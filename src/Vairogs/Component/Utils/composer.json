@@ -1,0 +1,66 @@
+{
+    "name": "vairogs/test-utils",
+    "description": "Symfony utility classes",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "vairogs",
+        "utils",
+        "symfony",
+        "array",
+        "date",
+        "doctrine",
+        "http-foundation",
+        "http",
+        "json",
+        "manipulation",
+        "object",
+        "php",
+        "prime",
+        "psr",
+        "response",
+        "sort",
+        "string",
+        "text",
+        "unique",
+        "uri",
+        "validation"
+    ],
+    "authors": [
+        {
+            "name": "k0d3r1s",
+            "homepage": "https://github.com/k0d3r1s",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.9",
+        "ext-curl": "*",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "symfony/http-foundation": "~4.2|~5.0",
+        "symfony/http-kernel": "~4.2|~5.0",
+        "doctrine/collections": "~1.6",
+        "doctrine/dbal": "~2.8",
+        "doctrine/orm": "~2.6",
+        "psr/http-message": "^1",
+        "twig/twig": "~2.8|~3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0|~7.0|~8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Component\\Utils\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    }
+}

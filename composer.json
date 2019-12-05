@@ -1,0 +1,39 @@
+{
+    "name": "vairogs/vairogs",
+    "description": "Vairogs",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "vairogs",
+        "utils",
+        "components"
+    ],
+    "authors": [
+        {
+            "name": "k0d3r1s",
+            "homepage": "https://github.com/k0d3r1s",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.9"
+    },
+    "replace": {
+        "vairogs/test-utils": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Component\\": "src/Vairogs/Component/"
+        },
+        "exclude-from-classmap": [
+            "**/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
