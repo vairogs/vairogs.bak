@@ -4,8 +4,8 @@ namespace RavenFlux\Twig\Sort;
 
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
-use Twig_Extension;
-use Twig_SimpleFilter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 use function array_key_exists;
 use function count;
 use function current;
@@ -19,7 +19,7 @@ use function usort;
 use const false;
 use const null;
 
-class SortExtension extends Twig_Extension
+class SortExtension extends AbstractExtension
 {
     protected const ASC = 'ASC';
     protected const DESC = 'DESC';
@@ -27,7 +27,7 @@ class SortExtension extends Twig_Extension
     public function getFilters(): array
     {
         return [
-            new Twig_SimpleFilter('usort', [$this, 'usortFunction']),
+            new TwigFilter('usort', [$this, 'usortFunction']),
         ];
     }
 
