@@ -1,0 +1,44 @@
+{
+    "name": "ravenflux/php-functions",
+    "description": "Twig extension that implements a way to use native PHP functions and filters in Twig template",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "ravenflux",
+        "twig",
+        "twig-extension",
+        "symfony",
+        "symfony2",
+        "symfony3",
+        "symfony4",
+        "php"
+    ],
+    "authors": [
+        {
+            "name": "k0d3r1s",
+            "homepage": "https://github.com/k0d3r1s",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.9",
+        "twig/twig": "~2.0|~3.0",
+        "twig/extensions": "~1.5"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "RavenFlux\\Twig\\Php\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    }
+}
