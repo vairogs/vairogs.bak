@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Utils;
+namespace Vairogs\Component\Utils\Helper;
 
 use function filter_var;
 use const false;

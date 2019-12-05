@@ -19,7 +19,7 @@
         "php": "^7.2.9"
     },
     "replace": {
-        "vairogs/test-utils": "self.version",
+        "vairogs/utils": "self.version",
         "vairogs/sitemap": "self.version",
         "ravenflux/sort-functions": "self.version"
     },

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Utils;
+namespace Vairogs\Component\Utils\Helper;
 
 use function array_key_exists;
 use function filter_var;
