@@ -21,7 +21,8 @@
     "replace": {
         "vairogs/utils": "self.version",
         "vairogs/sitemap": "self.version",
-        "ravenflux/sort-functions": "self.version"
+        "ravenflux/sort-functions": "self.version",
+        "ravenflux/php-functions": "self.version"
     },
     "autoload": {
         "psr-4": {
