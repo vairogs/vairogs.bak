@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap\Builder;
+namespace Vairogs\Component\Sitemap\Builder;
 
 use InvalidArgumentException;
 use function gettype;

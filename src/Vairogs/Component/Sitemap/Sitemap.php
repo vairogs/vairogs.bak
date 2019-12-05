@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap;
+namespace Vairogs\Component\Sitemap;
 
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Vairogs\Sitemap\DependencyInjection\VairogsSitemapExtension;
+use Vairogs\Component\Sitemap\DependencyInjection\VairogsSitemapExtension;
 
 class Sitemap extends Bundle
 {

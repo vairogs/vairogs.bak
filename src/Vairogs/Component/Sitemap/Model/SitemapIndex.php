@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap\Model;
+namespace Vairogs\Component\Sitemap\Model;
 
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;

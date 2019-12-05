@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap\Utils\Constant;
+namespace Vairogs\Component\Sitemap\Utils\Constant;
 
 use ReflectionException;
-use Vairogs\Utils\Iter;
-use Vairogs\Utils\Php;
+use Vairogs\Component\Utils\Iter;
+use Vairogs\Component\Utils\Php;
 
 final class VideoOption
 {

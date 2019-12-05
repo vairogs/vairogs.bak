@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap\Builder;
+namespace Vairogs\Component\Sitemap\Builder;
 
-use Vairogs\Sitemap\Model\RichUrl;
-use Vairogs\Sitemap\Model\Sitemap;
+use Vairogs\Component\Sitemap\Model\RichUrl;
+use Vairogs\Component\Sitemap\Model\Sitemap;
 use function fwrite;
 use function method_exists;
 use function ucfirst;

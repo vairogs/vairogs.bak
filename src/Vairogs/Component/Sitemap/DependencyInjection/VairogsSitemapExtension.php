@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap\DependencyInjection;
+namespace Vairogs\Component\Sitemap\DependencyInjection;
 
 use Exception;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Vairogs\Utils\Iter;
+use Vairogs\Component\Utils\Iter;
 
 class VairogsSitemapExtension extends Extension
 {

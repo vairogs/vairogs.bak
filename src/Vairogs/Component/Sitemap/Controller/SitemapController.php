@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap\Controller;
+namespace Vairogs\Component\Sitemap\Controller;
 
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Vairogs\Sitemap\Builder\Director;
-use Vairogs\Sitemap\Builder\XmlBuilder;
-use Vairogs\Sitemap\Provider;
-use Vairogs\Sitemap\Utils\ErrorResponse;
+use Vairogs\Component\Sitemap\Builder\Director;
+use Vairogs\Component\Sitemap\Builder\XmlBuilder;
+use Vairogs\Component\Sitemap\Provider;
+use Vairogs\Component\Sitemap\Utils\ErrorResponse;
 use function file_exists;
 use function file_get_contents;
 

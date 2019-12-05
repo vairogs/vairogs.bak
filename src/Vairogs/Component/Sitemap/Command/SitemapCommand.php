@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap\Command;
+namespace Vairogs\Component\Sitemap\Command;
 
 use Exception;
 use Symfony\Component\Console\Command\Command;
@@ -11,9 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Vairogs\Sitemap\Builder\Director;
-use Vairogs\Sitemap\Builder\FileBuilder;
-use Vairogs\Sitemap\Provider;
+use Vairogs\Component\Sitemap\Builder\Director;
+use Vairogs\Component\Sitemap\Builder\FileBuilder;
+use Vairogs\Component\Sitemap\Provider;
 use function fclose;
 use function getcwd;
 use function sprintf;

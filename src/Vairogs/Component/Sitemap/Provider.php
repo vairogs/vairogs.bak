@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Sitemap;
+namespace Vairogs\Component\Sitemap;
 
-use Vairogs\Sitemap\Model\Sitemap;
+use Vairogs\Component\Sitemap\Model\Sitemap;
 
 interface Provider
 {
