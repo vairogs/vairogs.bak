@@ -1,6 +1,6 @@
 <?php
 
-namespace RavenFlux\Twig;
+namespace RavenFlux\Twig\Sort;
 
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
