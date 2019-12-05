@@ -3,7 +3,7 @@
 namespace Vairogs\Tests\Utils;
 
 use PHPUnit\Framework\TestCase;
-use Vairogs\Utils\Text;
+use Vairogs\Component\Utils\Text;
 
 class TextTest extends TestCase
 {

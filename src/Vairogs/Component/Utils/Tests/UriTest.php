@@ -3,7 +3,7 @@
 namespace Vairogs\Tests\Utils;
 
 use PHPUnit\Framework\TestCase;
-use Vairogs\Utils\Uri;
+use Vairogs\Component\Utils\Uri;
 
 class UriTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils;
+namespace Vairogs\Component\Utils;
 
 use CURLFile;
 use function array_combine;

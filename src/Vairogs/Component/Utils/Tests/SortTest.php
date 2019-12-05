@@ -3,7 +3,7 @@
 namespace Vairogs\Tests\Utils;
 
 use PHPUnit\Framework\TestCase;
-use Vairogs\Utils\Sort;
+use Vairogs\Component\Utils\Sort;
 
 class SortTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils\Doctrine;
+namespace Vairogs\Component\Utils\Doctrine;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\DBALException;

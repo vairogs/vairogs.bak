@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils\Twig;
+namespace Vairogs\Component\Utils\Twig;
 
 use InvalidArgumentException;
 use Twig\TwigFilter;
