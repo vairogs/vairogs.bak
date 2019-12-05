@@ -19,7 +19,8 @@
         "php": "^7.2.9"
     },
     "replace": {
-        "vairogs/test-utils": "self.version"
+        "vairogs/test-utils": "self.version",
+        "vairogs/sitemap": "self.version"
     },
     "autoload": {
         "psr-4": {
@@ -33,6 +34,9 @@
         "branch-alias": {
             "dev-master": "2.x-dev"
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true

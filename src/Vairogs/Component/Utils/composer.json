@@ -1,5 +1,5 @@
 {
-    "name": "vairogs/test-utils",
+    "name": "vairogs/utils",
     "description": "Symfony utility classes",
     "license": "MIT",
     "type": "library",
@@ -49,6 +49,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~6.0|~7.0|~8.0"
+    },
+    "config": {
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
