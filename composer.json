@@ -20,11 +20,13 @@
     },
     "replace": {
         "vairogs/test-utils": "self.version",
-        "vairogs/sitemap": "self.version"
+        "vairogs/sitemap": "self.version",
+        "ravenflux/sort-functions": "self.version"
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\": "src/Vairogs/Component/"
+            "Vairogs\\Component\\": "src/Vairogs/Component/",
+            "RavenFlux\\": "src/RavenFlux/"
         },
         "exclude-from-classmap": [
             "**/Tests/"
