@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Utils;
+namespace Vairogs\Component\Utils\Tests;
 
 use Error;
 use Exception;
