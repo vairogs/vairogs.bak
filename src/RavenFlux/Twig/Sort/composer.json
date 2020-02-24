@@ -1,0 +1,45 @@
+{
+    "name": "ravenflux/sort-functions",
+    "description": "Twig extension that implements sorting functions in Twig template",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "ravenflux",
+        "twig",
+        "twig-extension",
+        "symfony",
+        "symfony3",
+        "symfony4",
+        "sort"
+    ],
+    "authors": [
+        {
+            "name": "k0d3r1s",
+            "homepage": "https://github.com/k0d3r1s",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.9",
+        "twig/twig": "~2.0|~3.0",
+        "twig/extensions": "~1.5",
+        "doctrine/collections": "~1.6",
+        "vairogs/utils": "2.x-dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "RavenFlux\\Twig\\Sort\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    }
+}
