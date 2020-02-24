@@ -1,0 +1,6 @@
+services:
+    ravenflux.twig.extension.getenv:
+        class: RavenFlux\Twig\GetEnv\GetEnvExtension
+        tags:
+            -
+                name: twig.extension
