@@ -6,7 +6,7 @@
 [![Total Downloads](https://poser.pugx.org/ravenflux/php-functions/downloads)](https://packagist.org/packages/ravenflux/php-functions)
 
 <p align="center">
-  <img src="https://github.com/ravenflux/php-functions/raw/master/ravenflux.jpg">
+  <img src="https://github.com/ravenflux/ravenflux/raw/master/ravenflux.jpg">
 </p>
 
 Twig extension that implements a way to use native PHP functions and filters in Twig template.
