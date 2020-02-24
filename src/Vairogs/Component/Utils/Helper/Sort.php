@@ -4,9 +4,15 @@ namespace Vairogs\Component\Utils\Helper;
 
 use function array_slice;
 use function count;
+use function is_array;
+use function method_exists;
+use function ucfirst;
 
 class Sort
 {
+    public const ASC = 'ASC';
+    public const DESC = 'DESC';
+
     /**
      * @param $foo
      * @param $bar
@@ -107,5 +113,63 @@ class Sort
         }
 
         return $result;
+    }
+
+    /**
+     * @param $item
+     * @param $field
+     *
+     * @return bool
+     */
+    public static function isSortable($item, $field): bool
+    {
+        if (is_array($item)) {
+            return array_key_exists($field, $item);
+        }
+
+        if (is_object($item)) {
+            return isset($item->$field) || property_exists($item, $field);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $parameter
+     * @param string $order
+     *
+     * @return callable
+     */
+    public static function usort($parameter, string $order): callable
+    {
+        return static function ($a, $b) use ($parameter, $order) {
+            $flip = ($order === self::DESC) ? -1 : 1;
+
+            if (is_array($a)) {
+                $a_sort_value = $a[$parameter];
+            } elseif (method_exists($a, 'get' . ucfirst($parameter))) {
+                $a_sort_value = $a->{'get' . ucfirst($parameter)}();
+            } else {
+                $a_sort_value = $a->$parameter;
+            }
+
+            if (is_array($b)) {
+                $b_sort_value = $b[$parameter];
+            } elseif (method_exists($b, 'get' . ucfirst($parameter))) {
+                $b_sort_value = $b->{'get' . ucfirst($parameter)}();
+            } else {
+                $b_sort_value = $b->$parameter;
+            }
+
+            if ($a_sort_value === $b_sort_value) {
+                return 0;
+            }
+
+            if ($a_sort_value > $b_sort_value) {
+                return $flip;
+            }
+
+            return (-1 * $flip);
+        };
     }
 }

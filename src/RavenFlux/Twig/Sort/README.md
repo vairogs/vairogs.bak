@@ -6,7 +6,7 @@
 [![Total Downloads](https://poser.pugx.org/ravenflux/sort-functions/downloads)](https://packagist.org/packages/ravenflux/sort-functions)
 
 <p align="center">
-  <img src="https://github.com/ravenflux/sort-functions/raw/master/ravenflux.jpg">
+  <img src="https://github.com/ravenflux/ravenflux/raw/master/ravenflux.jpg">
 </p>
 
 Twig extension that implements sorting functions in Twig template.
@@ -26,12 +26,12 @@ imports:
 Usage
 ------------
 ```twig
-{% for user in users|usort('name') %}
+{% for user in users|raven_usort('name') %}
     {{ user.name }}
 {% endfor %}
 ```
 ```twig
-{% for user in users|usort('name', 'DESC') %}
+{% for user in users|raven_usort('name', 'DESC') %}
     {{ user.name }}
 {% endfor %}
 ```
