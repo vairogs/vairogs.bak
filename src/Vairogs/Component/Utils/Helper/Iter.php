@@ -46,7 +46,7 @@ class Iter
     /**
      * @param $array
      */
-    public static function unique2(array &$array): void
+    public static function uniqueMap(array &$array): void
     {
         $array = array_map('\unserialize', array_unique(array_map('\serialize', $array)));
     }

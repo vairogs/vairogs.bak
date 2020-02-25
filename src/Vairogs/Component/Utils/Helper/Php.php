@@ -71,20 +71,20 @@ class Php
     public static function boolval($value): bool
     {
         if (is_bool($value)) {
-            return $value;
+            $result = $value;
+        } else {
+            $value = strtolower((string)$value);
+
+            if ('y' === $value) {
+                $result = true;
+            } elseif ('n' === $value) {
+                $result = false;
+            } else {
+                $result = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+            }
         }
 
-        $value = strtolower((string)$value);
-
-        if ('y' === $value) {
-            return true;
-        }
-
-        if ('n' === $value) {
-            return false;
-        }
-
-        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        return $result;
     }
 
     /**
