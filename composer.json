@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\": "src/Vairogs/Component/",
+            "Vairogs\\": "src/Vairogs/",
             "RavenFlux\\Twig\\": "src/RavenFlux/"
         },
         "exclude-from-classmap": [
