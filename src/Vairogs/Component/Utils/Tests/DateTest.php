@@ -3,7 +3,7 @@
 namespace Vairogs\Component\Utils\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Vairogs\Component\Utils\Date;
+use Vairogs\Component\Utils\Helper\Date;
 
 class DateTest extends TestCase
 {

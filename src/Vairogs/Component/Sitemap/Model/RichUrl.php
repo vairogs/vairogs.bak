@@ -15,7 +15,7 @@ class RichUrl extends Url
      *     @Assert\NotBlank()
      * )
      */
-    protected $alternateUrl = [];
+    protected array $alternateUrl = [];
 
     /**
      * @param string $locale

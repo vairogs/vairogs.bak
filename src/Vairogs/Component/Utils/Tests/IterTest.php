@@ -3,7 +3,7 @@
 namespace Vairogs\Component\Utils\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Vairogs\Component\Utils\Iter;
+use Vairogs\Component\Utils\Helper\Iter;
 
 class IterTest extends TestCase
 {

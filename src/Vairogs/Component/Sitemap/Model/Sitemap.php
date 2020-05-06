@@ -11,7 +11,7 @@ class Sitemap
      * @var Url[]
      * @Assert\Valid()
      */
-    protected $urls = [];
+    protected array $urls = [];
 
     /**
      * @param Url $url

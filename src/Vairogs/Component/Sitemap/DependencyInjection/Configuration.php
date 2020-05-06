@@ -10,7 +10,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @var string
      */
-    private $alias;
+    private string $alias;
 
     /**
      * @param string $alias

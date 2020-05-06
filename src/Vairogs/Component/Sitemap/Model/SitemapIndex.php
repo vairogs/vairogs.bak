@@ -20,7 +20,7 @@ class SitemapIndex
      * )
      * @var string
      */
-    protected $loc;
+    protected string $loc;
 
     /**
      * Optional
@@ -28,7 +28,7 @@ class SitemapIndex
      * @var null|DateTime
      * @Assert\Type(type="datetime")
      */
-    protected $lastmod;
+    protected ?DateTime$lastmod;
 
     /**
      * @return string

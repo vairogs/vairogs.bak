@@ -11,12 +11,12 @@ class ErrorResponse
     /**
      * @var ConstraintViolationListInterface
      */
-    private $errors;
+    private ConstraintViolationListInterface $errors;
 
     /**
      * @var Response
      */
-    private $response;
+    private Response $response;
 
     /**
      * @param ConstraintViolationListInterface $errors
@@ -26,6 +26,7 @@ class ErrorResponse
         $this->errors = $errors;
         $this->response = new Response();
         $this->response->headers->set('Content-Type', 'application/xml');
+        /** @noinspection UnusedFunctionResultInspection */
         $this->response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
@@ -47,7 +48,7 @@ class ErrorResponse
                 "\n\t" . '</error>' . "\n";
             // @formatter:on
         }
-        $buffer .= '</errors>' . "\n" . '<!-- error from sitemap library for Symfony vairogs/sitemap -->';;
+        $buffer .= '</errors>' . "\n" . '<!-- error from sitemap library for Symfony vairogs/sitemap -->';
 
         $this->response->setContent($buffer);
 

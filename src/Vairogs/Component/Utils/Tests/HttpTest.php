@@ -4,7 +4,7 @@ namespace Vairogs\Component\Utils\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Component\Utils\Http;
+use Vairogs\Component\Utils\Helper\Http;
 
 class HttpTest extends TestCase
 {

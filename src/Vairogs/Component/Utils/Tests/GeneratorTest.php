@@ -6,8 +6,8 @@ use Error;
 use Exception;
 use LogicException;
 use PHPUnit\Framework\TestCase;
-use Vairogs\Component\Utils\Generator;
-use Vairogs\Component\Utils\Text;
+use Vairogs\Component\Utils\Helper\Generator;
+use Vairogs\Component\Utils\Helper\Text;
 use function strlen;
 
 class GeneratorTest extends TestCase

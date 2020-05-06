@@ -9,95 +9,95 @@ class Video
     /**
      * @var string
      */
-    protected $thumbnailLoc;
+    protected string $thumbnailLoc;
 
     /**
      * @var string
      */
-    protected $title;
+    protected string $title;
 
     /**
      * @var string
      */
-    protected $description;
+    protected string $description;
 
     /**
      * @var null|string
      */
-    protected $contentLoc;
+    protected ?string $contentLoc;
 
     /**
      * @var null|string
      */
-    protected $playerLoc;
+    protected ?string $playerLoc;
 
     /**
      * @var null|int
      */
-    protected $duration;
+    protected ?int $duration;
 
     /**
      * @var null|DateTime
      */
-    protected $expirationDate;
+    protected ?DateTime $expirationDate;
 
     /**
      * @var null|float
      */
-    protected $rating;
+    protected ?float $rating;
 
     /**
      * @var null|int
      */
-    protected $viewCount;
+    protected ?int $viewCount;
 
     /**
      * @var null|DateTime
      */
-    protected $publicationDate;
+    protected ?DateTime $publicationDate;
 
     /**
      * @var null|string
      */
-    protected $familyFriendly;
+    protected ?string $familyFriendly;
 
     /**
      * @var string[]
      */
-    protected $tags = [];
+    protected array $tags = [];
 
     /**
      * @var null|string
      */
-    protected $category;
+    protected ?string $category;
 
     /**
      * @var array
      */
-    protected $restrictions = [];
+    protected array $restrictions = [];
 
     /**
      * @var null|string
      */
-    protected $galleryLoc;
+    protected ?string $galleryLoc;
 
     /**
      * @var null|string
      */
-    protected $requiresSubscription;
+    protected ?string $requiresSubscription;
 
     /**
      * @var null|string
      */
-    protected $uploader;
+    protected ?string $uploader;
 
     /**
      * @var array
      */
-    protected $platforms = [];
+    protected array $platforms = [];
 
     /**
      * @var null|string
      */
-    protected $live;
+    protected ?string $live;
 }

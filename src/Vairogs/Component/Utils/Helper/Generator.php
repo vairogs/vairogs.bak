@@ -34,27 +34,27 @@ class Generator
     /**
      * @var array
      */
-    private $sets = [];
+    private array $sets = [];
 
     /**
      * @var string
      */
-    private $lowerCase;
+    private string $lowerCase;
 
     /**
      * @var string
      */
-    private $upperCase;
+    private string $upperCase;
 
     /**
      * @var string
      */
-    private $digits;
+    private string $digits;
 
     /**
      * @var string
      */
-    private $symbols;
+    private string $symbols;
 
     public function __construct()
     {

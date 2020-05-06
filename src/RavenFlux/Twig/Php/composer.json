@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": "^7.2.9",
+        "php": "^7.4.0",
         "twig/twig": "~2.0|~3.0",
         "twig/extensions": "~1.5"
     },
@@ -38,7 +38,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.x-dev"
+            "dev-master": "3.x-dev"
         }
     }
 }

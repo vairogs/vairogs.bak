@@ -22,7 +22,7 @@ class Url
      *     max="2048"
      * )
      */
-    protected $loc;
+    protected string $loc;
 
     /**
      * Optional
@@ -30,7 +30,7 @@ class Url
      * @var null|DateTime
      * @Assert\Type(type="datetime")
      */
-    protected $lastmod;
+    protected ?DateTime$lastmod;
 
     /**
      * Optional
@@ -41,7 +41,7 @@ class Url
      * @Assert\Type(type="string")
      * @Assert\Choice(callback={"Vairogs\Component\Sitemap\Utils\Constant\ChangeFrequency", "getChangeFrequencies"})
      */
-    protected $changefreq;
+    protected ?string $changefreq;
 
     /**
      * Optional
@@ -57,19 +57,19 @@ class Url
      *     max="1.0"
      * )
      */
-    protected $priority = 0.5;
+    protected float $priority = 0.5;
 
     /**
      * @var Video[]
      * @Assert\Valid()
      */
-    protected $videos = [];
+    protected array $videos = [];
 
     /**
      * @var Image[]
      * @Assert\Valid()
      */
-    protected $images = [];
+    protected array $images = [];
 
     /**
      * @return string

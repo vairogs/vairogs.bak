@@ -112,7 +112,7 @@ class Text
      *
      * @return string
      */
-    public static function translit2(string $text): string
+    public static function translitCyrToLat(string $text): string
     {
         return str_replace(self::CYRMAP, self::LATMAP, $text);
     }
@@ -122,7 +122,7 @@ class Text
      *
      * @return string
      */
-    public static function translit4(string $text): string
+    public static function translitLatToCyr(string $text): string
     {
         return str_replace(self::LATMAP, self::CYRMAP, $text);
     }

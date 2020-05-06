@@ -13,7 +13,7 @@ class FileBuilder implements Builder
     /**
      * @var Sitemap
      */
-    protected $sitemap;
+    protected Sitemap $sitemap;
 
     /**
      * @param Sitemap $sitemap

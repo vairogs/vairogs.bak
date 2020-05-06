@@ -3,7 +3,7 @@
 namespace Vairogs\Component\Utils\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Vairogs\Component\Utils\Util;
+use Vairogs\Component\Utils\Helper\Util;
 
 class UtilTest extends TestCase
 {

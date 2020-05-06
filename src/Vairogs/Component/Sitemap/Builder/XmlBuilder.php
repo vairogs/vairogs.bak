@@ -12,7 +12,7 @@ class XmlBuilder implements Builder
     /**
      * @var Sitemap
      */
-    protected $sitemap;
+    protected Sitemap $sitemap;
 
     /**
      * @param Sitemap $sitemap

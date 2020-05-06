@@ -5,7 +5,7 @@ namespace Vairogs\Component\Sitemap\DependencyInjection;
 use Exception;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Vairogs\Component\Utils\Iter;
+use Vairogs\Component\Utils\Helper\Iter;
 
 class VairogsSitemapExtension extends Extension
 {

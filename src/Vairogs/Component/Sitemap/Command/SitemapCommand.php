@@ -21,22 +21,25 @@ use function unlink;
 
 class SitemapCommand extends Command
 {
+    /**
+     * @var string
+     */
     protected static $defaultName = 'vairogs:sitemap';
 
     /**
      * @var ValidatorInterface
      */
-    private $validator;
+    private ValidatorInterface $validator;
 
     /**
      * @var array
      */
-    private $options;
+    private array $options;
 
     /**
      * @var Provider|null
      */
-    private $provider;
+    private ?Provider $provider;
 
     /**
      * @param ValidatorInterface $validator

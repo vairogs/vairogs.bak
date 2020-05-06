@@ -6,7 +6,9 @@
     "keywords": [
         "vairogs",
         "utils",
-        "components"
+        "components",
+        "auth",
+        "openid"
     ],
     "authors": [
         {
@@ -16,13 +18,17 @@
         }
     ],
     "require": {
-        "php": "^7.2.9"
+        "php": "^7.4.0"
     },
     "replace": {
+        "vairogs/components": "self.version",
         "vairogs/utils": "self.version",
         "vairogs/sitemap": "self.version",
+        "vairogs/openid": "self.version",
+        "ravenflux/ravenflux": "self.version",
         "ravenflux/sort-functions": "self.version",
-        "ravenflux/php-functions": "self.version"
+        "ravenflux/php-functions": "self.version",
+        "ravenflux/getenv": "self.version"
     },
     "autoload": {
         "psr-4": {
@@ -35,7 +41,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.x-dev"
+            "dev-master": "3.x-dev"
         }
     },
     "config": {

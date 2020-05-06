@@ -17,7 +17,7 @@ class Image
      *     max="2048"
      * )
      */
-    protected $loc;
+    protected string $loc;
 
     /**
      * Optional
@@ -25,7 +25,7 @@ class Image
      * @var null|string
      * @Assert\Type(type="string")
      */
-    protected $caption;
+    protected ?string $caption;
 
     /**
      * Optional
@@ -33,7 +33,7 @@ class Image
      * @var null|string
      * @Assert\Type(type="string")
      */
-    protected $geoLocation;
+    protected ?string $geoLocation;
 
     /**
      * Optional
@@ -41,7 +41,7 @@ class Image
      * @var null|string
      * @Assert\Type(type="string")
      */
-    protected $title;
+    protected ?string $title;
 
     /**
      * Optional
@@ -49,7 +49,7 @@ class Image
      * @var null|string
      * @Assert\Type(type="string")
      */
-    protected $license;
+    protected ?string $license;
 
     /**
      * @return string

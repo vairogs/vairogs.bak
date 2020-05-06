@@ -3,7 +3,7 @@
 namespace Vairogs\Component\Sitemap\Utils\Constant;
 
 use ReflectionException;
-use Vairogs\Component\Utils\Php;
+use Vairogs\Component\Utils\Helper\Php;
 
 final class ChangeFrequency
 {

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace RavenFlux\Twig\Php;
 
@@ -15,14 +15,14 @@ use function key;
 class PhpFunctionsExtension extends AbstractExtension
 {
     /**
-     * @var array
+     * @var array|null
      */
-    private $functions;
+    private ?array $functions;
 
     /**
-     * @var array
+     * @var array|null
      */
-    private $filters;
+    private ?array $filters;
 
     /**
      * @param null|array $functions

@@ -11,15 +11,15 @@ trait CreatedModified
 {
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
-     * @var DateTime
+     * @var DateTime|null
      */
-    protected $createdAt;
+    protected ?DateTime $createdAt;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
-     * @var DateTime
+     * @var DateTime|null
      */
-    protected $modifiedAt;
+    protected ?DateTime $modifiedAt;
 
     /**
      * @return DateTime
