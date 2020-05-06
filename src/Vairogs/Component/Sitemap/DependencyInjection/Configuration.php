@@ -2,9 +2,10 @@
 
 namespace Vairogs\Component\Sitemap\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Component\Utils\DependencyInjection\VairogsConfiguration;
 
 class Configuration implements ConfigurationInterface
 {
@@ -13,13 +14,11 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder(Vairogs::ALIAS);
-        $tree = $treeBuilder->getRootNode();
+        return (new VairogsConfiguration(VairogsSitemapExtension::ALIAS))->getConfiguration($this->getConfiguration());
+    }
 
-        $tree->children()
-            ->arrayNode(VairogsSitemapExtension::ALIAS)
-            ->children();
-
+    private function getConfiguration(): ArrayNodeDefinition
+    {
         $node = (new TreeBuilder(VairogsSitemapExtension::ALIAS))->getRootNode();
 
         // @formatter:off
@@ -37,9 +36,6 @@ class Configuration implements ConfigurationInterface
         ->end();
         // @formatter:on
 
-        $tree->append($node);
-        $tree->end();
-
-        return $treeBuilder;
+        return $node;
     }
 }

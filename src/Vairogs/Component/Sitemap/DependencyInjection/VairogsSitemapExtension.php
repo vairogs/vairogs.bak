@@ -4,11 +4,10 @@ namespace Vairogs\Component\Sitemap\DependencyInjection;
 
 use Exception;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Vairogs\Component\Utils\Helper\Iter;
+use Vairogs\Component\Utils\DependencyInjection\VairogsExtension;
 use Vairogs\Component\Utils\Vairogs;
 
-class VairogsSitemapExtension extends Extension
+class VairogsSitemapExtension extends VairogsExtension
 {
     /**
      * @var string
@@ -18,17 +17,17 @@ class VairogsSitemapExtension extends Extension
     /**
      * @return string
      */
-    public function getAlias(): string
+    public function getExtension(): string
     {
-        return Vairogs::ALIAS;
+        return Vairogs::ALIAS . '.' . $this->getExtensionAlias();
     }
 
     /**
      * @return string
      */
-    public function getExtension(): string
+    public function getExtensionAlias(): string
     {
-        return Vairogs::ALIAS . '.' . self::ALIAS;
+        return self::ALIAS;
     }
 
     /**
@@ -40,10 +39,6 @@ class VairogsSitemapExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
-        $parameters = $this->processConfiguration($configuration, $configs)[self::ALIAS];
-
-        foreach (Iter::makeOneDimension([$this->getExtension() => $parameters]) as $key => $value) {
-            $container->setParameter($key, $value);
-        }
+        $this->process($configs, $container, $configuration);
     }
 }
