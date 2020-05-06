@@ -4,29 +4,23 @@ namespace Vairogs\Component\Sitemap\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Vairogs\Component\Utils\Vairogs;
 
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * @var string
-     */
-    private string $alias;
-
-    /**
-     * @param string $alias
-     */
-    public function __construct(string $alias)
-    {
-        $this->alias = $alias;
-    }
-
     /**
      * @return TreeBuilder
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder($this->getAlias());
-        $node = $treeBuilder->getRootNode();
+        $treeBuilder = new TreeBuilder(Vairogs::ALIAS);
+        $tree = $treeBuilder->getRootNode();
+
+        $tree->children()
+            ->arrayNode(VairogsSitemapExtension::ALIAS)
+            ->children();
+
+        $node = (new TreeBuilder(VairogsSitemapExtension::ALIAS))->getRootNode();
 
         // @formatter:off
         $node
@@ -43,14 +37,9 @@ class Configuration implements ConfigurationInterface
         ->end();
         // @formatter:on
 
-        return $treeBuilder;
-    }
+        $tree->append($node);
+        $tree->end();
 
-    /**
-     * @return string
-     */
-    public function getAlias(): string
-    {
-        return $this->alias;
+        return $treeBuilder;
     }
 }
