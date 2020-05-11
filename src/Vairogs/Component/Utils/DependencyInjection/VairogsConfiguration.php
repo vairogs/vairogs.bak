@@ -5,20 +5,9 @@ namespace Vairogs\Component\Utils\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Vairogs\Component\Utils\Vairogs;
-use function dump;
 
 final class VairogsConfiguration
 {
-    /**
-     * @var string
-     */
-    private string $alias;
-
-    public function __construct(string $alias)
-    {
-        $this->alias = $alias;
-    }
-
     /**
      * @param ArrayNodeDefinition $node
      * @param string $base
