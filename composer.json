@@ -39,7 +39,7 @@
         "symfony/routing": "~5.0|~5.1",
         "symfony/validator": "~5.0|~5.1",
         "twig/extensions": "~1.5",
-        "twig/twig": "~2.8|~3.0"
+        "twig/twig": "~3.0"
     },
     "replace": {
         "vairogs/components": "self.version",
