@@ -9,6 +9,11 @@ use Vairogs\Component\Sitemap\DependencyInjection\VairogsSitemapExtension;
 class Sitemap extends Bundle
 {
     /**
+     * @var string
+     */
+    public const ALIAS = 'sitemap';
+
+    /**
      * @return null|ExtensionInterface
      */
     public function getContainerExtension(): ?ExtensionInterface

@@ -4,16 +4,12 @@ namespace Vairogs\Component\Sitemap\DependencyInjection;
 
 use Exception;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Vairogs\Component\Sitemap\Sitemap;
 use Vairogs\Component\Utils\DependencyInjection\VairogsExtension;
 use Vairogs\Component\Utils\Vairogs;
 
 class VairogsSitemapExtension extends VairogsExtension
 {
-    /**
-     * @var string
-     */
-    public const ALIAS = 'sitemap';
-
     /**
      * @return string
      */
@@ -27,7 +23,7 @@ class VairogsSitemapExtension extends VairogsExtension
      */
     public function getExtensionAlias(): string
     {
-        return self::ALIAS;
+        return Sitemap::ALIAS;
     }
 
     /**
