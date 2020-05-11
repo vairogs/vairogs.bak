@@ -29,6 +29,9 @@ class SteamGiftsUser extends SteamUser
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getUsername() ?? $this->getOpenID();

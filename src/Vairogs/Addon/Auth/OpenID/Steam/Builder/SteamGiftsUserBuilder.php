@@ -6,11 +6,25 @@ use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamGiftsUser;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamGiftsUserArrayFactory;
+use function end;
+use function exec;
+use function explode;
+use function file_get_contents;
+use function preg_match_all;
+use function trim;
 
 class SteamGiftsUserBuilder implements OpenIDUserBuilder
 {
+    /**
+     * @var string
+     */
     protected string $cacheDir;
 
+    /**
+     * @param array $response
+     *
+     * @return OpenIDUser
+     */
     public function getUser(array $response): OpenIDUser
     {
         $this->cacheDir = $response['cache_dir'];
@@ -18,6 +32,11 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         return $this->getSteamGiftsUser($response);
     }
 
+    /**
+     * @param array $data
+     *
+     * @return SteamGiftsUser
+     */
     protected function getSteamGiftsUser(array $data): SteamGiftsUser
     {
         $input = $data['response']['players'][0];
@@ -26,6 +45,11 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         return SteamGiftsUserArrayFactory::create($input);
     }
 
+    /**
+     * @param string $user
+     *
+     * @return string|null
+     */
     protected function getUsername(string $user): ?string
     {
         $dir = $this->cacheDir . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . $user . '.txt';

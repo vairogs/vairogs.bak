@@ -4,6 +4,11 @@ namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
 class SteamGiftsUserArrayFactory
 {
+    /**
+     * @param array $bag
+     *
+     * @return SteamGiftsUser
+     */
     public static function create(array $bag): SteamGiftsUser
     {
         $avatar = [

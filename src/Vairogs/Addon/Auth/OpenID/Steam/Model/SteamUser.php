@@ -449,6 +449,9 @@ class SteamUser implements OpenIDUser
         return self::RETURNS_EMAIL;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getOpenID();
