@@ -39,10 +39,10 @@
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "symfony/config": "~4.4|~5.0",
-        "symfony/dependency-injection": "~4.4|~5.0",
-        "symfony/http-foundation": "~4.4|~5.0",
-        "symfony/http-kernel": "~4.4|~5.0",
+        "symfony/config": "~5.0|~5.1",
+        "symfony/dependency-injection": "~5.0|~5.1",
+        "symfony/http-foundation": "~5.0|~5.1",
+        "symfony/http-kernel": "~5.0|~5.1",
         "doctrine/collections": "~1.6",
         "doctrine/dbal": "~2.8",
         "doctrine/orm": "~2.6",
@@ -50,7 +50,7 @@
         "twig/twig": "~2.8|~3.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "~4.4|~5.0"
+        "symfony/phpunit-bridge": "~5.0|~5.1"
     },
     "config": {
         "sort-packages": true

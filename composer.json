@@ -8,7 +8,9 @@
         "utils",
         "components",
         "auth",
-        "openid"
+        "openid",
+        "steam",
+        "sitemap"
     ],
     "authors": [
         {
@@ -18,13 +20,37 @@
         }
     ],
     "require": {
-        "php": "^7.4.0"
+        "php": "^7.4.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-zlib": "*",
+        "doctrine/collections": "~1.6",
+        "doctrine/dbal": "~2.8",
+        "doctrine/orm": "~2.6",
+        "psr/http-message": "^1",
+        "symfony/config": "~5.0|~5.1",
+        "symfony/console": "~5.0|~5.1",
+        "symfony/dependency-injection": "~5.0|~5.1",
+        "symfony/framework-bundle": "~5.0|~5.1",
+        "symfony/http-foundation": "~5.0|~5.1",
+        "symfony/http-kernel": "~5.0|~5.1",
+        "symfony/routing": "~5.0|~5.1",
+        "symfony/validator": "~5.0|~5.1",
+        "twig/extensions": "~1.5",
+        "twig/twig": "~2.8|~3.0"
     },
     "replace": {
         "vairogs/components": "self.version",
         "vairogs/utils": "self.version",
         "vairogs/sitemap": "self.version",
-        "vairogs/openid": "self.version",
+        "vairogs/auth": "self.version",
+        "vairogs/auth-openid": "self.version",
+        "vairogs/addon": "self.version",
+        "vairogs/addon-auth": "self.version",
+        "vairogs/addon-auth-openid": "self.version",
+        "vairogs/addon-auth-openid-steam": "self.version",
         "ravenflux/ravenflux": "self.version",
         "ravenflux/sort-functions": "self.version",
         "ravenflux/php-functions": "self.version",

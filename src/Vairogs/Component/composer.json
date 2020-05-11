@@ -26,7 +26,8 @@
         "uri",
         "validation",
         "auth",
-        "openid"
+        "openid",
+        "steam"
     ],
     "authors": [
         {
@@ -38,19 +39,27 @@
     "require": {
         "php": "^7.4.0",
         "ext-curl": "*",
-        "ext-pdo": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "symfony/http-foundation": "~4.4|~5.0",
-        "symfony/http-kernel": "~4.4|~5.0",
+        "ext-pdo": "*",
+        "ext-zlib": "*",
         "doctrine/collections": "~1.6",
         "doctrine/dbal": "~2.8",
         "doctrine/orm": "~2.6",
         "psr/http-message": "^1",
+        "symfony/config": "~5.0|~5.1",
+        "symfony/console": "~5.0|~5.1",
+        "symfony/dependency-injection": "~5.0|~5.1",
+        "symfony/framework-bundle": "~5.0|~5.1",
+        "symfony/http-foundation": "~5.0|~5.1",
+        "symfony/http-kernel": "~5.0|~5.1",
+        "symfony/routing": "~5.0|~5.1"
+        "symfony/validator": "~5.0|~5.1",
+        "twig/extensions": "~1.5",
         "twig/twig": "~2.8|~3.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "~4.4|~5.0"
+        "symfony/phpunit-bridge": "~5.0|~5.1"
     },
     "config": {
         "sort-packages": true
@@ -71,6 +80,7 @@
     "replace": {
         "vairogs/utils": "self.version",
         "vairogs/sitemap": "self.version",
-        "vairogs/openid": "self.version"
+        "vairogs/auth": "self.version",
+        "vairogs/auth-openid": "self.version"
     }
 }
