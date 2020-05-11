@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": "^7.4.0",
-        "twig/twig": "3.*",
+        "twig/twig": "2.*|3.*",
         "twig/extensions": "~1.5"
     },
     "config": {
