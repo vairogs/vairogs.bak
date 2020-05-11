@@ -1,0 +1,47 @@
+{
+    "name": "vairogs/auth",
+    "description": "Utils: Auth library",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "vairogs",
+        "auth",
+        "openid",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "k0d3r1s",
+            "homepage": "https://github.com/k0d3r1s",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4.0",
+        "symfony/config": "~5.0|~5.1",
+        "symfony/dependency-injection": "~5.0|~5.1",
+        "symfony/http-foundation": "~5.0|~5.1",
+        "symfony/http-kernel": "~5.0|~5.1",
+        "symfony/routing": "~5.0|~5.1",
+        "vairogs/utils": "3.x-dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Component\\Auth\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    },
+    "replace": {
+        "vairogs/auth-openid": "self.version"
+    }
+}
