@@ -18,6 +18,11 @@ abstract class VairogsExtension extends Extension
         return Vairogs::ALIAS;
     }
 
+    /**
+     * @param array $configs
+     * @param ContainerBuilder $container
+     * @param ConfigurationInterface $configuration
+     */
     public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
         $parameters = $this->processConfiguration($configuration, $configs)[$this->getExtensionAlias()] ?? [];
