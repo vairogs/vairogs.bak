@@ -18,6 +18,9 @@ class Configuration implements ConfigurationInterface
         return (new VairogsConfiguration())->getConfiguration($this->getBaseConfiguration());
     }
 
+    /**
+     * @return ArrayNodeDefinition
+     */
     private function getBaseConfiguration(): ArrayNodeDefinition
     {
         $node = (new TreeBuilder(OpenID::OPENID_BASE_ALIAS))->getRootNode();
@@ -35,6 +38,9 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
+    /**
+     * @return ArrayNodeDefinition
+     */
     private function getConfiguration(): ArrayNodeDefinition
     {
         $node = (new TreeBuilder(OpenID::ALIAS))->getRootNode();
@@ -56,6 +62,9 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     public function buildClientConfiguration(ArrayNodeDefinition $node): void
     {
         $node->addDefaultsIfNotSet();

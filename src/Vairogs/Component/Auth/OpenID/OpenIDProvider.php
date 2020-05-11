@@ -14,10 +14,17 @@ use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Component\Utils\Helper\Http;
 use Vairogs\Component\Utils\Helper\Json;
 use Vairogs\Component\Utils\Helper\Uri;
+use function explode;
 use function file_get_contents;
+use function http_build_query;
+use function is_array;
+use function preg_match;
 use function sprintf;
 use function str_replace;
+use function stream_context_create;
 use function stripslashes;
+use function strlen;
+use function urldecode;
 
 class OpenIDProvider
 {
@@ -31,12 +38,24 @@ class OpenIDProvider
      */
     protected UrlGeneratorInterface $router;
 
+    /**
+     * @var string
+     */
     protected string $name;
 
+    /**
+     * @var bool|mixed
+     */
     protected $profileUrl;
 
+    /**
+     * @var array
+     */
     protected array $options;
 
+    /**
+     * @var string
+     */
     protected string $cacheDir;
 
     /**
@@ -72,6 +91,10 @@ class OpenIDProvider
         return $this->name;
     }
 
+    /**
+     * @return OpenIDUser|null
+     * @throws JsonException
+     */
     public function fetchUser(): ?OpenIDUser
     {
         $user = $this->validate();
@@ -101,6 +124,11 @@ class OpenIDProvider
         return $user;
     }
 
+    /**
+     * @param int $timeout
+     *
+     * @return string|null
+     */
     public function validate($timeout = 30): ?string
     {
         $get = $this->request->query->all();
@@ -110,24 +138,24 @@ class OpenIDProvider
             'openid.sig' => $get['openid_sig'],
             'openid.ns' => 'http://specs.openid.net/auth/2.0',
         ];
-        foreach (\explode(',', $get['openid_signed']) as $item) {
-            $val = $get['openid_' . \str_replace('.', '_', $item)];
+        foreach (explode(',', $get['openid_signed']) as $item) {
+            $val = $get['openid_' . str_replace('.', '_', $item)];
             $params['openid.' . $item] = stripslashes($val);
         }
         $params['openid.mode'] = 'check_authentication';
-        $data = \http_build_query($params);
-        $context = \stream_context_create([
+        $data = http_build_query($params);
+        $context = stream_context_create([
             'http' => [
                 'method' => 'POST',
-                'header' => "Accept-language: en\r\n" . "Content-type: application/x-www-form-urlencoded\r\n" . 'Content-Length: ' . \strlen($data) . "\r\n",
+                'header' => "Accept-language: en\r\n" . "Content-type: application/x-www-form-urlencoded\r\n" . 'Content-Length: ' . strlen($data) . "\r\n",
                 'content' => $data,
                 'timeout' => $timeout,
             ],
         ]);
-        \preg_match($this->options['preg_check'], \urldecode($get['openid_claimed_id']), $matches);
-        $openID = (\is_array($matches) && isset($matches[1])) ? $matches[1] : null;
+        preg_match($this->options['preg_check'], urldecode($get['openid_claimed_id']), $matches);
+        $openID = (is_array($matches) && isset($matches[1])) ? $matches[1] : null;
 
-        return \preg_match("#is_valid\s*:\s*true#i", \file_get_contents($this->options['openid_url'] . '/' . $this->options['api_key'], false, $context)) === 1 ? $openID : null;
+        return preg_match("#is_valid\s*:\s*true#i", file_get_contents($this->options['openid_url'] . '/' . $this->options['api_key'], false, $context)) === 1 ? $openID : null;
     }
 
     /**
@@ -145,6 +173,9 @@ class OpenIDProvider
         return null;
     }
 
+    /**
+     * @return RedirectResponse
+     */
     public function redirect(): RedirectResponse
     {
         $redirectUri = $this->router->generate($this->options['redirect_route'], $this->options['provider_options']['redirect_route_params'] ?? [], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -152,6 +183,12 @@ class OpenIDProvider
         return new RedirectResponse($this->urlPath($redirectUri));
     }
 
+    /**
+     * @param null $return
+     * @param null $altRealm
+     *
+     * @return string
+     */
     public function urlPath($return = null, $altRealm = null): string
     {
         $realm = $altRealm ?: Http::getSchema($this->request) . $this->request->server->get('HTTP_HOST');
@@ -163,7 +200,7 @@ class OpenIDProvider
             $return = $realm . $this->request->server->get('SCRIPT_NAME');
         }
 
-        return $this->options['openid_url'] . '/' . $this->options['api_key'] . '/?' . \http_build_query($this->getParams($return, $realm));
+        return $this->options['openid_url'] . '/' . $this->options['api_key'] . '/?' . http_build_query($this->getParams($return, $realm));
     }
 
     /**
@@ -176,6 +213,12 @@ class OpenIDProvider
         return Uri::isUrl($url);
     }
 
+    /**
+     * @param $return
+     * @param $realm
+     *
+     * @return array
+     */
     private function getParams($return, $realm): array
     {
         $params = [

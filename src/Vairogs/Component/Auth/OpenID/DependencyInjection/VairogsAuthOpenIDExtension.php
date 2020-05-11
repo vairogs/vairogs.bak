@@ -45,6 +45,10 @@ class VairogsAuthOpenIDExtension extends VairogsExtension
         $this->buildClients($container, $configuration);
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param ConfigurationInterface $configuration
+     */
     private function buildClients(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
         $base = Vairogs::ALIAS . '.' . $this->getExtensionAlias() . '.' . OpenID::ALIAS . '.clients';
@@ -63,6 +67,12 @@ class VairogsAuthOpenIDExtension extends VairogsExtension
         }
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param $clientServiceKey
+     * @param string $base
+     * @param string $key
+     */
     public function configureClient(ContainerBuilder $container, $clientServiceKey, string $base, string $key): void
     {
         $clientDefinition = $container->register($clientServiceKey, OpenIDProvider::class);

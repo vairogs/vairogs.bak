@@ -13,6 +13,9 @@ class OpenID extends Bundle
      */
     public const ALIAS = 'openid';
 
+    /**
+     * @var string
+     */
     public const OPENID_BASE_ALIAS = 'auth';
 
     /**

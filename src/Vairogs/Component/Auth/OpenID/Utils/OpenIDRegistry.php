@@ -10,13 +10,24 @@ use function sprintf;
 
 class OpenIDRegistry
 {
+    /**
+     * @var array
+     */
     private array $clients;
 
+    /**
+     * @param Traversable $clients
+     */
     public function __construct(Traversable $clients)
     {
         $this->clients = iterator_to_array($clients, true);
     }
 
+    /**
+     * @param string $name
+     *
+     * @return OpenIDProvider
+     */
     public function getClient(string $name): OpenIDProvider
     {
         foreach ($this->getClients() as $client) {
