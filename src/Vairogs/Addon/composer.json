@@ -1,0 +1,46 @@
+{
+    "name": "vairogs/addon",
+    "description": "Utils: Models",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "vairogs",
+        "auth",
+        "openid",
+        "symfony",
+        "steam",
+        "addon"
+    ],
+    "authors": [
+        {
+            "name": "k0d3r1s",
+            "homepage": "https://github.com/k0d3r1s",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4.0",
+        "vairogs/auth-openid": "3.x-dev"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Addon\\": ""
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    },
+    "replace": {
+        "vairogs/addon-auth": "self.version",
+        "vairogs/addon-auth-openid": "self.version",
+        "vairogs/addon-auth-openid-steam": "self.version"
+    }
+}
