@@ -14,6 +14,7 @@ use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Component\Utils\Helper\Http;
 use Vairogs\Component\Utils\Helper\Json;
 use Vairogs\Component\Utils\Helper\Uri;
+use function array_keys;
 use function explode;
 use function file_get_contents;
 use function http_build_query;
@@ -221,6 +222,11 @@ class OpenIDProvider
      */
     private function getParams($return, $realm): array
     {
+        if (isset($this->options['provider_options']['replace'])) {
+            $opt = $this->options['provider_options']['replace'];
+            $return = str_replace(array_keys($opt), $opt, $return);
+        }
+
         $params = [
             'openid.ns' => 'http://specs.openid.net/auth/2.0',
             'openid.mode' => 'checkid_setup',
