@@ -4,11 +4,28 @@ namespace Vairogs\Addon\Auth\OpenID\Steam\Builder;
 
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
-use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamUser;
-use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamUserArrayFactory;
+use Vairogs\Addon\Auth\OpenID\Steam\Model\Steam;
+use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
+use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
 
 class SteamUserBuilder implements OpenIDUserBuilder
 {
+    /**
+     * @var string
+     */
+    protected string $userClass = Steam::class;
+
+    /**
+     * @param string $userClass
+     * @return SteamUserBuilder
+     */
+    public function setUserClass(string $userClass): SteamUserBuilder
+    {
+        $this->userClass = $userClass;
+
+        return $this;
+    }
+
     /**
      * @param array $response
      *
@@ -22,10 +39,10 @@ class SteamUserBuilder implements OpenIDUserBuilder
     /**
      * @param array $data
      *
-     * @return SteamUser
+     * @return Steam
      */
-    protected function getSteamUser(array $data): SteamUser
+    protected function getSteamUser(array $data): User
     {
-        return SteamUserArrayFactory::create($data['response']['players'][0]);
+        return UserArrayFactory::create(new $this->userClass(), $data['response']['players'][0]);
     }
 }

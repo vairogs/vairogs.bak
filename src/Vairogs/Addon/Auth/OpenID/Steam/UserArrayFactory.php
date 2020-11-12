@@ -1,15 +1,17 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
+namespace Vairogs\Addon\Auth\OpenID\Steam;
 
-class SteamGiftsUserArrayFactory
+use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
+
+class UserArrayFactory
 {
     /**
+     * @param User $user
      * @param array $bag
-     *
-     * @return SteamGiftsUser
+     * @return Steam
      */
-    public static function create(array $bag): SteamGiftsUser
+    public static function create(User $user, array $bag): User
     {
         $avatar = [
             'small' => $bag['avatar'] ?? '',
@@ -18,7 +20,7 @@ class SteamGiftsUserArrayFactory
             'hash' => $bag['avatarhash'],
         ];
 
-        return (new SteamGiftsUser())
+        return $user
             ->setOpenID($bag['steamid'] ?? null)
             ->setCommunityState($bag['communityvisibilitystate'] ?? 0)
             ->setProfileState($bag['profilestate'] ?? 0)

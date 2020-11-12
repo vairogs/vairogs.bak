@@ -2,10 +2,17 @@
 
 namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
-class SteamGiftsUser extends SteamUser
+use Doctrine\ORM\Mapping as ORM;
+use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
+
+/**
+ * @ORM\MappedSuperclass()
+ */
+class SteamGifts extends Steam
 {
     /**
      * @var string|null
+     * @ORM\Column(type="string", nullable=true)
      */
     protected ?string $username;
 
@@ -20,9 +27,9 @@ class SteamGiftsUser extends SteamUser
     /**
      * @param string|null $username
      *
-     * @return SteamGiftsUser
+     * @return SteamGifts
      */
-    public function setUsername(?string $username): SteamGiftsUser
+    public function setUsername(?string $username): User
     {
         $this->username = $username;
 

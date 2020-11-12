@@ -3,93 +3,115 @@
 namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
+use Doctrine\ORM\Mapping as ORM;
+use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 
-class SteamUser implements OpenIDUser
+/**
+ * @ORM\MappedSuperclass()
+ */
+class Steam implements OpenIDUser, User
 {
     public const RETURNS_EMAIL = false;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=false)
      */
     protected string $openID;
 
     /**
      * @var int
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected int $communityState;
 
     /**
      * @var int
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected int $profileState;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=false)
      */
     protected string $persona;
 
     /**
      * @var int
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected int $commentPermission;
 
     /**
      * @var string
+     * @ORM\Column(type="string", nullable=false)
      */
     protected string $url;
 
     /**
      * @var array
+     * @ORM\Column(type="array", nullable=false)
      */
     protected array $avatar;
 
     /**
      * @var int
-     */
-    protected int $logoff;
-
-    /**
-     * @var int
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected int $personaState;
 
     /**
+     * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected ?int $logoff;
+
+    /**
      * @var string|null
+     * @ORM\Column(type="string", nullable=true)
      */
     protected ?string $name;
 
     /**
      * @var int|null
+     * @ORM\Column(type="bigint", nullable=true)
      */
     protected ?int $clanId;
 
     /**
      * @var int
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected int $createdAt;
 
     /**
      * @var int
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected int $personaFlags;
 
     /**
      * @var string|null
+     * @ORM\Column(type="string", nullable=true)
      */
     protected ?string $countryCode;
 
     /**
      * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $stateCode;
 
     /**
      * @var string|null
+     * @ORM\Column(type="string", nullable=true)
      */
     protected ?string $playing;
 
     /**
      * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $playingId;
 
@@ -104,9 +126,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param string|null $playing
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setPlaying(?string $playing): SteamUser
+    public function setPlaying(?string $playing): User
     {
         $this->playing = $playing;
 
@@ -124,9 +146,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int|null $playingId
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setPlayingId(?int $playingId): SteamUser
+    public function setPlayingId(?int $playingId): User
     {
         $this->playingId = $playingId;
 
@@ -144,9 +166,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int $communityState
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setCommunityState(int $communityState): SteamUser
+    public function setCommunityState(int $communityState): User
     {
         $this->communityState = $communityState;
 
@@ -164,9 +186,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int $profileState
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setProfileState(int $profileState): SteamUser
+    public function setProfileState(int $profileState): User
     {
         $this->profileState = $profileState;
 
@@ -184,9 +206,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param string $persona
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setPersona(string $persona): SteamUser
+    public function setPersona(string $persona): User
     {
         $this->persona = $persona;
 
@@ -204,9 +226,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int $commentPermission
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setCommentPermission(int $commentPermission): SteamUser
+    public function setCommentPermission(int $commentPermission): User
     {
         $this->commentPermission = $commentPermission;
 
@@ -224,9 +246,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param string $url
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setUrl(string $url): SteamUser
+    public function setUrl(string $url): User
     {
         $this->url = $url;
 
@@ -244,9 +266,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param array $avatar
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setAvatar(array $avatar): SteamUser
+    public function setAvatar(array $avatar): User
     {
         $this->avatar = $avatar;
 
@@ -254,19 +276,19 @@ class SteamUser implements OpenIDUser
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getLogoff(): int
+    public function getLogoff(): ?int
     {
         return $this->logoff;
     }
 
     /**
-     * @param int $logoff
+     * @param int|null $logoff
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setLogoff(int $logoff): SteamUser
+    public function setLogoff(?int $logoff): User
     {
         $this->logoff = $logoff;
 
@@ -284,9 +306,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int $personaState
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setPersonaState(int $personaState): SteamUser
+    public function setPersonaState(int $personaState): User
     {
         $this->personaState = $personaState;
 
@@ -304,9 +326,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param string|null $name
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setName(?string $name): SteamUser
+    public function setName(?string $name): User
     {
         $this->name = $name;
 
@@ -324,9 +346,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int|null $clanId
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setClanId(?int $clanId): SteamUser
+    public function setClanId(?int $clanId): User
     {
         $this->clanId = $clanId;
 
@@ -344,9 +366,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int $createdAt
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setCreatedAt(int $createdAt): SteamUser
+    public function setCreatedAt(int $createdAt): User
     {
         $this->createdAt = $createdAt;
 
@@ -364,9 +386,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int $personaFlags
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setPersonaFlags(int $personaFlags): SteamUser
+    public function setPersonaFlags(int $personaFlags): User
     {
         $this->personaFlags = $personaFlags;
 
@@ -384,9 +406,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param string|null $countryCode
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setCountryCode(?string $countryCode): SteamUser
+    public function setCountryCode(?string $countryCode): User
     {
         $this->countryCode = $countryCode;
 
@@ -404,9 +426,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param int|null $stateCode
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setStateCode(?int $stateCode): SteamUser
+    public function setStateCode(?int $stateCode): User
     {
         $this->stateCode = $stateCode;
 
@@ -432,9 +454,9 @@ class SteamUser implements OpenIDUser
     /**
      * @param string $openId
      *
-     * @return SteamUser
+     * @return User
      */
-    public function setOpenID(string $openId): SteamUser
+    public function setOpenID(string $openId): User
     {
         $this->openID = $openId;
 
@@ -455,5 +477,23 @@ class SteamUser implements OpenIDUser
     public function __toString()
     {
         return $this->getOpenID();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUsername(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @param string|null $username
+     *
+     * @return User
+     */
+    public function setUsername(?string $username): User
+    {
+        return $this;
     }
 }

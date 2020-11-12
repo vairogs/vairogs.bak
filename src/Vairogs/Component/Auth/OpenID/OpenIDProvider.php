@@ -104,6 +104,10 @@ class OpenIDProvider
             $builderClass = $this->options['user_builder'];
             $builder = new $builderClass();
             /** @var OpenIDUserBuilder $builder */
+            if (null !== ($userClass = $this->options['user_class'] ?? null)) {
+                $builder->setUserClass($userClass);
+            }
+            /** @var OpenIDUserBuilder $builder */
             if ($this->profileUrl === false) {
                 $user = $builder->getUser($this->request->query->all());
             } else {

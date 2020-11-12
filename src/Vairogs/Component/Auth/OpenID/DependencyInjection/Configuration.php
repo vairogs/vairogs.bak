@@ -77,6 +77,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('preg_check')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('ns_mode')->defaultValue('sreg')->end()
             ->scalarNode('user_builder')->isRequired()->end()
+            ->scalarNode('user_class')->defaultNull()->end()
             ->scalarNode('redirect_route')->isRequired()->cannotBeEmpty()->end()
             ->arrayNode('provider_options')->prototype('variable')->end()->end();
         // @formatter:on
