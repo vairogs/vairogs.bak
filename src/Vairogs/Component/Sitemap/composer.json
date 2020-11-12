@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^7.4.0",
+        "php": ">=7.4.0",
         "ext-zlib": "*",
         "symfony/dependency-injection": "~5.2",
         "symfony/http-kernel": "~5.2",
