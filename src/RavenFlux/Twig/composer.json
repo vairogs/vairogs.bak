@@ -23,6 +23,11 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "email": "support@vairogs.com",
+        "issues": "https://github.com/vairogs/vairogs/issues",
+        "wiki": "https://github.com/vairogs/vairogs/wiki"
+    },
     "funding": [
         {
             "type": "ko-fi",
