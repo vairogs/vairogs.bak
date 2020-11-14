@@ -15,9 +15,9 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Vairogs\Component\Cache\Annotation\Cache as Annotation;
-use Vairogs\Component\Cache\Cache;
 use Vairogs\Component\Cache\Utils\Adapter\Cache as Adapter;
 use Vairogs\Component\Cache\Utils\Attribute;
+use Vairogs\Component\Cache\Utils\Header;
 use Vairogs\Component\Cache\Utils\Pool;
 use function class_exists;
 use function in_array;
@@ -32,8 +32,8 @@ class CacheEventListener implements EventSubscriberInterface
      * @var string[]
      */
     private const HEADERS = [
-        Cache::INVALIDATE_CACHE,
-        Cache::SKIP_CACHE,
+        Header::INVALIDATE,
+        Header::SKIP,
     ];
 
     /**
@@ -166,7 +166,7 @@ class CacheEventListener implements EventSubscriberInterface
             return true;
         }
 
-        $invalidate = $request->headers->get(Cache::CACHE_HEADER);
+        $invalidate = $request->headers->get(Header::CACHE_VAR);
 
         return null !== $invalidate && in_array($invalidate, self::HEADERS, true);
     }
@@ -188,7 +188,7 @@ class CacheEventListener implements EventSubscriberInterface
             $key = $annotation->getKey($event->getRequest()
                 ->get(self::ROUTE));
             $cache = $this->getCache($key);
-            $skip = Cache::SKIP_CACHE === $event->getRequest()->headers->get(Cache::CACHE_HEADER);
+            $skip = Header::SKIP === $event->getRequest()->headers->get(Header::CACHE_VAR);
             if (null === $cache && !$skip) {
                 $this->setCache($key, $event->getResponse(), $annotation->getExpires());
             }
