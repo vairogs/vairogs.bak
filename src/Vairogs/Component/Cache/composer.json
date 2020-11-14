@@ -1,0 +1,79 @@
+{
+    "name": "vairogs/cache",
+    "description": "Utils: Cache library",
+    "type": "library",
+    "keywords": [
+        "cache",
+        "doctrine",
+        "filesystem",
+        "orm",
+        "phpsed",
+        "predis",
+        "redis",
+        "symfony",
+        "vairogs"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
+            "homepage": "https://github.com/k0d3r1s",
+            "role": "Developer"
+        },
+        {
+            "name": "phpsed",
+            "homepage": "https://github.com/phpsed",
+            "role": "Original Author"
+        }
+    ],
+    "support": {
+        "email": "support@vairogs.com",
+        "issues": "https://github.com/vairogs/vairogs/issues",
+        "wiki": "https://github.com/vairogs/vairogs/wiki"
+    },
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/vairogs/cache"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "ext-json": "*",
+        "doctrine/annotations": "~1.11",
+        "psr/cache": "^1",
+        "symfony/cache": "~5.2",
+        "symfony/config": "~5.2",
+        "symfony/dependency-injection": "~5.2",
+        "symfony/event-dispatcher": "~5.2",
+        "symfony/http-foundation": "~5.2",
+        "symfony/http-kernel": "~5.2",
+        "symfony/security-core": "~5.2",
+        "vairogs/utils": "3.x-dev"
+    },
+    "replace": {
+        "vairogs/cache-utils": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Component\\Cache\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    }
+}

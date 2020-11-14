@@ -76,6 +76,7 @@
         "vairogs/addon-auth-openid-steam": "self.version",
         "vairogs/auth-openid": "self.version",
         "vairogs/auth": "self.version",
+        "vairogs/cache": "self.version",
         "vairogs/components": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/utils": "self.version"

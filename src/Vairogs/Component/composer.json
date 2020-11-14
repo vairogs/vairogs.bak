@@ -85,6 +85,7 @@
     "replace": {
         "vairogs/auth": "self.version",
         "vairogs/auth-openid": "self.version",
+        "vairogs/cache": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/utils": "self.version"
     },
