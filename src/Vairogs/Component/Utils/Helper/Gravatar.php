@@ -12,16 +12,54 @@ use function urldecode;
 
 class Gravatar
 {
+    /**
+     * @var string
+     */
     public const ICON_404 = '404';
+
+    /**
+     * @var string
+     */
     public const ICON_MM = 'mm';
+
+    /**
+     * @var string
+     */
     public const ICON_IDENTICON = 'identicon';
+
+    /**
+     * @var string
+     */
     public const ICON_MONSTERID = 'monsterid';
+
+    /**
+     * @var string
+     */
     public const ICON_WAVATAR = 'wavatar';
+
+    /**
+     * @var string
+     */
     public const ICON_RETRO = 'retro';
+
+    /**
+     * @var string
+     */
     public const ICON_BLANK = 'blank';
 
+    /**
+     * @var string
+     */
     public const DEFAULT_EMAIL = 'vairogs@vairogs.com';
+
+    /**
+     * @var string
+     */
     public const HTTP_HOST = 'http://www.gravatar.com';
+
+    /**
+     * @var string
+     */
     public const HTTPS_HOST = 'https://secure.gravatar.com';
 
     /**

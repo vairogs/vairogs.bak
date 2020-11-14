@@ -30,15 +30,10 @@ use function urldecode;
 class OpenIDProvider
 {
     protected ?Request $request;
-
     protected UrlGeneratorInterface $router;
-
     protected string $name;
-
     protected $profileUrl;
-
     protected array $options;
-
     protected string $cacheDir;
 
     /**

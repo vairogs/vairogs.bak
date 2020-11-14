@@ -15,7 +15,6 @@ use function key;
 class PhpFunctionsExtension extends AbstractExtension
 {
     private ?array $functions;
-
     private ?array $filters;
 
     /**

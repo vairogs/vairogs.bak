@@ -11,9 +11,7 @@ use Vairogs\Component\Utils\Doctrine\Model\Log;
 class MonologDBHandler extends AbstractProcessingHandler
 {
     protected EntityManagerInterface|ObjectManager $em;
-
     protected string $logClass;
-
     protected ManagerRegistry $doctrine;
 
     /**

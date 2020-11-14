@@ -19,7 +19,6 @@ use function sprintf;
 class Attribute
 {
     protected Reader $reader;
-
     protected ?TokenStorageInterface $storage;
 
     /**

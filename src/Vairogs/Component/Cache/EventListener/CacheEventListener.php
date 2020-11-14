@@ -42,9 +42,7 @@ class CacheEventListener implements EventSubscriberInterface
     private const ROUTE = '_route';
 
     protected ChainAdapter $client;
-
     protected bool $enabled;
-
     protected Attribute $attribute;
 
     /**

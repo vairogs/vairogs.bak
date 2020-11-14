@@ -17,9 +17,19 @@ use function sprintf;
 
 class SortableNullWalker extends SqlWalker
 {
+    /**
+     * @var string
+     */
     public const NULLS_FIRST = 'NULLS FIRST';
+
+    /**
+     * @var string
+     */
     public const NULLS_LAST = 'NULLS LAST';
 
+    /**
+     * @var string
+     */
     public const FIELDS = __CLASS__ . '.fields';
 
     /**

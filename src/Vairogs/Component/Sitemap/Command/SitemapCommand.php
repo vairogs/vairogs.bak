@@ -24,9 +24,7 @@ class SitemapCommand extends Command
     protected static $defaultName = 'vairogs:sitemap';
 
     private ValidatorInterface $validator;
-
     private array $options;
-
     private ?Provider $provider;
 
     /**

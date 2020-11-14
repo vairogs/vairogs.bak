@@ -9,7 +9,6 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 class ErrorResponse
 {
     private ConstraintViolationListInterface $errors;
-
     private Response $response;
 
     /**

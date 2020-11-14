@@ -12,6 +12,9 @@ use const null;
 
 class StreamResponse extends Response
 {
+    /**
+     * @var int
+     */
     public const BUFFER_SIZE = 4096;
 
     private int $bufferSize;

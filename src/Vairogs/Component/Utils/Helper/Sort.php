@@ -10,7 +10,14 @@ use function ucfirst;
 
 class Sort
 {
+    /**
+     * @var string
+     */
     public const ASC = 'ASC';
+
+    /**
+     * @var string
+     */
     public const DESC = 'DESC';
 
     /**
