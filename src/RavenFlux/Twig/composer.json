@@ -1,50 +1,64 @@
 {
     "name": "ravenflux/ravenflux",
     "description": "RavenFlux Twig functions",
-    "license": "MIT",
     "type": "library",
     "keywords": [
-        "ravenflux",
-        "twig",
-        "twig-extension",
-        "symfony",
-        "symfony2",
-        "symfony3",
-        "symfony4",
-        "php",
-        "sort",
         "env",
-        "getenv"
+        "getenv",
+        "php",
+        "ravenflux",
+        "sort",
+        "symfony",
+        "symfony4",
+        "symfony5",
+        "twig",
+        "twig-extension"
     ],
+    "license": "MIT",
     "authors": [
         {
-            "name": "k0d3r1s",
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
             "homepage": "https://github.com/k0d3r1s",
             "role": "Developer"
         }
     ],
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/ravenflux/ravenflux"
+        }
+    ],
     "require": {
         "php": ">=7.4.0",
-        "twig/twig": "3.*",
         "doctrine/collections": "~1.6",
+        "twig/twig": "3.*",
         "vairogs/utils": "3.x-dev"
     },
-    "config": {
-        "sort-packages": true
+    "replace": {
+        "ravenflux/getenv": "self.version",
+        "ravenflux/php-functions": "self.version",
+        "ravenflux/sort-functions": "self.version"
     },
     "autoload": {
         "psr-4": {
             "RavenFlux\\Twig\\": ""
         }
     },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "3.x-dev"
         }
-    },
-    "replace": {
-        "ravenflux/getenv": "self.version",
-        "ravenflux/php-functions": "self.version",
-        "ravenflux/sort-functions": "self.version"
     }
 }

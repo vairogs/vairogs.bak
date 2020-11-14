@@ -1,19 +1,34 @@
 {
     "name": "vairogs/auth",
     "description": "Utils: Auth library",
-    "license": "MIT",
     "type": "library",
     "keywords": [
-        "vairogs",
         "auth",
         "openid",
-        "symfony"
+        "symfony",
+        "vairogs"
     ],
+    "license": "MIT",
     "authors": [
         {
-            "name": "k0d3r1s",
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
             "homepage": "https://github.com/k0d3r1s",
             "role": "Developer"
+        }
+    ],
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/vairogs/auth"
         }
     ],
     "require": {
@@ -25,23 +40,20 @@
         "symfony/routing": "~5.2",
         "vairogs/utils": "3.x-dev"
     },
-    "config": {
-        "sort-packages": true
+    "replace": {
+        "vairogs/auth-openid": "self.version"
     },
     "autoload": {
         "psr-4": {
             "Vairogs\\Component\\Auth\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        }
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
             "dev-master": "3.x-dev"
         }
-    },
-    "replace": {
-        "vairogs/auth-openid": "self.version"
     }
 }

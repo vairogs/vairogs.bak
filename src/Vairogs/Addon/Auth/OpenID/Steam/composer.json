@@ -1,21 +1,36 @@
 {
     "name": "vairogs/addon-auth-openid-steam",
-    "description": "Utils: Auth library: OpenID client: Steam models",
-    "license": "MIT",
+    "description": "Utils: Auth library OpenID Steam models",
     "type": "library",
     "keywords": [
-        "vairogs",
+        "addon",
         "auth",
         "openid",
-        "symfony",
         "steam",
-        "addon"
+        "symfony",
+        "vairogs"
     ],
+    "license": "MIT",
     "authors": [
         {
-            "name": "k0d3r1s",
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
             "homepage": "https://github.com/k0d3r1s",
             "role": "Developer"
+        }
+    ],
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/vairogs/addon-auth-openid-steam"
         }
     ],
     "require": {
@@ -23,16 +38,13 @@
         "doctrine/orm": "~2.6",
         "vairogs/auth-openid": "3.x-dev"
     },
-    "config": {
-        "sort-packages": true
-    },
     "autoload": {
         "psr-4": {
             "Vairogs\\Addon\\Auth\\OpenID\\Steam\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        }
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {

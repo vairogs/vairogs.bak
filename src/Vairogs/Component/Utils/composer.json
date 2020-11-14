@@ -1,19 +1,16 @@
 {
     "name": "vairogs/utils",
-    "description": "Symfony utility classes",
-    "license": "MIT",
+    "description": "Utils: Symfony utility classes",
     "type": "library",
     "keywords": [
-        "vairogs",
-        "utils",
-        "symfony",
         "array",
         "date",
         "doctrine",
-        "http-foundation",
         "http",
+        "http-foundation",
         "json",
         "manipulation",
+        "monolog",
         "object",
         "php",
         "prime",
@@ -21,16 +18,35 @@
         "response",
         "sort",
         "string",
+        "symfony",
         "text",
         "unique",
         "uri",
+        "utils",
+        "vairogs",
         "validation"
     ],
+    "license": "MIT",
     "authors": [
         {
-            "name": "k0d3r1s",
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
             "homepage": "https://github.com/k0d3r1s",
             "role": "Developer"
+        }
+    ],
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/vairogs/utils"
         }
     ],
     "require": {
@@ -39,23 +55,20 @@
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "monolog/monolog": "~2.1",
-        "symfony/config": "~5.2",
-        "symfony/dependency-injection": "~5.2",
-        "symfony/http-foundation": "~5.2",
-        "symfony/http-kernel": "~5.2",
         "doctrine/collections": "~1.6",
         "doctrine/dbal": "~2.8",
         "doctrine/orm": "~2.6",
         "doctrine/persistence": "~2.1",
+        "monolog/monolog": "~2.1",
         "psr/http-message": "^1",
-        "twig/twig": "2.*|3.*"
+        "symfony/config": "~5.2",
+        "symfony/dependency-injection": "~5.2",
+        "symfony/http-foundation": "~5.2",
+        "symfony/http-kernel": "~5.2",
+        "twig/twig": "3.*"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~5.2"
-    },
-    "config": {
-        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
@@ -64,6 +77,9 @@
         "exclude-from-classmap": [
             "/Tests/"
         ]
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {

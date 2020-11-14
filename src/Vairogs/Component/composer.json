@@ -1,39 +1,54 @@
 {
     "name": "vairogs/components",
     "description": "Vairogs components",
-    "license": "MIT",
     "type": "library",
     "keywords": [
-        "vairogs",
-        "utils",
-        "symfony",
         "array",
+        "auth",
         "date",
         "doctrine",
-        "http-foundation",
         "http",
+        "http-foundation",
         "json",
         "manipulation",
         "object",
+        "openid",
         "php",
         "prime",
         "psr",
         "response",
         "sort",
+        "steam",
         "string",
+        "symfony",
         "text",
         "unique",
         "uri",
-        "validation",
-        "auth",
-        "openid",
-        "steam"
+        "utils",
+        "vairogs",
+        "validation"
     ],
+    "license": "MIT",
     "authors": [
         {
-            "name": "k0d3r1s",
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
             "homepage": "https://github.com/k0d3r1s",
             "role": "Developer"
+        }
+    ],
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/vairogs/components"
         }
     ],
     "require": {
@@ -62,8 +77,11 @@
     "require-dev": {
         "symfony/phpunit-bridge": "~5.2"
     },
-    "config": {
-        "sort-packages": true
+    "replace": {
+        "vairogs/auth": "self.version",
+        "vairogs/auth-openid": "self.version",
+        "vairogs/sitemap": "self.version",
+        "vairogs/utils": "self.version"
     },
     "autoload": {
         "psr-4": {
@@ -73,15 +91,12 @@
             "/Tests/"
         ]
     },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "3.x-dev"
         }
-    },
-    "replace": {
-        "vairogs/utils": "self.version",
-        "vairogs/sitemap": "self.version",
-        "vairogs/auth": "self.version",
-        "vairogs/auth-openid": "self.version"
     }
 }
