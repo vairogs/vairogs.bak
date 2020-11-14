@@ -18,36 +18,13 @@ use const true;
 
 class Date
 {
-    /**
-     * @var string
-     */
     public const FORMAT = 'd-m-Y H:i:s';
-
-    /**
-     * @var array
-     */
     public const EXTRA_FORMATS = [
         'D M d Y H:i:s T',
     ];
-
-    /**
-     * @var int
-     */
     public const SEC = 1000;
-
-    /**
-     * @var int
-     */
     public const MIN = 60 * self::SEC;
-
-    /**
-     * @var int
-     */
     public const HOUR = 60 * self::MIN;
-
-    /**
-     * @var array
-     */
     public const TIME = [
         'hour' => self::HOUR,
         'min' => self::MIN,

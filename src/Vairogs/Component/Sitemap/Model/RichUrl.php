@@ -9,7 +9,6 @@ class RichUrl extends Url
     /**
      * Optional
      * The fully-qualified URL for the version of this page for the specified language/region.
-     * @var string[]
      * @Assert\All(
      *     @Assert\Type(type="string"),
      *     @Assert\NotBlank()

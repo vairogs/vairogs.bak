@@ -7,59 +7,16 @@ use Vairogs\Component\Utils\Helper\Date;
 
 class DateTest extends TestCase
 {
-    /**
-     * @var string
-     */
     private const PK_OLD_VALID = '111111-10258';
-
-    /**
-     * @var string
-     */
     private const PK_NEW_VALID = '320511-36626';
-
-    /**
-     * @var string
-     */
     private const PK_OLD_INVALID = '11111-11111';
-
-    /**
-     * @var string
-     */
     private const PK_NEW_INVALID = '323232-32323';
-
-    /**
-     * @var string
-     */
     private const PK_DATE_VALID = '120456';
-
-    /**
-     * @var string
-     */
     private const PK_DATE_INVALID = '320456';
-
-    /**
-     * @var int
-     */
     private const TIMESTAMP = 1546717009;
-
-    /**
-     * @var int
-     */
     private const TIMESTAMP_INVALID = 1546717005;
-
-    /**
-     * @var string
-     */
     private const DATE = '05-01-2019 19:36:49';
-
-    /**
-     * @var string
-     */
     private const DATE_INVALID = '05.01.2019 19:33:49';
-
-    /**
-     * @var array
-     */
     private const FORMAT_VALID = [
         '60' => '1 min',
         '3600' => '1 hour',
@@ -67,10 +24,6 @@ class DateTest extends TestCase
         '3666' => '1 hour 1 min 6 secs',
         '3606' => '1 hour 6 secs',
     ];
-
-    /**
-     * @var array
-     */
     private const FORMAT_INVALID = [
         '66' => '1 min',
         '3600' => '1 hours',

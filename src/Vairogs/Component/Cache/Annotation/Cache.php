@@ -16,17 +16,11 @@ use function str_replace;
  */
 class Cache
 {
-    /**
-     * @var string
-     */
     private const ALGORITHM = 'sha1';
 
     public int $expires;
-
     public null|string|array $data;
-
     public array $attributes = [];
-
     public string $strategy = Strategy::ALL;
 
     /**

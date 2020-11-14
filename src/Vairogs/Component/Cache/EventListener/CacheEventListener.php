@@ -28,17 +28,10 @@ use const true;
 
 class CacheEventListener implements EventSubscriberInterface
 {
-    /**
-     * @var string[]
-     */
     private const HEADERS = [
         Header::INVALIDATE,
         Header::SKIP,
     ];
-
-    /**
-     * @var string
-     */
     private const ROUTE = '_route';
 
     protected ChainAdapter $client;
