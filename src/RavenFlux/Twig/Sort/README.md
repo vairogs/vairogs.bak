@@ -17,6 +17,8 @@ The recommended way to install is via Composer:
 ```shell
 composer require ravenflux/sort-functions
 ```
+This package requires at least PHP 7.4.0
+
 For Symfony usage, import ravenflux/sort-function services.yaml file:
 ```yaml
 # config/services.yaml

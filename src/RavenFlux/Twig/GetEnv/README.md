@@ -17,6 +17,8 @@ The recommended way to install is via Composer:
 ```shell
 composer require ravenflux/getenv
 ```
+This package requires at least PHP 7.4.0
+
 Usage
 ------------
 ```twig
