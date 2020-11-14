@@ -16,6 +16,9 @@ use const null;
 
 class SortExtension extends AbstractExtension
 {
+    /**
+     * @return TwigFilter[]
+     */
     public function getFilters(): array
     {
         return [
@@ -26,6 +29,12 @@ class SortExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @param $data
+     * @param null $parameter
+     * @param string $order
+     * @return array
+     */
     public function usortFunction($data, $parameter = null, $order = Sort::ASC): array
     {
         if ($data instanceof Collection) {

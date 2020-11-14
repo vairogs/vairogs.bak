@@ -24,6 +24,7 @@ class Php
      * @param object $object
      * @param string $property
      * @param $value
+     * @noinspection StaticClosureCanBeUsedInspection
      */
     public static function hijackSet(object $object, string $property, $value): void
     {
@@ -55,6 +56,7 @@ class Php
      * @param string $property
      *
      * @return mixed
+     * @noinspection StaticClosureCanBeUsedInspection
      */
     public static function hijackGet(object $object, string $property)
     {

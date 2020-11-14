@@ -213,10 +213,8 @@ class Iter
         switch ($type) {
             case 'starts':
                 return array_values(self::filterKeyStartsWith($input, $with));
-                break;
             case 'ends':
                 return array_values(self::filterKeyEndsWith($input, $with));
-                break;
             default:
                 throw new InvalidArgumentException(sprintf('Invalid type "%s", allowed types are "starts" and "ends"', $type));
         }

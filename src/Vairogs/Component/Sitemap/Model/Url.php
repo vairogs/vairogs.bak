@@ -14,7 +14,6 @@ class Url
      * URL of the page.
      * This URL must begin with the protocol (such as http) and end with a trailing slash, if your web server requires
      * it. This value must be less than 2,048 characters.
-     * @var string
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
      * @Assert\Length(
@@ -27,7 +26,6 @@ class Url
     /**
      * Optional
      * The date of last modification of the file.
-     * @var null|DateTime
      * @Assert\Type(type="datetime")
      */
     protected ?DateTime$lastmod;
@@ -37,7 +35,6 @@ class Url
      * How frequently the page is likely to change.
      * This value provides general information to search engines and may not correlate exactly to how often they crawl
      * the page.
-     * @var null|string
      * @Assert\Type(type="string")
      * @Assert\Choice(callback={"Vairogs\Component\Sitemap\Utils\Constant\ChangeFrequency", "getChangeFrequencies"})
      */
@@ -49,7 +46,6 @@ class Url
      * Valid values range from 0.0 to 1.0.
      * This value does not affect how your pages are compared to pages on other sites—it only lets the search engines
      * know which pages you deem most important for the crawlers.
-     * @var float
      * @Assert\NotBlank()
      * @Assert\Type(type="float")
      * @Assert\Range(

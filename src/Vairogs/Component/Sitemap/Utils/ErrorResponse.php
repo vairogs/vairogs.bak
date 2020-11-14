@@ -8,14 +8,8 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class ErrorResponse
 {
-    /**
-     * @var ConstraintViolationListInterface
-     */
     private ConstraintViolationListInterface $errors;
 
-    /**
-     * @var Response
-     */
     private Response $response;
 
     /**

@@ -40,6 +40,7 @@ class Configuration implements ConfigurationInterface
 
     /**
      * @return ArrayNodeDefinition
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     private function getConfiguration(): ArrayNodeDefinition
     {
@@ -64,6 +65,7 @@ class Configuration implements ConfigurationInterface
 
     /**
      * @param ArrayNodeDefinition $node
+     * @noinspection NullPointerExceptionInspection
      */
     public function buildClientConfiguration(ArrayNodeDefinition $node): void
     {

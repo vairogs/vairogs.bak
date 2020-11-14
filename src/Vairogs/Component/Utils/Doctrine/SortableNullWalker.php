@@ -3,7 +3,10 @@
 namespace Vairogs\Component\Utils\Doctrine;
 
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\OraclePlatform;
+use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
 use Doctrine\ORM\Query\AST\OrderByClause;
 use Doctrine\ORM\Query\SqlWalker;
 use InvalidArgumentException;
@@ -21,9 +24,9 @@ class SortableNullWalker extends SqlWalker
 
     /**
      * @param OrderByClause $orderByClause
-     *
      * @return string|string[]|null
-     * @throws DBALException
+     * @throws Exception
+     * @noinspection PhpMissingParamTypeInspection
      */
     public function walkOrderByClause($orderByClause)
     {
@@ -33,7 +36,7 @@ class SortableNullWalker extends SqlWalker
                 ->getHint(self::FIELDS)) && $platform = $this->getConnection()
                 ->getDatabasePlatform()) {
             switch ($platform->getName()) {
-                case 'mysql':
+                case (new MySqlPlatform())->getName():
                     foreach ($fields as $field => $sorting) {
                         if (self::NULLS_LAST === $sorting) {
                             $sql = preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') (ASC|DESC)/i', static function ($matches) {
@@ -50,15 +53,14 @@ class SortableNullWalker extends SqlWalker
                         }
                     }
                     break;
-                case 'oracle':
-                case 'postgresql':
+                case (new OraclePlatform())->getName():
+                case (new PostgreSQL100Platform())->getName():
                     foreach ($fields as $field => $sorting) {
                         $sql = preg_replace('/(\.' . $field . ') (ASC|DESC)?\s*/i', '$1 $2 ' . $sorting, $sql);
                     }
                     break;
                 default:
                     throw new InvalidArgumentException(sprintf('Walker not implemented for "%s" platform', $platform));
-                    break;
             }
         }
 

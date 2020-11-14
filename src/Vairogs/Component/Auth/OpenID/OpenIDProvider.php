@@ -29,34 +29,16 @@ use function urldecode;
 
 class OpenIDProvider
 {
-    /**
-     * @var Request|null
-     */
     protected ?Request $request;
 
-    /**
-     * @var UrlGeneratorInterface
-     */
     protected UrlGeneratorInterface $router;
 
-    /**
-     * @var string
-     */
     protected string $name;
 
-    /**
-     * @var bool|mixed
-     */
     protected $profileUrl;
 
-    /**
-     * @var array
-     */
     protected array $options;
 
-    /**
-     * @var string
-     */
     protected string $cacheDir;
 
     /**

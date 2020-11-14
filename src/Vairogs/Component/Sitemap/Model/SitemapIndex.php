@@ -18,14 +18,12 @@ class SitemapIndex
      *     min="10",
      *     max="2048"
      * )
-     * @var string
      */
     protected string $loc;
 
     /**
      * Optional
      * The date of last modification of the file.
-     * @var null|DateTime
      * @Assert\Type(type="datetime")
      */
     protected ?DateTime$lastmod;

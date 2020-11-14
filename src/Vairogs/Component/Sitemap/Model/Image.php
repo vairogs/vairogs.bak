@@ -9,7 +9,6 @@ class Image
     /**
      * Required
      * The URL of the image.
-     * @var string
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
      * @Assert\Length(
@@ -22,7 +21,6 @@ class Image
     /**
      * Optional
      * The caption of the image.
-     * @var null|string
      * @Assert\Type(type="string")
      */
     protected ?string $caption;
@@ -30,7 +28,6 @@ class Image
     /**
      * Optional
      * The geographic location of the image.
-     * @var null|string
      * @Assert\Type(type="string")
      */
     protected ?string $geoLocation;
@@ -38,7 +35,6 @@ class Image
     /**
      * Optional
      * The title of the image.
-     * @var null|string
      * @Assert\Type(type="string")
      */
     protected ?string $title;
@@ -46,7 +42,6 @@ class Image
     /**
      * Optional
      * A URL to the license of the image.
-     * @var null|string
      * @Assert\Type(type="string")
      */
     protected ?string $license;

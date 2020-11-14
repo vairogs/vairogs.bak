@@ -18,6 +18,10 @@ class Configuration implements ConfigurationInterface
         return (new VairogsConfiguration())->getConfiguration($this->getConfiguration());
     }
 
+    /**
+     * @return ArrayNodeDefinition
+     * @noinspection NullPointerExceptionInspection
+     */
     private function getConfiguration(): ArrayNodeDefinition
     {
         $node = (new TreeBuilder(Sitemap::ALIAS))->getRootNode();

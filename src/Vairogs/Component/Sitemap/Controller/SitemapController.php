@@ -12,8 +12,8 @@ use Vairogs\Component\Sitemap\Builder\Director;
 use Vairogs\Component\Sitemap\Builder\XmlBuilder;
 use Vairogs\Component\Sitemap\Provider;
 use Vairogs\Component\Sitemap\Utils\ErrorResponse;
-use function file_exists;
 use function file_get_contents;
+use function is_file;
 
 class SitemapController extends AbstractController
 {
@@ -28,7 +28,7 @@ class SitemapController extends AbstractController
      */
     public function sitemap(Request $request, ValidatorInterface $validator, ?Provider $provider = null, array $options = []): Response
     {
-        if (file_exists($sitemap = getcwd() . '/sitemap.xml')) {
+        if (is_file($sitemap = getcwd() . '/sitemap.xml')) {
             return new Response(file_get_contents($sitemap));
         }
 

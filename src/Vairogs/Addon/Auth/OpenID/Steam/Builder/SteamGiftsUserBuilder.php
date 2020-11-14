@@ -21,14 +21,8 @@ use function trim;
 
 class SteamGiftsUserBuilder implements OpenIDUserBuilder
 {
-    /**
-     * @var string
-     */
     protected string $cacheDir;
 
-    /**
-     * @var string
-     */
     protected string $userClass = SteamGifts::class;
 
     /**

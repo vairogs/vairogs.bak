@@ -48,6 +48,7 @@ class VairogsAuthOpenIDExtension extends VairogsExtension
     /**
      * @param ContainerBuilder $container
      * @param ConfigurationInterface $configuration
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     private function buildClients(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {

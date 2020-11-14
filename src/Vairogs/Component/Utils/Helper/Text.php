@@ -17,6 +17,8 @@ use function mb_substr;
 use function preg_match;
 use function preg_replace;
 use function rtrim;
+use function str_contains;
+use function str_ends_with;
 use function str_pad;
 use function str_replace;
 use function strip_tags;
@@ -77,6 +79,7 @@ class Text
      * @param bool $lowFirst
      *
      * @return string
+     * @noinspection StringNormalizationInspection
      */
     public static function toCamelCase(string $string, bool $lowFirst = true): string
     {
@@ -148,7 +151,7 @@ class Text
      *
      * @return int
      */
-    public static function compareLatvian($a, $b, $field, $type = 'array'): ?int
+    public static function compareLatvian($a, $b, $field, $type = 'array'): int
     {
         $alphabet = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
         if ('array' === $type) {
@@ -285,7 +288,7 @@ class Text
             $needle = mb_strtolower($needle);
         }
 
-        return '' === $needle || $needle === mb_substr($haystack, -mb_strlen($needle));
+        return '' === $needle || str_ends_with($haystack, $needle);
     }
 
     /**
@@ -296,7 +299,7 @@ class Text
      */
     public static function contains(string $haystack, string $needle): bool
     {
-        return false !== mb_strpos($haystack, $needle);
+        return str_contains($haystack, $needle);
     }
 
     /**

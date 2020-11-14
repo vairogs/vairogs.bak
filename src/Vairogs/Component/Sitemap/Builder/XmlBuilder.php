@@ -9,9 +9,6 @@ use function ucfirst;
 
 class XmlBuilder implements Builder
 {
-    /**
-     * @var Sitemap
-     */
     protected Sitemap $sitemap;
 
     /**
@@ -23,7 +20,7 @@ class XmlBuilder implements Builder
     }
 
     /**
-     * @param string $buffer
+     * @param mixed $buffer
      */
     public function build(&$buffer): void
     {
@@ -50,7 +47,7 @@ class XmlBuilder implements Builder
     }
 
     /**
-     * @param string $buffer
+     * @param mixed $buffer
      */
     public function end(&$buffer): void
     {
@@ -58,7 +55,7 @@ class XmlBuilder implements Builder
     }
 
     /**
-     * @param string $buffer
+     * @param mixed $buffer
      */
     public function start(&$buffer): void
     {

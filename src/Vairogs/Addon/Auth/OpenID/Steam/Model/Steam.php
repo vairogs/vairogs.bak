@@ -14,103 +14,86 @@ class Steam implements OpenIDUser, User
     public const RETURNS_EMAIL = false;
 
     /**
-     * @var string
      * @ORM\Column(type="string", nullable=false)
      */
     protected string $openID;
 
     /**
-     * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
     protected int $communityState;
 
     /**
-     * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
     protected int $profileState;
 
     /**
-     * @var string
      * @ORM\Column(type="string", nullable=false)
      */
     protected string $persona;
 
     /**
-     * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
     protected int $commentPermission;
 
     /**
-     * @var string
      * @ORM\Column(type="string", nullable=false)
      */
     protected string $url;
 
     /**
-     * @var array
      * @ORM\Column(type="array", nullable=false)
      */
     protected array $avatar;
 
     /**
-     * @var int
      * @ORM\Column(type="integer", nullable=false)
      */
     protected int $personaState;
 
     /**
-     * @var int|null
      * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $logoff;
 
     /**
-     * @var string|null
      * @ORM\Column(type="string", nullable=true)
      */
     protected ?string $name;
 
     /**
-     * @var int|null
      * @ORM\Column(type="bigint", nullable=true)
      */
     protected ?int $clanId;
 
     /**
-     * @var int
      * @ORM\Column(type="integer", nullable=true)
      */
     protected int $createdAt;
 
     /**
-     * @var int
      * @ORM\Column(type="integer", nullable=true)
      */
     protected int $personaFlags;
 
     /**
-     * @var string|null
      * @ORM\Column(type="string", nullable=true)
      */
     protected ?string $countryCode;
 
     /**
-     * @var int|null
      * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $stateCode;
 
     /**
-     * @var string|null
      * @ORM\Column(type="string", nullable=true)
      */
     protected ?string $playing;
 
     /**
-     * @var int|null
      * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $playingId;

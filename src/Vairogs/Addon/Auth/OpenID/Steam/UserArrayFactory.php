@@ -9,7 +9,7 @@ class UserArrayFactory
     /**
      * @param User $user
      * @param array $bag
-     * @return Steam
+     * @return User
      */
     public static function create(User $user, array $bag): User
     {

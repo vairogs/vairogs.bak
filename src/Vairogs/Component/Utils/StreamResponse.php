@@ -14,9 +14,6 @@ class StreamResponse extends Response
 {
     public const BUFFER_SIZE = 4096;
 
-    /**
-     * @var int
-     */
     private int $bufferSize;
 
     /**

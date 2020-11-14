@@ -10,9 +10,6 @@ use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
 
 class SteamUserBuilder implements OpenIDUserBuilder
 {
-    /**
-     * @var string
-     */
     protected string $userClass = Steam::class;
 
     /**

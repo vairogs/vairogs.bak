@@ -10,9 +10,6 @@ use function sprintf;
 
 class OpenIDRegistry
 {
-    /**
-     * @var array
-     */
     private array $clients;
 
     /**

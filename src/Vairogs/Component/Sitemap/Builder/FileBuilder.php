@@ -10,9 +10,6 @@ use function ucfirst;
 
 class FileBuilder implements Builder
 {
-    /**
-     * @var Sitemap
-     */
     protected Sitemap $sitemap;
 
     /**
@@ -25,6 +22,7 @@ class FileBuilder implements Builder
 
     /**
      * @param resource $buffer
+     * @noinspection DisconnectedForeachInstructionInspection
      */
     public function build(&$buffer): void
     {

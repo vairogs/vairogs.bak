@@ -20,6 +20,7 @@ use function parse_str;
 use function preg_replace;
 use function preg_replace_callback;
 use function sprintf;
+use function str_starts_with;
 use function strpos;
 use function strrpos;
 use function substr;
@@ -35,7 +36,7 @@ class Uri
      *
      * @return array
      */
-    public static function buildHttpQuery($data, ?string $parent = null): array
+    public static function buildHttpQuery(array|object $data, ?string $parent = null): array
     {
         $result = [];
 
@@ -83,7 +84,7 @@ class Uri
         return $scheme . $host . $port . $path . $query;
     }
 
-    public static function arrayFromQueryString(string $query)
+    public static function arrayFromQueryString(string $query): array
     {
         $query = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', static function ($match) {
             return bin2hex(urldecode($match[0]));
@@ -119,7 +120,7 @@ class Uri
                 }
 
                 $key = $h[0];
-            } elseif (0 === strpos($h[0], "\t")) {
+            } elseif (str_starts_with($h[0], "\t")) {
                 $headers[$key] .= "\r\n\t" . trim($h[0]);
             } elseif (!$key) {
                 $headers[0] = trim($h[0]);

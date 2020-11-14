@@ -7,7 +7,7 @@ use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use function preg_match;
 use function sprintf;
-use function strpos;
+use function str_starts_with;
 use const false;
 use const true;
 
@@ -88,7 +88,7 @@ class Http
      */
     public static function isAbsolute($path): bool
     {
-        return 0 === strpos($path, '//') || preg_match('#^[a-z-]{3,}:\/\/#i', $path);
+        return str_starts_with($path, '//') || preg_match('#^[a-z-]{3,}:\/\/#i', $path);
     }
 
     /**
@@ -105,6 +105,7 @@ class Http
      * @param Request $request
      *
      * @return bool
+     * @noinspection SuspiciousBinaryOperationInspection
      */
     protected static function checkHttps(Request $request): bool
     {
@@ -125,6 +126,7 @@ class Http
      * @param Request $request
      *
      * @return bool
+     * @noinspection SuspiciousBinaryOperationInspection
      */
     protected static function checkHttpXForwardedSsl(Request $request): bool
     {
@@ -135,6 +137,7 @@ class Http
      * @param Request $request
      *
      * @return bool
+     * @noinspection SuspiciousBinaryOperationInspection
      */
     protected static function checkHttpXForwardedProto(Request $request): bool
     {

@@ -14,24 +14,18 @@ use function key;
 
 class PhpFunctionsExtension extends AbstractExtension
 {
-    /**
-     * @var array|null
-     */
     private ?array $functions;
 
-    /**
-     * @var array|null
-     */
     private ?array $filters;
 
     /**
-     * @param null|array $functions
-     * @param null|array $filters
+     * @param array $functions
+     * @param array $filters
      */
-    public function __construct($functions = null, $filters = null)
+    public function __construct($functions = [], $filters = [])
     {
-        $this->functions = $functions ?: [];
-        $this->filters = $filters ?: [];
+        $this->functions = $functions;
+        $this->filters = $filters;
     }
 
     /**
