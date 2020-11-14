@@ -5,6 +5,7 @@
     "keywords": [
         "array",
         "auth",
+        "cache",
         "date",
         "doctrine",
         "http",
@@ -83,9 +84,15 @@
         "symfony/phpunit-bridge": "~5.2"
     },
     "replace": {
+        "vairogs/addon": "self.version",
+        "vairogs/addon-auth": "self.version",
+        "vairogs/addon-auth-openid": "self.version",
+        "vairogs/addon-auth-openid-steam": "self.version",
         "vairogs/auth": "self.version",
         "vairogs/auth-openid": "self.version",
         "vairogs/cache": "self.version",
+        "vairogs/cache-utils": "self.version",
+        "vairogs/components": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/utils": "self.version"
     },
