@@ -41,5 +41,10 @@
         "branch-alias": {
             "dev-master": "3.x-dev"
         }
+    },
+    "replace": {
+        "ravenflux/getenv": "self.version",
+        "ravenflux/php-functions": "self.version",
+        "ravenflux/sort-functions": "self.version"
     }
 }
