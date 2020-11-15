@@ -12,6 +12,7 @@ class SitemapDependency implements Dependency
 {
     /**
      * @inheritDoc
+     * @noinspection NullPointerExceptionInspection
      */
     public function getConfiguration(ArrayNodeDefinition $node): void
     {

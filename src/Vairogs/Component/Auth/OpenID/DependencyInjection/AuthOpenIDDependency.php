@@ -18,6 +18,7 @@ class AuthOpenIDDependency implements Dependency
 {
     /**
      * @inheritDoc
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     public function getConfiguration(ArrayNodeDefinition $node): void
     {

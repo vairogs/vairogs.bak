@@ -27,6 +27,7 @@ class AuthDependency implements Dependency
             ->children()
             ->arrayNode(Component::AUTH)
             ->children();
+
         $node
             ->append($authNode)
             ->end();
