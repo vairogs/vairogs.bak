@@ -4,20 +4,22 @@ namespace RavenFlux\Twig\GetEnv;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Vairogs\Component\Utils\Twig\TwigTrait;
 
 class GetEnvExtension extends AbstractExtension
 {
+    use TwigTrait;
+
     /**
      * @return array
      */
     public function getFunctions(): array
     {
-        return [
-            new TwigFunction('raven_getenv', [
-                $this,
-                'getEnv',
-            ]),
+        $input = [
+            'getenv' => 'getEnv',
         ];
+
+        return $this->makeArray($input, 'raven', TwigFunction::class);
     }
 
     /**

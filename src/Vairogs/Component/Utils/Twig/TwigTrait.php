@@ -5,6 +5,8 @@ namespace Vairogs\Component\Utils\Twig;
 use InvalidArgumentException;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Vairogs\Component\Utils\Vairogs;
+use function in_array;
 use function is_array;
 use function sprintf;
 
@@ -12,26 +14,18 @@ trait TwigTrait
 {
     /**
      * @param array $input
-     * @param string $type
-     *
+     * @param string $key
+     * @param string $class
      * @return array
-     * @throws InvalidArgumentException
      */
-    public function makeArray(array $input, $type = 'filter'): array
+    public function makeArray(array $input, string $key = Vairogs::ALIAS, string $class = TwigFilter::class): array
     {
-        switch ($type) {
-            case 'filter':
-                $class = TwigFilter::class;
-                break;
-            case 'function':
-                $class = TwigFunction::class;
-                break;
-            default:
-                throw new InvalidArgumentException(sprintf('Invalid type "%s":. Allowed types are filter and function', $type));
+        if (!in_array($class, [TwigFilter::class, TwigFunction::class], true)) {
+            throw new InvalidArgumentException(sprintf('Invalid type "%s":. Allowed types are filter and function', $class));
         }
 
         $output = [];
-        $this->makeInput($input, $input);
+        $this->makeInput($input, $key, $input);
         foreach ($input as $call => $function) {
             if (is_array($function)) {
                 $options = $function[2] ?? [];
@@ -50,13 +44,14 @@ trait TwigTrait
 
     /**
      * @param array $input
+     * @param string $key
      * @param $output
      */
-    private function makeInput(array $input, &$output): void
+    private function makeInput(array $input, string $key, &$output): void
     {
         $output = [];
         foreach ($input as $call => $function) {
-            $output[sprintf('vairogs_%s', $call)] = $function;
+            $output[sprintf('%s_%s', $key, $call)] = $function;
         }
     }
 }

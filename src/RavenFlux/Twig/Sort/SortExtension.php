@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Vairogs\Component\Utils\Helper\Sort;
+use Vairogs\Component\Utils\Twig\TwigTrait;
 use function count;
 use function current;
 use function is_array;
@@ -15,17 +16,18 @@ use function usort;
 
 class SortExtension extends AbstractExtension
 {
+    use TwigTrait;
+
     /**
      * @return TwigFilter[]
      */
     public function getFilters(): array
     {
-        return [
-            new TwigFilter('raven_usort', [
-                $this,
-                'usortFunction',
-            ]),
+        $input = [
+            'usort' => 'usortFunction',
         ];
+
+        return $this->makeArray($input, 'raven');
     }
 
     /**

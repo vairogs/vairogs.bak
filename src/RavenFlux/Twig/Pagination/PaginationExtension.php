@@ -5,9 +5,12 @@ namespace RavenFlux\Twig\Pagination;
 use RavenFlux\Twig\Pagination\Behaviour\FixedLength;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Vairogs\Component\Utils\Twig\TwigTrait;
 
 class PaginationExtension extends AbstractExtension
 {
+    use TwigTrait;
+
     /**
      * @param int $visible
      * @param int $total
@@ -26,11 +29,10 @@ class PaginationExtension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return [
-            new TwigFunction('pagination', [
-                $this,
-                'pagination',
-            ]),
+        $input = [
+            'pagination' => 'pagination',
         ];
+
+        return $this->makeArray($input, 'raven', TwigFunction::class);
     }
 }

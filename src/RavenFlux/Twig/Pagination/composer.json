@@ -40,7 +40,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "twig/twig": "3.*"
+        "twig/twig": "3.*",
+        "vairogs/utils": "3.x-dev"
     },
     "autoload": {
         "psr-4": {
