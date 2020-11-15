@@ -79,6 +79,8 @@
         "vairogs/cache": "self.version",
         "vairogs/cache-utils": "self.version",
         "vairogs/components": "self.version",
+        "vairogs/extra": "self.version",
+        "vairogs/extra-specification": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/utils": "self.version"
     },
