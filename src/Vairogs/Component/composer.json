@@ -80,9 +80,6 @@
         "symfony/validator": "~5.2",
         "twig/twig": "3.*"
     },
-    "require-dev": {
-        "symfony/phpunit-bridge": "~5.2"
-    },
     "replace": {
         "vairogs/auth": "self.version",
         "vairogs/auth-openid": "self.version",

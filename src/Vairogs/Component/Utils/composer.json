@@ -72,9 +72,6 @@
         "symfony/http-kernel": "~5.2",
         "twig/twig": "3.*"
     },
-    "require-dev": {
-        "symfony/phpunit-bridge": "~5.2"
-    },
     "autoload": {
         "psr-4": {
             "Vairogs\\Component\\Utils\\": ""
