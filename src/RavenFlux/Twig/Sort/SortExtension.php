@@ -12,7 +12,6 @@ use function current;
 use function is_array;
 use function strtoupper;
 use function usort;
-use const null;
 
 class SortExtension extends AbstractExtension
 {

@@ -14,9 +14,7 @@ use function interface_exists;
 use function is_bool;
 use function sprintf;
 use function strtolower;
-use const false;
 use const FILTER_VALIDATE_BOOLEAN;
-use const true;
 
 class Php
 {

@@ -2,8 +2,6 @@
 
 namespace Vairogs\Extra\Specification;
 
-use const false;
-
 abstract class AbstractSpecification extends CompositeSpecification
 {
     protected string $name;

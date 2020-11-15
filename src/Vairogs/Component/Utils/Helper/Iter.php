@@ -18,9 +18,6 @@ use function is_object;
 use function range;
 use function sprintf;
 use const ARRAY_FILTER_USE_KEY;
-use const false;
-use const null;
-use const true;
 
 class Iter
 {

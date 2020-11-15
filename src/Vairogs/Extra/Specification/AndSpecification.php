@@ -2,8 +2,6 @@
 
 namespace Vairogs\Extra\Specification;
 
-use const null;
-
 class AndSpecification extends CompositeSpecification
 {
     private SpecificationInterface $one;

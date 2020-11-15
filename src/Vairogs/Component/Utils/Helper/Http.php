@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use function preg_match;
 use function sprintf;
 use function str_starts_with;
-use const false;
-use const true;
 
 class Http
 {

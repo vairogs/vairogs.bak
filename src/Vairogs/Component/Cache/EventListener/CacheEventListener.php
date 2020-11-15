@@ -22,9 +22,6 @@ use Vairogs\Component\Cache\Utils\Pool;
 use function class_exists;
 use function in_array;
 use function method_exists;
-use const false;
-use const null;
-use const true;
 
 class CacheEventListener implements EventSubscriberInterface
 {

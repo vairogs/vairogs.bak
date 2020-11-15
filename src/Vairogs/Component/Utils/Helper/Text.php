@@ -26,11 +26,9 @@ use function strrev;
 use function strtolower;
 use function ucwords;
 use function usort;
-use const false;
 use const FILTER_FLAG_ALLOW_FRACTION;
 use const FILTER_SANITIZE_NUMBER_FLOAT;
 use const STR_PAD_LEFT;
-use const true;
 
 class Text
 {

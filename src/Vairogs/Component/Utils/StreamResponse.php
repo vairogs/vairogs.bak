@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use function flush;
 use function sprintf;
 use function strlen;
-use const false;
-use const null;
 
 class StreamResponse extends Response
 {

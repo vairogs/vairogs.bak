@@ -13,8 +13,6 @@ use function round;
 use function str_replace;
 use function strlen;
 use function substr;
-use const false;
-use const true;
 
 class Date
 {

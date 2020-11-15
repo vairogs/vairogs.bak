@@ -6,7 +6,6 @@ use Doctrine\ORM\Internal\Hydration\AbstractHydrator;
 use PDO;
 use function is_numeric;
 use function mb_strpos;
-use const false;
 
 class SingleColumnArrayHydrator extends AbstractHydrator
 {

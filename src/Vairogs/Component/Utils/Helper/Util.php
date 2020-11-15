@@ -5,7 +5,6 @@ namespace Vairogs\Component\Utils\Helper;
 use function array_fill;
 use function implode;
 use function preg_match;
-use const null;
 
 class Util
 {

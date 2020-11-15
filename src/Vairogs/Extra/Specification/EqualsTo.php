@@ -3,9 +3,6 @@
 namespace Vairogs\Extra\Specification;
 
 use function sprintf;
-use const false;
-use const null;
-use const true;
 
 class EqualsTo extends AbstractSpecification
 {

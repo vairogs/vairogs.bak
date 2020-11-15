@@ -5,7 +5,6 @@ namespace Vairogs\Component\Utils\Doctrine;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
-use const null;
 
 trait CreatedModified
 {

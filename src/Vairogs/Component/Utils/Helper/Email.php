@@ -3,7 +3,6 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use function filter_var;
-use const false;
 use const FILTER_SANITIZE_STRING;
 use const FILTER_VALIDATE_EMAIL;
 
