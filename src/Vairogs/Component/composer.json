@@ -94,10 +94,7 @@
     "autoload": {
         "psr-4": {
             "Vairogs\\Component\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+        }
     },
     "config": {
         "sort-packages": true

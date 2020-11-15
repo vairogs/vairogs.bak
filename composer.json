@@ -88,10 +88,7 @@
         "psr-4": {
             "Vairogs\\": "src/Vairogs/",
             "RavenFlux\\Twig\\": "src/RavenFlux/"
-        },
-        "exclude-from-classmap": [
-            "**/Tests/"
-        ]
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

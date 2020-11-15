@@ -42,6 +42,9 @@
     "require": {
         "php": ">=7.4.0"
     },
+    "replace": {
+        "vairogs/extra-specification": "self.version"
+    },
     "autoload": {
         "psr-4": {
             "Vairogs\\Extra\\": ""
