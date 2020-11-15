@@ -1,15 +1,11 @@
 {
-    "name": "ravenflux/ravenflux",
-    "description": "RavenFlux Twig functions",
+    "name": "ravenflux/pagination",
+    "description": "Twig extension that implements pagination in Twig template",
     "type": "library",
     "keywords": [
-        "env",
-        "getenv",
-        "php",
         "ravenflux",
-        "sort",
+        "pagination",
         "symfony",
-        "symfony4",
         "symfony5",
         "twig",
         "twig-extension"
@@ -39,24 +35,16 @@
         },
         {
             "type": "issuehunt",
-            "url": "https://issuehunt.io/r/ravenflux/ravenflux"
+            "url": "https://issuehunt.io/r/ravenflux/pagination"
         }
     ],
     "require": {
         "php": ">=7.4.0",
-        "doctrine/collections": "~1.6",
-        "twig/twig": "3.*",
-        "vairogs/utils": "3.x-dev"
-    },
-    "replace": {
-        "ravenflux/getenv": "self.version",
-        "ravenflux/pagination": "self.version",
-        "ravenflux/php-functions": "self.version",
-        "ravenflux/sort-functions": "self.version"
+        "twig/twig": "3.*"
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\Twig\\": ""
+            "RavenFlux\\Twig\\Pagination\\": ""
         }
     },
     "config": {

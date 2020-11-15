@@ -1,6 +1,7 @@
 services:
     ravenflux.twig.extension.getenv:
         class: RavenFlux\Twig\GetEnv\GetEnvExtension
+        public: false
         tags:
             -
                 name: twig.extension

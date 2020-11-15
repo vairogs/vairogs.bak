@@ -67,6 +67,7 @@
     },
     "replace": {
         "ravenflux/getenv": "self.version",
+        "ravenflux/pagination": "self.version",
         "ravenflux/php-functions": "self.version",
         "ravenflux/ravenflux": "self.version",
         "ravenflux/sort-functions": "self.version",
