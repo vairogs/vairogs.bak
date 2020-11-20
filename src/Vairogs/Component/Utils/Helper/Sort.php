@@ -5,8 +5,6 @@ namespace Vairogs\Component\Utils\Helper;
 use function array_slice;
 use function count;
 use function is_array;
-use function method_exists;
-use function ucfirst;
 
 class Sort
 {
@@ -14,8 +12,8 @@ class Sort
     public const DESC = 'DESC';
 
     /**
-     * @param $foo
-     * @param $bar
+     * @param mixed $foo
+     * @param mixed $bar
      */
     public static function swap(&$foo, &$bar): void
     {
@@ -45,8 +43,8 @@ class Sort
 
     /**
      * @param array $array
-     * @param $foo
-     * @param $bar
+     * @param mixed $foo
+     * @param mixed $bar
      */
     public static function swapArray(array &$array, $foo, $bar): void
     {
@@ -60,11 +58,11 @@ class Sort
     }
 
     /**
-     * @param $array
+     * @param array $array
      *
      * @return array
      */
-    public static function mergeSort($array): array
+    public static function mergeSort(array $array): array
     {
         if (1 === count($array)) {
             return $array;
@@ -81,12 +79,11 @@ class Sort
     }
 
     /**
-     * @param $left
-     * @param $right
-     *
+     * @param array $left
+     * @param array $right
      * @return array
      */
-    private static function merge($left, $right): array
+    private static function merge(array $left, array $right): array
     {
         $result = [];
         $i = $j = 0;
@@ -103,10 +100,12 @@ class Sort
                 $i++;
             }
         }
+
         while ($i < $leftCount) {
             $result[] = $left[$i];
             $i++;
         }
+
         while ($j < $rightCount) {
             $result[] = $right[$j];
             $j++;
@@ -116,8 +115,8 @@ class Sort
     }
 
     /**
-     * @param $item
-     * @param $field
+     * @param mixed $item
+     * @param mixed $field
      *
      * @return bool
      */
@@ -135,7 +134,7 @@ class Sort
     }
 
     /**
-     * @param $parameter
+     * @param mixed $parameter
      * @param string $order
      *
      * @return callable
@@ -145,27 +144,11 @@ class Sort
         return static function ($a, $b) use ($parameter, $order) {
             $flip = ($order === self::DESC) ? -1 : 1;
 
-            if (is_array($a)) {
-                $a_sort_value = $a[$parameter];
-            } elseif (method_exists($a, 'get' . ucfirst($parameter))) {
-                $a_sort_value = $a->{'get' . ucfirst($parameter)}();
-            } else {
-                $a_sort_value = $a->$parameter;
-            }
-
-            if (is_array($b)) {
-                $b_sort_value = $b[$parameter];
-            } elseif (method_exists($b, 'get' . ucfirst($parameter))) {
-                $b_sort_value = $b->{'get' . ucfirst($parameter)}();
-            } else {
-                $b_sort_value = $b->$parameter;
-            }
-
-            if ($a_sort_value === $b_sort_value) {
+            if (($a_sort = Php::getParameter($a, $parameter)) === ($b_sort = Php::getParameter($b, $parameter))) {
                 return 0;
             }
 
-            if ($a_sort_value > $b_sort_value) {
+            if ($a_sort > $b_sort) {
                 return $flip;
             }
 

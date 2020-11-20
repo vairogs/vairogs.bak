@@ -21,7 +21,7 @@ class Json
     public const PRETTY = 0b0010;
 
     /**
-     * @param $value
+     * @param mixed $value
      * @param int $flags
      *
      * @return string

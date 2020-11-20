@@ -41,7 +41,7 @@ class CacheEventListener implements EventSubscriberInterface
      * @param null|TokenStorageInterface $storage
      * @param Adapter[] ...$adapters
      */
-    public function __construct(Reader $reader, bool $enabled, ?TokenStorageInterface $storage, ...$adapters)
+    public function __construct(Reader $reader, bool $enabled, ?TokenStorageInterface $storage, array ...$adapters)
     {
         $this->enabled = $enabled;
         if ($this->enabled) {
@@ -115,12 +115,12 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      *
-     * @return null|mixed
+     * @return mixed
      * @throws InvalidArgumentException
      */
-    private function getCache($key)
+    private function getCache(string $key)
     {
         $cache = $this->client->getItem($key);
         if ($cache->isHit()) {
@@ -150,6 +150,10 @@ class CacheEventListener implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
     private function needsInvalidation(Request $request): bool
     {
         if ($request->getMethod() === Request::METHOD_PURGE) {
@@ -187,7 +191,7 @@ class CacheEventListener implements EventSubscriberInterface
 
     /**
      * @param string $key
-     * @param $value
+     * @param mixed $value
      * @param null|int $expires
      *
      * @throws InvalidArgumentException

@@ -31,25 +31,17 @@ class Generator
     public const SYMBOLS = 'symbols';
 
     private array $sets = [];
-    private string $lowerCase;
-    private string $upperCase;
-    private string $digits;
-    private string $symbols;
-
-    public function __construct()
-    {
-        $this->lowerCase = self::PASS_LOWERCASE;
-        $this->upperCase = self::PASS_UPPERCASE;
-        $this->digits = self::PASS_DIGITS;
-        $this->symbols = self::PASS_SYMBOLS;
-    }
+    private string $lowerCase = self::PASS_LOWERCASE;
+    private string $upperCase = self::PASS_UPPERCASE;
+    private string $digits = self::PASS_DIGITS;
+    private string $symbols = self::PASS_SYMBOLS;
 
     /**
      * @param int $length
      *
      * @return string
      */
-    public static function getUniqueId($length = 20): string
+    public static function getUniqueId(int $length = 20): string
     {
         try {
             return substr(bin2hex(random_bytes($length)), 0, $length);
@@ -64,7 +56,7 @@ class Generator
      *
      * @return string
      */
-    public static function getRandomString($length = 20, $chars = self::RAND_BASIC): string
+    public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
     {
         /** @noinspection NonSecureStrShuffleUsageInspection */
         return substr(str_shuffle(str_repeat($chars, (int)ceil((int)(strlen($chars) / $length)))), 0, $length);
@@ -77,7 +69,7 @@ class Generator
      * @throws LogicException
      * @throws Exception
      */
-    public function generate($length = 20): string
+    public function generate(int $length = 20): string
     {
         if (empty($this->sets)) {
             throw new LogicException('At least one set must be used!');
@@ -98,12 +90,12 @@ class Generator
     }
 
     /**
-     * @param $array
+     * @param array $array
      *
      * @return int|mixed
      * @throws Exception
      */
-    private function tweak($array)
+    private function tweak(array $array)
     {
         if (function_exists('random_int')) {
             return random_int(0, count($array) - 1);
@@ -153,11 +145,11 @@ class Generator
     }
 
     /**
-     * @param $lowerCase
+     * @param string $lowerCase
      *
      * @return Generator
      */
-    public function setLowerCase($lowerCase): Generator
+    public function setLowerCase(string $lowerCase): Generator
     {
         $this->lowerCase = $lowerCase;
 
@@ -165,11 +157,11 @@ class Generator
     }
 
     /**
-     * @param $upperCase
+     * @param string $upperCase
      *
      * @return Generator
      */
-    public function setUpperCase($upperCase): Generator
+    public function setUpperCase(string $upperCase): Generator
     {
         $this->upperCase = $upperCase;
 
@@ -177,11 +169,11 @@ class Generator
     }
 
     /**
-     * @param $digits
+     * @param string $digits
      *
      * @return Generator
      */
-    public function setDigits($digits): Generator
+    public function setDigits(string $digits): Generator
     {
         $this->digits = $digits;
 
@@ -189,11 +181,11 @@ class Generator
     }
 
     /**
-     * @param $symbols
+     * @param string $symbols
      *
      * @return Generator
      */
-    public function setSymbols($symbols): Generator
+    public function setSymbols(string $symbols): Generator
     {
         $this->symbols = $symbols;
 

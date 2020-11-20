@@ -30,7 +30,7 @@ class Date
     ];
 
     /**
-     * @param $personCode
+     * @param string $personCode
      *
      * @return bool
      */
@@ -58,7 +58,7 @@ class Date
     }
 
     /**
-     * @param $personCode
+     * @param string $personCode
      *
      * @return bool
      */
@@ -81,7 +81,7 @@ class Date
     }
 
     /**
-     * @param $date
+     * @param string $date
      *
      * @return bool
      */
@@ -104,7 +104,7 @@ class Date
     }
 
     /**
-     * @param $personCode
+     * @param string $personCode
      *
      * @return bool
      */
@@ -126,7 +126,7 @@ class Date
      *
      * @return string|int
      */
-    public static function excelDate(int $timestamp, $format = self::FORMAT)
+    public static function excelDate(int $timestamp, string $format = self::FORMAT)
     {
         $base = 25569;
         if ($timestamp >= $base) {
@@ -142,12 +142,12 @@ class Date
     }
 
     /**
-     * @param $date
+     * @param mixed $date
      * @param string $format
      *
      * @return bool
      */
-    public static function validateDateBasic($date, $format = self::FORMAT): bool
+    public static function validateDateBasic($date, string $format = self::FORMAT): bool
     {
         $object = DateTime::createFromFormat($format, $date);
 
@@ -155,11 +155,11 @@ class Date
     }
 
     /**
-     * @param $timestamp
+     * @param float|int $timestamp
      *
      * @return string
      */
-    public static function format($timestamp): string
+    public static function format(int|float $timestamp): string
     {
         $str = '';
         $timestamp = round($timestamp * 1000);

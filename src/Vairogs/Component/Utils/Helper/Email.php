@@ -9,11 +9,11 @@ use const FILTER_VALIDATE_EMAIL;
 class Email
 {
     /**
-     * @param $email
+     * @param string $email
      *
      * @return bool
      */
-    public static function isValid($email): bool
+    public static function isValid(string $email): bool
     {
         if (empty($email)) {
             return false;

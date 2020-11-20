@@ -86,11 +86,11 @@ class AuthOpenIDDependency implements Dependency
 
     /**
      * @param ContainerBuilder $container
-     * @param $clientServiceKey
+     * @param string $clientServiceKey
      * @param string $base
      * @param string $key
      */
-    private function configureClient(ContainerBuilder $container, $clientServiceKey, string $base, string $key): void
+    private function configureClient(ContainerBuilder $container, string $clientServiceKey, string $base, string $key): void
     {
         $clientDefinition = $container->register($clientServiceKey, OpenIDProvider::class);
         $clientDefinition->setArguments([

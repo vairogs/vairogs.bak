@@ -23,7 +23,7 @@ class PhpFunctionsExtension extends AbstractExtension
      * @param array $functions
      * @param array $filters
      */
-    public function __construct($functions = [], $filters = [])
+    public function __construct(array $functions = [], array $filters = [])
     {
         $this->functions = $functions;
         $this->filters = $filters;
@@ -89,7 +89,7 @@ class PhpFunctionsExtension extends AbstractExtension
     }
 
     /**
-     * @param $object
+     * @param mixed $object
      * @param string $filter
      * @param mixed ...$arguments
      *

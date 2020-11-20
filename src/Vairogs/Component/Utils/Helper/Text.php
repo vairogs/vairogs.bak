@@ -17,8 +17,6 @@ use function mb_substr;
 use function preg_match;
 use function preg_replace;
 use function rtrim;
-use function str_contains;
-use function str_ends_with;
 use function str_pad;
 use function str_replace;
 use function strip_tags;
@@ -46,6 +44,8 @@ class Text
         'A', 'B', 'V', 'G', 'D', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'ʺ', 'Y', '–', 'E'
     ];
     // @formatter:on
+
+    public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
 
     /**
      * @param string $string
@@ -80,7 +80,7 @@ class Text
      */
     public static function toCamelCase(string $string, bool $lowFirst = true): string
     {
-        if ($lowFirst) {
+        if (true === $lowFirst) {
             return preg_replace('~\s+~', '', lcfirst(ucwords(strtolower(str_replace('_', ' ', $string)))));
         }
 
@@ -141,23 +141,17 @@ class Text
     }
 
     /**
-     * @param $a
-     * @param $b
-     * @param $field
-     * @param string $type
+     * @param mixed $a
+     * @param mixed $b
+     * @param mixed $field
      *
      * @return int
      */
-    public static function compareLatvian($a, $b, $field, $type = 'array'): int
+    public static function compareLatvian($a, $b, $field): int
     {
-        $alphabet = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
-        if ('array' === $type) {
-            $a = mb_strtolower($a[$field]);
-            $b = mb_strtolower($b[$field]);
-        } else {
-            $a = mb_strtolower($a->$field());
-            $b = mb_strtolower($b->$field());
-        }
+        $a = mb_strtolower(Php::getParameter($a, $field));
+        $b = mb_strtolower(Php::getParameter($b, $field));
+
         $len = mb_strlen($a);
 
         for ($i = 0; $i < $len; $i++) {
@@ -167,7 +161,7 @@ class Text
             if ($i > mb_strlen($b)) {
                 return 1;
             }
-            if (mb_strpos($alphabet, mb_substr($a, $i, 1)) > mb_strpos($alphabet, mb_substr($b, $i, 1))) {
+            if (mb_strpos(self::ALPHABET, mb_substr($a, $i, 1)) > mb_strpos(self::ALPHABET, mb_substr($b, $i, 1))) {
                 return 1;
             }
 
@@ -257,51 +251,6 @@ class Text
     /**
      * @param string $haystack
      * @param string $needle
-     * @param bool $caseSensitive
-     *
-     * @return bool
-     */
-    public static function starts(string $haystack, string $needle, bool $caseSensitive = false): bool
-    {
-        $function = 'mb_stripos';
-        if (true === $caseSensitive) {
-            $function = 'mb_strpos';
-        }
-
-        return '' === $needle || 0 === $function($haystack, $needle);
-    }
-
-    /**
-     * @param string $haystack
-     * @param string $needle
-     * @param bool $caseSensitive
-     *
-     * @return bool
-     */
-    public static function ends(string $haystack, string $needle, bool $caseSensitive = false): bool
-    {
-        if (false === $caseSensitive) {
-            $haystack = mb_strtolower($haystack);
-            $needle = mb_strtolower($needle);
-        }
-
-        return '' === $needle || str_ends_with($haystack, $needle);
-    }
-
-    /**
-     * @param string $haystack
-     * @param string $needle
-     *
-     * @return bool
-     */
-    public static function contains(string $haystack, string $needle): bool
-    {
-        return str_contains($haystack, $needle);
-    }
-
-    /**
-     * @param string $haystack
-     * @param string $needle
      *
      * @return bool
      */
@@ -331,7 +280,7 @@ class Text
     }
 
     /**
-     * @param $value
+     * @param mixed $value
      *
      * @return int|string
      */

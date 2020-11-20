@@ -32,7 +32,7 @@ class OpenIDProvider
     protected ?Request $request;
     protected UrlGeneratorInterface $router;
     protected string $name;
-    protected $profileUrl;
+    protected ?string $profileUrl;
     protected array $options;
     protected string $cacheDir;
 
@@ -49,7 +49,7 @@ class OpenIDProvider
         $this->router = $router;
         $this->name = $name;
         $this->options = $options;
-        $this->profileUrl = $this->options['provider_options']['profile_url'] ?? false;
+        $this->profileUrl = $this->options['provider_options']['profile_url'] ?? null;
         $this->cacheDir = $cacheDir;
     }
 
@@ -85,7 +85,7 @@ class OpenIDProvider
                 $builder->setUserClass($userClass);
             }
             /** @var OpenIDUserBuilder $builder */
-            if ($this->profileUrl === false) {
+            if (null === $this->profileUrl) {
                 $user = $builder->getUser($this->request->query->all());
             } else {
                 foreach ($this->options['provider_options']['profile_url_replace'] as $option) {
@@ -111,7 +111,7 @@ class OpenIDProvider
      *
      * @return string|null
      */
-    public function validate($timeout = 30): ?string
+    public function validate(int $timeout = 30): ?string
     {
         $get = $this->request->query->all();
         $params = [
@@ -141,12 +141,12 @@ class OpenIDProvider
     }
 
     /**
-     * @param null $openID
+     * @param null|string $openID
      *
      * @return mixed|null
      * @throws JsonException
      */
-    private function getData($openID = null)
+    private function getData(?string $openID = null)
     {
         if (null !== $openID) {
             return Json::decode(file_get_contents(str_replace('#openid#', $openID, $this->profileUrl)), 1);
@@ -166,12 +166,12 @@ class OpenIDProvider
     }
 
     /**
-     * @param null $return
-     * @param null $altRealm
+     * @param string|null $return
+     * @param string|null $altRealm
      *
      * @return string
      */
-    public function urlPath($return = null, $altRealm = null): string
+    public function urlPath(?string $return = null, ?string $altRealm = null): string
     {
         $realm = $altRealm ?: Http::getSchema($this->request) . $this->request->server->get('HTTP_HOST');
         if (null !== $return) {
@@ -196,12 +196,12 @@ class OpenIDProvider
     }
 
     /**
-     * @param $return
-     * @param $realm
+     * @param string $return
+     * @param string|null $realm
      *
      * @return array
      */
-    private function getParams($return, $realm): array
+    private function getParams(string $return, ?string $realm): array
     {
         if (isset($this->options['provider_options']['replace'])) {
             $opt = $this->options['provider_options']['replace'];

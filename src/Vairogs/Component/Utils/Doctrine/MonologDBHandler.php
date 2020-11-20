@@ -27,6 +27,9 @@ class MonologDBHandler extends AbstractProcessingHandler
         $this->doctrine = $doctrine;
     }
 
+    /**
+     * @param array $record
+     */
     protected function write(array $record): void
     {
         $entry = new $this->logClass();

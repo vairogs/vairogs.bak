@@ -18,7 +18,7 @@ class StreamResponse extends Response
      * @param ResponseInterface $response
      * @param int $bufferSize
      */
-    public function __construct(ResponseInterface $response, $bufferSize = self::BUFFER_SIZE)
+    public function __construct(ResponseInterface $response, int $bufferSize = self::BUFFER_SIZE)
     {
         parent::__construct(null, $response->getStatusCode(), $response->getHeaders());
 

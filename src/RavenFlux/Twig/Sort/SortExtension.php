@@ -28,16 +28,16 @@ class SortExtension extends AbstractExtension
             'usort' => 'usortFunction',
         ];
 
-        return $this->makeArray($input, Vairogs::RAVEN);
+        return $this->makeArray($input, Vairogs::RAVEN, TwigFilter::class);
     }
 
     /**
-     * @param $data
-     * @param null $parameter
+     * @param mixed $data
+     * @param null|string $parameter
      * @param string $order
      * @return array
      */
-    public function usortFunction($data, $parameter = null, $order = Sort::ASC): array
+    public function usortFunction($data, ?string $parameter = null, string $order = Sort::ASC): array
     {
         if ($data instanceof Collection) {
             $data = $data->toArray();

@@ -11,7 +11,7 @@ use function reset;
 class ColumnHydrator extends ArrayHydrator
 {
     /**
-     * @return mixed[]
+     * @return array
      */
     protected function hydrateAllData(): array
     {

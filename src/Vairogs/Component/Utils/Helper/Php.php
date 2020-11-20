@@ -11,9 +11,12 @@ use function class_exists;
 use function filter_var;
 use function get_class;
 use function interface_exists;
+use function is_array;
 use function is_bool;
+use function method_exists;
 use function sprintf;
 use function strtolower;
+use function ucfirst;
 use const FILTER_VALIDATE_BOOLEAN;
 
 class Php
@@ -21,7 +24,7 @@ class Php
     /**
      * @param object $object
      * @param string $property
-     * @param $value
+     * @param mixed $value
      * @noinspection StaticClosureCanBeUsedInspection
      */
     public static function hijackSet(object $object, string $property, $value): void
@@ -64,27 +67,27 @@ class Php
     }
 
     /**
-     * @param $value
+     * @param mixed $value
      *
      * @return bool
      */
     public static function boolval($value): bool
     {
         if (is_bool($value)) {
-            $result = $value;
-        } else {
-            $value = strtolower((string)$value);
-
-            if ('y' === $value) {
-                $result = true;
-            } elseif ('n' === $value) {
-                $result = false;
-            } else {
-                $result = filter_var($value, FILTER_VALIDATE_BOOLEAN);
-            }
+            return $value;
         }
 
-        return $result;
+        $value = strtolower((string)$value);
+
+        if ('y' === $value) {
+            return true;
+        }
+
+        if ('n' === $value) {
+            return false;
+        }
+
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**
@@ -113,5 +116,23 @@ class Php
         }
 
         throw new InvalidArgumentException(sprintf('Invalid class "%s"', $class));
+    }
+
+    /**
+     * @param array|object $variable
+     * @param mixed $key
+     * @return mixed
+     */
+    public static function getParameter(object|array $variable, $key)
+    {
+        if (is_array($variable)) {
+            return $variable[$key];
+        }
+
+        if (method_exists($variable, 'get' . ucfirst($key))) {
+            return $variable->{'get' . ucfirst($key)}();
+        }
+
+        return $variable->$key;
     }
 }

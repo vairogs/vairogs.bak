@@ -53,7 +53,7 @@ class Cache
     }
 
     /**
-     * @param $data
+     * @param mixed $data
      *
      * @return Cache
      */

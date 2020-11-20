@@ -17,12 +17,14 @@ use function is_array;
 use function is_object;
 use function range;
 use function sprintf;
+use function str_ends_with;
+use function str_starts_with;
 use const ARRAY_FILTER_USE_KEY;
 
 class Iter
 {
     /**
-     * @param $variable
+     * @param mixed $variable
      *
      * @return bool
      */
@@ -41,7 +43,7 @@ class Iter
     }
 
     /**
-     * @param $array
+     * @param array $array
      */
     public static function uniqueMap(array &$array): void
     {
@@ -165,11 +167,9 @@ class Iter
     {
         $result = [];
         foreach ($input as $key => $element) {
-            if (is_array($element)) {
-                $result[$key] = self::arrayFlipRecursive($element);
-            } elseif (is_object($element)) {
+            if (is_array($element) || is_object($element)) {
                 $result[$key] = self::arrayFlipRecursive((array)$element);
-            } elseif (in_array(gettype($element), [
+            } else if (in_array(gettype($element), [
                 'integer',
                 'string',
             ], true)) {
@@ -184,7 +184,7 @@ class Iter
 
     /**
      * @param array $input
-     * @param $value
+     * @param mixed $value
      */
     public static function removeFromArray(array &$input, $value): void
     {
@@ -226,7 +226,7 @@ class Iter
     public static function filterKeyStartsWith(array $input, string $startsWith): array
     {
         return array_filter($input, static function ($key) use ($startsWith) {
-            return Text::starts($key, $startsWith, true);
+            return str_starts_with($key, $startsWith);
         }, ARRAY_FILTER_USE_KEY);
     }
 
@@ -239,13 +239,13 @@ class Iter
     public static function filterKeyEndsWith(array $input, string $endsWith): array
     {
         return array_filter($input, static function ($key) use ($endsWith) {
-            return Text::ends($key, $endsWith, true);
+            return str_ends_with($key, $endsWith);
         }, ARRAY_FILTER_USE_KEY);
     }
 
     /**
      * @param array $input
-     * @param $key
+     * @param mixed $key
      *
      * @return mixed|null
      */

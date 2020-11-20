@@ -24,7 +24,10 @@ final class LocaleResolver
         $this->availableLocales = $availableLocales;
     }
 
-    public function resolve()
+    /**
+     * @return string|null
+     */
+    public function resolve(): ?string
     {
         $locale = $this->resolveLocale($this->request, $this->availableLocales);
         if (in_array($locale, $this->availableLocales, true)) {

@@ -57,7 +57,7 @@ class Http
      *
      * @return string
      */
-    public static function getRemoteIp(Request $request, $trust = false): string
+    public static function getRemoteIp(Request $request, bool $trust = false): string
     {
         if (false === $trust) {
             return $request->server->get('REMOTE_ADDR');
@@ -79,11 +79,11 @@ class Http
     }
 
     /**
-     * @param $path
+     * @param string $path
      *
      * @return bool
      */
-    public static function isAbsolute($path): bool
+    public static function isAbsolute(string $path): bool
     {
         return str_starts_with($path, '//') || preg_match('#^[a-z-]{3,}:\/\/#i', $path);
     }

@@ -15,6 +15,11 @@ trait LocaleResolverTrait
     protected string $cookieName;
     protected array $hostMap;
 
+    /**
+     * @param Request $request
+     * @param array $availableLocales
+     * @return mixed|null
+     */
     public function resolveLocale(Request $request, array $availableLocales)
     {
         if (!empty($this->hostMap[$request->getHost()])) {
@@ -35,6 +40,10 @@ trait LocaleResolverTrait
         return null;
     }
 
+    /**
+     * @param Request $request
+     * @return string|null
+     */
     protected function returnByQueryParameter(Request $request): ?string
     {
         // @formatter:off
@@ -48,6 +57,10 @@ trait LocaleResolverTrait
         return null;
     }
 
+    /**
+     * @param $hostLanguage
+     * @return string|null
+     */
     private function preg($hostLanguage): ?string
     {
         if (preg_match('#^[a-z]{2}(?:_[a-z]{2})?$#i', $hostLanguage)) {
@@ -57,6 +70,10 @@ trait LocaleResolverTrait
         return null;
     }
 
+    /**
+     * @param Request $request
+     * @return string|null
+     */
     protected function returnByPreviousSession(Request $request): ?string
     {
         if ($request->hasPreviousSession()) {
@@ -69,6 +86,10 @@ trait LocaleResolverTrait
         return null;
     }
 
+    /**
+     * @param Request $request
+     * @return string|null
+     */
     protected function returnByCookie(Request $request): ?string
     {
         if ($request->cookies->has($this->cookieName) && $result = $this->preg($request->cookies->get($this->cookieName))) {
@@ -78,6 +99,11 @@ trait LocaleResolverTrait
         return null;
     }
 
+    /**
+     * @param Request $request
+     * @param array $availableLocales
+     * @return string|null
+     */
     protected function returnByLang(Request $request, array $availableLocales): ?string
     {
         foreach ($this->parseLanguages($request) as $lang) {
@@ -89,6 +115,10 @@ trait LocaleResolverTrait
         return null;
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     private function parseLanguages(Request $request): array
     {
         $languages = [];

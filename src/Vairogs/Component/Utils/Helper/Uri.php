@@ -62,6 +62,10 @@ class Uri
         return $result;
     }
 
+    /**
+     * @param string $url
+     * @return string
+     */
     public static function urlEncode(string $url): string
     {
         $url_parsed = parse_url($url);
@@ -84,6 +88,10 @@ class Uri
         return $scheme . $host . $port . $path . $query;
     }
 
+    /**
+     * @param string $query
+     * @return array
+     */
     public static function arrayFromQueryString(string $query): array
     {
         $query = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', static function ($match) {
@@ -95,6 +103,10 @@ class Uri
         return array_combine(array_map('hex2bin', array_keys($values)), $values);
     }
 
+    /**
+     * @param string $rawHeaders
+     * @return array
+     */
     public static function parseHeaders(string $rawHeaders = ''): array
     {
         if (function_exists('http_parse_headers')) {
