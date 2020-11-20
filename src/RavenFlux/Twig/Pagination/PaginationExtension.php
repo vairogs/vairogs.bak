@@ -6,6 +6,7 @@ use RavenFlux\Twig\Pagination\Behaviour\FixedLength;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Vairogs\Component\Utils\Twig\TwigTrait;
+use Vairogs\Component\Utils\Vairogs;
 
 class PaginationExtension extends AbstractExtension
 {
@@ -33,6 +34,6 @@ class PaginationExtension extends AbstractExtension
             'pagination' => 'pagination',
         ];
 
-        return $this->makeArray($input, 'raven', TwigFunction::class);
+        return $this->makeArray($input, Vairogs::RAVEN, TwigFunction::class);
     }
 }

@@ -38,7 +38,7 @@ class Orm implements Cache
      */
     public function getAdapter(): CacheItemPoolInterface
     {
-        $table = sprintf('%s_items', Vairogs::ALIAS);
+        $table = sprintf('%s_items', Vairogs::VAIROGS);
         $schema = $this->manager->getConnection()
             ->getSchemaManager();
         $adapter = new PdoAdapter($this->manager->getConnection(), '', 0, ['db_table' => $table]);

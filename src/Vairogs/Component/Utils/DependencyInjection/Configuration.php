@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder(Vairogs::ALIAS);
+        $treeBuilder = new TreeBuilder(Vairogs::VAIROGS);
         $rootNode = $treeBuilder->getRootNode();
 
         $this->appendCacheNode($rootNode);

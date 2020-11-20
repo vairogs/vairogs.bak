@@ -18,7 +18,7 @@ trait TwigTrait
      * @param string $class
      * @return array
      */
-    public function makeArray(array $input, string $key = Vairogs::ALIAS, string $class = TwigFilter::class): array
+    public function makeArray(array $input, string $key = Vairogs::VAIROGS, string $class = TwigFilter::class): array
     {
         if (!in_array($class, [TwigFilter::class, TwigFunction::class], true)) {
             throw new InvalidArgumentException(sprintf('Invalid type "%s":. Allowed types are filter and function', $class));

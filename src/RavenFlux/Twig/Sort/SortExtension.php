@@ -8,6 +8,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Vairogs\Component\Utils\Helper\Sort;
 use Vairogs\Component\Utils\Twig\TwigTrait;
+use Vairogs\Component\Utils\Vairogs;
 use function count;
 use function current;
 use function is_array;
@@ -27,7 +28,7 @@ class SortExtension extends AbstractExtension
             'usort' => 'usortFunction',
         ];
 
-        return $this->makeArray($input, 'raven');
+        return $this->makeArray($input, Vairogs::RAVEN);
     }
 
     /**

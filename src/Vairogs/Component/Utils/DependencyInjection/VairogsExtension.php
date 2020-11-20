@@ -20,7 +20,7 @@ class VairogsExtension extends Extension
      */
     public function getAlias(): string
     {
-        return Vairogs::ALIAS;
+        return Vairogs::VAIROGS;
     }
 
     /**
@@ -55,7 +55,7 @@ class VairogsExtension extends Extension
      */
     public function getExtension(): string
     {
-        return Vairogs::ALIAS;
+        return Vairogs::VAIROGS;
     }
 
     /**
@@ -107,6 +107,6 @@ class VairogsExtension extends Extension
      */
     public function getExtensionAlias(): string
     {
-        return Vairogs::ALIAS;
+        return Vairogs::VAIROGS;
     }
 }

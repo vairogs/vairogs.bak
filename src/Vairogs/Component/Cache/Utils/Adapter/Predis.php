@@ -35,6 +35,6 @@ class Predis implements Cache
      */
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new RedisAdapter($this->client, Vairogs::ALIAS, 0);
+        return new RedisAdapter($this->client, Vairogs::VAIROGS, 0);
     }
 }

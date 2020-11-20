@@ -6,5 +6,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class Vairogs extends Bundle
 {
-    public const ALIAS = 'vairogs';
+    public const VAIROGS = 'vairogs';
+    public const RAVEN = 'raven';
 }

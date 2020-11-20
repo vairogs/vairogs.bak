@@ -5,12 +5,14 @@ namespace RavenFlux\Twig\Php;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Vairogs\Component\Utils\Vairogs;
 use function array_keys;
 use function array_map;
 use function current;
 use function is_array;
 use function is_numeric;
 use function key;
+use function sprintf;
 
 class PhpFunctionsExtension extends AbstractExtension
 {
@@ -38,9 +40,9 @@ class PhpFunctionsExtension extends AbstractExtension
             return new TwigFilter($function, $callback);
         }, array_keys($callbacks), $callbacks);
 
-        $mappedFilters[] = new TwigFilter('raven_filter', [
+        $mappedFilters[] = new TwigFilter(sprintf('%s_filter', Vairogs::RAVEN), [
             $this,
-            'ravenFilter',
+            'getFilter',
         ]);
 
         return $mappedFilters;
@@ -78,9 +80,9 @@ class PhpFunctionsExtension extends AbstractExtension
             return new TwigFunction($function, $callback);
         }, array_keys($callbacks), $callbacks);
 
-        $mappedFunctions[] = new TwigFunction('raven_function', [
+        $mappedFunctions[] = new TwigFunction(sprintf('%s_function', Vairogs::RAVEN), [
             $this,
-            'ravenFunction',
+            'getFunction',
         ]);
 
         return $mappedFunctions;
@@ -93,7 +95,7 @@ class PhpFunctionsExtension extends AbstractExtension
      *
      * @return mixed
      */
-    public function ravenFilter($object, string $filter, ...$arguments)
+    public function getFilter($object, string $filter, ...$arguments)
     {
         if (!$arguments) {
             return $filter($object);
@@ -108,7 +110,7 @@ class PhpFunctionsExtension extends AbstractExtension
      *
      * @return mixed
      */
-    public function ravenFunction(string $function, ...$arguments)
+    public function getFunction(string $function, ...$arguments)
     {
         return $function(...$arguments);
     }

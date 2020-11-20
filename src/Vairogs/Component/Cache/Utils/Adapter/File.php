@@ -15,6 +15,6 @@ class File implements Cache
      */
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new PhpFilesAdapter(Vairogs::ALIAS, 0);
+        return new PhpFilesAdapter(Vairogs::VAIROGS, 0);
     }
 }
