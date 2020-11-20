@@ -25,7 +25,7 @@ class AuthOpenIDDependency implements Dependency
         // @formatter:off
         $node
             ->children()
-            ->arrayNode(Component::OPENID)
+            ->arrayNode(Component::AUTH_OPENID)
                 ->canBeEnabled()
                 ->addDefaultsIfNotSet()
                 ->children()
@@ -44,7 +44,7 @@ class AuthOpenIDDependency implements Dependency
      */
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $base = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::OPENID . '.clients';
+        $base = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID . '.clients';
         foreach ($container->getParameter($base) as $key => $clientConfig) {
             $tree = new TreeBuilder($key);
             $node = $tree->getRootNode();

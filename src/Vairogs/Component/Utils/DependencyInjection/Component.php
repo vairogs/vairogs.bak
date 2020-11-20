@@ -4,8 +4,8 @@ namespace Vairogs\Component\Utils\DependencyInjection;
 
 final class Component
 {
-    public const CACHE = 'cache';
     public const AUTH = 'auth';
+    public const AUTH_OPENID = 'openid';
+    public const CACHE = 'cache';
     public const SITEMAP = 'sitemap';
-    public const OPENID = 'openid';
 }
