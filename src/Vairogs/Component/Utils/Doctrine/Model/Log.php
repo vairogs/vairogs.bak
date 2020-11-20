@@ -2,12 +2,10 @@
 
 namespace Vairogs\Component\Utils\Doctrine\Model;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass()
- * @ORM\HasLifecycleCallbacks()
  */
 abstract class Log
 {
@@ -35,11 +33,6 @@ abstract class Log
      * @ORM\Column(name="extra", type="array")
      */
     protected array $extra;
-
-    /**
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    protected DateTime $createdAt;
 
     /**
      * @return string
@@ -128,24 +121,6 @@ abstract class Log
     public function setExtra(array $extra): Log
     {
         $this->extra = $extra;
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getCreatedAt(): DateTime
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param DateTime $createdAt
-     * @return Log
-     */
-    public function setCreatedAt(DateTime $createdAt): Log
-    {
-        $this->createdAt = $createdAt;
         return $this;
     }
 }
