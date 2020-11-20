@@ -11,27 +11,27 @@ trait CreatedModified
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    protected ?DateTime $createdAt;
+    protected ?DateTime $creationDate = null;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    protected ?DateTime $modifiedAt;
+    protected ?DateTime $modificationDate;
 
     /**
      * @return DateTime
      */
-    public function getModifiedAt(): DateTime
+    public function getModificationDate(): DateTime
     {
-        return $this->modifiedAt;
+        return $this->modificationDate;
     }
 
     /**
-     * @param DateTime $modifiedAt
+     * @param DateTime $modificationDate
      */
-    public function setModifiedAt(DateTime $modifiedAt): void
+    public function setModificationDate(DateTime $modificationDate): void
     {
-        $this->modifiedAt = $modifiedAt;
+        $this->modificationDate = $modificationDate;
     }
 
     /**
@@ -41,26 +41,26 @@ trait CreatedModified
      */
     public function updatedTimestamps(): void
     {
-        $this->setModifiedAt(new DateTime());
+        $this->setModificationDate(new DateTime());
 
-        if (null === $this->createdAt) {
-            $this->setCreatedAt(new DateTime());
+        if (null === $this->creationDate) {
+            $this->setCreationDate(new DateTime());
         }
     }
 
     /**
      * @return DateTime
      */
-    public function getCreatedAt(): DateTime
+    public function getCreationDate(): DateTime
     {
-        return $this->createdAt;
+        return $this->creationDate;
     }
 
     /**
-     * @param DateTime $createdAt
+     * @param DateTime $creationDate
      */
-    public function setCreatedAt(DateTime $createdAt): void
+    public function setCreationDate(DateTime $creationDate): void
     {
-        $this->createdAt = $createdAt;
+        $this->creationDate = $creationDate;
     }
 }
