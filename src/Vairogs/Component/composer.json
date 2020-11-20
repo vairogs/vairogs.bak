@@ -54,7 +54,7 @@
         },
         {
             "type": "issuehunt",
-            "url": "https://issuehunt.io/r/vairogs/components"
+            "url": "https://issuehunt.io/r/vairogs/vairogs"
         }
     ],
     "require": {

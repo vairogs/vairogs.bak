@@ -33,7 +33,7 @@
         },
         {
             "type": "issuehunt",
-            "url": "https://issuehunt.io/r/vairogs/auth-openid"
+            "url": "https://issuehunt.io/r/vairogs/vairogs"
         }
     ],
     "require": {
