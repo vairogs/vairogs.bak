@@ -1,18 +1,13 @@
 {
-    "name": "ravenflux/ravenflux",
-    "description": "Useful Twig extensions",
+    "name": "vairogs/captcha",
+    "description": "Utils: Captcha library",
     "type": "library",
     "keywords": [
-        "env",
-        "getenv",
-        "php",
-        "ravenflux",
-        "sort",
+        "captcha",
+        "honey",
+        "recaptcha",
         "symfony",
-        "symfony4",
-        "symfony5",
-        "twig",
-        "twig-extension"
+        "vairogs"
     ],
     "license": "MIT",
     "authors": [
@@ -44,19 +39,17 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "doctrine/collections": "~1.6",
-        "twig/twig": "3.*",
+        "symfony/config": "~5.2",
+        "symfony/dependency-injection": "~5.2",
+        "symfony/form": "~5.2",
+        "symfony/options-resolver": "~5.2",
+        "symfony/translation": "~5.2",
+        "symfony/validator": "~5.2",
         "vairogs/utils": "3.x-dev"
-    },
-    "replace": {
-        "ravenflux/getenv": "self.version",
-        "ravenflux/pagination": "self.version",
-        "ravenflux/php-functions": "self.version",
-        "ravenflux/sort-functions": "self.version"
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\": ""
+            "Vairogs\\Component\\Captcha\\\\": ""
         }
     },
     "config": {

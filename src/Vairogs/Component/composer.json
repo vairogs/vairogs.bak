@@ -6,6 +6,7 @@
         "array",
         "auth",
         "cache",
+        "captcha",
         "date",
         "doctrine",
         "http",
@@ -74,9 +75,12 @@
         "symfony/console": "~5.2",
         "symfony/dependency-injection": "~5.2",
         "symfony/framework-bundle": "~5.2",
+        "symfony/form": "~5.2",
         "symfony/http-foundation": "~5.2",
         "symfony/http-kernel": "~5.2",
+        "symfony/options-resolver": "~5.2",
         "symfony/routing": "~5.2",
+        "symfony/translation": "~5.2",
         "symfony/validator": "~5.2",
         "twig/twig": "3.*"
     },
@@ -85,6 +89,7 @@
         "vairogs/auth-openid": "self.version",
         "vairogs/cache": "self.version",
         "vairogs/cache-utils": "self.version",
+        "vairogs/captcha": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/utils": "self.version"
     },
