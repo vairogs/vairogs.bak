@@ -1,6 +1,6 @@
 services:
-    ravenflux.twig.extension.getenv:
-        class: RavenFlux\Twig\GetEnv\GetEnvExtension
+    ravenflux.twig.extension.php_functions:
+        class: RavenFlux\Php\PhpFunctionsExtension
         public: false
         tags:
             -

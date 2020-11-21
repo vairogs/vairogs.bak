@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\Twig\Pagination;
+namespace RavenFlux\Pagination;
 
-use RavenFlux\Twig\Pagination\Behaviour\FixedLength;
+use RavenFlux\Pagination\Behaviour\FixedLength;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Vairogs\Component\Utils\Twig\TwigTrait;

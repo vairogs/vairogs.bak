@@ -85,7 +85,7 @@
     "autoload": {
         "psr-4": {
             "Vairogs\\": "src/Vairogs/",
-            "RavenFlux\\Twig\\": "src/RavenFlux/"
+            "RavenFlux\\": "src/RavenFlux/"
         }
     },
     "minimum-stability": "dev",

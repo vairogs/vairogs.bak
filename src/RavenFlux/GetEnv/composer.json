@@ -1,11 +1,13 @@
 {
-    "name": "ravenflux/pagination",
-    "description": "Twig extension that implements pagination in Twig template",
+    "name": "ravenflux/getenv",
+    "description": "Twig extension that implements getenv in Twig template",
     "type": "library",
     "keywords": [
+        "env",
+        "getenv",
         "ravenflux",
-        "pagination",
         "symfony",
+        "symfony4",
         "symfony5",
         "twig",
         "twig-extension"
@@ -45,7 +47,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\Twig\\Pagination\\": ""
+            "RavenFlux\\GetEnv\\": ""
         }
     },
     "config": {

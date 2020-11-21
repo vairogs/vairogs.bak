@@ -1,6 +1,6 @@
 services:
     ravenflux.twig.extension.sort_functions:
-        class: RavenFlux\Twig\Sort\SortExtension
+        class: RavenFlux\Sort\SortExtension
         public: false
         tags:
             -

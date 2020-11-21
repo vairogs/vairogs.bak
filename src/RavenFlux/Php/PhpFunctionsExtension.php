@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\Twig\Php;
+namespace RavenFlux\Php;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;

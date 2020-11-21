@@ -1,12 +1,11 @@
 {
-    "name": "ravenflux/sort-functions",
-    "description": "Twig extension that implements sorting functions in Twig template",
+    "name": "ravenflux/pagination",
+    "description": "Twig extension that implements pagination in Twig template",
     "type": "library",
     "keywords": [
         "ravenflux",
-        "sort",
+        "pagination",
         "symfony",
-        "symfony4",
         "symfony5",
         "twig",
         "twig-extension"
@@ -41,13 +40,12 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "doctrine/collections": "~1.6",
         "twig/twig": "3.*",
         "vairogs/utils": "3.x-dev"
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\Twig\\Sort\\": ""
+            "RavenFlux\\Pagination\\": ""
         }
     },
     "config": {

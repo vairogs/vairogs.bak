@@ -1,10 +1,9 @@
 {
-    "name": "ravenflux/getenv",
-    "description": "Twig extension that implements getenv in Twig template",
+    "name": "ravenflux/php-functions",
+    "description": "Twig extension that implements a way to use native PHP functions and filters in Twig template",
     "type": "library",
     "keywords": [
-        "env",
-        "getenv",
+        "php",
         "ravenflux",
         "symfony",
         "symfony4",
@@ -47,7 +46,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\Twig\\GetEnv\\": ""
+            "RavenFlux\\Php\\": ""
         }
     },
     "config": {

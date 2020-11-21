@@ -26,7 +26,7 @@ For Symfony usage add it as a service and tag it:
 # config/services.yaml
 services:
     ravenflux.twig.extension.php_functions:
-        class: RavenFlux\Twig\Php\PhpFunctionsExtension
+        class: RavenFlux\Php\PhpFunctionsExtension
         arguments:
             - #first argument are functions
                 - 'count'
@@ -41,7 +41,7 @@ or without any arguments if you want to use dynamic function / filters:
 # config/services.yaml
 services:
     ravenflux.twig.extension.php_functions:
-        class: RavenFlux\Twig\Php\PhpFunctionsExtension
+        class: RavenFlux\Php\PhpFunctionsExtension
         tags:
             -
                 name: twig.extension

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\Twig\Pagination\Behaviour;
+namespace RavenFlux\Pagination\Behaviour;
 
 use InvalidArgumentException;
 
