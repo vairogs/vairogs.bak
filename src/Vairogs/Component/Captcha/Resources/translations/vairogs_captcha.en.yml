@@ -1,5 +1,4 @@
-vairogs:
-    captcha:
-        error:
-            honey:
-                value_set: Honey Captcha validation has failed
+vairogs_captcha:
+    error:
+        honey:
+            value_set: The CSRF token is invalid. Please try to resubmit the form. # Disguise honey pot as CSRF

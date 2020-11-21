@@ -9,7 +9,7 @@ trait HoneyTrait
     /**
      * @var null
      * @Assert\IsNull(
-     *     message="vairogs.captcha.error.honey.value_set"
+     *     message="vairogs_captcha.error.honey.value_set"
      * )
      */
     private $honey;

@@ -15,6 +15,7 @@ class HoneyType extends HiddenType
         $resolver->setDefaults([
             'attr' => ['value' => ''],
             'required' => false,
+            'translation_domain' => 'vairogs_captcha'
         ]);
     }
 }
