@@ -17,7 +17,7 @@ use function method_exists;
 use function sprintf;
 use function strtolower;
 use function ucfirst;
-use const FILTER_VALIDATE_BOOLEAN;
+use const FILTER_VALIDATE_BOOL;
 
 class Php
 {
@@ -87,7 +87,7 @@ class Php
             return false;
         }
 
-        return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+        return filter_var($value, FILTER_VALIDATE_BOOL);
     }
 
     /**
