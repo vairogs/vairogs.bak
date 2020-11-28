@@ -45,17 +45,9 @@ class VairogsExtension extends Extension
     {
         $parameters = $this->processConfiguration($configuration, $configs) ?? [];
 
-        foreach (Iter::makeOneDimension([$this->getExtension() => $parameters]) as $key => $value) {
+        foreach (Iter::makeOneDimension([$this->getAlias() => $parameters]) as $key => $value) {
             $container->setParameter($key, $value);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getExtension(): string
-    {
-        return Vairogs::VAIROGS;
     }
 
     /**
@@ -100,13 +92,5 @@ class VairogsExtension extends Extension
         if (class_exists(SitemapDependency::class)) {
             (new SitemapDependency())->loadComponent($container, $configuration);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getExtensionAlias(): string
-    {
-        return Vairogs::VAIROGS;
     }
 }
