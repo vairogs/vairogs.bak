@@ -182,6 +182,32 @@ class Date
     }
 
     /**
+     * @param float|int $timestamp
+     * @return array
+     */
+    public static function formatToArray(int|float $timestamp): array
+    {
+        $timestamp = round($timestamp * 1000);
+        $result = [];
+
+        foreach (self::TIME as $unit => $value) {
+            if ($timestamp >= $value) {
+                $time = floor($timestamp / $value * 100.0 / 100.0);
+                if ($time > 0) {
+                    $result[$unit] = $time;
+                }
+                $timestamp -= ($time * $value);
+            }
+        }
+
+        if ($timestamp > 0) {
+            $result['micro'] = $timestamp;
+        }
+
+        return $result;
+    }
+
+    /**
      * @param string $string
      * @param string $format
      *
