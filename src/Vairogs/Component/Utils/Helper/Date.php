@@ -25,8 +25,8 @@ class Date
     public const HOUR = 60 * self::MIN;
     public const TIME = [
         'hour' => self::HOUR,
-        'min' => self::MIN,
-        'sec' => self::SEC,
+        'minute' => self::MIN,
+        'second' => self::SEC,
     ];
 
     /**
