@@ -27,10 +27,10 @@ class Json
      * @return string
      * @throws JsonException
      */
-    public static function encode($value, int $flags = 0): string
+    public static function encode(mixed $value, int $flags = 0): string
     {
-        $flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | (($flags & self::PRETTY) ? JSON_PRETTY_PRINT : 0) | (defined('JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : 0);
-        $json = json_encode($value, $flags | JSON_THROW_ON_ERROR, 512);
+        $flags = (int)(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | (($flags & self::PRETTY) ? JSON_PRETTY_PRINT : 0) | (defined('JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : 0));
+        $json = json_encode($value, $flags | JSON_THROW_ON_ERROR);
         if ($error = json_last_error()) {
             throw new JsonException(json_last_error_msg(), $error);
         }
@@ -45,7 +45,7 @@ class Json
      * @return mixed
      * @throws JsonException
      */
-    public static function decode(string $json, int $flags = 0)
+    public static function decode(string $json, int $flags = 0): mixed
     {
         $forceArray = (bool)($flags & self::FORCE_ARRAY);
         $value = json_decode($json, $forceArray, 512, JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING);

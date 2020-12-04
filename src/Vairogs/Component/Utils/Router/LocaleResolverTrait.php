@@ -18,9 +18,9 @@ trait LocaleResolverTrait
     /**
      * @param Request $request
      * @param array $availableLocales
-     * @return mixed|null
+     * @return mixed
      */
-    public function resolveLocale(Request $request, array $availableLocales)
+    public function resolveLocale(Request $request, array $availableLocales): mixed
     {
         if (!empty($this->hostMap[$request->getHost()])) {
             return $this->hostMap[$request->getHost()];

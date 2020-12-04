@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use InvalidArgumentException;
+use JetBrains\PhpStorm\Pure;
 use function array_filter;
 use function array_flip;
 use function array_intersect_key;
@@ -28,7 +29,7 @@ class Iter
      *
      * @return bool
      */
-    public static function isEmpty($variable): bool
+    public static function isEmpty(mixed $variable): bool
     {
         $result = true;
         if (!empty($variable) && is_array($variable)) {
@@ -56,7 +57,7 @@ class Iter
      *
      * @return array
      */
-    public static function unique(array $input, bool $keepKeys = false): array
+    #[Pure] public static function unique(array $input, bool $keepKeys = false): array
     {
         if (true === $keepKeys) {
             return array_unique($input);
@@ -70,7 +71,7 @@ class Iter
      *
      * @return bool
      */
-    public static function isMultiDimensional(array $keys = []): bool
+    #[Pure] public static function isMultiDimensional(array $keys = []): bool
     {
         foreach ($keys as $key) {
             if (is_array($key)) {
@@ -130,7 +131,7 @@ class Iter
      *
      * @return bool
      */
-    public static function isAssociative(array $array): bool
+    #[Pure] public static function isAssociative(array $array): bool
     {
         if ([] === $array) {
             return false;
@@ -186,7 +187,7 @@ class Iter
      * @param array $input
      * @param mixed $value
      */
-    public static function removeFromArray(array &$input, $value): void
+    public static function removeFromArray(array &$input, mixed $value): void
     {
         if (in_array($value, $input, true)) {
             foreach ($input as $key => $item) {
@@ -247,9 +248,9 @@ class Iter
      * @param array $input
      * @param mixed $key
      *
-     * @return mixed|null
+     * @return mixed
      */
-    public static function getIfNotEmpty(array $input, $key)
+    public static function getIfNotEmpty(array $input, mixed $key): mixed
     {
         if (!isset($input[$key])) {
             return null;

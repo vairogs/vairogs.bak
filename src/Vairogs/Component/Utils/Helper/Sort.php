@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Utils\Helper;
 
+use JetBrains\PhpStorm\Pure;
 use function array_slice;
 use function count;
 use function is_array;
@@ -15,7 +16,7 @@ class Sort
      * @param mixed $foo
      * @param mixed $bar
      */
-    public static function swap(&$foo, &$bar): void
+    public static function swap(mixed &$foo, mixed &$bar): void
     {
         if ($foo === $bar) {
             return;
@@ -46,7 +47,7 @@ class Sort
      * @param mixed $foo
      * @param mixed $bar
      */
-    public static function swapArray(array &$array, $foo, $bar): void
+    public static function swapArray(array &$array, mixed $foo, mixed $bar): void
     {
         if ($array[$foo] === $array[$bar]) {
             return;
@@ -120,7 +121,7 @@ class Sort
      *
      * @return bool
      */
-    public static function isSortable($item, $field): bool
+    #[Pure] public static function isSortable(mixed $item, mixed $field): bool
     {
         if (is_array($item)) {
             return array_key_exists($field, $item);
@@ -139,7 +140,7 @@ class Sort
      *
      * @return callable
      */
-    public static function usort($parameter, string $order): callable
+    public static function usort(mixed $parameter, string $order): callable
     {
         return static function ($a, $b) use ($parameter, $order) {
             $flip = ($order === self::DESC) ? -1 : 1;

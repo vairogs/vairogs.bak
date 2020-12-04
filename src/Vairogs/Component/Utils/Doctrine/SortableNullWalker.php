@@ -27,7 +27,7 @@ class SortableNullWalker extends SqlWalker
      * @throws Exception
      * @noinspection PhpMissingParamTypeInspection
      */
-    public function walkOrderByClause($orderByClause)
+    public function walkOrderByClause($orderByClause): array|string|null
     {
         $sql = parent::walkOrderByClause($orderByClause);
 

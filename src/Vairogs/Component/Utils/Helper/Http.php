@@ -85,7 +85,7 @@ class Http
      */
     public static function isAbsolute(string $path): bool
     {
-        return str_starts_with($path, '//') || preg_match('#^[a-z-]{3,}:\/\/#i', $path);
+        return str_starts_with($path, '//') || preg_match('#^[a-z-]{3,}://#i', $path);
     }
 
     /**
@@ -102,7 +102,6 @@ class Http
      * @param Request $request
      *
      * @return bool
-     * @noinspection SuspiciousBinaryOperationInspection
      */
     protected static function checkHttps(Request $request): bool
     {
@@ -123,7 +122,6 @@ class Http
      * @param Request $request
      *
      * @return bool
-     * @noinspection SuspiciousBinaryOperationInspection
      */
     protected static function checkHttpXForwardedSsl(Request $request): bool
     {
@@ -134,7 +132,6 @@ class Http
      * @param Request $request
      *
      * @return bool
-     * @noinspection SuspiciousBinaryOperationInspection
      */
     protected static function checkHttpXForwardedProto(Request $request): bool
     {

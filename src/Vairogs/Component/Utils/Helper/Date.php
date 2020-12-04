@@ -5,6 +5,7 @@ namespace Vairogs\Component\Utils\Helper;
 use DateTime;
 use Exception;
 use InvalidArgumentException;
+use JetBrains\PhpStorm\Pure;
 use ReflectionException;
 use function array_merge;
 use function floor;
@@ -126,7 +127,7 @@ class Date
      *
      * @return string|int
      */
-    public static function excelDate(int $timestamp, string $format = self::FORMAT)
+    public static function excelDate(int $timestamp, string $format = self::FORMAT): int|string
     {
         $base = 25569;
         if ($timestamp >= $base) {
@@ -147,7 +148,7 @@ class Date
      *
      * @return bool
      */
-    public static function validateDateBasic($date, string $format = self::FORMAT): bool
+    public static function validateDateBasic(mixed $date, string $format = self::FORMAT): bool
     {
         $object = DateTime::createFromFormat($format, $date);
 
@@ -159,7 +160,7 @@ class Date
      *
      * @return string
      */
-    public static function format(int|float $timestamp): string
+    #[Pure] public static function format(int|float $timestamp): string
     {
         $str = '';
         $timestamp = round($timestamp * 1000);
@@ -185,7 +186,7 @@ class Date
      * @param float|int $timestamp
      * @return array
      */
-    public static function formatToArray(int|float $timestamp): array
+    #[Pure] public static function formatToArray(int|float $timestamp): array
     {
         $timestamp = round($timestamp * 1000);
         $result = [];
@@ -269,7 +270,7 @@ class Date
      * @return DateTime|string
      * @throws ReflectionException
      */
-    public static function guessDateFormat(string $date)
+    public static function guessDateFormat(string $date): DateTime|string
     {
         $formats = array_merge(Php::getClassConstantsValues(DateTime::class), self::EXTRA_FORMATS);
         foreach ($formats as $format) {

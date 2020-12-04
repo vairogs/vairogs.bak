@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Utils\Helper;
 
+use JetBrains\PhpStorm\Pure;
 use function array_key_exists;
 use function filter_var;
 use function html_entity_decode;
@@ -147,7 +148,7 @@ class Text
      *
      * @return int
      */
-    public static function compareLatvian($a, $b, $field): int
+    public static function compareLatvian(mixed $a, mixed $b, mixed $field): int
     {
         $a = mb_strtolower(Php::getParameter($a, $field));
         $b = mb_strtolower(Php::getParameter($b, $field));
@@ -187,7 +188,7 @@ class Text
      *
      * @return string
      */
-    public static function zero(int $number, int $length): string
+    #[Pure] public static function zero(int $number, int $length): string
     {
         return str_pad($number, $length, '0', STR_PAD_LEFT);
     }
@@ -254,7 +255,7 @@ class Text
      *
      * @return bool
      */
-    public static function containsAny(string $haystack, string $needle): bool
+    #[Pure] public static function containsAny(string $haystack, string $needle): bool
     {
         return false !== strpbrk($haystack, $needle);
     }
@@ -264,7 +265,7 @@ class Text
      *
      * @return string
      */
-    public static function reverse(string $string): string
+    #[Pure] public static function reverse(string $string): string
     {
         return iconv('UTF-32LE', 'UTF-8', strrev(iconv('UTF-8', 'UTF-32BE', $string)));
     }
@@ -284,7 +285,7 @@ class Text
      *
      * @return int|string
      */
-    public static function getNumeric($value)
+    #[Pure] public static function getNumeric(mixed $value): int|string
     {
         if (is_numeric($value)) {
             return $value + 0;
@@ -298,7 +299,7 @@ class Text
      *
      * @return float
      */
-    public static function sanitizeFloat(string $string): float
+    #[Pure] public static function sanitizeFloat(string $string): float
     {
         return (float)filter_var($string, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }

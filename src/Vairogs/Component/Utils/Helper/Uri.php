@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use CURLFile;
+use JetBrains\PhpStorm\Pure;
 use function array_combine;
 use function array_keys;
 use function array_map;
@@ -142,7 +143,7 @@ class Uri
         return $headers;
     }
 
-    public static function isUrl(string $url): bool
+    #[Pure] public static function isUrl(string $url): bool
     {
         $url = filter_var($url, FILTER_SANITIZE_URL);
 
@@ -155,7 +156,7 @@ class Uri
      *
      * @return string|bool
      */
-    public static function parseQueryPath(string $path)
+    public static function parseQueryPath(string $path): bool|string
     {
         $path = '/' . ltrim($path, '/');
         $path = preg_replace('/[\x00-\x1F\x7F]/', '', $path);

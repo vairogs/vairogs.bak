@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Utils\Helper;
 
+use JetBrains\PhpStorm\Pure;
 use function filter_var;
 use const FILTER_SANITIZE_STRING;
 use const FILTER_VALIDATE_EMAIL;
@@ -13,7 +14,7 @@ class Email
      *
      * @return bool
      */
-    public static function isValid(string $email): bool
+    #[Pure] public static function isValid(string $email): bool
     {
         if (empty($email)) {
             return false;

@@ -4,6 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use Closure;
 use InvalidArgumentException;
+use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
 use ReflectionException;
 use function array_values;
@@ -27,7 +28,7 @@ class Php
      * @param mixed $value
      * @noinspection StaticClosureCanBeUsedInspection
      */
-    public static function hijackSet(object $object, string $property, $value): void
+    public static function hijackSet(object $object, string $property, mixed $value): void
     {
         self::call(function () use ($object, $property, $value) {
             $object->$property = $value;
@@ -40,8 +41,9 @@ class Php
      * @param bool $return
      *
      * @return mixed
+     * @noinspection PhpInconsistentReturnPointsInspection
      */
-    public static function call(callable $function, object $clone, bool $return = false)
+    public static function call(callable $function, object $clone, bool $return = false): mixed
     {
         $func = Closure::bind($function, $clone, get_class($clone));
 
@@ -59,7 +61,7 @@ class Php
      * @return mixed
      * @noinspection StaticClosureCanBeUsedInspection
      */
-    public static function hijackGet(object $object, string $property)
+    public static function hijackGet(object $object, string $property): mixed
     {
         return self::call(function () use ($object, $property) {
             return $object->$property;
@@ -71,7 +73,7 @@ class Php
      *
      * @return bool
      */
-    public static function boolval($value): bool
+    #[Pure] public static function boolval(mixed $value): bool
     {
         if (is_bool($value)) {
             return $value;
@@ -123,7 +125,7 @@ class Php
      * @param mixed $key
      * @return mixed
      */
-    public static function getParameter(object|array $variable, $key)
+    public static function getParameter(object|array $variable, mixed $key): mixed
     {
         if (is_array($variable)) {
             return $variable[$key];

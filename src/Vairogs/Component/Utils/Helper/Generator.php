@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use Exception;
+use JetBrains\PhpStorm\Pure;
 use LogicException;
 use function array_rand;
 use function bin2hex;
@@ -45,7 +46,7 @@ class Generator
     {
         try {
             return substr(bin2hex(random_bytes($length)), 0, $length);
-        } catch (Exception $exception) {
+        } catch (Exception) {
             return self::getRandomString($length);
         }
     }
@@ -56,7 +57,7 @@ class Generator
      *
      * @return string
      */
-    public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
+    #[Pure] public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
     {
         /** @noinspection NonSecureStrShuffleUsageInspection */
         return substr(str_shuffle(str_repeat($chars, (int)ceil((int)(strlen($chars) / $length)))), 0, $length);
@@ -92,10 +93,10 @@ class Generator
     /**
      * @param array $array
      *
-     * @return int|mixed
+     * @return array|int|string
      * @throws Exception
      */
-    private function tweak(array $array)
+    private function tweak(array $array): array|int|string
     {
         if (function_exists('random_int')) {
             return random_int(0, count($array) - 1);
