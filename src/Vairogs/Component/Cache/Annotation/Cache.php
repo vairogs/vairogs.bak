@@ -47,7 +47,7 @@ class Cache
     /**
      * @return null|array|string
      */
-    public function getData()
+    public function getData(): array|string|null
     {
         return $this->data;
     }
@@ -57,7 +57,7 @@ class Cache
      *
      * @return Cache
      */
-    public function setData($data): Cache
+    public function setData(mixed $data): Cache
     {
         $this->data = $data;
 

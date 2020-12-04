@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Cache\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
+use JetBrains\PhpStorm\ArrayShape;
 use Psr\Cache\InvalidArgumentException;
 use ReflectionException;
 use Symfony\Component\Cache\Adapter\ChainAdapter;
@@ -54,6 +55,7 @@ class CacheEventListener implements EventSubscriberInterface
     /**
      * @return array
      */
+    #[ArrayShape([KernelEvents::CONTROLLER => "array", KernelEvents::RESPONSE => "string", KernelEvents::REQUEST => "string"])]
     public static function getSubscribedEvents(): array
     {
         return [
@@ -120,7 +122,7 @@ class CacheEventListener implements EventSubscriberInterface
      * @return mixed
      * @throws InvalidArgumentException
      */
-    private function getCache(string $key)
+    private function getCache(string $key): mixed
     {
         $cache = $this->client->getItem($key);
         if ($cache->isHit()) {
@@ -196,7 +198,7 @@ class CacheEventListener implements EventSubscriberInterface
      *
      * @throws InvalidArgumentException
      */
-    private function setCache(string $key, $value, ?int $expires): void
+    private function setCache(string $key, mixed $value, ?int $expires): void
     {
         $cache = $this->client->getItem($key);
         $cache->set($value);

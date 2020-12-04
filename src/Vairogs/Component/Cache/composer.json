@@ -50,6 +50,7 @@
         "php": ">=7.4.0",
         "ext-json": "*",
         "doctrine/annotations": "~1.11",
+        "jetbrains/phpstorm-attributes": "*",
         "psr/cache": "^1",
         "symfony/cache": "~5.2",
         "symfony/config": "~5.2",
