@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Auth\OpenID\Utils;
 
 use InvalidArgumentException;
+use JetBrains\PhpStorm\Pure;
 use Traversable;
 use Vairogs\Component\Auth\OpenID\OpenIDProvider;
 use function iterator_to_array;
@@ -15,7 +16,7 @@ class OpenIDRegistry
     /**
      * @param Traversable $clients
      */
-    public function __construct(Traversable $clients)
+    #[Pure] public function __construct(Traversable $clients)
     {
         $this->clients = iterator_to_array($clients, true);
     }

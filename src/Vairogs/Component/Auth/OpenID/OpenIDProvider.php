@@ -2,6 +2,8 @@
 
 namespace Vairogs\Component\Auth\OpenID;
 
+use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 use JsonException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -143,10 +145,10 @@ class OpenIDProvider
     /**
      * @param null|string $openID
      *
-     * @return mixed|null
+     * @return mixed
      * @throws JsonException
      */
-    private function getData(?string $openID = null)
+    private function getData(?string $openID = null): mixed
     {
         if (null !== $openID) {
             return Json::decode(file_get_contents(str_replace('#openid#', $openID, $this->profileUrl)), 1);
@@ -190,7 +192,7 @@ class OpenIDProvider
      *
      * @return bool
      */
-    private function validateUrl(string $url): bool
+    #[Pure] private function validateUrl(string $url): bool
     {
         return Uri::isUrl($url);
     }
@@ -201,6 +203,7 @@ class OpenIDProvider
      *
      * @return array
      */
+    #[ArrayShape(['openid.ns' => "string", 'openid.mode' => "string", 'openid.return_to' => "string|string[]", 'openid.realm' => "null|string", 'openid.identity' => "string", 'openid.claimed_id' => "string", 'openid.sreg.required' => "array|mixed", 'openid.ns.sreg' => "string"])]
     private function getParams(string $return, ?string $realm): array
     {
         if (isset($this->options['provider_options']['replace'])) {
