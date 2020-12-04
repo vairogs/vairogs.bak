@@ -21,12 +21,12 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
     protected string $userClass = SteamGifts::class;
 
     /**
-     * @param string $userClass
+     * @param string $class
      * @return SteamGiftsUserBuilder
      */
-    public function setUserClass(string $userClass): SteamGiftsUserBuilder
+    public function setUserClass(string $class): SteamGiftsUserBuilder
     {
-        $this->userClass = $userClass;
+        $this->userClass = $class;
 
         return $this;
     }

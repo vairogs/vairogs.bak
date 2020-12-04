@@ -13,12 +13,12 @@ class SteamUserBuilder implements OpenIDUserBuilder
     protected string $userClass = Steam::class;
 
     /**
-     * @param string $userClass
+     * @param string $class
      * @return SteamUserBuilder
      */
-    public function setUserClass(string $userClass): SteamUserBuilder
+    public function setUserClass(string $class): SteamUserBuilder
     {
-        $this->userClass = $userClass;
+        $this->userClass = $class;
 
         return $this;
     }

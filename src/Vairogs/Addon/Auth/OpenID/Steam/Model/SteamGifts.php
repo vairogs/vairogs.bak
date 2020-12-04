@@ -3,6 +3,7 @@
 namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 
 /**
@@ -38,7 +39,7 @@ class SteamGifts extends Steam
     /**
      * @return string
      */
-    public function __toString()
+    #[Pure] public function __toString(): string
     {
         return $this->getUsername() ?? $this->getOpenID();
     }

@@ -2,6 +2,7 @@
 
 namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
+use JetBrains\PhpStorm\Pure;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 use Doctrine\ORM\Mapping as ORM;
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
@@ -457,7 +458,7 @@ class Steam implements OpenIDUser, User
     /**
      * @return string
      */
-    public function __toString()
+    #[Pure] public function __toString(): string
     {
         return $this->getOpenID();
     }
