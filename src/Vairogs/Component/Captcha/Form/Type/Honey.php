@@ -5,7 +5,7 @@ namespace Vairogs\Component\Captcha\Form\Type;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class HoneyType extends HiddenType
+class Honey extends HiddenType
 {
     /**
      * @param OptionsResolver $resolver
