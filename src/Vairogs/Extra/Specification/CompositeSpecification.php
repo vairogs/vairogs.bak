@@ -2,12 +2,14 @@
 
 namespace Vairogs\Extra\Specification;
 
+use JetBrains\PhpStorm\Pure;
+
 abstract class CompositeSpecification implements SpecificationInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function andX(SpecificationInterface $specification): SpecificationInterface
+    #[Pure] public function andX(SpecificationInterface $specification): SpecificationInterface
     {
         return new AndSpecification($this, $specification);
     }
@@ -15,7 +17,7 @@ abstract class CompositeSpecification implements SpecificationInterface
     /**
      * {@inheritdoc}
      */
-    public function not(): SpecificationInterface
+    #[Pure] public function not(): SpecificationInterface
     {
         return new NotSpecification($this);
     }
@@ -23,7 +25,7 @@ abstract class CompositeSpecification implements SpecificationInterface
     /**
      * {@inheritdoc}
      */
-    public function orX(SpecificationInterface $specification): SpecificationInterface
+    #[Pure] public function orX(SpecificationInterface $specification): SpecificationInterface
     {
         return new OrSpecification($this, $specification);
     }
