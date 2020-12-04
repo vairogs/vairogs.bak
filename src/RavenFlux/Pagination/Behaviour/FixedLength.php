@@ -3,6 +3,7 @@
 namespace RavenFlux\Pagination\Behaviour;
 
 use InvalidArgumentException;
+use JetBrains\PhpStorm\Pure;
 
 final class FixedLength
 {
@@ -100,7 +101,7 @@ final class FixedLength
      *
      * @return bool
      */
-    public function hasSingleOmittedChunk(int $totalPages, int $currentPage): bool
+    #[Pure] public function hasSingleOmittedChunk(int $totalPages, int $currentPage): bool
     {
         return $this->hasSingleOmittedChunkNearLastPage($currentPage) || $this->hasSingleOmittedChunkNearStartPage($totalPages, $currentPage);
     }
@@ -110,7 +111,7 @@ final class FixedLength
      *
      * @return bool
      */
-    private function hasSingleOmittedChunkNearLastPage(int $currentPage): bool
+    #[Pure] private function hasSingleOmittedChunkNearLastPage(int $currentPage): bool
     {
         return $currentPage <= $this->getSingleOmissionBreakpoint();
     }
@@ -118,7 +119,7 @@ final class FixedLength
     /**
      * @return int
      */
-    private function getSingleOmissionBreakpoint(): int
+    #[Pure] private function getSingleOmissionBreakpoint(): int
     {
         return (int)floor($this->maximumVisible / 2) + 1;
     }
@@ -129,7 +130,7 @@ final class FixedLength
      *
      * @return bool
      */
-    private function hasSingleOmittedChunkNearStartPage(int $totalPages, int $currentPage): bool
+    #[Pure] private function hasSingleOmittedChunkNearStartPage(int $totalPages, int $currentPage): bool
     {
         return $currentPage >= $totalPages - $this->getSingleOmissionBreakpoint() + 1;
     }
@@ -141,7 +142,7 @@ final class FixedLength
      *
      * @return array
      */
-    private function getPaginationDataWithSingleOmittedChunk(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
+    #[Pure] private function getPaginationDataWithSingleOmittedChunk(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
     {
         if ($this->hasSingleOmittedChunkNearLastPage($currentPage)) {
             $rest = $this->maximumVisible - $currentPage;
@@ -165,7 +166,7 @@ final class FixedLength
      *
      * @return array
      */
-    private function getPaginationDataWithTwoOmittedChunks(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
+    #[Pure] private function getPaginationDataWithTwoOmittedChunks(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
     {
         $visibleExceptForCurrent = $this->maximumVisible - 1;
         if ($currentPage <= ceil($totalPages / 2)) {

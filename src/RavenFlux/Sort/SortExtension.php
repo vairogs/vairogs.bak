@@ -37,7 +37,7 @@ class SortExtension extends AbstractExtension
      * @param string $order
      * @return array
      */
-    public function usortFunction($data, ?string $parameter = null, string $order = Sort::ASC): array
+    public function usortFunction(mixed $data, ?string $parameter = null, string $order = Sort::ASC): array
     {
         if ($data instanceof Collection) {
             $data = $data->toArray();

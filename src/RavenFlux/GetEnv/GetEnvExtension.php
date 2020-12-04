@@ -2,6 +2,7 @@
 
 namespace RavenFlux\GetEnv;
 
+use JetBrains\PhpStorm\Pure;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Vairogs\Component\Utils\Twig\TwigTrait;
@@ -28,7 +29,7 @@ class GetEnvExtension extends AbstractExtension
      *
      * @return mixed
      */
-    public function getEnv(string $varname)
+    #[Pure] public function getEnv(string $varname): mixed
     {
         if ($env = getenv($varname)) {
             return $env;
