@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Sitemap\Model;
 
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Validator\Constraints as Assert;
 use function method_exists;
 
@@ -28,7 +29,7 @@ class Sitemap
     /**
      * @return bool
      */
-    public function hasImages(): bool
+    #[Pure] public function hasImages(): bool
     {
         foreach ($this->getUrls() as $url) {
             if ($url->hasImages()) {
@@ -62,7 +63,7 @@ class Sitemap
     /**
      * @return bool
      */
-    public function hasVideos(): bool
+    #[Pure] public function hasVideos(): bool
     {
         foreach ($this->getUrls() as $url) {
             if ($url->hasVideos()) {

@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Sitemap\Model;
 
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class RichUrl extends Url
@@ -32,7 +33,7 @@ class RichUrl extends Url
     /**
      * @return bool
      */
-    public function hasAlternates(): bool
+    #[Pure] public function hasAlternates(): bool
     {
         return !empty($this->getAlternateUrls());
     }
