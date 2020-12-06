@@ -76,6 +76,7 @@
         "ravenflux/php-functions": "self.version",
         "ravenflux/ravenflux": "self.version",
         "ravenflux/sort-functions": "self.version",
+        "ravenflux/vairogs-helper": "self.version",
         "ravenflux/vairogs-helper-date": "self.version",
         "ravenflux/vairogs-helper-email": "self.version",
         "ravenflux/vairogs-helper-file": "self.version",
