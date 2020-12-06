@@ -7,6 +7,7 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
 use ReflectionException;
+use Vairogs\Component\Utils\Annotation;
 use function array_values;
 use function class_exists;
 use function filter_var;
@@ -27,6 +28,7 @@ class Php
      * @param string $property
      * @param mixed $value
      * @noinspection StaticClosureCanBeUsedInspection
+     * @Annotation\TwigFunction()
      */
     public static function hijackSet(object $object, string $property, mixed $value): void
     {
@@ -42,6 +44,7 @@ class Php
      *
      * @return mixed
      * @noinspection PhpInconsistentReturnPointsInspection
+     * @Annotation\TwigFunction()
      */
     public static function call(callable $function, object $clone, bool $return = false): mixed
     {
@@ -60,6 +63,7 @@ class Php
      *
      * @return mixed
      * @noinspection StaticClosureCanBeUsedInspection
+     * @Annotation\TwigFunction()
      */
     public static function hijackGet(object $object, string $property): mixed
     {
@@ -72,6 +76,7 @@ class Php
      * @param mixed $value
      *
      * @return bool
+     * @Annotation\TwigFilter()
      */
     #[Pure] public static function boolval(mixed $value): bool
     {
@@ -98,6 +103,7 @@ class Php
      * @return array
      * @throws ReflectionException
      * @throws InvalidArgumentException
+     * @Annotation\TwigFunction()
      */
     public static function getClassConstantsValues(string $class): array
     {
@@ -110,6 +116,7 @@ class Php
      * @return array
      * @throws InvalidArgumentException
      * @throws ReflectionException
+     * @Annotation\TwigFunction()
      */
     public static function getClassConstants(string $class): array
     {
@@ -124,6 +131,7 @@ class Php
      * @param array|object $variable
      * @param mixed $key
      * @return mixed
+     * @Annotation\TwigFilter()
      */
     public static function getParameter(object|array $variable, mixed $key): mixed
     {
