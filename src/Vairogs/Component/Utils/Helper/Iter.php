@@ -4,6 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Component\Utils\Annotation;
 use function array_filter;
 use function array_flip;
 use function array_intersect_key;
@@ -28,6 +29,7 @@ class Iter
      * @param mixed $variable
      *
      * @return bool
+     * @Annotation\TwigFunction()
      */
     public static function isEmpty(mixed $variable): bool
     {
@@ -45,6 +47,7 @@ class Iter
 
     /**
      * @param array $array
+     * @Annotation\TwigFilter()
      */
     public static function uniqueMap(array &$array): void
     {
@@ -56,6 +59,7 @@ class Iter
      * @param bool $keepKeys
      *
      * @return array
+     * @Annotation\TwigFilter()
      */
     #[Pure] public static function unique(array $input, bool $keepKeys = false): array
     {
@@ -70,6 +74,7 @@ class Iter
      * @param array $keys
      *
      * @return bool
+     * @Annotation\TwigFunction()
      */
     #[Pure] public static function isMultiDimensional(array $keys = []): bool
     {
@@ -86,6 +91,7 @@ class Iter
      * @param array $keys
      *
      * @return bool
+     * @Annotation\TwigFunction()
      */
     public static function isAnyKeyNull(array $keys = []): bool
     {
@@ -105,6 +111,7 @@ class Iter
      * @param bool $onlyLast
      *
      * @return array
+     * @Annotation\TwigFilter()
      */
     public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false): array
     {
@@ -130,6 +137,7 @@ class Iter
      * @param array $array
      *
      * @return bool
+     * @Annotation\TwigFunction()
      */
     #[Pure] public static function isAssociative(array $array): bool
     {
@@ -145,6 +153,7 @@ class Iter
      * @param array $second
      *
      * @return array
+     * @Annotation\TwigFilter()
      */
     public static function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
@@ -163,6 +172,7 @@ class Iter
      *
      * @return array
      * @throws InvalidArgumentException
+     * @Annotation\TwigFilter()
      */
     public static function arrayFlipRecursive(array $input = []): array
     {
@@ -186,6 +196,7 @@ class Iter
     /**
      * @param array $input
      * @param mixed $value
+     * @Annotation\TwigFilter()
      */
     public static function removeFromArray(array &$input, mixed $value): void
     {
@@ -205,6 +216,7 @@ class Iter
      *
      * @return array
      * @throws InvalidArgumentException
+     * @Annotation\TwigFilter()
      */
     public static function arrayValuesFiltered(array $input, string $with, string $type = 'starts'): array
     {
@@ -223,6 +235,7 @@ class Iter
      * @param string $startsWith
      *
      * @return array
+     * @Annotation\TwigFilter()
      */
     public static function filterKeyStartsWith(array $input, string $startsWith): array
     {
@@ -236,6 +249,7 @@ class Iter
      * @param string $endsWith
      *
      * @return array
+     * @Annotation\TwigFilter()
      */
     public static function filterKeyEndsWith(array $input, string $endsWith): array
     {
@@ -249,6 +263,7 @@ class Iter
      * @param mixed $key
      *
      * @return mixed
+     * @Annotation\TwigFilter()
      */
     public static function getIfNotEmpty(array $input, mixed $key): mixed
     {

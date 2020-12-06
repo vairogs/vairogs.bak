@@ -1,0 +1,6 @@
+services:
+    RavenFlux\VairogsHelper\IterExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension

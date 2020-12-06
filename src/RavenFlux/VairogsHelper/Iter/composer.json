@@ -1,0 +1,62 @@
+{
+    "name": "ravenflux/vairogs-helper-iter",
+    "description": "Twig extension that implements vairogs/utils Iter helper functions in Twig template",
+    "type": "library",
+    "keywords": [
+        "ravenflux",
+        "symfony",
+        "symfony5",
+        "iter",
+        "twig",
+        "twig-extension",
+        "utils",
+        "vairogs"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
+            "homepage": "https://github.com/k0d3r1s",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@vairogs.com",
+        "issues": "https://github.com/vairogs/vairogs/issues",
+        "wiki": "https://github.com/vairogs/vairogs/wiki"
+    },
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/vairogs/vairogs"
+        }
+    ],
+    "require": {
+        "php": ">=8.0.0",
+        "jetbrains/phpstorm-attributes": "*",
+        "twig/twig": "3.*",
+        "vairogs/utils": "3.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "RavenFlux\\VairogsHelper\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    }
+}
