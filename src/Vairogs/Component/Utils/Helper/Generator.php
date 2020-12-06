@@ -5,6 +5,7 @@ namespace Vairogs\Component\Utils\Helper;
 use Exception;
 use JetBrains\PhpStorm\Pure;
 use LogicException;
+use Vairogs\Component\Utils\Annotation;
 use function array_rand;
 use function bin2hex;
 use function ceil;
@@ -41,6 +42,7 @@ class Generator
      * @param int $length
      *
      * @return string
+     * @Annotation\TwigFunction()
      */
     public static function getUniqueId(int $length = 20): string
     {
@@ -56,6 +58,7 @@ class Generator
      * @param string $chars
      *
      * @return string
+     * @Annotation\TwigFunction()
      */
     #[Pure] public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
     {
@@ -69,6 +72,7 @@ class Generator
      * @return string
      * @throws LogicException
      * @throws Exception
+     * @Annotation\TwigFunction()
      */
     public function generate(int $length = 20): string
     {
