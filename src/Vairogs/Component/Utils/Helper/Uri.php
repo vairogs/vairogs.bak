@@ -4,6 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Component\Utils\Annotation;
 use function array_combine;
 use function array_keys;
 use function array_map;
@@ -36,6 +37,7 @@ class Uri
      * @param string|null $parent
      *
      * @return array
+     * @Annotation\TwigFilter()
      */
     public static function buildHttpQuery(array|object $data, ?string $parent = null): array
     {
@@ -66,6 +68,7 @@ class Uri
     /**
      * @param string $url
      * @return string
+     * @Annotation\TwigFilter ()
      */
     public static function urlEncode(string $url): string
     {
@@ -92,6 +95,7 @@ class Uri
     /**
      * @param string $query
      * @return array
+     * @Annotation\TwigFilter()
      */
     public static function arrayFromQueryString(string $query): array
     {
@@ -107,6 +111,7 @@ class Uri
     /**
      * @param string $rawHeaders
      * @return array
+     * @Annotation\TwigFilter()
      */
     public static function parseHeaders(string $rawHeaders = ''): array
     {
@@ -123,7 +128,7 @@ class Uri
             if (isset($h[1])) {
                 if (!isset($headers[$h[0]])) {
                     $headers[$h[0]] = trim($h[1]);
-                } elseif (is_array($headers[$h[0]])) {
+                } else if (is_array($headers[$h[0]])) {
                     $headers[$h[0]][] = trim($h[1]);
                 } else {
                     $headers[$h[0]] = [
@@ -133,9 +138,9 @@ class Uri
                 }
 
                 $key = $h[0];
-            } elseif (str_starts_with($h[0], "\t")) {
+            } else if (str_starts_with($h[0], "\t")) {
                 $headers[$key] .= "\r\n\t" . trim($h[0]);
-            } elseif (!$key) {
+            } else if (!$key) {
                 $headers[0] = trim($h[0]);
             }
         }
@@ -143,6 +148,11 @@ class Uri
         return $headers;
     }
 
+    /**
+     * @param string $url
+     * @return bool
+     * @Annotation\TwigFunction()
+     */
     #[Pure] public static function isUrl(string $url): bool
     {
         $url = filter_var($url, FILTER_SANITIZE_URL);
@@ -155,6 +165,7 @@ class Uri
      * @param string $path
      *
      * @return string|bool
+     * @Annotation\TwigFilter()
      */
     public static function parseQueryPath(string $path): bool|string
     {
