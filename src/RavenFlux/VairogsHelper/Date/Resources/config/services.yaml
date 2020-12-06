@@ -1,0 +1,6 @@
+services:
+    RavenFlux\VairogsHelper\DateExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
