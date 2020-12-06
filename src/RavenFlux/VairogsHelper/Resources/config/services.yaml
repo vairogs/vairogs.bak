@@ -1,0 +1,78 @@
+services:
+    RavenFlux\VairogsHelper\DateExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\EmailExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\FileExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\GeneratorExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\GravatarExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\HttpExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\IterExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\JsonExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\PhpExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\SortExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\TextExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\UriExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    RavenFlux\VairogsHelper\UtilExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
