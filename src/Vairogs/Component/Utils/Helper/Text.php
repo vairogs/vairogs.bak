@@ -183,14 +183,14 @@ class Text
     }
 
     /**
-     * @param int $number
+     * @param string $input
      * @param int $length
      *
      * @return string
      */
-    #[Pure] public static function zero(int $number, int $length): string
+    #[Pure] public static function zero(string $input, int $length): string
     {
-        return str_pad($number, $length, '0', STR_PAD_LEFT);
+        return str_pad($input, $length, '0', STR_PAD_LEFT);
     }
 
     /**
