@@ -1,0 +1,6 @@
+services:
+    RavenFlux\VairogsHelper\HttpExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension

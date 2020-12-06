@@ -5,6 +5,7 @@ namespace Vairogs\Component\Utils\Helper;
 use InvalidArgumentException;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
+use Vairogs\Component\Utils\Annotation;
 use function preg_match;
 use function sprintf;
 use function str_starts_with;
@@ -22,6 +23,7 @@ class Http
      * @param Request $request
      *
      * @return string
+     * @Annotation\TwigFunction()
      */
     public static function getSchema(Request $request): string
     {
@@ -32,6 +34,7 @@ class Http
      * @param Request $request
      *
      * @return bool
+     * @Annotation\TwigFunction()
      */
     public static function isHttps(Request $request): bool
     {
@@ -56,6 +59,7 @@ class Http
      * @param bool $trust
      *
      * @return string
+     * @Annotation\TwigFunction()
      */
     public static function getRemoteIp(Request $request, bool $trust = false): string
     {
@@ -82,6 +86,7 @@ class Http
      * @param string $path
      *
      * @return bool
+     * @Annotation\TwigFunction()
      */
     public static function isAbsolute(string $path): bool
     {
@@ -92,6 +97,7 @@ class Http
      * @return array
      * @throws InvalidArgumentException
      * @throws ReflectionException
+     * @Annotation\TwigFunction()
      */
     public static function getMethods(): array
     {
