@@ -1,0 +1,6 @@
+services:
+    RavenFlux\VairogsHelper\SortExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension

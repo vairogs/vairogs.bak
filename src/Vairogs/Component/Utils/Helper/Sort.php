@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Component\Utils\Annotation;
 use function array_slice;
 use function count;
 use function is_array;
@@ -15,6 +16,7 @@ class Sort
     /**
      * @param mixed $foo
      * @param mixed $bar
+     * @Annotation\TwigFunction()
      */
     public static function swap(mixed &$foo, mixed &$bar): void
     {
@@ -29,6 +31,7 @@ class Sort
 
     /**
      * @param array $array
+     * @Annotation\TwigFilter()
      */
     public static function bubbleSort(array &$array): void
     {
@@ -46,6 +49,7 @@ class Sort
      * @param array $array
      * @param mixed $foo
      * @param mixed $bar
+     * @Annotation\TwigFunction()
      */
     public static function swapArray(array &$array, mixed $foo, mixed $bar): void
     {
@@ -62,6 +66,7 @@ class Sort
      * @param array $array
      *
      * @return array
+     * @Annotation\TwigFilter()
      */
     public static function mergeSort(array $array): array
     {
@@ -120,6 +125,7 @@ class Sort
      * @param mixed $field
      *
      * @return bool
+     * @Annotation\TwigFunction()
      */
     #[Pure] public static function isSortable(mixed $item, mixed $field): bool
     {
@@ -139,6 +145,7 @@ class Sort
      * @param string $order
      *
      * @return callable
+     * @Annotation\TwigFilter()
      */
     public static function usort(mixed $parameter, string $order): callable
     {
