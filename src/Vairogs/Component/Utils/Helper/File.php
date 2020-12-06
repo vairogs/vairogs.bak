@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use RuntimeException;
+use Vairogs\Component\Utils\Annotation;
 use function dirname;
 use function is_dir;
 use function mkdir;
@@ -13,6 +14,7 @@ class File
     /**
      * @param string $path
      * @return bool
+     * @Annotation\TwigFunction()
      */
     public static function mkdir(string $path): bool
     {
