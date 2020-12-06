@@ -42,7 +42,7 @@ class CacheEventListener implements EventSubscriberInterface
      * @param null|TokenStorageInterface $storage
      * @param Adapter[] ...$adapters
      */
-    public function __construct(Reader $reader, bool $enabled, ?TokenStorageInterface $storage, array ...$adapters)
+    public function __construct(Reader $reader, bool $enabled, ?TokenStorageInterface $storage, ...$adapters)
     {
         $this->enabled = $enabled;
         if ($this->enabled) {
