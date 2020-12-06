@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Utils\Helper;
 
+use Vairogs\Component\Utils\Annotation;
 use function array_fill;
 use function implode;
 use function preg_match;
@@ -12,6 +13,7 @@ class Util
      * @param int $number
      *
      * @return bool
+     * @Annotation\TwigFunction()
      */
     public static function isPrime(int $number): bool
     {
