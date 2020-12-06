@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use JsonException;
+use Vairogs\Component\Utils\Annotation;
 use function defined;
 use function json_decode;
 use function json_encode;
@@ -26,6 +27,7 @@ class Json
      *
      * @return string
      * @throws JsonException
+     * @Annotation\TwigFilter()
      */
     public static function encode(mixed $value, int $flags = 0): string
     {
@@ -44,6 +46,7 @@ class Json
      *
      * @return mixed
      * @throws JsonException
+     * @Annotation\TwigFilter()
      */
     public static function decode(string $json, int $flags = 0): mixed
     {

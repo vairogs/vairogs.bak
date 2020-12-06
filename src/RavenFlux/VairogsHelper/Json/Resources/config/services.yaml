@@ -1,0 +1,6 @@
+services:
+    RavenFlux\VairogsHelper\JsonExtension:
+        public: false
+        tags:
+            -
+                name: twig.extension
