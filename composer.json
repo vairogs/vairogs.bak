@@ -48,6 +48,7 @@
         "ext-mbstring": "*",
         "ext-pdo": "*",
         "ext-zlib": "*",
+        "doctrine/annotations": "~1.11",
         "doctrine/collections": "~1.6",
         "doctrine/dbal": "~2.8",
         "doctrine/orm": "~2.6",
@@ -64,6 +65,7 @@
         "symfony/http-kernel": "~5.2",
         "symfony/options-resolver": "~5.2",
         "symfony/routing": "~5.2",
+        "symfony/security-core": "~5.2",
         "symfony/translation": "~5.2",
         "symfony/validator": "~5.2",
         "twig/twig": "3.*"
