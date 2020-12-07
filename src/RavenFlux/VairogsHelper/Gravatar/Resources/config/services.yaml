@@ -1,5 +1,5 @@
 services:
-    RavenFlux\VairogsHelper\GravatarExtension:
+    RavenFlux\VairogsHelper\Gravatar\Extension:
         public: false
         tags:
             -

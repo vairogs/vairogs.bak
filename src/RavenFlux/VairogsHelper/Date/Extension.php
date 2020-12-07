@@ -1,21 +1,21 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\VairogsHelper;
+namespace RavenFlux\VairogsHelper\Date;
 
 use ReflectionException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Vairogs\Component\Utils\Annotation;
-use Vairogs\Component\Utils\Helper\Text;
+use Vairogs\Component\Utils\Helper\Date;
 use Vairogs\Component\Utils\Twig\Helper;
 use Vairogs\Component\Utils\Twig\TwigTrait;
 use Vairogs\Component\Utils\Vairogs;
 
-class TextExtension extends AbstractExtension
+class Extension extends AbstractExtension
 {
     use TwigTrait;
 
-    private const SUFFIX = '_text_';
+    private const SUFFIX = '_date_';
 
     /**
      * @return array
@@ -23,7 +23,7 @@ class TextExtension extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Text::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Date::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
     }
 
     /**
@@ -32,6 +32,6 @@ class TextExtension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Text::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Date::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
     }
 }

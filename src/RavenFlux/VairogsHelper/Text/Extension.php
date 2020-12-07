@@ -1,21 +1,21 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\VairogsHelper;
+namespace RavenFlux\VairogsHelper\Text;
 
 use ReflectionException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Vairogs\Component\Utils\Annotation;
-use Vairogs\Component\Utils\Helper\Iter;
+use Vairogs\Component\Utils\Helper\Text;
 use Vairogs\Component\Utils\Twig\Helper;
 use Vairogs\Component\Utils\Twig\TwigTrait;
 use Vairogs\Component\Utils\Vairogs;
 
-class IterExtension extends AbstractExtension
+class Extension extends AbstractExtension
 {
     use TwigTrait;
 
-    private const SUFFIX = '_iter_';
+    private const SUFFIX = '_text_';
 
     /**
      * @return array
@@ -23,7 +23,7 @@ class IterExtension extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Iter::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Text::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
     }
 
     /**
@@ -32,6 +32,6 @@ class IterExtension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Iter::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Text::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
     }
 }

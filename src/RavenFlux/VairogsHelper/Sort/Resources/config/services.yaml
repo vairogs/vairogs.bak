@@ -1,5 +1,5 @@
 services:
-    RavenFlux\VairogsHelper\SortExtension:
+    RavenFlux\VairogsHelper\Sort\Extension:
         public: false
         tags:
             -

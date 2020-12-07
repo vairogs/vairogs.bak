@@ -48,7 +48,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\VairogsHelper\\": ""
+            "RavenFlux\\VairogsHelper\\Iter\\": ""
         }
     },
     "config": {

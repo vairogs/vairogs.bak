@@ -1,21 +1,21 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\VairogsHelper;
+namespace RavenFlux\VairogsHelper\Generator;
 
 use ReflectionException;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Vairogs\Component\Utils\Annotation;
-use Vairogs\Component\Utils\Helper\Uri;
+use Vairogs\Component\Utils\Helper\Generator;
 use Vairogs\Component\Utils\Twig\Helper;
 use Vairogs\Component\Utils\Twig\TwigTrait;
 use Vairogs\Component\Utils\Vairogs;
 
-class UriExtension extends AbstractExtension
+class Extension extends AbstractExtension
 {
     use TwigTrait;
 
-    private const SUFFIX = '_uri_';
+    private const SUFFIX = '_generator_';
 
     /**
      * @return array
@@ -23,7 +23,7 @@ class UriExtension extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Uri::class, Annotation\TwigFilter::class), Vairogs::RAVEN . '_text_', TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Generator::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
     }
 
     /**
@@ -32,6 +32,6 @@ class UriExtension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Uri::class, Annotation\TwigFunction::class), Vairogs::RAVEN . '_text_', TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Generator::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
     }
 }

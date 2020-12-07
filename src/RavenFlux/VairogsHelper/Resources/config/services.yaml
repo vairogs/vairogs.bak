@@ -1,77 +1,77 @@
 services:
-    RavenFlux\VairogsHelper\DateExtension:
+    RavenFlux\VairogsHelper\Date\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\EmailExtension:
+    RavenFlux\VairogsHelper\Email\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\FileExtension:
+    RavenFlux\VairogsHelper\File\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\GeneratorExtension:
+    RavenFlux\VairogsHelper\Generator\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\GravatarExtension:
+    RavenFlux\VairogsHelper\Gravatar\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\HttpExtension:
+    RavenFlux\VairogsHelper\Http\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\IterExtension:
+    RavenFlux\VairogsHelper\Iter\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\JsonExtension:
+    RavenFlux\VairogsHelper\Json\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\PhpExtension:
+    RavenFlux\VairogsHelper\Php\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\SortExtension:
+    RavenFlux\VairogsHelper\Sort\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\TextExtension:
+    RavenFlux\VairogsHelper\Text\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\UriExtension:
+    RavenFlux\VairogsHelper\Uri\Extension:
         public: false
         tags:
             -
                 name: twig.extension
 
-    RavenFlux\VairogsHelper\UtilExtension:
+    RavenFlux\VairogsHelper\Util\Extension:
         public: false
         tags:
             -

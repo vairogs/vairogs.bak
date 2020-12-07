@@ -1,5 +1,5 @@
 services:
-    RavenFlux\VairogsHelper\EmailExtension:
+    RavenFlux\VairogsHelper\Email\Extension:
         public: false
         tags:
             -

@@ -1,5 +1,5 @@
 services:
-    RavenFlux\VairogsHelper\FileExtension:
+    RavenFlux\VairogsHelper\File\Extension:
         public: false
         tags:
             -

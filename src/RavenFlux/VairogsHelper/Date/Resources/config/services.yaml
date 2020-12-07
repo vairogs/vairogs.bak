@@ -1,5 +1,5 @@
 services:
-    RavenFlux\VairogsHelper\DateExtension:
+    RavenFlux\VairogsHelper\Date\Extension:
         public: false
         tags:
             -

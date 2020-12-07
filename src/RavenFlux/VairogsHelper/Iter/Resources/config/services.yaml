@@ -1,5 +1,5 @@
 services:
-    RavenFlux\VairogsHelper\IterExtension:
+    RavenFlux\VairogsHelper\Iter\Extension:
         public: false
         tags:
             -
