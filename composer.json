@@ -108,6 +108,7 @@
     "autoload": {
         "psr-4": {
             "Vairogs\\": "src/Vairogs/",
+            "RavenFlux\\VairogsHelper\\": "src/RavenFlux/VairogsHelper",
             "RavenFlux\\": "src/RavenFlux/"
         }
     },
