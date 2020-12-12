@@ -49,6 +49,7 @@ class Sort
      * @param array $array
      * @param mixed $foo
      * @param mixed $bar
+     * @Annotation\TwigFilter()
      * @Annotation\TwigFunction()
      */
     public static function swapArray(array &$array, mixed $foo, mixed $bar): void

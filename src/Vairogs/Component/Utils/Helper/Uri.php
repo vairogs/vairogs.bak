@@ -38,6 +38,7 @@ class Uri
      *
      * @return array
      * @Annotation\TwigFilter()
+     * @Annotation\TwigFunction()
      */
     public static function buildHttpQuery(array|object $data, ?string $parent = null): array
     {

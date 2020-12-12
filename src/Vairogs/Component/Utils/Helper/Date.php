@@ -19,8 +19,10 @@ use function substr;
 class Date
 {
     public const FORMAT = 'd-m-Y H:i:s';
+    public const FORMAT_TS = 'D M d Y H:i:s T';
     public const EXTRA_FORMATS = [
-        'D M d Y H:i:s T',
+        self::FORMAT,
+        self::FORMAT_TS,
     ];
     public const SEC = 1000;
     public const MIN = 60 * self::SEC;

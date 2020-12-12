@@ -132,6 +132,7 @@ class Php
      * @param mixed $key
      * @return mixed
      * @Annotation\TwigFilter()
+     * @Annotation\TwigFunction()
      */
     public static function getParameter(object|array $variable, mixed $key): mixed
     {

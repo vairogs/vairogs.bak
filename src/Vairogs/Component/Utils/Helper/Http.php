@@ -23,6 +23,7 @@ class Http
      * @param Request $request
      *
      * @return string
+     * @Annotation\TwigFilter()
      * @Annotation\TwigFunction()
      */
     public static function getSchema(Request $request): string
@@ -57,7 +58,6 @@ class Http
     /**
      * @param Request $request
      * @param bool $trust
-     *
      * @return string
      * @Annotation\TwigFunction()
      */
@@ -77,6 +77,20 @@ class Http
             if ($request->server->has($parameter)) {
                 return $request->server->get($parameter);
             }
+        }
+
+        return $request->server->get('REMOTE_ADDR');
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     * @Annotation\TwigFunction()
+     */
+    public static function getRemoteIpCF(Request $request): string
+    {
+        if ($request->server->has('HTTP_CF_CONNECTING_IP')) {
+            return $request->server->get('HTTP_CF_CONNECTING_IP');
         }
 
         return $request->server->get('REMOTE_ADDR');
