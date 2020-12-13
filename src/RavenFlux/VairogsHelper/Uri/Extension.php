@@ -3,8 +3,8 @@
 namespace RavenFlux\VairogsHelper\Uri;
 
 use ReflectionException;
+use Twig;
 use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use Vairogs\Component\Utils\Annotation;
 use Vairogs\Component\Utils\Helper\Uri;
 use Vairogs\Component\Utils\Twig\Helper;
@@ -23,7 +23,7 @@ class Extension extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Uri::class, Annotation\TwigFilter::class), Vairogs::RAVEN . '_text_', TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Uri::class, Annotation\TwigFilter::class), Vairogs::RAVEN . '_text_', Twig\TwigFilter::class);
     }
 
     /**
@@ -32,6 +32,6 @@ class Extension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Uri::class, Annotation\TwigFunction::class), Vairogs::RAVEN . '_text_', TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Uri::class, Annotation\TwigFunction::class), Vairogs::RAVEN . '_text_', Twig\TwigFunction::class);
     }
 }

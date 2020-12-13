@@ -12,7 +12,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 class SteamGifts extends Steam
 {
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
      */
     protected ?string $username;
 

@@ -15,7 +15,7 @@ class Steam implements OpenIDUser, User
     public const RETURNS_EMAIL = false;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=false, unique=true)
      */
     protected string $openID;
 

@@ -3,8 +3,8 @@
 namespace RavenFlux\VairogsHelper\Iter;
 
 use ReflectionException;
+use Twig;
 use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use Vairogs\Component\Utils\Annotation;
 use Vairogs\Component\Utils\Helper\Iter;
 use Vairogs\Component\Utils\Twig\Helper;
@@ -23,7 +23,7 @@ class Extension extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Iter::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Iter::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFilter::class);
     }
 
     /**
@@ -32,6 +32,6 @@ class Extension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Iter::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, TwigFilter::class);
+        return $this->makeArray(Helper::getTwigAnnotations(Iter::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFunction::class);
     }
 }
