@@ -16,14 +16,6 @@ use function class_exists;
 class VairogsExtension extends Extension
 {
     /**
-     * @return string
-     */
-    public function getAlias(): string
-    {
-        return Vairogs::VAIROGS;
-    }
-
-    /**
      * @param array $configs
      * @param ContainerBuilder $container
      *
@@ -48,6 +40,14 @@ class VairogsExtension extends Extension
         foreach (Iter::makeOneDimension([$this->getAlias() => $parameters]) as $key => $value) {
             $container->setParameter($key, $value);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getAlias(): string
+    {
+        return Vairogs::VAIROGS;
     }
 
     /**

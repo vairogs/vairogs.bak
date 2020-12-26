@@ -37,6 +37,7 @@ class AuthOpenIDDependency implements Dependency
                 ->end()
             ->end()
         ->end();
+        // @formatter:on
     }
 
     /**
@@ -44,19 +45,22 @@ class AuthOpenIDDependency implements Dependency
      */
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $base = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID . '.clients';
-        foreach ($container->getParameter($base) as $key => $clientConfig) {
-            $tree = new TreeBuilder($key);
-            $node = $tree->getRootNode();
-            $this->buildClientConfiguration($node);
-            $config = (new Processor())->process($tree->buildTree(), [$clientConfig]);
-            $clientServiceKey = $base . '.' . $key;
+        $enbledKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID . '.enabled';
+        if ($container->hasParameter($enbledKey) && true === $container->getParameter($enbledKey)) {
+            $base = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID . '.clients';
+            foreach ($container->getParameter($base) as $key => $clientConfig) {
+                $tree = new TreeBuilder($key);
+                $node = $tree->getRootNode();
+                $this->buildClientConfiguration($node);
+                $config = (new Processor())->process($tree->buildTree(), [$clientConfig]);
+                $clientServiceKey = $base . '.' . $key;
 
-            foreach (Iter::makeOneDimension($config, $clientServiceKey) as $tkey => $value) {
-                $container->setParameter($tkey, $value);
+                foreach (Iter::makeOneDimension($config, $clientServiceKey) as $tkey => $value) {
+                    $container->setParameter($tkey, $value);
+                }
+
+                $this->configureClient($container, $clientServiceKey, $base, $key);
             }
-
-            $this->configureClient($container, $clientServiceKey, $base, $key);
         }
     }
 

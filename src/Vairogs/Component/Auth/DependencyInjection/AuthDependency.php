@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Component\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
+use Vairogs\Component\Utils\Vairogs;
 use function class_exists;
 
 class AuthDependency implements Dependency
@@ -26,9 +27,8 @@ class AuthDependency implements Dependency
         $node
             ->children()
             ->arrayNode(Component::AUTH)
-            ->children();
-
-        $node
+            ->canBeEnabled()
+            ->children()
             ->append($authNode)
             ->end();
         // @formatter:on
@@ -49,8 +49,11 @@ class AuthDependency implements Dependency
      */
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(AuthOpenIDDependency::class)) {
-            (new AuthOpenIDDependency())->loadComponent($container, $configuration);
+        $enbledKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.enabled';
+        if ($container->hasParameter($enbledKey) && true === $container->getParameter($enbledKey)) {
+            if (class_exists(AuthOpenIDDependency::class)) {
+                (new AuthOpenIDDependency())->loadComponent($container, $configuration);
+            }
         }
     }
 }
