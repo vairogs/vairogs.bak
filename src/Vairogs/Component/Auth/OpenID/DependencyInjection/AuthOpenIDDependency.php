@@ -45,21 +45,22 @@ class AuthOpenIDDependency implements Dependency
      */
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $enbledKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID . '.enabled';
+        $baseKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID;
+        $enbledKey = $baseKey . '.enabled';
         if ($container->hasParameter($enbledKey) && true === $container->getParameter($enbledKey)) {
-            $base = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID . '.clients';
-            foreach ($container->getParameter($base) as $key => $clientConfig) {
+            $clientsKey = $baseKey . '.clients';
+            foreach ($container->getParameter($clientsKey) as $key => $clientConfig) {
                 $tree = new TreeBuilder($key);
                 $node = $tree->getRootNode();
                 $this->buildClientConfiguration($node);
                 $config = (new Processor())->process($tree->buildTree(), [$clientConfig]);
-                $clientServiceKey = $base . '.' . $key;
+                $clientServiceKey = $clientsKey . '.' . $key;
 
                 foreach (Iter::makeOneDimension($config, $clientServiceKey) as $tkey => $value) {
                     $container->setParameter($tkey, $value);
                 }
 
-                $this->configureClient($container, $clientServiceKey, $base, $key);
+                $this->configureClient($container, $clientServiceKey, $clientsKey, $key);
             }
         }
     }

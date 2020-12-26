@@ -21,14 +21,16 @@ class AuthDependency implements Dependency
         // @formatter:off
         $authNode = $node
             ->children()
-                ->arrayNode(Component::AUTH);
+                ->arrayNode(Component::AUTH)
+                ->canBeEnabled();
         $this->appendOpenIDConfiguration($authNode);
 
         $node
             ->children()
             ->arrayNode(Component::AUTH)
-            ->canBeEnabled()
-            ->children()
+            ->children();
+
+        $node
             ->append($authNode)
             ->end();
         // @formatter:on
