@@ -10,14 +10,11 @@ use function ucfirst;
 
 class FileBuilder implements Builder
 {
-    protected Sitemap $sitemap;
-
     /**
      * @param Sitemap $sitemap
      */
-    public function __construct(Sitemap $sitemap)
+    public function __construct(protected Sitemap $sitemap)
     {
-        $this->sitemap = $sitemap;
     }
 
     /**
@@ -39,10 +36,8 @@ class FileBuilder implements Builder
                     fwrite($buffer, "\t" . "<$key>" . $url->$getter() . "</$key>" . "\n");
                 }
             }
-            if ([] !== $alternates) {
-                foreach ($alternates as $locale => $alternate) {
-                    fwrite($buffer, "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
-                }
+            foreach ($alternates ?? [] as $locale => $alternate) {
+                fwrite($buffer, "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
             }
             fwrite($buffer, '</url>' . "\n");
         }

@@ -10,21 +10,26 @@ use Vairogs\Component\Utils\Doctrine\Model\Log;
 
 class MonologDBHandler extends AbstractProcessingHandler
 {
-    protected EntityManagerInterface|ObjectManager $em;
-    protected string $logClass;
-    protected ManagerRegistry $doctrine;
-
     /**
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface|ObjectManager $em
      * @param ManagerRegistry $doctrine
      * @param string $logClass
      */
-    public function __construct(EntityManagerInterface $em, ManagerRegistry $doctrine, string $logClass)
+    public function __construct(protected EntityManagerInterface|ObjectManager $em, protected ManagerRegistry $doctrine, protected string $logClass)
     {
         parent::__construct();
-        $this->em = $em;
-        $this->logClass = $logClass;
-        $this->doctrine = $doctrine;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleBatch(array $records): void
+    {
+        $this->em->beginTransaction();
+        foreach ($records as $record) {
+            $this->handle($record);
+        }
+        $this->em->commit();
     }
 
     /**
@@ -46,17 +51,5 @@ class MonologDBHandler extends AbstractProcessingHandler
 
         $this->em->persist($entry);
         $this->em->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function handleBatch(array $records): void
-    {
-        $this->em->beginTransaction();
-        foreach ($records as $record) {
-            $this->handle($record);
-        }
-        $this->em->commit();
     }
 }

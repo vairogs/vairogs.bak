@@ -9,13 +9,15 @@ use function sprintf;
 class Director
 {
     /**
-     * @var mixed
+     * @param $buffer
      */
-    private $buffer;
-
-    public function __construct($buffer)
+    public function __construct(
+        /**
+         * @var mixed
+         */
+        private $buffer
+    )
     {
-        $this->buffer = $buffer;
     }
 
     /**

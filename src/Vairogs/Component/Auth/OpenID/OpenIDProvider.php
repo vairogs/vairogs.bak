@@ -32,11 +32,7 @@ use function urldecode;
 class OpenIDProvider
 {
     protected ?Request $request;
-    protected UrlGeneratorInterface $router;
-    protected string $name;
     protected ?string $profileUrl;
-    protected array $options;
-    protected string $cacheDir;
 
     /**
      * @param RequestStack $stack
@@ -45,14 +41,10 @@ class OpenIDProvider
      * @param string $cacheDir
      * @param array $options
      */
-    public function __construct(RequestStack $stack, RouterInterface $router, string $name, string $cacheDir, array $options = [])
+    public function __construct(RequestStack $stack, protected RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
     {
         $this->request = $stack->getCurrentRequest();
-        $this->router = $router;
-        $this->name = $name;
-        $this->options = $options;
         $this->profileUrl = $this->options['provider_options']['profile_url'] ?? null;
-        $this->cacheDir = $cacheDir;
     }
 
     /**

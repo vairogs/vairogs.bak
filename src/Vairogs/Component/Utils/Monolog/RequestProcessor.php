@@ -6,14 +6,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class RequestProcessor
 {
-    protected RequestStack $requestStack;
-
     /**
      * @param RequestStack $requestStack
      */
-    public function __construct(RequestStack $requestStack)
+    public function __construct(protected RequestStack $requestStack)
     {
-        $this->requestStack = $requestStack;
     }
 
     /**

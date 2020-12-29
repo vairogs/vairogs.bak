@@ -33,7 +33,6 @@ class CacheEventListener implements EventSubscriberInterface
     private const ROUTE = '_route';
 
     protected ChainAdapter $client;
-    protected bool $enabled;
     protected Attribute $attribute;
 
     /**
@@ -42,9 +41,8 @@ class CacheEventListener implements EventSubscriberInterface
      * @param null|TokenStorageInterface $storage
      * @param Adapter[] ...$adapters
      */
-    public function __construct(Reader $reader, bool $enabled, ?TokenStorageInterface $storage, ...$adapters)
+    public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $storage, ...$adapters)
     {
-        $this->enabled = $enabled;
         if ($this->enabled) {
             $this->client = new ChainAdapter(Pool::createPoolFor(Annotation::class, $adapters));
             $this->client->prune();

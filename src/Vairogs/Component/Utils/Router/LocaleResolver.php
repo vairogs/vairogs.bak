@@ -10,18 +10,14 @@ final class LocaleResolver
 {
     use LocaleResolverTrait;
 
-    private string $defaultLocale;
     private ?Request $request;
-    private array $availableLocales;
 
     /**
      * @param string $defaultLocale
      * @param array $availableLocales
      */
-    public function __construct(string $defaultLocale, array $availableLocales = [])
+    public function __construct(private string $defaultLocale, private array $availableLocales = [])
     {
-        $this->defaultLocale = $defaultLocale;
-        $this->availableLocales = $availableLocales;
     }
 
     /**

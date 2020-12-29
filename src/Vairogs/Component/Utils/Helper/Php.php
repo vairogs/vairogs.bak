@@ -48,7 +48,7 @@ class Php
      */
     public static function call(callable $function, object $clone, bool $return = false): mixed
     {
-        $func = Closure::bind($function, $clone, get_class($clone));
+        $func = Closure::bind($function, $clone, $clone::class);
 
         if (true === $return) {
             return $func();

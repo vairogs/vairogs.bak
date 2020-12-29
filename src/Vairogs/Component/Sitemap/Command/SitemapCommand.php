@@ -22,8 +22,6 @@ use function unlink;
 class SitemapCommand extends Command
 {
     protected static $defaultName = 'vairogs:sitemap';
-
-    private ValidatorInterface $validator;
     private array $options;
     private ?Provider $provider;
 
@@ -32,13 +30,11 @@ class SitemapCommand extends Command
      * @param Provider|null $provider
      * @param array $options
      */
-    public function __construct(ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
+    public function __construct(private ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
     {
         if (null === $provider || (false === $options['enabled'])) {
             throw new NotFoundHttpException('To use VairogsSitemap, you must enable it and provide a Provider');
         }
-
-        $this->validator = $validator;
         $this->options = $options;
         $this->provider = $provider;
         parent::__construct(self::$defaultName);

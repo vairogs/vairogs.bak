@@ -24,24 +24,21 @@ class SitemapController extends AbstractController
      * @param array $options
      *
      * @return Response
-     * @Route("/sitemap.xml", methods={"GET"}, defaults={"_format"="xml"}, name="sitemap.xml")
      */
+    #[Route(path: '/sitemap.xml', name: 'sitemap.xml', defaults: ['_format' => 'xml'], methods: [Request::METHOD_GET])]
     public function sitemap(Request $request, ValidatorInterface $validator, ?Provider $provider = null, array $options = []): Response
     {
         if (is_file($sitemap = getcwd() . '/sitemap.xml')) {
             return new Response(file_get_contents($sitemap));
         }
-
         if (null === $provider || (false === $options['enabled'])) {
             throw new NotFoundHttpException('To use VairogsSitemap, you must enable it and provide a Provider');
         }
-
         $model = $provider->populate($request->getSchemeAndHttpHost());
         $errors = $validator->validate($model);
         if ($errors->count()) {
             return (new ErrorResponse($errors))->getResponse();
         }
-
         return new Response((new Director(''))->build(new XmlBuilder($model)));
     }
 }

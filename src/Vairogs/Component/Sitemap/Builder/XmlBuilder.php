@@ -9,14 +9,11 @@ use function ucfirst;
 
 class XmlBuilder implements Builder
 {
-    protected Sitemap $sitemap;
-
     /**
      * @param Sitemap $sitemap
      */
-    public function __construct(Sitemap $sitemap)
+    public function __construct(protected Sitemap $sitemap)
     {
-        $this->sitemap = $sitemap;
     }
 
     /**
@@ -37,10 +34,8 @@ class XmlBuilder implements Builder
                     $buffer .= "\t" . "<$key>" . $url->$getter() . "</$key>" . "\n";
                 }
             }
-            if ([] !== $alternates) {
-                foreach ($alternates as $locale => $alternate) {
-                    $buffer .= "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n";
-                }
+            foreach ($alternates ?? [] as $locale => $alternate) {
+                $buffer .= "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n";
             }
             $buffer .= '</url>' . "\n";
         }

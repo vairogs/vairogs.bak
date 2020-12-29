@@ -8,15 +8,13 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class ErrorResponse
 {
-    private ConstraintViolationListInterface $errors;
     private Response $response;
 
     /**
      * @param ConstraintViolationListInterface $errors
      */
-    public function __construct(ConstraintViolationListInterface $errors)
+    public function __construct(private ConstraintViolationListInterface $errors)
     {
-        $this->errors = $errors;
         $this->response = new Response();
         $this->response->headers->set('Content-Type', 'application/xml');
         /** @noinspection UnusedFunctionResultInspection */

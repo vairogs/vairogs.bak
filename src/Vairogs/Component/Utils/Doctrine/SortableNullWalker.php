@@ -41,7 +41,7 @@ class SortableNullWalker extends SqlWalker
                             $sql = preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') (ASC|DESC)/i', static function ($matches) {
                                 if ($matches[3] === Criteria::ASC) {
                                     $order = Criteria::DESC;
-                                } elseif ($matches[3] === Criteria::DESC) {
+                                } else if ($matches[3] === Criteria::DESC) {
                                     $order = Criteria::ASC;
                                 } else {
                                     throw new InvalidArgumentException(sprintf('Order must be "%s" or "%s"', Criteria::ASC, Criteria::DESC));

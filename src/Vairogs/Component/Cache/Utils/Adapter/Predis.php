@@ -14,20 +14,14 @@ use function sprintf;
 
 class Predis implements Cache
 {
-    private ClientInterface $client;
-
     /**
      * @param ClientInterface $client
-     *
-     * @throws InvalidConfigurationException
      */
-    public function __construct(ClientInterface $client)
+    public function __construct(private ClientInterface $client)
     {
         if (!class_exists(SncRedisBundle::class) || !interface_exists(ClientInterface::class)) {
             throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'predis/predis', __CLASS__));
         }
-
-        $this->client = $client;
     }
 
     /**

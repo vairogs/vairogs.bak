@@ -16,20 +16,14 @@ use function sprintf;
 
 class Orm implements Cache
 {
-    private EntityManagerInterface $manager;
-
     /**
      * @param EntityManagerInterface $manager
-     *
-     * @throws InvalidConfigurationException
      */
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(private EntityManagerInterface $manager)
     {
         if (!interface_exists(Driver::class) || !class_exists(Query::class)) {
             throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'doctrine/orm', 'doctrine/dbal', __CLASS__));
         }
-
-        $this->manager = $manager;
     }
 
     /**

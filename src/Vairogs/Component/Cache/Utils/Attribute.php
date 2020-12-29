@@ -18,17 +18,12 @@ use function sprintf;
 
 class Attribute
 {
-    protected Reader $reader;
-    protected ?TokenStorageInterface $storage;
-
     /**
      * @param Reader $reader
-     * @param null|TokenStorageInterface $storage
+     * @param TokenStorageInterface|null $storage
      */
-    public function __construct(Reader $reader, ?TokenStorageInterface $storage = null)
+    public function __construct(protected Reader $reader, protected ?TokenStorageInterface $storage = null)
     {
-        $this->reader = $reader;
-        $this->storage = $storage;
     }
 
     /**

@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Psr\Cache\CacheItemPoolInterface;
 use RuntimeException;
 use Vairogs\Component\Cache\Utils\Adapter\Cache;
-use function get_class;
 use function sprintf;
 
 class Pool
@@ -29,7 +28,7 @@ class Pool
             }
 
             if (!$adapter instanceof Cache && !$adapter instanceof CacheItemPoolInterface) {
-                throw new InvalidArgumentException(sprintf('Adapter %s must implement %s or %s', get_class($adapter), Cache::class, CacheItemPoolInterface::class));
+                throw new InvalidArgumentException(sprintf('Adapter %s must implement %s or %s', $adapter::class, Cache::class, CacheItemPoolInterface::class));
             }
 
             if ($adapter instanceof Cache) {
