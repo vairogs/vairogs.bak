@@ -4,14 +4,10 @@ namespace Vairogs\Extra\Specification;
 
 abstract class AbstractSpecification extends CompositeSpecification
 {
-    protected string $name;
     protected string $message;
-    protected bool $required;
 
-    public function __construct(string $name, bool $required = false)
+    public function __construct(protected string $name, protected bool $required = false)
     {
-        $this->name = $name;
-        $this->required = $required;
     }
 
     public function getName(): string

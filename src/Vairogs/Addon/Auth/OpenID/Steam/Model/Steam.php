@@ -3,6 +3,7 @@
 namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
 use JetBrains\PhpStorm\Pure;
+use Stringable;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 use Doctrine\ORM\Mapping as ORM;
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
@@ -10,7 +11,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 /**
  * @ORM\MappedSuperclass()
  */
-class Steam implements OpenIDUser, User
+class Steam implements OpenIDUser, User, Stringable
 {
     public const RETURNS_EMAIL = false;
 

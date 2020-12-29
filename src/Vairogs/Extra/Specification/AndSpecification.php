@@ -4,17 +4,8 @@ namespace Vairogs\Extra\Specification;
 
 class AndSpecification extends CompositeSpecification
 {
-    private SpecificationInterface $one;
-    private SpecificationInterface $other;
-
-    /**
-     * @param SpecificationInterface $one
-     * @param SpecificationInterface $other
-     */
-    public function __construct(SpecificationInterface $one, SpecificationInterface $other)
+    public function __construct(private SpecificationInterface $one, private SpecificationInterface $other)
     {
-        $this->one = $one;
-        $this->other = $other;
     }
 
     /**
