@@ -26,10 +26,16 @@ use function method_exists;
 
 class CacheEventListener implements EventSubscriberInterface
 {
+    /**
+     * @var string[]
+     */
     private const HEADERS = [
         Header::INVALIDATE,
         Header::SKIP,
     ];
+    /**
+     * @var string
+     */
     private const ROUTE = '_route';
 
     protected ChainAdapter $client;
@@ -78,7 +84,7 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        if ($annotation = $this->attribute->getAnnotation($event, Annotation::class)) {
+        if (null !== ($annotation = $this->attribute->getAnnotation($event, Annotation::class))) {
             $annotation->setData($this->attribute->getAttributes($event, Annotation::class));
             /* @var $annotation Annotation */
             $response = $this->getCache($annotation->getKey($event->getRequest()
@@ -170,7 +176,7 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        if ($annotation = $this->attribute->getAnnotation($event, Annotation::class)) {
+        if (null !== ($annotation = $this->attribute->getAnnotation($event, Annotation::class))) {
             $annotation->setData($this->attribute->getAttributes($event, Annotation::class));
             $key = $annotation->getKey($event->getRequest()
                 ->get(self::ROUTE));
@@ -194,6 +200,7 @@ class CacheEventListener implements EventSubscriberInterface
         $cache = $this->client->getItem($key);
         $cache->set($value);
         $cache->expiresAfter($expires);
+
         $this->client->save($cache);
     }
 }

@@ -16,6 +16,9 @@ use function str_replace;
  */
 class Cache
 {
+    /**
+     * @var string
+     */
     private const ALGORITHM = 'sha1';
 
     public int $expires;

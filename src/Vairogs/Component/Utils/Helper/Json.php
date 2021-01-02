@@ -18,7 +18,13 @@ use const JSON_UNESCAPED_UNICODE;
 
 class Json
 {
+    /**
+     * @var int
+     */
     public const FORCE_ARRAY = 0b0001;
+    /**
+     * @var int
+     */
     public const PRETTY = 0b0010;
 
     /**

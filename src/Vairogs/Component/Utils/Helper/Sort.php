@@ -10,7 +10,13 @@ use function is_array;
 
 class Sort
 {
+    /**
+     * @var string
+     */
     public const ASC = 'ASC';
+    /**
+     * @var string
+     */
     public const DESC = 'DESC';
 
     /**

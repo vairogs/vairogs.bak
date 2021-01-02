@@ -13,6 +13,9 @@ use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
  */
 class Steam implements OpenIDUser, User, Stringable
 {
+    /**
+     * @var bool
+     */
     public const RETURNS_EMAIL = false;
 
     /**

@@ -10,6 +10,9 @@ use function strlen;
 
 class StreamResponse extends Response
 {
+    /**
+     * @var int
+     */
     public const BUFFER_SIZE = 4096;
 
     /**

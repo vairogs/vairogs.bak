@@ -56,7 +56,7 @@ class SortExtension extends AbstractExtension
         }
 
         if (!Sort::isSortable(current($data), $parameter)) {
-            throw new InvalidArgumentException('Sorting parameter doesn\'t exist in sortable variable');
+            throw new InvalidArgumentException("Sorting parameter doesn't exist in sortable variable");
         }
 
         @usort($data, Sort::usort($parameter, strtoupper($order)));

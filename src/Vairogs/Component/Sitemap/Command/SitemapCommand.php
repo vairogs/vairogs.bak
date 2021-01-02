@@ -70,9 +70,9 @@ class SitemapCommand extends Command
             try {
                 (new Director($handle))->build(new FileBuilder($sitemap));
                 $output->writeln(sprintf('<info>Sitemap generated as "%s"</info>', $filename));
-            } catch (Exception $e) {
+            } catch (Exception $exception) {
                 @unlink($filename);
-                $output->writeln('<error>' . $e->getMessage() . '</error>');
+                $output->writeln('<error>' . $exception->getMessage() . '</error>');
             }
             fclose($handle);
         }

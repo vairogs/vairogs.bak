@@ -36,7 +36,7 @@ class Attribute
     public function getAttributes(KernelEvent $event, string $class): array
     {
         $input = [];
-        if ($annotation = $this->getAnnotation($event, $class)) {
+        if (null !== ($annotation = $this->getAnnotation($event, $class))) {
             $request = $event->getRequest();
 
             $user = null;

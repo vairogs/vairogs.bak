@@ -3,9 +3,10 @@
 namespace Vairogs\Component\Cache\Utils\Adapter;
 
 use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
+use Exception;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\PdoAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -28,7 +29,7 @@ class Orm implements Cache
 
     /**
      * @return CacheItemPoolInterface
-     * @throws Exception
+     * @throws DBALException
      */
     public function getAdapter(): CacheItemPoolInterface
     {
@@ -40,8 +41,8 @@ class Orm implements Cache
         if ($schema && !$schema->tablesExist([$table])) {
             try {
                 $adapter->createTable();
-            } catch (\Exception $e) {
-                throw new Exception($e->getMessage(), $e->getCode(), $e);
+            } catch (Exception $exception) {
+                throw new DBALException($exception->getMessage(), $exception->getCode(), $exception);
             }
         }
 
@@ -49,6 +50,6 @@ class Orm implements Cache
             return $adapter;
         }
 
-        throw Exception::invalidTableName($table);
+        throw DBALException::invalidTableName($table);
     }
 }

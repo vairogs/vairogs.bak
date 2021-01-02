@@ -37,8 +37,8 @@ class MonologDBHandler extends AbstractProcessingHandler
      */
     protected function write(array $record): void
     {
-        $entry = new $this->logClass();
         /** @var Log $entry */
+        $entry = new $this->logClass();
         $entry->setMessage($record['message']);
         $entry->setLevel($record['level']);
         $entry->setLevelName($record['level_name']);

@@ -12,11 +12,29 @@ use function str_starts_with;
 
 class Http
 {
+    /**
+     * @var int
+     */
     public const HTTP = 80;
+    /**
+     * @var int
+     */
     public const HTTPS = 443;
+    /**
+     * @var string
+     */
     private const HEADER_HTTPS = 'HTTPS';
+    /**
+     * @var string
+     */
     private const HEADER_PORT = 'SERVER_PORT';
+    /**
+     * @var string
+     */
     private const HEADER_SSL = 'HTTP_X_FORWARDED_SSL';
+    /**
+     * @var string
+     */
     private const HEADER_PROTO = 'HTTP_X_FORWARDED_PROTO';
 
     /**

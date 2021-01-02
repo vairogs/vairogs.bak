@@ -96,7 +96,7 @@ class Uri
      */
     public static function arrayFromQueryString(string $query): array
     {
-        $query = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', static fn ($match) => bin2hex(urldecode($match[0])), $query);
+        $query = preg_replace_callback('#(?:^|(?<=&))[^=[]+#', static fn ($match) => bin2hex(urldecode($match[0])), $query);
 
         parse_str($query, $values);
 
@@ -164,7 +164,7 @@ class Uri
     public static function parseQueryPath(string $path): bool|string
     {
         $path = '/' . ltrim($path, '/');
-        $path = preg_replace('/[\x00-\x1F\x7F]/', '', $path);
+        $path = preg_replace('#[\x00-\x1F\x7F]#', '', $path);
 
         while (false !== $pos = strpos($path, '/../')) {
             $leftSlashNext = strrpos(substr($path, 0, $pos), '/');

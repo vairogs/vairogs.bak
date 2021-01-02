@@ -18,15 +18,36 @@ use function substr;
 
 class Date
 {
+    /**
+     * @var string
+     */
     public const FORMAT = 'd-m-Y H:i:s';
+    /**
+     * @var string
+     */
     public const FORMAT_TS = 'D M d Y H:i:s T';
+    /**
+     * @var string[]
+     */
     public const EXTRA_FORMATS = [
         self::FORMAT,
         self::FORMAT_TS,
     ];
+    /**
+     * @var int
+     */
     public const SEC = 1000;
+    /**
+     * @var int
+     */
     public const MIN = 60 * self::SEC;
+    /**
+     * @var int
+     */
     public const HOUR = 60 * self::MIN;
+    /**
+     * @var array<string, int>
+     */
     public const TIME = [
         'hour' => self::HOUR,
         'minute' => self::MIN,

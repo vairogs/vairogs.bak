@@ -17,7 +17,7 @@ class Util
      */
     public static function isPrime(int $number): bool
     {
-        preg_match('/^1?$|^(11+?)\1+$/', implode(1, array_fill(0, $number, null)), $matches);
+        preg_match('#^1?$|^(11+?)\1+$#', implode(1, array_fill(0, $number, null)), $matches);
 
         return isset($matches[1]);
     }

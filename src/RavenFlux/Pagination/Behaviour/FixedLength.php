@@ -7,6 +7,9 @@ use JetBrains\PhpStorm\Pure;
 
 final class FixedLength
 {
+    /**
+     * @var int
+     */
     public const MIN_VISIBLE = 3;
 
     private int $maximumVisible;

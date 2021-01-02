@@ -15,6 +15,9 @@ class Extension extends AbstractExtension
 {
     use TwigTrait;
 
+    /**
+     * @var string
+     */
     private const SUFFIX = '_iter_';
 
     /**

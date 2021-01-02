@@ -45,7 +45,9 @@ class Text
         'A', 'B', 'V', 'G', 'D', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'ʺ', 'Y', '–', 'E'
     ];
     // @formatter:on
-
+    /**
+     * @var string
+     */
     public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
 
     /**
@@ -57,7 +59,7 @@ class Text
      */
     public static function fromCamelCase(string $string, string $separator = '_'): string
     {
-        return strtolower(preg_replace('/(?!^)[[:upper:]]+/', $separator . '$0', $string));
+        return strtolower(preg_replace('#(?!^)[[:upper:]]+#', $separator . '$0', $string));
     }
 
     /**
@@ -85,10 +87,10 @@ class Text
     public static function toCamelCase(string $string, bool $lowFirst = true): string
     {
         if ($lowFirst) {
-            return preg_replace('~\s+~', '', lcfirst(ucwords(strtolower(str_replace('_', ' ', $string)))));
+            return preg_replace('#\s+#', '', lcfirst(ucwords(strtolower(str_replace('_', ' ', $string)))));
         }
 
-        return preg_replace('~\s+~', '', ucwords(strtolower(str_replace('_', ' ', $string))));
+        return preg_replace('#\s+#', '', ucwords(strtolower(str_replace('_', ' ', $string))));
     }
 
     /**
@@ -110,7 +112,7 @@ class Text
      */
     public static function oneSpace(string $text): string
     {
-        return preg_replace('/\s+/S', ' ', $text);
+        return preg_replace('#\s+#S', ' ', $text);
     }
 
     /**
@@ -157,7 +159,7 @@ class Text
      */
     public static function stripSpace(string $string): string
     {
-        return preg_replace('/\s+/', '', $string);
+        return preg_replace('#\s+#', '', $string);
     }
 
     /**
@@ -262,7 +264,7 @@ class Text
      */
     public static function keepNumeric(string $string): string
     {
-        return preg_replace('~\D~', '', $string);
+        return preg_replace('#\D#', '', $string);
     }
 
     /**

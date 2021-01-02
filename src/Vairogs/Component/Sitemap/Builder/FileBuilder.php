@@ -34,7 +34,7 @@ class FileBuilder implements Builder
 ');
             foreach (array_keys($urlArray) as $key) {
                 if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
-                    fwrite($buffer, "\t" . "<$key>" . $url->$getter() . "</$key>" . "\n");
+                    fwrite($buffer, "\t" . sprintf('<%s>', $key) . $url->$getter() . sprintf('</%s>', $key) . "\n");
                 }
             }
             foreach ($alternates ?? [] as $locale => $alternate) {

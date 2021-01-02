@@ -73,8 +73,8 @@ class OpenIDProvider
 
         if ($user !== null) {
             $builderClass = $this->options['user_builder'];
-            $builder = new $builderClass();
             /** @var OpenIDUserBuilder $builder */
+            $builder = new $builderClass();
             if (null !== ($userClass = $this->options['user_class'] ?? null)) {
                 $builder->setUserClass($userClass);
             }
