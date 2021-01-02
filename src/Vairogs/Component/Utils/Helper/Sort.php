@@ -4,9 +4,13 @@ namespace Vairogs\Component\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Component\Utils\Annotation;
+use function array_key_exists;
 use function array_slice;
 use function count;
 use function is_array;
+use function is_object;
+use function property_exists;
+use function round;
 
 class Sort
 {
@@ -93,6 +97,42 @@ class Sort
     }
 
     /**
+     * @param array $left
+     * @param array $right
+     * @return array
+     */
+    private static function merge(array $left, array $right): array
+    {
+        $result = [];
+        $i = $j = 0;
+
+        $leftCount = count($left);
+        $rightCount = count($right);
+
+        while ($i < $leftCount && $j < $rightCount) {
+            if ($left[$i] > $right[$j]) {
+                $result[] = $right[$j];
+                $j++;
+            } else {
+                $result[] = $left[$i];
+                $i++;
+            }
+        }
+
+        while ($i < $leftCount) {
+            $result[] = $left[$i];
+            $i++;
+        }
+
+        while ($j < $rightCount) {
+            $result[] = $right[$j];
+            $j++;
+        }
+
+        return $result;
+    }
+
+    /**
      * @param mixed $item
      * @param mixed $field
      *
@@ -134,41 +174,5 @@ class Sort
 
             return (-1 * $flip);
         };
-    }
-
-    /**
-     * @param array $left
-     * @param array $right
-     * @return array
-     */
-    private static function merge(array $left, array $right): array
-    {
-        $result = [];
-        $i = $j = 0;
-
-        $leftCount = count($left);
-        $rightCount = count($right);
-
-        while ($i < $leftCount && $j < $rightCount) {
-            if ($left[$i] > $right[$j]) {
-                $result[] = $right[$j];
-                $j++;
-            } else {
-                $result[] = $left[$i];
-                $i++;
-            }
-        }
-
-        while ($i < $leftCount) {
-            $result[] = $left[$i];
-            $i++;
-        }
-
-        while ($j < $rightCount) {
-            $result[] = $right[$j];
-            $j++;
-        }
-
-        return $result;
     }
 }

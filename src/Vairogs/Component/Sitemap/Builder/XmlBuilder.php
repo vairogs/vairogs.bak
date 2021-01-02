@@ -4,7 +4,9 @@ namespace Vairogs\Component\Sitemap\Builder;
 
 use Vairogs\Component\Sitemap\Model\RichUrl;
 use Vairogs\Component\Sitemap\Model\Sitemap;
+use function array_keys;
 use function method_exists;
+use function sprintf;
 use function ucfirst;
 
 class XmlBuilder implements Builder

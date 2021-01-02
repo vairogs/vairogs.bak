@@ -15,6 +15,7 @@ use function round;
 use function str_replace;
 use function strlen;
 use function substr;
+use function trim;
 
 class Date
 {

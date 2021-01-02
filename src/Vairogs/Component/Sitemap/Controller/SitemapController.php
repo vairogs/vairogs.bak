@@ -13,6 +13,7 @@ use Vairogs\Component\Sitemap\Builder\XmlBuilder;
 use Vairogs\Component\Sitemap\Provider;
 use Vairogs\Component\Sitemap\Utils\ErrorResponse;
 use function file_get_contents;
+use function getcwd;
 use function is_file;
 
 class SitemapController extends AbstractController

@@ -21,6 +21,7 @@ use function rtrim;
 use function str_pad;
 use function str_replace;
 use function strip_tags;
+use function strpbrk;
 use function strrev;
 use function strtolower;
 use function ucwords;

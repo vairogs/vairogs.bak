@@ -7,6 +7,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Vairogs\Component\Utils\Twig\TwigTrait;
 use Vairogs\Component\Utils\Vairogs;
+use function getenv;
 
 class GetEnvExtension extends AbstractExtension
 {

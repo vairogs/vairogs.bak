@@ -12,6 +12,7 @@ use function end;
 use function exec;
 use function explode;
 use function file_get_contents;
+use function is_file;
 use function preg_match_all;
 use function trim;
 

@@ -4,6 +4,12 @@ namespace RavenFlux\Pagination\Behaviour;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+use function ceil;
+use function floor;
+use function is_int;
+use function is_string;
+use function range;
+use function sprintf;
 
 final class FixedLength
 {
