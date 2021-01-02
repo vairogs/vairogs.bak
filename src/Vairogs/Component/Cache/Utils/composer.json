@@ -55,7 +55,8 @@
     "suggest": {
         "snc/redis-bundle": "For PredisAdapter usage",
         "doctrine/orm": "For OrmAdapter usage",
-        "doctrine/dbal": "For OrmAdapter usage"
+        "doctrine/dbal": "For OrmAdapter usage",
+        "ext-redis": "For PhpRedisAdapter"
     },
     "autoload": {
         "psr-4": {
