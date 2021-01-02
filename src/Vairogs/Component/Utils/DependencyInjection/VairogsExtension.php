@@ -18,28 +18,28 @@ class VairogsExtension extends Extension
 {
     /**
      * @param array $configs
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      *
      * @throws Exception
      */
-    public function load(array $configs, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $containerBuilder): void
     {
         $configuration = new Configuration();
-        $this->process($configs, $container, $configuration);
-        $this->processComponents($container, $configuration);
+        $this->process($configs, $containerBuilder, $configuration);
+        $this->processComponents($containerBuilder, $configuration);
     }
 
     /**
      * @param array $configs
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      * @param ConfigurationInterface $configuration
      */
-    public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void
+    public function process(array $configs, ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         $parameters = $this->processConfiguration($configuration, $configs) ?? [];
 
         foreach (Iter::makeOneDimension([$this->getAlias() => $parameters]) as $key => $value) {
-            $container->setParameter($key, $value);
+            $containerBuilder->setParameter($key, $value);
         }
     }
 
@@ -52,58 +52,58 @@ class VairogsExtension extends Extension
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      * @param ConfigurationInterface $configuration
      */
-    private function processComponents(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    private function processComponents(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
-        $this->processCacheComponent($container, $configuration);
-        $this->processAuthComponent($container, $configuration);
-        $this->processSitemapComponent($container, $configuration);
-        $this->processTranslationComponent($container, $configuration);
+        $this->processCacheComponent($containerBuilder, $configuration);
+        $this->processAuthComponent($containerBuilder, $configuration);
+        $this->processSitemapComponent($containerBuilder, $configuration);
+        $this->processTranslationComponent($containerBuilder, $configuration);
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      * @param ConfigurationInterface $configuration
      */
-    private function processCacheComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    private function processCacheComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         if (class_exists(CacheDependency::class)) {
-            (new CacheDependency())->loadComponent($container, $configuration);
+            (new CacheDependency())->loadComponent($containerBuilder, $configuration);
         }
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      * @param ConfigurationInterface $configuration
      */
-    private function processAuthComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    private function processAuthComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         if (class_exists(AuthDependency::class)) {
-            (new AuthDependency())->loadComponent($container, $configuration);
+            (new AuthDependency())->loadComponent($containerBuilder, $configuration);
         }
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      * @param ConfigurationInterface $configuration
      */
-    private function processSitemapComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    private function processSitemapComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         if (class_exists(SitemapDependency::class)) {
-            (new SitemapDependency())->loadComponent($container, $configuration);
+            (new SitemapDependency())->loadComponent($containerBuilder, $configuration);
         }
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      * @param ConfigurationInterface $configuration
      */
-    private function processTranslationComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    private function processTranslationComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         if (class_exists(TranslationDependency::class)) {
-            (new TranslationDependency())->loadComponent($container, $configuration);
+            (new TranslationDependency())->loadComponent($containerBuilder, $configuration);
         }
     }
 }

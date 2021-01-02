@@ -20,10 +20,10 @@ class AuthOpenIDDependency implements Dependency
      * @inheritDoc
      * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
-    public function getConfiguration(ArrayNodeDefinition $node): void
+    public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
-        $node
+        $arrayNodeDefinition
             ->children()
             ->arrayNode(Component::AUTH_OPENID)
                 ->canBeEnabled()
@@ -43,13 +43,13 @@ class AuthOpenIDDependency implements Dependency
     /**
      * @inheritDoc
      */
-    public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         $baseKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID;
-        $enbledKey = $baseKey . '.enabled';
-        if ($container->hasParameter($enbledKey) && true === $container->getParameter($enbledKey)) {
+        $enabledKey = $baseKey . '.enabled';
+        if ($containerBuilder->hasParameter($enabledKey) && true === $containerBuilder->getParameter($enabledKey)) {
             $clientsKey = $baseKey . '.clients';
-            foreach ($container->getParameter($clientsKey) as $key => $clientConfig) {
+            foreach ($containerBuilder->getParameter($clientsKey) as $key => $clientConfig) {
                 $tree = new TreeBuilder($key);
                 $node = $tree->getRootNode();
                 $this->buildClientConfiguration($node);
@@ -57,22 +57,22 @@ class AuthOpenIDDependency implements Dependency
                 $clientServiceKey = $clientsKey . '.' . $key;
 
                 foreach (Iter::makeOneDimension($config, $clientServiceKey) as $tkey => $value) {
-                    $container->setParameter($tkey, $value);
+                    $containerBuilder->setParameter($tkey, $value);
                 }
 
-                $this->configureClient($container, $clientServiceKey, $clientsKey, $key);
+                $this->configureClient($containerBuilder, $clientServiceKey, $clientsKey, $key);
             }
         }
     }
 
     /**
-     * @param ArrayNodeDefinition $node
+     * @param ArrayNodeDefinition $arrayNodeDefinition
      * @noinspection NullPointerExceptionInspection
      */
-    private function buildClientConfiguration(ArrayNodeDefinition $node): void
+    private function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        $node->addDefaultsIfNotSet();
-        $optionsNode = $node->children();
+        $arrayNodeDefinition->addDefaultsIfNotSet();
+        $optionsNode = $arrayNodeDefinition->children();
 
         // @formatter:off
         $optionsNode
@@ -90,20 +90,20 @@ class AuthOpenIDDependency implements Dependency
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      * @param string $clientServiceKey
      * @param string $base
      * @param string $key
      */
-    private function configureClient(ContainerBuilder $container, string $clientServiceKey, string $base, string $key): void
+    private function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
     {
-        $clientDefinition = $container->register($clientServiceKey, OpenIDProvider::class);
+        $clientDefinition = $containerBuilder->register($clientServiceKey, OpenIDProvider::class);
         $clientDefinition->setArguments([
             new Reference('request_stack'),
             new Reference('router'),
             $key,
-            $container->getParameter('kernel.cache_dir'),
-            $container->getParameter($clientServiceKey),
+            $containerBuilder->getParameter('kernel.cache_dir'),
+            $containerBuilder->getParameter($clientServiceKey),
         ])
             ->addTag($base);
     }

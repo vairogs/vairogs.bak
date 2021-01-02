@@ -19,42 +19,42 @@ class Steam implements OpenIDUser, User, Stringable
     public const RETURNS_EMAIL = false;
 
     /**
-     * @ORM\Column(type="string", nullable=false, unique=true)
+     * @ORM\Column(type="string", unique=true)
      */
     protected string $openID;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     protected int $communityState;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     protected int $profileState;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string")
      */
     protected string $persona;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     protected int $commentPermission;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string")
      */
     protected string $url;
 
     /**
-     * @ORM\Column(type="array", nullable=false)
+     * @ORM\Column(type="array")
      */
     protected array $avatar;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     protected int $personaState;
 
@@ -102,6 +102,13 @@ class Steam implements OpenIDUser, User, Stringable
      * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $playingId = null;
+    /**
+     * @return string
+     */
+    #[Pure] public function __toString(): string
+    {
+        return $this->getOpenID();
+    }
 
     /**
      * @return string|null
@@ -457,14 +464,6 @@ class Steam implements OpenIDUser, User, Stringable
     public function returnsEmail(): bool
     {
         return self::RETURNS_EMAIL;
-    }
-
-    /**
-     * @return string
-     */
-    #[Pure] public function __toString(): string
-    {
-        return $this->getOpenID();
     }
 
     /**

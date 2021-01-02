@@ -14,6 +14,7 @@ class Sort
      * @var string
      */
     public const ASC = 'ASC';
+
     /**
      * @var string
      */
@@ -92,6 +93,50 @@ class Sort
     }
 
     /**
+     * @param mixed $item
+     * @param mixed $field
+     *
+     * @return bool
+     * @Annotation\TwigFunction()
+     */
+    #[Pure] public static function isSortable(mixed $item, mixed $field): bool
+    {
+        if (is_array($item)) {
+            return array_key_exists($field, $item);
+        }
+
+        if (is_object($item)) {
+            return isset($item->$field) || property_exists($item, $field);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param mixed $parameter
+     * @param string $order
+     *
+     * @return callable
+     * @Annotation\TwigFilter()
+     */
+    public static function usort(mixed $parameter, string $order): callable
+    {
+        return static function ($a, $b) use ($parameter, $order) {
+            $flip = ($order === self::DESC) ? -1 : 1;
+
+            if (($aSort = Php::getParameter($a, $parameter)) === ($bSort = Php::getParameter($b, $parameter))) {
+                return 0;
+            }
+
+            if ($aSort > $bSort) {
+                return $flip;
+            }
+
+            return (-1 * $flip);
+        };
+    }
+
+    /**
      * @param array $left
      * @param array $right
      * @return array
@@ -125,49 +170,5 @@ class Sort
         }
 
         return $result;
-    }
-
-    /**
-     * @param mixed $item
-     * @param mixed $field
-     *
-     * @return bool
-     * @Annotation\TwigFunction()
-     */
-    #[Pure] public static function isSortable(mixed $item, mixed $field): bool
-    {
-        if (is_array($item)) {
-            return array_key_exists($field, $item);
-        }
-
-        if (is_object($item)) {
-            return isset($item->$field) || property_exists($item, $field);
-        }
-
-        return false;
-    }
-
-    /**
-     * @param mixed $parameter
-     * @param string $order
-     *
-     * @return callable
-     * @Annotation\TwigFilter()
-     */
-    public static function usort(mixed $parameter, string $order): callable
-    {
-        return static function ($a, $b) use ($parameter, $order) {
-            $flip = ($order === self::DESC) ? -1 : 1;
-
-            if (($a_sort = Php::getParameter($a, $parameter)) === ($b_sort = Php::getParameter($b, $parameter))) {
-                return 0;
-            }
-
-            if ($a_sort > $b_sort) {
-                return $flip;
-            }
-
-            return (-1 * $flip);
-        };
     }
 }

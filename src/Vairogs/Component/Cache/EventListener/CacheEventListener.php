@@ -44,15 +44,15 @@ class CacheEventListener implements EventSubscriberInterface
     /**
      * @param Reader $reader
      * @param bool $enabled
-     * @param null|TokenStorageInterface $storage
+     * @param null|TokenStorageInterface $tokenStorage
      * @param Adapter[] ...$adapters
      */
-    public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $storage, ...$adapters)
+    public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
     {
         if ($this->enabled) {
             $this->client = new ChainAdapter(Pool::createPoolFor(Annotation::class, $adapters));
             $this->client->prune();
-            $this->attribute = new Attribute($reader, $storage);
+            $this->attribute = new Attribute($reader, $tokenStorage);
         }
     }
 
@@ -73,44 +73,44 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param ControllerEvent $event
+     * @param ControllerEvent $controllerEvent
      *
      * @throws InvalidArgumentException
      * @throws ReflectionException
      */
-    public function onKernelController(ControllerEvent $event): void
+    public function onKernelController(ControllerEvent $controllerEvent): void
     {
-        if (!$this->check($event)) {
+        if (!$this->check($controllerEvent)) {
             return;
         }
 
-        if (null !== ($annotation = $this->attribute->getAnnotation($event, Annotation::class))) {
-            $annotation->setData($this->attribute->getAttributes($event, Annotation::class));
+        if (null !== ($annotation = $this->attribute->getAnnotation($controllerEvent, Annotation::class))) {
+            $annotation->setData($this->attribute->getAttributes($controllerEvent, Annotation::class));
             /* @var $annotation Annotation */
-            $response = $this->getCache($annotation->getKey($event->getRequest()
+            $response = $this->getCache($annotation->getKey($controllerEvent->getRequest()
                 ->get(self::ROUTE)));
             if (null !== $response) {
-                $event->setController($response);
+                $controllerEvent->setController($response);
             }
         }
     }
 
     /**
-     * @param KernelEvent $event
+     * @param KernelEvent $kernelEvent
      *
      * @return bool
      */
-    private function check(KernelEvent $event): bool
+    private function check(KernelEvent $kernelEvent): bool
     {
-        if (!$this->enabled || !$this->client || !$event->isMasterRequest()) {
+        if (!$this->enabled || !$this->client || !$kernelEvent->isMasterRequest()) {
             return false;
         }
 
-        if (method_exists($event, 'getResponse') && $event->getResponse() && !$event->getResponse()
+        if (method_exists($kernelEvent, 'getResponse') && $kernelEvent->getResponse() && !$kernelEvent->getResponse()
                 ->isSuccessful()) {
             return false;
         }
-        return !empty($controller = $this->attribute->getController($event)) && class_exists($controller[0]);
+        return !empty($controller = $this->attribute->getController($kernelEvent)) && class_exists($controller[0]);
     }
 
     /**
@@ -130,20 +130,20 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param RequestEvent $event
+     * @param RequestEvent $requestEvent
      *
      * @throws InvalidArgumentException
      * @throws ReflectionException
      */
-    public function onKernelRequest(RequestEvent $event): void
+    public function onKernelRequest(RequestEvent $requestEvent): void
     {
-        if (!$this->check($event)) {
+        if (!$this->check($requestEvent)) {
             return;
         }
 
-        if (($annotation = $this->attribute->getAnnotation($event, Annotation::class)) && $this->needsInvalidation($event->getRequest())) {
-            $annotation->setData($this->attribute->getAttributes($event, Annotation::class));
-            $key = $annotation->getKey($event->getRequest()
+        if (($annotation = $this->attribute->getAnnotation($requestEvent, Annotation::class)) && $this->needsInvalidation($requestEvent->getRequest())) {
+            $annotation->setData($this->attribute->getAttributes($requestEvent, Annotation::class));
+            $key = $annotation->getKey($requestEvent->getRequest()
                 ->get(self::ROUTE));
             $this->client->deleteItem($key);
         }
@@ -165,25 +165,25 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param ResponseEvent $event
+     * @param ResponseEvent $responseEvent
      *
      * @throws InvalidArgumentException
      * @throws ReflectionException
      */
-    public function onKernelResponse(ResponseEvent $event): void
+    public function onKernelResponse(ResponseEvent $responseEvent): void
     {
-        if (!$this->check($event)) {
+        if (!$this->check($responseEvent)) {
             return;
         }
 
-        if (null !== ($annotation = $this->attribute->getAnnotation($event, Annotation::class))) {
-            $annotation->setData($this->attribute->getAttributes($event, Annotation::class));
-            $key = $annotation->getKey($event->getRequest()
+        if (null !== ($annotation = $this->attribute->getAnnotation($responseEvent, Annotation::class))) {
+            $annotation->setData($this->attribute->getAttributes($responseEvent, Annotation::class));
+            $key = $annotation->getKey($responseEvent->getRequest()
                 ->get(self::ROUTE));
             $cache = $this->getCache($key);
-            $skip = Header::SKIP === $event->getRequest()->headers->get(Header::CACHE_VAR);
+            $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(Header::CACHE_VAR);
             if (null === $cache && !$skip) {
-                $this->setCache($key, $event->getResponse(), $annotation->getExpires());
+                $this->setCache($key, $responseEvent->getResponse(), $annotation->getExpires());
             }
         }
     }

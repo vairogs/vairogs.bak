@@ -12,10 +12,10 @@ class MonologDBHandler extends AbstractProcessingHandler
 {
     /**
      * @param EntityManagerInterface|ObjectManager $em
-     * @param ManagerRegistry $doctrine
+     * @param ManagerRegistry $managerRegistry
      * @param string $logClass
      */
-    public function __construct(protected EntityManagerInterface|ObjectManager $em, protected ManagerRegistry $doctrine, protected string $logClass)
+    public function __construct(protected EntityManagerInterface|ObjectManager $em, protected ManagerRegistry $managerRegistry, protected string $logClass)
     {
         parent::__construct();
     }
@@ -46,7 +46,7 @@ class MonologDBHandler extends AbstractProcessingHandler
         $entry->setContext($record['context']);
 
         if (!$this->em->isOpen()) {
-            $this->em = $this->doctrine->resetManager();
+            $this->em = $this->managerRegistry->resetManager();
         }
 
         $this->em->persist($entry);

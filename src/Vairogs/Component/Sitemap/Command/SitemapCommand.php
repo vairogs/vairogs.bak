@@ -33,7 +33,7 @@ class SitemapCommand extends Command
     public function __construct(private ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
     {
         if (null === $provider || (false === $options['enabled'])) {
-            throw new NotFoundHttpException('To use VairogsSitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException('To use vairogs/sitemap, you must enable it and provide a Provider');
         }
         $this->options = $options;
         $this->provider = $provider;
@@ -55,9 +55,9 @@ class SitemapCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $sitemap = $this->provider->populate($input->getArgument('host'));
-        $errors = $this->validator->validate($sitemap);
-        if (0 !== $errors->count()) {
-            foreach ($errors as $error) {
+        $constraintViolationList = $this->validator->validate($sitemap);
+        if (0 !== $constraintViolationList->count()) {
+            foreach ($constraintViolationList as $error) {
                 /** @var ConstraintViolation $error */
                 $output->writeln($error->getMessage());
             }

@@ -26,8 +26,8 @@ class RequestProcessor
             $record['extra']['uri'] = $request->getUri();
             $record['extra']['method'] = $request->getMethod();
 
-            if (null !== $string = $request->getQueryString()) {
-                $record['extra']['query_string'] = $string;
+            if (null !== $queryString = $request->getQueryString()) {
+                $record['extra']['query_string'] = $queryString;
             }
 
             if ([] !== $post = $request->request->all()) {

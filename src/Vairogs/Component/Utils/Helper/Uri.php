@@ -49,13 +49,13 @@ class Uri
         }
 
         foreach ($data as $key => $value) {
-            $new_key = $parent ? sprintf('%s[%s]', $parent, $key) : $key;
+            $newKey = $parent ? sprintf('%s[%s]', $parent, $key) : $key;
 
             if (!$value instanceof CURLFile && (is_array($value) || is_object($value))) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
-                $result = array_merge($result, self::buildHttpQuery($value, $new_key));
+                $result = array_merge($result, self::buildHttpQuery($value, $newKey));
             } else {
-                $result[$new_key] = $value;
+                $result[$newKey] = $value;
             }
         }
 
@@ -69,13 +69,13 @@ class Uri
      */
     public static function urlEncode(string $url): string
     {
-        $url_parsed = parse_url($url);
+        $urlParsed = parse_url($url);
 
-        $scheme = $url_parsed['scheme'] . '://';
-        $host = $url_parsed['host'];
-        $port = $url_parsed['port'] ?? null;
-        $path = $url_parsed['path'] ?? null;
-        $query = $url_parsed['query'] ?? null;
+        $scheme = $urlParsed['scheme'] . '://';
+        $host = $urlParsed['host'];
+        $port = $urlParsed['port'] ?? null;
+        $path = $urlParsed['path'] ?? null;
+        $query = $urlParsed['query'] ?? null;
 
         if (null !== $query) {
             /** @var string $query */
@@ -123,7 +123,7 @@ class Uri
             if (isset($h[1])) {
                 if (!isset($headers[$h[0]])) {
                     $headers[$h[0]] = trim($h[1]);
-                } elseif (is_array($headers[$h[0]])) {
+                } else if (is_array($headers[$h[0]])) {
                     $headers[$h[0]][] = trim($h[1]);
                 } else {
                     $headers[$h[0]] = [
@@ -132,9 +132,9 @@ class Uri
                     ];
                 }
                 $key = $h[0];
-            } elseif (str_starts_with($h[0], "\t")) {
+            } else if (str_starts_with($h[0], "\t")) {
                 $headers[$key] .= "\r\n\t" . trim($h[0]);
-            } elseif ('' === $key) {
+            } else if ('' === $key) {
                 $headers[0] = trim($h[0]);
             }
         }

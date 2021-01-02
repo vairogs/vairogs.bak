@@ -11,9 +11,9 @@ class ErrorResponse
     private Response $response;
 
     /**
-     * @param ConstraintViolationListInterface $errors
+     * @param ConstraintViolationListInterface $constraintViolationList
      */
-    public function __construct(private ConstraintViolationListInterface $errors)
+    public function __construct(private ConstraintViolationListInterface $constraintViolationList)
     {
         $this->response = new Response();
         $this->response->headers->set('Content-Type', 'application/xml');
@@ -31,7 +31,7 @@ class ErrorResponse
 <errors>
 ';
         // @formatter:on
-        foreach ($this->errors as $error) {
+        foreach ($this->constraintViolationList as $error) {
             /** @var ConstraintViolation $error */
             // @formatter:off
             $buffer .= "\t" . '<error>' .

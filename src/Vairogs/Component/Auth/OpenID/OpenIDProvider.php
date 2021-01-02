@@ -35,15 +35,15 @@ class OpenIDProvider
     protected ?string $profileUrl;
 
     /**
-     * @param RequestStack $stack
+     * @param RequestStack $requestStack
      * @param RouterInterface $router
      * @param string $name
      * @param string $cacheDir
      * @param array $options
      */
-    public function __construct(RequestStack $stack, protected RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
+    public function __construct(RequestStack $requestStack, protected RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
     {
-        $this->request = $stack->getCurrentRequest();
+        $this->request = $requestStack->getCurrentRequest();
         $this->profileUrl = $this->options['provider_options']['profile_url'] ?? null;
     }
 

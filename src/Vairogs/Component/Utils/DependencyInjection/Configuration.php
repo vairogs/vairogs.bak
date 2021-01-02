@@ -31,42 +31,42 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @param ArrayNodeDefinition $node
+     * @param ArrayNodeDefinition $arrayNodeDefinition
      */
-    private function appendCacheNode(ArrayNodeDefinition $node): void
+    private function appendCacheNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(CacheDependency::class)) {
-            (new CacheDependency())->getConfiguration($node);
+            (new CacheDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 
     /**
-     * @param ArrayNodeDefinition $node
+     * @param ArrayNodeDefinition $arrayNodeDefinition
      */
-    private function appendAuthNode(ArrayNodeDefinition $node): void
+    private function appendAuthNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(AuthDependency::class)) {
-            (new AuthDependency())->getConfiguration($node);
+            (new AuthDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 
     /**
-     * @param ArrayNodeDefinition $node
+     * @param ArrayNodeDefinition $arrayNodeDefinition
      */
-    private function appendSitemapNode(ArrayNodeDefinition $node): void
+    private function appendSitemapNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(SitemapDependency::class)) {
-            (new SitemapDependency())->getConfiguration($node);
+            (new SitemapDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 
     /**
-     * @param ArrayNodeDefinition $node
+     * @param ArrayNodeDefinition $arrayNodeDefinition
      */
-    private function appendTranslationNode(ArrayNodeDefinition $node): void
+    private function appendTranslationNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(TranslationDependency::class)) {
-            (new TranslationDependency())->getConfiguration($node);
+            (new TranslationDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 }

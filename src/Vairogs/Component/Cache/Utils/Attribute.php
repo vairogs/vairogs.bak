@@ -20,34 +20,35 @@ class Attribute
 {
     /**
      * @param Reader $reader
-     * @param TokenStorageInterface|null $storage
+     * @param TokenStorageInterface|null $tokenStorage
      */
-    public function __construct(protected Reader $reader, protected ?TokenStorageInterface $storage = null)
+    public function __construct(protected Reader $reader, protected ?TokenStorageInterface $tokenStorage = null)
     {
     }
 
     /**
-     * @param KernelEvent $event
+     * @param KernelEvent $kernelEvent
      * @param string $class
      * @return array
      * @throws ReflectionException
      * @throws InvalidArgumentException
      */
-    public function getAttributes(KernelEvent $event, string $class): array
+    public function getAttributes(KernelEvent $kernelEvent, string $class): array
     {
         $input = [];
-        if (null !== ($annotation = $this->getAnnotation($event, $class))) {
-            $request = $event->getRequest();
+        if (null !== ($annotation = $this->getAnnotation($kernelEvent, $class))) {
+            $request = $kernelEvent->getRequest();
 
             $user = null;
-            if (null !== $this->storage && $this->storage->getToken() && $object = $this->storage->getToken()->getUser()) {
+            if (null !== $this->tokenStorage && $this->tokenStorage->getToken() && $object = $this->tokenStorage->getToken()
+                    ->getUser()) {
                 if (is_array($object)) {
                     $user = $object;
-                } elseif ($object instanceof JsonSerializable) {
+                } else if ($object instanceof JsonSerializable) {
                     $user = $object->jsonSerialize();
-                } elseif (method_exists($object, 'toArray')) {
+                } else if (method_exists($object, 'toArray')) {
                     $user = $object->toArray();
-                } elseif (method_exists($object, '__toArray')) {
+                } else if (method_exists($object, '__toArray')) {
                     $user = $object->__toArray();
                 }
             }
@@ -89,18 +90,18 @@ class Attribute
     }
 
     /**
-     * @param KernelEvent $event
+     * @param KernelEvent $kernelEvent
      * @param string $class
      *
      * @return object|null
      * @throws ReflectionException
      */
-    public function getAnnotation(KernelEvent $event, string $class): ?object
+    public function getAnnotation(KernelEvent $kernelEvent, string $class): ?object
     {
-        $controller = $this->getController($event);
-        $controllerClass = new ReflectionClass(reset($controller));
+        $controller = $this->getController($kernelEvent);
+        $reflectionClass = new ReflectionClass(reset($controller));
 
-        if ($method = $controllerClass->getMethod(end($controller))) {
+        if ($method = $reflectionClass->getMethod(end($controller))) {
             return $this->reader->getMethodAnnotation($method, $class);
         }
 
@@ -108,13 +109,14 @@ class Attribute
     }
 
     /**
-     * @param KernelEvent $event
+     * @param KernelEvent $kernelEvent
      *
      * @return array
      */
-    public function getController(KernelEvent $event): array
+    public function getController(KernelEvent $kernelEvent): array
     {
-        if (is_array($controller = explode('::', $event->getRequest()->get('_controller'), 2)) && isset($controller[1])) {
+        if (is_array($controller = explode('::', $kernelEvent->getRequest()
+                ->get('_controller'), 2)) && isset($controller[1])) {
             return $controller;
         }
 

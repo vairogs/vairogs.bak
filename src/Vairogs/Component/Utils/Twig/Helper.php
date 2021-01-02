@@ -18,11 +18,11 @@ class Helper
      */
     public static function getTwigAnnotations(string $class, string $filterClass): array
     {
-        $reader = new AnnotationReader();
+        $annotationReader = new AnnotationReader();
         $methods = (new ReflectionClass($class))->getMethods(ReflectionMethod::IS_PUBLIC);
         $filtered = [];
         foreach ($methods as $method) {
-            if (null !== $reader->getMethodAnnotation($method, $filterClass)) {
+            if (null !== $annotationReader->getMethodAnnotation($method, $filterClass)) {
                 $filtered[Text::fromCamelCase($method->getName())] = [$class, $method->getName()];
             }
         }

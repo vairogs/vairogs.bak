@@ -25,38 +25,47 @@ class Generator
      * @var string
      */
     public const PASS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+
     /**
      * @var string
      */
     public const PASS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
     /**
      * @var string
      */
     public const PASS_DIGITS = '0123456789';
+
     /**
      * @var string
      */
     public const PASS_SYMBOLS = '!@#$%^&*()_-=+;:.,?';
+
     /**
      * @var string
      */
     public const RAND_BASIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
     /**
      * @var string
      */
     public const RAND_EXTENDED = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-=+;:,.?';
+
     /**
      * @var string
      */
     public const LOWER = 'lower';
+
     /**
      * @var string
      */
     public const UPPER = 'upper';
+
     /**
      * @var string
      */
     public const DIGITS = 'digits';
+
     /**
      * @var string
      */

@@ -16,44 +16,44 @@ class AuthDependency implements Dependency
     /**
      * @inheritDoc
      */
-    public function getConfiguration(ArrayNodeDefinition $node): void
+    public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
-        $authNode = $node
+        $authNode = $arrayNodeDefinition
             ->children()
                 ->arrayNode(Component::AUTH)
                 ->canBeEnabled();
         $this->appendOpenIDConfiguration($authNode);
 
-        $node
+        $arrayNodeDefinition
             ->children()
             ->arrayNode(Component::AUTH)
             ->children();
 
-        $node
+        $arrayNodeDefinition
             ->append($authNode)
             ->end();
         // @formatter:on
     }
 
     /**
-     * @param ArrayNodeDefinition $node
+     * @param ArrayNodeDefinition $arrayNodeDefinition
      */
-    private function appendOpenIDConfiguration(ArrayNodeDefinition $node): void
+    private function appendOpenIDConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(AuthOpenIDDependency::class)) {
-            (new AuthOpenIDDependency())->getConfiguration($node);
+            (new AuthOpenIDDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 
     /**
      * @inheritDoc
      */
-    public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
-        $enbledKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.enabled';
-        if ($container->hasParameter($enbledKey) && true === $container->getParameter($enbledKey) && class_exists(AuthOpenIDDependency::class)) {
-            (new AuthOpenIDDependency())->loadComponent($container, $configuration);
+        $enabledKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.enabled';
+        if ($containerBuilder->hasParameter($enabledKey) && true === $containerBuilder->getParameter($enabledKey) && class_exists(AuthOpenIDDependency::class)) {
+            (new AuthOpenIDDependency())->loadComponent($containerBuilder, $configuration);
         }
     }
 }

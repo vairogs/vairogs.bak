@@ -32,12 +32,12 @@ class SitemapController extends AbstractController
             return new Response(file_get_contents($sitemap));
         }
         if (null === $provider || (false === $options['enabled'])) {
-            throw new NotFoundHttpException('To use VairogsSitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException('To use vairogs/sitemap, you must enable it and provide a Provider');
         }
         $model = $provider->populate($request->getSchemeAndHttpHost());
-        $errors = $validator->validate($model);
-        if (0 !== $errors->count()) {
-            return (new ErrorResponse($errors))->getResponse();
+        $constraintViolationList = $validator->validate($model);
+        if (0 !== $constraintViolationList->count()) {
+            return (new ErrorResponse($constraintViolationList))->getResponse();
         }
         return new Response((new Director(''))->build(new XmlBuilder($model)));
     }

@@ -9,13 +9,13 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 interface Dependency
 {
     /**
-     * @param ArrayNodeDefinition $node
+     * @param ArrayNodeDefinition $arrayNodeDefinition
      */
-    public function getConfiguration(ArrayNodeDefinition $node): void;
+    public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void;
 
     /**
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $containerBuilder
      * @param ConfigurationInterface $configuration
      */
-    public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void;
+    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void;
 }

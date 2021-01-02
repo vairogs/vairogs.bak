@@ -18,6 +18,14 @@ class SteamGifts extends Steam implements Stringable
     protected ?string $username = null;
 
     /**
+     * @return string
+     */
+    #[Pure] public function __toString(): string
+    {
+        return $this->getUsername() ?? $this->getOpenID();
+    }
+
+    /**
      * @return string|null
      */
     public function getUsername(): ?string
@@ -35,13 +43,5 @@ class SteamGifts extends Steam implements Stringable
         $this->username = $username;
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    #[Pure] public function __toString(): string
-    {
-        return $this->getUsername() ?? $this->getOpenID();
     }
 }

@@ -18,9 +18,9 @@ use function sprintf;
 class Orm implements Cache
 {
     /**
-     * @param EntityManagerInterface $manager
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(private EntityManagerInterface $manager)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
         if (!interface_exists(Driver::class) || !class_exists(Query::class)) {
             throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'doctrine/orm', 'doctrine/dbal', self::class));
@@ -34,20 +34,20 @@ class Orm implements Cache
     public function getAdapter(): CacheItemPoolInterface
     {
         $table = sprintf('%s_items', Vairogs::VAIROGS);
-        $schema = $this->manager->getConnection()
+        $schemaManager = $this->entityManager->getConnection()
             ->getSchemaManager();
-        $adapter = new PdoAdapter($this->manager->getConnection(), '', 0, ['db_table' => $table]);
+        $pdoAdapter = new PdoAdapter($this->entityManager->getConnection(), '', 0, ['db_table' => $table]);
 
-        if ($schema && !$schema->tablesExist([$table])) {
+        if ($schemaManager && !$schemaManager->tablesExist([$table])) {
             try {
-                $adapter->createTable();
+                $pdoAdapter->createTable();
             } catch (Exception $exception) {
                 throw new DBALException($exception->getMessage(), $exception->getCode(), $exception);
             }
         }
 
-        if ($schema && $schema->tablesExist([$table])) {
-            return $adapter;
+        if ($schemaManager && $schemaManager->tablesExist([$table])) {
+            return $pdoAdapter;
         }
 
         throw DBALException::invalidTableName($table);

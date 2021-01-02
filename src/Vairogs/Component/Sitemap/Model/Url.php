@@ -12,6 +12,17 @@ use function number_format;
 class Url
 {
     /**
+     * @var Video[]
+     * @Assert\Valid()
+     */
+    protected array $videos = [];
+
+    /**
+     * @var Image[]
+     * @Assert\Valid()
+     */
+    protected array $images = [];
+    /**
      * Required
      * URL of the page.
      * This URL must begin with the protocol (such as http) and end with a trailing slash, if your web server requires
@@ -30,7 +41,7 @@ class Url
      * The date of last modification of the file.
      * @Assert\Type(type="datetime")
      */
-    protected ?DateTime$lastmod = null;
+    protected ?DateTime $lastmod = null;
 
     /**
      * Optional
@@ -56,18 +67,6 @@ class Url
      * )
      */
     protected float $priority = 0.5;
-
-    /**
-     * @var Video[]
-     * @Assert\Valid()
-     */
-    protected array $videos = [];
-
-    /**
-     * @var Image[]
-     * @Assert\Valid()
-     */
-    protected array $images = [];
 
     /**
      * @return string

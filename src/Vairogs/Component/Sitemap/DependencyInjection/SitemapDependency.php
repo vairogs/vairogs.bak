@@ -14,10 +14,10 @@ class SitemapDependency implements Dependency
      * @inheritDoc
      * @noinspection NullPointerExceptionInspection
      */
-    public function getConfiguration(ArrayNodeDefinition $node): void
+    public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
-        $node
+        $arrayNodeDefinition
             ->children()
             ->arrayNode(Component::SITEMAP)
                 ->canBeEnabled()
@@ -38,7 +38,7 @@ class SitemapDependency implements Dependency
     /**
      * @inheritDoc
      */
-    public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
     }
 }
