@@ -84,7 +84,7 @@ class Text
      */
     public static function toCamelCase(string $string, bool $lowFirst = true): string
     {
-        if (true === $lowFirst) {
+        if ($lowFirst) {
             return preg_replace('~\s+~', '', lcfirst(ucwords(strtolower(str_replace('_', ' ', $string)))));
         }
 

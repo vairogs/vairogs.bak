@@ -52,10 +52,8 @@ class AuthDependency implements Dependency
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
         $enbledKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.enabled';
-        if ($container->hasParameter($enbledKey) && true === $container->getParameter($enbledKey)) {
-            if (class_exists(AuthOpenIDDependency::class)) {
-                (new AuthOpenIDDependency())->loadComponent($container, $configuration);
-            }
+        if ($container->hasParameter($enbledKey) && true === $container->getParameter($enbledKey) && class_exists(AuthOpenIDDependency::class)) {
+            (new AuthOpenIDDependency())->loadComponent($container, $configuration);
         }
     }
 }

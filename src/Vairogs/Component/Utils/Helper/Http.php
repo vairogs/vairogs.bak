@@ -63,7 +63,7 @@ class Http
      */
     public static function getRemoteIp(Request $request, bool $trust = false): string
     {
-        if (false === $trust) {
+        if (!$trust) {
             return $request->server->get('REMOTE_ADDR');
         }
 

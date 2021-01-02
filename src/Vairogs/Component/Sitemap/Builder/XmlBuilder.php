@@ -28,8 +28,9 @@ class XmlBuilder implements Builder
                 $alternates = $url->getAlternateUrls();
                 unset($urlArray['alternateUrl']);
             }
-            $buffer .= '<url>' . "\n";
-            foreach ($urlArray as $key => $var) {
+            $buffer .= '<url>
+';
+            foreach (array_keys($urlArray) as $key) {
                 if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
                     $buffer .= "\t" . "<$key>" . $url->$getter() . "</$key>" . "\n";
                 }
@@ -37,7 +38,8 @@ class XmlBuilder implements Builder
             foreach ($alternates ?? [] as $locale => $alternate) {
                 $buffer .= "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n";
             }
-            $buffer .= '</url>' . "\n";
+            $buffer .= '</url>
+';
         }
     }
 
@@ -46,7 +48,8 @@ class XmlBuilder implements Builder
      */
     public function end(&$buffer): void
     {
-        $buffer .= '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->';
+        $buffer .= '</urlset>
+<!-- created with sitemap library for Symfony vairogs/sitemap -->';
     }
 
     /**
@@ -62,15 +65,19 @@ class XmlBuilder implements Builder
             "\n\t" . 'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"';
         // @formatter:on
         if ($this->sitemap->hasAlternates()) {
-            $buffer .= "\n\t" . 'xmlns:xhtml="http://www.w3.org/1999/xhtml" ';
+            $buffer .= '
+	xmlns:xhtml="http://www.w3.org/1999/xhtml" ';
         }
         if ($this->sitemap->hasVideos()) {
-            $buffer .= "\n\t" . 'xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
+            $buffer .= '
+	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
         }
         if ($this->sitemap->hasImages()) {
-            $buffer .= "\n\t" . 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
+            $buffer .= '
+	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
         }
-        $buffer .= '>' . "\n";
+        $buffer .= '>
+';
     }
 
     public function getType(): string

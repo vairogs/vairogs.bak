@@ -49,7 +49,7 @@ class Php
     {
         $func = Closure::bind($function, $clone, $clone::class);
 
-        if (true === $return) {
+        if ($return) {
             return $func();
         }
 

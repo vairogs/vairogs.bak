@@ -56,7 +56,7 @@ class SitemapCommand extends Command
     {
         $sitemap = $this->provider->populate($input->getArgument('host'));
         $errors = $this->validator->validate($sitemap);
-        if ($errors->count()) {
+        if (0 !== $errors->count()) {
             foreach ($errors as $error) {
                 /** @var ConstraintViolation $error */
                 $output->writeln($error->getMessage());

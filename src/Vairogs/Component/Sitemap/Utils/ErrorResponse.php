@@ -27,8 +27,9 @@ class ErrorResponse
     public function getResponse(): Response
     {
         // @formatter:off
-        $buffer = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" .
-            '<errors>' . "\n";
+        $buffer = '<?xml version="1.0" encoding="UTF-8"?>
+<errors>
+';
         // @formatter:on
         foreach ($this->errors as $error) {
             /** @var ConstraintViolation $error */
@@ -39,7 +40,8 @@ class ErrorResponse
                 "\n\t" . '</error>' . "\n";
             // @formatter:on
         }
-        $buffer .= '</errors>' . "\n" . '<!-- error from sitemap library for Symfony vairogs/sitemap -->';
+        $buffer .= '</errors>
+<!-- error from sitemap library for Symfony vairogs/sitemap -->';
 
         $this->response->setContent($buffer);
 

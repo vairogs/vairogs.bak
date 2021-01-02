@@ -125,7 +125,7 @@ class Date
             $checksum -= (int)$personCode[$i] * (int)substr($check, $i * 2, 2);
         }
 
-        return !((int)($checksum - floor($checksum / 11) * 11) !== (int)$personCode[10]);
+        return (int)($checksum - floor($checksum / 11) * 11) === (int)$personCode[10];
     }
 
     /**

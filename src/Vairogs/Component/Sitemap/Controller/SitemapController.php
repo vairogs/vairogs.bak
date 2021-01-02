@@ -36,7 +36,7 @@ class SitemapController extends AbstractController
         }
         $model = $provider->populate($request->getSchemeAndHttpHost());
         $errors = $validator->validate($model);
-        if ($errors->count()) {
+        if (0 !== $errors->count()) {
             return (new ErrorResponse($errors))->getResponse();
         }
         return new Response((new Director(''))->build(new XmlBuilder($model)));

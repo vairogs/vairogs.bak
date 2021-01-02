@@ -18,7 +18,7 @@ class ColumnHydrator extends ArrayHydrator
         if (!isset($this->_rsm->indexByMap['scalars'])) {
             return $this->_stmt->fetchAll(PDO::FETCH_COLUMN);
         }
-        if (!$result = parent::hydrateAllData()) {
+        if ([] === ($result = parent::hydrateAllData())) {
             return $result;
         }
         $indexColumn = $this->_rsm->scalarMappings[$this->_rsm->indexByMap['scalars']];

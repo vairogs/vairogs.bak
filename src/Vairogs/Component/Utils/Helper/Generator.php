@@ -86,7 +86,8 @@ class Generator
             $all .= $set;
         }
         $all = str_split($all);
-        for ($i = 0; $i < $length - count($this->sets); $i++) {
+        $setsCount = count($this->sets);
+        for ($i = 0; $i < $length - $setsCount; $i++) {
             $unique .= $all[$this->tweak($all)];
         }
 

@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Utils\Doctrine;
 
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 
@@ -11,25 +12,25 @@ trait CreatedModified
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    protected ?DateTime $creationDate = null;
+    protected ?DateTimeInterface $creationDate = null;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    protected ?DateTime $modificationDate = null;
+    protected ?DateTimeInterface $modificationDate = null;
 
     /**
      * @return DateTime
      */
-    public function getModificationDate(): DateTime
+    public function getModificationDate(): DateTimeInterface
     {
         return $this->modificationDate;
     }
 
     /**
-     * @param DateTime $modificationDate
+     * @param DateTimeInterface $modificationDate
      */
-    public function setModificationDate(DateTime $modificationDate): void
+    public function setModificationDate(DateTimeInterface $modificationDate): void
     {
         $this->modificationDate = $modificationDate;
     }
@@ -51,15 +52,15 @@ trait CreatedModified
     /**
      * @return DateTime
      */
-    public function getCreationDate(): DateTime
+    public function getCreationDate(): DateTimeInterface
     {
         return $this->creationDate;
     }
 
     /**
-     * @param DateTime $creationDate
+     * @param DateTimeInterface $creationDate
      */
-    public function setCreationDate(DateTime $creationDate): void
+    public function setCreationDate(DateTimeInterface $creationDate): void
     {
         $this->creationDate = $creationDate;
     }

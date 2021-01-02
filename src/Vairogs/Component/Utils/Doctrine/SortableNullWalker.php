@@ -39,9 +39,9 @@ class SortableNullWalker extends SqlWalker
                     foreach ($fields as $field => $sorting) {
                         if (self::NULLS_LAST === $sorting) {
                             $sql = preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') (ASC|DESC)/i', static function ($matches) {
-                                if ($matches[3] === Criteria::ASC) {
+                                if (Criteria::ASC === $matches[3]) {
                                     $order = Criteria::DESC;
-                                } else if ($matches[3] === Criteria::DESC) {
+                                } elseif (Criteria::DESC === $matches[3]) {
                                     $order = Criteria::ASC;
                                 } else {
                                     throw new InvalidArgumentException(sprintf('Order must be "%s" or "%s"', Criteria::ASC, Criteria::DESC));

@@ -104,12 +104,7 @@ class CacheEventListener implements EventSubscriberInterface
                 ->isSuccessful()) {
             return false;
         }
-
-        if (empty($controller = $this->attribute->getController($event)) || !class_exists($controller[0])) {
-            return false;
-        }
-
-        return true;
+        return !empty($controller = $this->attribute->getController($event)) && class_exists($controller[0]);
     }
 
     /**

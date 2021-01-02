@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Sitemap\Model;
 
 use DateTime;
+use DateTimeInterface;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\Validator\Constraints as Assert;
 use function get_object_vars;
@@ -97,11 +98,11 @@ class Url
     }
 
     /**
-     * @param null|DateTime $lastmod
+     * @param DateTimeInterface|null $lastmod
      *
      * @return self
      */
-    public function setLastmod(?DateTime $lastmod): self
+    public function setLastmod(?DateTimeInterface $lastmod): self
     {
         $this->lastmod = $lastmod;
 

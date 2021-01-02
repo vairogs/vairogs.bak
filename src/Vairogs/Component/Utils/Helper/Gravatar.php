@@ -37,12 +37,12 @@ class Gravatar
      */
     public static function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
     {
-        if (empty($email) || false === Email::isValid($email)) {
+        if (empty($email) || !Email::isValid($email)) {
             $email = self::DEFAULT_EMAIL;
         }
 
         $host = self::HTTP_HOST;
-        if (true === $isSecure) {
+        if ($isSecure) {
             $host = self::HTTPS_HOST;
         }
 

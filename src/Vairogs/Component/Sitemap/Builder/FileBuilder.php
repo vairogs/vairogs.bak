@@ -30,8 +30,9 @@ class FileBuilder implements Builder
                 $alternates = $url->getAlternateUrls();
                 unset($urlArray['alternateUrl']);
             }
-            fwrite($buffer, '<url>' . "\n");
-            foreach ($urlArray as $key => $var) {
+            fwrite($buffer, '<url>
+');
+            foreach (array_keys($urlArray) as $key) {
                 if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
                     fwrite($buffer, "\t" . "<$key>" . $url->$getter() . "</$key>" . "\n");
                 }
@@ -39,7 +40,8 @@ class FileBuilder implements Builder
             foreach ($alternates ?? [] as $locale => $alternate) {
                 fwrite($buffer, "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
             }
-            fwrite($buffer, '</url>' . "\n");
+            fwrite($buffer, '</url>
+');
         }
     }
 
@@ -48,7 +50,8 @@ class FileBuilder implements Builder
      */
     public function end(&$buffer): void
     {
-        fwrite($buffer, '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
+        fwrite($buffer, '</urlset>
+<!-- created with sitemap library for Symfony vairogs/sitemap -->');
     }
 
     /**
@@ -64,15 +67,19 @@ class FileBuilder implements Builder
             "\n\t" . 'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"');
         // @formatter:on
         if ($this->sitemap->hasAlternates()) {
-            fwrite($buffer, "\n\t" . 'xmlns:xhtml="http://www.w3.org/1999/xhtml" ');
+            fwrite($buffer, '
+	xmlns:xhtml="http://www.w3.org/1999/xhtml" ');
         }
         if ($this->sitemap->hasVideos()) {
-            fwrite($buffer, "\n\t" . 'xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
+            fwrite($buffer, '
+	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
         }
         if ($this->sitemap->hasImages()) {
-            fwrite($buffer, "\n\t" . 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
+            fwrite($buffer, '
+	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
         }
-        fwrite($buffer, '>' . "\n");
+        fwrite($buffer, '>
+');
     }
 
     public function getType(): string

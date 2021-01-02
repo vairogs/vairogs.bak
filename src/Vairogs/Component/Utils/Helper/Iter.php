@@ -63,7 +63,7 @@ class Iter
      */
     #[Pure] public static function unique(array $input, bool $keepKeys = false): array
     {
-        if (true === $keepKeys) {
+        if ($keepKeys) {
             return array_unique($input);
         }
 
@@ -93,15 +93,9 @@ class Iter
      * @return bool
      * @Annotation\TwigFunction()
      */
-    public static function isAnyKeyNull(array $keys = []): bool
+    #[Pure] public static function isAnyKeyNull(array $keys = []): bool
     {
-        foreach ($keys as $key) {
-            if (null === $key) {
-                return true;
-            }
-        }
-
-        return false;
+        return in_array(null, $keys, true);
     }
 
     /**
@@ -117,13 +111,13 @@ class Iter
     {
         $result = [];
         foreach ($array as $key => $value) {
-            $key = $base ? $base . '.' . $key : $key;
+            $key = '' !== $base ? $base . '.' . $key : $key;
             if (is_array($value) && self::isAssociative($value)) {
                 foreach (self::makeOneDimension($value, (string)$key, $separator) as $ik => $iv) {
                     $result[$ik] = $iv;
                 }
 
-                if (true === $onlyLast) {
+                if ($onlyLast) {
                     continue;
                 }
             }
@@ -158,7 +152,7 @@ class Iter
     public static function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
         $result = array_intersect_key($first, $second);
-        foreach ($result as $key => $value) {
+        foreach (array_keys($result) as $key) {
             if (is_array($first[$key]) && is_array($second[$key])) {
                 $result[$key] = self::arrayIntersectKeyRecursive($first[$key], $second[$key]);
             }
@@ -180,7 +174,7 @@ class Iter
         foreach ($input as $key => $element) {
             if (is_array($element) || is_object($element)) {
                 $result[$key] = self::arrayFlipRecursive((array)$element);
-            } else if (in_array(gettype($element), [
+            } elseif (in_array(gettype($element), [
                 'integer',
                 'string',
             ], true)) {
@@ -264,6 +258,6 @@ class Iter
             return null;
         }
 
-        return !empty($input[$key]) ? $input[$key] : null;
+        return empty($input[$key]) ? null : $input[$key];
     }
 }

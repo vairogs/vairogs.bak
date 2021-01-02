@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Sitemap\Model;
 
 use DateTime;
+use DateTimeInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SitemapIndex
@@ -57,11 +58,11 @@ class SitemapIndex
     }
 
     /**
-     * @param DateTime|null $lastmod
+     * @param DateTimeInterface|null $lastmod
      *
      * @return SitemapIndex
      */
-    public function setLastmod(?DateTime $lastmod): SitemapIndex
+    public function setLastmod(?DateTimeInterface $lastmod): SitemapIndex
     {
         $this->lastmod = $lastmod;
 
