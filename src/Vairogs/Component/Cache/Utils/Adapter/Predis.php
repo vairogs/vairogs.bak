@@ -20,7 +20,7 @@ class Predis implements Cache
     public function __construct(private ClientInterface $client)
     {
         if (!class_exists(SncRedisBundle::class) || !interface_exists(ClientInterface::class)) {
-            throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'predis/predis', __CLASS__));
+            throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'predis/predis', self::class));
         }
     }
 

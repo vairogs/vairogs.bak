@@ -19,7 +19,7 @@ class SortableNullWalker extends SqlWalker
 {
     public const NULLS_FIRST = 'NULLS FIRST';
     public const NULLS_LAST = 'NULLS LAST';
-    public const FIELDS = __CLASS__ . '.fields';
+    public const FIELDS = self::class . '.fields';
 
     /**
      * @param OrderByClause $orderByClause

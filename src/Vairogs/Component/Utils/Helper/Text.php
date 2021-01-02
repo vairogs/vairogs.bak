@@ -144,7 +144,7 @@ class Text
     public static function sortLatvian(array $names): bool
     {
         return usort($names, [
-            __CLASS__,
+            self::class,
             'compareLatvian',
         ]);
     }

@@ -22,7 +22,7 @@ final class VideoOption
      */
     public static function getRestrictions(): array
     {
-        return Iter::arrayValuesFiltered(Php::getClassConstants(__CLASS__), 'RESTRICTION_');
+        return Iter::arrayValuesFiltered(Php::getClassConstants(self::class), 'RESTRICTION_');
     }
 
     /**
@@ -31,7 +31,7 @@ final class VideoOption
      */
     public static function getPlatforms(): array
     {
-        return Iter::arrayValuesFiltered(Php::getClassConstants(__CLASS__), 'PLATFORM_');
+        return Iter::arrayValuesFiltered(Php::getClassConstants(self::class), 'PLATFORM_');
     }
 
     /**
@@ -40,6 +40,6 @@ final class VideoOption
      */
     public static function getOptions(): array
     {
-        return Iter::arrayValuesFiltered(Php::getClassConstants(__CLASS__), 'OPTION_');
+        return Iter::arrayValuesFiltered(Php::getClassConstants(self::class), 'OPTION_');
     }
 }

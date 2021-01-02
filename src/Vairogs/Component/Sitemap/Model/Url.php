@@ -29,7 +29,7 @@ class Url
      * The date of last modification of the file.
      * @Assert\Type(type="datetime")
      */
-    protected ?DateTime$lastmod;
+    protected ?DateTime$lastmod = null;
 
     /**
      * Optional
@@ -39,7 +39,7 @@ class Url
      * @Assert\Type(type="string")
      * @Assert\Choice(callback={"Vairogs\Component\Sitemap\Utils\Constant\ChangeFrequency", "getChangeFrequencies"})
      */
-    protected ?string $changefreq;
+    protected ?string $changefreq = null;
 
     /**
      * Optional

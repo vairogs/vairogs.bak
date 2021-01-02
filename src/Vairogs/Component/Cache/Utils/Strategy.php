@@ -17,6 +17,6 @@ final class Strategy
      */
     public function getStrategies(): array
     {
-        return (new ReflectionClass(__CLASS__))->getConstants();
+        return (new ReflectionClass(self::class))->getConstants();
     }
 }

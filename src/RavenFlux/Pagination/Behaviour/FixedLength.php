@@ -156,7 +156,7 @@ final class FixedLength
         $pagesLeft = range(1, $omitPagesFrom - 1);
         $pagesRight = range($omitPagesTo + 1, $totalPages);
 
-        return array_merge($pagesLeft, [$omittedPagesIndicator], $pagesRight);
+        return [...$pagesLeft, ...[$omittedPagesIndicator], ...$pagesRight];
     }
 
     /**
@@ -185,6 +185,6 @@ final class FixedLength
         $pagesRight = range($omitPagesRightTo + 1, $totalPages);
 
         /** @noinspection SuspiciousFunctionCallsInspection */
-        return array_merge($pagesLeft, [$omittedPagesIndicator], $pagesCenter, [$omittedPagesIndicator], $pagesRight);
+        return [...$pagesLeft, ...[$omittedPagesIndicator], ...$pagesCenter, ...[$omittedPagesIndicator], ...$pagesRight];
     }
 }

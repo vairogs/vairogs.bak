@@ -239,9 +239,7 @@ class Iter
      */
     public static function filterKeyStartsWith(array $input, string $startsWith): array
     {
-        return array_filter($input, static function ($key) use ($startsWith) {
-            return str_starts_with($key, $startsWith);
-        }, ARRAY_FILTER_USE_KEY);
+        return array_filter($input, static fn($key) => str_starts_with($key, $startsWith), ARRAY_FILTER_USE_KEY);
     }
 
     /**
@@ -253,9 +251,7 @@ class Iter
      */
     public static function filterKeyEndsWith(array $input, string $endsWith): array
     {
-        return array_filter($input, static function ($key) use ($endsWith) {
-            return str_ends_with($key, $endsWith);
-        }, ARRAY_FILTER_USE_KEY);
+        return array_filter($input, static fn($key) => str_ends_with($key, $endsWith), ARRAY_FILTER_USE_KEY);
     }
 
     /**

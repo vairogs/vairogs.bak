@@ -23,28 +23,28 @@ class Image
      * The caption of the image.
      * @Assert\Type(type="string")
      */
-    protected ?string $caption;
+    protected ?string $caption = null;
 
     /**
      * Optional
      * The geographic location of the image.
      * @Assert\Type(type="string")
      */
-    protected ?string $geoLocation;
+    protected ?string $geoLocation = null;
 
     /**
      * Optional
      * The title of the image.
      * @Assert\Type(type="string")
      */
-    protected ?string $title;
+    protected ?string $title = null;
 
     /**
      * Optional
      * A URL to the license of the image.
      * @Assert\Type(type="string")
      */
-    protected ?string $license;
+    protected ?string $license = null;
 
     /**
      * @return string

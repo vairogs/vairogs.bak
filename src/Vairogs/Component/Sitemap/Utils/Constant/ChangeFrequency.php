@@ -22,6 +22,6 @@ final class ChangeFrequency
      */
     public static function getChangeFrequencies(): array
     {
-        return Php::getClassConstantsValues(__CLASS__);
+        return Php::getClassConstantsValues(self::class);
     }
 }

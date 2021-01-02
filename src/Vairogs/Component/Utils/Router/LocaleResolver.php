@@ -10,7 +10,7 @@ final class LocaleResolver
 {
     use LocaleResolverTrait;
 
-    private ?Request $request;
+    private ?Request $request = null;
 
     /**
      * @param string $defaultLocale

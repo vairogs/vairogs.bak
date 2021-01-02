@@ -67,6 +67,6 @@ class Gravatar
      */
     private static function getIcons(): array
     {
-        return Iter::filterKeyStartsWith(Php::getClassConstants(__CLASS__), 'ICON_');
+        return Iter::filterKeyStartsWith(Php::getClassConstants(self::class), 'ICON_');
     }
 }

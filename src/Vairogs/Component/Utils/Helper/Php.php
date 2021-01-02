@@ -67,9 +67,7 @@ class Php
      */
     public static function hijackGet(object $object, string $property): mixed
     {
-        return self::call(function () use ($object, $property) {
-            return $object->$property;
-        }, $object, true);
+        return self::call(fn() => $object->$property, $object, true);
     }
 
     /**

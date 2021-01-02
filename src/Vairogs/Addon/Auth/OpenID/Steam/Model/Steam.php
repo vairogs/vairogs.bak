@@ -58,17 +58,17 @@ class Steam implements OpenIDUser, User, Stringable
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected ?int $logoff;
+    protected ?int $logoff = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected ?string $name;
+    protected ?string $name = null;
 
     /**
      * @ORM\Column(type="bigint", nullable=true)
      */
-    protected ?int $clanId;
+    protected ?int $clanId = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -83,22 +83,22 @@ class Steam implements OpenIDUser, User, Stringable
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected ?string $countryCode;
+    protected ?string $countryCode = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected ?int $stateCode;
+    protected ?int $stateCode = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected ?string $playing;
+    protected ?string $playing = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected ?int $playingId;
+    protected ?int $playingId = null;
 
     /**
      * @return string|null

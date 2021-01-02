@@ -16,7 +16,7 @@ trait CreatedModified
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    protected ?DateTime $modificationDate;
+    protected ?DateTime $modificationDate = null;
 
     /**
      * @return DateTime

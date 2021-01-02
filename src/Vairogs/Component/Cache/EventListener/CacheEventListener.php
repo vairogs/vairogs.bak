@@ -84,9 +84,7 @@ class CacheEventListener implements EventSubscriberInterface
             $response = $this->getCache($annotation->getKey($event->getRequest()
                 ->get(self::ROUTE)));
             if (null !== $response) {
-                $event->setController(static function () use ($response) {
-                    return $response;
-                });
+                $event->setController($response);
             }
         }
     }

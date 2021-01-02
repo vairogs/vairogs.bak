@@ -26,7 +26,7 @@ class SitemapIndex
      * The date of last modification of the file.
      * @Assert\Type(type="datetime")
      */
-    protected ?DateTime$lastmod;
+    protected ?DateTime$lastmod = null;
 
     /**
      * @return string

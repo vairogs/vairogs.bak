@@ -15,7 +15,7 @@ class SteamGifts extends Steam implements Stringable
     /**
      * @ORM\Column(type="string", nullable=true, unique=true)
      */
-    protected ?string $username;
+    protected ?string $username = null;
 
     /**
      * @return string|null
