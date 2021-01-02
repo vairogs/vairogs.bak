@@ -12,32 +12,29 @@ class StreamResponse extends Response
 {
     public const BUFFER_SIZE = 4096;
 
-    private int $bufferSize;
-
     /**
      * @param ResponseInterface $response
      * @param int $bufferSize
      */
-    public function __construct(ResponseInterface $response, int $bufferSize = self::BUFFER_SIZE)
+    public function __construct(ResponseInterface $response, private int $bufferSize = self::BUFFER_SIZE)
     {
         parent::__construct(null, $response->getStatusCode(), $response->getHeaders());
 
         $this->content = $response->getBody();
-        $this->bufferSize = $bufferSize;
     }
 
     /**
      * @return bool|string
      */
-    public function getContent()
+    public function getContent(): bool|string
     {
         return false;
     }
 
     /**
-     * @return Response|void
+     * @return void
      */
-    public function sendContent()
+    public function sendContent(): void
     {
         $chunked = $this->headers->has('Transfer-Encoding');
         $this->content->seek(0);
