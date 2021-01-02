@@ -142,7 +142,7 @@ final class FixedLength
      *
      * @return array
      */
-    #[Pure] private function getPaginationDataWithSingleOmittedChunk(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
+    private function getPaginationDataWithSingleOmittedChunk(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
     {
         if ($this->hasSingleOmittedChunkNearLastPage($currentPage)) {
             $rest = $this->maximumVisible - $currentPage;
@@ -166,7 +166,7 @@ final class FixedLength
      *
      * @return array
      */
-    #[Pure] private function getPaginationDataWithTwoOmittedChunks(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
+    private function getPaginationDataWithTwoOmittedChunks(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
     {
         $visibleExceptForCurrent = $this->maximumVisible - 1;
         if ($currentPage <= ceil($totalPages / 2)) {
@@ -184,7 +184,6 @@ final class FixedLength
         $pagesCenter = range($omitPagesLeftTo + 1, $omitPagesRightFrom - 1);
         $pagesRight = range($omitPagesRightTo + 1, $totalPages);
 
-        /** @noinspection SuspiciousFunctionCallsInspection */
         return [...$pagesLeft, ...[$omittedPagesIndicator], ...$pagesCenter, ...[$omittedPagesIndicator], ...$pagesRight];
     }
 }

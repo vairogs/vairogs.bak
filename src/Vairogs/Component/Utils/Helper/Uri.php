@@ -100,7 +100,7 @@ class Uri
      */
     public static function arrayFromQueryString(string $query): array
     {
-        $query = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', static fn($match) => bin2hex(urldecode($match[0])), $query);
+        $query = preg_replace_callback('/(?:^|(?<=&))[^=[]+/', static fn ($match) => bin2hex(urldecode($match[0])), $query);
 
         parse_str($query, $values);
 

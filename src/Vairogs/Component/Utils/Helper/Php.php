@@ -11,7 +11,6 @@ use Vairogs\Component\Utils\Annotation;
 use function array_values;
 use function class_exists;
 use function filter_var;
-use function get_class;
 use function interface_exists;
 use function is_array;
 use function is_bool;
@@ -62,12 +61,11 @@ class Php
      * @param string $property
      *
      * @return mixed
-     * @noinspection StaticClosureCanBeUsedInspection
      * @Annotation\TwigFunction()
      */
     public static function hijackGet(object $object, string $property): mixed
     {
-        return self::call(fn() => $object->$property, $object, true);
+        return self::call(fn () => $object->$property, $object, true);
     }
 
     /**
