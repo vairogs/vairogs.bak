@@ -31,7 +31,7 @@ class Php
      */
     public static function hijackSet(object $object, string $property, mixed $value): void
     {
-        self::call(function () use ($object, $property, $value) {
+        self::call(function () use ($object, $property, $value): void {
             $object->$property = $value;
         }, $object);
     }

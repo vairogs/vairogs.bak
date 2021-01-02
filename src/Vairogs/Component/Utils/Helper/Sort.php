@@ -161,7 +161,7 @@ class Sort
      */
     public static function usort(mixed $parameter, string $order): callable
     {
-        return static function ($a, $b) use ($parameter, $order) {
+        return static function ($a, $b) use ($parameter, $order): int {
             $flip = ($order === self::DESC) ? -1 : 1;
 
             if (($aSort = Php::getParameter($a, $parameter)) === ($bSort = Php::getParameter($b, $parameter))) {

@@ -47,7 +47,7 @@ class SortableNullWalker extends SqlWalker
                 case (new MySqlPlatform())->getName():
                     foreach ($fields as $field => $sorting) {
                         if (self::NULLS_LAST === $sorting) {
-                            $sql = preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') (ASC|DESC)/i', static function ($matches) {
+                            $sql = preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') (ASC|DESC)/i', static function ($matches): string {
                                 if (Criteria::ASC === $matches[3]) {
                                     $order = Criteria::DESC;
                                 } elseif (Criteria::DESC === $matches[3]) {

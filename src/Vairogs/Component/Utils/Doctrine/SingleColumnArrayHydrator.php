@@ -11,6 +11,7 @@ class SingleColumnArrayHydrator extends AbstractHydrator
 {
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
     protected function hydrateAllData(): array
     {
