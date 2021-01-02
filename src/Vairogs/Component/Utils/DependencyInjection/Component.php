@@ -8,4 +8,5 @@ final class Component
     public const AUTH_OPENID = 'openid';
     public const CACHE = 'cache';
     public const SITEMAP = 'sitemap';
+    public const TRANSLATION = 'translation';
 }

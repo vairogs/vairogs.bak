@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Vairogs\Component\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Component\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Component\Sitemap\DependencyInjection\SitemapDependency;
+use Vairogs\Component\Translation\DependencyInjection\TranslationDependency;
 use Vairogs\Component\Utils\Helper\Iter;
 use Vairogs\Component\Utils\Vairogs;
 use function class_exists;
@@ -59,6 +60,7 @@ class VairogsExtension extends Extension
         $this->processCacheComponent($container, $configuration);
         $this->processAuthComponent($container, $configuration);
         $this->processSitemapComponent($container, $configuration);
+        $this->processTranslationComponent($container, $configuration);
     }
 
     /**
@@ -91,6 +93,17 @@ class VairogsExtension extends Extension
     {
         if (class_exists(SitemapDependency::class)) {
             (new SitemapDependency())->loadComponent($container, $configuration);
+        }
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param ConfigurationInterface $configuration
+     */
+    private function processTranslationComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    {
+        if (class_exists(TranslationDependency::class)) {
+            (new TranslationDependency())->loadComponent($container, $configuration);
         }
     }
 }

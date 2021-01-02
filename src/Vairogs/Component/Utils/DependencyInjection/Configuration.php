@@ -8,6 +8,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Vairogs\Component\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Component\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Component\Sitemap\DependencyInjection\SitemapDependency;
+use Vairogs\Component\Translation\DependencyInjection\TranslationDependency;
 use Vairogs\Component\Utils\Vairogs;
 use function class_exists;
 
@@ -24,6 +25,7 @@ class Configuration implements ConfigurationInterface
         $this->appendCacheNode($rootNode);
         $this->appendAuthNode($rootNode);
         $this->appendSitemapNode($rootNode);
+        $this->appendTranslationNode($rootNode);
 
         return $treeBuilder;
     }
@@ -55,6 +57,16 @@ class Configuration implements ConfigurationInterface
     {
         if (class_exists(SitemapDependency::class)) {
             (new SitemapDependency())->getConfiguration($node);
+        }
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function appendTranslationNode(ArrayNodeDefinition $node): void
+    {
+        if (class_exists(TranslationDependency::class)) {
+            (new TranslationDependency())->getConfiguration($node);
         }
     }
 }
