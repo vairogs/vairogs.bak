@@ -2,14 +2,18 @@
 
 namespace Vairogs\Addon\Auth\OpenID\Steam\Builder;
 
-use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
-use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
-use Vairogs\Addon\Auth\OpenID\Steam\Model\Steam;
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
+use Vairogs\Addon\Auth\OpenID\Steam\Model\Steam;
 use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
+use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
+use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
+use function rtrim;
+use function str_starts_with;
 
 class SteamUserBuilder implements OpenIDUserBuilder
 {
+    private const PROFILE_URL_START = 'https://steamcommunity.com/id/';
+
     protected string $userClass = Steam::class;
 
     /**
@@ -38,8 +42,35 @@ class SteamUserBuilder implements OpenIDUserBuilder
      *
      * @return Steam
      */
-    protected function getSteamUser(array $data): User
+    private function getSteamUser(array $data): User
     {
-        return UserArrayFactory::create(new $this->userClass(), $data['response']['players'][0]);
+        $user = UserArrayFactory::create(new $this->userClass(), $data['response']['players'][0]);
+        $user->setUsername($this->getUsername($user));
+
+        return $user;
+    }
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    private function getUsername(User $user): string
+    {
+        if (true === $this->hasUsername($user)) {
+            $username = str_replace(self::PROFILE_URL_START, '', $user->getUrl());
+
+            return rtrim($username, '/');
+        }
+
+        return $user->getOpenID();
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    private function hasUsername(User $user): bool
+    {
+        return str_starts_with($user->getUrl(), self::PROFILE_URL_START);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 use Stringable;
-use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
-use Doctrine\ORM\Mapping as ORM;
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
+use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 
 /**
  * @ORM\MappedSuperclass()
@@ -102,12 +102,38 @@ class Steam implements OpenIDUser, User, Stringable
      * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $playingId = null;
+
+    /**
+     * @ORM\Column(type="string", nullable=true, unique=true)
+     */
+    protected ?string $username = null;
+
     /**
      * @return string
      */
     #[Pure] public function __toString(): string
     {
         return $this->getOpenID();
+    }
+
+    /**
+     * @return string
+     */
+    public function getOpenID(): string
+    {
+        return $this->openID;
+    }
+
+    /**
+     * @param string $openId
+     *
+     * @return User
+     */
+    public function setOpenID(string $openId): User
+    {
+        $this->openID = $openId;
+
+        return $this;
     }
 
     /**
@@ -439,26 +465,6 @@ class Steam implements OpenIDUser, User, Stringable
     }
 
     /**
-     * @return string
-     */
-    public function getOpenID(): string
-    {
-        return $this->openID;
-    }
-
-    /**
-     * @param string $openId
-     *
-     * @return User
-     */
-    public function setOpenID(string $openId): User
-    {
-        $this->openID = $openId;
-
-        return $this;
-    }
-
-    /**
      * @return bool
      */
     public function returnsEmail(): bool
@@ -471,16 +477,17 @@ class Steam implements OpenIDUser, User, Stringable
      */
     public function getUsername(): ?string
     {
-        return null;
+        return $this->username;
     }
 
     /**
      * @param string|null $username
-     *
-     * @return User
+     * @return Steam
      */
-    public function setUsername(?string $username): User
+    public function setUsername(?string $username): Steam
     {
+        $this->username = $username;
+
         return $this;
     }
 }
