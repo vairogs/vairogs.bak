@@ -125,7 +125,7 @@ class Uri
             if (isset($h[1])) {
                 if (!isset($headers[$h[0]])) {
                     $headers[$h[0]] = trim($h[1]);
-                } else if (is_array($headers[$h[0]])) {
+                } elseif (is_array($headers[$h[0]])) {
                     $headers[$h[0]][] = trim($h[1]);
                 } else {
                     $headers[$h[0]] = [
@@ -134,9 +134,9 @@ class Uri
                     ];
                 }
                 $key = $h[0];
-            } else if (str_starts_with($h[0], "\t")) {
+            } elseif (str_starts_with($h[0], "\t")) {
                 $headers[$key] .= "\r\n\t" . trim($h[0]);
-            } else if ('' === $key) {
+            } elseif ('' === $key) {
                 $headers[0] = trim($h[0]);
             }
         }

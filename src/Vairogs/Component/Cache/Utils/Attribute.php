@@ -44,11 +44,11 @@ class Attribute
                     ->getUser()) {
                 if (is_array($object)) {
                     $user = $object;
-                } else if ($object instanceof JsonSerializable) {
+                } elseif ($object instanceof JsonSerializable) {
                     $user = $object->jsonSerialize();
-                } else if (method_exists($object, 'toArray')) {
+                } elseif (method_exists($object, 'toArray')) {
                     $user = $object->toArray();
-                } else if (method_exists($object, '__toArray')) {
+                } elseif (method_exists($object, '__toArray')) {
                     $user = $object->__toArray();
                 }
             }
