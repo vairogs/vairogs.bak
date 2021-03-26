@@ -49,7 +49,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
      *
      * @return SteamGifts
      */
-    protected function getSteamGiftsUser(array $data): User
+    private function getSteamGiftsUser(array $data): User
     {
         $input = $data['response']['players'][0];
         $input['username'] = $this->getUsername($input['steamid']);
@@ -62,7 +62,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
      *
      * @return string|null
      */
-    protected function getUsername(string $user): ?string
+    private function getUsername(string $user): ?string
     {
         $path = $this->cacheDir . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $user . '.txt';
 
