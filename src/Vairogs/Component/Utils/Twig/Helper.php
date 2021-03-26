@@ -16,7 +16,7 @@ class Helper
      * @return array
      * @throws ReflectionException
      */
-    public static function getTwigAnnotations(string $class, string $filterClass): array
+    public static function getFilterAnnotations(string $class, string $filterClass): array
     {
         $annotationReader = new AnnotationReader();
         $methods = (new ReflectionClass($class))->getMethods(ReflectionMethod::IS_PUBLIC);

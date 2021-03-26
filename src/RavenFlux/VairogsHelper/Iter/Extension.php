@@ -26,7 +26,7 @@ class Extension extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Iter::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFilter::class);
+        return $this->makeArray(Helper::getFilterAnnotations(Iter::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFilter::class);
     }
 
     /**
@@ -35,6 +35,6 @@ class Extension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return $this->makeArray(Helper::getTwigAnnotations(Iter::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFunction::class);
+        return $this->makeArray(Helper::getFilterAnnotations(Iter::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFunction::class);
     }
 }
