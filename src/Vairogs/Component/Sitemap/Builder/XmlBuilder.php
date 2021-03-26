@@ -21,7 +21,7 @@ class XmlBuilder implements Builder
     /**
      * @param mixed $buffer
      */
-    public function build(&$buffer): void
+    public function build(mixed &$buffer): void
     {
         foreach ($this->sitemap->getUrls() as $url) {
             $alternates = [];
@@ -30,8 +30,7 @@ class XmlBuilder implements Builder
                 $alternates = $url->getAlternateUrls();
                 unset($urlArray['alternateUrl']);
             }
-            $buffer .= '<url>
-';
+            $buffer .= '<url>' . "\n";
             foreach (array_keys($urlArray) as $key) {
                 if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
                     $buffer .= "\t" . sprintf('<%s>', $key) . $url->$getter() . sprintf('</%s>', $key) . "\n";
@@ -40,24 +39,22 @@ class XmlBuilder implements Builder
             foreach ($alternates ?? [] as $locale => $alternate) {
                 $buffer .= "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n";
             }
-            $buffer .= '</url>
-';
+            $buffer .= '</url>' . "\n";
         }
     }
 
     /**
      * @param mixed $buffer
      */
-    public function end(&$buffer): void
+    public function end(mixed &$buffer): void
     {
-        $buffer .= '</urlset>
-<!-- created with sitemap library for Symfony vairogs/sitemap -->';
+        $buffer .= '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->';
     }
 
     /**
      * @param mixed $buffer
      */
-    public function start(&$buffer): void
+    public function start(mixed &$buffer): void
     {
         // @formatter:off
         $buffer .= '<?xml version="1.0" encoding="UTF-8"?>' .
@@ -67,16 +64,13 @@ class XmlBuilder implements Builder
             "\n\t" . 'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"';
         // @formatter:on
         if ($this->sitemap->hasAlternates()) {
-            $buffer .= '
-	xmlns:xhtml="http://www.w3.org/1999/xhtml" ';
+            $buffer .= "\n\t" . 'xmlns:xhtml="http://www.w3.org/1999/xhtml" ';
         }
         if ($this->sitemap->hasVideos()) {
-            $buffer .= '
-	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
+            $buffer .= "\n\t" . 'xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
         }
         if ($this->sitemap->hasImages()) {
-            $buffer .= '
-	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
+            $buffer .= "\n\t" . 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
         }
         $buffer .= '>
 ';

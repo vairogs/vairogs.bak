@@ -9,14 +9,9 @@ use function sprintf;
 class Director
 {
     /**
-     * @param $buffer
+     * @param mixed $buffer
      */
-    public function __construct(
-        /**
-         * @var mixed
-         */
-        private $buffer
-    )
+    public function __construct(private mixed $buffer)
     {
     }
 
@@ -27,7 +22,7 @@ class Director
      */
     public function build(Builder $builder): mixed
     {
-        if ($expected = $builder->getType() !== ($actual = gettype($this->buffer))) {
+        if (($expected = $builder->getType()) !== ($actual = gettype($this->buffer))) {
             throw new InvalidArgumentException(sprintf('Director __constructor parameter must be %s, %s given', $expected, $actual));
         }
 

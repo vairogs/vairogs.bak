@@ -20,10 +20,10 @@ class FileBuilder implements Builder
     }
 
     /**
-     * @param resource $buffer
+     * @param mixed $buffer
      * @noinspection DisconnectedForeachInstructionInspection
      */
-    public function build(&$buffer): void
+    public function build(mixed &$buffer): void
     {
         foreach ($this->sitemap->getUrls() as $url) {
             $alternates = [];
@@ -32,8 +32,7 @@ class FileBuilder implements Builder
                 $alternates = $url->getAlternateUrls();
                 unset($urlArray['alternateUrl']);
             }
-            fwrite($buffer, '<url>
-');
+            fwrite($buffer, '<url>' . "\n");
             foreach (array_keys($urlArray) as $key) {
                 if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
                     fwrite($buffer, "\t" . sprintf('<%s>', $key) . $url->$getter() . sprintf('</%s>', $key) . "\n");
@@ -42,24 +41,22 @@ class FileBuilder implements Builder
             foreach ($alternates ?? [] as $locale => $alternate) {
                 fwrite($buffer, "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
             }
-            fwrite($buffer, '</url>
-');
+            fwrite($buffer, '</url>', "\n");
         }
     }
 
     /**
-     * @param resource $buffer
+     * @param mixed $buffer
      */
-    public function end(&$buffer): void
+    public function end(mixed &$buffer): void
     {
-        fwrite($buffer, '</urlset>
-<!-- created with sitemap library for Symfony vairogs/sitemap -->');
+        fwrite($buffer, '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
     }
 
     /**
-     * @param resource $buffer
+     * @param mixed $buffer
      */
-    public function start(&$buffer): void
+    public function start(mixed &$buffer): void
     {
         // @formatter:off
         fwrite($buffer, '<?xml version="1.0" encoding="UTF-8"?>' .
@@ -69,19 +66,15 @@ class FileBuilder implements Builder
             "\n\t" . 'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"');
         // @formatter:on
         if ($this->sitemap->hasAlternates()) {
-            fwrite($buffer, '
-	xmlns:xhtml="http://www.w3.org/1999/xhtml" ');
+            fwrite($buffer, "\n\t" . 'xmlns:xhtml="http://www.w3.org/1999/xhtml" ');
         }
         if ($this->sitemap->hasVideos()) {
-            fwrite($buffer, '
-	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
+            fwrite($buffer, "\n\t" . 'xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
         }
         if ($this->sitemap->hasImages()) {
-            fwrite($buffer, '
-	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
+            fwrite($buffer, "\n\t" . 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
         }
-        fwrite($buffer, '>
-');
+        fwrite($buffer, '>' . "\n");
     }
 
     public function getType(): string

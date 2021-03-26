@@ -7,17 +7,17 @@ interface Builder
     /**
      * @param mixed $buffer
      */
-    public function start(&$buffer): void;
+    public function start(mixed &$buffer): void;
 
     /**
      * @param mixed $buffer
      */
-    public function end(&$buffer): void;
+    public function end(mixed &$buffer): void;
 
     /**
      * @param mixed $buffer
      */
-    public function build(&$buffer): void;
+    public function build(mixed &$buffer): void;
 
     /**
      * @return string
