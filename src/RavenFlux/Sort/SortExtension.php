@@ -19,9 +19,6 @@ class SortExtension extends AbstractExtension
 {
     use TwigTrait;
 
-    /**
-     * @return TwigFilter[]
-     */
     public function getFilters(): array
     {
         $input = [
@@ -31,12 +28,6 @@ class SortExtension extends AbstractExtension
         return $this->makeArray($input, Vairogs::RAVEN, TwigFilter::class);
     }
 
-    /**
-     * @param mixed $data
-     * @param null|string $parameter
-     * @param string $order
-     * @return array
-     */
     public function usortFunction(mixed $data, ?string $parameter = null, string $order = Sort::ASC): array
     {
         if ($data instanceof Collection) {

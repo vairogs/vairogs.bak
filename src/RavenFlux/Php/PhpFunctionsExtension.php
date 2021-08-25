@@ -17,17 +17,10 @@ use function sprintf;
 
 class PhpFunctionsExtension extends AbstractExtension
 {
-    /**
-     * @param array $functions
-     * @param array $filters
-     */
     public function __construct(private array $functions = [], private array $filters = [])
     {
     }
 
-    /**
-     * @return array
-     */
     public function getFilters(): array
     {
         $callbacks = $this->getCallbacks($this->filters);
@@ -39,12 +32,8 @@ class PhpFunctionsExtension extends AbstractExtension
         return $mappedFilters;
     }
 
-    /**
-     * @param array $callables
-     *
-     * @return array
-     */
-    #[Pure] private function getCallbacks(array $callables = []): array
+    #[Pure]
+    private function getCallbacks(array $callables = []): array
     {
         $result = [];
         foreach ($callables as $function) {
@@ -60,13 +49,6 @@ class PhpFunctionsExtension extends AbstractExtension
         return $result;
     }
 
-    /**
-     * @param mixed $object
-     * @param string $filter
-     * @param mixed ...$arguments
-     *
-     * @return mixed
-     */
     public function getFilter(mixed $object, string $filter, ...$arguments): mixed
     {
         if ([] === $arguments) {
@@ -76,9 +58,6 @@ class PhpFunctionsExtension extends AbstractExtension
         return $filter($object, ...$arguments);
     }
 
-    /**
-     * @return array
-     */
     public function getFunctions(): array
     {
         $callbacks = $this->getCallbacks($this->functions);
@@ -90,12 +69,6 @@ class PhpFunctionsExtension extends AbstractExtension
         return $mappedFunctions;
     }
 
-    /**
-     * @param string $function
-     * @param mixed ...$arguments
-     *
-     * @return mixed
-     */
     public function getFunction(string $function, ...$arguments): mixed
     {
         return $function(...$arguments);

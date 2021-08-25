@@ -15,13 +15,9 @@ class Extension extends AbstractExtension
 {
     use TwigTrait;
 
-    /**
-     * @var string
-     */
     private const SUFFIX = '_sort_';
 
     /**
-     * @return array
      * @throws ReflectionException
      */
     public function getFilters(): array
@@ -30,7 +26,6 @@ class Extension extends AbstractExtension
     }
 
     /**
-     * @return array
      * @throws ReflectionException
      */
     public function getFunctions(): array

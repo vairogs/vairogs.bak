@@ -13,24 +13,15 @@ use function sprintf;
 
 final class FixedLength
 {
-    /**
-     * @var int
-     */
     public const MIN_VISIBLE = 3;
 
     private int $maximumVisible;
 
-    /**
-     * @param int $maximumVisible
-     */
     public function __construct(int $maximumVisible)
     {
         $this->setMaximumVisible($maximumVisible);
     }
 
-    /**
-     * @param int $maximumVisible
-     */
     private function setMaximumVisible(int $maximumVisible): void
     {
         if ($maximumVisible < self::MIN_VISIBLE) {
@@ -39,11 +30,6 @@ final class FixedLength
         $this->maximumVisible = $maximumVisible;
     }
 
-    /**
-     * @param int $maximumVisible
-     *
-     * @return FixedLength
-     */
     public function withMaximumVisible(int $maximumVisible): FixedLength
     {
         $clone = clone $this;
@@ -52,21 +38,11 @@ final class FixedLength
         return $clone;
     }
 
-    /**
-     * @return int
-     */
     public function getMaximumVisible(): int
     {
         return $this->maximumVisible;
     }
 
-    /**
-     * @param int $totalPages
-     * @param int $currentPage
-     * @param int $indicator
-     *
-     * @return array
-     */
     public function getPaginationData(int $totalPages, int $currentPage, int $indicator = -1): array
     {
         $this->guardPaginationData($totalPages, $currentPage, $indicator);
@@ -80,11 +56,6 @@ final class FixedLength
         return $this->getPaginationDataWithTwoOmittedChunks($totalPages, $currentPage, $indicator);
     }
 
-    /**
-     * @param int $totalPages
-     * @param int $currentPage
-     * @param int|string $indicator
-     */
     private function guardPaginationData(int $totalPages, int $currentPage, int|string $indicator = -1): void
     {
         if ($totalPages < 1) {
@@ -104,53 +75,31 @@ final class FixedLength
         }
     }
 
-    /**
-     * @param int $totalPages
-     * @param int $currentPage
-     *
-     * @return bool
-     */
-    #[Pure] public function hasSingleOmittedChunk(int $totalPages, int $currentPage): bool
+    #[Pure]
+    public function hasSingleOmittedChunk(int $totalPages, int $currentPage): bool
     {
         return $this->hasSingleOmittedChunkNearLastPage($currentPage) || $this->hasSingleOmittedChunkNearStartPage($totalPages, $currentPage);
     }
 
-    /**
-     * @param int $currentPage
-     *
-     * @return bool
-     */
-    #[Pure] private function hasSingleOmittedChunkNearLastPage(int $currentPage): bool
+    #[Pure]
+    private function hasSingleOmittedChunkNearLastPage(int $currentPage): bool
     {
         return $currentPage <= $this->getSingleOmissionBreakpoint();
     }
 
-    /**
-     * @return int
-     */
-    #[Pure] private function getSingleOmissionBreakpoint(): int
+    #[Pure]
+    private function getSingleOmissionBreakpoint(): int
     {
         return (int)floor($this->maximumVisible / 2) + 1;
     }
 
-    /**
-     * @param int $totalPages
-     * @param int $currentPage
-     *
-     * @return bool
-     */
-    #[Pure] private function hasSingleOmittedChunkNearStartPage(int $totalPages, int $currentPage): bool
+    #[Pure]
+    private function hasSingleOmittedChunkNearStartPage(int $totalPages, int $currentPage): bool
     {
         return $currentPage >= $totalPages - $this->getSingleOmissionBreakpoint() + 1;
     }
 
-    /**
-     * @param int $totalPages
-     * @param int $currentPage
-     * @param int $omittedPagesIndicator
-     *
-     * @return array
-     */
+    #[Pure]
     private function getPaginationDataWithSingleOmittedChunk(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
     {
         if ($this->hasSingleOmittedChunkNearLastPage($currentPage)) {
@@ -168,13 +117,6 @@ final class FixedLength
         return [...$pagesLeft, ...[$omittedPagesIndicator], ...$pagesRight];
     }
 
-    /**
-     * @param int $totalPages
-     * @param int $currentPage
-     * @param int $omittedPagesIndicator
-     *
-     * @return array
-     */
     private function getPaginationDataWithTwoOmittedChunks(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
     {
         $visibleExceptForCurrent = $this->maximumVisible - 1;
