@@ -101,6 +101,7 @@
         "vairogs/captcha": "self.version",
         "vairogs/components": "self.version",
         "vairogs/extra": "self.version",
+        "vairogs/extra-constants": "self.version",
         "vairogs/extra-specification": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/utils": "self.version"
