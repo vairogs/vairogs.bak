@@ -2,34 +2,11 @@
 
 namespace RavenFlux\VairogsHelper\Json;
 
-use ReflectionException;
-use Twig;
-use Twig\Extension\AbstractExtension;
-use Vairogs\Component\Utils\Annotation;
 use Vairogs\Component\Utils\Helper\Json;
-use Vairogs\Component\Utils\Twig\Helper;
-use Vairogs\Component\Utils\Twig\TwigTrait;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Component\Utils\Twig\BaseExtension;
 
-class Extension extends AbstractExtension
+class Extension extends BaseExtension
 {
-    use TwigTrait;
-
-    private const SUFFIX = '_json_';
-
-    /**
-     * @throws ReflectionException
-     */
-    public function getFilters(): array
-    {
-        return $this->makeArray(Helper::getFilterAnnotations(Json::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFilter::class);
-    }
-
-    /**
-     * @throws ReflectionException
-     */
-    public function getFunctions(): array
-    {
-        return $this->makeArray(Helper::getFilterAnnotations(Json::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFunction::class);
-    }
+    protected static string $suffix = '_json_';
+    protected static string $class = Json::class;
 }

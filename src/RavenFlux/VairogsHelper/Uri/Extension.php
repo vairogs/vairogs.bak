@@ -2,34 +2,11 @@
 
 namespace RavenFlux\VairogsHelper\Uri;
 
-use ReflectionException;
-use Twig;
-use Twig\Extension\AbstractExtension;
-use Vairogs\Component\Utils\Annotation;
 use Vairogs\Component\Utils\Helper\Uri;
-use Vairogs\Component\Utils\Twig\Helper;
-use Vairogs\Component\Utils\Twig\TwigTrait;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Component\Utils\Twig\BaseExtension;
 
-class Extension extends AbstractExtension
+class Extension extends BaseExtension
 {
-    use TwigTrait;
-
-    private const SUFFIX = '_uri_';
-
-    /**
-     * @throws ReflectionException
-     */
-    public function getFilters(): array
-    {
-        return $this->makeArray(Helper::getFilterAnnotations(Uri::class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFilter::class);
-    }
-
-    /**
-     * @throws ReflectionException
-     */
-    public function getFunctions(): array
-    {
-        return $this->makeArray(Helper::getFilterAnnotations(Uri::class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::SUFFIX, Twig\TwigFunction::class);
-    }
+    protected static string $suffix = '_uri_';
+    protected static string $class = Uri::class;
 }
