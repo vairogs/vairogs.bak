@@ -8,5 +8,5 @@ jobs:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - name: Deploy
-        id: hedeployllo
+        id: deploy
         uses: vairogs/deploy-action@v1.0.1
