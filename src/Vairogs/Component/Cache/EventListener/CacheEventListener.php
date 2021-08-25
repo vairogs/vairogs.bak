@@ -104,7 +104,7 @@ class CacheEventListener implements EventSubscriberInterface
      */
     private function check(KernelEvent $kernelEvent): bool
     {
-        if (!$this->enabled || !$this->client || !$kernelEvent->isMasterRequest()) {
+        if (!$this->enabled || !$this->client || !$kernelEvent->isMainRequest()) {
             return false;
         }
 

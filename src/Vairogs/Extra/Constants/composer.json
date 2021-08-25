@@ -44,7 +44,7 @@
     "require": {
         "php": ">=8.0.0",
         "jetbrains/phpstorm-attributes": "*",
-        "symfony/http-foundation": "~5.2"
+        "symfony/http-foundation": "~5.3"
     },
     "autoload": {
         "psr-4": {

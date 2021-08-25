@@ -41,8 +41,8 @@
     "require": {
         "php": ">=8.0.0",
         "jetbrains/phpstorm-attributes": "*",
-        "symfony/config": "~5.2",
-        "symfony/dependency-injection": "~5.2",
+        "symfony/config": "~5.3",
+        "symfony/dependency-injection": "~5.3",
         "vairogs/utils": "3.x-dev"
     },
     "autoload": {
