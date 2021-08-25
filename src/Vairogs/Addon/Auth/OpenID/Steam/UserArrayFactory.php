@@ -21,7 +21,7 @@ class UserArrayFactory
         ];
 
         return $user
-            ->setOpenID($bag['steamid'] ?? null)
+            ->setOpenID($bag['steamid'])
             ->setCommunityState($bag['communityvisibilitystate'] ?? 0)
             ->setProfileState($bag['profilestate'] ?? 0)
             ->setPersona($bag['personaname'] ?? $bag['steamid'])
