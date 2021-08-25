@@ -1,138 +1,138 @@
 [
     {
         "path": "src/Vairogs/Addon",
-        "repo": "git@github.com:vairogs/addon.git"
+        "repo": "https://GH@github.com/vairogs/addon.git"
     },
     {
         "path": "src/Vairogs/Addon/Auth",
-        "repo": "git@github.com:vairogs/addon-auth.git"
+        "repo": "https://GH@github.com/vairogs/addon-auth.git"
     },
     {
         "path": "src/Vairogs/Addon/Auth/OpenID",
-        "repo": "git@github.com:vairogs/addon-auth-openid.git"
+        "repo": "https://GH@github.com/vairogs/addon-auth-openid.git"
     },
     {
         "path": "src/Vairogs/Addon/Auth/OpenID/Steam",
-        "repo": "git@github.com:vairogs/addon-auth-openid-steam.git"
+        "repo": "https://GH@github.com/vairogs/addon-auth-openid-steam.git"
     },
     {
         "path": "src/Vairogs/Component",
-        "repo": "git@github.com:vairogs/components.git"
+        "repo": "https://GH@github.com/vairogs/components.git"
     },
     {
         "path": "src/Vairogs/Component/Auth",
-        "repo": "git@github.com:vairogs/auth.git"
+        "repo": "https://GH@github.com/vairogs/auth.git"
     },
     {
         "path": "src/Vairogs/Component/Auth/OpenID",
-        "repo": "git@github.com:vairogs/auth-openid.git"
+        "repo": "https://GH@github.com/vairogs/auth-openid.git"
     },
     {
         "path": "src/Vairogs/Component/Cache",
-        "repo": "git@github.com:vairogs/cache.git"
+        "repo": "https://GH@github.com/vairogs/cache.git"
     },
     {
         "path": "src/Vairogs/Component/Cache/Utils",
-        "repo": "git@github.com:vairogs/cache-utils.git"
+        "repo": "https://GH@github.com/vairogs/cache-utils.git"
     },
     {
         "path": "src/Vairogs/Component/Captcha",
-        "repo": "git@github.com:vairogs/captcha.git"
+        "repo": "https://GH@github.com/vairogs/captcha.git"
     },
     {
         "path": "src/Vairogs/Component/Sitemap",
-        "repo": "git@github.com:vairogs/sitemap.git"
+        "repo": "https://GH@github.com/vairogs/sitemap.git"
     },
     {
         "path": "src/Vairogs/Component/Utils",
-        "repo": "git@github.com:vairogs/utils.git"
+        "repo": "https://GH@github.com/vairogs/utils.git"
     },
     {
         "path": "src/Vairogs/Extra",
-        "repo": "git@github.com:vairogs/extra.git"
+        "repo": "https://GH@github.com/vairogs/extra.git"
     },
     {
         "path": "src/Vairogs/Extra/Specification",
-        "repo": "git@github.com:vairogs/extra-specification.git"
+        "repo": "https://GH@github.com/vairogs/extra-specification.git"
     },
     {
         "path": "src/Vairogs/Extra/Constants",
-        "repo": "git@github.com:vairogs/extra-constants.git"
+        "repo": "https://GH@github.com/vairogs/extra-constants.git"
     },
     {
         "path": "src/RavenFlux",
-        "repo": "git@github.com:ravenflux/ravenflux.git"
+        "repo": "https://GH@github.com/ravenflux/ravenflux.git"
     },
     {
         "path": "src/RavenFlux/GetEnv",
-        "repo": "git@github.com:ravenflux/getenv.git"
+        "repo": "https://GH@github.com/ravenflux/getenv.git"
     },
     {
         "path": "src/RavenFlux/Pagination",
-        "repo": "git@github.com:ravenflux/pagination.git"
+        "repo": "https://GH@github.com/ravenflux/pagination.git"
     },
     {
         "path": "src/RavenFlux/Php",
-        "repo": "git@github.com:ravenflux/php-functions.git"
+        "repo": "https://GH@github.com/ravenflux/php-functions.git"
     },
     {
         "path": "src/RavenFlux/Sort",
-        "repo": "git@github.com:ravenflux/sort-functions.git"
+        "repo": "https://GH@github.com/ravenflux/sort-functions.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper",
-        "repo": "git@github.com:ravenflux/vairogs-helper.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Date",
-        "repo": "git@github.com:ravenflux/vairogs-helper-date.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-date.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Email",
-        "repo": "git@github.com:ravenflux/vairogs-helper-email.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-email.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/File",
-        "repo": "git@github.com:ravenflux/vairogs-helper-file.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-file.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Generator",
-        "repo": "git@github.com:ravenflux/vairogs-helper-generator.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-generator.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Gravatar",
-        "repo": "git@github.com:ravenflux/vairogs-helper-gravatar.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-gravatar.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Http",
-        "repo": "git@github.com:ravenflux/vairogs-helper-http.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-http.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Iter",
-        "repo": "git@github.com:ravenflux/vairogs-helper-iter.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-iter.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Json",
-        "repo": "git@github.com:ravenflux/vairogs-helper-json.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-json.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Php",
-        "repo": "git@github.com:ravenflux/vairogs-helper-php.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-php.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Sort",
-        "repo": "git@github.com:ravenflux/vairogs-helper-sort.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-sort.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Text",
-        "repo": "git@github.com:ravenflux/vairogs-helper-text.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-text.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Uri",
-        "repo": "git@github.com:ravenflux/vairogs-helper-uri.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-uri.git"
     },
     {
         "path": "src/RavenFlux/VairogsHelper/Util",
-        "repo": "git@github.com:ravenflux/vairogs-helper-util.git"
+        "repo": "https://GH@github.com/ravenflux/vairogs-helper-util.git"
     }
 ]
