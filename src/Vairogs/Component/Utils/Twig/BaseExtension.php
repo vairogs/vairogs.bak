@@ -4,10 +4,11 @@ namespace Vairogs\Component\Utils\Twig;
 
 use ReflectionException;
 use Twig;
+use Twig\Extension\AbstractExtension;
 use Vairogs\Component\Utils\Annotation;
 use Vairogs\Component\Utils\Vairogs;
 
-abstract class BaseExtension
+abstract class BaseExtension extends AbstractExtension
 {
     use TwigTrait;
 
