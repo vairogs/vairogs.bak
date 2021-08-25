@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Deploy
         id: hedeployllo
-        uses: vairogs/deploy-action@v1.0.0
+        uses: vairogs/deploy-action@v1.0.1
