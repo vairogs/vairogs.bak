@@ -10,11 +10,6 @@ final class HttpStatusCode
     public const HTTP_SWITCHING_PROTOCOLS = Response::HTTP_SWITCHING_PROTOCOLS;
     public const HTTP_PROCESSING = Response::HTTP_PROCESSING;
     public const HTTP_EARLY_HINTS = Response::HTTP_EARLY_HINTS;
-    public const HTTP_RESPONSE_IS_STALE = 110; //
-    public const HTTP_REVALIDATION_FAILED = 111; //
-    public const HTTP_DISCONNECTED_OPERATION = 112; //
-    public const HTTP_HEURISTIC_EXPIRATION = 113; //
-    public const HTTP_MISCELLANEOUS_WARNING = 199;
     public const HTTP_OK = Response::HTTP_OK;
     public const HTTP_CREATED = Response::HTTP_CREATED;
     public const HTTP_ACCEPTED = Response::HTTP_ACCEPTED;
@@ -24,10 +19,7 @@ final class HttpStatusCode
     public const HTTP_PARTIAL_CONTENT = Response::HTTP_PARTIAL_CONTENT;
     public const HTTP_MULTI_STATUS = Response::HTTP_MULTI_STATUS;
     public const HTTP_ALREADY_REPORTED = Response::HTTP_ALREADY_REPORTED;
-    public const HTTP_THIS_IS_FINE = 218; //
-    public const HTTP_TRANSFORMATION_APPLIED = 214; //
     public const HTTP_IM_USED = Response::HTTP_IM_USED;
-    public const HTTP_MISCELLANEOUS_PERSISTENT_WARNING = 299; //
     public const HTTP_MULTIPLE_CHOICES = Response::HTTP_MULTIPLE_CHOICES;
     public const HTTP_MOVED_PERMANENTLY = Response::HTTP_MOVED_PERMANENTLY;
     public const HTTP_FOUND = Response::HTTP_FOUND;
@@ -56,7 +48,6 @@ final class HttpStatusCode
     public const HTTP_REQUESTED_RANGE_NOT_SATISFIABLE = Response::HTTP_REQUESTED_RANGE_NOT_SATISFIABLE;
     public const HTTP_EXPECTATION_FAILED = Response::HTTP_EXPECTATION_FAILED;
     public const HTTP_I_AM_A_TEAPOT = Response::HTTP_I_AM_A_TEAPOT;
-    public const HTTP_ENHANCE_YOUR_CALM = 420; //
     public const HTTP_MISDIRECTED_REQUEST = Response::HTTP_MISDIRECTED_REQUEST;
     public const HTTP_UNPROCESSABLE_ENTITY = Response::HTTP_UNPROCESSABLE_ENTITY;
     public const HTTP_LOCKED = Response::HTTP_LOCKED;
@@ -66,12 +57,7 @@ final class HttpStatusCode
     public const HTTP_PRECONDITION_REQUIRED = Response::HTTP_PRECONDITION_REQUIRED;
     public const HTTP_TOO_MANY_REQUESTS = Response::HTTP_TOO_MANY_REQUESTS;
     public const HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE = Response::HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE;
-    public const HTTP_CONNECTION_CLOSED_WITHOUT_RESPONSE = 444; //
-    public const HTTP_RETRY_WITH = 449; //
-    public const HTTP_BLOCKED_BY_WINDOWS_PARENTAL_CONTROLS = 450; //
     public const HTTP_UNAVAILABLE_FOR_LEGAL_REASONS = Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS;
-    public const HTTP_INVALID_TOKEN = 498; //
-    public const HTTP_TOKEN_REQUIRED = 499; //
     public const HTTP_INTERNAL_SERVER_ERROR = Response::HTTP_INTERNAL_SERVER_ERROR;
     public const HTTP_NOT_IMPLEMENTED = Response::HTTP_NOT_IMPLEMENTED;
     public const HTTP_BAD_GATEWAY = Response::HTTP_BAD_GATEWAY;
@@ -81,9 +67,25 @@ final class HttpStatusCode
     public const HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL = Response::HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL;
     public const HTTP_INSUFFICIENT_STORAGE = Response::HTTP_INSUFFICIENT_STORAGE;
     public const HTTP_LOOP_DETECTED = Response::HTTP_LOOP_DETECTED;
-    public const HTTP_BANDWIDTH_LIMIT_EXCEEDED = 509; //
     public const HTTP_NOT_EXTENDED = Response::HTTP_NOT_EXTENDED;
     public const HTTP_NETWORK_AUTHENTICATION_REQUIRED = Response::HTTP_NETWORK_AUTHENTICATION_REQUIRED;
+
+    /* EXTRA RESPONSES */
+    public const HTTP_RESPONSE_IS_STALE = 110; //
+    public const HTTP_REVALIDATION_FAILED = 111; //
+    public const HTTP_DISCONNECTED_OPERATION = 112; //
+    public const HTTP_HEURISTIC_EXPIRATION = 113; //
+    public const HTTP_MISCELLANEOUS_WARNING = 199; //
+    public const HTTP_THIS_IS_FINE = 218; //
+    public const HTTP_TRANSFORMATION_APPLIED = 214; //
+    public const HTTP_MISCELLANEOUS_PERSISTENT_WARNING = 299; //
+    public const HTTP_ENHANCE_YOUR_CALM = 420; //
+    public const HTTP_CONNECTION_CLOSED_WITHOUT_RESPONSE = 444; //
+    public const HTTP_RETRY_WITH = 449; //
+    public const HTTP_BLOCKED_BY_WINDOWS_PARENTAL_CONTROLS = 450; //
+    public const HTTP_INVALID_TOKEN = 498; //
+    public const HTTP_TOKEN_REQUIRED = 499; //
+    public const HTTP_BANDWIDTH_LIMIT_EXCEEDED = 509; //
     public const HTTP_SITE_IS_OVERLOADED = 529; //
     public const HTTP_SITE_IS_FROZEN = 530; //
     public const HTTP_NETWORK_READ_TIMEOUT_ERROR = 598; //
