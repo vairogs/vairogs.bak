@@ -16,7 +16,6 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Vairogs\Component\Cache\Annotation\Cache as Annotation;
-use Vairogs\Component\Cache\Utils\Adapter\Cache as Adapter;
 use Vairogs\Component\Cache\Utils\Attribute;
 use Vairogs\Component\Cache\Utils\Header;
 use Vairogs\Component\Cache\Utils\Pool;
@@ -26,27 +25,15 @@ use function method_exists;
 
 class CacheEventListener implements EventSubscriberInterface
 {
-    /**
-     * @var string[]
-     */
     private const HEADERS = [
         Header::INVALIDATE,
         Header::SKIP,
     ];
-    /**
-     * @var string
-     */
     private const ROUTE = '_route';
 
     protected ChainAdapter $client;
     protected Attribute $attribute;
 
-    /**
-     * @param Reader $reader
-     * @param bool $enabled
-     * @param null|TokenStorageInterface $tokenStorage
-     * @param Adapter[] ...$adapters
-     */
     public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
     {
         if ($this->enabled) {
@@ -56,9 +43,6 @@ class CacheEventListener implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @return array
-     */
     #[ArrayShape([KernelEvents::CONTROLLER => "array", KernelEvents::RESPONSE => "string", KernelEvents::REQUEST => "string"])]
     public static function getSubscribedEvents(): array
     {
@@ -73,8 +57,6 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param ControllerEvent $controllerEvent
-     *
      * @throws InvalidArgumentException
      * @throws ReflectionException
      */
@@ -97,11 +79,6 @@ class CacheEventListener implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param KernelEvent $kernelEvent
-     *
-     * @return bool
-     */
     private function check(KernelEvent $kernelEvent): bool
     {
         if (!$this->enabled || !$this->client || !$kernelEvent->isMainRequest()) {
@@ -116,9 +93,6 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param string $key
-     *
-     * @return mixed
      * @throws InvalidArgumentException
      */
     private function getCache(string $key): mixed
@@ -132,8 +106,6 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param RequestEvent $requestEvent
-     *
      * @throws InvalidArgumentException
      * @throws ReflectionException
      */
@@ -151,10 +123,6 @@ class CacheEventListener implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param Request $request
-     * @return bool
-     */
     private function needsInvalidation(Request $request): bool
     {
         if ($request->getMethod() === Request::METHOD_PURGE) {
@@ -167,8 +135,6 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param ResponseEvent $responseEvent
-     *
      * @throws InvalidArgumentException
      * @throws ReflectionException
      */
@@ -191,10 +157,6 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
-     * @param null|int $expires
-     *
      * @throws InvalidArgumentException
      */
     private function setCache(string $key, mixed $value, ?int $expires): void

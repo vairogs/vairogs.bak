@@ -10,7 +10,6 @@ use Vairogs\Component\Utils\Vairogs;
 class File implements Cache
 {
     /**
-     * @return CacheItemPoolInterface
      * @throws CacheException
      */
     public function getAdapter(): CacheItemPoolInterface

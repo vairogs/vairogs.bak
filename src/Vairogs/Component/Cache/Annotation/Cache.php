@@ -16,9 +16,6 @@ use function str_replace;
  */
 class Cache
 {
-    /**
-     * @var string
-     */
     private const ALGORITHM = 'sha1';
 
     public int $expires;
@@ -26,10 +23,6 @@ class Cache
     public array $attributes = [];
     public string $strategy = Strategy::ALL;
 
-    /**
-     * @param string $prefix
-     * @return string
-     */
     public function getKey(string $prefix = ''): string
     {
         $value = $this->getData();
@@ -47,19 +40,11 @@ class Cache
         return hash(self::ALGORITHM, $prefix . '_' . $key);
     }
 
-    /**
-     * @return null|array|string
-     */
     public function getData(): array|string|null
     {
         return $this->data;
     }
 
-    /**
-     * @param mixed $data
-     *
-     * @return Cache
-     */
     public function setData(mixed $data): Cache
     {
         $this->data = $data;
@@ -67,27 +52,16 @@ class Cache
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getAttributes(): array
     {
         return $this->attributes;
     }
 
-    /**
-     * @return null|string
-     */
     public function getStrategy(): ?string
     {
         return $this->strategy;
     }
 
-    /**
-     * @param string $strategy
-     *
-     * @return Cache
-     */
     public function setStrategy(string $strategy): Cache
     {
         $this->strategy = $strategy;
@@ -95,9 +69,6 @@ class Cache
         return $this;
     }
 
-    /**
-     * @return null|int
-     */
     public function getExpires(): ?int
     {
         return $this->expires;

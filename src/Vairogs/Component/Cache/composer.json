@@ -64,6 +64,13 @@
     "replace": {
         "vairogs/cache-utils": "self.version"
     },
+    "suggest": {
+        "snc/redis-bundle": "For Predis or PhpRedis adapter usage",
+        "doctrine/orm": "For Orm adapter usage",
+        "doctrine/dbal": "For Orm adapter usage",
+        "ext-redis": "For PhpRedis or Predis adapter",
+        "ext-phpiredis": "For PhpRedis adapter"
+    },
     "autoload": {
         "psr-4": {
             "Vairogs\\Component\\Cache\\": ""

@@ -18,18 +18,11 @@ use function sprintf;
 
 class Attribute
 {
-    /**
-     * @param Reader $reader
-     * @param TokenStorageInterface|null $tokenStorage
-     */
     public function __construct(protected Reader $reader, protected ?TokenStorageInterface $tokenStorage = null)
     {
     }
 
     /**
-     * @param KernelEvent $kernelEvent
-     * @param string $class
-     * @return array
      * @throws ReflectionException
      * @throws InvalidArgumentException
      */
@@ -77,7 +70,6 @@ class Attribute
                 case Strategy::ALL:
                     $input = $request->attributes->get('_route_params') + $request->query->all() + $request->request->all();
                     if (null !== $user) {
-                        /** @noinspection AdditionOperationOnArraysInspection */
                         $input += $user;
                     }
                     break;
@@ -90,10 +82,6 @@ class Attribute
     }
 
     /**
-     * @param KernelEvent $kernelEvent
-     * @param string $class
-     *
-     * @return object|null
      * @throws ReflectionException
      */
     public function getAnnotation(KernelEvent $kernelEvent, string $class): ?object
@@ -108,11 +96,6 @@ class Attribute
         return null;
     }
 
-    /**
-     * @param KernelEvent $kernelEvent
-     *
-     * @return array
-     */
     public function getController(KernelEvent $kernelEvent): array
     {
         if (is_array($controller = explode('::', $kernelEvent->getRequest()

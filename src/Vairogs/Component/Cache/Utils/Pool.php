@@ -11,10 +11,6 @@ use function sprintf;
 class Pool
 {
     /**
-     * @param string $class
-     * @param array $adapters
-     * @return array
-     *
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */

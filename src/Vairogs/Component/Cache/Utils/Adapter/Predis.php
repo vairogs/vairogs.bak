@@ -14,9 +14,6 @@ use function sprintf;
 
 class Predis implements Cache
 {
-    /**
-     * @param ClientInterface $client
-     */
     public function __construct(private ClientInterface $client)
     {
         if (!class_exists(SncRedisBundle::class) || !interface_exists(ClientInterface::class)) {
@@ -24,9 +21,6 @@ class Predis implements Cache
         }
     }
 
-    /**
-     * @return CacheItemPoolInterface
-     */
     public function getAdapter(): CacheItemPoolInterface
     {
         return new RedisAdapter($this->client, Vairogs::VAIROGS, 0);

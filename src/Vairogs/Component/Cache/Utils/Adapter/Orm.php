@@ -17,9 +17,6 @@ use function sprintf;
 
 class Orm implements Cache
 {
-    /**
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(private EntityManagerInterface $entityManager)
     {
         if (!interface_exists(Driver::class) || !class_exists(Query::class)) {
@@ -28,7 +25,6 @@ class Orm implements Cache
     }
 
     /**
-     * @return CacheItemPoolInterface
      * @throws DBALException
      */
     public function getAdapter(): CacheItemPoolInterface

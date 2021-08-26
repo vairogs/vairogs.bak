@@ -11,7 +11,6 @@ use Vairogs\Component\Utils\DependencyInjection\Dependency;
 class CacheDependency implements Dependency
 {
     /**
-     * @inheritDoc
      * @noinspection NullPointerExceptionInspection
      */
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void

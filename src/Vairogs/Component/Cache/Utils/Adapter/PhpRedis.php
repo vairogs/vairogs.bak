@@ -11,11 +11,8 @@ use Vairogs\Component\Utils\Vairogs;
 use function class_exists;
 use function sprintf;
 
-class PhpRedisAdapter implements Cache
+class PhpRedis implements Cache
 {
-    /**
-     * @param Redis $client
-     */
     public function __construct(private Redis $client)
     {
         if (!class_exists(SncRedisBundle::class) || !class_exists(Redis::class)) {
@@ -23,9 +20,6 @@ class PhpRedisAdapter implements Cache
         }
     }
 
-    /**
-     * @return CacheItemPoolInterface
-     */
     public function getAdapter(): CacheItemPoolInterface
     {
         return new RedisAdapter($this->client, Vairogs::VAIROGS, 0);
