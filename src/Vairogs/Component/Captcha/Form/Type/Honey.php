@@ -7,15 +7,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Honey extends HiddenType
 {
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'attr' => ['value' => ''],
             'required' => false,
-            'translation_domain' => 'vairogs_captcha'
+            'translation_domain' => 'vairogs_captcha',
         ]);
     }
 }

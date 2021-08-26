@@ -6,28 +6,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait HoneyTrait
 {
-    /**
-     * @var null
-     * @Assert\IsNull(
-     *     message="vairogs_captcha.error.honey.value_set"
-     * )
-     */
-    private $honey;
+    #[Assert\IsNull(message: 'vairogs_captcha.error.honey.value_set')]
+    private mixed $honey;
 
-    /**
-     * @return null
-     */
-    public function getHoney()
+    public function getHoney(): mixed
     {
         return $this->honey;
     }
 
-    /**
-     * @param null $honey
-     *
-     * @return self
-     */
-    public function setHoney($honey): self
+    public function setHoney(mixed $honey): self
     {
         $this->honey = $honey;
 
