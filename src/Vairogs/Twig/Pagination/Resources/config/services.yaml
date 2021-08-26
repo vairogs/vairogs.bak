@@ -1,6 +1,5 @@
 services:
-    vairogs.twig.extension.pagination:
-        class: Vairogs\Twig\Pagination\Extension
+    Vairogs\Twig\Pagination\Extension:
         public: false
         tags:
             -

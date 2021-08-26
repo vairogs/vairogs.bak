@@ -78,5 +78,61 @@
     {
         "path": "src/Vairogs/Twig/Sort",
         "repo": "https://GH@github.com/vairogs/twig-sort.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper",
+        "repo": "https://GH@github.com/vairogs/twig-helper.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Date",
+        "repo": "https://GH@github.com/vairogs/twig-helper-date.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Email",
+        "repo": "https://GH@github.com/vairogs/twig-helper-email.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/File",
+        "repo": "https://GH@github.com/vairogs/twig-helper-file.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Generator",
+        "repo": "https://GH@github.com/vairogs/twig-helper-generator.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Gravatar",
+        "repo": "https://GH@github.com/vairogs/twig-helper-gravatar.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Http",
+        "repo": "https://GH@github.com/vairogs/twig-helper-http.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Iter",
+        "repo": "https://GH@github.com/vairogs/twig-helper-iter.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Json",
+        "repo": "https://GH@github.com/vairogs/twig-helper-json.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Php",
+        "repo": "https://GH@github.com/vairogs/twig-helper-php.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Sort",
+        "repo": "https://GH@github.com/vairogs/twig-helper-sort.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Text",
+        "repo": "https://GH@github.com/vairogs/twig-helper-text.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Uri",
+        "repo": "https://GH@github.com/vairogs/twig-helper-uri.git"
+    ,
+    {
+        "path": "src/Vairogs/Twig/Helper/Util",
+        "repo": "https://GH@github.com/vairogs/twig-helper-util.git"
     }
 ]

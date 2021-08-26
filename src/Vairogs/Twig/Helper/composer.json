@@ -1,16 +1,32 @@
 {
-    "name": "vairogs/twig",
-    "description": "Useful Twig extensions",
+    "name": "vairogs/twig-helper",
+    "description": "Twig extension that implements vairogs/utils helper functions in Twig template",
     "type": "library",
     "keywords": [
-        "env",
-        "getenv",
+        "array",
+        "date",
+        "doctrine",
+        "http",
+        "http-foundation",
+        "json",
+        "manipulation",
+        "monolog",
+        "object",
         "php",
-        "vairogs",
+        "prime",
+        "psr",
+        "response",
         "sort",
+        "string",
         "symfony",
+        "text",
         "twig",
-        "twig-extension"
+        "twig-extension",
+        "unique",
+        "uri",
+        "utils",
+        "vairogs",
+        "validation"
     ],
     "license": "MIT",
     "authors": [
@@ -42,17 +58,11 @@
     ],
     "require": {
         "php": ">=8.0.0",
-        "doctrine/collections": "~1.6",
         "jetbrains/phpstorm-attributes": "*",
         "twig/twig": "3.*",
         "vairogs/utils": "3.x-dev"
     },
     "replace": {
-        "vairogs/twig-getenv": "self.version",
-        "vairogs/twig-pagination": "self.version",
-        "vairogs/twig-php": "self.version",
-        "vairogs/twig-sort": "self.version",
-        "vairogs/twig-helper": "self.version",
         "vairogs/twig-helper-date": "self.version",
         "vairogs/twig-helper-email": "self.version",
         "vairogs/twig-helper-file": "self.version",
@@ -69,7 +79,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Twig\\": ""
+            "Vairogs\\Twig\\Helper\\": ""
         }
     },
     "config": {

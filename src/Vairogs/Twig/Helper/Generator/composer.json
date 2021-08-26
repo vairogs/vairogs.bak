@@ -1,16 +1,14 @@
 {
-    "name": "vairogs/twig",
-    "description": "Useful Twig extensions",
+    "name": "vairogs/twig-helper-generator",
+    "description": "Twig extension that implements vairogs/utils Generator helper functions in Twig template",
     "type": "library",
     "keywords": [
-        "env",
-        "getenv",
-        "php",
-        "vairogs",
-        "sort",
         "symfony",
+        "generator",
         "twig",
-        "twig-extension"
+        "twig-extension",
+        "utils",
+        "vairogs"
     ],
     "license": "MIT",
     "authors": [
@@ -42,34 +40,13 @@
     ],
     "require": {
         "php": ">=8.0.0",
-        "doctrine/collections": "~1.6",
         "jetbrains/phpstorm-attributes": "*",
         "twig/twig": "3.*",
         "vairogs/utils": "3.x-dev"
     },
-    "replace": {
-        "vairogs/twig-getenv": "self.version",
-        "vairogs/twig-pagination": "self.version",
-        "vairogs/twig-php": "self.version",
-        "vairogs/twig-sort": "self.version",
-        "vairogs/twig-helper": "self.version",
-        "vairogs/twig-helper-date": "self.version",
-        "vairogs/twig-helper-email": "self.version",
-        "vairogs/twig-helper-file": "self.version",
-        "vairogs/twig-helper-generator": "self.version",
-        "vairogs/twig-helper-gravatar": "self.version",
-        "vairogs/twig-helper-http": "self.version",
-        "vairogs/twig-helper-iter": "self.version",
-        "vairogs/twig-helper-json": "self.version",
-        "vairogs/twig-helper-php": "self.version",
-        "vairogs/twig-helper-sort": "self.version",
-        "vairogs/twig-helper-text": "self.version",
-        "vairogs/twig-helper-uri": "self.version",
-        "vairogs/twig-helper-util": "self.version"
-    },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Twig\\": ""
+            "Vairogs\\Twig\\Helper\\Generator\\": ""
         }
     },
     "config": {

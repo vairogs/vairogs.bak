@@ -1,5 +1,5 @@
 services:
-    Vairogs\Twig\GetEnv\Extension:
+    Vairogs\Twig\Helper\Date\Extension:
         public: false
         tags:
             -

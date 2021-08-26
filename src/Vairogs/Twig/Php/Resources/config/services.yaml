@@ -1,6 +1,5 @@
 services:
-    vairogs.twig.extension.php:
-        class: Vairogs\Twig\Php\Extension
+    Vairogs\Twig\Php\Extension:
         public: false
         tags:
             -
