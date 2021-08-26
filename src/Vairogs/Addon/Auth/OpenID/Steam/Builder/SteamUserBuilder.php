@@ -13,13 +13,8 @@ use function str_starts_with;
 class SteamUserBuilder implements OpenIDUserBuilder
 {
     private const PROFILE_URL_START = 'https://steamcommunity.com/id/';
-
     protected string $userClass = Steam::class;
 
-    /**
-     * @param string $class
-     * @return SteamUserBuilder
-     */
     public function setUserClass(string $class): SteamUserBuilder
     {
         $this->userClass = $class;
@@ -27,21 +22,11 @@ class SteamUserBuilder implements OpenIDUserBuilder
         return $this;
     }
 
-    /**
-     * @param array $response
-     *
-     * @return OpenIDUser
-     */
     public function getUser(array $response): OpenIDUser
     {
         return $this->getSteamUser($response);
     }
 
-    /**
-     * @param array $data
-     *
-     * @return Steam
-     */
     private function getSteamUser(array $data): User
     {
         $user = UserArrayFactory::create(new $this->userClass(), $data['response']['players'][0]);
@@ -50,10 +35,6 @@ class SteamUserBuilder implements OpenIDUserBuilder
         return $user;
     }
 
-    /**
-     * @param User $user
-     * @return string
-     */
     private function getUsername(User $user): string
     {
         if (true === $this->hasUsername($user)) {
@@ -65,10 +46,6 @@ class SteamUserBuilder implements OpenIDUserBuilder
         return $user->getOpenID();
     }
 
-    /**
-     * @param User $user
-     * @return bool
-     */
     private function hasUsername(User $user): bool
     {
         return str_starts_with($user->getUrl(), self::PROFILE_URL_START);

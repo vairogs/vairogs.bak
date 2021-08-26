@@ -9,12 +9,11 @@ use Stringable;
 /**
  * @ORM\MappedSuperclass()
  */
+#[ORM\MappedSuperclass]
 class SteamGifts extends Steam implements Stringable
 {
-    /**
-     * @return string
-     */
-    #[Pure] public function __toString(): string
+    #[Pure]
+    public function __toString(): string
     {
         return $this->getUsername() ?? $this->getOpenID();
     }

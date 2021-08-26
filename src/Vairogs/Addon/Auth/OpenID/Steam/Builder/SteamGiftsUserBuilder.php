@@ -21,10 +21,6 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
     protected string $cacheDir;
     protected string $userClass = SteamGifts::class;
 
-    /**
-     * @param string $class
-     * @return SteamGiftsUserBuilder
-     */
     public function setUserClass(string $class): SteamGiftsUserBuilder
     {
         $this->userClass = $class;
@@ -32,11 +28,6 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         return $this;
     }
 
-    /**
-     * @param array $response
-     *
-     * @return OpenIDUser
-     */
     public function getUser(array $response): OpenIDUser
     {
         $this->cacheDir = $response['cache_dir'];
@@ -44,11 +35,6 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         return $this->getSteamGiftsUser($response);
     }
 
-    /**
-     * @param array $data
-     *
-     * @return SteamGifts
-     */
     private function getSteamGiftsUser(array $data): User
     {
         $input = $data['response']['players'][0];
@@ -57,11 +43,6 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         return UserArrayFactory::create(new $this->userClass(), $input);
     }
 
-    /**
-     * @param string $user
-     *
-     * @return string|null
-     */
     private function getUsername(string $user): ?string
     {
         $path = $this->cacheDir . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $user . '.txt';

@@ -6,11 +6,6 @@ use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 
 class UserArrayFactory
 {
-    /**
-     * @param User $user
-     * @param array $bag
-     * @return User
-     */
     public static function create(User $user, array $bag): User
     {
         $avatar = [
