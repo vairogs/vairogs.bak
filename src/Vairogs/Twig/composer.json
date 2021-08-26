@@ -62,7 +62,7 @@
         "vairogs/twig-helper-sort": "self.version",
         "vairogs/twig-helper-text": "self.version",
         "vairogs/twig-helper-uri": "self.version",
-        "vairogs/twig-helper-util": "self.version"
+        "vairogs/twig-helper-util": "self.version",
         "vairogs/twig-pagination": "self.version",
         "vairogs/twig-php": "self.version",
         "vairogs/twig-sort": "self.version"
