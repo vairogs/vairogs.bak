@@ -49,9 +49,6 @@
     },
     "replace": {
         "vairogs/twig-getenv": "self.version",
-        "vairogs/twig-pagination": "self.version",
-        "vairogs/twig-php": "self.version",
-        "vairogs/twig-sort": "self.version",
         "vairogs/twig-helper": "self.version",
         "vairogs/twig-helper-date": "self.version",
         "vairogs/twig-helper-email": "self.version",
@@ -66,6 +63,9 @@
         "vairogs/twig-helper-text": "self.version",
         "vairogs/twig-helper-uri": "self.version",
         "vairogs/twig-helper-util": "self.version"
+        "vairogs/twig-pagination": "self.version",
+        "vairogs/twig-php": "self.version",
+        "vairogs/twig-sort": "self.version"
     },
     "autoload": {
         "psr-4": {

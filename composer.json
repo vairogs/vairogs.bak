@@ -11,7 +11,8 @@
         "sitemap",
         "steam",
         "utils",
-        "vairogs"
+        "vairogs",
+        "twig"
     ],
     "license": "MIT",
     "authors": [
@@ -59,8 +60,8 @@
         "symfony/config": "~5.3",
         "symfony/console": "~5.3",
         "symfony/dependency-injection": "~5.3",
-        "symfony/framework-bundle": "~5.3",
         "symfony/form": "~5.3",
+        "symfony/framework-bundle": "~5.3",
         "symfony/http-foundation": "~5.3",
         "symfony/http-kernel": "~5.3",
         "symfony/options-resolver": "~5.3",
@@ -87,9 +88,6 @@
         "vairogs/sitemap": "self.version",
         "vairogs/twig": "self.version",
         "vairogs/twig-getenv": "self.version",
-        "vairogs/twig-pagination": "self.version",
-        "vairogs/twig-php": "self.version",
-        "vairogs/twig-sort": "self.version",
         "vairogs/twig-helper": "self.version",
         "vairogs/twig-helper-date": "self.version",
         "vairogs/twig-helper-email": "self.version",
@@ -104,6 +102,9 @@
         "vairogs/twig-helper-text": "self.version",
         "vairogs/twig-helper-uri": "self.version",
         "vairogs/twig-helper-util": "self.version",
+        "vairogs/twig-pagination": "self.version",
+        "vairogs/twig-php": "self.version",
+        "vairogs/twig-sort": "self.version",
         "vairogs/utils": "self.version"
     },
     "autoload": {
