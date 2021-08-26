@@ -74,5 +74,9 @@
     {
         "path": "src/Vairogs/Twig/Php",
         "repo": "https://GH@github.com/vairogs/twig-php.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Sort",
+        "repo": "https://GH@github.com/vairogs/twig-sort.git"
     }
 ]

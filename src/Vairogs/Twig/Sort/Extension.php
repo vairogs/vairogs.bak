@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\Sort;
+namespace Vairogs\Twig\Sort;
 
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
@@ -15,7 +15,7 @@ use function is_array;
 use function strtoupper;
 use function usort;
 
-class SortExtension extends AbstractExtension
+class Extension extends AbstractExtension
 {
     use TwigTrait;
 

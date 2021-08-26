@@ -1,13 +1,11 @@
 {
-    "name": "ravenflux/sort-functions",
+    "name": "vairogs/twig-sort",
     "description": "Twig extension that implements sorting functions in Twig template",
     "type": "library",
     "keywords": [
-        "ravenflux",
+        "vairogs",
         "sort",
         "symfony",
-        "symfony4",
-        "symfony5",
         "twig",
         "twig-extension"
     ],
@@ -47,7 +45,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\Sort\\": ""
+            "vairogs\\Twig\\Sort\\": ""
         }
     },
     "config": {
