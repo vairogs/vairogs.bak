@@ -11,7 +11,6 @@ use Vairogs\Component\Utils\DependencyInjection\Dependency;
 class TranslationDependency implements Dependency
 {
     /**
-     * @inheritDoc
      * @noinspection NullPointerExceptionInspection
      */
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
