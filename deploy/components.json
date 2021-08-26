@@ -1,138 +1,138 @@
 [
     {
         "path": "src/Vairogs/Addon",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/addon.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/addon.git"
     },
     {
         "path": "src/Vairogs/Addon/Auth",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/addon-auth.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/addon-auth.git"
     },
     {
         "path": "src/Vairogs/Addon/Auth/OpenID",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/addon-auth-openid.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/addon-auth-openid.git"
     },
     {
         "path": "src/Vairogs/Addon/Auth/OpenID/Steam",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/addon-auth-openid-steam.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/addon-auth-openid-steam.git"
     },
     {
         "path": "src/Vairogs/Component",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/components.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/components.git"
     },
     {
         "path": "src/Vairogs/Component/Auth",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/auth.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/auth.git"
     },
     {
         "path": "src/Vairogs/Component/Auth/OpenID",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/auth-openid.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/auth-openid.git"
     },
     {
         "path": "src/Vairogs/Component/Cache",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/cache.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/cache.git"
     },
     {
         "path": "src/Vairogs/Component/Cache/Utils",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/cache-utils.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/cache-utils.git"
     },
     {
         "path": "src/Vairogs/Component/Captcha",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/captcha.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/captcha.git"
     },
     {
         "path": "src/Vairogs/Component/Sitemap",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/sitemap.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/sitemap.git"
     },
     {
         "path": "src/Vairogs/Component/Utils",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/utils.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/utils.git"
     },
     {
         "path": "src/Vairogs/Extra",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/extra.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/extra.git"
     },
     {
         "path": "src/Vairogs/Extra/Specification",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/extra-specification.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/extra-specification.git"
     },
     {
         "path": "src/Vairogs/Extra/Constants",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/extra-constants.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/extra-constants.git"
     },
     {
         "path": "src/Vairogs/Twig",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig.git"
     },
     {
         "path": "src/Vairogs/Twig/GetEnv",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-getenv.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-getenv.git"
     },
     {
         "path": "src/Vairogs/Twig/Pagination",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-pagination.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-pagination.git"
     },
     {
         "path": "src/Vairogs/Twig/Php",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-php.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-php.git"
     },
     {
         "path": "src/Vairogs/Twig/Sort",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-sort.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-sort.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Date",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-date.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-date.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Email",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-email.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-email.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/File",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-file.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-file.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Generator",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-generator.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-generator.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Gravatar",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-gravatar.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-gravatar.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Http",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-http.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-http.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Iter",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-iter.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-iter.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Json",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-json.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-json.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Php",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-php.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-php.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Sort",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-sort.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-sort.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Text",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-text.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-text.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Uri",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-uri.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-uri.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Util",
-        "repo": "https://${GH_TOKEN}@github.com/vairogs/twig-helper-util.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-util.git"
     }
 ]
