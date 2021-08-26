@@ -7,7 +7,6 @@ use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\OraclePlatform;
 use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
-use Doctrine\ORM\Query\AST\OrderByClause;
 use Doctrine\ORM\Query\SqlWalker;
 use InvalidArgumentException;
 use function is_array;
@@ -17,24 +16,12 @@ use function sprintf;
 
 class SortableNullWalker extends SqlWalker
 {
-    /**
-     * @var string
-     */
     public const NULLS_FIRST = 'NULLS FIRST';
-    /**
-     * @var string
-     */
     public const NULLS_LAST = 'NULLS LAST';
-    /**
-     * @var string
-     */
     public const FIELDS = self::class . '.fields';
 
     /**
-     * @param OrderByClause $orderByClause
-     * @return string|string[]|null
      * @throws Exception
-     * @noinspection PhpMissingParamTypeInspection
      */
     public function walkOrderByClause($orderByClause): array|string|null
     {

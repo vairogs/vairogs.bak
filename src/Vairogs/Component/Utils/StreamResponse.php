@@ -10,15 +10,8 @@ use function strlen;
 
 class StreamResponse extends Response
 {
-    /**
-     * @var int
-     */
     public const BUFFER_SIZE = 4096;
 
-    /**
-     * @param ResponseInterface $response
-     * @param int $bufferSize
-     */
     public function __construct(ResponseInterface $response, private int $bufferSize = self::BUFFER_SIZE)
     {
         parent::__construct(null, $response->getStatusCode(), $response->getHeaders());
@@ -26,17 +19,11 @@ class StreamResponse extends Response
         $this->content = $response->getBody();
     }
 
-    /**
-     * @return bool|string
-     */
     public function getContent(): bool|string
     {
         return false;
     }
 
-    /**
-     * @return void
-     */
     public function sendContent(): void
     {
         $chunked = $this->headers->has('Transfer-Encoding');

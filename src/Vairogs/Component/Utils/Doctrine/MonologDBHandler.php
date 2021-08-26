@@ -10,19 +10,11 @@ use Vairogs\Component\Utils\Doctrine\Model\Log;
 
 class MonologDBHandler extends AbstractProcessingHandler
 {
-    /**
-     * @param EntityManagerInterface|ObjectManager $em
-     * @param ManagerRegistry $managerRegistry
-     * @param string $logClass
-     */
     public function __construct(protected EntityManagerInterface|ObjectManager $em, protected ManagerRegistry $managerRegistry, protected string $logClass)
     {
         parent::__construct();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function handleBatch(array $records): void
     {
         $this->em->beginTransaction();
@@ -32,9 +24,6 @@ class MonologDBHandler extends AbstractProcessingHandler
         $this->em->commit();
     }
 
-    /**
-     * @param array $record
-     */
     protected function write(array $record): void
     {
         /** @var Log $entry */

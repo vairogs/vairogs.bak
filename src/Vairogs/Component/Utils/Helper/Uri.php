@@ -35,10 +35,6 @@ use const FILTER_VALIDATE_URL;
 class Uri
 {
     /**
-     * @param array|object $data
-     * @param string|null $parent
-     *
-     * @return array
      * @Annotation\TwigFilter()
      * @Annotation\TwigFunction()
      */
@@ -65,8 +61,6 @@ class Uri
     }
 
     /**
-     * @param string $url
-     * @return string
      * @Annotation\TwigFilter ()
      */
     public static function urlEncode(string $url): string
@@ -92,8 +86,6 @@ class Uri
     }
 
     /**
-     * @param string $query
-     * @return array
      * @Annotation\TwigFilter()
      */
     public static function arrayFromQueryString(string $query): array
@@ -106,8 +98,6 @@ class Uri
     }
 
     /**
-     * @param string $rawHeaders
-     * @return array
      * @Annotation\TwigFilter()
      */
     public static function parseHeaders(string $rawHeaders = ''): array
@@ -145,8 +135,6 @@ class Uri
     }
 
     /**
-     * @param string $url
-     * @return bool
      * @Annotation\TwigFunction()
      */
     #[Pure] public static function isUrl(string $url): bool
@@ -158,9 +146,6 @@ class Uri
     }
 
     /**
-     * @param string $path
-     *
-     * @return string|bool
      * @Annotation\TwigFilter()
      */
     public static function parseQueryPath(string $path): bool|string

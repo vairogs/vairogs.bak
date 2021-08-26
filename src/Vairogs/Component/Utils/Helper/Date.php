@@ -19,36 +19,15 @@ use function trim;
 
 class Date
 {
-    /**
-     * @var string
-     */
     public const FORMAT = 'd-m-Y H:i:s';
-    /**
-     * @var string
-     */
     public const FORMAT_TS = 'D M d Y H:i:s T';
-    /**
-     * @var string[]
-     */
     public const EXTRA_FORMATS = [
         self::FORMAT,
         self::FORMAT_TS,
     ];
-    /**
-     * @var int
-     */
     public const SEC = 1000;
-    /**
-     * @var int
-     */
     public const MIN = 60 * self::SEC;
-    /**
-     * @var int
-     */
     public const HOUR = 60 * self::MIN;
-    /**
-     * @var array<string, int>
-     */
     public const TIME = [
         'hour' => self::HOUR,
         'minute' => self::MIN,
@@ -56,9 +35,6 @@ class Date
     ];
 
     /**
-     * @param string $personCode
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     public static function validatePersonCode(string $personCode): bool
@@ -85,9 +61,6 @@ class Date
     }
 
     /**
-     * @param string $personCode
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     public static function validateNewPersonCode(string $personCode): bool
@@ -109,9 +82,6 @@ class Date
     }
 
     /**
-     * @param string $date
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     public static function validateDate(string $date): bool
@@ -133,9 +103,6 @@ class Date
     }
 
     /**
-     * @param string $personCode
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     public static function validateOldPersonCode(string $personCode): bool
@@ -151,10 +118,6 @@ class Date
     }
 
     /**
-     * @param int $timestamp
-     * @param string $format
-     *
-     * @return string|int
      * @Annotation\TwigFilter()
      */
     public static function excelDate(int $timestamp, string $format = self::FORMAT): int|string
@@ -173,10 +136,6 @@ class Date
     }
 
     /**
-     * @param mixed $date
-     * @param string $format
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     public static function validateDateBasic(mixed $date, string $format = self::FORMAT): bool
@@ -187,9 +146,6 @@ class Date
     }
 
     /**
-     * @param float|int $timestamp
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     #[Pure] public static function format(int|float $timestamp): string
@@ -215,8 +171,6 @@ class Date
     }
 
     /**
-     * @param float|int $timestamp
-     * @return array
      * @Annotation\TwigFilter()
      */
     #[Pure] public static function formatToArray(int|float $timestamp): array
@@ -242,10 +196,6 @@ class Date
     }
 
     /**
-     * @param string $string
-     * @param string $format
-     *
-     * @return string|null
      * @Annotation\TwigFilter()
      */
     public static function formatDate(string $string, string $format = self::FORMAT): ?string
@@ -256,10 +206,6 @@ class Date
     }
 
     /**
-     * @param string|null $format
-     * @param string|null $dateString
-     *
-     * @return DateTime|null
      * @Annotation\TwigFilter()
      */
     public static function getDateNullable(?string $format = null, ?string $dateString = null): ?DateTime
@@ -272,10 +218,6 @@ class Date
     }
 
     /**
-     * @param string|null $format
-     * @param string|null $dateString
-     *
-     * @return DateTime
      * @throws InvalidArgumentException
      * @Annotation\TwigFilter()
      */
@@ -289,10 +231,6 @@ class Date
     }
 
     /**
-     * @param int $timestamp
-     * @param string|null $format
-     *
-     * @return string
      * @throws Exception
      * @Annotation\TwigFilter()
      */
@@ -303,9 +241,6 @@ class Date
     }
 
     /**
-     * @param string $date
-     *
-     * @return DateTime|string
      * @throws ReflectionException
      * @Annotation\TwigFilter()
      */

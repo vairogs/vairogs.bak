@@ -15,8 +15,6 @@ use function sprintf;
 class File
 {
     /**
-     * @param string $path
-     * @return bool
      * @Annotation\TwigFunction()
      */
     public static function mkdir(string $path): bool
@@ -30,8 +28,6 @@ class File
     }
 
     /**
-     * @param string $filename
-     * @return bool
      * @Annotation\TwigFunction()
      */
     #[Pure] public static function fileExistsPublic(string $filename): bool

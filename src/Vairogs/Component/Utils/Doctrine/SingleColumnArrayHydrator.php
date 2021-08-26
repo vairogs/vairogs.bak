@@ -9,10 +9,6 @@ use function mb_strpos;
 
 class SingleColumnArrayHydrator extends AbstractHydrator
 {
-    /**
-     * {@inheritdoc}
-     * @return mixed[]
-     */
     protected function hydrateAllData(): array
     {
         $result = [];

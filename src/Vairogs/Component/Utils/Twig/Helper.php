@@ -11,9 +11,6 @@ use Vairogs\Component\Utils\Helper\Text;
 class Helper
 {
     /**
-     * @param string $class
-     * @param string $filterClass
-     * @return array
      * @throws ReflectionException
      */
     public static function getFilterAnnotations(string $class, string $filterClass): array

@@ -21,54 +21,15 @@ use function substr;
 
 class Generator
 {
-    /**
-     * @var string
-     */
     public const PASS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
-
-    /**
-     * @var string
-     */
     public const PASS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-    /**
-     * @var string
-     */
     public const PASS_DIGITS = '0123456789';
-
-    /**
-     * @var string
-     */
     public const PASS_SYMBOLS = '!@#$%^&*()_-=+;:.,?';
-
-    /**
-     * @var string
-     */
     public const RAND_BASIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-    /**
-     * @var string
-     */
     public const RAND_EXTENDED = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-=+;:,.?';
-
-    /**
-     * @var string
-     */
     public const LOWER = 'lower';
-
-    /**
-     * @var string
-     */
     public const UPPER = 'upper';
-
-    /**
-     * @var string
-     */
     public const DIGITS = 'digits';
-
-    /**
-     * @var string
-     */
     public const SYMBOLS = 'symbols';
 
     private array $sets = [];
@@ -78,9 +39,6 @@ class Generator
     private string $symbols = self::PASS_SYMBOLS;
 
     /**
-     * @param int $length
-     *
-     * @return string
      * @Annotation\TwigFunction()
      */
     public static function getUniqueId(int $length = 20): string
@@ -93,10 +51,6 @@ class Generator
     }
 
     /**
-     * @param int $length
-     * @param string $chars
-     *
-     * @return string
      * @Annotation\TwigFunction()
      */
     #[Pure] public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
@@ -106,9 +60,6 @@ class Generator
     }
 
     /**
-     * @param int $length
-     *
-     * @return string
      * @throws LogicException
      * @throws Exception
      * @Annotation\TwigFunction()
@@ -135,9 +86,6 @@ class Generator
     }
 
     /**
-     * @param array $array
-     *
-     * @return array|int|string
      * @throws Exception
      */
     private function tweak(array $array): array|int|string
@@ -149,9 +97,6 @@ class Generator
         return array_rand($array);
     }
 
-    /**
-     * @return Generator
-     */
     public function useLower(): Generator
     {
         $this->sets[self::LOWER] = $this->lowerCase;
@@ -159,9 +104,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return Generator
-     */
     public function useUpper(): Generator
     {
         $this->sets[self::UPPER] = $this->upperCase;
@@ -169,9 +111,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return Generator
-     */
     public function useDigits(): Generator
     {
         $this->sets[self::DIGITS] = $this->digits;
@@ -179,9 +118,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return Generator
-     */
     public function useSymbols(): Generator
     {
         $this->sets[self::SYMBOLS] = $this->symbols;
@@ -189,11 +125,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @param string $lowerCase
-     *
-     * @return Generator
-     */
     public function setLowerCase(string $lowerCase): Generator
     {
         $this->lowerCase = $lowerCase;
@@ -201,11 +132,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @param string $upperCase
-     *
-     * @return Generator
-     */
     public function setUpperCase(string $upperCase): Generator
     {
         $this->upperCase = $upperCase;
@@ -213,11 +139,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @param string $digits
-     *
-     * @return Generator
-     */
     public function setDigits(string $digits): Generator
     {
         $this->digits = $digits;
@@ -225,11 +146,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @param string $symbols
-     *
-     * @return Generator
-     */
     public function setSymbols(string $symbols): Generator
     {
         $this->symbols = $symbols;
@@ -237,9 +153,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return Generator
-     */
     public function reset(): Generator
     {
         $this->sets = [];
@@ -247,9 +160,6 @@ class Generator
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getSets(): array
     {
         return $this->sets;

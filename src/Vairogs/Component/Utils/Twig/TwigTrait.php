@@ -11,12 +11,6 @@ use function sprintf;
 
 trait TwigTrait
 {
-    /**
-     * @param array $input
-     * @param string $key
-     * @param string $class
-     * @return array
-     */
     public function makeArray(array $input, string $key, string $class): array
     {
         if (!in_array($class, [TwigFilter::class, TwigFunction::class], true)) {
@@ -41,11 +35,6 @@ trait TwigTrait
         return $output;
     }
 
-    /**
-     * @param array $input
-     * @param string $key
-     * @param array $output
-     */
     private function makeInput(array $input, string $key, array &$output): void
     {
         $output = [];

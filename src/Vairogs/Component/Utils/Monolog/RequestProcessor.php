@@ -6,17 +6,10 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class RequestProcessor
 {
-    /**
-     * @param RequestStack $requestStack
-     */
     public function __construct(protected RequestStack $requestStack)
     {
     }
 
-    /**
-     * @param array $record
-     * @return array
-     */
     public function processRecord(array $record): array
     {
         $record['extra'] = [];

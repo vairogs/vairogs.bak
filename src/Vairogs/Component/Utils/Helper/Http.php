@@ -12,35 +12,14 @@ use function str_starts_with;
 
 class Http
 {
-    /**
-     * @var int
-     */
     public const HTTP = 80;
-    /**
-     * @var int
-     */
     public const HTTPS = 443;
-    /**
-     * @var string
-     */
     private const HEADER_HTTPS = 'HTTPS';
-    /**
-     * @var string
-     */
     private const HEADER_PORT = 'SERVER_PORT';
-    /**
-     * @var string
-     */
     private const HEADER_SSL = 'HTTP_X_FORWARDED_SSL';
-    /**
-     * @var string
-     */
     private const HEADER_PROTO = 'HTTP_X_FORWARDED_PROTO';
 
     /**
-     * @param Request $request
-     *
-     * @return string
      * @Annotation\TwigFilter()
      * @Annotation\TwigFunction()
      */
@@ -50,9 +29,6 @@ class Http
     }
 
     /**
-     * @param Request $request
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     public static function isHttps(Request $request): bool
@@ -74,9 +50,6 @@ class Http
     }
 
     /**
-     * @param Request $request
-     * @param bool $trust
-     * @return string
      * @Annotation\TwigFunction()
      */
     public static function getRemoteIp(Request $request, bool $trust = false): string
@@ -101,8 +74,6 @@ class Http
     }
 
     /**
-     * @param Request $request
-     * @return string
      * @Annotation\TwigFunction()
      */
     public static function getRemoteIpCF(Request $request): string
@@ -115,9 +86,6 @@ class Http
     }
 
     /**
-     * @param string $path
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     public static function isAbsolute(string $path): bool
@@ -126,7 +94,6 @@ class Http
     }
 
     /**
-     * @return array
      * @throws InvalidArgumentException
      * @throws ReflectionException
      * @Annotation\TwigFunction()
@@ -136,41 +103,21 @@ class Http
         return Iter::arrayValuesFiltered(Php::getClassConstants(Request::class), 'METHOD_');
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
     protected static function checkHttps(Request $request): bool
     {
         return $request->server->has(self::HEADER_HTTPS) && 'on' === $request->server->get(self::HEADER_HTTPS);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
     protected static function checkServerPort(Request $request): bool
     {
         return $request->server->has(self::HEADER_PORT) && self::HTTPS === (int)$request->server->get(self::HEADER_PORT);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
     protected static function checkHttpXForwardedSsl(Request $request): bool
     {
         return $request->server->has(self::HEADER_SSL) && 'on' === $request->server->get(self::HEADER_SSL);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
     protected static function checkHttpXForwardedProto(Request $request): bool
     {
         return $request->server->has(self::HEADER_PROTO) && 'https' === $request->server->get(self::HEADER_PROTO);

@@ -12,24 +12,20 @@ trait CreatedModified
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
+    #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $creationDate = null;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
+    #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $modificationDate = null;
 
-    /**
-     * @return DateTime
-     */
     public function getModificationDate(): DateTimeInterface
     {
         return $this->modificationDate;
     }
 
-    /**
-     * @param DateTimeInterface $modificationDate
-     */
     public function setModificationDate(DateTimeInterface $modificationDate): void
     {
         $this->modificationDate = $modificationDate;
@@ -40,6 +36,8 @@ trait CreatedModified
      * @ORM\PreUpdate
      * @throws Exception
      */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function updatedTimestamps(): void
     {
         $this->setModificationDate(new DateTime());
@@ -49,17 +47,11 @@ trait CreatedModified
         }
     }
 
-    /**
-     * @return DateTime
-     */
     public function getCreationDate(): DateTimeInterface
     {
         return $this->creationDate;
     }
 
-    /**
-     * @param DateTimeInterface $creationDate
-     */
     public function setCreationDate(DateTimeInterface $creationDate): void
     {
         $this->creationDate = $creationDate;

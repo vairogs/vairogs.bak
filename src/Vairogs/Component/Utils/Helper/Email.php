@@ -11,12 +11,10 @@ use const FILTER_VALIDATE_EMAIL;
 class Email
 {
     /**
-     * @param string $email
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function isValid(string $email): bool
+    #[Pure]
+    public static function isValid(string $email): bool
     {
         if (empty($email)) {
             return false;

@@ -23,10 +23,6 @@ use const FILTER_VALIDATE_BOOL;
 class Php
 {
     /**
-     * @param object $object
-     * @param string $property
-     * @param mixed $value
-     * @noinspection StaticClosureCanBeUsedInspection
      * @Annotation\TwigFunction()
      */
     public static function hijackSet(object $object, string $property, mixed $value): void
@@ -37,11 +33,6 @@ class Php
     }
 
     /**
-     * @param callable $function
-     * @param object $clone
-     * @param bool $return
-     *
-     * @return mixed
      * @noinspection PhpInconsistentReturnPointsInspection
      * @Annotation\TwigFunction()
      */
@@ -57,10 +48,6 @@ class Php
     }
 
     /**
-     * @param object $object
-     * @param string $property
-     *
-     * @return mixed
      * @Annotation\TwigFunction()
      */
     public static function hijackGet(object $object, string $property): mixed
@@ -69,9 +56,6 @@ class Php
     }
 
     /**
-     * @param mixed $value
-     *
-     * @return bool
      * @Annotation\TwigFilter()
      */
     #[Pure] public static function boolval(mixed $value): bool
@@ -94,9 +78,6 @@ class Php
     }
 
     /**
-     * @param string $class
-     *
-     * @return array
      * @throws ReflectionException
      * @throws InvalidArgumentException
      * @Annotation\TwigFunction()
@@ -107,9 +88,6 @@ class Php
     }
 
     /**
-     * @param string $class
-     *
-     * @return array
      * @throws InvalidArgumentException
      * @throws ReflectionException
      * @Annotation\TwigFunction()
@@ -124,9 +102,6 @@ class Php
     }
 
     /**
-     * @param array|object $variable
-     * @param mixed $key
-     * @return mixed
      * @Annotation\TwigFilter()
      * @Annotation\TwigFunction()
      */

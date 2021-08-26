@@ -46,16 +46,9 @@ class Text
         'A', 'B', 'V', 'G', 'D', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'ʺ', 'Y', '–', 'E'
     ];
     // @formatter:on
-    /**
-     * @var string
-     */
     public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
 
     /**
-     * @param string $string
-     * @param string $separator
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function fromCamelCase(string $string, string $separator = '_'): string
@@ -64,9 +57,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function toSnakeCase(string $string): string
@@ -78,10 +68,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     * @param bool $lowFirst
-     *
-     * @return string
      * @noinspection StringNormalizationInspection
      * @Annotation\TwigFilter()
      */
@@ -95,9 +81,6 @@ class Text
     }
 
     /**
-     * @param string $text
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function cleanText(string $text): string
@@ -106,9 +89,6 @@ class Text
     }
 
     /**
-     * @param string $text
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function oneSpace(string $text): string
@@ -117,9 +97,6 @@ class Text
     }
 
     /**
-     * @param string $text
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function translitCyrToLat(string $text): string
@@ -128,9 +105,6 @@ class Text
     }
 
     /**
-     * @param string $text
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function translitLatToCyr(string $text): string
@@ -139,9 +113,6 @@ class Text
     }
 
     /**
-     * @param array $names
-     *
-     * @return bool
      * @Annotation\TwigFilter()
      */
     public static function sortLatvian(array $names): bool
@@ -153,9 +124,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function stripSpace(string $string): string
@@ -164,10 +132,6 @@ class Text
     }
 
     /**
-     * @param string $input
-     * @param int $length
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     #[Pure] public static function zero(string $input, int $length): string
@@ -176,11 +140,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     * @param int $length
-     * @param string $append
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function truncateSafe(string $string, int $length, string $append = '...'): string
@@ -200,11 +159,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     * @param int $limit
-     * @param string $append
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function limitChars(string $string, int $limit = 100, string $append = '...'): string
@@ -217,11 +171,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     * @param int $limit
-     * @param string $append
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function limitWords(string $string, int $limit = 100, string $append = '...'): string
@@ -235,10 +184,6 @@ class Text
     }
 
     /**
-     * @param string $haystack
-     * @param string $needle
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     #[Pure] public static function containsAny(string $haystack, string $needle): bool
@@ -247,9 +192,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     #[Pure] public static function reverse(string $string): string
@@ -258,9 +200,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     *
-     * @return string
      * @Annotation\TwigFilter()
      */
     public static function keepNumeric(string $string): string
@@ -269,9 +208,6 @@ class Text
     }
 
     /**
-     * @param string $string
-     *
-     * @return float
      * @Annotation\TwigFilter()
      */
     #[Pure] public static function sanitizeFloat(string $string): float
@@ -279,13 +215,6 @@ class Text
         return (float)filter_var($string, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }
 
-    /**
-     * @param mixed $a
-     * @param mixed $b
-     * @param mixed $field
-     *
-     * @return int
-     */
     private static function compareLatvian(mixed $a, mixed $b, mixed $field): int
     {
         $a = mb_strtolower(Php::getParameter($a, $field));

@@ -14,19 +14,10 @@ use function round;
 
 class Sort
 {
-    /**
-     * @var string
-     */
     public const ASC = 'ASC';
-
-    /**
-     * @var string
-     */
     public const DESC = 'DESC';
 
     /**
-     * @param mixed $foo
-     * @param mixed $bar
      * @Annotation\TwigFunction()
      */
     public static function swap(mixed &$foo, mixed &$bar): void
@@ -41,7 +32,6 @@ class Sort
     }
 
     /**
-     * @param array $array
      * @Annotation\TwigFilter()
      */
     public static function bubbleSort(array &$array): void
@@ -57,9 +47,6 @@ class Sort
     }
 
     /**
-     * @param array $array
-     * @param mixed $foo
-     * @param mixed $bar
      * @Annotation\TwigFilter()
      * @Annotation\TwigFunction()
      */
@@ -75,9 +62,6 @@ class Sort
     }
 
     /**
-     * @param array $array
-     *
-     * @return array
      * @Annotation\TwigFilter()
      */
     public static function mergeSort(array $array): array
@@ -96,11 +80,6 @@ class Sort
         return self::merge($left, $right);
     }
 
-    /**
-     * @param array $left
-     * @param array $right
-     * @return array
-     */
     private static function merge(array $left, array $right): array
     {
         $result = [];
@@ -133,10 +112,6 @@ class Sort
     }
 
     /**
-     * @param mixed $item
-     * @param mixed $field
-     *
-     * @return bool
      * @Annotation\TwigFunction()
      */
     #[Pure] public static function isSortable(mixed $item, mixed $field): bool
@@ -153,10 +128,6 @@ class Sort
     }
 
     /**
-     * @param mixed $parameter
-     * @param string $order
-     *
-     * @return callable
      * @Annotation\TwigFilter()
      */
     public static function usort(mixed $parameter, string $order): callable

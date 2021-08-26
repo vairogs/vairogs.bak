@@ -14,9 +14,6 @@ use function class_exists;
 
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * @return TreeBuilder
-     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(Vairogs::VAIROGS);
@@ -30,9 +27,6 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $arrayNodeDefinition
-     */
     private function appendCacheNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(CacheDependency::class)) {
@@ -40,9 +34,6 @@ class Configuration implements ConfigurationInterface
         }
     }
 
-    /**
-     * @param ArrayNodeDefinition $arrayNodeDefinition
-     */
     private function appendAuthNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(AuthDependency::class)) {
@@ -50,9 +41,6 @@ class Configuration implements ConfigurationInterface
         }
     }
 
-    /**
-     * @param ArrayNodeDefinition $arrayNodeDefinition
-     */
     private function appendSitemapNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(SitemapDependency::class)) {
@@ -60,9 +48,6 @@ class Configuration implements ConfigurationInterface
         }
     }
 
-    /**
-     * @param ArrayNodeDefinition $arrayNodeDefinition
-     */
     private function appendTranslationNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(TranslationDependency::class)) {

@@ -10,9 +10,6 @@ use function reset;
 
 class ColumnHydrator extends ArrayHydrator
 {
-    /**
-     * @return array
-     */
     protected function hydrateAllData(): array
     {
         if (!isset($this->_rsm->indexByMap['scalars'])) {
