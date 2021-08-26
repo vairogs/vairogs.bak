@@ -19,7 +19,7 @@ class Extension extends AbstractExtension
             'getenv' => 'getEnv',
         ];
 
-        return $this->makeArray($input, Vairogs::RAVEN, TwigFunction::class);
+        return $this->makeArray($input, Vairogs::VAIROGS, TwigFunction::class);
     }
 
     #[Pure]

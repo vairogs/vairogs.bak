@@ -66,5 +66,13 @@
     {
         "path": "src/Vairogs/Twig/GetEnv",
         "repo": "https://GH@github.com/vairogs/twig-getenv.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Pagination",
+        "repo": "https://GH@github.com/vairogs/twig-pagination.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Php",
+        "repo": "https://GH@github.com/vairogs/twig-php.git"
     }
 ]

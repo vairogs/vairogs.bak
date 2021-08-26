@@ -23,6 +23,6 @@ class Extension extends AbstractExtension
             'pagination' => 'pagination',
         ];
 
-        return $this->makeArray($input, Vairogs::RAVEN, TwigFunction::class);
+        return $this->makeArray($input, Vairogs::VAIROGS, TwigFunction::class);
     }
 }

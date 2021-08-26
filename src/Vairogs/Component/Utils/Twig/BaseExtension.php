@@ -20,7 +20,7 @@ abstract class BaseExtension extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return $this->makeArray(Helper::getFilterAnnotations(self::$class, Annotation\TwigFilter::class), Vairogs::RAVEN . self::$suffix, Twig\TwigFilter::class);
+        return $this->makeArray(Helper::getFilterAnnotations(self::$class, Annotation\TwigFilter::class), Vairogs::VAIROGS . self::$suffix, Twig\TwigFilter::class);
     }
 
     /**
@@ -28,6 +28,6 @@ abstract class BaseExtension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return $this->makeArray(Helper::getFilterAnnotations(self::$class, Annotation\TwigFunction::class), Vairogs::RAVEN . self::$suffix, Twig\TwigFunction::class);
+        return $this->makeArray(Helper::getFilterAnnotations(self::$class, Annotation\TwigFunction::class), Vairogs::VAIROGS . self::$suffix, Twig\TwigFunction::class);
     }
 }

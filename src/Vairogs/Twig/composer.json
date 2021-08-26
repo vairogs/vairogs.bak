@@ -49,7 +49,8 @@
     },
     "replace": {
         "vairogs/twig-getenv": "self.version",
-        "vairogs/twig-pagination": "self.version"
+        "vairogs/twig-pagination": "self.version",
+        "vairogs/twig-php": "self.version"
     },
     "autoload": {
         "psr-4": {

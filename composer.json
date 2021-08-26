@@ -88,6 +88,7 @@
         "vairogs/twig": "self.version",
         "vairogs/twig-getenv": "self.version",
         "vairogs/twig-pagination": "self.version",
+        "vairogs/twig-php": "self.version",
         "vairogs/utils": "self.version"
     },
     "autoload": {

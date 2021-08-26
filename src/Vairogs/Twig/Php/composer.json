@@ -1,13 +1,11 @@
 {
-    "name": "ravenflux/php-functions",
+    "name": "vairogs/twig-php",
     "description": "Twig extension that implements a way to use native PHP functions and filters in Twig template",
     "type": "library",
     "keywords": [
         "php",
-        "ravenflux",
+        "vairogs",
         "symfony",
-        "symfony4",
-        "symfony5",
         "twig",
         "twig-extension"
     ],
@@ -47,7 +45,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\Php\\": ""
+            "Vairogs\\Twig\\Php\\": ""
         }
     },
     "config": {

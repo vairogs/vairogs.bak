@@ -1,6 +1,6 @@
 services:
-    ravenflux.twig.extension.php_functions:
-        class: RavenFlux\Php\PhpFunctionsExtension
+    vairogs.twig.extension.php:
+        class: Vairogs\Twig\Php\Extension
         public: false
         tags:
             -

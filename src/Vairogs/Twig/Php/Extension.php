@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\Php;
+namespace Vairogs\Twig\Php;
 
 use JetBrains\PhpStorm\Pure;
 use Twig\Extension\AbstractExtension;
@@ -15,7 +15,7 @@ use function is_numeric;
 use function key;
 use function sprintf;
 
-class PhpFunctionsExtension extends AbstractExtension
+class Extension extends AbstractExtension
 {
     public function __construct(private array $functions = [], private array $filters = [])
     {
@@ -27,7 +27,7 @@ class PhpFunctionsExtension extends AbstractExtension
 
         $mappedFilters = array_map(static fn ($function, $callback) => new TwigFilter($function, $callback), array_keys($callbacks), $callbacks);
 
-        $mappedFilters[] = new TwigFilter(sprintf('%s_filter', Vairogs::RAVEN), fn (mixed $object, string $filter, ...$arguments): mixed => $this->getFilter($object, $filter, $arguments));
+        $mappedFilters[] = new TwigFilter(sprintf('%s_filter', Vairogs::VAIROGS), fn (mixed $object, string $filter, ...$arguments): mixed => $this->getFilter($object, $filter, $arguments));
 
         return $mappedFilters;
     }
@@ -64,7 +64,7 @@ class PhpFunctionsExtension extends AbstractExtension
 
         $mappedFunctions = array_map(static fn ($function, $callback) => new TwigFunction($function, $callback), array_keys($callbacks), $callbacks);
 
-        $mappedFunctions[] = new TwigFunction(sprintf('%s_function', Vairogs::RAVEN), fn (string $function, ...$arguments): mixed => $this->getFunction($function, $arguments));
+        $mappedFunctions[] = new TwigFunction(sprintf('%s_function', Vairogs::VAIROGS), fn (string $function, ...$arguments): mixed => $this->getFunction($function, $arguments));
 
         return $mappedFunctions;
     }
