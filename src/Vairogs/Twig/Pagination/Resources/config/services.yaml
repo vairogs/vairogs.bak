@@ -1,6 +1,6 @@
 services:
-    ravenflux.twig.extension.pagination:
-        class: RavenFlux\Pagination\PaginationExtension
+    vairogs.twig.extension.pagination:
+        class: Vairogs\Twig\Pagination\Extension
         public: false
         tags:
             -

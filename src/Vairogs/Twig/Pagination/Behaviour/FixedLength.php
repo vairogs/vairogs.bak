@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\Pagination\Behaviour;
+namespace Vairogs\Twig\Pagination\Behaviour;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;

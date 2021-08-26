@@ -1,12 +1,11 @@
 {
-    "name": "ravenflux/pagination",
+    "name": "vairogs/twig-pagination",
     "description": "Twig extension that implements pagination in Twig template",
     "type": "library",
     "keywords": [
-        "ravenflux",
+        "vairogs",
         "pagination",
         "symfony",
-        "symfony5",
         "twig",
         "twig-extension"
     ],
@@ -46,7 +45,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\Pagination\\": ""
+            "Vairogs\\Twig\\Pagination\\": ""
         }
     },
     "config": {

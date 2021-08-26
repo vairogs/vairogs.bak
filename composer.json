@@ -71,24 +71,6 @@
         "twig/twig": "3.*"
     },
     "replace": {
-        "ravenflux/pagination": "self.version",
-        "ravenflux/php-functions": "self.version",
-        "ravenflux/ravenflux": "self.version",
-        "ravenflux/sort-functions": "self.version",
-        "ravenflux/vairogs-helper": "self.version",
-        "ravenflux/vairogs-helper-date": "self.version",
-        "ravenflux/vairogs-helper-email": "self.version",
-        "ravenflux/vairogs-helper-file": "self.version",
-        "ravenflux/vairogs-helper-generator": "self.version",
-        "ravenflux/vairogs-helper-gravatar": "self.version",
-        "ravenflux/vairogs-helper-http": "self.version",
-        "ravenflux/vairogs-helper-iter": "self.version",
-        "ravenflux/vairogs-helper-json": "self.version",
-        "ravenflux/vairogs-helper-php": "self.version",
-        "ravenflux/vairogs-helper-sort": "self.version",
-        "ravenflux/vairogs-helper-text": "self.version",
-        "ravenflux/vairogs-helper-uri": "self.version",
-        "ravenflux/vairogs-helper-util": "self.version",
         "vairogs/addon": "self.version",
         "vairogs/addon-auth": "self.version",
         "vairogs/addon-auth-openid": "self.version",
@@ -105,13 +87,13 @@
         "vairogs/sitemap": "self.version",
         "vairogs/twig": "self.version",
         "vairogs/twig-getenv": "self.version",
+        "vairogs/twig-pagination": "self.version",
         "vairogs/utils": "self.version"
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\": "src/Vairogs/",
-            "RavenFlux\\VairogsHelper\\": "src/RavenFlux/VairogsHelper",
-            "RavenFlux\\": "src/RavenFlux/"
+            "Vairogs\\Twig\\VairogsHelper\\": "src/Vairogs/Twig/VairogsHelper",
+            "Vairogs\\": "src/Vairogs/"
         }
     },
     "minimum-stability": "dev",

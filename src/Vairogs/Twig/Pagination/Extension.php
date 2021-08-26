@@ -1,14 +1,14 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\Pagination;
+namespace Vairogs\Twig\Pagination;
 
-use RavenFlux\Pagination\Behaviour\FixedLength;
+use Vairogs\Twig\Pagination\Behaviour\FixedLength;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Vairogs\Component\Utils\Twig\TwigTrait;
 use Vairogs\Component\Utils\Vairogs;
 
-class PaginationExtension extends AbstractExtension
+class Extension extends AbstractExtension
 {
     use TwigTrait;
 
