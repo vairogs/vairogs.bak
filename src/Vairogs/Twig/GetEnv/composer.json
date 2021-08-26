@@ -1,14 +1,12 @@
 {
-    "name": "ravenflux/getenv",
+    "name": "vairogs/twig-getenv",
     "description": "Twig extension that implements getenv in Twig template",
     "type": "library",
     "keywords": [
         "env",
         "getenv",
-        "ravenflux",
+        "vairogs",
         "symfony",
-        "symfony4",
-        "symfony5",
         "twig",
         "twig-extension"
     ],
@@ -48,7 +46,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RavenFlux\\GetEnv\\": ""
+            "Vairogs\\Twig\\GetEnv\\": ""
         }
     },
     "config": {

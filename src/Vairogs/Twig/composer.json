@@ -47,6 +47,9 @@
         "twig/twig": "3.*",
         "vairogs/utils": "3.x-dev"
     },
+    "replace": {
+        "vairogs/twig-getenv": "self.version"
+    },
     "autoload": {
         "psr-4": {
             "Vairogs\\Twig\\": ""

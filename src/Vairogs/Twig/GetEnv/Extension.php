@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace RavenFlux\GetEnv;
+namespace Vairogs\Twig\GetEnv;
 
 use JetBrains\PhpStorm\Pure;
 use Twig\Extension\AbstractExtension;
@@ -9,7 +9,7 @@ use Vairogs\Component\Utils\Twig\TwigTrait;
 use Vairogs\Component\Utils\Vairogs;
 use function getenv;
 
-class GetEnvExtension extends AbstractExtension
+class Extension extends AbstractExtension
 {
     use TwigTrait;
 

@@ -71,7 +71,6 @@
         "twig/twig": "3.*"
     },
     "replace": {
-        "ravenflux/getenv": "self.version",
         "ravenflux/pagination": "self.version",
         "ravenflux/php-functions": "self.version",
         "ravenflux/ravenflux": "self.version",
@@ -104,6 +103,8 @@
         "vairogs/extra-constants": "self.version",
         "vairogs/extra-specification": "self.version",
         "vairogs/sitemap": "self.version",
+        "vairogs/twig": "self.version",
+        "vairogs/twig-getenv": "self.version",
         "vairogs/utils": "self.version"
     },
     "autoload": {
