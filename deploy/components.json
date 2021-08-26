@@ -58,5 +58,13 @@
     {
         "path": "src/Vairogs/Extra/Constants",
         "repo": "https://GH@github.com/vairogs/extra-constants.git"
+    },
+    {
+        "path": "src/Vairogs/Twig",
+        "repo": "https://GH@github.com/vairogs/twig.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/GetEnv",
+        "repo": "https://GH@github.com/vairogs/twig-getenv.git"
     }
 ]
