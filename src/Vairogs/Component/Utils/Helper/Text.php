@@ -134,7 +134,8 @@ class Text
     /**
      * @Annotation\TwigFilter()
      */
-    #[Pure] public static function zero(string $input, int $length): string
+    #[Pure]
+    public static function zero(string $input, int $length): string
     {
         return str_pad($input, $length, '0', STR_PAD_LEFT);
     }
@@ -186,7 +187,8 @@ class Text
     /**
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function containsAny(string $haystack, string $needle): bool
+    #[Pure]
+    public static function containsAny(string $haystack, string $needle): bool
     {
         return false !== strpbrk($haystack, $needle);
     }
@@ -194,7 +196,8 @@ class Text
     /**
      * @Annotation\TwigFilter()
      */
-    #[Pure] public static function reverse(string $string): string
+    #[Pure]
+    public static function reverse(string $string): string
     {
         return iconv('UTF-32LE', 'UTF-8', strrev(iconv('UTF-8', 'UTF-32BE', $string)));
     }
@@ -210,7 +213,8 @@ class Text
     /**
      * @Annotation\TwigFilter()
      */
-    #[Pure] public static function sanitizeFloat(string $string): float
+    #[Pure]
+    public static function sanitizeFloat(string $string): float
     {
         return (float)filter_var($string, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }

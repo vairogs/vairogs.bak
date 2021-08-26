@@ -29,7 +29,8 @@ class Sitemap
     /**
      * @return bool
      */
-    #[Pure] public function hasImages(): bool
+    #[Pure]
+    public function hasImages(): bool
     {
         foreach ($this->getUrls() as $url) {
             if ($url->hasImages()) {
@@ -63,7 +64,8 @@ class Sitemap
     /**
      * @return bool
      */
-    #[Pure] public function hasVideos(): bool
+    #[Pure]
+    public function hasVideos(): bool
     {
         foreach ($this->getUrls() as $url) {
             if ($url->hasVideos()) {

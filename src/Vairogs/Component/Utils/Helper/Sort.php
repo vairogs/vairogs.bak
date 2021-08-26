@@ -114,7 +114,8 @@ class Sort
     /**
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function isSortable(mixed $item, mixed $field): bool
+    #[Pure]
+    public static function isSortable(mixed $item, mixed $field): bool
     {
         if (is_array($item)) {
             return array_key_exists($field, $item);

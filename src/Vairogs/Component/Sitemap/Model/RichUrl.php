@@ -33,7 +33,8 @@ class RichUrl extends Url
     /**
      * @return bool
      */
-    #[Pure] public function hasAlternates(): bool
+    #[Pure]
+    public function hasAlternates(): bool
     {
         return !empty($this->getAlternateUrls());
     }

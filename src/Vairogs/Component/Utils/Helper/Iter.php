@@ -53,7 +53,8 @@ class Iter
     /**
      * @Annotation\TwigFilter()
      */
-    #[Pure] public static function unique(array $input, bool $keepKeys = false): array
+    #[Pure]
+    public static function unique(array $input, bool $keepKeys = false): array
     {
         if ($keepKeys) {
             return array_unique($input);
@@ -65,7 +66,8 @@ class Iter
     /**
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function isMultiDimensional(array $keys = []): bool
+    #[Pure]
+    public static function isMultiDimensional(array $keys = []): bool
     {
         foreach ($keys as $key) {
             if (is_array($key)) {
@@ -79,7 +81,8 @@ class Iter
     /**
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function isAnyKeyNull(array $keys = []): bool
+    #[Pure]
+    public static function isAnyKeyNull(array $keys = []): bool
     {
         return in_array(null, $keys, true);
     }
@@ -110,7 +113,8 @@ class Iter
     /**
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function isAssociative(array $array): bool
+    #[Pure]
+    public static function isAssociative(array $array): bool
     {
         if ([] === $array) {
             return false;

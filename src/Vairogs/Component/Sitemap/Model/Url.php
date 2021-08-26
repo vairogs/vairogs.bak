@@ -131,7 +131,8 @@ class Url
     /**
      * @return string
      */
-    #[Pure] public function getPriority(): string
+    #[Pure]
+    public function getPriority(): string
     {
         return number_format($this->priority, 2);
     }
@@ -175,7 +176,8 @@ class Url
     /**
      * @return array
      */
-    #[Pure] public function toArray(): array
+    #[Pure]
+    public function toArray(): array
     {
         return get_object_vars($this);
     }
@@ -183,7 +185,8 @@ class Url
     /**
      * @return bool
      */
-    #[Pure] public function hasVideos(): bool
+    #[Pure]
+    public function hasVideos(): bool
     {
         return !empty($this->getVideos());
     }
@@ -211,7 +214,8 @@ class Url
     /**
      * @return bool
      */
-    #[Pure] public function hasImages(): bool
+    #[Pure]
+    public function hasImages(): bool
     {
         return !empty($this->getImages());
     }

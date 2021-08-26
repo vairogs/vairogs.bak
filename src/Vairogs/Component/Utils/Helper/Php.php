@@ -58,7 +58,8 @@ class Php
     /**
      * @Annotation\TwigFilter()
      */
-    #[Pure] public static function boolval(mixed $value): bool
+    #[Pure]
+    public static function boolval(mixed $value): bool
     {
         if (is_bool($value)) {
             return $value;

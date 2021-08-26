@@ -137,7 +137,8 @@ class Uri
     /**
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function isUrl(string $url): bool
+    #[Pure]
+    public static function isUrl(string $url): bool
     {
         $url = filter_var($url, FILTER_SANITIZE_URL);
 

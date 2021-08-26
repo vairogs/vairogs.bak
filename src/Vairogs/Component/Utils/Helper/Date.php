@@ -148,7 +148,8 @@ class Date
     /**
      * @Annotation\TwigFilter()
      */
-    #[Pure] public static function format(int|float $timestamp): string
+    #[Pure]
+    public static function format(int|float $timestamp): string
     {
         $str = '';
         $timestamp = round($timestamp * 1000);
@@ -173,7 +174,8 @@ class Date
     /**
      * @Annotation\TwigFilter()
      */
-    #[Pure] public static function formatToArray(int|float $timestamp): array
+    #[Pure]
+    public static function formatToArray(int|float $timestamp): array
     {
         $timestamp = round($timestamp * 1000);
         $result = [];

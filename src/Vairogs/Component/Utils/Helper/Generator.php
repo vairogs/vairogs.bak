@@ -53,7 +53,8 @@ class Generator
     /**
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
+    #[Pure]
+    public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
     {
         /** @noinspection NonSecureStrShuffleUsageInspection */
         return substr(str_shuffle(str_repeat($chars, (int)ceil((int)(strlen($chars) / $length)))), 0, $length);

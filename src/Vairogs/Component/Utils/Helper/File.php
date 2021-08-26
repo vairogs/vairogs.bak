@@ -30,7 +30,8 @@ class File
     /**
      * @Annotation\TwigFunction()
      */
-    #[Pure] public static function fileExistsPublic(string $filename): bool
+    #[Pure]
+    public static function fileExistsPublic(string $filename): bool
     {
         return is_file(getcwd() . '/' . $filename);
     }
