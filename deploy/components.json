@@ -130,7 +130,7 @@
     {
         "path": "src/Vairogs/Twig/Helper/Uri",
         "repo": "https://GH@github.com/vairogs/twig-helper-uri.git"
-    ,
+    },
     {
         "path": "src/Vairogs/Twig/Helper/Util",
         "repo": "https://GH@github.com/vairogs/twig-helper-util.git"
