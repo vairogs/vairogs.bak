@@ -34,37 +34,23 @@ class OpenIDProvider
     protected ?Request $request;
     protected ?string $profileUrl;
 
-    /**
-     * @param RequestStack $requestStack
-     * @param RouterInterface $router
-     * @param string $name
-     * @param string $cacheDir
-     * @param array $options
-     */
     public function __construct(RequestStack $requestStack, protected RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
     {
         $this->request = $requestStack->getCurrentRequest();
         $this->profileUrl = $this->options['provider_options']['profile_url'] ?? null;
     }
 
-    /**
-     * @return array
-     */
     public function getOptions(): array
     {
         return $this->options;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return OpenIDUser|null
      * @throws JsonException
      */
     public function fetchUser(): ?OpenIDUser
@@ -100,11 +86,6 @@ class OpenIDProvider
         return $user;
     }
 
-    /**
-     * @param int $timeout
-     *
-     * @return string|null
-     */
     public function validate(int $timeout = 30): ?string
     {
         $get = $this->request->query->all();
@@ -135,9 +116,6 @@ class OpenIDProvider
     }
 
     /**
-     * @param null|string $openID
-     *
-     * @return mixed
      * @throws JsonException
      */
     private function getData(?string $openID = null): mixed
@@ -149,9 +127,6 @@ class OpenIDProvider
         return null;
     }
 
-    /**
-     * @return RedirectResponse
-     */
     public function redirect(): RedirectResponse
     {
         $redirectUri = $this->router->generate($this->options['redirect_route'], $this->options['provider_options']['redirect_route_params'] ?? [], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -159,15 +134,9 @@ class OpenIDProvider
         return new RedirectResponse($this->urlPath($redirectUri));
     }
 
-    /**
-     * @param string|null $return
-     * @param string|null $altRealm
-     *
-     * @return string
-     */
     public function urlPath(?string $return = null, ?string $altRealm = null): string
     {
-        $realm = $altRealm ?: Http::getSchema($this->request) . $this->request->server->get('HTTP_HOST');
+        $realm = $altRealm ?: (Http::getSchema($this->request) . $this->request->server->get('HTTP_HOST'));
         if (null !== $return) {
             if (!$this->validateUrl($return)) {
                 throw new RuntimeException('error_oauth_invalid_return_url');
@@ -179,22 +148,12 @@ class OpenIDProvider
         return $this->options['openid_url'] . '/' . $this->options['api_key'] . '/?' . http_build_query($this->getParams($return, $realm));
     }
 
-    /**
-     * @param string $url
-     *
-     * @return bool
-     */
-    #[Pure] private function validateUrl(string $url): bool
+    #[Pure]
+    private function validateUrl(string $url): bool
     {
         return Uri::isUrl($url);
     }
 
-    /**
-     * @param string $return
-     * @param string|null $realm
-     *
-     * @return array
-     */
     #[ArrayShape(['openid.ns' => "string", 'openid.mode' => "string", 'openid.return_to' => "string|string[]", 'openid.realm' => "null|string", 'openid.identity' => "string", 'openid.claimed_id' => "string", 'openid.sreg.required' => "array|mixed", 'openid.ns.sreg' => "string"])]
     private function getParams(string $return, ?string $realm): array
     {

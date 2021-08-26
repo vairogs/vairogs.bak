@@ -17,7 +17,6 @@ use Vairogs\Component\Utils\Vairogs;
 class AuthOpenIDDependency implements Dependency
 {
     /**
-     * @inheritDoc
      * @noinspection PhpPossiblePolymorphicInvocationInspection
      */
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
@@ -40,9 +39,6 @@ class AuthOpenIDDependency implements Dependency
         // @formatter:on
     }
 
-    /**
-     * @inheritDoc
-     */
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         $baseKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID;
@@ -66,7 +62,6 @@ class AuthOpenIDDependency implements Dependency
     }
 
     /**
-     * @param ArrayNodeDefinition $arrayNodeDefinition
      * @noinspection NullPointerExceptionInspection
      */
     private function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
@@ -89,12 +84,6 @@ class AuthOpenIDDependency implements Dependency
         $optionsNode->end();
     }
 
-    /**
-     * @param ContainerBuilder $containerBuilder
-     * @param string $clientServiceKey
-     * @param string $base
-     * @param string $key
-     */
     private function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
     {
         $clientDefinition = $containerBuilder->register($clientServiceKey, OpenIDProvider::class);

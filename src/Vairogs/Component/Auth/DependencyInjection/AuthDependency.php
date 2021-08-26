@@ -13,9 +13,6 @@ use function class_exists;
 
 class AuthDependency implements Dependency
 {
-    /**
-     * @inheritDoc
-     */
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
@@ -36,9 +33,6 @@ class AuthDependency implements Dependency
         // @formatter:on
     }
 
-    /**
-     * @param ArrayNodeDefinition $arrayNodeDefinition
-     */
     private function appendOpenIDConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(AuthOpenIDDependency::class)) {
@@ -46,9 +40,6 @@ class AuthDependency implements Dependency
         }
     }
 
-    /**
-     * @inheritDoc
-     */
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         $enabledKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.enabled';
