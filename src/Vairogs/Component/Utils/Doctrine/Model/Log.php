@@ -45,7 +45,7 @@ abstract class Log
         return $this->message;
     }
 
-    public function setMessage(string $message): Log
+    public function setMessage(string $message): static
     {
         $this->message = $message;
         return $this;
@@ -56,7 +56,7 @@ abstract class Log
         return $this->context;
     }
 
-    public function setContext(array $context): Log
+    public function setContext(array $context): static
     {
         $this->context = $context;
         return $this;
@@ -67,7 +67,7 @@ abstract class Log
         return $this->level;
     }
 
-    public function setLevel(int $level): Log
+    public function setLevel(int $level): static
     {
         $this->level = $level;
         return $this;
@@ -78,7 +78,7 @@ abstract class Log
         return $this->levelName;
     }
 
-    public function setLevelName(string $levelName): Log
+    public function setLevelName(string $levelName): static
     {
         $this->levelName = $levelName;
         return $this;
@@ -89,7 +89,7 @@ abstract class Log
         return $this->extra;
     }
 
-    public function setExtra(array $extra): Log
+    public function setExtra(array $extra): static
     {
         $this->extra = $extra;
         return $this;

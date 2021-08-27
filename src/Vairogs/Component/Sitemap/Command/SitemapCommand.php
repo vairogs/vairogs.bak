@@ -23,6 +23,8 @@ use function unlink;
 
 class SitemapCommand extends Command
 {
+    private const HOST = 'host';
+
     protected static $defaultName = 'vairogs:sitemap';
     private array $options;
     private Provider $provider;
@@ -39,15 +41,15 @@ class SitemapCommand extends Command
 
     protected function configure(): void
     {
-        $host = $this->options['host'] ?? null;
+        $host = $this->options[self::HOST] ?? null;
         $this->setDescription('Regenerate sitemap.xml')
-            ->addArgument('host', $host ? InputArgument::OPTIONAL : InputArgument::REQUIRED, 'host to use in sitemap', $this->options['host'])
+            ->addArgument(self::HOST, $host ? InputArgument::OPTIONAL : InputArgument::REQUIRED, 'host to use in sitemap', $this->options[self::HOST])
             ->addOption('filename', null, InputOption::VALUE_OPTIONAL, 'sitemap filename if not sitemap.xml', 'sitemap.xml');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $sitemap = $this->provider->populate($input->getArgument('host'));
+        $sitemap = $this->provider->populate($input->getArgument(self::HOST));
         $constraintViolationList = $this->validator->validate($sitemap);
         if (0 !== $constraintViolationList->count()) {
             foreach ($constraintViolationList as $error) {

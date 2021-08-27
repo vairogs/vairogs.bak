@@ -40,7 +40,7 @@ class VairogsExtension extends Extension
         return Vairogs::VAIROGS;
     }
 
-    private function processComponents(ContainerBuilder $container, ConfigurationInterface $configuration): void
+    private function processComponents(ContainerBuilder $container, Configuration $configuration): void
     {
         $this->processCacheComponent($container, $configuration);
         $this->processAuthComponent($container, $configuration);

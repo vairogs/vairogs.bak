@@ -127,7 +127,7 @@ class Steam implements OpenIDUser, User, Stringable
     #[Pure]
     public function __toString(): string
     {
-        return $this->getOpenID();
+        return $this->openID;
     }
 
     public function getOpenID(): string

@@ -9,7 +9,7 @@ class Sitemap
 {
     protected array $urls = [];
 
-    public function addUrl(Url $url): Sitemap
+    public function addUrl(Url $url): static
     {
         $this->urls[] = $url;
 
@@ -19,7 +19,7 @@ class Sitemap
     #[Pure]
     public function hasImages(): bool
     {
-        foreach ($this->getUrls() as $url) {
+        foreach ($this->urls as $url) {
             if ($url->hasImages()) {
                 return true;
             }
@@ -33,7 +33,7 @@ class Sitemap
         return $this->urls;
     }
 
-    public function setUrls(array $urls): Sitemap
+    public function setUrls(array $urls): static
     {
         $this->urls = $urls;
 
@@ -43,7 +43,7 @@ class Sitemap
     #[Pure]
     public function hasVideos(): bool
     {
-        foreach ($this->getUrls() as $url) {
+        foreach ($this->urls as $url) {
             if ($url->hasVideos()) {
                 return true;
             }
@@ -54,7 +54,7 @@ class Sitemap
 
     public function hasAlternates(): bool
     {
-        foreach ($this->getUrls() as $url) {
+        foreach ($this->urls as $url) {
             if (method_exists($url, 'hasAlternates') && $url->hasAlternates()) {
                 return true;
             }

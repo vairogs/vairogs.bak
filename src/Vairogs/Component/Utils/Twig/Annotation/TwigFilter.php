@@ -2,12 +2,13 @@
 
 namespace Vairogs\Component\Utils\Twig\Annotation;
 
+use Attribute;
 use Doctrine\Common\Annotations\Annotation;
 
 /**
  * @Annotation
  */
+#[Attribute]
 final class TwigFilter
 {
-
 }

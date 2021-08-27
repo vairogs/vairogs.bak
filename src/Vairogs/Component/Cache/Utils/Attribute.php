@@ -18,6 +18,8 @@ use function sprintf;
 
 class Attribute
 {
+    private const _ROUTE_PARAMS = '_route_params';
+
     public function __construct(protected Reader $reader, protected ?TokenStorageInterface $tokenStorage = null)
     {
     }
@@ -33,15 +35,15 @@ class Attribute
 
             $user = $this->getUser();
             return match ($annotation->getStrategy()) {
-                Strategy::GET => $request->attributes->get('_route_params') + $request->query->all(),
+                Strategy::GET => $request->attributes->get(self::_ROUTE_PARAMS) + $request->query->all(),
                 Strategy::POST => $request->request->all(),
                 Strategy::USER => $user,
                 Strategy::MIXED => [
-                    Strategy::GET => $request->attributes->get('_route_params') + $request->query->all(),
+                    Strategy::GET => $request->attributes->get(self::_ROUTE_PARAMS) + $request->query->all(),
                     Strategy::POST => $request->request->all(),
                     Strategy::USER => $user,
                 ],
-                Strategy::ALL => $request->attributes->get('_route_params') + $request->query->all() + $request->request->all() + $user,
+                Strategy::ALL => $request->attributes->get(self::_ROUTE_PARAMS) + $request->query->all() + $request->request->all() + $user,
                 default => throw new InvalidArgumentException(sprintf('Unknown strategy: %s', $annotation->getStrategy())),
             };
         }

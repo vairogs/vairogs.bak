@@ -18,6 +18,7 @@ class Http
     private const HEADER_PORT = 'SERVER_PORT';
     private const HEADER_SSL = 'HTTP_X_FORWARDED_SSL';
     private const HEADER_PROTO = 'HTTP_X_FORWARDED_PROTO';
+    private const REMOTE_ADDR = 'REMOTE_ADDR';
 
     /**
      * @Annotation\TwigFilter()
@@ -55,7 +56,7 @@ class Http
     public static function getRemoteIp(Request $request, bool $trust = false): string
     {
         if (!$trust) {
-            return $request->server->get('REMOTE_ADDR');
+            return $request->server->get(self::REMOTE_ADDR);
         }
 
         $parameters = [
@@ -70,7 +71,7 @@ class Http
             }
         }
 
-        return $request->server->get('REMOTE_ADDR');
+        return $request->server->get(self::REMOTE_ADDR);
     }
 
     /**
@@ -82,7 +83,7 @@ class Http
             return $request->server->get('HTTP_CF_CONNECTING_IP');
         }
 
-        return $request->server->get('REMOTE_ADDR');
+        return $request->server->get(self::REMOTE_ADDR);
     }
 
     /**

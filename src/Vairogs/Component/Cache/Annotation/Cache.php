@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Cache\Annotation;
 
+use Attribute;
 use Doctrine\Common\Annotations\Annotation;
 use Vairogs\Component\Cache\Utils\Strategy;
 use Vairogs\Component\Utils\Helper\Iter;
@@ -14,6 +15,7 @@ use function str_replace;
  * @Annotation
  * @Annotation\Target({"METHOD"})
  */
+#[Attribute]
 class Cache
 {
     private const ALGORITHM = 'sha1';
@@ -25,12 +27,12 @@ class Cache
 
     public function getKey(string $prefix = ''): string
     {
-        $value = $this->getData();
+        $value = $this->data;
         if (!is_array($value)) {
             $key = $value ?: '';
         } else {
-            if (!empty($this->getAttributes())) {
-                $flipped = Iter::arrayFlipRecursive($this->getAttributes());
+            if (!empty($this->attributes)) {
+                $flipped = Iter::arrayFlipRecursive($this->attributes);
                 $value = Iter::arrayIntersectKeyRecursive($value, $flipped);
             }
 
@@ -45,7 +47,7 @@ class Cache
         return $this->data;
     }
 
-    public function setData(mixed $data): Cache
+    public function setData(mixed $data): static
     {
         $this->data = $data;
 
@@ -57,19 +59,19 @@ class Cache
         return $this->attributes;
     }
 
-    public function getStrategy(): ?string
+    public function getStrategy(): string
     {
         return $this->strategy;
     }
 
-    public function setStrategy(string $strategy): Cache
+    public function setStrategy(string $strategy): static
     {
         $this->strategy = $strategy;
 
         return $this;
     }
 
-    public function getExpires(): ?int
+    public function getExpires(): int
     {
         return $this->expires;
     }

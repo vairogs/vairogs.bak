@@ -9,8 +9,8 @@ use ReflectionException;
 use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
-use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -76,14 +76,12 @@ class CacheEventListener implements EventSubscriberInterface
                 $response = $this->getCache($key);
             }
             if (null !== $response) {
-                $controllerEvent->setController(static function () use ($response) {
-                    return $response;
-                });
+                $controllerEvent->setController(static fn () => $response);
             }
         }
     }
 
-    private function check(KernelEvent $kernelEvent): bool
+    private function check(ControllerEvent|RequestEvent|ResponseEvent $kernelEvent): bool
     {
         if (!$this->enabled || !$kernelEvent->isMainRequest()) {
             return false;
@@ -163,7 +161,7 @@ class CacheEventListener implements EventSubscriberInterface
     /**
      * @throws InvalidArgumentException
      */
-    private function setCache(string $key, mixed $value, ?int $expires): void
+    private function setCache(string $key, Response $value, ?int $expires): void
     {
         $cache = $this->client->getItem($key);
         $cache->set($value);

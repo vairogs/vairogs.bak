@@ -6,11 +6,11 @@ use JetBrains\PhpStorm\Pure;
 
 class RichUrl extends Url
 {
-    protected array $alternateUrl = [];
+    protected array $alternateUrls = [];
 
-    public function addAlternateUrl(string $locale, string $url): Url
+    public function addAlternateUrl(string $locale, string $url): static
     {
-        $this->alternateUrl[$locale] = $url;
+        $this->alternateUrls[$locale] = $url;
 
         return $this;
     }
@@ -18,11 +18,11 @@ class RichUrl extends Url
     #[Pure]
     public function hasAlternates(): bool
     {
-        return !empty($this->getAlternateUrls());
+        return !empty($this->alternateUrls);
     }
 
     public function getAlternateUrls(): array
     {
-        return $this->alternateUrl;
+        return $this->alternateUrls;
     }
 }

@@ -31,13 +31,16 @@ use function urldecode;
 
 class OpenIDProvider
 {
+    private const PROVIDER_OPTIONS = 'provider_options';
+    private const STRING = 'string';
+
     protected Request $request;
     protected ?string $profileUrl;
 
     public function __construct(RequestStack $requestStack, protected RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
     {
         $this->request = $requestStack->getCurrentRequest();
-        $this->profileUrl = $this->options['provider_options']['profile_url'] ?? null;
+        $this->profileUrl = $this->options[self::PROVIDER_OPTIONS]['profile_url'] ?? null;
     }
 
     public function getOptions(): array
@@ -66,8 +69,8 @@ class OpenIDProvider
             if (null === $this->profileUrl) {
                 $user = $builder->getUser($this->request->query->all());
             } else {
-                foreach ($this->options['provider_options']['profile_url_replace'] as $option) {
-                    if (null !== ($replace = $this->options[$option] ?? $this->options['provider_options'][$option] ?? null)) {
+                foreach ($this->options[self::PROVIDER_OPTIONS]['profile_url_replace'] as $option) {
+                    if (null !== ($replace = $this->options[$option] ?? $this->options[self::PROVIDER_OPTIONS][$option] ?? null)) {
                         $this->profileUrl = str_replace(sprintf('#%s#', $option), $replace, $this->profileUrl);
                     }
                 }
@@ -128,7 +131,7 @@ class OpenIDProvider
 
     public function redirect(): RedirectResponse
     {
-        $redirectUri = $this->router->generate($this->options['redirect_route'], $this->options['provider_options']['redirect_route_params'] ?? [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $redirectUri = $this->router->generate($this->options['redirect_route'], $this->options[self::PROVIDER_OPTIONS]['redirect_route_params'] ?? [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         return new RedirectResponse($this->urlPath($redirectUri));
     }
@@ -153,11 +156,11 @@ class OpenIDProvider
         return Uri::isUrl($url);
     }
 
-    #[ArrayShape(['openid.ns' => "string", 'openid.mode' => "string", 'openid.return_to' => "string|string[]", 'openid.realm' => "null|string", 'openid.identity' => "string", 'openid.claimed_id' => "string", 'openid.sreg.required' => "array|mixed", 'openid.ns.sreg' => "string"])]
+    #[ArrayShape(['openid.ns' => self::STRING, 'openid.mode' => self::STRING, 'openid.return_to' => "string|string[]", 'openid.realm' => "null|string", 'openid.identity' => self::STRING, 'openid.claimed_id' => self::STRING, 'openid.sreg.required' => "array|mixed", 'openid.ns.sreg' => self::STRING])]
     private function getParams(string $return, ?string $realm): array
     {
-        if (isset($this->options['provider_options']['replace'])) {
-            $opt = $this->options['provider_options']['replace'];
+        if (isset($this->options[self::PROVIDER_OPTIONS]['replace'])) {
+            $opt = $this->options[self::PROVIDER_OPTIONS]['replace'];
             $return = str_replace(array_keys($opt), $opt, $return);
         }
 
@@ -169,9 +172,9 @@ class OpenIDProvider
             'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
             'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
         ];
-        if ('sreg' === ($this->options['provider_options']['ns_mode'] ?? '')) {
+        if ('sreg' === ($this->options[self::PROVIDER_OPTIONS]['ns_mode'] ?? '')) {
             $params['openid.ns.sreg'] = 'http://openid.net/extensions/sreg/1.1';
-            $params['openid.sreg.required'] = $this->options['provider_options']['sreg_fields'] ?? [];
+            $params['openid.sreg.required'] = $this->options[self::PROVIDER_OPTIONS]['sreg_fields'] ?? [];
         }
 
         return $params;

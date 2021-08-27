@@ -19,7 +19,7 @@ class OpenIDRegistry
 
     public function getClient(string $name): OpenIDProvider
     {
-        foreach ($this->getClients() as $client) {
+        foreach ($this->clients as $client) {
             if ($name === $client->getName()) {
                 return $client;
             }

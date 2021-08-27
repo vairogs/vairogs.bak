@@ -15,7 +15,7 @@ class SitemapIndex
         return $this->loc;
     }
 
-    public function setLoc(string $loc): SitemapIndex
+    public function setLoc(string $loc): static
     {
         $this->loc = $loc;
 
@@ -27,7 +27,7 @@ class SitemapIndex
         return $this->lastmod;
     }
 
-    public function setLastmod(?DateTimeInterface $lastmod): SitemapIndex
+    public function setLastmod(?DateTimeInterface $lastmod): static
     {
         $this->lastmod = $lastmod;
 

@@ -200,7 +200,7 @@ class Date
     /**
      * @Annotation\TwigFilter()
      */
-    public static function formatDate(string $string, string $format = self::FORMAT): ?string
+    public static function formatDate(string $string, string $format = self::FORMAT): string
     {
         return DateTime::createFromFormat($format, $string)?->format(self::FORMAT);
     }

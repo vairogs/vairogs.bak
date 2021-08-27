@@ -89,7 +89,7 @@ class Url
     #[Pure]
     public function hasVideos(): bool
     {
-        return !empty($this->getVideos());
+        return !empty($this->videos);
     }
 
     public function getVideos(): array
@@ -107,7 +107,7 @@ class Url
     #[Pure]
     public function hasImages(): bool
     {
-        return !empty($this->getImages());
+        return !empty($this->images);
     }
 
     public function getImages(): array

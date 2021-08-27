@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class RequestProcessor
 {
+    private const EXTRA = 'extra';
+
     protected ?Request $request;
 
     public function __construct(RequestStack $requestStack)
@@ -16,27 +18,27 @@ class RequestProcessor
 
     public function processRecord(array $record): array
     {
-        $record['extra'] = [];
+        $record[self::EXTRA] = [];
         if (null !== $this->request) {
-            $record['extra']['client_ip'] = $this->request->getClientIp();
-            $record['extra']['client_port'] = $this->request->getPort();
-            $record['extra']['uri'] = $this->request->getUri();
-            $record['extra']['method'] = $this->request->getMethod();
+            $record[self::EXTRA]['client_ip'] = $this->request->getClientIp();
+            $record[self::EXTRA]['client_port'] = $this->request->getPort();
+            $record[self::EXTRA]['uri'] = $this->request->getUri();
+            $record[self::EXTRA]['method'] = $this->request->getMethod();
 
             if (null !== $queryString = $this->request->getQueryString()) {
-                $record['extra']['query_string'] = $queryString;
+                $record[self::EXTRA]['query_string'] = $queryString;
             }
 
             if ([] !== $post = $this->request->request->all()) {
-                $record['extra']['POST'] = $post;
+                $record[self::EXTRA]['POST'] = $post;
             }
 
             if ([] !== $get = $this->request->query->all()) {
-                $record['extra']['GET'] = $get;
+                $record[self::EXTRA]['GET'] = $get;
             }
 
             if ([] !== $files = $this->request->files->all()) {
-                $record['extra']['FILES'] = $files;
+                $record[self::EXTRA]['FILES'] = $files;
             }
         }
 

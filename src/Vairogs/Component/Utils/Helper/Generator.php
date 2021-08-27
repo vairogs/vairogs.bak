@@ -102,63 +102,63 @@ class Generator
         return array_rand($array);
     }
 
-    public function useLower(): Generator
+    public function useLower(): static
     {
         $this->sets[self::LOWER] = $this->lowerCase;
 
         return $this;
     }
 
-    public function useUpper(): Generator
+    public function useUpper(): static
     {
         $this->sets[self::UPPER] = $this->upperCase;
 
         return $this;
     }
 
-    public function useDigits(): Generator
+    public function useDigits(): static
     {
         $this->sets[self::DIGITS] = $this->digits;
 
         return $this;
     }
 
-    public function useSymbols(): Generator
+    public function useSymbols(): static
     {
         $this->sets[self::SYMBOLS] = $this->symbols;
 
         return $this;
     }
 
-    public function setLowerCase(string $lowerCase): Generator
+    public function setLowerCase(string $lowerCase): static
     {
         $this->lowerCase = $lowerCase;
 
         return $this;
     }
 
-    public function setUpperCase(string $upperCase): Generator
+    public function setUpperCase(string $upperCase): static
     {
         $this->upperCase = $upperCase;
 
         return $this;
     }
 
-    public function setDigits(string $digits): Generator
+    public function setDigits(string $digits): static
     {
         $this->digits = $digits;
 
         return $this;
     }
 
-    public function setSymbols(string $symbols): Generator
+    public function setSymbols(string $symbols): static
     {
         $this->symbols = $symbols;
 
         return $this;
     }
 
-    public function reset(): Generator
+    public function reset(): static
     {
         $this->sets = [];
 

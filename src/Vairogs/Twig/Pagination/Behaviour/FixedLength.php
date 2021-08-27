@@ -13,9 +13,7 @@ final class FixedLength
 {
     public const MIN_VISIBLE = 3;
 
-    private int $maximumVisible;
-
-    public function __construct(int $maximumVisible)
+    public function __construct(private int $maximumVisible)
     {
         $this->setMaximumVisible($maximumVisible);
     }
@@ -28,7 +26,7 @@ final class FixedLength
         $this->maximumVisible = $maximumVisible;
     }
 
-    public function withMaximumVisible(int $maximumVisible): FixedLength
+    public function withMaximumVisible(int $maximumVisible): static
     {
         $clone = clone $this;
         $clone->setMaximumVisible($maximumVisible);

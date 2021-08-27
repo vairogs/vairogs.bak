@@ -15,7 +15,7 @@ class Image
         return $this->loc;
     }
 
-    public function setLoc(string $loc): Image
+    public function setLoc(string $loc): static
     {
         $this->loc = $loc;
 
@@ -27,7 +27,7 @@ class Image
         return $this->caption;
     }
 
-    public function setCaption(?string $caption): Image
+    public function setCaption(?string $caption): static
     {
         $this->caption = $caption;
 
@@ -39,7 +39,7 @@ class Image
         return $this->geoLocation;
     }
 
-    public function setGeoLocation(?string $geoLocation): Image
+    public function setGeoLocation(?string $geoLocation): static
     {
         $this->geoLocation = $geoLocation;
 
@@ -51,7 +51,7 @@ class Image
         return $this->title;
     }
 
-    public function setTitle(?string $title): Image
+    public function setTitle(?string $title): static
     {
         $this->title = $title;
 
@@ -63,7 +63,7 @@ class Image
         return $this->license;
     }
 
-    public function setLicense(?string $license): Image
+    public function setLicense(?string $license): static
     {
         $this->license = $license;
 
