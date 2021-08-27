@@ -2,15 +2,12 @@
 
 namespace Vairogs\Component\Utils\Router;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use function in_array;
 
 final class LocaleResolver
 {
     use LocaleResolverTrait;
-
-    private ?Request $request = null;
 
     public function __construct(private string $defaultLocale, private array $availableLocales = [])
     {

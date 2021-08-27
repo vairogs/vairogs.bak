@@ -14,6 +14,7 @@ trait LocaleResolverTrait
 {
     protected string $cookieName;
     protected array $hostMap;
+    protected ?Request $request = null;
 
     public function resolveLocale(Request $request, array $availableLocales): mixed
     {
