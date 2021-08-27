@@ -81,16 +81,18 @@ class Attribute
     {
         $user = $this->tokenStorage?->getToken()?->getUser();
 
-        if (method_exists($user, 'toArray')) {
-            return $user->toArray();
-        }
+        if (null !== $user) {
+            if (method_exists($user, 'toArray')) {
+                return $user->toArray();
+            }
 
-        if (method_exists($user, '__toArray')) {
-            return $user->__toArray();
-        }
+            if (method_exists($user, '__toArray')) {
+                return $user->__toArray();
+            }
 
-        if ($user instanceof JsonSerializable) {
-            return $user->jsonSerialize();
+            if ($user instanceof JsonSerializable) {
+                return $user->jsonSerialize();
+            }
         }
 
         return [];

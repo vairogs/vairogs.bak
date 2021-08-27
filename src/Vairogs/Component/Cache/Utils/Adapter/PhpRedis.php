@@ -13,7 +13,7 @@ use function sprintf;
 
 class PhpRedis implements Cache
 {
-    public function __construct(private Redis $client)
+    public function __construct(private Redis $client, private string $namespace = Vairogs::VAIROGS)
     {
         if (!class_exists(SncRedisBundle::class) || !class_exists(Redis::class)) {
             throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'ext-redis', self::class));
@@ -22,6 +22,6 @@ class PhpRedis implements Cache
 
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new RedisAdapter($this->client, Vairogs::VAIROGS, 0);
+        return new RedisAdapter($this->client, $this->namespace, 0);
     }
 }

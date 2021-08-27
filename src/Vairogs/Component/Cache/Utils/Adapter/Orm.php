@@ -17,7 +17,7 @@ use function sprintf;
 
 class Orm implements Cache
 {
-    public function __construct(private EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager, private string $namespace = Vairogs::VAIROGS)
     {
         if (!interface_exists(Driver::class) || !class_exists(Query::class)) {
             throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'doctrine/orm', 'doctrine/dbal', self::class));
@@ -29,7 +29,7 @@ class Orm implements Cache
      */
     public function getAdapter(): CacheItemPoolInterface
     {
-        $table = sprintf('%s_items', Vairogs::VAIROGS);
+        $table = sprintf('%s_items', $this->namespace);
         $schemaManager = $this->entityManager->getConnection()
             ->getSchemaManager();
         $pdoAdapter = new PdoAdapter($this->entityManager->getConnection(), '', 0, ['db_table' => $table]);

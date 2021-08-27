@@ -14,7 +14,7 @@ use function sprintf;
 
 class Predis implements Cache
 {
-    public function __construct(private ClientInterface $client)
+    public function __construct(private ClientInterface $client, private string $namespace = Vairogs::VAIROGS)
     {
         if (!class_exists(SncRedisBundle::class) || !interface_exists(ClientInterface::class)) {
             throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'predis/predis', self::class));
@@ -23,6 +23,6 @@ class Predis implements Cache
 
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new RedisAdapter($this->client, Vairogs::VAIROGS, 0);
+        return new RedisAdapter($this->client, $this->namespace, 0);
     }
 }

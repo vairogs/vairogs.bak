@@ -9,11 +9,15 @@ use Vairogs\Component\Utils\Vairogs;
 
 class File implements Cache
 {
+    public function __construct(private string $namespace = Vairogs::VAIROGS)
+    {
+    }
+
     /**
      * @throws CacheException
      */
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new PhpFilesAdapter(Vairogs::VAIROGS, 0);
+        return new PhpFilesAdapter($this->namespace, 0);
     }
 }
