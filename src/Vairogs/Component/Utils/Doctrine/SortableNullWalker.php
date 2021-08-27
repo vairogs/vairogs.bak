@@ -34,7 +34,7 @@ class SortableNullWalker extends SqlWalker
                 case (new MySqlPlatform())->getName():
                     foreach ($fields as $field => $sorting) {
                         if (self::NULLS_LAST === $sorting) {
-                            $sql = preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') ('.Criteria::ASC.'|'.Criteria::DESC.')/i', static function ($matches): string {
+                            $sql = preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') (' . Criteria::ASC . '|' . Criteria::DESC . ')/i', static function ($matches): string {
                                 if (Criteria::ASC === $matches[3]) {
                                     $order = Criteria::DESC;
                                 } elseif (Criteria::DESC === $matches[3]) {
@@ -51,7 +51,7 @@ class SortableNullWalker extends SqlWalker
                 case (new OraclePlatform())->getName():
                 case (new PostgreSQL100Platform())->getName():
                     foreach ($fields as $field => $sorting) {
-                        $sql = preg_replace('/(\.' . $field . ') ('.Criteria::ASC.'|'.Criteria::DESC.')?\s*/i', '$1 $2 ' . $sorting, $sql);
+                        $sql = preg_replace('/(\.' . $field . ') (' . Criteria::ASC . '|' . Criteria::DESC . ')?\s*/i', '$1 $2 ' . $sorting, $sql);
                     }
                     break;
                 default:
