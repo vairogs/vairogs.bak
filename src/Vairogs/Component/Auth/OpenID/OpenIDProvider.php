@@ -55,9 +55,7 @@ class OpenIDProvider
      */
     public function fetchUser(): ?OpenIDUser
     {
-        $user = $this->validate();
-
-        if ($user !== null) {
+        if (null !== $user = $this->validate()) {
             $builderClass = $this->options['user_builder'];
             /** @var OpenIDUserBuilder $builder */
             $builder = new $builderClass();
@@ -79,7 +77,8 @@ class OpenIDProvider
                 $user = $builder->getUser($data);
             }
         }
-        if ($user === null) {
+
+        if (null === $user) {
             throw new RuntimeException('error_oauth_login_invalid_or_timed_out');
         }
 
@@ -170,7 +169,7 @@ class OpenIDProvider
             'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
             'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
         ];
-        if (($this->options['provider_options']['ns_mode'] ?? '') === 'sreg') {
+        if ('sreg' === ($this->options['provider_options']['ns_mode'] ?? '')) {
             $params['openid.ns.sreg'] = 'http://openid.net/extensions/sreg/1.1';
             $params['openid.sreg.required'] = $this->options['provider_options']['sreg_fields'] ?? [];
         }
