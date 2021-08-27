@@ -24,7 +24,6 @@ class Pool
             }
 
             if ($adapter instanceof Cache) {
-                /** @var Cache $provider */
                 $pool[] = $adapter->getAdapter();
             } else {
                 $pool[] = $adapter;
