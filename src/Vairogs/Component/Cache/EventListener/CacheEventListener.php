@@ -70,8 +70,7 @@ class CacheEventListener implements EventSubscriberInterface
         if (null !== ($annotation = $this->attribute->getAnnotation($controllerEvent, Annotation::class))) {
             $annotation->setData($this->attribute->getAttributes($controllerEvent, Annotation::class));
             /* @var $annotation Annotation */
-            $key = $annotation->getKey($controllerEvent->getRequest()
-                ->get(self::ROUTE));
+            $key = $annotation->getKey($controllerEvent->getRequest()?->get(self::ROUTE));
             $response = null;
             if (is_string($key)) {
                 $response = $this->getCache($key);
