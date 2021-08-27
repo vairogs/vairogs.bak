@@ -4,31 +4,23 @@ namespace Vairogs\Twig\Sort;
 
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
 use Vairogs\Component\Utils\Helper\Sort;
-use Vairogs\Component\Utils\Twig\TwigTrait;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Component\Utils\Twig\Annotation;
+use Vairogs\Component\Utils\Twig\BaseExtension;
 use function count;
 use function current;
 use function is_array;
 use function strtoupper;
 use function usort;
 
-class Extension extends AbstractExtension
+class Extension extends BaseExtension
 {
-    use TwigTrait;
+    protected static string $class = self::class;
 
-    public function getFilters(): array
-    {
-        $input = [
-            'usort' => 'usortFunction',
-        ];
-
-        return $this->makeArray($input, Vairogs::VAIROGS, TwigFilter::class);
-    }
-
-    public function usortFunction(mixed $data, ?string $parameter = null, string $order = Sort::ASC): array
+    /**
+     * @Annotation\TwigFilter
+     */
+    public function usort(mixed $data, ?string $parameter = null, string $order = Sort::ASC): array
     {
         if ($data instanceof Collection) {
             $data = $data->toArray();

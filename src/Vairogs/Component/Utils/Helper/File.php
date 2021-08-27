@@ -4,7 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
 use RuntimeException;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function dirname;
 use function getcwd;
 use function is_dir;

@@ -3,12 +3,11 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function array_key_exists;
 use function filter_var;
 use function html_entity_decode;
 use function iconv;
-use function lcfirst;
 use function mb_convert_encoding;
 use function mb_strlen;
 use function mb_strpos;
@@ -26,9 +25,6 @@ use function strrev;
 use function strtolower;
 use function ucwords;
 use function usort;
-use const FILTER_FLAG_ALLOW_FRACTION;
-use const FILTER_SANITIZE_NUMBER_FLOAT;
-use const STR_PAD_LEFT;
 
 class Text
 {
@@ -47,6 +43,7 @@ class Text
     ];
     // @formatter:on
     public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
+    public const UTF8 = 'UTF-8';
 
     /**
      * @Annotation\TwigFilter()
@@ -61,23 +58,19 @@ class Text
      */
     public static function toSnakeCase(string $string): string
     {
-        $string = preg_replace('#([A-Z\d]+)([A-Z][a-z])#', '\1_\2', self::toCamelCase($string));
-        $string = preg_replace('#([a-z\d])([A-Z])#', '\1_\2', $string);
+        $string = preg_replace(['#([A-Z\d]+)([A-Z][a-z])#', '#([a-z\d])([A-Z])#'], '\1_\2', self::toCamelCase($string));
 
         return strtolower(str_replace('-', '_', $string));
     }
 
     /**
-     * @noinspection StringNormalizationInspection
      * @Annotation\TwigFilter()
      */
     public static function toCamelCase(string $string, bool $lowFirst = true): string
     {
-        if ($lowFirst) {
-            return preg_replace('#\s+#', '', lcfirst(ucwords(strtolower(str_replace('_', ' ', $string)))));
-        }
+        $function = true === $lowFirst ? 'lcfirst' : 'ucfirst';
 
-        return preg_replace('#\s+#', '', ucwords(strtolower(str_replace('_', ' ', $string))));
+        return preg_replace('#\s+#', '', $function(ucwords(strtolower(str_replace('_', ' ', $string)))));
     }
 
     /**
@@ -85,7 +78,7 @@ class Text
      */
     public static function cleanText(string $text): string
     {
-        return html_entity_decode(self::oneSpace(str_replace(' ?', '', mb_convert_encoding(strip_tags($text), 'UTF-8', 'UTF-8'))));
+        return html_entity_decode(self::oneSpace(str_replace(' ?', '', mb_convert_encoding(strip_tags($text), self::UTF8, self::UTF8))));
     }
 
     /**
@@ -199,7 +192,7 @@ class Text
     #[Pure]
     public static function reverse(string $string): string
     {
-        return iconv('UTF-32LE', 'UTF-8', strrev(iconv('UTF-8', 'UTF-32BE', $string)));
+        return iconv('UTF-32LE', 'UTF-8', strrev(iconv(self::UTF8, 'UTF-32BE', $string)));
     }
 
     /**

@@ -3,10 +3,8 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function filter_var;
-use const FILTER_SANITIZE_STRING;
-use const FILTER_VALIDATE_EMAIL;
 
 class Email
 {

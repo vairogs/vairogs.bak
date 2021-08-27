@@ -7,6 +7,6 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_sort_';
+    protected static string $suffix = '_sort';
     protected static string $class = Sort::class;
 }

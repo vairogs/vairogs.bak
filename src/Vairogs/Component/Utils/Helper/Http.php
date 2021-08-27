@@ -5,7 +5,7 @@ namespace Vairogs\Component\Utils\Helper;
 use InvalidArgumentException;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function preg_match;
 use function sprintf;
 use function str_starts_with;

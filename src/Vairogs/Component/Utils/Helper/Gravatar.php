@@ -4,7 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use InvalidArgumentException;
 use ReflectionException;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function hash;
 use function http_build_query;
 use function strtolower;

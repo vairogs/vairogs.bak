@@ -4,7 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function array_filter;
 use function array_flip;
 use function array_intersect_key;
@@ -21,7 +21,6 @@ use function range;
 use function sprintf;
 use function str_ends_with;
 use function str_starts_with;
-use const ARRAY_FILTER_USE_KEY;
 
 class Iter
 {

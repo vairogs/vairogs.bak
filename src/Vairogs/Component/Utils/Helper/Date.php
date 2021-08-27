@@ -7,7 +7,7 @@ use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionException;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function array_merge;
 use function floor;
 use function gmdate;
@@ -202,9 +202,7 @@ class Date
      */
     public static function formatDate(string $string, string $format = self::FORMAT): ?string
     {
-        $datetime = DateTime::createFromFormat($format, $string);
-
-        return $datetime ? $datetime->format(self::FORMAT) : null;
+        return DateTime::createFromFormat($format, $string)?->format(self::FORMAT);
     }
 
     /**

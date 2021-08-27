@@ -7,6 +7,6 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_email_';
+    protected static string $suffix = '_email';
     protected static string $class = Email::class;
 }

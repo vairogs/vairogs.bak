@@ -5,7 +5,7 @@ namespace Vairogs\Component\Utils\Helper;
 use Exception;
 use JetBrains\PhpStorm\Pure;
 use LogicException;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function array_rand;
 use function bin2hex;
 use function ceil;

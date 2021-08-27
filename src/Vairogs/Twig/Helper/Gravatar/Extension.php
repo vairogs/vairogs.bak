@@ -7,6 +7,6 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_gravatar_';
+    protected static string $suffix = '_gravatar';
     protected static string $class = Gravatar::class;
 }

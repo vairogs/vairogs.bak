@@ -7,6 +7,6 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_date_';
+    protected static string $suffix = '_date';
     protected static string $class = Date::class;
 }

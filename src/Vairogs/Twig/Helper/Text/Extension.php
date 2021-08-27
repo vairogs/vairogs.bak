@@ -7,6 +7,6 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_text_';
+    protected static string $suffix = '_text';
     protected static string $class = Text::class;
 }

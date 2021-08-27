@@ -7,6 +7,6 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_generator_';
+    protected static string $suffix = '_generator';
     protected static string $class = Generator::class;
 }

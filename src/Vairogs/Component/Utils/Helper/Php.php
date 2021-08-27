@@ -7,10 +7,12 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
 use ReflectionException;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
+use function array_diff;
 use function array_values;
 use function class_exists;
 use function filter_var;
+use function get_class_methods;
 use function interface_exists;
 use function is_array;
 use function is_bool;
@@ -18,7 +20,6 @@ use function method_exists;
 use function sprintf;
 use function strtolower;
 use function ucfirst;
-use const FILTER_VALIDATE_BOOL;
 
 class Php
 {
@@ -117,5 +118,19 @@ class Php
         }
 
         return $variable->$key;
+    }
+
+    /**
+     * @Annotation\TwigFilter()
+     * @Annotation\TwigFunction()
+     */
+    public static function getClassMethods(string $class, ?string $parent = null): array
+    {
+        $methods = get_class_methods($class);
+        if (null !== $parent) {
+            return array_diff($methods, get_class_methods($parent));
+        }
+
+        return $methods;
     }
 }

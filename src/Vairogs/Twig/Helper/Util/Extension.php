@@ -7,6 +7,6 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_util_';
+    protected static string $suffix = '_util';
     protected static string $class = Util::class;
 }

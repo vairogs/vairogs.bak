@@ -3,18 +3,12 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use JsonException;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function defined;
 use function json_decode;
 use function json_encode;
 use function json_last_error;
 use function json_last_error_msg;
-use const JSON_BIGINT_AS_STRING;
-use const JSON_PRESERVE_ZERO_FRACTION;
-use const JSON_PRETTY_PRINT;
-use const JSON_THROW_ON_ERROR;
-use const JSON_UNESCAPED_SLASHES;
-use const JSON_UNESCAPED_UNICODE;
 
 class Json
 {

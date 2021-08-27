@@ -3,25 +3,17 @@
 namespace Vairogs\Twig\GetEnv;
 
 use JetBrains\PhpStorm\Pure;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
-use Vairogs\Component\Utils\Twig\TwigTrait;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Component\Utils\Twig\Annotation;
+use Vairogs\Component\Utils\Twig\BaseExtension;
 use function getenv;
 
-class Extension extends AbstractExtension
+class Extension extends BaseExtension
 {
-    use TwigTrait;
+    protected static string $class = self::class;
 
-    public function getFunctions(): array
-    {
-        $input = [
-            'getenv' => 'getEnv',
-        ];
-
-        return $this->makeArray($input, Vairogs::VAIROGS, TwigFunction::class);
-    }
-
+    /**
+     * @Annotation\TwigFunction
+     */
     #[Pure]
     public function getEnv(string $varname): mixed
     {

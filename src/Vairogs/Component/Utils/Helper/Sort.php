@@ -3,7 +3,7 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function array_key_exists;
 use function array_slice;
 use function count;

@@ -7,6 +7,6 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_http_';
+    protected static string $suffix = '_http';
     protected static string $class = Http::class;
 }

@@ -4,7 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Component\Utils\Annotation;
+use Vairogs\Component\Utils\Twig\Annotation;
 use function array_combine;
 use function array_keys;
 use function array_map;
@@ -30,7 +30,6 @@ use function strrpos;
 use function substr;
 use function trim;
 use function urldecode;
-use const FILTER_VALIDATE_URL;
 
 class Uri
 {
