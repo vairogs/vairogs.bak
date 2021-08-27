@@ -17,6 +17,7 @@ use Vairogs\Component\Sitemap\Provider;
 use function fclose;
 use function fopen;
 use function getcwd;
+use function is_file;
 use function sprintf;
 use function unlink;
 
@@ -57,18 +58,16 @@ class SitemapCommand extends Command
             $output->writeln('<fg=blue>Generating sitemap</>');
             $filename = getcwd() . '/public/' . $input->getOption('filename');
 
-            try {
+            if (is_file($filename)) {
                 unlink($filename);
-            } catch (Exception) {
             }
             $handle = fopen($filename, 'w+b');
             try {
                 (new Director($handle))->build(new FileBuilder($sitemap));
                 $output->writeln(sprintf('<info>Sitemap generated as "%s"</info>', $filename));
             } catch (Exception $exception) {
-                try {
+                if (is_file($filename)) {
                     unlink($filename);
-                } catch (Exception) {
                 }
                 $output->writeln('<error>' . $exception->getMessage() . '</error>');
             }

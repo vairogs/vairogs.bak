@@ -3,9 +3,7 @@
 namespace Vairogs\Twig\Sort;
 
 use Doctrine\Common\Collections\Collection;
-use Exception;
 use InvalidArgumentException;
-use RuntimeException;
 use Vairogs\Component\Utils\Helper\Sort;
 use Vairogs\Component\Utils\Twig\Annotation;
 use Vairogs\Component\Utils\Twig\BaseExtension;
@@ -44,11 +42,7 @@ class Extension extends BaseExtension
             throw new InvalidArgumentException("Sorting parameter doesn't exist in sortable variable");
         }
 
-        try {
-            usort($data, Sort::usort($parameter, strtoupper($order)));
-        } catch (Exception $e) {
-            throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
-        }
+        usort($data, Sort::usort($parameter, strtoupper($order)));
 
         return $data;
     }
