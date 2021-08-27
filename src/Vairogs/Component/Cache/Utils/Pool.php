@@ -19,10 +19,6 @@ class Pool
         $pool = [];
 
         foreach ($adapters as $adapter) {
-            if (null === $adapter) {
-                continue;
-            }
-
             if (!$adapter instanceof Cache && !$adapter instanceof CacheItemPoolInterface) {
                 throw new InvalidArgumentException(sprintf('Adapter %s must implement %s or %s', $adapter::class, Cache::class, CacheItemPoolInterface::class));
             }
@@ -31,7 +27,7 @@ class Pool
                 /** @var Cache $provider */
                 $pool[] = $adapter->getAdapter();
             } else {
-                $pool = $adapter;
+                $pool[] = $adapter;
             }
         }
 

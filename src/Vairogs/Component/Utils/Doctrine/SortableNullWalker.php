@@ -23,7 +23,7 @@ class SortableNullWalker extends SqlWalker
     /**
      * @throws Exception
      */
-    public function walkOrderByClause($orderByClause): array|string|null
+    public function walkOrderByClause($orderByClause): string|array|null
     {
         $sql = parent::walkOrderByClause($orderByClause);
 
@@ -55,7 +55,7 @@ class SortableNullWalker extends SqlWalker
                     }
                     break;
                 default:
-                    throw new InvalidArgumentException(sprintf('Walker not implemented for "%s" platform', $platform));
+                    throw new InvalidArgumentException(sprintf('Walker not implemented for "%s" platform', $platform->getName()));
             }
         }
 

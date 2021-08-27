@@ -28,38 +28,25 @@ class Attribute
      */
     public function getAttributes(KernelEvent $kernelEvent, string $class): array
     {
-        $input = [];
         if (null !== ($annotation = $this->getAnnotation($kernelEvent, $class))) {
             $request = $kernelEvent->getRequest();
 
             $user = $this->getUser();
-            switch ($annotation->getStrategy()) {
-                case Strategy::GET:
-                    $input = $request->attributes->get('_route_params') + $request->query->all();
-                    break;
-                case Strategy::POST:
-                    $input = $request->request->all();
-                    break;
-                case Strategy::USER:
-                    $input = $user;
-                    break;
-                case Strategy::MIXED:
-                    $input = [
-                        Strategy::GET => $request->attributes->get('_route_params') + $request->query->all(),
-                        Strategy::POST => $request->request->all(),
-                        Strategy::USER => $user,
-                    ];
-                    break;
-                case Strategy::ALL:
-                    $input = $request->attributes->get('_route_params') + $request->query->all() + $request->request->all();
-                    $input += $user;
-                    break;
-                default:
-                    throw new InvalidArgumentException(sprintf('Unknown strategy: %s', $annotation->getStrategy()));
-            }
+            return match ($annotation->getStrategy()) {
+                Strategy::GET => $request->attributes->get('_route_params') + $request->query->all(),
+                Strategy::POST => $request->request->all(),
+                Strategy::USER => $user,
+                Strategy::MIXED => [
+                    Strategy::GET => $request->attributes->get('_route_params') + $request->query->all(),
+                    Strategy::POST => $request->request->all(),
+                    Strategy::USER => $user,
+                ],
+                Strategy::ALL => $request->attributes->get('_route_params') + $request->query->all() + $request->request->all() + $user,
+                default => throw new InvalidArgumentException(sprintf('Unknown strategy: %s', $annotation->getStrategy())),
+            };
         }
 
-        return $input;
+        return [];
     }
 
     /**
@@ -90,10 +77,6 @@ class Attribute
     private function getUser(): array
     {
         $user = $this->tokenStorage?->getToken()?->getUser();
-
-        if (is_array($user)) {
-            return $user;
-        }
 
         if (method_exists($user, 'toArray')) {
             return $user->toArray();

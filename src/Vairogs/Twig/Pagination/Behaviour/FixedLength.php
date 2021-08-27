@@ -6,8 +6,6 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use function ceil;
 use function floor;
-use function is_int;
-use function is_string;
 use function range;
 use function sprintf;
 
@@ -56,7 +54,7 @@ final class FixedLength
         return $this->getPaginationDataWithTwoOmittedChunks($totalPages, $currentPage, $indicator);
     }
 
-    private function guardPaginationData(int $totalPages, int $currentPage, int|string $indicator = -1): void
+    private function guardPaginationData(int $totalPages, int $currentPage, int $indicator = -1): void
     {
         if ($totalPages < 1) {
             throw new InvalidArgumentException(sprintf('Total number of pages (%d) should not be lower than 1.', $totalPages));
@@ -66,9 +64,6 @@ final class FixedLength
         }
         if ($currentPage > $totalPages) {
             throw new InvalidArgumentException(sprintf('Current page (%d) should not be higher than total number of pages (%d).', $currentPage, $totalPages));
-        }
-        if (!is_int($indicator) && !is_string($indicator)) {
-            throw new InvalidArgumentException('Omitted pages indicator should either be a string or an int.');
         }
         if ($indicator >= 1 && $indicator <= $totalPages) {
             throw new InvalidArgumentException(sprintf('Omitted pages indicator (%d) should not be between 1 and total number of pages (%d).', $indicator, $totalPages));
