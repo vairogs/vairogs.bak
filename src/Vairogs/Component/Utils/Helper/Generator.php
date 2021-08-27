@@ -11,6 +11,7 @@ use function bin2hex;
 use function ceil;
 use function count;
 use function function_exists;
+use function is_array;
 use function random_bytes;
 use function random_int;
 use function str_repeat;
@@ -73,15 +74,16 @@ class Generator
 
         $all = $unique = '';
         foreach ($this->sets as $set) {
-            if (0 < strlen($set) && is_array($split = str_split($set))) {
+            if (is_array($split = str_split($set))) {
                 $unique .= $set[$this->tweak($split)];
                 $all .= $set;
             }
         }
-        $all = str_split($all);
-        $setsCount = count($this->sets);
-        for ($i = 0; $i < $length - $setsCount; $i++) {
-            $unique .= $all[$this->tweak($all)];
+        if (is_array($all = str_split($all))) {
+            $setsCount = count($this->sets);
+            for ($i = 0; $i < $length - $setsCount; $i++) {
+                $unique .= $all[$this->tweak($all)];
+            }
         }
 
         /** @noinspection NonSecureStrShuffleUsageInspection */

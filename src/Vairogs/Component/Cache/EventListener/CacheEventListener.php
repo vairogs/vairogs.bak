@@ -21,6 +21,7 @@ use Vairogs\Component\Cache\Utils\Header;
 use Vairogs\Component\Cache\Utils\Pool;
 use function class_exists;
 use function in_array;
+use function is_string;
 use function method_exists;
 
 class CacheEventListener implements EventSubscriberInterface
@@ -71,7 +72,10 @@ class CacheEventListener implements EventSubscriberInterface
             /* @var $annotation Annotation */
             $key = $annotation->getKey($controllerEvent->getRequest()
                 ->get(self::ROUTE));
-            $response = null !== $key ? $this->getCache($key) : null;
+            $response = null;
+            if (is_string($key)) {
+                $response = $this->getCache($key);
+            }
             if (null !== $response) {
                 $controllerEvent->setController(static function () use ($response) {
                     return $response;
