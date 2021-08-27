@@ -32,20 +32,7 @@ class Attribute
         if (null !== ($annotation = $this->getAnnotation($kernelEvent, $class))) {
             $request = $kernelEvent->getRequest();
 
-            $user = null;
-            if (null !== $this->tokenStorage && $this->tokenStorage->getToken() && $object = $this->tokenStorage->getToken()
-                    ->getUser()) {
-                if (is_array($object)) {
-                    $user = $object;
-                } elseif ($object instanceof JsonSerializable) {
-                    $user = $object->jsonSerialize();
-                } elseif (method_exists($object, 'toArray')) {
-                    $user = $object->toArray();
-                } elseif (method_exists($object, '__toArray')) {
-                    $user = $object->__toArray();
-                }
-            }
-
+            $user = $this->getUser();
             switch ($annotation->getStrategy()) {
                 case Strategy::GET:
                     $input = $request->attributes->get('_route_params') + $request->query->all();
@@ -54,24 +41,18 @@ class Attribute
                     $input = $request->request->all();
                     break;
                 case Strategy::USER:
-                    if (null !== $user) {
-                        $input = $user;
-                    }
+                    $input = $user;
                     break;
                 case Strategy::MIXED:
                     $input = [
                         Strategy::GET => $request->attributes->get('_route_params') + $request->query->all(),
                         Strategy::POST => $request->request->all(),
+                        Strategy::USER => $user,
                     ];
-                    if (null !== $user) {
-                        $input[Strategy::USER] = $user;
-                    }
                     break;
                 case Strategy::ALL:
                     $input = $request->attributes->get('_route_params') + $request->query->all() + $request->request->all();
-                    if (null !== $user) {
-                        $input += $user;
-                    }
+                    $input += $user;
                     break;
                 default:
                     throw new InvalidArgumentException(sprintf('Unknown strategy: %s', $annotation->getStrategy()));
@@ -101,6 +82,29 @@ class Attribute
         if (is_array($controller = explode('::', $kernelEvent->getRequest()
                 ->get('_controller'), 2)) && isset($controller[1])) {
             return $controller;
+        }
+
+        return [];
+    }
+
+    private function getUser(): array
+    {
+        $user = $this->tokenStorage?->getToken()?->getUser();
+
+        if (is_array($user)) {
+            return $user;
+        }
+
+        if (method_exists($user, 'toArray')) {
+            return $user->toArray();
+        }
+
+        if (method_exists($user, '__toArray')) {
+            return $user->__toArray();
+        }
+
+        if ($user instanceof JsonSerializable) {
+            return $user->jsonSerialize();
         }
 
         return [];
