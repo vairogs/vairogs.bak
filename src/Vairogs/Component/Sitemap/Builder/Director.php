@@ -8,18 +8,10 @@ use function sprintf;
 
 class Director
 {
-    /**
-     * @param mixed $buffer
-     */
     public function __construct(private mixed $buffer)
     {
     }
 
-    /**
-     * @param Builder $builder
-     *
-     * @return mixed
-     */
     public function build(Builder $builder): mixed
     {
         if (($expected = $builder->getType()) !== ($actual = gettype($this->buffer))) {

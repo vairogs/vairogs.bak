@@ -11,7 +11,6 @@ use Vairogs\Component\Utils\DependencyInjection\Dependency;
 class SitemapDependency implements Dependency
 {
     /**
-     * @inheritDoc
      * @noinspection NullPointerExceptionInspection
      */
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
@@ -35,9 +34,6 @@ class SitemapDependency implements Dependency
         // @formatter:on
     }
 
-    /**
-     * @inheritDoc
-     */
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
     }

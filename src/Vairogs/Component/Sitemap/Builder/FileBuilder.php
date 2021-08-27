@@ -12,18 +12,14 @@ use function ucfirst;
 
 class FileBuilder implements Builder
 {
-    /**
-     * @param Sitemap $sitemap
-     */
     public function __construct(protected Sitemap $sitemap)
     {
     }
 
     /**
-     * @param mixed $buffer
      * @noinspection DisconnectedForeachInstructionInspection
      */
-    public function build(mixed &$buffer): void
+    public function build(&$buffer): void
     {
         foreach ($this->sitemap->getUrls() as $url) {
             $alternates = [];
@@ -41,22 +37,16 @@ class FileBuilder implements Builder
             foreach ($alternates ?? [] as $locale => $alternate) {
                 fwrite($buffer, "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
             }
-            fwrite($buffer, '</url>', "\n");
+            fwrite($buffer, '</url>' . "\n");
         }
     }
 
-    /**
-     * @param mixed $buffer
-     */
-    public function end(mixed &$buffer): void
+    public function end(&$buffer): void
     {
         fwrite($buffer, '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
     }
 
-    /**
-     * @param mixed $buffer
-     */
-    public function start(mixed &$buffer): void
+    public function start(&$buffer): void
     {
         // @formatter:off
         fwrite($buffer, '<?xml version="1.0" encoding="UTF-8"?>' .

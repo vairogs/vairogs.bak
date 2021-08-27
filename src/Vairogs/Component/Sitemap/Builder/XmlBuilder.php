@@ -11,17 +11,11 @@ use function ucfirst;
 
 class XmlBuilder implements Builder
 {
-    /**
-     * @param Sitemap $sitemap
-     */
     public function __construct(protected Sitemap $sitemap)
     {
     }
 
-    /**
-     * @param mixed $buffer
-     */
-    public function build(mixed &$buffer): void
+    public function build(&$buffer): void
     {
         foreach ($this->sitemap->getUrls() as $url) {
             $alternates = [];
@@ -43,18 +37,12 @@ class XmlBuilder implements Builder
         }
     }
 
-    /**
-     * @param mixed $buffer
-     */
-    public function end(mixed &$buffer): void
+    public function end(&$buffer): void
     {
         $buffer .= '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->';
     }
 
-    /**
-     * @param mixed $buffer
-     */
-    public function start(mixed &$buffer): void
+    public function start(&$buffer): void
     {
         // @formatter:off
         $buffer .= '<?xml version="1.0" encoding="UTF-8"?>' .

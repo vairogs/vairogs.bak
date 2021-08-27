@@ -18,14 +18,6 @@ use function is_file;
 
 class SitemapController extends AbstractController
 {
-    /**
-     * @param Request $request
-     * @param ValidatorInterface $validator
-     * @param Provider|null $provider
-     * @param array $options
-     *
-     * @return Response
-     */
     #[Route(path: '/sitemap.xml', name: 'sitemap.xml', defaults: ['_format' => 'xml'], methods: [Request::METHOD_GET])]
     public function sitemap(Request $request, ValidatorInterface $validator, ?Provider $provider = null, array $options = []): Response
     {

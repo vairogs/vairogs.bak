@@ -3,22 +3,12 @@
 namespace Vairogs\Component\Sitemap\Model;
 
 use JetBrains\PhpStorm\Pure;
-use Symfony\Component\Validator\Constraints as Assert;
 use function method_exists;
 
 class Sitemap
 {
-    /**
-     * @var Url[]
-     * @Assert\Valid()
-     */
     protected array $urls = [];
 
-    /**
-     * @param Url $url
-     *
-     * @return Sitemap
-     */
     public function addUrl(Url $url): Sitemap
     {
         $this->urls[] = $url;
@@ -26,9 +16,6 @@ class Sitemap
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     #[Pure]
     public function hasImages(): bool
     {
@@ -41,19 +28,11 @@ class Sitemap
         return false;
     }
 
-    /**
-     * @return Url[]
-     */
     public function getUrls(): array
     {
         return $this->urls;
     }
 
-    /**
-     * @param Url[] $urls
-     *
-     * @return Sitemap
-     */
     public function setUrls(array $urls): Sitemap
     {
         $this->urls = $urls;
@@ -61,9 +40,6 @@ class Sitemap
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     #[Pure]
     public function hasVideos(): bool
     {
@@ -76,9 +52,6 @@ class Sitemap
         return false;
     }
 
-    /**
-     * @return bool
-     */
     public function hasAlternates(): bool
     {
         foreach ($this->getUrls() as $url) {

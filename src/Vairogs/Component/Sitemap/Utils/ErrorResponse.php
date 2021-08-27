@@ -10,9 +10,6 @@ class ErrorResponse
 {
     private Response $response;
 
-    /**
-     * @param ConstraintViolationListInterface $constraintViolationList
-     */
     public function __construct(private ConstraintViolationListInterface $constraintViolationList)
     {
         $this->response = new Response();
@@ -21,9 +18,6 @@ class ErrorResponse
         $this->response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    /**
-     * @return Response
-     */
     public function getResponse(): Response
     {
         // @formatter:off

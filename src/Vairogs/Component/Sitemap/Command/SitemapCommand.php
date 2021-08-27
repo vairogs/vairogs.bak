@@ -22,18 +22,10 @@ use function unlink;
 
 class SitemapCommand extends Command
 {
-    /**
-     * @var string
-     */
     protected static $defaultName = 'vairogs:sitemap';
     private array $options;
-    private ?Provider $provider;
+    private Provider $provider;
 
-    /**
-     * @param ValidatorInterface $validator
-     * @param Provider|null $provider
-     * @param array $options
-     */
     public function __construct(private ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
     {
         if (null === $provider || (false === $options['enabled'])) {
@@ -52,10 +44,6 @@ class SitemapCommand extends Command
             ->addOption('filename', null, InputOption::VALUE_OPTIONAL, 'sitemap filename if not sitemap.xml', 'sitemap.xml');
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $sitemap = $this->provider->populate($input->getArgument('host'));
