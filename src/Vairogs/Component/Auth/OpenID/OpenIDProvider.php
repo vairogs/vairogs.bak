@@ -31,7 +31,7 @@ use function urldecode;
 
 class OpenIDProvider
 {
-    protected ?Request $request;
+    protected Request $request;
     protected ?string $profileUrl;
 
     public function __construct(RequestStack $requestStack, protected RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])

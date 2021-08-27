@@ -66,8 +66,9 @@ class Attribute
 
     public function getController(KernelEvent $kernelEvent): array
     {
-        if (is_array($controller = explode('::', $kernelEvent->getRequest()
-                ->get('_controller'), 2)) && isset($controller[1])) {
+        $kernelController = $kernelEvent->getRequest()
+            ->get('_controller');
+        if ((null !== $kernelController) && is_array($controller = explode('::', $kernelController, 2)) && isset($controller[1])) {
             return $controller;
         }
 

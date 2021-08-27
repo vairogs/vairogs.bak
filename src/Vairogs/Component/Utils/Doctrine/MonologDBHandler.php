@@ -4,13 +4,12 @@ namespace Vairogs\Component\Utils\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Persistence\ObjectManager;
 use Monolog\Handler\AbstractProcessingHandler;
 use Vairogs\Component\Utils\Doctrine\Model\Log;
 
 class MonologDBHandler extends AbstractProcessingHandler
 {
-    public function __construct(protected EntityManagerInterface|ObjectManager $em, protected ManagerRegistry $managerRegistry, protected string $logClass)
+    public function __construct(protected EntityManagerInterface $em, protected ManagerRegistry $managerRegistry, protected string $logClass)
     {
         parent::__construct();
     }

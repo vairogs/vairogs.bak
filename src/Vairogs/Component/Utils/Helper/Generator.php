@@ -73,8 +73,10 @@ class Generator
 
         $all = $unique = '';
         foreach ($this->sets as $set) {
-            $unique .= $set[$this->tweak(str_split($set))];
-            $all .= $set;
+            if (0 < strlen($set) && is_array($split = str_split($set))) {
+                $unique .= $set[$this->tweak($split)];
+                $all .= $set;
+            }
         }
         $all = str_split($all);
         $setsCount = count($this->sets);
