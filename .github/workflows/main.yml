@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Deploy
         id: deploy
-        uses: vairogs/deploy-action@v1.0.8
+        uses: vairogs/deploy-action@master
