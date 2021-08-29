@@ -95,6 +95,7 @@
         "vairogs/twig-helper-generator": "self.version",
         "vairogs/twig-helper-gravatar": "self.version",
         "vairogs/twig-helper-http": "self.version",
+        "vairogs/twig-helper-identification": "self.version",
         "vairogs/twig-helper-iter": "self.version",
         "vairogs/twig-helper-json": "self.version",
         "vairogs/twig-helper-php": "self.version",
