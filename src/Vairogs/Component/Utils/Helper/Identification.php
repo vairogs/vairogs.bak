@@ -2,8 +2,11 @@
 
 namespace Vairogs\Component\Utils\Helper;
 
+use Exception;
 use Vairogs\Component\Utils\Twig\Annotation;
+use function bin2hex;
 use function floor;
+use function random_bytes;
 use function str_replace;
 use function strlen;
 use function substr;
@@ -70,5 +73,17 @@ class Identification
         }
 
         return (int)($checksum - floor($checksum / 11) * 11) === (int)$personCode[10];
+    }
+
+    /**
+     * @Annotation\TwigFunction()
+     */
+    public static function getUniqueId(int $length = 20): string
+    {
+        try {
+            return substr(bin2hex(random_bytes($length)), 0, $length);
+        } catch (Exception) {
+            return Generator::getRandomString($length);
+        }
     }
 }

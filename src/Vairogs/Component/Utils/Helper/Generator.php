@@ -7,12 +7,10 @@ use JetBrains\PhpStorm\Pure;
 use LogicException;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function array_rand;
-use function bin2hex;
 use function ceil;
 use function count;
 use function function_exists;
 use function is_array;
-use function random_bytes;
 use function random_int;
 use function str_repeat;
 use function str_shuffle;
@@ -38,18 +36,6 @@ class Generator
     private string $upperCase = self::PASS_UPPERCASE;
     private string $digits = self::PASS_DIGITS;
     private string $symbols = self::PASS_SYMBOLS;
-
-    /**
-     * @Annotation\TwigFunction()
-     */
-    public static function getUniqueId(int $length = 20): string
-    {
-        try {
-            return substr(bin2hex(random_bytes($length)), 0, $length);
-        } catch (Exception) {
-            return self::getRandomString($length);
-        }
-    }
 
     /**
      * @Annotation\TwigFunction()
