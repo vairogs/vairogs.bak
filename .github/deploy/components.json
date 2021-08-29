@@ -132,6 +132,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-text.git"
     },
     {
+        "path": "src/Vairogs/Twig/Helper/Translit",
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-translit.git"
+    },
+    {
         "path": "src/Vairogs/Twig/Helper/Uri",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-uri.git"
     },
