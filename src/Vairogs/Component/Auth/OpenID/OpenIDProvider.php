@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
-use Vairogs\Component\Utils\Helper\Http;
 use Vairogs\Component\Utils\Helper\Json;
 use Vairogs\Component\Utils\Helper\Uri;
 use function array_keys;
@@ -138,7 +137,7 @@ class OpenIDProvider
 
     public function urlPath(?string $return = null, ?string $altRealm = null): string
     {
-        $realm = $altRealm ?: (Http::getSchema($this->request) . $this->request->server->get('HTTP_HOST'));
+        $realm = $altRealm ?: (Uri::getSchema($this->request) . $this->request->server->get('HTTP_HOST'));
         if (null !== $return) {
             if (!$this->validateUrl($return)) {
                 throw new RuntimeException('error_oauth_invalid_return_url');

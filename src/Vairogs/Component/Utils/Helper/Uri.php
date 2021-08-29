@@ -4,6 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function array_combine;
 use function array_keys;
@@ -21,6 +22,7 @@ use function is_object;
 use function ltrim;
 use function parse_str;
 use function parse_url;
+use function preg_match;
 use function preg_replace;
 use function preg_replace_callback;
 use function sprintf;
@@ -164,5 +166,22 @@ class Uri
         }
 
         return $path;
+    }
+
+    /**
+     * @Annotation\TwigFilter()
+     * @Annotation\TwigFunction()
+     */
+    public static function getSchema(Request $request): string
+    {
+        return Http::isHttps($request) ? 'https://' : 'http://';
+    }
+
+    /**
+     * @Annotation\TwigFunction()
+     */
+    public static function isAbsolute(string $path): bool
+    {
+        return str_starts_with($path, '//') || preg_match('#^[a-z-]{3,}://#i', $path);
     }
 }

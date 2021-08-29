@@ -6,9 +6,7 @@ use InvalidArgumentException;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Component\Utils\Twig\Annotation;
-use function preg_match;
 use function sprintf;
-use function str_starts_with;
 
 class Http
 {
@@ -19,15 +17,6 @@ class Http
     private const HEADER_SSL = 'HTTP_X_FORWARDED_SSL';
     private const HEADER_PROTO = 'HTTP_X_FORWARDED_PROTO';
     private const REMOTE_ADDR = 'REMOTE_ADDR';
-
-    /**
-     * @Annotation\TwigFilter()
-     * @Annotation\TwigFunction()
-     */
-    public static function getSchema(Request $request): string
-    {
-        return self::isHttps($request) ? 'https://' : 'http://';
-    }
 
     /**
      * @Annotation\TwigFunction()
@@ -84,14 +73,6 @@ class Http
         }
 
         return $request->server->get(self::REMOTE_ADDR);
-    }
-
-    /**
-     * @Annotation\TwigFunction()
-     */
-    public static function isAbsolute(string $path): bool
-    {
-        return str_starts_with($path, '//') || preg_match('#^[a-z-]{3,}://#i', $path);
     }
 
     /**

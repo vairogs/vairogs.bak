@@ -40,7 +40,7 @@ class Gravatar
             $host = self::HTTPS_HOST;
         }
 
-        if (Http::isAbsolute($default)) {
+        if (Uri::isAbsolute($default)) {
             $default = urldecode($default);
         } else {
             $default = self::getIcons()['ICON_' . $default] ?? self::ICON_IDENTICON;
