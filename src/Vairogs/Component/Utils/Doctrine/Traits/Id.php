@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Utils\Doctrine\Trait;
+namespace Vairogs\Component\Utils\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 
