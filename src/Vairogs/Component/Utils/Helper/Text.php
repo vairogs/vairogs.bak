@@ -182,6 +182,15 @@ class Text
         return (float)filter_var($string, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }
 
+    /**
+     * @Annotation\TwigFilter()
+     */
+    public static function getLastPart(string $string, string $delimiter): string
+    {
+        $idx = strrpos($string, $delimiter);
+        return $idx === false ? $string : substr($string, $idx + 1);
+    }
+
     private static function compareLatvian(mixed $a, mixed $b, mixed $field): int
     {
         $a = mb_strtolower(Php::getParameter($a, $field));

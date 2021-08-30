@@ -7,6 +7,5 @@ use Vairogs\Component\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {
-    protected static string $suffix = '_translit';
     protected static string $class = Translit::class;
 }
