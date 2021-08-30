@@ -12,6 +12,7 @@ use Vairogs\Component\Sitemap\Builder\Director;
 use Vairogs\Component\Sitemap\Builder\XmlBuilder;
 use Vairogs\Component\Sitemap\Provider;
 use Vairogs\Component\Sitemap\Utils\ErrorResponse;
+use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use function file_get_contents;
 use function getcwd;
 use function is_file;
@@ -24,7 +25,7 @@ class SitemapController extends AbstractController
         if (is_file($sitemap = getcwd() . '/sitemap.xml')) {
             return new Response(file_get_contents($sitemap));
         }
-        if (null === $provider || (false === $options['enabled'])) {
+        if (null === $provider || (false === $options[Dependency::ENABLED])) {
             throw new NotFoundHttpException('To use vairogs/sitemap, you must enable it and provide a Provider');
         }
         $model = $provider->populate($request->getSchemeAndHttpHost());

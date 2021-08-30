@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Vairogs\Component\Sitemap\Builder\Director;
 use Vairogs\Component\Sitemap\Builder\FileBuilder;
 use Vairogs\Component\Sitemap\Provider;
+use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use function fclose;
 use function fopen;
 use function getcwd;
@@ -31,7 +32,7 @@ class SitemapCommand extends Command
 
     public function __construct(private ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
     {
-        if (null === $provider || (false === $options['enabled'])) {
+        if (null === $provider || (false === $options[Dependency::ENABLED])) {
             throw new NotFoundHttpException('To use vairogs/sitemap, you must enable it and provide a Provider');
         }
         $this->options = $options;

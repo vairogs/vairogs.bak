@@ -8,8 +8,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Component\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
+use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Vairogs;
 use function class_exists;
+use function sprintf;
 
 class AuthDependency implements Dependency
 {
@@ -35,14 +37,14 @@ class AuthDependency implements Dependency
 
     private function appendOpenIDConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(AuthOpenIDDependency::class)) {
+        if (class_exists(AuthOpenIDDependency::class) && Php::classImplements(AuthOpenIDDependency::class, Dependency::class)) {
             (new AuthOpenIDDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
-        $enabledKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.enabled';
+        $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Dependency::ENABLED);
         if ($containerBuilder->hasParameter($enabledKey) && true === $containerBuilder->getParameter($enabledKey) && class_exists(AuthOpenIDDependency::class)) {
             (new AuthOpenIDDependency())->loadComponent($containerBuilder, $configuration);
         }

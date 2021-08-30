@@ -11,6 +11,7 @@ use Vairogs\Component\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Component\Sitemap\DependencyInjection\SitemapDependency;
 use Vairogs\Component\Translation\DependencyInjection\TranslationDependency;
 use Vairogs\Component\Utils\Helper\Iter;
+use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Vairogs;
 use function class_exists;
 
@@ -50,28 +51,28 @@ class VairogsExtension extends Extension
 
     private function processCacheComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(CacheDependency::class)) {
+        if (class_exists(CacheDependency::class) && Php::classImplements(CacheDependency::class, Dependency::class)) {
             (new CacheDependency())->loadComponent($container, $configuration);
         }
     }
 
     private function processAuthComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(AuthDependency::class)) {
+        if (class_exists(AuthDependency::class) && Php::classImplements(AuthDependency::class, Dependency::class)) {
             (new AuthDependency())->loadComponent($container, $configuration);
         }
     }
 
     private function processSitemapComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(SitemapDependency::class)) {
+        if (class_exists(SitemapDependency::class) && Php::classImplements(SitemapDependency::class, Dependency::class)) {
             (new SitemapDependency())->loadComponent($container, $configuration);
         }
     }
 
     private function processTranslationComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(TranslationDependency::class)) {
+        if (class_exists(TranslationDependency::class) && Php::classImplements(TranslationDependency::class, Dependency::class)) {
             (new TranslationDependency())->loadComponent($container, $configuration);
         }
     }

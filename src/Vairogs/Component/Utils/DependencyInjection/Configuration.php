@@ -9,6 +9,7 @@ use Vairogs\Component\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Component\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Component\Sitemap\DependencyInjection\SitemapDependency;
 use Vairogs\Component\Translation\DependencyInjection\TranslationDependency;
+use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Vairogs;
 use function class_exists;
 
@@ -29,28 +30,28 @@ class Configuration implements ConfigurationInterface
 
     private function appendCacheNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(CacheDependency::class)) {
+        if (class_exists(CacheDependency::class) && Php::classImplements(CacheDependency::class, Dependency::class)) {
             (new CacheDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 
     private function appendAuthNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(AuthDependency::class)) {
+        if (class_exists(AuthDependency::class) && Php::classImplements(AuthDependency::class, Dependency::class)) {
             (new AuthDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 
     private function appendSitemapNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(SitemapDependency::class)) {
+        if (class_exists(SitemapDependency::class) && Php::classImplements(SitemapDependency::class, Dependency::class)) {
             (new SitemapDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 
     private function appendTranslationNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(TranslationDependency::class)) {
+        if (class_exists(TranslationDependency::class) && Php::classImplements(TranslationDependency::class, Dependency::class)) {
             (new TranslationDependency())->getConfiguration($arrayNodeDefinition);
         }
     }

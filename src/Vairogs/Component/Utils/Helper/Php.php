@@ -11,6 +11,7 @@ use Vairogs\Component\Utils\Twig\Annotation;
 use function array_diff;
 use function array_values;
 use function class_exists;
+use function class_implements;
 use function filter_var;
 use function get_class_methods;
 use function interface_exists;
@@ -19,6 +20,7 @@ use function is_bool;
 use function method_exists;
 use function sprintf;
 use function strtolower;
+use function trait_exists;
 use function ucfirst;
 
 class Php
@@ -96,11 +98,24 @@ class Php
      */
     public static function getClassConstants(string $class): array
     {
-        if (class_exists($class) || interface_exists($class)) {
+        if (self::exists($class, true)) {
             return (new ReflectionClass($class))->getConstants();
         }
 
         throw new InvalidArgumentException(sprintf('Invalid class "%s"', $class));
+    }
+
+    /**
+     * @Annotation\TwigFilter()
+     * @Annotation\TwigFunction()
+     */
+    public static function exists(string $class, $doNotCheckTrait = false): bool
+    {
+        if (true === $doNotCheckTrait) {
+            return class_exists($class) || interface_exists($class);
+        }
+
+        return class_exists($class) || interface_exists($class) || trait_exists($class);
     }
 
     /**
@@ -132,5 +147,29 @@ class Php
         }
 
         return $methods;
+    }
+
+    /**
+     * @throws ReflectionException
+     * @Annotation\TwigFilter()
+     */
+    public static function getShortName(string $class): string
+    {
+        if (self::exists($class)) {
+            return (new ReflectionClass($class))->getShortName();
+        }
+
+        return $class;
+    }
+
+    /**
+     * @Annotation\TwigFilter()
+     * @Annotation\TwigFunction()
+     */
+    public static function classImplements(string $class, string $interface): bool
+    {
+        $interfaces = class_implements($class);
+
+        return isset($interfaces[$interface]);
     }
 }

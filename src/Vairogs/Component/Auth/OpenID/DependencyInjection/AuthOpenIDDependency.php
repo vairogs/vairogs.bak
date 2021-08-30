@@ -13,6 +13,7 @@ use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use Vairogs\Component\Utils\Helper\Iter;
 use Vairogs\Component\Utils\Vairogs;
+use function sprintf;
 
 class AuthOpenIDDependency implements Dependency
 {
@@ -42,7 +43,7 @@ class AuthOpenIDDependency implements Dependency
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         $baseKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID;
-        $enabledKey = $baseKey . '.enabled';
+        $enabledKey = sprintf('%s.%s', $baseKey, Dependency::ENABLED);
         if ($containerBuilder->hasParameter($enabledKey) && true === $containerBuilder->getParameter($enabledKey)) {
             $clientsKey = $baseKey . '.clients';
             foreach ($containerBuilder->getParameter($clientsKey) as $key => $clientConfig) {
