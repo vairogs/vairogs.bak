@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Utils\Doctrine;
+namespace Vairogs\Component\Utils\Doctrine\Trait;
 
 use Doctrine\ORM\Mapping as ORM;
 
-trait IdTrait
+trait Id
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
