@@ -34,6 +34,7 @@ class Video
     public function setThumbnailLoc(string $thumbnailLoc): static
     {
         $this->thumbnailLoc = $thumbnailLoc;
+
         return $this;
     }
 
@@ -45,6 +46,7 @@ class Video
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -56,6 +58,7 @@ class Video
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -67,6 +70,7 @@ class Video
     public function setContentLoc(?string $contentLoc): static
     {
         $this->contentLoc = $contentLoc;
+
         return $this;
     }
 
@@ -78,6 +82,7 @@ class Video
     public function setPlayerLoc(?string $playerLoc): static
     {
         $this->playerLoc = $playerLoc;
+
         return $this;
     }
 
@@ -89,6 +94,7 @@ class Video
     public function setDuration(?int $duration): static
     {
         $this->duration = $duration;
+
         return $this;
     }
 
@@ -100,6 +106,7 @@ class Video
     public function setExpirationDate(?DateTime $expirationDate): static
     {
         $this->expirationDate = $expirationDate;
+
         return $this;
     }
 
@@ -111,6 +118,7 @@ class Video
     public function setRating(?float $rating): static
     {
         $this->rating = $rating;
+
         return $this;
     }
 
@@ -122,6 +130,7 @@ class Video
     public function setViewCount(?int $viewCount): static
     {
         $this->viewCount = $viewCount;
+
         return $this;
     }
 
@@ -133,6 +142,7 @@ class Video
     public function setPublicationDate(?DateTime $publicationDate): static
     {
         $this->publicationDate = $publicationDate;
+
         return $this;
     }
 
@@ -144,6 +154,7 @@ class Video
     public function setFamilyFriendly(?string $familyFriendly): static
     {
         $this->familyFriendly = $familyFriendly;
+
         return $this;
     }
 
@@ -155,6 +166,7 @@ class Video
     public function setTags(array $tags): static
     {
         $this->tags = $tags;
+
         return $this;
     }
 
@@ -166,6 +178,7 @@ class Video
     public function setCategory(?string $category): static
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -177,6 +190,7 @@ class Video
     public function setRestrictions(array $restrictions): static
     {
         $this->restrictions = $restrictions;
+
         return $this;
     }
 
@@ -188,6 +202,7 @@ class Video
     public function setGalleryLoc(?string $galleryLoc): static
     {
         $this->galleryLoc = $galleryLoc;
+
         return $this;
     }
 
@@ -199,6 +214,7 @@ class Video
     public function setRequiresSubscription(?string $requiresSubscription): static
     {
         $this->requiresSubscription = $requiresSubscription;
+
         return $this;
     }
 
@@ -210,6 +226,7 @@ class Video
     public function setUploader(?string $uploader): static
     {
         $this->uploader = $uploader;
+
         return $this;
     }
 
@@ -221,6 +238,7 @@ class Video
     public function setPlatforms(array $platforms): static
     {
         $this->platforms = $platforms;
+
         return $this;
     }
 
@@ -232,6 +250,7 @@ class Video
     public function setLive(?string $live): static
     {
         $this->live = $live;
+
         return $this;
     }
 }

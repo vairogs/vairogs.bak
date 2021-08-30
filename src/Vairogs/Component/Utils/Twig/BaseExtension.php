@@ -29,6 +29,7 @@ abstract class BaseExtension extends AbstractExtension
     public function getFilters(): array
     {
         $suffix = $this->getSuffix($vars = get_class_vars(static::class));
+
         return $this->makeArray(Helper::getFiltered($vars['class'], Annotation\TwigFilter::class), $suffix, Twig\TwigFilter::class);
     }
 
@@ -41,13 +42,13 @@ abstract class BaseExtension extends AbstractExtension
         $ns = (new ReflectionClass($vars['class']))->getNamespaceName();
         $short = Php::getShortName($vars['class']);
 
-        if ('Vairogs\Component\Utils\Helper' === $ns) {
+        if (Vairogs::HELPER_NAMESPACE === $ns) {
             $suffix = sprintf('%s_%s', 'helper', $short);
         } elseif ('Extension' === $short) {
             $suffix = Text::getLastPart($ns, '\\');
         }
 
-        if (str_starts_with($ns, 'Vairogs')) {
+        if (str_starts_with($ns, Php::getShortName(Vairogs::class))) {
             $vars['key'] = Vairogs::VAIROGS;
         }
 
@@ -64,6 +65,7 @@ abstract class BaseExtension extends AbstractExtension
     public function getFunctions(): array
     {
         $suffix = $this->getSuffix($vars = get_class_vars(static::class));
+
         return $this->makeArray(Helper::getFiltered($vars['class'], Annotation\TwigFunction::class), $suffix, Twig\TwigFunction::class);
     }
 }

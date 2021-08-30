@@ -48,6 +48,7 @@ abstract class Log
     public function setMessage(string $message): static
     {
         $this->message = $message;
+
         return $this;
     }
 
@@ -59,6 +60,7 @@ abstract class Log
     public function setContext(array $context): static
     {
         $this->context = $context;
+
         return $this;
     }
 
@@ -70,6 +72,7 @@ abstract class Log
     public function setLevel(int $level): static
     {
         $this->level = $level;
+
         return $this;
     }
 
@@ -81,6 +84,7 @@ abstract class Log
     public function setLevelName(string $levelName): static
     {
         $this->levelName = $levelName;
+
         return $this;
     }
 
@@ -92,6 +96,7 @@ abstract class Log
     public function setExtra(array $extra): static
     {
         $this->extra = $extra;
+
         return $this;
     }
 }

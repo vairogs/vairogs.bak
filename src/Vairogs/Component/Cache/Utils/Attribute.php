@@ -34,6 +34,7 @@ class Attribute
             $request = $kernelEvent->getRequest();
 
             $user = $this->getUser();
+
             return match ($annotation->getStrategy()) {
                 Strategy::GET => $request->attributes->get(self::_ROUTE_PARAMS) + $request->query->all(),
                 Strategy::POST => $request->request->all(),

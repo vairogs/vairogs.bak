@@ -33,6 +33,7 @@ class SitemapController extends AbstractController
         if (0 !== $constraintViolationList->count()) {
             return (new ErrorResponse($constraintViolationList))->getResponse();
         }
+
         return new Response((new Director(''))->build(new XmlBuilder($model)));
     }
 }

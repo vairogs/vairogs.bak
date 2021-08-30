@@ -156,6 +156,7 @@ class Text
     public static function getLastPart(string $string, string $delimiter): string
     {
         $idx = strrpos($string, $delimiter);
+
         return $idx === false ? $string : substr($string, $idx + 1);
     }
 
