@@ -18,9 +18,7 @@ class Http
     private const HEADER_PROTO = 'HTTP_X_FORWARDED_PROTO';
     private const REMOTE_ADDR = 'REMOTE_ADDR';
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function isHttps(Request $request): bool
     {
         $checks = [
@@ -39,9 +37,7 @@ class Http
         return false;
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function getRemoteIp(Request $request, bool $trust = false): string
     {
         if (!$trust) {
@@ -63,9 +59,7 @@ class Http
         return $request->server->get(self::REMOTE_ADDR);
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function getRemoteIpCF(Request $request): string
     {
         if ($request->server->has('HTTP_CF_CONNECTING_IP')) {
@@ -78,8 +72,8 @@ class Http
     /**
      * @throws InvalidArgumentException
      * @throws ReflectionException
-     * @Annotation\TwigFunction()
      */
+    #[Annotation\TwigFunction]
     public static function getMethods(): array
     {
         return Iter::arrayValuesFiltered(Php::getClassConstants(Request::class), 'METHOD_');

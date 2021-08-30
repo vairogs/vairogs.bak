@@ -9,9 +9,7 @@ use function preg_match;
 
 class Util
 {
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function isPrime(int $number): bool
     {
         preg_match('#^1?$|^(11+?)\1+$#', implode('1', array_fill(0, $number, null)), $matches);

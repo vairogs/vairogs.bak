@@ -13,13 +13,12 @@ class Helper
     /**
      * @throws ReflectionException
      */
-    public static function getFilterAnnotations(string $class, string $filterClass, bool $withClass = true): array
+    public static function getFiltered(string $class, string $filterClass, bool $withClass = true): array
     {
-        $annotationReader = new AnnotationReader();
         $methods = (new ReflectionClass($class))->getMethods(ReflectionMethod::IS_PUBLIC);
         $filtered = [];
         foreach ($methods as $method) {
-            if (null !== $annotationReader->getMethodAnnotation($method, $filterClass)) {
+            if (true === self::filterExists($method, $filterClass)) {
                 if (true === $withClass) {
                     $filtered[Text::fromCamelCase($method->getName())] = [$class, $method->getName()];
                 } else {
@@ -29,5 +28,10 @@ class Helper
         }
 
         return $filtered;
+    }
+
+    private static function filterExists(ReflectionMethod $method, string $filterClass): bool
+    {
+        return null !== (new AnnotationReader())->getMethodAnnotation($method, $filterClass) || [] !== $method->getAttributes($filterClass);
     }
 }

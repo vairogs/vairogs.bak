@@ -29,7 +29,7 @@ abstract class BaseExtension extends AbstractExtension
     public function getFilters(): array
     {
         $suffix = $this->getSuffix($vars = get_class_vars(static::class));
-        return $this->makeArray(Helper::getFilterAnnotations($vars['class'], Annotation\TwigFilter::class), $suffix, Twig\TwigFilter::class);
+        return $this->makeArray(Helper::getFiltered($vars['class'], Annotation\TwigFilter::class), $suffix, Twig\TwigFilter::class);
     }
 
     /**
@@ -64,6 +64,6 @@ abstract class BaseExtension extends AbstractExtension
     public function getFunctions(): array
     {
         $suffix = $this->getSuffix($vars = get_class_vars(static::class));
-        return $this->makeArray(Helper::getFilterAnnotations($vars['class'], Annotation\TwigFunction::class), $suffix, Twig\TwigFunction::class);
+        return $this->makeArray(Helper::getFiltered($vars['class'], Annotation\TwigFunction::class), $suffix, Twig\TwigFunction::class);
     }
 }

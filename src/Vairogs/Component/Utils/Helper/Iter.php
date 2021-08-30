@@ -24,9 +24,7 @@ use function str_starts_with;
 
 class Iter
 {
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function isEmpty(mixed $variable): bool
     {
         $result = true;
@@ -41,17 +39,13 @@ class Iter
         return $result;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function uniqueMap(array &$array): void
     {
         $array = array_map('\unserialize', array_unique(array_map('\serialize', $array)));
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     #[Pure]
     public static function unique(array $input, bool $keepKeys = false): array
     {
@@ -62,9 +56,7 @@ class Iter
         return array_keys(array_flip($input));
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public static function isMultiDimensional(array $keys = []): bool
     {
@@ -77,18 +69,14 @@ class Iter
         return false;
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public static function isAnyKeyNull(array $keys = []): bool
     {
         return in_array(null, $keys, true);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false): array
     {
         $result = [];
@@ -109,9 +97,7 @@ class Iter
         return $result;
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public static function isAssociative(array $array): bool
     {
@@ -122,9 +108,7 @@ class Iter
         return array_keys($array) !== range(0, count($array) - 1);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
         $result = array_intersect_key($first, $second);
@@ -139,8 +123,8 @@ class Iter
 
     /**
      * @throws InvalidArgumentException
-     * @Annotation\TwigFilter()
      */
+    #[Annotation\TwigFilter]
     public static function arrayFlipRecursive(array $input = []): array
     {
         $result = [];
@@ -160,9 +144,7 @@ class Iter
         return $result;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function removeFromArray(array &$input, mixed $value): void
     {
         if (in_array($value, $input, true)) {
@@ -176,8 +158,8 @@ class Iter
 
     /**
      * @throws InvalidArgumentException
-     * @Annotation\TwigFilter()
      */
+    #[Annotation\TwigFilter]
     public static function arrayValuesFiltered(array $input, string $with, string $type = 'starts'): array
     {
         return match ($type) {
@@ -187,25 +169,19 @@ class Iter
         };
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function filterKeyStartsWith(array $input, string $startsWith): array
     {
         return array_filter($input, static fn ($key) => str_starts_with($key, $startsWith), ARRAY_FILTER_USE_KEY);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function filterKeyEndsWith(array $input, string $endsWith): array
     {
         return array_filter($input, static fn ($key) => str_ends_with($key, $endsWith), ARRAY_FILTER_USE_KEY);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function getIfNotEmpty(array $input, mixed $key): mixed
     {
         if (!isset($input[$key])) {

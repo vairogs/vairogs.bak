@@ -32,9 +32,7 @@ class Date
         'second' => self::SEC,
     ];
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function validateDate(string $date): bool
     {
         $date = Text::keepNumeric($date);
@@ -53,9 +51,7 @@ class Date
         return 0 < $day && $months[$month - 1] >= $day;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function excelDate(int $timestamp, string $format = self::FORMAT): int|string
     {
         $base = 25569;
@@ -71,9 +67,7 @@ class Date
         return $timestamp;
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function validateDateBasic(mixed $date, string $format = self::FORMAT): bool
     {
         $object = DateTime::createFromFormat($format, $date);
@@ -81,9 +75,7 @@ class Date
         return $object && $date === $object->format($format);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     #[Pure]
     public static function format(int|float $timestamp): string
     {
@@ -107,9 +99,7 @@ class Date
         return trim($str);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     #[Pure]
     public static function formatToArray(int|float $timestamp): array
     {
@@ -133,17 +123,13 @@ class Date
         return $result;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function formatDate(string $string, string $format = self::FORMAT): string
     {
         return DateTime::createFromFormat($format, $string)?->format(self::FORMAT);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function getDateNullable(?string $format = null, ?string $dateString = null): ?DateTime
     {
         if (!$date = DateTime::createFromFormat($format, $dateString)) {
@@ -155,8 +141,8 @@ class Date
 
     /**
      * @throws InvalidArgumentException
-     * @Annotation\TwigFilter()
      */
+    #[Annotation\TwigFilter]
     public static function getDate(?string $format = null, ?string $dateString = null): DateTime
     {
         if (!$date = DateTime::createFromFormat($format, $dateString)) {
@@ -168,8 +154,8 @@ class Date
 
     /**
      * @throws Exception
-     * @Annotation\TwigFilter()
      */
+    #[Annotation\TwigFilter]
     public static function createFromUnixTimestamp(int $timestamp = 0, string $format = null): string
     {
         return (new DateTime())->setTimestamp($timestamp)
@@ -178,8 +164,8 @@ class Date
 
     /**
      * @throws ReflectionException
-     * @Annotation\TwigFilter()
      */
+    #[Annotation\TwigFilter]
     public static function guessDateFormat(string $date): DateTime|string
     {
         $formats = array_merge(Php::getClassConstantsValues(DateTime::class), self::EXTRA_FORMATS);

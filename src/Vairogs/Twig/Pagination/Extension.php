@@ -10,9 +10,7 @@ class Extension extends BaseExtension
 {
     protected static string $class = self::class;
 
-    /**
-     * @Annotation\TwigFunction
-     */
+    #[Annotation\TwigFunction]
     public function pagination(int $visible, int $total, int $current, int $ommit = -1): array
     {
         return (new FixedLength($visible))->getPaginationData($total, $current, $ommit);

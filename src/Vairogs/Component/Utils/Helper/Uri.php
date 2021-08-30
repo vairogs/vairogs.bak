@@ -35,10 +35,8 @@ use function urldecode;
 
 class Uri
 {
-    /**
-     * @Annotation\TwigFilter()
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
     public static function buildHttpQuery(array|object $data, ?string $parent = null): array
     {
         $result = [];
@@ -61,9 +59,7 @@ class Uri
         return $result;
     }
 
-    /**
-     * @Annotation\TwigFilter ()
-     */
+    #[Annotation\TwigFilter]
     public static function urlEncode(string $url): string
     {
         $urlParsed = parse_url($url);
@@ -86,9 +82,7 @@ class Uri
         return $scheme . $host . $port . $path . $query;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function arrayFromQueryString(string $query): array
     {
         $query = preg_replace_callback('#(?:^|(?<=&))[^=[]+#', static fn ($match) => bin2hex(urldecode($match[0])), $query);
@@ -98,9 +92,7 @@ class Uri
         return array_combine(array_map('hex2bin', array_keys($values)), $values);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function parseHeaders(string $rawHeaders = ''): array
     {
         if (function_exists('http_parse_headers')) {
@@ -135,9 +127,7 @@ class Uri
         return $headers;
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public static function isUrl(string $url): bool
     {
@@ -147,9 +137,7 @@ class Uri
         return false !== filter_var($url, FILTER_VALIDATE_URL);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function parseQueryPath(string $path): bool|string
     {
         $path = '/' . ltrim($path, '/');
@@ -168,18 +156,14 @@ class Uri
         return $path;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
     public static function getSchema(Request $request): string
     {
         return Http::isHttps($request) ? 'https://' : 'http://';
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function isAbsolute(string $path): bool
     {
         return str_starts_with($path, '//') || preg_match('#^[a-z-]{3,}://#i', $path);

@@ -25,9 +25,7 @@ use function ucfirst;
 
 class Php
 {
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function hijackSet(object $object, string $property, mixed $value): void
     {
         self::call(function () use ($object, $property, $value): void {
@@ -37,8 +35,8 @@ class Php
 
     /**
      * @noinspection PhpInconsistentReturnPointsInspection
-     * @Annotation\TwigFunction()
      */
+    #[Annotation\TwigFunction]
     public static function call(callable $function, object $clone, bool $return = false): mixed
     {
         $func = Closure::bind($function, $clone, $clone::class);
@@ -50,17 +48,13 @@ class Php
         $func();
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function hijackGet(object $object, string $property): mixed
     {
         return self::call(fn () => $object->$property, $object, true);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     #[Pure]
     public static function boolval(mixed $value): bool
     {
@@ -84,8 +78,8 @@ class Php
     /**
      * @throws ReflectionException
      * @throws InvalidArgumentException
-     * @Annotation\TwigFunction()
      */
+    #[Annotation\TwigFunction]
     public static function getClassConstantsValues(string $class): array
     {
         return array_values(self::getClassConstants($class));
@@ -94,8 +88,8 @@ class Php
     /**
      * @throws InvalidArgumentException
      * @throws ReflectionException
-     * @Annotation\TwigFunction()
      */
+    #[Annotation\TwigFunction]
     public static function getClassConstants(string $class): array
     {
         if (self::exists($class, true)) {
@@ -105,10 +99,8 @@ class Php
         throw new InvalidArgumentException(sprintf('Invalid class "%s"', $class));
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
     public static function exists(string $class, $doNotCheckTrait = false): bool
     {
         if (true === $doNotCheckTrait) {
@@ -118,10 +110,8 @@ class Php
         return class_exists($class) || interface_exists($class) || trait_exists($class);
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
     public static function getParameter(object|array $variable, mixed $key): mixed
     {
         if (is_array($variable)) {
@@ -135,10 +125,8 @@ class Php
         return $variable->$key;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
     public static function getClassMethods(string $class, ?string $parent = null): array
     {
         $methods = get_class_methods($class);
@@ -151,8 +139,8 @@ class Php
 
     /**
      * @throws ReflectionException
-     * @Annotation\TwigFilter()
      */
+    #[Annotation\TwigFilter]
     public static function getShortName(string $class): string
     {
         if (self::exists($class)) {
@@ -162,10 +150,8 @@ class Php
         return $class;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
     public static function classImplements(string $class, string $interface): bool
     {
         $interfaces = class_implements($class);

@@ -37,9 +37,7 @@ class Generator
     private string $digits = self::PASS_DIGITS;
     private string $symbols = self::PASS_SYMBOLS;
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
     {
@@ -50,8 +48,8 @@ class Generator
     /**
      * @throws LogicException
      * @throws Exception
-     * @Annotation\TwigFunction()
      */
+    #[Annotation\TwigFunction]
     public function generate(int $length = 20): string
     {
         if (empty($this->sets)) {

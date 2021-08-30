@@ -17,9 +17,7 @@ class Extension extends BaseExtension
 {
     protected static string $class = self::class;
 
-    /**
-     * @Annotation\TwigFilter
-     */
+    #[Annotation\TwigFilter]
     public function usort(mixed $data, ?string $parameter = null, string $order = Sort::ASC): array
     {
         if ($data instanceof Collection) {

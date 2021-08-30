@@ -13,9 +13,7 @@ use function substr;
 
 class Identification
 {
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function validatePersonCode(string $personCode): bool
     {
         $personCode = Text::keepNumeric($personCode);
@@ -39,9 +37,7 @@ class Identification
         return true;
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function validateNewPersonCode(string $personCode): bool
     {
         $personCode = str_replace('-', '', $personCode);
@@ -60,9 +56,7 @@ class Identification
         return (1 - $remainder) === (int)$personCode[10];
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function validateOldPersonCode(string $personCode): bool
     {
         $personCode = str_replace('-', '', $personCode);
@@ -75,9 +69,7 @@ class Identification
         return (int)($checksum - floor($checksum / 11) * 11) === (int)$personCode[10];
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function getUniqueId(int $length = 20): string
     {
         try {

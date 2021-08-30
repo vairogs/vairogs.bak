@@ -17,9 +17,7 @@ class Sort
     public const ASC = 'ASC';
     public const DESC = 'DESC';
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function swap(mixed &$foo, mixed &$bar): void
     {
         if ($foo === $bar) {
@@ -31,9 +29,7 @@ class Sort
         $bar = $tmp;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function bubbleSort(array &$array): void
     {
         $count = count($array);
@@ -46,10 +42,8 @@ class Sort
         }
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
     public static function swapArray(array &$array, mixed $foo, mixed $bar): void
     {
         if ($array[$foo] === $array[$bar]) {
@@ -61,9 +55,7 @@ class Sort
         $array[$bar] = $tmp;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function mergeSort(array $array): array
     {
         if (1 === count($array)) {
@@ -111,9 +103,7 @@ class Sort
         return $result;
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public static function isSortable(mixed $item, mixed $field): bool
     {
@@ -128,9 +118,7 @@ class Sort
         return false;
     }
 
-    /**
-     * @Annotation\TwigFilter()
-     */
+    #[Annotation\TwigFilter]
     public static function usort(mixed $parameter, string $order): callable
     {
         return static function ($a, $b) use ($parameter, $order): int {

@@ -8,9 +8,7 @@ use function filter_var;
 
 class Email
 {
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public static function isValid(string $email): bool
     {

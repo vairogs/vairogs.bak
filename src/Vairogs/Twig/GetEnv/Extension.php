@@ -11,9 +11,7 @@ class Extension extends BaseExtension
 {
     protected static string $class = self::class;
 
-    /**
-     * @Annotation\TwigFunction
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public function getEnv(string $varname): mixed
     {

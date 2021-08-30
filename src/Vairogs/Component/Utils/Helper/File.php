@@ -14,9 +14,7 @@ use function sprintf;
 
 class File
 {
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     public static function mkdir(string $path): bool
     {
         $dir = dirname($path);
@@ -27,9 +25,7 @@ class File
         return true;
     }
 
-    /**
-     * @Annotation\TwigFunction()
-     */
+    #[Annotation\TwigFunction]
     #[Pure]
     public static function fileExistsPublic(string $filename): bool
     {
