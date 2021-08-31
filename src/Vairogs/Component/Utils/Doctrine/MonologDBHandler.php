@@ -17,9 +17,11 @@ class MonologDBHandler extends AbstractProcessingHandler
     public function handleBatch(array $records): void
     {
         $this->em->beginTransaction();
+
         foreach ($records as $record) {
             $this->handle($record);
         }
+
         $this->em->commit();
     }
 

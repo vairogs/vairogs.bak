@@ -72,12 +72,15 @@ class CacheEventListener implements EventSubscriberInterface
             /* @var $annotation Annotation */
             $route = $controllerEvent->getRequest()?->get(self::ROUTE);
             $response = null;
+
             if (is_string($route)) {
                 $key = $annotation->getKey();
+
                 if (is_string($key)) {
                     $response = $this->getCache($key);
                 }
             }
+
             if (null !== $response) {
                 $controllerEvent->setController(static fn () => $response);
             }
@@ -103,6 +106,7 @@ class CacheEventListener implements EventSubscriberInterface
     private function getCache(string $key): mixed
     {
         $cache = $this->client->getItem($key);
+
         if ($cache->isHit()) {
             return $cache->get();
         }
@@ -155,6 +159,7 @@ class CacheEventListener implements EventSubscriberInterface
                 ->get(self::ROUTE));
             $cache = $this->getCache($key);
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(Header::CACHE_VAR);
+
             if (null === $cache && !$skip) {
                 $this->setCache($key, $responseEvent->getResponse(), $annotation->getExpires());
             }

@@ -44,8 +44,10 @@ class AuthOpenIDDependency implements Dependency
     {
         $baseKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID;
         $enabledKey = sprintf('%s.%s', $baseKey, Dependency::ENABLED);
+
         if ($containerBuilder->hasParameter($enabledKey) && true === $containerBuilder->getParameter($enabledKey)) {
             $clientsKey = $baseKey . '.clients';
+
             foreach ($containerBuilder->getParameter($clientsKey) as $key => $clientConfig) {
                 $tree = new TreeBuilder($key);
                 $node = $tree->getRootNode();

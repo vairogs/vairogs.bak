@@ -28,6 +28,7 @@ class Cache
     public function getKey(string $prefix = ''): string
     {
         $value = $this->data;
+
         if (!is_array($value)) {
             $key = $value ?: '';
         } else {
