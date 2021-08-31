@@ -5,7 +5,7 @@ namespace Vairogs\Component\Utils\Doctrine;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Monolog\Handler\AbstractProcessingHandler;
-use Vairogs\Component\Utils\Doctrine\Model\Log;
+use Vairogs\Component\Utils\Doctrine\Model\Factory\LogArrayFactory;
 
 class MonologDBHandler extends AbstractProcessingHandler
 {
@@ -25,13 +25,7 @@ class MonologDBHandler extends AbstractProcessingHandler
 
     protected function write(array $record): void
     {
-        /** @var Log $entry */
-        $entry = new $this->logClass();
-        $entry->setMessage($record['message']);
-        $entry->setLevel($record['level']);
-        $entry->setLevelName($record['level_name']);
-        $entry->setExtra($record['extra']);
-        $entry->setContext($record['context']);
+        $entry = LogArrayFactory::create($record, $this->logClass);
 
         if (!$this->em->isOpen()) {
             $this->em = $this->managerRegistry->resetManager();
