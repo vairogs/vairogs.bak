@@ -26,9 +26,11 @@ trait CreatedModified
         return $this->modificationDate;
     }
 
-    public function setModificationDate(DateTimeInterface $modificationDate): void
+    public function setModificationDate(DateTimeInterface $modificationDate): self
     {
         $this->modificationDate = $modificationDate;
+
+        return $this;
     }
 
     /**
@@ -38,13 +40,15 @@ trait CreatedModified
      */
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function updatedTimestamps(): void
+    public function updatedTimestamps(): self
     {
         $this->setModificationDate(new DateTime());
 
         if (null === $this->creationDate) {
             $this->setCreationDate(new DateTime());
         }
+
+        return $this;
     }
 
     public function getCreationDate(): DateTimeInterface
@@ -52,8 +56,10 @@ trait CreatedModified
         return $this->creationDate;
     }
 
-    public function setCreationDate(DateTimeInterface $creationDate): void
+    public function setCreationDate(DateTimeInterface $creationDate): self
     {
         $this->creationDate = $creationDate;
+
+        return $this;
     }
 }
