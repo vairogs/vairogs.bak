@@ -11,6 +11,7 @@ class GreaterOrEqualsTo extends AbstractSpecification
         if ($actualValue >= $expectedValue) {
             return true;
         }
+
         $this->message = sprintf('%s is invalid as it is not greater than expected %s', $actualValue, $expectedValue);
 
         return false;

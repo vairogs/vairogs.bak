@@ -11,6 +11,7 @@ class NotEmpty extends AbstractSpecification
         if (!empty($actualValue)) {
             return true;
         }
+
         $this->message = sprintf('%s is required and cannot be empty', $this->getName());
 
         return false;
