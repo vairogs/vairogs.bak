@@ -10,16 +10,15 @@ use Exception;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\PdoAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Vairogs;
-use function class_exists;
-use function interface_exists;
 use function sprintf;
 
 class Orm implements Cache
 {
     public function __construct(private EntityManagerInterface $entityManager, private string $namespace = Vairogs::VAIROGS)
     {
-        if (!interface_exists(Driver::class) || !class_exists(Query::class)) {
+        if (!Php::exists(Driver::class) || !Php::exists(Query::class)) {
             throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'doctrine/orm', 'doctrine/dbal', self::class));
         }
     }
