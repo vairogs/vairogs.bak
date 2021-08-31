@@ -92,7 +92,7 @@ class Php
     #[Annotation\TwigFunction]
     public static function getClassConstants(string $class): array
     {
-        if (self::exists($class, true)) {
+        if (self::exists($class)) {
             return (new ReflectionClass($class))->getConstants();
         }
 
@@ -101,9 +101,9 @@ class Php
 
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
-    public static function exists(string $class, $doNotCheckTrait = false): bool
+    public static function exists(string $class, $checkTrait = false): bool
     {
-        if (true === $doNotCheckTrait) {
+        if (false === $checkTrait) {
             return class_exists($class) || interface_exists($class);
         }
 
@@ -143,7 +143,7 @@ class Php
     #[Annotation\TwigFilter]
     public static function getShortName(string $class): string
     {
-        if (self::exists($class)) {
+        if (self::exists($class, true)) {
             return (new ReflectionClass($class))->getShortName();
         }
 
