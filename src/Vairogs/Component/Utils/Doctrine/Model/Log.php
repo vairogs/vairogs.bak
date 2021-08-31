@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\MappedSuperclass()
  */
 #[ORM\MappedSuperclass]
-abstract class Log
+class Log
 {
     /**
      * @ORM\Column(type="text")

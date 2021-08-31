@@ -61,9 +61,11 @@ class OpenIDProvider
             $builderClass = $this->options['user_builder'];
             /** @var OpenIDUserBuilder $builder */
             $builder = new $builderClass();
+
             if (null !== ($userClass = $this->options['user_class'] ?? null)) {
                 $builder->setUserClass($userClass);
             }
+
             /** @var OpenIDUserBuilder $builder */
             if (null === $this->profileUrl) {
                 $user = $builder->getUser($this->request->query->all());
@@ -96,10 +98,12 @@ class OpenIDProvider
             'openid.sig' => $get['openid_sig'],
             'openid.ns' => 'http://specs.openid.net/auth/2.0',
         ];
+
         foreach (explode(',', $get['openid_signed']) as $item) {
             $val = $get['openid_' . str_replace('.', '_', $item)];
             $params['openid.' . $item] = stripslashes($val);
         }
+
         $params['openid.mode'] = 'check_authentication';
         $data = http_build_query($params);
         $context = stream_context_create([
@@ -138,6 +142,7 @@ class OpenIDProvider
     public function urlPath(?string $return = null, ?string $altRealm = null): string
     {
         $realm = $altRealm ?: (Uri::getSchema($this->request) . $this->request->server->get('HTTP_HOST'));
+
         if (null !== $return) {
             if (!$this->validateUrl($return)) {
                 throw new RuntimeException('error_oauth_invalid_return_url');
@@ -171,6 +176,7 @@ class OpenIDProvider
             'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
             'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
         ];
+
         if ('sreg' === ($this->options[self::PROVIDER_OPTIONS]['ns_mode'] ?? '')) {
             $params['openid.ns.sreg'] = 'http://openid.net/extensions/sreg/1.1';
             $params['openid.sreg.required'] = $this->options[self::PROVIDER_OPTIONS]['sreg_fields'] ?? [];

@@ -74,9 +74,9 @@ interface User extends OpenIDUser
 
     public function getOpenID(): string;
 
-    public function setOpenID(string $openId): User;
-
     public function returnsEmail(): bool;
+
+    public function setOpenID(string $openId): User;
 
     public function getUsername(): ?string;
 

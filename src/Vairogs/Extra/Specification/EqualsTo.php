@@ -11,6 +11,7 @@ class EqualsTo extends AbstractSpecification
         if ($expectedValue === $actualValue) {
             return true;
         }
+
         $this->message = sprintf('%s is invalid as it is not equal to expected %s', $actualValue, $expectedValue);
 
         return false;

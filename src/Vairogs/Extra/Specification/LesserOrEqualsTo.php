@@ -12,6 +12,7 @@ class LesserOrEqualsTo extends AbstractSpecification
         if ($actualValue <= $expectedValue) {
             return true;
         }
+
         $this->message = sprintf('%s is invalid as it is not less than expected %s', $actualValue, $expectedValue);
 
         return false;
