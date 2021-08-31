@@ -8,14 +8,11 @@ use function sprintf;
 
 class LogArrayFactory
 {
-    public static function create(array $data, ?string $class = null): Log
+    public static function create(array $data, string $class = Log::class): Log
     {
-        $object = new Log();
-        if (null !== $class) {
-            $object = new $class();
-            if (!$object instanceof Log) {
-                throw new InvalidArgumentException(sprintf('%s class must extend %s', $class, Log::class));
-            }
+        $object = new $class();
+        if (!$object instanceof Log) {
+            throw new InvalidArgumentException(sprintf('%s class must extend %s', $class, Log::class));
         }
 
         return $object
