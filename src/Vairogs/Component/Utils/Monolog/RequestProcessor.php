@@ -19,6 +19,7 @@ class RequestProcessor
     public function processRecord(array $record): array
     {
         $record[self::EXTRA] = [];
+
         if (null !== $this->request) {
             $record[self::EXTRA]['client_ip'] = $this->request->getClientIp();
             $record[self::EXTRA]['client_port'] = $this->request->getPort();
@@ -30,11 +31,11 @@ class RequestProcessor
             }
 
             if ([] !== $post = $this->request->request->all()) {
-                $record[self::EXTRA]['POST'] = $post;
+                $record[self::EXTRA][Request::METHOD_POST] = $post;
             }
 
             if ([] !== $get = $this->request->query->all()) {
-                $record[self::EXTRA]['GET'] = $get;
+                $record[self::EXTRA][Request::METHOD_GET] = $get;
             }
 
             if ([] !== $files = $this->request->files->all()) {

@@ -25,6 +25,7 @@ class ErrorResponse
 <errors>
 ';
         // @formatter:on
+
         foreach ($this->constraintViolationList as $error) {
             /** @var ConstraintViolation $error */
             // @formatter:off
@@ -34,6 +35,7 @@ class ErrorResponse
                 "\n\t" . '</error>' . "\n";
             // @formatter:on
         }
+
         $buffer .= '</errors>
 <!-- error from sitemap library for Symfony vairogs/sitemap -->';
 

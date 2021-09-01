@@ -27,8 +27,10 @@ class Http
             self::HEADER_SSL,
             self::HEADER_PROTO,
         ];
+
         foreach ($checks as $check) {
             $function = sprintf('check%s', Text::toCamelCase($check));
+
             if (self::{$function}($request)) {
                 return true;
             }

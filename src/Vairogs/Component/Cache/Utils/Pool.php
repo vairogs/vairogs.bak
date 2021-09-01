@@ -14,7 +14,7 @@ class Pool
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
-    public static function createPoolFor(string $class, array $adapters = []): array
+    public static function createPoolForClass(string $class, array $adapters = []): array
     {
         $pool = [];
 

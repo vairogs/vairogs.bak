@@ -17,6 +17,7 @@ class Helper
     {
         $methods = (new ReflectionClass($class))->getMethods(ReflectionMethod::IS_PUBLIC);
         $filtered = [];
+
         foreach ($methods as $method) {
             if (true === self::filterExists($method, $filterClass)) {
                 if (true === $withClass) {

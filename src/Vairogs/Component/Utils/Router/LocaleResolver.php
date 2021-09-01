@@ -16,6 +16,7 @@ final class LocaleResolver
     public function resolve(): ?string
     {
         $locale = $this->resolveLocale($this->request, $this->availableLocales);
+
         if (in_array($locale, $this->availableLocales, true)) {
             return $locale;
         }

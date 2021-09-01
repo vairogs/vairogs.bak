@@ -38,12 +38,15 @@ class Date
         $date = Text::keepNumeric($date);
         $day = (int)substr($date, 0, 2);
         $month = (int)substr($date, 2, 2);
+
         if ($month < 0 || $month > 12) {
             return false;
         }
+
         // @formatter:off
         $months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,];
         // @formatter:on
+
         if (0 === (int)substr($date, 4, 2) % 4) {
             $months[1] = 29;
         }
@@ -55,10 +58,12 @@ class Date
     public static function excelDate(int $timestamp, string $format = self::FORMAT): int|string
     {
         $base = 25569;
+
         if ($timestamp >= $base) {
             /** @noinspection SummerTimeUnsafeTimeManipulationInspection */
             $unix = ($timestamp - $base) * 86400;
             $date = gmdate($format, $unix);
+
             if (self::validateDateBasic($date, $format)) {
                 return $date;
             }
@@ -81,6 +86,7 @@ class Date
     {
         $str = '';
         $timestamp = round($timestamp * 1000);
+
         foreach (self::TIME as $unit => $value) {
             if ($timestamp >= $value) {
                 $time = floor($timestamp / $value * 100.0 / 100.0);
@@ -88,6 +94,7 @@ class Date
                 if ($time > 0) {
                     $str .= $time . ' ' . $unit . (1.0 === $time ? '' : 's') . ' ';
                 }
+
                 $timestamp -= ($time * $value);
             }
         }
@@ -109,9 +116,11 @@ class Date
         foreach (self::TIME as $unit => $value) {
             if ($timestamp >= $value) {
                 $time = floor($timestamp / $value * 100.0 / 100.0);
+
                 if ($time > 0) {
                     $result[$unit] = $time;
                 }
+
                 $timestamp -= ($time * $value);
             }
         }
@@ -169,8 +178,10 @@ class Date
     public static function guessDateFormat(string $date): DateTime|string
     {
         $formats = array_merge(Php::getClassConstantsValues(DateTime::class), self::EXTRA_FORMATS);
+        
         foreach ($formats as $format) {
             $datetime = DateTime::createFromFormat($format, $date);
+
             if ($datetime instanceof DateTime) {
                 return $datetime;
             }

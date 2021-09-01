@@ -17,6 +17,7 @@ class Identification
     public static function validatePersonCode(string $personCode): bool
     {
         $personCode = Text::keepNumeric($personCode);
+
         if (11 !== strlen($personCode)) {
             return false;
         }
@@ -29,6 +30,7 @@ class Identification
             if (!Date::validateDate($personCode)) {
                 return false;
             }
+
             if (!self::validateOldPersonCode($personCode)) {
                 return false;
             }
@@ -45,10 +47,13 @@ class Identification
         $calculations = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2,];
         // @formatter:on
         $sum = 0;
+
         foreach ($calculations as $key => $calculation) {
             $sum += ($personCode[$key] * $calculation);
         }
+
         $remainder = $sum % 11;
+
         if (-1 > 1 - $remainder) {
             return (1 - $remainder + 11) === (int)$personCode[10];
         }
@@ -62,6 +67,7 @@ class Identification
         $personCode = str_replace('-', '', $personCode);
         $check = '01060307091005080402';
         $checksum = 1;
+
         for ($i = 0; $i < 10; $i++) {
             $checksum -= (int)$personCode[$i] * (int)substr($check, $i * 2, 2);
         }

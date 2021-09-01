@@ -19,6 +19,7 @@ trait TwigTrait
 
         $output = [];
         $this->makeInput($input, $key, $input);
+
         foreach ($input as $call => $function) {
             if (is_array($function)) {
                 $options = $function[2] ?? [];
@@ -38,6 +39,7 @@ trait TwigTrait
     private function makeInput(array $input, string $key, array &$output): void
     {
         $output = [];
+
         foreach ($input as $call => $function) {
             $output[sprintf('%s_%s', $key, $call)] = $function;
         }

@@ -5,6 +5,7 @@ namespace Vairogs\Component\Utils\Helper;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Component\Utils\Twig\Annotation;
+use Vairogs\Extra\Constants\Type;
 use function array_filter;
 use function array_flip;
 use function array_intersect_key;
@@ -28,6 +29,7 @@ class Iter
     public static function isEmpty(mixed $variable): bool
     {
         $result = true;
+
         if (!empty($variable) && is_array($variable)) {
             foreach ($variable as $value) {
                 $result = $result && self::isEmpty($value);
@@ -80,8 +82,10 @@ class Iter
     public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false): array
     {
         $result = [];
+
         foreach ($array as $key => $value) {
             $key = '' !== $base ? $base . '.' . $key : $key;
+
             if (is_array($value) && self::isAssociative($value)) {
                 foreach (self::makeOneDimension($value, (string)$key, $separator) as $ik => $iv) {
                     $result[$ik] = $iv;
@@ -91,6 +95,7 @@ class Iter
                     continue;
                 }
             }
+
             $result[$key] = $value;
         }
 
@@ -112,6 +117,7 @@ class Iter
     public static function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
         $result = array_intersect_key($first, $second);
+
         foreach (array_keys($result) as $key) {
             if (is_array($first[$key]) && is_array($second[$key])) {
                 $result[$key] = self::arrayIntersectKeyRecursive($first[$key], $second[$key]);
@@ -128,12 +134,13 @@ class Iter
     public static function arrayFlipRecursive(array $input = []): array
     {
         $result = [];
+
         foreach ($input as $key => $element) {
             if (is_array($element) || is_object($element)) {
                 $result[$key] = self::arrayFlipRecursive((array)$element);
             } elseif (in_array(gettype($element), [
-                'integer',
-                'string',
+                Type::INTEGER,
+                Type::STRING,
             ], true)) {
                 $result[$element] = $key;
             } else {
@@ -172,13 +179,13 @@ class Iter
     #[Annotation\TwigFilter]
     public static function filterKeyStartsWith(array $input, string $startsWith): array
     {
-        return array_filter($input, static fn ($key) => str_starts_with($key, $startsWith), ARRAY_FILTER_USE_KEY);
+        return array_filter($input, static fn($key) => str_starts_with($key, $startsWith), ARRAY_FILTER_USE_KEY);
     }
 
     #[Annotation\TwigFilter]
     public static function filterKeyEndsWith(array $input, string $endsWith): array
     {
-        return array_filter($input, static fn ($key) => str_ends_with($key, $endsWith), ARRAY_FILTER_USE_KEY);
+        return array_filter($input, static fn($key) => str_ends_with($key, $endsWith), ARRAY_FILTER_USE_KEY);
     }
 
     #[Annotation\TwigFilter]

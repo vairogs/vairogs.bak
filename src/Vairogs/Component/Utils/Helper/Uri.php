@@ -85,7 +85,7 @@ class Uri
     #[Annotation\TwigFilter]
     public static function arrayFromQueryString(string $query): array
     {
-        $query = preg_replace_callback('#(?:^|(?<=&))[^=[]+#', static fn ($match) => bin2hex(urldecode($match[0])), $query);
+        $query = preg_replace_callback('#(?:^|(?<=&))[^=[]+#', static fn($match) => bin2hex(urldecode($match[0])), $query);
 
         parse_str($query, $values);
 
@@ -116,6 +116,7 @@ class Uri
                         trim($h[1]),
                     ];
                 }
+
                 $key = $h[0];
             } elseif (str_starts_with($h[0], "\t")) {
                 $headers[$key] .= "\r\n\t" . trim($h[0]);
@@ -131,10 +132,8 @@ class Uri
     #[Pure]
     public static function isUrl(string $url): bool
     {
-        $url = filter_var($url, FILTER_SANITIZE_URL);
-
         /** @noinspection BypassedUrlValidationInspection */
-        return false !== filter_var($url, FILTER_VALIDATE_URL);
+        return false !== filter_var(filter_var($url, FILTER_SANITIZE_URL), FILTER_VALIDATE_URL);
     }
 
     #[Annotation\TwigFilter]

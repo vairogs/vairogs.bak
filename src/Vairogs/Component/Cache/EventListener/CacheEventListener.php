@@ -19,6 +19,7 @@ use Vairogs\Component\Cache\Annotation\Cache as Annotation;
 use Vairogs\Component\Cache\Utils\Attribute;
 use Vairogs\Component\Cache\Utils\Header;
 use Vairogs\Component\Cache\Utils\Pool;
+use Vairogs\Extra\Constants\Type;
 use function class_exists;
 use function in_array;
 use function is_string;
@@ -37,14 +38,18 @@ class CacheEventListener implements EventSubscriberInterface
 
     public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
     {
-        if ($this->enabled) {
-            $this->client = new ChainAdapter(Pool::createPoolFor(Annotation::class, $adapters));
+        if (true === $this->enabled) {
+            $this->client = new ChainAdapter(Pool::createPoolForClass(Annotation::class, $adapters));
             $this->client->prune();
             $this->attribute = new Attribute($reader, $tokenStorage);
         }
     }
 
-    #[ArrayShape([KernelEvents::CONTROLLER => "array", KernelEvents::RESPONSE => "string", KernelEvents::REQUEST => "string"])]
+    #[ArrayShape([
+        KernelEvents::CONTROLLER => Type::ARRAY,
+        KernelEvents::RESPONSE => Type::STRING,
+        KernelEvents::REQUEST => Type::STRING,
+    ])]
     public static function getSubscribedEvents(): array
     {
         return [
@@ -68,8 +73,8 @@ class CacheEventListener implements EventSubscriberInterface
         }
 
         if (null !== ($annotation = $this->attribute->getAnnotation($controllerEvent, Annotation::class))) {
-            $annotation->setData($this->attribute->getAttributes($controllerEvent, Annotation::class));
             /* @var $annotation Annotation */
+            $annotation->setData($this->attribute->getAttributes($controllerEvent, Annotation::class));
             $route = $controllerEvent->getRequest()?->get(self::ROUTE);
             $response = null;
 
@@ -82,7 +87,7 @@ class CacheEventListener implements EventSubscriberInterface
             }
 
             if (null !== $response) {
-                $controllerEvent->setController(static fn () => $response);
+                $controllerEvent->setController(static fn() => $response);
             }
         }
     }

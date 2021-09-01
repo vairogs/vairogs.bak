@@ -16,6 +16,7 @@ class LogArrayFactory
         }
 
         $object = new $class();
+
         if (!$object instanceof Log) {
             throw new InvalidArgumentException(sprintf('Class %s must extend %s', $class, Log::class));
         }

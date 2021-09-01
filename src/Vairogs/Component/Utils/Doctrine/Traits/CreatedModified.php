@@ -6,19 +6,20 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
+use Vairogs\Extra\Constants\Type;
 
 trait CreatedModified
 {
     /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column(type=Type::DATETIME, options={"default": "CURRENT_TIMESTAMP"})
      */
-    #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: Type::DATETIME, options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $creationDate = null;
 
     /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column(type=Type::DATETIME, options={"default": "CURRENT_TIMESTAMP"})
      */
-    #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: Type::DATETIME, options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $modificationDate = null;
 
     public function getModificationDate(): DateTimeInterface
@@ -26,7 +27,7 @@ trait CreatedModified
         return $this->modificationDate;
     }
 
-    public function setModificationDate(DateTimeInterface $modificationDate): self
+    public function setModificationDate(DateTimeInterface $modificationDate): static
     {
         $this->modificationDate = $modificationDate;
 
@@ -40,7 +41,7 @@ trait CreatedModified
      */
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function updatedTimestamps(): self
+    public function updatedTimestamps(): static
     {
         $this->setModificationDate(new DateTime());
 
@@ -56,7 +57,7 @@ trait CreatedModified
         return $this->creationDate;
     }
 
-    public function setCreationDate(DateTimeInterface $creationDate): self
+    public function setCreationDate(DateTimeInterface $creationDate): static
     {
         $this->creationDate = $creationDate;
 

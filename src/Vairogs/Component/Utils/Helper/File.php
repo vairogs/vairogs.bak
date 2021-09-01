@@ -18,6 +18,7 @@ class File
     public static function mkdir(string $path): bool
     {
         $dir = dirname($path);
+
         if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }

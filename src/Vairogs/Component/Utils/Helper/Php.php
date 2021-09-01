@@ -51,7 +51,7 @@ class Php
     #[Annotation\TwigFunction]
     public static function hijackGet(object $object, string $property): mixed
     {
-        return self::call(fn () => $object->$property, $object, true);
+        return self::call(fn() => $object->$property, $object, true);
     }
 
     #[Annotation\TwigFilter]
@@ -154,8 +154,6 @@ class Php
     #[Annotation\TwigFilter]
     public static function classImplements(string $class, string $interface): bool
     {
-        $interfaces = class_implements($class);
-
-        return isset($interfaces[$interface]);
+        return isset(class_implements($class)[$interface]);
     }
 }

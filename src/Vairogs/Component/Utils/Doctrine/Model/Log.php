@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Utils\Doctrine\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vairogs\Extra\Constants\Type;
 
 /**
  * @ORM\MappedSuperclass()
@@ -11,33 +12,33 @@ use Doctrine\ORM\Mapping as ORM;
 class Log
 {
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type=Type::TEXT)
      */
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: Type::TEXT)]
     protected string $message;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type=Type::ARRAY)
      */
-    #[ORM\Column(type: 'array')]
+    #[ORM\Column(type: Type::ARRAY)]
     protected array $context;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type=Type::SMALLINT)
      */
-    #[ORM\Column(type: 'smallint')]
+    #[ORM\Column(type: Type::SMALLINT)]
     protected int $level;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type=Type::STRING, length=50)
      */
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: Type::STRING, length: 50)]
     protected string $levelName;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type=Type::ARRAY)
      */
-    #[ORM\Column(type: 'extra')]
+    #[ORM\Column(type: Type::ARRAY)]
     protected array $extra;
 
     public function getMessage(): string

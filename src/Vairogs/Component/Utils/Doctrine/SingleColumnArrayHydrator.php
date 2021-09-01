@@ -13,11 +13,14 @@ class SingleColumnArrayHydrator extends AbstractHydrator
     protected function hydrateAllData(): array
     {
         $result = [];
+
         while ($data = $this->_stmt->fetch(PDO::FETCH_NUM)) {
             $value = $data[0];
+
             if (is_numeric($value)) {
                 $value = false === mb_strpos($value, '.', 0, Text::UTF8) ? (int)$value : (float)$value;
             }
+
             $result[] = $value;
         }
 

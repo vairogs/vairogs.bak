@@ -57,14 +57,17 @@ class Generator
         }
 
         $all = $unique = '';
+
         foreach ($this->sets as $set) {
             if (is_array($split = str_split($set))) {
                 $unique .= $set[$this->tweak($split)];
                 $all .= $set;
             }
         }
+
         if (is_array($all = str_split($all))) {
             $setsCount = count($this->sets);
+
             for ($i = 0; $i < $length - $setsCount; $i++) {
                 $unique .= $all[$this->tweak($all)];
             }

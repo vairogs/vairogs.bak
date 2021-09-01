@@ -35,6 +35,7 @@ class SitemapCommand extends Command
         if (null === $provider || (false === $options[Dependency::ENABLED])) {
             throw new NotFoundHttpException('To use vairogs/sitemap, you must enable it and provide a Provider');
         }
+
         $this->options = $options;
         $this->provider = $provider;
         parent::__construct(self::$defaultName);
@@ -52,6 +53,7 @@ class SitemapCommand extends Command
     {
         $sitemap = $this->provider->populate($input->getArgument(self::HOST));
         $constraintViolationList = $this->validator->validate($sitemap);
+
         if (0 !== $constraintViolationList->count()) {
             foreach ($constraintViolationList as $error) {
                 /** @var ConstraintViolation $error */
@@ -64,7 +66,9 @@ class SitemapCommand extends Command
             if (is_file($filename)) {
                 unlink($filename);
             }
+
             $handle = fopen($filename, 'w+b');
+
             try {
                 (new Director($handle))->build(new FileBuilder($sitemap));
                 $output->writeln(sprintf('<info>Sitemap generated as "%s"</info>', $filename));
@@ -72,8 +76,10 @@ class SitemapCommand extends Command
                 if (is_file($filename)) {
                     unlink($filename);
                 }
+
                 $output->writeln('<error>' . $exception->getMessage() . '</error>');
             }
+
             fclose($handle);
         }
     }

@@ -27,11 +27,11 @@ use function stream_context_create;
 use function stripslashes;
 use function strlen;
 use function urldecode;
+use Vairogs\Extra\Constants\Type;
 
 class OpenIDProvider
 {
     private const PROVIDER_OPTIONS = 'provider_options';
-    private const STRING = 'string';
 
     protected Request $request;
     protected ?string $profileUrl;
@@ -160,7 +160,7 @@ class OpenIDProvider
         return Uri::isUrl($url);
     }
 
-    #[ArrayShape(['openid.ns' => self::STRING, 'openid.mode' => self::STRING, 'openid.return_to' => "string|string[]", 'openid.realm' => "null|string", 'openid.identity' => self::STRING, 'openid.claimed_id' => self::STRING, 'openid.sreg.required' => "array|mixed", 'openid.ns.sreg' => self::STRING])]
+    #[ArrayShape(['openid.ns' => Type::STRING, 'openid.mode' => Type::STRING, 'openid.return_to' => "string|string[]", 'openid.realm' => "null|string", 'openid.identity' => Type::STRING, 'openid.claimed_id' => Type::STRING, 'openid.sreg.required' => "array|mixed", 'openid.ns.sreg' => Type::STRING])]
     private function getParams(string $return, ?string $realm): array
     {
         if (isset($this->options[self::PROVIDER_OPTIONS]['replace'])) {

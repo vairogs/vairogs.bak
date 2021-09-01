@@ -13,6 +13,7 @@ use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use Vairogs\Component\Utils\Helper\Iter;
 use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Extra\Constants\Type;
 use function sprintf;
 
 class AuthOpenIDDependency implements Dependency
@@ -30,7 +31,7 @@ class AuthOpenIDDependency implements Dependency
                 ->addDefaultsIfNotSet()
                 ->children()
                     ->arrayNode('clients')
-                        ->prototype('array')
+                        ->prototype(Type::ARRAY)
                             ->prototype('variable')->end()
                         ->end()
                     ->end()

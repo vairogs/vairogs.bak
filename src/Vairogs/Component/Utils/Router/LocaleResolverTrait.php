@@ -21,12 +21,14 @@ trait LocaleResolverTrait
         if (!empty($this->hostMap[$request->getHost()])) {
             return $this->hostMap[$request->getHost()];
         }
+
         $functions = [
             'returnByQueryParameter',
             'returnByPreviousSession',
             'returnByCookie',
             'returnByLang',
         ];
+
         foreach ($functions as $function) {
             if ($result = $this->{$function}($request, $availableLocales)) {
                 return $result;
@@ -41,6 +43,7 @@ trait LocaleResolverTrait
         // @formatter:off
         foreach (['hl', 'lang'] as $parameter) {
             // @formatter:on
+
             if ($request->query->has($parameter) && $result = $this->preg($request->query->get($parameter))) {
                 return $result;
             }
@@ -62,6 +65,7 @@ trait LocaleResolverTrait
     {
         if ($request->hasPreviousSession()) {
             $session = $request->getSession();
+
             if ($session && $session->has('_locale')) {
                 return $session->get('_locale');
             }
