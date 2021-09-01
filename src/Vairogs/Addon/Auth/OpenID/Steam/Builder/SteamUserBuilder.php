@@ -37,7 +37,7 @@ class SteamUserBuilder implements OpenIDUserBuilder
 
     private function getUsername(User $user): string
     {
-        if (true === $this->hasUsername($user)) {
+        if ($this->hasUsername($user)) {
             $username = str_replace(self::PROFILE_URL_START, '', $user->getUrl());
 
             return rtrim($username, '/');

@@ -103,7 +103,7 @@ class Php
     #[Annotation\TwigFilter]
     public static function exists(string $class, $checkTrait = false): bool
     {
-        if (false === $checkTrait) {
+        if (!$checkTrait) {
             return class_exists($class) || interface_exists($class);
         }
 

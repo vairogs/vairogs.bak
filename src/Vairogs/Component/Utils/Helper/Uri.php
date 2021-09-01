@@ -145,7 +145,7 @@ class Uri
         while (false !== $pos = strpos($path, '/../')) {
             $leftSlashNext = strrpos(substr($path, 0, $pos), '/');
 
-            if (false === $leftSlashNext) {
+            if (!$leftSlashNext) {
                 return false;
             }
 

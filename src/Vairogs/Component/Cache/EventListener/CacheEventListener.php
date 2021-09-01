@@ -38,7 +38,7 @@ class CacheEventListener implements EventSubscriberInterface
 
     public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
     {
-        if (true === $this->enabled) {
+        if ($this->enabled) {
             $this->client = new ChainAdapter(Pool::createPoolForClass(Annotation::class, $adapters));
             $this->client->prune();
             $this->attribute = new Attribute($reader, $tokenStorage);

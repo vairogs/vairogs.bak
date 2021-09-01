@@ -19,8 +19,8 @@ class Helper
         $filtered = [];
 
         foreach ($methods as $method) {
-            if (true === self::filterExists($method, $filterClass)) {
-                if (true === $withClass) {
+            if (self::filterExists($method, $filterClass)) {
+                if ($withClass) {
                     $filtered[Text::fromCamelCase($method->getName())] = [$class, $method->getName()];
                 } else {
                     $filtered[Text::fromCamelCase($method->getName())] = $method->getName();
