@@ -15,10 +15,10 @@ class FixedLength
 
     public function __construct(private int $maximumVisible)
     {
-        $this->checkMinimum($this->maximumVisible);
+        $this->checkMinimumAllowed($this->maximumVisible);
     }
 
-    private function checkMinimum(int $maximumVisible): void
+    private function checkMinimumAllowed(int $maximumVisible): void
     {
         if ($this->maximumVisible < self::MIN_VISIBLE) {
             throw new InvalidArgumentException(sprintf('Maximum of number of visible pages (%d) should be at least %d.', $maximumVisible, self::MIN_VISIBLE));
@@ -27,7 +27,7 @@ class FixedLength
 
     public function withMaximumVisible(int $maximumVisible): static
     {
-        $this->checkMinimum($maximumVisible);
+        $this->checkMinimumAllowed($maximumVisible);
 
         $clone = clone $this;
         $clone->setMaximumVisible($maximumVisible);
