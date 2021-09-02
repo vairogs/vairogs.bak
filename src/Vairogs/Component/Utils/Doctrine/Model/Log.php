@@ -3,7 +3,8 @@
 namespace Vairogs\Component\Utils\Doctrine\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Vairogs\Extra\Constants\Type;
+use Vairogs\Extra\Constants\Type\Numeric;
+use Vairogs\Extra\Constants\Type\Basic;
 
 /**
  * @ORM\MappedSuperclass()
@@ -12,33 +13,33 @@ use Vairogs\Extra\Constants\Type;
 class Log
 {
     /**
-     * @ORM\Column(type=Type::TEXT)
+     * @ORM\Column(type=Basic::TEXT)
      */
-    #[ORM\Column(type: Type::TEXT)]
+    #[ORM\Column(type: Basic::TEXT)]
     protected string $message;
 
     /**
-     * @ORM\Column(type=Type::ARRAY)
+     * @ORM\Column(type=Basic::ARRAY)
      */
-    #[ORM\Column(type: Type::ARRAY)]
+    #[ORM\Column(type: Basic::ARRAY)]
     protected array $context;
 
     /**
-     * @ORM\Column(type=Type::SMALLINT)
+     * @ORM\Column(type=Numeric::SMALLINT)
      */
-    #[ORM\Column(type: Type::SMALLINT)]
+    #[ORM\Column(type: Numeric::SMALLINT)]
     protected int $level;
 
     /**
-     * @ORM\Column(type=Type::STRING, length=50)
+     * @ORM\Column(type=Basic::STRING, length=50)
      */
-    #[ORM\Column(type: Type::STRING, length: 50)]
+    #[ORM\Column(type: Basic::STRING, length: 50)]
     protected string $levelName;
 
     /**
-     * @ORM\Column(type=Type::ARRAY)
+     * @ORM\Column(type=Basic::ARRAY)
      */
-    #[ORM\Column(type: Type::ARRAY)]
+    #[ORM\Column(type: Basic::ARRAY)]
     protected array $extra;
 
     public function getMessage(): string

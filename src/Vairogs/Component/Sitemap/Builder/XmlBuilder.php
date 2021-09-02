@@ -4,7 +4,7 @@ namespace Vairogs\Component\Sitemap\Builder;
 
 use Vairogs\Component\Sitemap\Model\RichUrl;
 use Vairogs\Component\Sitemap\Model\Sitemap;
-use Vairogs\Extra\Constants\Type;
+use Vairogs\Extra\Constants\Type\Basic;
 use function array_keys;
 use function method_exists;
 use function sprintf;
@@ -50,7 +50,7 @@ class XmlBuilder implements Builder
 
     public function getType(): string
     {
-        return Type::STRING;
+        return Basic::STRING;
     }
 
     public function start(&$buffer): void

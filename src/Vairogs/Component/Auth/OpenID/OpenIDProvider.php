@@ -27,7 +27,7 @@ use function stream_context_create;
 use function stripslashes;
 use function strlen;
 use function urldecode;
-use Vairogs\Extra\Constants\Type;
+use Vairogs\Extra\Constants\Type\Basic;
 
 class OpenIDProvider
 {
@@ -160,7 +160,16 @@ class OpenIDProvider
         return Uri::isUrl($url);
     }
 
-    #[ArrayShape(['openid.ns' => Type::STRING, 'openid.mode' => Type::STRING, 'openid.return_to' => "string|string[]", 'openid.realm' => "null|string", 'openid.identity' => Type::STRING, 'openid.claimed_id' => Type::STRING, 'openid.sreg.required' => "array|mixed", 'openid.ns.sreg' => Type::STRING])]
+    #[ArrayShape([
+        'openid.ns' => Basic::STRING,
+        'openid.mode' => Basic::STRING,
+        'openid.return_to' => "string|string[]",
+        'openid.realm' => "null|string",
+        'openid.identity' => Basic::STRING,
+        'openid.claimed_id' => Basic::STRING,
+        'openid.sreg.required' => "array|mixed",
+        'openid.ns.sreg' => Basic::STRING,
+    ])]
     private function getParams(string $return, ?string $realm): array
     {
         if (isset($this->options[self::PROVIDER_OPTIONS]['replace'])) {

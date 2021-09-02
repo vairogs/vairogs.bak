@@ -7,7 +7,8 @@ use JetBrains\PhpStorm\Pure;
 use Stringable;
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
-use Vairogs\Extra\Constants\Type;
+use Vairogs\Extra\Constants\Type\Numeric;
+use Vairogs\Extra\Constants\Type\Basic;
 
 /**
  * @ORM\MappedSuperclass()
@@ -18,111 +19,111 @@ class Steam implements OpenIDUser, User, Stringable
     public const RETURNS_EMAIL = false;
 
     /**
-     * @ORM\Column(type=Type::STRING, unique=true)
+     * @ORM\Column(type=Basic::STRING, unique=true)
      */
-    #[ORM\Column(type: Type::STRING, unique: true)]
+    #[ORM\Column(type: Basic::STRING, unique: true)]
     protected string $openID;
 
     /**
-     * @ORM\Column(type=Type::INTEGER)
+     * @ORM\Column(type=Basic::INTEGER)
      */
-    #[ORM\Column(type: Type::INTEGER)]
+    #[ORM\Column(type: Basic::INTEGER)]
     protected int $communityState;
 
     /**
-     * @ORM\Column(type=Type::INTEGER)
+     * @ORM\Column(type=Basic::INTEGER)
      */
-    #[ORM\Column(type: Type::INTEGER)]
+    #[ORM\Column(type: Basic::INTEGER)]
     protected int $profileState;
 
     /**
-     * @ORM\Column(type=Type::STRING)
+     * @ORM\Column(type=Basic::STRING)
      */
-    #[ORM\Column(type: Type::STRING)]
+    #[ORM\Column(type: Basic::STRING)]
     protected string $persona;
 
     /**
-     * @ORM\Column(type=Type::INTEGER)
+     * @ORM\Column(type=Basic::INTEGER)
      */
-    #[ORM\Column(type: Type::INTEGER)]
+    #[ORM\Column(type: Basic::INTEGER)]
     protected int $commentPermission;
 
     /**
-     * @ORM\Column(type=Type::STRING)
+     * @ORM\Column(type=Basic::STRING)
      */
-    #[ORM\Column(type: Type::STRING)]
+    #[ORM\Column(type: Basic::STRING)]
     protected string $url;
 
     /**
-     * @ORM\Column(type=Type::ARRAY)
+     * @ORM\Column(type=Basic::ARRAY)
      */
-    #[ORM\Column(type: Type::ARRAY)]
+    #[ORM\Column(type: Basic::ARRAY)]
     protected array $avatar;
 
     /**
-     * @ORM\Column(type=Type::INTEGER)
+     * @ORM\Column(type=Basic::INTEGER)
      */
-    #[ORM\Column(type: Type::INTEGER)]
+    #[ORM\Column(type: Basic::INTEGER)]
     protected int $personaState;
 
     /**
-     * @ORM\Column(type=Type::INTEGER, nullable=true)
+     * @ORM\Column(type=Basic::INTEGER, nullable=true)
      */
-    #[ORM\Column(type: Type::INTEGER, nullable: true)]
+    #[ORM\Column(type: Basic::INTEGER, nullable: true)]
     protected ?int $logoff = null;
 
     /**
-     * @ORM\Column(type=Type::STRING, nullable=true)
+     * @ORM\Column(type=Basic::STRING, nullable=true)
      */
-    #[ORM\Column(type: Type::STRING, nullable: true)]
+    #[ORM\Column(type: Basic::STRING, nullable: true)]
     protected ?string $name = null;
 
     /**
-     * @ORM\Column(type=Type::BIGINT, nullable=true)
+     * @ORM\Column(type=Numeric::BIGINT, nullable=true)
      */
-    #[ORM\Column(type: Type::BIGINT, nullable: true)]
+    #[ORM\Column(type: Numeric::BIGINT, nullable: true)]
     protected ?int $clanId = null;
 
     /**
-     * @ORM\Column(type=Type::INTEGER, nullable=true)
+     * @ORM\Column(type=Basic::INTEGER, nullable=true)
      */
-    #[ORM\Column(type: Type::INTEGER, nullable: true)]
+    #[ORM\Column(type: Basic::INTEGER, nullable: true)]
     protected int $createdAt;
 
     /**
-     * @ORM\Column(type=Type::INTEGER, nullable=true)
+     * @ORM\Column(type=Basic::INTEGER, nullable=true)
      */
-    #[ORM\Column(type: Type::INTEGER, nullable: true)]
+    #[ORM\Column(type: Basic::INTEGER, nullable: true)]
     protected int $personaFlags;
 
     /**
-     * @ORM\Column(type=Type::STRING, nullable=true)
+     * @ORM\Column(type=Basic::STRING, nullable=true)
      */
-    #[ORM\Column(type: Type::STRING, nullable: true)]
+    #[ORM\Column(type: Basic::STRING, nullable: true)]
     protected ?string $countryCode = null;
 
     /**
-     * @ORM\Column(type=Type::INTEGER, nullable=true)
+     * @ORM\Column(type=Basic::INTEGER, nullable=true)
      */
-    #[ORM\Column(type: Type::INTEGER, nullable: true)]
+    #[ORM\Column(type: Basic::INTEGER, nullable: true)]
     protected ?int $stateCode = null;
 
     /**
-     * @ORM\Column(type=Type::STRING, nullable=true)
+     * @ORM\Column(type=Basic::STRING, nullable=true)
      */
-    #[ORM\Column(type: Type::STRING, nullable: true)]
+    #[ORM\Column(type: Basic::STRING, nullable: true)]
     protected ?string $playing = null;
 
     /**
-     * @ORM\Column(type=Type::INTEGER, nullable=true)
+     * @ORM\Column(type=Basic::INTEGER, nullable=true)
      */
-    #[ORM\Column(type: Type::INTEGER, nullable: true)]
+    #[ORM\Column(type: Basic::INTEGER, nullable: true)]
     protected ?int $playingId = null;
 
     /**
-     * @ORM\Column(type=Type::STRING, nullable=true, unique=true)
+     * @ORM\Column(type=Basic::STRING, nullable=true, unique=true)
      */
-    #[ORM\Column(type: Type::STRING, unique: true, nullable: true)]
+    #[ORM\Column(type: Basic::STRING, unique: true, nullable: true)]
     protected ?string $username = null;
 
     #[Pure]

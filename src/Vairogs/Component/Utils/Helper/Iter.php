@@ -5,7 +5,7 @@ namespace Vairogs\Component\Utils\Helper;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Component\Utils\Twig\Annotation;
-use Vairogs\Extra\Constants\Type;
+use Vairogs\Extra\Constants\Type\Basic;
 use function array_filter;
 use function array_flip;
 use function array_intersect_key;
@@ -139,8 +139,8 @@ class Iter
             if (is_array($element) || is_object($element)) {
                 $result[$key] = self::arrayFlipRecursive((array)$element);
             } elseif (in_array(gettype($element), [
-                Type::INTEGER,
-                Type::STRING,
+                Basic::INTEGER,
+                Basic::STRING,
             ], true)) {
                 $result[$element] = $key;
             } else {

@@ -3,17 +3,17 @@
 namespace Vairogs\Component\Utils\Doctrine\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use Vairogs\Extra\Constants\Type;
+use Vairogs\Extra\Constants\Type\Basic;
 
 trait Id
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(type: Type::INTEGER, unique: true)]
+    #[ORM\Column(type: Basic::INTEGER, unique: true)]
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Column(type=Type::INTEGER, unique=true)
+     * @ORM\Column(type=Basic::INTEGER, unique=true)
      */
     protected ?int $id = null;
 
