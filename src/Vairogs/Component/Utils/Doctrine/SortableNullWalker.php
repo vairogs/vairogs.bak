@@ -9,6 +9,7 @@ use Doctrine\DBAL\Platforms\OraclePlatform;
 use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
 use Doctrine\ORM\Query\SqlWalker;
 use InvalidArgumentException;
+use function func_get_args;
 use function is_array;
 use function preg_replace;
 use function preg_replace_callback;
@@ -27,38 +28,51 @@ class SortableNullWalker extends SqlWalker
     {
         $sql = parent::walkOrderByClause($orderByClause);
 
-        if (is_array($fields = $this->getQuery()
-                ->getHint(self::FIELDS)) && $platform = $this->getConnection()
-                ->getDatabasePlatform()) {
-            switch ($platform->getName()) {
-                case (new MySqlPlatform())->getName():
-                    foreach ($fields as $field => $sorting) {
-                        if (self::NULLS_LAST === $sorting) {
-                            $sql = preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') (' . Criteria::ASC . '|' . Criteria::DESC . ')/i', static function ($matches): string {
-                                if (Criteria::ASC === $matches[3]) {
-                                    $order = Criteria::DESC;
-                                } elseif (Criteria::DESC === $matches[3]) {
-                                    $order = Criteria::ASC;
-                                } else {
-                                    throw new InvalidArgumentException(sprintf('Order must be "%s" or "%s"', Criteria::ASC, Criteria::DESC));
-                                }
+        // @formatter:off
+        $fields = $this->getQuery()->getHint(self::FIELDS);
+        $platform = $this->getConnection()?->getDatabasePlatform()?->getName();
+        // @formatter:on
 
-                                return ('ORDER BY -' . $matches[1] . $matches[2] . ' ' . $order);
-                            }, $sql);
-                        }
-                    }
-                    break;
-                case (new OraclePlatform())->getName():
-                case (new PostgreSQL100Platform())->getName():
-                    foreach ($fields as $field => $sorting) {
-                        $sql = preg_replace('/(\.' . $field . ') (' . Criteria::ASC . '|' . Criteria::DESC . ')?\s*/i', '$1 $2 ' . $sorting, $sql);
-                    }
-                    break;
-                default:
-                    throw new InvalidArgumentException(sprintf('Walker not implemented for "%s" platform', $platform->getName()));
+        if (is_array($fields) && $platform) {
+            foreach ($fields as $field => $sorting) {
+                $sql = match ($platform) {
+                    (new MySqlPlatform())->getName() => $this->stepMysql($sql, $field, $sorting),
+                    (new OraclePlatform())->getName() => $this->stepOracle($sql, $field, $sorting),
+                    (new PostgreSQL100Platform())->getName() => $this->stepPostgre($sql, $field, $sorting),
+                    default => throw new InvalidArgumentException(sprintf('Walker not implemented for "%s" platform', $platform)),
+                };
             }
         }
 
         return $sql;
+    }
+
+    private function stepMysql(string $sql, string $field, string $sorting): string
+    {
+        if (self::NULLS_LAST === $sorting) {
+            return preg_replace_callback('/ORDER BY (.+)' . '(' . $field . ') (' . Criteria::ASC . '|' . Criteria::DESC . ')/i', static function ($matches): string {
+                if (Criteria::ASC === $matches[3]) {
+                    $order = Criteria::DESC;
+                } elseif (Criteria::DESC === $matches[3]) {
+                    $order = Criteria::ASC;
+                } else {
+                    throw new InvalidArgumentException(sprintf('Order must be "%s" or "%s"', Criteria::ASC, Criteria::DESC));
+                }
+
+                return ('ORDER BY -' . $matches[1] . $matches[2] . ' ' . $order);
+            }, $sql);
+        }
+
+        return $sql;
+    }
+
+    private function stepOracle(string $sql, string $field, string $sorting): string
+    {
+        return preg_replace('/(\.' . $field . ') (' . Criteria::ASC . '|' . Criteria::DESC . ')?\s*/i', '$1 $2 ' . $sorting, $sql);
+    }
+
+    private function stepPostgre(string $sql, string $field, string $sorting): string
+    {
+        return $this->stepOracle(...func_get_args());
     }
 }
