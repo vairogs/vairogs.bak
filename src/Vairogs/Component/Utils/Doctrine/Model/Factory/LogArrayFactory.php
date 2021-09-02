@@ -21,8 +21,7 @@ class LogArrayFactory
             throw new InvalidArgumentException(sprintf('Class %s must extend %s', $class, Log::class));
         }
 
-        return $object
-            ->setMessage($data['message'] ?? '')
+        return $object->setMessage($data['message'] ?? '')
             ->setLevel($data['level'] ?? 0)
             ->setLevelName($data['level_name'] ?? '')
             ->setExtra($data['extra'] ?? [])

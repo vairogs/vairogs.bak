@@ -132,6 +132,107 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->openID;
     }
 
+    public function getAvatar(): array
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(array $avatar): User
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getClanId(): ?int
+    {
+        return $this->clanId;
+    }
+
+    public function setClanId(?int $clanId): User
+    {
+        $this->clanId = $clanId;
+
+        return $this;
+    }
+
+    public function getCommentPermission(): int
+    {
+        return $this->commentPermission;
+    }
+
+    public function setCommentPermission(int $commentPermission): User
+    {
+        $this->commentPermission = $commentPermission;
+
+        return $this;
+    }
+
+    public function getCommunityState(): int
+    {
+        return $this->communityState;
+    }
+
+    public function setCommunityState(int $communityState): User
+    {
+        $this->communityState = $communityState;
+
+        return $this;
+    }
+
+    public function getCountryCode(): ?string
+    {
+        return $this->countryCode;
+    }
+
+    public function setCountryCode(?string $countryCode): User
+    {
+        $this->countryCode = $countryCode;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): int
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(int $createdAt): User
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return null;
+    }
+
+    public function getLogoff(): ?int
+    {
+        return $this->logoff;
+    }
+
+    public function setLogoff(?int $logoff): User
+    {
+        $this->logoff = $logoff;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): User
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     public function getOpenID(): string
     {
         return $this->openID;
@@ -140,6 +241,42 @@ class Steam implements OpenIDUser, User, Stringable
     public function setOpenID(string $openId): User
     {
         $this->openID = $openId;
+
+        return $this;
+    }
+
+    public function getPersona(): string
+    {
+        return $this->persona;
+    }
+
+    public function setPersona(string $persona): User
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
+
+    public function getPersonaFlags(): int
+    {
+        return $this->personaFlags;
+    }
+
+    public function setPersonaFlags(int $personaFlags): User
+    {
+        $this->personaFlags = $personaFlags;
+
+        return $this;
+    }
+
+    public function getPersonaState(): int
+    {
+        return $this->personaState;
+    }
+
+    public function setPersonaState(int $personaState): User
+    {
+        $this->personaState = $personaState;
 
         return $this;
     }
@@ -168,18 +305,6 @@ class Steam implements OpenIDUser, User, Stringable
         return $this;
     }
 
-    public function getCommunityState(): int
-    {
-        return $this->communityState;
-    }
-
-    public function setCommunityState(int $communityState): User
-    {
-        $this->communityState = $communityState;
-
-        return $this;
-    }
-
     public function getProfileState(): int
     {
         return $this->profileState;
@@ -188,138 +313,6 @@ class Steam implements OpenIDUser, User, Stringable
     public function setProfileState(int $profileState): User
     {
         $this->profileState = $profileState;
-
-        return $this;
-    }
-
-    public function getPersona(): string
-    {
-        return $this->persona;
-    }
-
-    public function setPersona(string $persona): User
-    {
-        $this->persona = $persona;
-
-        return $this;
-    }
-
-    public function getCommentPermission(): int
-    {
-        return $this->commentPermission;
-    }
-
-    public function setCommentPermission(int $commentPermission): User
-    {
-        $this->commentPermission = $commentPermission;
-
-        return $this;
-    }
-
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): User
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    public function getAvatar(): array
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(array $avatar): User
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    public function getLogoff(): ?int
-    {
-        return $this->logoff;
-    }
-
-    public function setLogoff(?int $logoff): User
-    {
-        $this->logoff = $logoff;
-
-        return $this;
-    }
-
-    public function getPersonaState(): int
-    {
-        return $this->personaState;
-    }
-
-    public function setPersonaState(int $personaState): User
-    {
-        $this->personaState = $personaState;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): User
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getClanId(): ?int
-    {
-        return $this->clanId;
-    }
-
-    public function setClanId(?int $clanId): User
-    {
-        $this->clanId = $clanId;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): int
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(int $createdAt): User
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getPersonaFlags(): int
-    {
-        return $this->personaFlags;
-    }
-
-    public function setPersonaFlags(int $personaFlags): User
-    {
-        $this->personaFlags = $personaFlags;
-
-        return $this;
-    }
-
-    public function getCountryCode(): ?string
-    {
-        return $this->countryCode;
-    }
-
-    public function setCountryCode(?string $countryCode): User
-    {
-        $this->countryCode = $countryCode;
 
         return $this;
     }
@@ -336,14 +329,16 @@ class Steam implements OpenIDUser, User, Stringable
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getUrl(): string
     {
-        return null;
+        return $this->url;
     }
 
-    public function returnsEmail(): bool
+    public function setUrl(string $url): User
     {
-        return self::RETURNS_EMAIL;
+        $this->url = $url;
+
+        return $this;
     }
 
     public function getUsername(): ?string
@@ -356,5 +351,10 @@ class Steam implements OpenIDUser, User, Stringable
         $this->username = $username;
 
         return $this;
+    }
+
+    public function returnsEmail(): bool
+    {
+        return self::RETURNS_EMAIL;
     }
 }

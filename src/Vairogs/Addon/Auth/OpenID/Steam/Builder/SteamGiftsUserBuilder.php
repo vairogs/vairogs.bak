@@ -21,13 +21,6 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
     protected string $cacheDir;
     protected string $userClass = SteamGifts::class;
 
-    public function setUserClass(string $class): SteamGiftsUserBuilder
-    {
-        $this->userClass = $class;
-
-        return $this;
-    }
-
     public function getUser(array $response): OpenIDUser
     {
         $this->cacheDir = $response['cache_dir'];
@@ -65,5 +58,12 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         }
 
         return $username;
+    }
+
+    public function setUserClass(string $class): SteamGiftsUserBuilder
+    {
+        $this->userClass = $class;
+
+        return $this;
     }
 }

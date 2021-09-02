@@ -21,7 +21,10 @@ class Helper
         foreach ($methods as $method) {
             if (self::filterExists($method, $filterClass)) {
                 if ($withClass) {
-                    $filtered[Text::fromCamelCase($method->getName())] = [$class, $method->getName()];
+                    $filtered[Text::fromCamelCase($method->getName())] = [
+                        $class,
+                        $method->getName(),
+                    ];
                 } else {
                     $filtered[Text::fromCamelCase($method->getName())] = $method->getName();
                 }

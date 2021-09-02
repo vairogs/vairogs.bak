@@ -17,8 +17,7 @@ class UserArrayFactory
             'hash' => $bag['avatarhash'],
         ];
 
-        return $user
-            ->setOpenID($bag[self::STEAMID])
+        return $user->setOpenID($bag[self::STEAMID])
             ->setCommunityState($bag['communityvisibilitystate'] ?? 0)
             ->setProfileState($bag['profilestate'] ?? 0)
             ->setPersona($bag['personaname'] ?? $bag[self::STEAMID])

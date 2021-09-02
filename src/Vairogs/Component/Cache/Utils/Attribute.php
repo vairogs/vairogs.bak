@@ -71,7 +71,7 @@ class Attribute
     {
         $kernelController = $kernelEvent->getRequest()
             ->get('_controller');
-        
+
         if ((null !== $kernelController) && is_array($controller = explode('::', $kernelController, 2)) && isset($controller[1])) {
             return $controller;
         }

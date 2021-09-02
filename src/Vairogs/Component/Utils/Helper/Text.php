@@ -40,7 +40,10 @@ class Text
     #[Annotation\TwigFilter]
     public static function toSnakeCase(string $string): string
     {
-        $string = preg_replace(['#([A-Z\d]+)([A-Z][a-z])#', '#([a-z\d])([A-Z])#'], '\1_\2', self::toCamelCase($string));
+        $string = preg_replace([
+            '#([A-Z\d]+)([A-Z][a-z])#',
+            '#([a-z\d])([A-Z])#',
+        ], '\1_\2', self::toCamelCase($string));
 
         return strtolower(str_replace('-', '_', $string));
     }

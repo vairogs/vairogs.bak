@@ -13,7 +13,10 @@ trait TwigTrait
 {
     public function makeArray(array $input, string $key, string $class): array
     {
-        if (!in_array($class, [TwigFilter::class, TwigFunction::class], true)) {
+        if (!in_array($class, [
+            TwigFilter::class,
+            TwigFunction::class,
+        ], true)) {
             throw new InvalidArgumentException(sprintf('Invalid type "%s":. Allowed types are filter and function', $class));
         }
 

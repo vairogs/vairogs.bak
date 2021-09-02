@@ -178,7 +178,7 @@ class Date
     public static function guessDateFormat(string $date): DateTime|string
     {
         $formats = array_merge(Php::getClassConstantsValues(DateTime::class), self::EXTRA_FORMATS);
-        
+
         foreach ($formats as $format) {
             $datetime = DateTime::createFromFormat($format, $date);
 

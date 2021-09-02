@@ -15,13 +15,6 @@ class SteamUserBuilder implements OpenIDUserBuilder
     private const PROFILE_URL_START = 'https://steamcommunity.com/id/';
     protected string $userClass = Steam::class;
 
-    public function setUserClass(string $class): SteamUserBuilder
-    {
-        $this->userClass = $class;
-
-        return $this;
-    }
-
     public function getUser(array $response): OpenIDUser
     {
         return $this->getSteamUser($response);
@@ -49,5 +42,12 @@ class SteamUserBuilder implements OpenIDUserBuilder
     private function hasUsername(User $user): bool
     {
         return str_starts_with($user->getUrl(), self::PROFILE_URL_START);
+    }
+
+    public function setUserClass(string $class): SteamUserBuilder
+    {
+        $this->userClass = $class;
+
+        return $this;
     }
 }
