@@ -39,7 +39,7 @@ class FileBuilder implements Builder
                 }
             }
 
-            foreach ($alternates ?? [] as $locale => $alternate) {
+            foreach ($alternates as $locale => $alternate) {
                 fwrite($buffer, "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
             }
 
