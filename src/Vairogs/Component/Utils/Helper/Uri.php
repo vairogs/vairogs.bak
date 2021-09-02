@@ -37,7 +37,7 @@ class Uri
 {
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
-    public static function buildHttpQuery(array|object $data, ?string $parent = null): array
+    public static function buildHttpQueryArray(array|object $data, ?string $parent = null): array
     {
         $result = [];
 
@@ -50,7 +50,7 @@ class Uri
 
             if (!$value instanceof CURLFile && (is_array($value) || is_object($value))) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
-                $result = array_merge($result, self::buildHttpQuery($value, $newKey));
+                $result = array_merge($result, self::buildHttpQueryArray($value, $newKey));
             } else {
                 $result[$newKey] = $value;
             }
@@ -106,14 +106,15 @@ class Uri
             $h = explode(':', $header, 2);
 
             if (isset($h[1])) {
+                $h1 = trim($h[1]);
                 if (!isset($headers[$h[0]])) {
-                    $headers[$h[0]] = trim($h[1]);
+                    $headers[$h[0]] = $h1;
                 } elseif (is_array($headers[$h[0]])) {
-                    $headers[$h[0]][] = trim($h[1]);
+                    $headers[$h[0]][] = $h1;
                 } else {
                     $headers[$h[0]] = [
                         $headers[$h[0]],
-                        trim($h[1]),
+                        $h1,
                     ];
                 }
 

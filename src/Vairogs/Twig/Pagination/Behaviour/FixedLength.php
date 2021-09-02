@@ -63,19 +63,19 @@ class FixedLength
     private function validate(int $totalPages, int $currentPage, int $indicator = -1): void
     {
         if ($totalPages < 1) {
-            throw new InvalidArgumentException(sprintf('Total number of pages (%d) should not be lower than 1.', $totalPages));
+            throw new InvalidArgumentException(sprintf('Total number of pages (%d) should not be lower than 1', $totalPages));
         }
 
         if ($currentPage < 1) {
-            throw new InvalidArgumentException(sprintf('Current page (%d) should not be lower than 1.', $currentPage));
+            throw new InvalidArgumentException(sprintf('Current page (%d) should not be lower than 1', $currentPage));
         }
 
         if ($currentPage > $totalPages) {
-            throw new InvalidArgumentException(sprintf('Current page (%d) should not be higher than total number of pages (%d).', $currentPage, $totalPages));
+            throw new InvalidArgumentException(sprintf('Current page (%d) should not be higher than total number of pages (%d)', $currentPage, $totalPages));
         }
 
         if ($indicator >= 1 && $indicator <= $totalPages) {
-            throw new InvalidArgumentException(sprintf('Omitted pages indicator (%d) should not be between 1 and total number of pages (%d).', $indicator, $totalPages));
+            throw new InvalidArgumentException(sprintf('Omitted pages indicator (%d) should not be between 1 and total number of pages (%d)', $indicator, $totalPages));
         }
     }
 
