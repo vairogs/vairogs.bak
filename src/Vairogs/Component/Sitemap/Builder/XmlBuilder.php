@@ -6,11 +6,8 @@ use Vairogs\Component\Sitemap\Model\RichUrl;
 use Vairogs\Component\Sitemap\Model\Sitemap;
 use Vairogs\Extra\Constants\Type\Basic;
 use function array_keys;
-use function method_exists;
-use function sprintf;
-use function ucfirst;
 
-class XmlBuilder implements Builder
+class XmlBuilder extends AbstractBuilder
 {
     public function __construct(protected Sitemap $sitemap)
     {
@@ -30,9 +27,7 @@ class XmlBuilder implements Builder
             $buffer .= '<url>' . "\n";
 
             foreach (array_keys($urlArray) as $key) {
-                if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
-                    $buffer .= "\t" . sprintf('<%s>', $key) . $url->$getter() . sprintf('</%s>', $key) . "\n";
-                }
+                $buffer .= $this->getBufferValue($url, $key);
             }
 
             foreach ($alternates as $locale => $alternate) {

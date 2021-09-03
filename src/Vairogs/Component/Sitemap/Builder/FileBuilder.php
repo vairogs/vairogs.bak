@@ -7,11 +7,8 @@ use Vairogs\Component\Sitemap\Model\Sitemap;
 use Vairogs\Extra\Constants\Type\Basic;
 use function array_keys;
 use function fwrite;
-use function method_exists;
-use function sprintf;
-use function ucfirst;
 
-class FileBuilder implements Builder
+class FileBuilder extends AbstractBuilder
 {
     public function __construct(protected Sitemap $sitemap)
     {
@@ -34,9 +31,7 @@ class FileBuilder implements Builder
             fwrite($buffer, '<url>' . "\n");
 
             foreach (array_keys($urlArray) as $key) {
-                if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
-                    fwrite($buffer, "\t" . sprintf('<%s>', $key) . $url->$getter() . sprintf('</%s>', $key) . "\n");
-                }
+                fwrite($buffer, $this->getBufferValue($url, $key));
             }
 
             foreach ($alternates as $locale => $alternate) {
