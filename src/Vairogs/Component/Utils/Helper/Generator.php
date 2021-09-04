@@ -24,8 +24,8 @@ class Generator
     public const PASS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     public const PASS_DIGITS = '0123456789';
     public const PASS_SYMBOLS = '!@#$%^&*()_-=+;:.,?';
-    public const RAND_BASIC = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    public const RAND_EXTENDED = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_-=+;:,.?';
+    public const RAND_BASIC = self::PASS_LOWERCASE . self::PASS_UPPERCASE . self::PASS_DIGITS;
+    public const RAND_EXTENDED = self::RAND_BASIC . self::PASS_SYMBOLS;
     public const LOWER = 'lower';
     public const UPPER = 'upper';
     public const DIGITS = 'digits';

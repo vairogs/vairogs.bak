@@ -1,0 +1,19 @@
+on: [push]
+
+jobs:
+    split:
+        runs-on: ubuntu-latest
+        name: splitsh-lite
+        steps:
+            - name: Get branch name
+              shell: bash
+              run: echo "::set-output name=branch::${GITHUB_REF#refs/heads/}"
+              id: branch
+            - name: Split
+              id: splitsh
+              uses: docker://k0d3r1s/action:split--latest
+              env:
+                  BRANCH: ${{ steps.branch.outputs.branch }}
+                  REPO: ${{ github.repository }}
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                  COMPONENTS_URL: ${{ secrets.COMPONENTS_URL }}
