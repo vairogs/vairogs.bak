@@ -16,4 +16,4 @@ jobs:
                   BRANCH: ${{ steps.branch.outputs.branch }}
                   REPO: ${{ github.repository }}
                   GH_TOKEN: ${{ secrets.GH_TOKEN }}
-                  COMPONENTS_URL: ${{ secrets.COMPONENTS_URL }}
+                  COMPONENTS_URL: https://raw.githubusercontent.com/vairogs/vairogs/${{ steps.branch.outputs.branch }}/.github/deploy/components.json
