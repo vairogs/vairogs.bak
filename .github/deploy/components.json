@@ -16,6 +16,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/addon-auth-openid-steam.git"
     },
     {
+        "path": "src/Vairogs/Cms",
+        "repo": "https://GH_TOKEN@github.com/vairogs/cms.git"
+    },
+    {
         "path": "src/Vairogs/Component",
         "repo": "https://GH_TOKEN@github.com/vairogs/components.git"
     },

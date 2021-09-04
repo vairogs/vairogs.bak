@@ -81,6 +81,7 @@
         "vairogs/cache": "self.version",
         "vairogs/cache-utils": "self.version",
         "vairogs/captcha": "self.version",
+        "vairogs/cms": "self.version",
         "vairogs/components": "self.version",
         "vairogs/extra": "self.version",
         "vairogs/extra-constants": "self.version",
