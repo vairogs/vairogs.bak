@@ -100,9 +100,3 @@ services:
         tags:
             -
                 name: twig.extension
-
-    Vairogs\Twig\Sort\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension

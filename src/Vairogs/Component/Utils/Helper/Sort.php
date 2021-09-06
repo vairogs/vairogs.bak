@@ -2,15 +2,20 @@
 
 namespace Vairogs\Component\Utils\Helper;
 
+use Doctrine\Common\Collections\Collection;
+use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function array_key_exists;
 use function array_slice;
 use function count;
+use function current;
 use function is_array;
 use function is_object;
 use function property_exists;
 use function round;
+use function strtoupper;
+use function usort;
 
 class Sort
 {
@@ -101,6 +106,34 @@ class Sort
         }
 
         return $result;
+    }
+
+    #[Annotation\TwigFilter]
+    public static function sort(mixed $data, ?string $parameter = null, string $order = self::ASC): array
+    {
+        if ($data instanceof Collection) {
+            $data = $data->toArray();
+        }
+
+        if (!is_array($data)) {
+            throw new InvalidArgumentException('Only iterable variables can be sorted');
+        }
+
+        if (count($data) < 2) {
+            return $data;
+        }
+
+        if (null === $parameter) {
+            throw new InvalidArgumentException('No sorting parameter pased');
+        }
+
+        if (!self::isSortable(current($data), $parameter)) {
+            throw new InvalidArgumentException("Sorting parameter doesn't exist in sortable variable");
+        }
+
+        usort($data, self::usort($parameter, strtoupper($order)));
+
+        return $data;
     }
 
     #[Annotation\TwigFunction]
