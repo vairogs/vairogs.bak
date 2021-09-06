@@ -94,7 +94,7 @@ class Steam implements OpenIDUser, User, Stringable
      * @ORM\Column(type=Basic::INTEGER, nullable=true)
      */
     #[ORM\Column(type: Basic::INTEGER, nullable: true)]
-    protected int $personaFlags;
+    protected ?int $personaFlags = null;
 
     /**
      * @ORM\Column(type=Basic::STRING, nullable=true)
@@ -257,12 +257,12 @@ class Steam implements OpenIDUser, User, Stringable
         return $this;
     }
 
-    public function getPersonaFlags(): int
+    public function getPersonaFlags(): ?int
     {
         return $this->personaFlags;
     }
 
-    public function setPersonaFlags(int $personaFlags): User
+    public function setPersonaFlags(?int $personaFlags): User
     {
         $this->personaFlags = $personaFlags;
 
