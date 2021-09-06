@@ -89,12 +89,6 @@ services:
             -
                 name: twig.extension
 
-    Vairogs\Twig\GetEnv\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension
-
     Vairogs\Twig\Pagination\Extension:
         public: false
         tags:

@@ -14,6 +14,7 @@ use function class_exists;
 use function class_implements;
 use function filter_var;
 use function get_class_methods;
+use function getenv;
 use function interface_exists;
 use function is_array;
 use function is_bool;
@@ -155,5 +156,16 @@ class Php
     public static function classImplements(string $class, string $interface): bool
     {
         return isset(class_implements($class)[$interface]);
+    }
+
+    #[Annotation\TwigFunction]
+    #[Pure]
+    public static function getEnv(string $varname, bool $localOnly = false): mixed
+    {
+        if ($env = getenv($varname, $localOnly)) {
+            return $env;
+        }
+
+        return $_ENV[$varname] ?? $varname;
     }
 }

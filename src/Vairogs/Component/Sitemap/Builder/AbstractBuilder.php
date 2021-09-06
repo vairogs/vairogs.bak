@@ -69,7 +69,8 @@ abstract class AbstractBuilder implements Builder
     public function start(&$buffer): void
     {
         // @formatter:on
-        $this->write($buffer,
+        $this->write(
+            $buffer,
             '<?xml version="1.0" encoding="UTF-8"?>' .
             "\n" .
             '<urlset ' .

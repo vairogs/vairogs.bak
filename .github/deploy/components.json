@@ -64,10 +64,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig.git"
     },
     {
-        "path": "src/Vairogs/Twig/GetEnv",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-getenv.git"
-    },
-    {
         "path": "src/Vairogs/Twig/Pagination",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-pagination.git"
     },

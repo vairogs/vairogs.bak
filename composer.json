@@ -87,7 +87,6 @@
         "vairogs/extra-specification": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/twig": "self.version",
-        "vairogs/twig-getenv": "self.version",
         "vairogs/twig-helper": "self.version",
         "vairogs/twig-helper-date": "self.version",
         "vairogs/twig-helper-email": "self.version",
