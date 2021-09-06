@@ -68,12 +68,18 @@ abstract class AbstractBuilder implements Builder
 
     public function start(&$buffer): void
     {
-        // @formatter:off
-        $this->write($buffer, '<?xml version="1.0" encoding="UTF-8"?>' .
-            "\n" . '<urlset ' .
-            "\n\t" . 'xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" ' .
-            "\n\t" . 'xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" ' .
-            "\n\t" . 'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"');
+        // @formatter:on
+        $this->write($buffer,
+            '<?xml version="1.0" encoding="UTF-8"?>' .
+            "\n" .
+            '<urlset ' .
+            "\n\t" .
+            'xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" ' .
+            "\n\t" .
+            'xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" ' .
+            "\n\t" .
+            'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"'
+        );
         // @formatter:on
 
         if ($this->sitemap->hasAlternates()) {
