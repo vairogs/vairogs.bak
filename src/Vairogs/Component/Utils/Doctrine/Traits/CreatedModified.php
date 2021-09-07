@@ -12,11 +12,11 @@ trait CreatedModified
     /**
      * @ORM\Column(options={"default": "CURRENT_TIMESTAMP"})
      */
-    #[ORM\Column( options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $creationDate = null;
 
     /**
-     * @ORM\Column( options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column(options={"default": "CURRENT_TIMESTAMP"})
      */
     #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $modificationDate = null;
