@@ -58,9 +58,9 @@ interface User extends OpenIDUser
 
     public function setCreatedAt(int $createdAt): User;
 
-    public function getPersonaFlags(): int;
+    public function getPersonaFlags(): ?int;
 
-    public function setPersonaFlags(int $personaFlags): User;
+    public function setPersonaFlags(?int $personaFlags): User;
 
     public function getCountryCode(): ?string;
 
