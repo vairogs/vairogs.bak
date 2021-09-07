@@ -8,6 +8,7 @@ use function array_key_exists;
 use function filter_var;
 use function html_entity_decode;
 use function iconv;
+use function is_numeric;
 use function mb_convert_encoding;
 use function mb_strlen;
 use function mb_strpos;
@@ -187,5 +188,14 @@ class Text
         }
 
         return 0;
+    }
+
+    public static function getNormalizedValue(string $value): string|int|float
+    {
+        if (is_numeric($value)) {
+            return str_contains((string)$value, '.') ? (float)$value : (int)$value;
+        }
+
+        return $value;
     }
 }
