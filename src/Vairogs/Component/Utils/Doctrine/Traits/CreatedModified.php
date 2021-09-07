@@ -6,20 +6,19 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
-use Vairogs\Extra\Constants\Type\Basic;
 
 trait CreatedModified
 {
     /**
-     * @ORM\Column(type=Basic::DATETIME, options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column(options={"default": "CURRENT_TIMESTAMP"})
      */
-    #[ORM\Column(type: Basic::DATETIME, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column( options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $creationDate = null;
 
     /**
-     * @ORM\Column(type=Basic::DATETIME, options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column( options={"default": "CURRENT_TIMESTAMP"})
      */
-    #[ORM\Column(type: Basic::DATETIME, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $modificationDate = null;
 
     public function getModificationDate(): DateTimeInterface
