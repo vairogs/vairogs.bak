@@ -31,7 +31,6 @@ class CacheEventListener implements EventSubscriberInterface
         Header::INVALIDATE,
         Header::SKIP,
     ];
-    private const ROUTE = '_route';
 
     protected ChainAdapter $client;
     protected Attribute $attribute;
@@ -75,18 +74,22 @@ class CacheEventListener implements EventSubscriberInterface
         if (null !== ($annotation = $this->attribute->getAnnotation($controllerEvent, Annotation::class))) {
             /* @var $annotation Annotation */
             $annotation->setData($this->attribute->getAttributes($controllerEvent, Annotation::class));
-            $route = $controllerEvent->getRequest()?->get(self::ROUTE);
             $response = null;
 
-            if (is_string($route)) {
-                $key = $annotation->getKey();
+            $needsInvalidation = $this->needsInvalidation($controllerEvent->getRequest());
+            if (is_string($route = $this->getRoute($controllerEvent))) {
+                $key = $annotation->getKey($route);
 
                 if (is_string($key)) {
-                    $response = $this->getCache($key);
+                    if (!$needsInvalidation) {
+                        $response = $this->getCache($key);
+                    } else {
+                        $this->client->deleteItem($key);
+                    }
                 }
             }
 
-            if (null !== $response) {
+            if (null !== $response && !$needsInvalidation) {
                 $controllerEvent->setController(static fn() => $response);
             }
         }
@@ -103,6 +106,22 @@ class CacheEventListener implements EventSubscriberInterface
         }
 
         return !empty($controller = $this->attribute->getController($kernelEvent)) && class_exists($controller[0]);
+    }
+
+    private function needsInvalidation(Request $request): bool
+    {
+        if ($request->getMethod() === Request::METHOD_PURGE) {
+            return true;
+        }
+
+        $invalidate = $request->headers->get(Header::CACHE_VAR);
+
+        return null !== $invalidate && in_array($invalidate, self::HEADERS, true);
+    }
+
+    private function getRoute(RequestEvent|ResponseEvent|ControllerEvent $kernelEvent): ?string
+    {
+        return $kernelEvent->getRequest()?->get('_route');
     }
 
     /**
@@ -131,21 +150,8 @@ class CacheEventListener implements EventSubscriberInterface
 
         if (($annotation = $this->attribute->getAnnotation($requestEvent, Annotation::class)) && $this->needsInvalidation($requestEvent->getRequest())) {
             $annotation->setData($this->attribute->getAttributes($requestEvent, Annotation::class));
-            $key = $annotation->getKey($requestEvent->getRequest()
-                ->get(self::ROUTE));
-            $this->client->deleteItem($key);
+            $this->client->deleteItem($annotation->getKey($this->getRoute($requestEvent)));
         }
-    }
-
-    private function needsInvalidation(Request $request): bool
-    {
-        if ($request->getMethod() === Request::METHOD_PURGE) {
-            return true;
-        }
-
-        $invalidate = $request->headers->get(Header::CACHE_VAR);
-
-        return null !== $invalidate && in_array($invalidate, self::HEADERS, true);
     }
 
     /**
@@ -160,8 +166,7 @@ class CacheEventListener implements EventSubscriberInterface
 
         if (null !== ($annotation = $this->attribute->getAnnotation($responseEvent, Annotation::class))) {
             $annotation->setData($this->attribute->getAttributes($responseEvent, Annotation::class));
-            $key = $annotation->getKey($responseEvent->getRequest()
-                ->get(self::ROUTE));
+            $key = $annotation->getKey($this->getRoute($responseEvent));
             $cache = $this->getCache($key);
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(Header::CACHE_VAR);
 

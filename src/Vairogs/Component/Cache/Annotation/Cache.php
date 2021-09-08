@@ -20,7 +20,7 @@ class Cache
 {
     private const ALGORITHM = 'sha1';
 
-    public int $expires;
+    public ?int $expires = null;
     public null|string|array $data;
     public array $attributes = [];
     public string $strategy = Strategy::ALL;
@@ -72,7 +72,7 @@ class Cache
         return $this;
     }
 
-    public function getExpires(): int
+    public function getExpires(): ?int
     {
         return $this->expires;
     }
