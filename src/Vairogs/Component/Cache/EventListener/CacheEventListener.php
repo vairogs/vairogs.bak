@@ -77,12 +77,12 @@ class CacheEventListener implements EventSubscriberInterface
             $response = null;
 
             if (is_string($route = $this->getRoute($controllerEvent))) {
-                if (is_string($key = $annotation->getKey($route))) {
-                    if (!$this->needsInvalidation($controllerEvent->getRequest())) {
-                        $response = $this->getCache($key);
-                    } else {
-                        $this->client->deleteItem($key);
-                    }
+                $key = $annotation->getKey($route);
+                
+                if (!$this->needsInvalidation($controllerEvent->getRequest())) {
+                    $response = $this->getCache($key);
+                } else {
+                    $this->client->deleteItem($key);
                 }
             }
 
