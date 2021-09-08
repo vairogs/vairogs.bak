@@ -76,12 +76,9 @@ class CacheEventListener implements EventSubscriberInterface
             $annotation->setData($this->attribute->getAttributes($controllerEvent, Annotation::class));
             $response = null;
 
-            $needsInvalidation = $this->needsInvalidation($controllerEvent->getRequest());
             if (is_string($route = $this->getRoute($controllerEvent))) {
-                $key = $annotation->getKey($route);
-
-                if (is_string($key)) {
-                    if (!$needsInvalidation) {
+                if (is_string($key = $annotation->getKey($route))) {
+                    if (!$this->needsInvalidation($controllerEvent->getRequest())) {
                         $response = $this->getCache($key);
                     } else {
                         $this->client->deleteItem($key);
@@ -89,7 +86,7 @@ class CacheEventListener implements EventSubscriberInterface
                 }
             }
 
-            if (null !== $response && !$needsInvalidation) {
+            if (null !== $response) {
                 $controllerEvent->setController(static fn() => $response);
             }
         }
@@ -108,6 +105,11 @@ class CacheEventListener implements EventSubscriberInterface
         return !empty($controller = $this->attribute->getController($kernelEvent)) && class_exists($controller[0]);
     }
 
+    private function getRoute(RequestEvent|ResponseEvent|ControllerEvent $kernelEvent): ?string
+    {
+        return $kernelEvent->getRequest()?->get('_route');
+    }
+
     private function needsInvalidation(Request $request): bool
     {
         if ($request->getMethod() === Request::METHOD_PURGE) {
@@ -117,11 +119,6 @@ class CacheEventListener implements EventSubscriberInterface
         $invalidate = $request->headers->get(Header::CACHE_VAR);
 
         return null !== $invalidate && in_array($invalidate, self::HEADERS, true);
-    }
-
-    private function getRoute(RequestEvent|ResponseEvent|ControllerEvent $kernelEvent): ?string
-    {
-        return $kernelEvent->getRequest()?->get('_route');
     }
 
     /**
