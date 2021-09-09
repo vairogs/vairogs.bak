@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Auth\OpenID;
 
+use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
 use JsonException;
@@ -35,11 +36,13 @@ class OpenIDProvider
 
     protected Request $request;
     protected ?string $profileUrl;
+    protected ?string $userClass;
 
     public function __construct(RequestStack $requestStack, protected RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
     {
         $this->request = $requestStack->getCurrentRequest();
         $this->profileUrl = $this->options[self::PROVIDER_OPTIONS]['profile_url'] ?? null;
+        $this->userClass = $this->options['user_class'] ?? null;
     }
 
     public function getOptions(): array
@@ -60,11 +63,7 @@ class OpenIDProvider
         if (null !== $user = $this->validate()) {
             $builderClass = $this->options['user_builder'];
             /** @var OpenIDUserBuilder $builder */
-            $builder = new $builderClass();
-
-            if (null !== ($userClass = $this->options['user_class'] ?? null)) {
-                $builder->setUserClass($userClass);
-            }
+            $builder = (new $builderClass())->setUserClass($this->userClass ?? $builder::USER_CLASS);
 
             /** @var OpenIDUserBuilder $builder */
             if (null === $this->profileUrl) {
@@ -76,14 +75,14 @@ class OpenIDProvider
                     }
                 }
 
-                $data = $this->getData($user);
+                $data = null !== $user ? $this->getData($user) : null;
                 $data['cache_dir'] = $this->cacheDir;
                 $user = $builder->getUser($data);
             }
         }
 
         if (null === $user) {
-            throw new RuntimeException('error_oauth_login_invalid_or_timed_out');
+            throw new RuntimeException('Invalid login or request has timed out');
         }
 
         return $user;
@@ -100,15 +99,14 @@ class OpenIDProvider
         ];
 
         foreach (explode(',', $get['openid_signed']) as $item) {
-            $val = $get['openid_' . str_replace('.', '_', $item)];
-            $params['openid.' . $item] = stripslashes($val);
+            $params['openid.' . $item] = stripslashes($get['openid_' . str_replace('.', '_', $item)]);
         }
 
         $params['openid.mode'] = 'check_authentication';
         $data = http_build_query($params);
         $context = stream_context_create([
             'http' => [
-                'method' => 'POST',
+                'method' => Request::METHOD_POST,
                 'header' => "Accept-language: en\r\n" . "Content-type: application/x-www-form-urlencoded\r\n" . 'Content-Length: ' . strlen($data) . "\r\n",
                 'content' => $data,
                 'timeout' => $timeout,
@@ -123,13 +121,9 @@ class OpenIDProvider
     /**
      * @throws JsonException
      */
-    private function getData(?string $openID = null): mixed
+    private function getData(string $openID): mixed
     {
-        if (null !== $openID) {
-            return Json::decode(file_get_contents(str_replace('#openid#', $openID, $this->profileUrl)), 1);
-        }
-
-        return null;
+        return Json::decode(file_get_contents(str_replace('#openid#', $openID, $this->profileUrl)), 1);
     }
 
     public function redirect(): RedirectResponse
@@ -145,7 +139,7 @@ class OpenIDProvider
 
         if (null !== $return) {
             if (!$this->validateUrl($return)) {
-                throw new RuntimeException('error_oauth_invalid_return_url');
+                throw new InvalidArgumentException('Invalid return url');
             }
         } else {
             $return = $realm . $this->request->server->get('SCRIPT_NAME');

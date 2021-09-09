@@ -13,7 +13,9 @@ use function str_starts_with;
 class SteamUserBuilder implements OpenIDUserBuilder
 {
     private const PROFILE_URL_START = 'https://steamcommunity.com/id/';
-    protected string $userClass = Steam::class;
+    public const USER_CLASS = Steam::class;
+
+    protected string $userClass = self::USER_CLASS;
 
     public function getUser(array $response): OpenIDUser
     {
@@ -23,9 +25,8 @@ class SteamUserBuilder implements OpenIDUserBuilder
     private function getSteamUser(array $data): User
     {
         $user = UserArrayFactory::create(new $this->userClass(), $data['response']['players'][0]);
-        $user->setUsername($this->getUsername($user));
 
-        return $user;
+        return $user->setUsername($this->getUsername($user));
     }
 
     private function getUsername(User $user): string

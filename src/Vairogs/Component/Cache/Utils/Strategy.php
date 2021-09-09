@@ -2,10 +2,12 @@
 
 namespace Vairogs\Component\Cache\Utils;
 
+use Symfony\Component\HttpFoundation\Request;
+
 final class Strategy
 {
-    public const GET = 'GET';
-    public const POST = 'POST';
+    public const GET = Request::METHOD_GET;
+    public const POST = Request::METHOD_POST;
     public const USER = 'USER';
     public const MIXED = 'MIXED';
     public const ALL = 'ALL';

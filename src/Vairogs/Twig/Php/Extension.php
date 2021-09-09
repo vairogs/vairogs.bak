@@ -34,7 +34,7 @@ class Extension extends AbstractExtension
     #[Pure]
     private function getCallbacks(array $callables = []): array
     {
-        $result = [];
+        $callbacks = [];
         foreach ($callables as $function) {
             if (is_array($function) && !is_numeric(key($function))) {
                 $callback = current($function);
@@ -43,10 +43,10 @@ class Extension extends AbstractExtension
                 $callback = $function;
             }
 
-            $result[$function] = $callback;
+            $callbacks[$function] = $callback;
         }
 
-        return $result;
+        return $callbacks;
     }
 
     public function getFilter(mixed $object, string $filter, ...$arguments): mixed

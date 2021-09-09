@@ -18,8 +18,10 @@ use function trim;
 
 class SteamGiftsUserBuilder implements OpenIDUserBuilder
 {
+    public const USER_CLASS = SteamGifts::class;
+
     protected string $cacheDir;
-    protected string $userClass = SteamGifts::class;
+    protected string $userClass = self::USER_CLASS;
 
     public function getUser(array $response): OpenIDUser
     {

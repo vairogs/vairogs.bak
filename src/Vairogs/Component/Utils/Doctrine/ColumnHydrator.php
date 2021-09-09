@@ -6,13 +6,14 @@ use Doctrine\ORM\Internal\Hydration\ArrayHydrator;
 use PDO;
 use function array_column;
 use function array_keys;
+use function class_exists;
 use function reset;
 
 class ColumnHydrator extends ArrayHydrator
 {
     protected function hydrateAllData(): array
     {
-        if (!isset($this->_rsm->indexByMap['scalars'])) {
+        if (!isset($this->_rsm->indexByMap['scalars']) && class_exists(PDO::class)) {
             return $this->_stmt->fetchAll(PDO::FETCH_COLUMN);
         }
 
