@@ -32,14 +32,14 @@ class CacheEventListener implements EventSubscriberInterface
         Header::SKIP,
     ];
 
-    protected ChainAdapter $client;
+    protected ChainAdapter $adapter;
     protected Attribute $attribute;
 
     public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
     {
         if ($this->enabled) {
-            $this->client = new ChainAdapter(Pool::createPoolForClass(Annotation::class, $adapters));
-            $this->client->prune();
+            $this->adapter = new ChainAdapter(Pool::createPoolForClass(Annotation::class, $adapters));
+            $this->adapter->prune();
             $this->attribute = new Attribute($reader, $tokenStorage);
         }
     }
@@ -82,7 +82,7 @@ class CacheEventListener implements EventSubscriberInterface
                 if (!$this->needsInvalidation($controllerEvent->getRequest())) {
                     $response = $this->getCache($key);
                 } else {
-                    $this->client->deleteItem($key);
+                    $this->adapter->deleteItem($key);
                 }
             }
 
@@ -126,7 +126,7 @@ class CacheEventListener implements EventSubscriberInterface
      */
     private function getCache(string $key): mixed
     {
-        $cache = $this->client->getItem($key);
+        $cache = $this->adapter->getItem($key);
 
         if ($cache->isHit()) {
             return $cache->get();
@@ -147,7 +147,7 @@ class CacheEventListener implements EventSubscriberInterface
 
         if (($annotation = $this->attribute->getAnnotation($requestEvent, Annotation::class)) && $this->needsInvalidation($requestEvent->getRequest())) {
             $annotation->setData($this->attribute->getAttributes($requestEvent, Annotation::class));
-            $this->client->deleteItem($annotation->getKey($this->getRoute($requestEvent)));
+            $this->adapter->deleteItem($annotation->getKey($this->getRoute($requestEvent)));
         }
     }
 
@@ -178,10 +178,10 @@ class CacheEventListener implements EventSubscriberInterface
      */
     private function setCache(string $key, Response $value, ?int $expires): void
     {
-        $cache = $this->client->getItem($key);
+        $cache = $this->adapter->getItem($key);
         $cache->set($value);
         $cache->expiresAfter($expires);
 
-        $this->client->save($cache);
+        $this->adapter->save($cache);
     }
 }

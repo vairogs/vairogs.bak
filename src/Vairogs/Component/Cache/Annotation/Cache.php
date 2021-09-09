@@ -4,6 +4,7 @@ namespace Vairogs\Component\Cache\Annotation;
 
 use Attribute;
 use Doctrine\Common\Annotations\Annotation;
+use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 use Vairogs\Component\Cache\Utils\Strategy;
 use Vairogs\Component\Utils\Helper\Iter;
 use function hash;
@@ -14,16 +15,17 @@ use function str_replace;
 /**
  * @Annotation
  * @Annotation\Target({"METHOD"})
+ * @NamedArgumentConstructor()
  */
-#[Attribute]
+#[Attribute(Attribute::TARGET_METHOD)]
 class Cache
 {
     private const ALGORITHM = 'sha1';
 
-    public ?int $expires = null;
-    public null|string|array $data;
-    public array $attributes = [];
-    public string $strategy = Strategy::ALL;
+    public function __construct(public ?int $expires = null, public array $attributes = [], public string $strategy = Strategy::ALL, public null|string|array $data = null)
+    {
+
+    }
 
     public function getKey(string $prefix = ''): string
     {

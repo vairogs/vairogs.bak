@@ -61,7 +61,13 @@ class Attribute
         $reflectionClass = new ReflectionClass(reset($controller));
 
         if ($method = $reflectionClass->getMethod(end($controller))) {
-            return $this->reader->getMethodAnnotation($method, $class);
+            if ($class === ($attribute = $method->getAttributes($class)[0] ?? null)?->getName()) {
+                return $attribute->newInstance();
+            }
+
+            if (($object = $this->reader->getMethodAnnotation($method, $class)) instanceof $class) {
+                return $object;
+            }
         }
 
         return null;
