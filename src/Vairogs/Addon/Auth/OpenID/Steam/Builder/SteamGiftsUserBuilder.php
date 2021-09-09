@@ -41,7 +41,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         $path = $this->cacheDir . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $user . '.txt';
 
         if (File::mkdir($path) && !is_file($path)) {
-            exec('wget --no-verbose --spider --output-file=' . $path . " -e robots=off -U='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2837.0 Safari/537.36' https://www.steamgifts.com/go/user/" . $user);
+            exec('wget --no-verbose --spider --output-file=' . $path . " -e robots=off -U='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36' https://www.steamgifts.com/go/user/" . $user);
         }
 
         if (!is_file($path)) {
