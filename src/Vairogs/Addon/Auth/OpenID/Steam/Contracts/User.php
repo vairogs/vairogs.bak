@@ -8,67 +8,67 @@ interface User extends OpenIDUser
 {
     public function getPlaying(): ?string;
 
-    public function setPlaying(?string $playing): User;
+    public function setPlaying(?string $playing): static;
 
     public function getPlayingId(): ?int;
 
-    public function setPlayingId(?int $playingId): User;
+    public function setPlayingId(?int $playingId): static;
 
     public function getCommunityState(): int;
 
-    public function setCommunityState(int $communityState): User;
+    public function setCommunityState(int $communityState): static;
 
     public function getProfileState(): int;
 
-    public function setProfileState(int $profileState): User;
+    public function setProfileState(int $profileState): static;
 
     public function getPersona(): string;
 
-    public function setPersona(string $persona): User;
+    public function setPersona(string $persona): static;
 
     public function getCommentPermission(): int;
 
-    public function setCommentPermission(int $commentPermission): User;
+    public function setCommentPermission(int $commentPermission): static;
 
     public function getUrl(): string;
 
-    public function setUrl(string $url): User;
+    public function setUrl(string $url): static;
 
     public function getAvatar(): array;
 
-    public function setAvatar(array $avatar): User;
+    public function setAvatar(array $avatar): static;
 
     public function getLogoff(): ?int;
 
-    public function setLogoff(?int $logoff): User;
+    public function setLogoff(?int $logoff): static;
 
     public function getPersonaState(): int;
 
-    public function setPersonaState(int $personaState): User;
+    public function setPersonaState(int $personaState): static;
 
     public function getName(): ?string;
 
-    public function setName(?string $name): User;
+    public function setName(?string $name): static;
 
     public function getClanId(): ?int;
 
-    public function setClanId(?int $clanId): User;
+    public function setClanId(?int $clanId): static;
 
     public function getCreatedAt(): int;
 
-    public function setCreatedAt(int $createdAt): User;
+    public function setCreatedAt(int $createdAt): static;
 
     public function getPersonaFlags(): ?int;
 
-    public function setPersonaFlags(?int $personaFlags): User;
+    public function setPersonaFlags(?int $personaFlags): static;
 
     public function getCountryCode(): ?string;
 
-    public function setCountryCode(?string $countryCode): User;
+    public function setCountryCode(?string $countryCode): static;
 
     public function getStateCode(): ?int;
 
-    public function setStateCode(?int $stateCode): User;
+    public function setStateCode(?int $stateCode): static;
 
     public function getEmail(): ?string;
 
@@ -76,9 +76,9 @@ interface User extends OpenIDUser
 
     public function returnsEmail(): bool;
 
-    public function setOpenID(string $openId): User;
+    public function setOpenID(string $openId): static;
 
     public function getUsername(): ?string;
 
-    public function setUsername(?string $username): User;
+    public function setUsername(?string $username): static;
 }

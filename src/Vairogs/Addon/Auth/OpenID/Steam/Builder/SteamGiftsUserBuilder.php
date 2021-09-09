@@ -60,7 +60,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         return $username;
     }
 
-    public function setUserClass(string $class): SteamGiftsUserBuilder
+    public function setUserClass(string $class): static
     {
         $this->userClass = $class;
 

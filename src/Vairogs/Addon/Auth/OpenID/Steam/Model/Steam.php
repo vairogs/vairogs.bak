@@ -7,8 +7,8 @@ use JetBrains\PhpStorm\Pure;
 use Stringable;
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
-use Vairogs\Extra\Constants\Type\Numeric;
 use Vairogs\Extra\Constants\Type\Basic;
+use Vairogs\Extra\Constants\Type\Numeric;
 
 /**
  * @ORM\MappedSuperclass()
@@ -137,7 +137,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->avatar;
     }
 
-    public function setAvatar(array $avatar): User
+    public function setAvatar(array $avatar): static
     {
         $this->avatar = $avatar;
 
@@ -149,7 +149,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->clanId;
     }
 
-    public function setClanId(?int $clanId): User
+    public function setClanId(?int $clanId): static
     {
         $this->clanId = $clanId;
 
@@ -161,7 +161,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->commentPermission;
     }
 
-    public function setCommentPermission(int $commentPermission): User
+    public function setCommentPermission(int $commentPermission): static
     {
         $this->commentPermission = $commentPermission;
 
@@ -173,7 +173,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->communityState;
     }
 
-    public function setCommunityState(int $communityState): User
+    public function setCommunityState(int $communityState): static
     {
         $this->communityState = $communityState;
 
@@ -185,7 +185,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->countryCode;
     }
 
-    public function setCountryCode(?string $countryCode): User
+    public function setCountryCode(?string $countryCode): static
     {
         $this->countryCode = $countryCode;
 
@@ -197,7 +197,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->createdAt;
     }
 
-    public function setCreatedAt(int $createdAt): User
+    public function setCreatedAt(int $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -214,7 +214,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->logoff;
     }
 
-    public function setLogoff(?int $logoff): User
+    public function setLogoff(?int $logoff): static
     {
         $this->logoff = $logoff;
 
@@ -226,7 +226,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->name;
     }
 
-    public function setName(?string $name): User
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -238,7 +238,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->openID;
     }
 
-    public function setOpenID(string $openId): User
+    public function setOpenID(string $openId): static
     {
         $this->openID = $openId;
 
@@ -250,7 +250,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->persona;
     }
 
-    public function setPersona(string $persona): User
+    public function setPersona(string $persona): static
     {
         $this->persona = $persona;
 
@@ -262,7 +262,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->personaFlags;
     }
 
-    public function setPersonaFlags(?int $personaFlags): User
+    public function setPersonaFlags(?int $personaFlags): static
     {
         $this->personaFlags = $personaFlags;
 
@@ -274,7 +274,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->personaState;
     }
 
-    public function setPersonaState(int $personaState): User
+    public function setPersonaState(int $personaState): static
     {
         $this->personaState = $personaState;
 
@@ -286,7 +286,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->playing;
     }
 
-    public function setPlaying(?string $playing): User
+    public function setPlaying(?string $playing): static
     {
         $this->playing = $playing;
 
@@ -298,7 +298,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->playingId;
     }
 
-    public function setPlayingId(?int $playingId): User
+    public function setPlayingId(?int $playingId): static
     {
         $this->playingId = $playingId;
 
@@ -310,7 +310,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->profileState;
     }
 
-    public function setProfileState(int $profileState): User
+    public function setProfileState(int $profileState): static
     {
         $this->profileState = $profileState;
 
@@ -322,7 +322,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->stateCode;
     }
 
-    public function setStateCode(?int $stateCode): User
+    public function setStateCode(?int $stateCode): static
     {
         $this->stateCode = $stateCode;
 
@@ -334,7 +334,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->url;
     }
 
-    public function setUrl(string $url): User
+    public function setUrl(string $url): static
     {
         $this->url = $url;
 
@@ -346,7 +346,7 @@ class Steam implements OpenIDUser, User, Stringable
         return $this->username;
     }
 
-    public function setUsername(?string $username): Steam
+    public function setUsername(?string $username): static
     {
         $this->username = $username;
 

@@ -22,7 +22,7 @@ class Url
         return $this->loc;
     }
 
-    public function setLoc(string $loc): self
+    public function setLoc(string $loc): static
     {
         $this->loc = $loc;
 
@@ -34,7 +34,7 @@ class Url
         return $this->lastmod?->format(DateTimeInterface::ATOM);
     }
 
-    public function setLastmod(?DateTimeInterface $lastmod): self
+    public function setLastmod(?DateTimeInterface $lastmod): static
     {
         $this->lastmod = $lastmod;
 
@@ -46,7 +46,7 @@ class Url
         return $this->changefreq;
     }
 
-    public function setChangefreq(?string $changefreq): self
+    public function setChangefreq(?string $changefreq): static
     {
         $this->changefreq = $changefreq;
 
@@ -59,21 +59,21 @@ class Url
         return number_format($this->priority, 2);
     }
 
-    public function setPriority(float $priority): self
+    public function setPriority(float $priority): static
     {
         $this->priority = $priority;
 
         return $this;
     }
 
-    public function addVideo(Video $video): self
+    public function addVideo(Video $video): static
     {
         $this->videos[] = $video;
 
         return $this;
     }
 
-    public function addImage(Image $image): self
+    public function addImage(Image $image): static
     {
         $this->images[] = $image;
 
@@ -97,7 +97,7 @@ class Url
         return $this->videos;
     }
 
-    public function setVideos(array $videos): self
+    public function setVideos(array $videos): static
     {
         $this->videos = $videos;
 
@@ -115,7 +115,7 @@ class Url
         return $this->images;
     }
 
-    public function setImages(array $images): self
+    public function setImages(array $images): static
     {
         $this->images = $images;
 

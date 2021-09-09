@@ -14,7 +14,7 @@ trait HoneyTrait
         return $this->honey;
     }
 
-    public function setHoney(mixed $honey): self
+    public function setHoney(mixed $honey): static
     {
         $this->honey = $honey;
 

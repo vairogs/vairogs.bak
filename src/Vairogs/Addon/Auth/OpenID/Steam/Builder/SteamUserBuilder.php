@@ -44,7 +44,7 @@ class SteamUserBuilder implements OpenIDUserBuilder
         return str_starts_with($user->getUrl(), self::PROFILE_URL_START);
     }
 
-    public function setUserClass(string $class): SteamUserBuilder
+    public function setUserClass(string $class): static
     {
         $this->userClass = $class;
 
