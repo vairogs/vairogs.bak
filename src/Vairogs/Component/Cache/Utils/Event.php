@@ -16,7 +16,7 @@ use function method_exists;
 use function reset;
 use function sprintf;
 
-class Attribute
+class Event
 {
     private const PARAMS = '_route_params';
 
