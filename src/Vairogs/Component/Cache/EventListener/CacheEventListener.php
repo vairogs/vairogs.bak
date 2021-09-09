@@ -38,7 +38,7 @@ class CacheEventListener implements EventSubscriberInterface
     public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
     {
         if ($this->enabled) {
-            $this->adapter = new ChainAdapter(Pool::createPoolForClass(Annotation::class, $adapters));
+            $this->adapter = new ChainAdapter(Pool::createPool(Annotation::class, $adapters));
             $this->adapter->prune();
             $this->event = new Event($reader, $tokenStorage);
         }
@@ -164,10 +164,9 @@ class CacheEventListener implements EventSubscriberInterface
         if (null !== ($annotation = $this->event->getAnnotation($responseEvent, Annotation::class))) {
             $annotation->setData($this->event->getAttributes($responseEvent, Annotation::class));
             $key = $annotation->getKey($this->getRoute($responseEvent));
-            $cache = $this->getCache($key);
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(Header::CACHE_VAR);
 
-            if (null === $cache && !$skip) {
+            if (null === $this->getCache($key) && !$skip) {
                 $this->setCache($key, $responseEvent->getResponse(), $annotation->getExpires());
             }
         }

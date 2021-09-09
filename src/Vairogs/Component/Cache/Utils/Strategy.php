@@ -2,9 +2,6 @@
 
 namespace Vairogs\Component\Cache\Utils;
 
-use ReflectionException;
-use Vairogs\Component\Utils\Helper\Php;
-
 final class Strategy
 {
     public const GET = 'GET';
@@ -12,12 +9,4 @@ final class Strategy
     public const USER = 'USER';
     public const MIXED = 'MIXED';
     public const ALL = 'ALL';
-
-    /**
-     * @throws ReflectionException
-     */
-    public function getStrategies(): array
-    {
-        return Php::getClassConstants(self::class);
-    }
 }

@@ -18,7 +18,7 @@ use function str_replace;
  * @NamedArgumentConstructor()
  */
 #[Attribute(Attribute::TARGET_METHOD)]
-class Cache
+final class Cache
 {
     private const ALGORITHM = 'sha1';
 
@@ -50,7 +50,7 @@ class Cache
         return $this->data;
     }
 
-    public function setData(mixed $data): static
+    public function setData(mixed $data): Cache
     {
         $this->data = $data;
 
@@ -67,7 +67,7 @@ class Cache
         return $this->strategy;
     }
 
-    public function setStrategy(string $strategy): static
+    public function setStrategy(string $strategy): Cache
     {
         $this->strategy = $strategy;
 

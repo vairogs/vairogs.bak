@@ -58,9 +58,8 @@ class Event
     public function getAnnotation(KernelEvent $kernelEvent, string $class): ?object
     {
         $controller = $this->getController($kernelEvent);
-        $reflectionClass = new ReflectionClass(reset($controller));
 
-        if ($method = $reflectionClass->getMethod(end($controller))) {
+        if ($method = (new ReflectionClass(reset($controller)))->getMethod(end($controller))) {
             foreach ($method->getAttributes($class) as $attribute) {
                 if ($class === $attribute->getName()) {
                     return $attribute->newInstance();
