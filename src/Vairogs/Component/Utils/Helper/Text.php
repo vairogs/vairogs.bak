@@ -11,9 +11,7 @@ use function iconv;
 use function is_numeric;
 use function mb_convert_encoding;
 use function mb_strlen;
-use function mb_strpos;
 use function mb_strrpos;
-use function mb_strtolower;
 use function mb_substr;
 use function preg_match;
 use function preg_replace;
@@ -25,11 +23,9 @@ use function strpbrk;
 use function strrev;
 use function strtolower;
 use function ucwords;
-use function usort;
 
 class Text
 {
-    public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
     public const UTF8 = 'UTF-8';
 
     #[Annotation\TwigFilter]
@@ -67,15 +63,6 @@ class Text
     public static function oneSpace(string $text): string
     {
         return preg_replace('#\s+#S', ' ', $text);
-    }
-
-    #[Annotation\TwigFilter]
-    public static function sortLatvian(array $names): bool
-    {
-        return usort($names, [
-            self::class,
-            'compareLatvian',
-        ]);
     }
 
     #[Annotation\TwigFilter]
@@ -171,31 +158,5 @@ class Text
         }
 
         return $value;
-    }
-
-    private static function compareLatvian(mixed $a, mixed $b, mixed $field): int
-    {
-        $a = mb_strtolower(Php::getParameter($a, $field));
-        $b = mb_strtolower(Php::getParameter($b, $field));
-
-        $len = mb_strlen($a);
-
-        for ($i = 0; $i < $len; $i++) {
-            if (mb_substr($a, $i, 1) === mb_substr($b, $i, 1)) {
-                continue;
-            }
-
-            if ($i > mb_strlen($b)) {
-                return 1;
-            }
-
-            if (mb_strpos(self::ALPHABET, mb_substr($a, $i, 1)) > mb_strpos(self::ALPHABET, mb_substr($b, $i, 1))) {
-                return 1;
-            }
-
-            return -1;
-        }
-
-        return 0;
     }
 }

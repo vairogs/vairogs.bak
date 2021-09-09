@@ -7,4 +7,6 @@ interface OpenIDUserBuilder
     public function getUser(array $response): OpenIDUser;
 
     public function setUserClass(string $class): static;
+
+    public function getUserClass(): string;
 }

@@ -5,7 +5,6 @@ namespace Vairogs\Component\Utils\Doctrine;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Doctrine\DBAL\Platforms\OraclePlatform;
 use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
 use Doctrine\ORM\Query\SqlWalker;
 use InvalidArgumentException;
@@ -33,12 +32,16 @@ class SortableNullWalker extends SqlWalker
         $platform = $this->getConnection()?->getDatabasePlatform()?->getName();
         // @formatter:on
 
+        $mysql = (new MySqlPlatform())->getName();
+        $postgres = (new PostgreSQL100Platform())->getName();
+        $oracle = (new PostgreSQL100Platform())->getName();
+
         if (is_array($fields) && $platform) {
             foreach ($fields as $field => $sorting) {
                 $sql = match ($platform) {
-                    (new MySqlPlatform())->getName() => $this->stepMysql($sql, $field, $sorting),
-                    (new OraclePlatform())->getName() => $this->stepOracle($sql, $field, $sorting),
-                    (new PostgreSQL100Platform())->getName() => $this->stepPostgre($sql, $field, $sorting),
+                    $mysql => $this->stepMysql($sql, $field, $sorting),
+                    $oracle => $this->stepOracle($sql, $field, $sorting),
+                    $postgres => $this->stepPostgre($sql, $field, $sorting),
                     default => throw new InvalidArgumentException(sprintf('Walker not implemented for "%s" platform', $platform)),
                 };
             }

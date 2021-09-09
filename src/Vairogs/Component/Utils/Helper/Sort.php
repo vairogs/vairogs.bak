@@ -21,6 +21,7 @@ class Sort
 {
     public const ASC = 'ASC';
     public const DESC = 'DESC';
+    public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
 
     #[Annotation\TwigFunction]
     public static function swap(mixed &$foo, mixed &$bar): void
@@ -167,5 +168,40 @@ class Sort
 
             return (-1 * $flip);
         };
+    }
+
+    #[Annotation\TwigFilter]
+    public static function sortLatvian(array $names): bool
+    {
+        return usort($names, [
+            self::class,
+            'compareLatvian',
+        ]);
+    }
+
+    private static function compareLatvian(mixed $a, mixed $b, mixed $field): int
+    {
+        $a = mb_strtolower(Php::getParameter($a, $field));
+        $b = mb_strtolower(Php::getParameter($b, $field));
+
+        $len = mb_strlen($a);
+
+        for ($i = 0; $i < $len; $i++) {
+            if (mb_substr($a, $i, 1) === mb_substr($b, $i, 1)) {
+                continue;
+            }
+
+            if ($i > mb_strlen($b)) {
+                return 1;
+            }
+
+            if (mb_strpos(self::ALPHABET, mb_substr($a, $i, 1)) > mb_strpos(self::ALPHABET, mb_substr($b, $i, 1))) {
+                return 1;
+            }
+
+            return -1;
+        }
+
+        return 0;
     }
 }

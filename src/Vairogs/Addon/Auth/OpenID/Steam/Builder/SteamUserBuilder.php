@@ -13,9 +13,7 @@ use function str_starts_with;
 class SteamUserBuilder implements OpenIDUserBuilder
 {
     private const PROFILE_URL_START = 'https://steamcommunity.com/id/';
-    public const USER_CLASS = Steam::class;
-
-    protected string $userClass = self::USER_CLASS;
+    protected string $userClass = Steam::class;
 
     public function getUser(array $response): OpenIDUser
     {
@@ -50,5 +48,10 @@ class SteamUserBuilder implements OpenIDUserBuilder
         $this->userClass = $class;
 
         return $this;
+    }
+
+    public function getUserClass(): string
+    {
+        return $this->userClass;
     }
 }
