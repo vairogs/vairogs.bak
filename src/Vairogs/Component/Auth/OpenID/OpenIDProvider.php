@@ -76,7 +76,7 @@ class OpenIDProvider
                     }
                 }
 
-                $data = null !== $user ? $this->getData($user) : null;
+                $data = $this->getData($user);
                 $data['cache_dir'] = $this->cacheDir;
                 $user = $builder->getUser($data);
             }
