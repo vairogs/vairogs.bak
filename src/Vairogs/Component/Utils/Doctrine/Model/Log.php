@@ -3,8 +3,8 @@
 namespace Vairogs\Component\Utils\Doctrine\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Vairogs\Extra\Constants\Type\Numeric;
 use Vairogs\Extra\Constants\Type\Basic;
+use Vairogs\Extra\Constants\Type\Numeric;
 
 /**
  * @ORM\MappedSuperclass()

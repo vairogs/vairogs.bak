@@ -164,6 +164,15 @@ class Text
         return $idx === false ? $string : substr($string, $idx + 1);
     }
 
+    public static function getNormalizedValue(string $value): string|int|float
+    {
+        if (is_numeric($value)) {
+            return str_contains((string)$value, '.') ? (float)$value : (int)$value;
+        }
+
+        return $value;
+    }
+
     private static function compareLatvian(mixed $a, mixed $b, mixed $field): int
     {
         $a = mb_strtolower(Php::getParameter($a, $field));
@@ -188,14 +197,5 @@ class Text
         }
 
         return 0;
-    }
-
-    public static function getNormalizedValue(string $value): string|int|float
-    {
-        if (is_numeric($value)) {
-            return str_contains((string)$value, '.') ? (float)$value : (int)$value;
-        }
-
-        return $value;
     }
 }

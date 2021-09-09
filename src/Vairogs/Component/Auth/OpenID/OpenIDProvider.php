@@ -15,6 +15,7 @@ use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Component\Utils\Helper\Json;
 use Vairogs\Component\Utils\Helper\Uri;
+use Vairogs\Extra\Constants\Type\Basic;
 use function array_keys;
 use function explode;
 use function file_get_contents;
@@ -27,7 +28,6 @@ use function stream_context_create;
 use function stripslashes;
 use function strlen;
 use function urldecode;
-use Vairogs\Extra\Constants\Type\Basic;
 
 class OpenIDProvider
 {

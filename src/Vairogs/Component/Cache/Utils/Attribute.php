@@ -18,7 +18,7 @@ use function sprintf;
 
 class Attribute
 {
-    private const ROUTE_PARAMS = '_route_params';
+    private const PARAMS = '_route_params';
 
     public function __construct(protected Reader $reader, protected ?TokenStorageInterface $tokenStorage = null)
     {
@@ -36,15 +36,15 @@ class Attribute
             $user = $this->getUser();
 
             return match ($annotation->getStrategy()) {
-                Strategy::GET => $request->attributes->get(self::ROUTE_PARAMS) + $request->query->all(),
+                Strategy::GET => $request->attributes->get(self::PARAMS) + $request->query->all(),
                 Strategy::POST => $request->request->all(),
                 Strategy::USER => $user,
                 Strategy::MIXED => [
-                    Strategy::GET => $request->attributes->get(self::ROUTE_PARAMS) + $request->query->all(),
+                    Strategy::GET => $request->attributes->get(self::PARAMS) + $request->query->all(),
                     Strategy::POST => $request->request->all(),
                     Strategy::USER => $user,
                 ],
-                Strategy::ALL => $request->attributes->get(self::ROUTE_PARAMS) + $request->query->all() + $request->request->all() + $user,
+                Strategy::ALL => $request->attributes->get(self::PARAMS) + $request->query->all() + $request->request->all() + $user,
                 default => throw new InvalidArgumentException(sprintf('Unknown strategy: %s', $annotation->getStrategy())),
             };
         }
@@ -61,8 +61,10 @@ class Attribute
         $reflectionClass = new ReflectionClass(reset($controller));
 
         if ($method = $reflectionClass->getMethod(end($controller))) {
-            if ($class === ($attribute = $method->getAttributes($class)[0] ?? null)?->getName()) {
-                return $attribute->newInstance();
+            foreach ($method->getAttributes($class) as $attribute) {
+                if ($class === $attribute->getName()) {
+                    return $attribute->newInstance();
+                }
             }
 
             if (($object = $this->reader->getMethodAnnotation($method, $class)) instanceof $class) {
@@ -75,11 +77,11 @@ class Attribute
 
     public function getController(KernelEvent $kernelEvent): array
     {
-        $kernelController = $kernelEvent->getRequest()
+        $controller = $kernelEvent->getRequest()
             ->get('_controller');
 
-        if ((null !== $kernelController) && is_array($controller = explode('::', $kernelController, 2)) && isset($controller[1])) {
-            return $controller;
+        if ((null !== $controller) && is_array($instance = explode('::', $controller, 2)) && isset($instance[1])) {
+            return $instance;
         }
 
         return [];
