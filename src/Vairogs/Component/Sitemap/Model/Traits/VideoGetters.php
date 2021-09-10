@@ -4,7 +4,7 @@ namespace Vairogs\Component\Sitemap\Model\Traits;
 
 use DateTimeInterface;
 
-trait VideoGet
+trait VideoGetters
 {
     public function getThumbnailLoc(): string
     {

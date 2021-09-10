@@ -3,13 +3,13 @@
 namespace Vairogs\Component\Sitemap\Model;
 
 use DateTimeInterface;
-use Vairogs\Component\Sitemap\Model\Traits\VideoGet;
-use Vairogs\Component\Sitemap\Model\Traits\VideoSet;
+use Vairogs\Component\Sitemap\Model\Traits\VideoGetters;
+use Vairogs\Component\Sitemap\Model\Traits\VideoSetters;
 
 class Video
 {
-    use VideoGet;
-    use VideoSet;
+    use VideoGetters;
+    use VideoSetters;
 
     protected string $thumbnailLoc;
     protected string $title;
