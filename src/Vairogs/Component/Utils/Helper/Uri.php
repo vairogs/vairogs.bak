@@ -4,6 +4,7 @@ namespace Vairogs\Component\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
+use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function array_combine;
@@ -14,7 +15,6 @@ use function bin2hex;
 use function explode;
 use function filter_var;
 use function function_exists;
-use function get_object_vars;
 use function http_build_query;
 use function http_parse_headers;
 use function is_array;
@@ -26,11 +26,11 @@ use function preg_match;
 use function preg_replace;
 use function preg_replace_callback;
 use function sprintf;
+use function str_replace;
 use function str_starts_with;
 use function strpos;
 use function strrpos;
 use function substr;
-use function trim;
 use function urldecode;
 
 class Uri
@@ -41,11 +41,7 @@ class Uri
     {
         $result = [];
 
-        if (is_object($data)) {
-            $data = get_object_vars($data);
-        }
-
-        foreach ($data as $key => $value) {
+        foreach (self::getArray($data) as $key => $value) {
             $newKey = $parent ? sprintf('%s[%s]', $parent, $key) : $key;
 
             if (!$value instanceof CURLFile && (is_array($value) || is_object($value))) {
@@ -57,6 +53,18 @@ class Uri
         }
 
         return $result;
+    }
+
+    private static function getArray(array|object $input): array
+    {
+        if (is_object($object = $input)) {
+            $input = [];
+            foreach ((new ReflectionClass($object))->getProperties() as $property) {
+                $input[$name = $property->getName()] = Php::hijackGet($object, $name);
+            }
+        }
+
+        return $input;
     }
 
     #[Annotation\TwigFilter]
@@ -99,30 +107,17 @@ class Uri
             return http_parse_headers($rawHeaders);
         }
 
-        $key = '';
         $headers = [];
+        $headerArray = str_replace("\r", "", $rawHeaders);
+        $headerArray = explode("\n", $headerArray);
 
-        foreach (explode("\n", $rawHeaders) as $header) {
-            $h = explode(':', $header, 2);
+        foreach ($headerArray as $value) {
+            $header = explode(": ", $value, 2);
 
-            if (isset($h[1])) {
-                $h1 = trim($h[1]);
-                if (!isset($headers[$h[0]])) {
-                    $headers[$h[0]] = $h1;
-                } elseif (is_array($headers[$h[0]])) {
-                    $headers[$h[0]][] = $h1;
-                } else {
-                    $headers[$h[0]] = [
-                        $headers[$h[0]],
-                        $h1,
-                    ];
-                }
-
-                $key = $h[0];
-            } elseif (str_starts_with($h[0], "\t")) {
-                $headers[$key] .= "\r\n\t" . trim($h[0]);
-            } elseif ('' === $key) {
-                $headers[0] = trim($h[0]);
+            if ($header[0] && !$header[1]) {
+                $headers['status'] = $header[0];
+            } elseif ($header[0] && $header[1]) {
+                $headers[$header[0]] = $header[1];
             }
         }
 
