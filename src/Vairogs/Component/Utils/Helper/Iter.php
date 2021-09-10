@@ -25,6 +25,8 @@ use function str_starts_with;
 
 class Iter
 {
+    public const DOT = '.';
+
     #[Annotation\TwigFunction]
     public static function isEmpty(mixed $variable): bool
     {
@@ -84,10 +86,10 @@ class Iter
         $result = [];
 
         foreach ($array as $key => $value) {
-            $key = '' !== $base ? $base . '.' . $key : $key;
+            $key = ltrim($base . self::DOT . $key, self::DOT);
 
             if (is_array($value) && self::isAssociative($value)) {
-                foreach (self::makeOneDimension($value, (string)$key, $separator) as $ik => $iv) {
+                foreach (self::makeOneDimension($value, $key, $separator) as $ik => $iv) {
                     $result[$ik] = $iv;
                 }
 
