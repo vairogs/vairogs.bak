@@ -18,20 +18,12 @@ class Identification
     {
         $personCode = Text::keepNumeric($personCode);
 
-        if (11 !== strlen($personCode)) {
-            return false;
-        }
-
         if (32 === (int)substr($personCode, 0, 2)) {
             if (!self::validateNewPersonCode($personCode)) {
                 return false;
             }
         } else {
-            if (!Date::validateDate($personCode)) {
-                return false;
-            }
-
-            if (!self::validateOldPersonCode($personCode)) {
+            if (!Date::validateDate($personCode) || !self::validateOldPersonCode($personCode)) {
                 return false;
             }
         }
@@ -42,6 +34,10 @@ class Identification
     #[Annotation\TwigFunction]
     public static function validateNewPersonCode(string $personCode): bool
     {
+        if (11 !== strlen($personCode)) {
+            return false;
+        }
+
         $personCode = str_replace('-', '', $personCode);
         // @formatter:off
         $calculations = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2,];
@@ -64,6 +60,10 @@ class Identification
     #[Annotation\TwigFunction]
     public static function validateOldPersonCode(string $personCode): bool
     {
+        if (11 !== strlen($personCode)) {
+            return false;
+        }
+
         $personCode = str_replace('-', '', $personCode);
         $check = '01060307091005080402';
         $checksum = 1;

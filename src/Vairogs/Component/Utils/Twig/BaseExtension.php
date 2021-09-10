@@ -21,7 +21,7 @@ abstract class BaseExtension extends AbstractExtension
 
     protected static string $class;
     protected static string $key = '';
-    protected static string $suffix = '';
+    protected static ?string $prefix = null;
 
     protected array $vars;
 
@@ -43,22 +43,22 @@ abstract class BaseExtension extends AbstractExtension
      */
     private function getMethods(string $filter, string $class): array
     {
-        return $this->makeArray(Helper::getFiltered($this->vars['class'], $filter), $this->getSuffix(), $class);
+        return $this->makeArray(Helper::getFiltered($this->vars['class'], $filter), $this->getPrefix(), $class);
     }
 
     /**
      * @throws ReflectionException
      */
-    private function getSuffix(): string
+    private function getPrefix(): string
     {
-        $suffix = '' !== $this->vars['suffix'] ? $this->vars['suffix'] : $this->vars['class'];
+        $base = $this->vars['prefix'] ?? $this->vars['class'];
         $ns = (new ReflectionClass($this->vars['class']))->getNamespaceName();
         $short = Php::getShortName($this->vars['class']);
 
         if (Vairogs::HELPER_NAMESPACE === $ns) {
-            $suffix = sprintf('%s_%s', 'helper', $short);
+            $base = sprintf('%s_%s', 'helper', $short);
         } elseif ('Extension' === $short) {
-            $suffix = Text::getLastPart($ns, '\\');
+            $base = Text::getLastPart($ns, '\\');
         }
 
         if (str_starts_with($ns, Php::getShortName(Vairogs::class))) {
@@ -66,10 +66,10 @@ abstract class BaseExtension extends AbstractExtension
         }
 
         if ('' !== $this->vars['key']) {
-            $suffix = sprintf('%s_%s', $this->vars['key'], $suffix);
+            $base = sprintf('%s_%s', $this->vars['key'], $base);
         }
 
-        return strtolower($suffix);
+        return strtolower($base);
     }
 
     /**

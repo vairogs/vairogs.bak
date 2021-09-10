@@ -65,15 +65,11 @@ class Php
 
         $value = strtolower((string)$value);
 
-        if ('y' === $value) {
-            return true;
-        }
-
-        if ('n' === $value) {
-            return false;
-        }
-
-        return filter_var($value, FILTER_VALIDATE_BOOL);
+        return match ($value) {
+            'y' => true,
+            'n' => false,
+            default => filter_var($value, FILTER_VALIDATE_BOOL),
+        };
     }
 
     /**

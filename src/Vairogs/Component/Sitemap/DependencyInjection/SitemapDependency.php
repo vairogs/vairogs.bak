@@ -36,5 +36,6 @@ class SitemapDependency implements Dependency
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
+        // Part of interface, not needed in this component
     }
 }

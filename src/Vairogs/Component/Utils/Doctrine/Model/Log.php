@@ -19,9 +19,9 @@ class Log
     protected string $message;
 
     /**
-     * @ORM\Column(type=Basic::ARRAY)
+     * @ORM\Column
      */
-    #[ORM\Column(type: Basic::ARRAY)]
+    #[ORM\Column]
     protected array $context;
 
     /**
@@ -31,15 +31,15 @@ class Log
     protected int $level;
 
     /**
-     * @ORM\Column(type=Basic::STRING, length=50)
+     * @ORM\Column(length=50)
      */
-    #[ORM\Column(type: Basic::STRING, length: 50)]
+    #[ORM\Column(length: 50)]
     protected string $levelName;
 
     /**
-     * @ORM\Column(type=Basic::ARRAY)
+     * @ORM\Column
      */
-    #[ORM\Column(type: Basic::ARRAY)]
+    #[ORM\Column]
     protected array $extra;
 
     public function getMessage(): string
