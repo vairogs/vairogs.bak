@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use function end;
 use function explode;
 use function is_array;
-use function method_exists;
 use function reset;
 use function sprintf;
 
@@ -90,18 +89,8 @@ class Event
     {
         $user = $this->tokenStorage?->getToken()?->getUser();
 
-        if (null !== $user) {
-            if (method_exists($user, 'toArray')) {
-                return $user->toArray();
-            }
-
-            if (method_exists($user, '__toArray')) {
-                return $user->__toArray();
-            }
-
-            if ($user instanceof JsonSerializable) {
-                return $user->jsonSerialize();
-            }
+        if ($user instanceof JsonSerializable) {
+            return $user->jsonSerialize();
         }
 
         return [];

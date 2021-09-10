@@ -191,11 +191,7 @@ class Sort
                 continue;
             }
 
-            if ($i > mb_strlen($b)) {
-                return 1;
-            }
-
-            if (mb_strpos(self::ALPHABET, mb_substr($a, $i, 1)) > mb_strpos(self::ALPHABET, mb_substr($b, $i, 1))) {
+            if ($i > mb_strlen($b) || mb_strpos(self::ALPHABET, mb_substr($a, $i, 1)) > mb_strpos(self::ALPHABET, mb_substr($b, $i, 1))) {
                 return 1;
             }
 

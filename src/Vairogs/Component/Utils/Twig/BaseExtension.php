@@ -23,24 +23,37 @@ abstract class BaseExtension extends AbstractExtension
     protected static string $key = '';
     protected static string $suffix = '';
 
-    /**
-     * @throws ReflectionException
-     */
-    public function getFilters(): array
-    {
-        $suffix = $this->getSuffix($vars = get_class_vars(static::class));
+    protected array $vars;
 
-        return $this->makeArray(Helper::getFiltered($vars['class'], Annotation\TwigFilter::class), $suffix, Twig\TwigFilter::class);
+    public function __construct()
+    {
+        $this->vars = get_class_vars(static::class);
     }
 
     /**
      * @throws ReflectionException
      */
-    private function getSuffix(array $vars): string
+    public function getFilters(): array
     {
-        $suffix = '' !== $vars['suffix'] ? $vars['suffix'] : $vars['class'];
-        $ns = (new ReflectionClass($vars['class']))->getNamespaceName();
-        $short = Php::getShortName($vars['class']);
+        return $this->getMethods(Annotation\TwigFilter::class, Twig\TwigFilter::class);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    private function getMethods(string $filter, string $class): array
+    {
+        return $this->makeArray(Helper::getFiltered($this->vars['class'], $filter), $this->getSuffix(), $class);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    private function getSuffix(): string
+    {
+        $suffix = '' !== $this->vars['suffix'] ? $this->vars['suffix'] : $this->vars['class'];
+        $ns = (new ReflectionClass($this->vars['class']))->getNamespaceName();
+        $short = Php::getShortName($this->vars['class']);
 
         if (Vairogs::HELPER_NAMESPACE === $ns) {
             $suffix = sprintf('%s_%s', 'helper', $short);
@@ -49,11 +62,11 @@ abstract class BaseExtension extends AbstractExtension
         }
 
         if (str_starts_with($ns, Php::getShortName(Vairogs::class))) {
-            $vars['key'] = Vairogs::VAIROGS;
+            $this->vars['key'] = Vairogs::VAIROGS;
         }
 
-        if ('' !== $vars['key']) {
-            $suffix = sprintf('%s_%s', $vars['key'], $suffix);
+        if ('' !== $this->vars['key']) {
+            $suffix = sprintf('%s_%s', $this->vars['key'], $suffix);
         }
 
         return strtolower($suffix);
@@ -64,8 +77,6 @@ abstract class BaseExtension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        $suffix = $this->getSuffix($vars = get_class_vars(static::class));
-
-        return $this->makeArray(Helper::getFiltered($vars['class'], Annotation\TwigFunction::class), $suffix, Twig\TwigFunction::class);
+        return $this->getMethods(Annotation\TwigFunction::class, Twig\TwigFunction::class);
     }
 }

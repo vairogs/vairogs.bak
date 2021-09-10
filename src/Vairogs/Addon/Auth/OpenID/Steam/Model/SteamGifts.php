@@ -4,13 +4,12 @@ namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
-use Stringable;
 
 /**
  * @ORM\MappedSuperclass()
  */
 #[ORM\MappedSuperclass]
-class SteamGifts extends Steam implements Stringable
+class SteamGifts extends Steam
 {
     #[Pure]
     public function __toString(): string

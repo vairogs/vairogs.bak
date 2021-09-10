@@ -6,12 +6,13 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
 use JsonException;
-use RuntimeException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use UnexpectedValueException;
+use Vairogs\Addon\Auth\OpenID\Constants\OpenID;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Component\Utils\Helper\Json;
@@ -83,7 +84,7 @@ class OpenIDProvider
         }
 
         if (null === $user) {
-            throw new RuntimeException('Invalid login or request has timed out');
+            throw new UnexpectedValueException('Invalid login or request has timed out');
         }
 
         return $user;
@@ -93,17 +94,17 @@ class OpenIDProvider
     {
         $get = $this->request->query->all();
         $params = [
-            'openid.assoc_handle' => $get['openid_assoc_handle'],
-            'openid.signed' => $get['openid_signed'],
-            'openid.sig' => $get['openid_sig'],
-            'openid.ns' => 'http://specs.openid.net/auth/2.0',
+            OpenID::ASSOC_HANDLE => $get['openid_assoc_handle'],
+            OpenID::SIGNED => $get['openid_signed'],
+            OpenID::SIG => $get['openid_sig'],
+            OpenID::NS => 'http://specs.openid.net/auth/2.0',
         ];
 
         foreach (explode(',', $get['openid_signed']) as $item) {
             $params['openid.' . $item] = stripslashes($get['openid_' . str_replace('.', '_', $item)]);
         }
 
-        $params['openid.mode'] = 'check_authentication';
+        $params[OpenID::MODE] = 'check_authentication';
         $data = http_build_query($params);
         $context = stream_context_create([
             'http' => [
@@ -156,14 +157,14 @@ class OpenIDProvider
     }
 
     #[ArrayShape([
-        'openid.ns' => Basic::STRING,
-        'openid.mode' => Basic::STRING,
-        'openid.return_to' => "string|string[]",
-        'openid.realm' => "null|string",
-        'openid.identity' => Basic::STRING,
-        'openid.claimed_id' => Basic::STRING,
-        'openid.sreg.required' => "array|mixed",
-        'openid.ns.sreg' => Basic::STRING,
+        OpenID::NS => Basic::STRING,
+        OpenID::MODE => Basic::STRING,
+        OpenID::RETURN_TO => "string|string[]",
+        OpenID::REALM => "null|string",
+        OpenID::IDENTITY => Basic::STRING,
+        OpenID::CLAIMED_ID => Basic::STRING,
+        OpenID::SREG_REQUIRED => "array|mixed",
+        OpenID::NS_SREG => Basic::STRING,
     ])]
     private function getParams(string $return, ?string $realm): array
     {
@@ -173,17 +174,17 @@ class OpenIDProvider
         }
 
         $params = [
-            'openid.ns' => 'http://specs.openid.net/auth/2.0',
-            'openid.mode' => 'checkid_setup',
-            'openid.return_to' => $return,
-            'openid.realm' => $realm,
-            'openid.identity' => 'http://specs.openid.net/auth/2.0/identifier_select',
-            'openid.claimed_id' => 'http://specs.openid.net/auth/2.0/identifier_select',
+            OpenID::NS => 'http://specs.openid.net/auth/2.0',
+            OpenID::MODE => 'checkid_setup',
+            OpenID::RETURN_TO => $return,
+            OpenID::REALM => $realm,
+            OpenID::IDENTITY => 'http://specs.openid.net/auth/2.0/identifier_select',
+            OpenID::CLAIMED_ID => 'http://specs.openid.net/auth/2.0/identifier_select',
         ];
 
         if ('sreg' === ($this->options[self::PROVIDER_OPTIONS]['ns_mode'] ?? '')) {
-            $params['openid.ns.sreg'] = 'http://openid.net/extensions/sreg/1.1';
-            $params['openid.sreg.required'] = $this->options[self::PROVIDER_OPTIONS]['sreg_fields'] ?? [];
+            $params[OpenID::NS_SREG] = 'http://openid.net/extensions/sreg/1.1';
+            $params[OpenID::SREG_REQUIRED] = $this->options[self::PROVIDER_OPTIONS]['sreg_fields'] ?? [];
         }
 
         return $params;

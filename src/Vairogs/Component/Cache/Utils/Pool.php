@@ -2,16 +2,16 @@
 
 namespace Vairogs\Component\Cache\Utils;
 
+use BadMethodCallException;
 use InvalidArgumentException;
 use Psr\Cache\CacheItemPoolInterface;
-use RuntimeException;
 use Vairogs\Component\Cache\Utils\Adapter\Cache;
 use function sprintf;
 
 class Pool
 {
     /**
-     * @throws RuntimeException
+     * @throws BadMethodCallException
      * @throws InvalidArgumentException
      */
     public static function createPool(string $class, array $adapters = []): array
@@ -31,7 +31,7 @@ class Pool
         }
 
         if ([] === $pool) {
-            throw new RuntimeException(sprintf('At least one provider must be provided in order to use %s', $class));
+            throw new BadMethodCallException(sprintf('At least one provider must be provided in order to use %s', $class));
         }
 
         return $pool;
