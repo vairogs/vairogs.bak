@@ -14,9 +14,7 @@ use function array_merge;
 use function bin2hex;
 use function explode;
 use function filter_var;
-use function function_exists;
 use function http_build_query;
-use function http_parse_headers;
 use function is_array;
 use function is_object;
 use function ltrim;
@@ -103,10 +101,6 @@ class Uri
     #[Annotation\TwigFilter]
     public static function parseHeaders(string $rawHeaders = ''): array
     {
-        if (function_exists('http_parse_headers')) {
-            return http_parse_headers($rawHeaders);
-        }
-
         $headers = [];
         $headerArray = str_replace("\r", "", $rawHeaders);
         $headerArray = explode("\n", $headerArray);
