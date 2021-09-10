@@ -8,9 +8,6 @@ use Vairogs\Component\Sitemap\Model\Traits\VideoSetters;
 
 class Video
 {
-    use VideoGetters;
-    use VideoSetters;
-
     protected string $thumbnailLoc;
     protected string $title;
     protected string $description;
@@ -30,4 +27,7 @@ class Video
     protected ?string $requiresSubscription = null;
     protected ?string $uploader = null;
     protected ?string $live = null;
+
+    use VideoGetters;
+    use VideoSetters;
 }
