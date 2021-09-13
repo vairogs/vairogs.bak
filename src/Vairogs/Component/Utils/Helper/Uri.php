@@ -4,7 +4,6 @@ namespace Vairogs\Component\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
-use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function array_combine;
@@ -39,7 +38,7 @@ class Uri
     {
         $result = [];
 
-        foreach (self::getArray($data) as $key => $value) {
+        foreach (Php::getArray($data) as $key => $value) {
             $newKey = $parent ? sprintf('%s[%s]', $parent, $key) : $key;
 
             if (!$value instanceof CURLFile && (is_array($value) || is_object($value))) {
@@ -51,18 +50,6 @@ class Uri
         }
 
         return $result;
-    }
-
-    private static function getArray(array|object $input): array
-    {
-        if (is_object($object = $input)) {
-            $input = [];
-            foreach ((new ReflectionClass($object))->getProperties() as $property) {
-                $input[$name = $property->getName()] = Php::hijackGet($object, $name);
-            }
-        }
-
-        return $input;
     }
 
     #[Annotation\TwigFilter]

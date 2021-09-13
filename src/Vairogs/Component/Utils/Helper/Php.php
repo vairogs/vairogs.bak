@@ -18,6 +18,7 @@ use function getenv;
 use function interface_exists;
 use function is_array;
 use function is_bool;
+use function is_object;
 use function method_exists;
 use function sprintf;
 use function strtolower;
@@ -163,5 +164,19 @@ class Php
         }
 
         return $_ENV[$varname] ?? $varname;
+    }
+
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
+    public static function getArray(array|object $input): array
+    {
+        if (is_object($object = $input)) {
+            $input = [];
+            foreach ((new ReflectionClass($object))->getProperties() as $property) {
+                $input[$name = $property->getName()] = self::hijackGet($object, $name);
+            }
+        }
+
+        return $input;
     }
 }
