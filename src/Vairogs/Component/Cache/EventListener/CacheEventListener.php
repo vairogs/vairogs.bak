@@ -87,7 +87,7 @@ class CacheEventListener implements EventSubscriberInterface
             }
 
             if (null !== $response) {
-                $controllerEvent->setController(static fn() => $response);
+                $controllerEvent->setController(static fn () => $response);
             }
         }
     }
@@ -112,7 +112,7 @@ class CacheEventListener implements EventSubscriberInterface
 
     private function needsInvalidation(Request $request): bool
     {
-        if ($request->getMethod() === Request::METHOD_PURGE) {
+        if (Request::METHOD_PURGE === $request->getMethod()) {
             return true;
         }
 

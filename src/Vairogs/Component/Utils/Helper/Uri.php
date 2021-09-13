@@ -78,7 +78,7 @@ class Uri
     #[Annotation\TwigFilter]
     public static function arrayFromQueryString(string $query): array
     {
-        $query = preg_replace_callback('#(?:^|(?<=&))[^=[]+#', static fn($match) => bin2hex(urldecode($match[0])), $query);
+        $query = preg_replace_callback('#(?:^|(?<=&))[^=[]+#', static fn ($match) => bin2hex(urldecode($match[0])), $query);
 
         parse_str($query, $values);
 
@@ -89,11 +89,11 @@ class Uri
     public static function parseHeaders(string $rawHeaders = ''): array
     {
         $headers = [];
-        $headerArray = str_replace("\r", "", $rawHeaders);
+        $headerArray = str_replace("\r", '', $rawHeaders);
         $headerArray = explode("\n", $headerArray);
 
         foreach ($headerArray as $value) {
-            $header = explode(": ", $value, 2);
+            $header = explode(': ', $value, 2);
 
             if ($header[0] && !$header[1]) {
                 $headers['status'] = $header[0];
@@ -109,7 +109,7 @@ class Uri
     #[Pure]
     public static function isUrl(string $url): bool
     {
-        /** @noinspection BypassedUrlValidationInspection */
+        /* @noinspection BypassedUrlValidationInspection */
         return false !== filter_var(filter_var($url, FILTER_SANITIZE_URL), FILTER_VALIDATE_URL);
     }
 

@@ -53,7 +53,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         $expl = explode('/', $matches[0][0]);
         $username = null;
 
-        if (trim(end($expl)) !== '') {
+        if ('' !== trim(end($expl))) {
             $username = end($expl);
         }
 

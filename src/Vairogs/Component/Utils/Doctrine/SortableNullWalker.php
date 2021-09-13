@@ -62,7 +62,7 @@ class SortableNullWalker extends SqlWalker
                     throw new InvalidArgumentException(sprintf('Order must be "%s" or "%s"', Criteria::ASC, Criteria::DESC));
                 }
 
-                return ('ORDER BY -' . $matches[1] . $matches[2] . ' ' . $order);
+                return 'ORDER BY -' . $matches[1] . $matches[2] . ' ' . $order;
             }, $sql);
         }
 

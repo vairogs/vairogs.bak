@@ -8,7 +8,6 @@ use Twig;
 use Twig\Extension\AbstractExtension;
 use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Helper\Text;
-use Vairogs\Component\Utils\Twig\Annotation;
 use Vairogs\Component\Utils\Vairogs;
 use function get_class_vars;
 use function sprintf;

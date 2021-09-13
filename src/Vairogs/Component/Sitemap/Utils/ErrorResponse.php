@@ -14,7 +14,6 @@ class ErrorResponse
     {
         $this->response = new Response();
         $this->response->headers->set('Content-Type', 'application/xml');
-        /** @noinspection UnusedFunctionResultInspection */
         $this->response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
@@ -26,8 +25,8 @@ class ErrorResponse
 ';
         // @formatter:on
 
+        /** @var ConstraintViolation $error */
         foreach ($this->constraintViolationList as $error) {
-            /** @var ConstraintViolation $error */
             // @formatter:off
             $buffer .= "\t" . '<error>' .
                 "\n\t\t" . '<property_path>' . $error->getPropertyPath() . '</property_path>' .

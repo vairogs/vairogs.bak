@@ -36,18 +36,18 @@ class Date
     public static function validateDate(string $date): bool
     {
         $date = Text::keepNumeric($date);
-        $day = (int)substr($date, 0, 2);
-        $month = (int)substr($date, 2, 2);
+        $day = (int) substr($date, 0, 2);
+        $month = (int) substr($date, 2, 2);
 
         if ($month < 0 || $month > 12) {
             return false;
         }
 
         // @formatter:off
-        $months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31,];
+        $months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         // @formatter:on
 
-        if (0 === (int)substr($date, 4, 2) % 4) {
+        if (0 === (int) substr($date, 4, 2) % 4) {
             $months[1] = 29;
         }
 
@@ -165,7 +165,7 @@ class Date
      * @throws Exception
      */
     #[Annotation\TwigFilter]
-    public static function createFromUnixTimestamp(int $timestamp = 0, string $format = null): string
+    public static function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string
     {
         return (new DateTime())->setTimestamp($timestamp)
             ->format($format ?? self::FORMAT);

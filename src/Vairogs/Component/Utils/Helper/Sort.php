@@ -70,7 +70,7 @@ class Sort
             return $array;
         }
 
-        $middle = (int)round(count($array) / 2);
+        $middle = (int) round(count($array) / 2);
         $left = array_slice($array, 0, $middle);
         $right = array_slice($array, $middle);
 
@@ -158,7 +158,7 @@ class Sort
     public static function usort(string $parameter, string $order): callable
     {
         return static function (array|object $a, array|object $b) use ($parameter, $order): int {
-            $flip = ($order === self::DESC) ? -1 : 1;
+            $flip = (self::DESC === $order) ? -1 : 1;
 
             if (($aSort = Php::getParameter($a, $parameter)) === ($bSort = Php::getParameter($b, $parameter))) {
                 return 0;
@@ -168,7 +168,7 @@ class Sort
                 return $flip;
             }
 
-            return (-1 * $flip);
+            return -1 * $flip;
         };
     }
 

@@ -140,7 +140,7 @@ class Text
     #[Pure]
     public static function sanitizeFloat(string $string): float
     {
-        return (float)filter_var($string, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        return (float) filter_var($string, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }
 
     #[Annotation\TwigFilter]
@@ -148,13 +148,13 @@ class Text
     {
         $idx = strrpos($string, $delimiter);
 
-        return $idx === false ? $string : substr($string, $idx + 1);
+        return false === $idx ? $string : substr($string, $idx + 1);
     }
 
     public static function getNormalizedValue(string $value): string|int|float
     {
         if (is_numeric($value)) {
-            return str_contains((string)$value, '.') ? (float)$value : (int)$value;
+            return str_contains((string) $value, '.') ? (float) $value : (int) $value;
         }
 
         return $value;

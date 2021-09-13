@@ -67,7 +67,6 @@ class OpenIDProvider
             $builder = new $builderClass();
             $builder->setUserClass($this->userClass ?? $builder->getUserClass());
 
-            /** @var OpenIDUserBuilder $builder */
             if (null === $this->profileUrl) {
                 $user = $builder->getUser($this->request->query->all());
             } else {
@@ -117,7 +116,7 @@ class OpenIDProvider
         preg_match($this->options['preg_check'], urldecode($get['openid_claimed_id']), $matches);
         $openID = (is_array($matches) && isset($matches[1])) ? $matches[1] : null;
 
-        return preg_match("#is_valid\s*:\s*true#i", file_get_contents($this->options['openid_url'] . '/' . $this->options['api_key'], false, $context)) === 1 ? $openID : null;
+        return 1 === preg_match("#is_valid\s*:\s*true#i", file_get_contents($this->options['openid_url'] . '/' . $this->options['api_key'], false, $context)) ? $openID : null;
     }
 
     /**
@@ -159,11 +158,11 @@ class OpenIDProvider
     #[ArrayShape([
         OpenID::NS => Basic::STRING,
         OpenID::MODE => Basic::STRING,
-        OpenID::RETURN_TO => "string|string[]",
-        OpenID::REALM => "null|string",
+        OpenID::RETURN_TO => 'string|string[]',
+        OpenID::REALM => 'null|string',
         OpenID::IDENTITY => Basic::STRING,
         OpenID::CLAIMED_ID => Basic::STRING,
-        OpenID::SREG_REQUIRED => "array|mixed",
+        OpenID::SREG_REQUIRED => 'array|mixed',
         OpenID::NS_SREG => Basic::STRING,
     ])]
     private function getParams(string $return, ?string $realm): array

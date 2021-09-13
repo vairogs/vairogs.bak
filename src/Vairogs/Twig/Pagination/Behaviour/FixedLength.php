@@ -94,7 +94,7 @@ class FixedLength
     #[Pure]
     private function getSingleOmissionBreakpoint(): int
     {
-        return (int)floor($this->maximumVisible / 2) + 1;
+        return (int) floor($this->maximumVisible / 2) + 1;
     }
 
     #[Pure]
@@ -108,11 +108,11 @@ class FixedLength
     {
         if ($this->hasSingleOmittedChunkNearLastPage($currentPage)) {
             $rest = $this->maximumVisible - $currentPage;
-            $omitPagesFrom = ((int)ceil($rest / 2)) + $currentPage;
+            $omitPagesFrom = ((int) ceil($rest / 2)) + $currentPage;
             $omitPagesTo = $totalPages - ($this->maximumVisible - $omitPagesFrom);
         } else {
             $rest = $this->maximumVisible - ($totalPages - $currentPage);
-            $omitPagesFrom = (int)ceil($rest / 2);
+            $omitPagesFrom = (int) ceil($rest / 2);
             $omitPagesTo = ($currentPage - ($rest - $omitPagesFrom));
         }
 

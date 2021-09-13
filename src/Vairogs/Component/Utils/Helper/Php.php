@@ -53,7 +53,7 @@ class Php
     #[Annotation\TwigFunction]
     public static function hijackGet(object $object, string $property): mixed
     {
-        return self::call(fn() => $object->$property, $object, true);
+        return self::call(fn () => $object->$property, $object, true);
     }
 
     #[Annotation\TwigFilter]
@@ -64,7 +64,7 @@ class Php
             return $value;
         }
 
-        $value = strtolower((string)$value);
+        $value = strtolower((string) $value);
 
         return match ($value) {
             'y' => true,

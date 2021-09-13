@@ -8,7 +8,6 @@ class LesserOrEqualsTo extends AbstractSpecification
 {
     public function isSatisfiedBy(mixed $expectedValue, mixed $actualValue = null): bool
     {
-        /** @noinspection InsufficientTypesControlInspection */
         if ($actualValue <= $expectedValue) {
             return true;
         }

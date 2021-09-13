@@ -18,7 +18,7 @@ class Identification
     {
         $personCode = Text::keepNumeric($personCode);
 
-        if (32 === (int)substr($personCode, 0, 2)) {
+        if (32 === (int) substr($personCode, 0, 2)) {
             if (!self::validateNewPersonCode($personCode)) {
                 return false;
             }
@@ -40,7 +40,7 @@ class Identification
 
         $personCode = str_replace('-', '', $personCode);
         // @formatter:off
-        $calculations = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2,];
+        $calculations = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
         // @formatter:on
         $sum = 0;
 
@@ -51,10 +51,10 @@ class Identification
         $remainder = $sum % 11;
 
         if (-1 > 1 - $remainder) {
-            return (1 - $remainder + 11) === (int)$personCode[10];
+            return (1 - $remainder + 11) === (int) $personCode[10];
         }
 
-        return (1 - $remainder) === (int)$personCode[10];
+        return (1 - $remainder) === (int) $personCode[10];
     }
 
     #[Annotation\TwigFunction]
@@ -69,10 +69,10 @@ class Identification
         $checksum = 1;
 
         for ($i = 0; $i < 10; $i++) {
-            $checksum -= (int)$personCode[$i] * (int)substr($check, $i * 2, 2);
+            $checksum -= (int) $personCode[$i] * (int) substr($check, $i * 2, 2);
         }
 
-        return (int)($checksum - floor($checksum / 11) * 11) === (int)$personCode[10];
+        return (int) ($checksum - floor($checksum / 11) * 11) === (int) $personCode[10];
     }
 
     #[Annotation\TwigFunction]

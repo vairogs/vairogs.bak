@@ -98,7 +98,7 @@ trait LocaleResolverTrait
     {
         $languages = [];
         foreach ($request->getLanguages() as $language) {
-            if (strlen($language) !== 2) {
+            if (2 !== strlen($language)) {
                 $newLang = explode('_', $language, 2);
                 $languages[] = reset($newLang);
             } else {

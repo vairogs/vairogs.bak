@@ -88,7 +88,7 @@ class Http
 
     protected static function checkServerPort(Request $request): bool
     {
-        return $request->server->has(self::HEADER_PORT) && self::HTTPS === (int)$request->server->get(self::HEADER_PORT);
+        return $request->server->has(self::HEADER_PORT) && self::HTTPS === (int) $request->server->get(self::HEADER_PORT);
     }
 
     protected static function checkHttpXForwardedSsl(Request $request): bool

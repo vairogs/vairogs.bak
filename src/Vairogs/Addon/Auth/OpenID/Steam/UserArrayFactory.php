@@ -26,13 +26,13 @@ class UserArrayFactory
             ->setLogoff($bag['lastlogoff'] ?? 0)
             ->setPersonaState($bag['personastate'] ?? 0)
             ->setName($bag['realname'] ?? $bag['personaname'] ?? $bag[self::STEAMID])
-            ->setClanId((int)($bag['primaryclanid'] ?? 0))
+            ->setClanId((int) ($bag['primaryclanid'] ?? 0))
             ->setCreatedAt($bag['timecreated'] ?? 0)
             ->setPersonaFlags($bag['personastateflags'] ?? 0)
             ->setCountryCode($bag['loccountrycode'] ?? 'UNKNOWN')
-            ->setStateCode((int)($bag['locstatecode'] ?? 0))
+            ->setStateCode((int) ($bag['locstatecode'] ?? 0))
             ->setPlaying($bag['gameextrainfo'] ?? '')
-            ->setPlayingId((int)($bag['gameid'] ?? 0))
+            ->setPlayingId((int) ($bag['gameid'] ?? 0))
             ->setAvatar($avatar)
             ->setUsername($bag['username'] ?? null);
     }

@@ -24,7 +24,6 @@ final class Cache
 
     public function __construct(private ?int $expires = null, private array $attributes = [], private string $strategy = Strategy::ALL, private string $algorithm = self::ALGORITHM, private mixed $data = null)
     {
-
     }
 
     public function getKey(string $prefix = ''): string
@@ -50,7 +49,7 @@ final class Cache
         return $this->data;
     }
 
-    public function setData(mixed $data): Cache
+    public function setData(mixed $data): self
     {
         $this->data = $data;
 
@@ -67,7 +66,7 @@ final class Cache
         return $this->strategy;
     }
 
-    public function setStrategy(string $strategy): Cache
+    public function setStrategy(string $strategy): self
     {
         $this->strategy = $strategy;
 

@@ -17,6 +17,8 @@ use Vairogs\Extra\Constants\Type\Numeric;
 #[ORM\MappedSuperclass]
 class Steam implements OpenIDUser, User, Stringable
 {
+    use SteamGetters;
+    use SteamSetters;
     public const RETURNS_EMAIL = false;
 
     /**
@@ -126,9 +128,6 @@ class Steam implements OpenIDUser, User, Stringable
      */
     #[ORM\Column(unique: true, nullable: true)]
     protected ?string $username = null;
-
-    use SteamGetters;
-    use SteamSetters;
 
     #[Pure]
     public function __toString(): string

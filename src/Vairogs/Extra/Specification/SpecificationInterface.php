@@ -6,9 +6,9 @@ interface SpecificationInterface
 {
     public function isSatisfiedBy(mixed $expectedValue, mixed $actualValue = null): bool;
 
-    public function andX(SpecificationInterface $specification): SpecificationInterface;
+    public function andX(self $specification): self;
 
-    public function orX(SpecificationInterface $specification): SpecificationInterface;
+    public function orX(self $specification): self;
 
-    public function not(): SpecificationInterface;
+    public function not(): self;
 }

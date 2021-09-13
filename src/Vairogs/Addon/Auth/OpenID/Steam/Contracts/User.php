@@ -6,5 +6,4 @@ use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 
 interface User extends OpenIDUser, UserSetters, UserGetters
 {
-
 }

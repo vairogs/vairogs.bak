@@ -55,7 +55,7 @@ abstract class AbstractBuilder implements Builder
     protected function getGetterValue(Url $url, string $key): ?string
     {
         if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
-            return (string)$url->$getter();
+            return (string) $url->$getter();
         }
 
         return null;

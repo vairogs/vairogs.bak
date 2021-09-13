@@ -139,7 +139,7 @@ class Iteration
 
         foreach ($input as $key => $element) {
             if (is_array($element) || is_object($element)) {
-                $result[$key] = self::arrayFlipRecursive((array)$element);
+                $result[$key] = self::arrayFlipRecursive((array) $element);
             } elseif (in_array(gettype($element), [
                 Basic::INTEGER,
                 Basic::STRING,
@@ -181,13 +181,13 @@ class Iteration
     #[Annotation\TwigFilter]
     public static function filterKeyStartsWith(array $input, string $startsWith): array
     {
-        return array_filter($input, static fn($key) => str_starts_with($key, $startsWith), ARRAY_FILTER_USE_KEY);
+        return array_filter($input, static fn ($key) => str_starts_with($key, $startsWith), ARRAY_FILTER_USE_KEY);
     }
 
     #[Annotation\TwigFilter]
     public static function filterKeyEndsWith(array $input, string $endsWith): array
     {
-        return array_filter($input, static fn($key) => str_ends_with($key, $endsWith), ARRAY_FILTER_USE_KEY);
+        return array_filter($input, static fn ($key) => str_ends_with($key, $endsWith), ARRAY_FILTER_USE_KEY);
     }
 
     #[Annotation\TwigFilter]
