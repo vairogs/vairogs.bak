@@ -110,7 +110,7 @@ class Php
 
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
-    public static function getParameter(object|array $variable, mixed $key): mixed
+    public static function getParameter(array|object $variable, mixed $key): mixed
     {
         if (is_array($variable)) {
             return $variable[$key];

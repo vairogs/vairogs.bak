@@ -4,7 +4,7 @@ namespace Vairogs\Extra\Specification;
 
 interface ExtendedSpecificationInterface extends SpecificationInterface
 {
-    public function getName();
+    public function getName(): string;
 
-    public function getMessage();
+    public function getMessage(): string;
 }

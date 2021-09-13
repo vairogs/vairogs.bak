@@ -25,12 +25,15 @@ class Extension extends AbstractExtension
     {
         $callbacks = $this->getCallbacks($this->filters);
 
-        $mappedFilters = array_map(static fn($function, $callback) => new TwigFilter($function, $callback), array_keys($callbacks), $callbacks);
-        $mappedFilters[] = new TwigFilter(sprintf('%s_filter', Vairogs::VAIROGS), fn(mixed $object, string $filter, ...$arguments): mixed => $this->getFilter($object, $filter, $arguments));
+        $mappedFilters = array_map(static fn(string $function, callable $callback) => new TwigFilter($function, $callback), array_keys($callbacks), $callbacks);
+        $mappedFilters[] = new TwigFilter(sprintf('%s_filter', Vairogs::VAIROGS), fn(mixed $object, string $filter, array...$arguments): mixed => $this->getFilter($object, $filter, $arguments));
 
         return $mappedFilters;
     }
 
+    /**
+     * @param callable[] $callables
+     */
     #[Pure]
     private function getCallbacks(array $callables = []): array
     {
@@ -49,6 +52,9 @@ class Extension extends AbstractExtension
         return $callbacks;
     }
 
+    /**
+     * @param array $arguments
+     */
     public function getFilter(mixed $object, string $filter, ...$arguments): mixed
     {
         if ([] === $arguments) {
@@ -62,12 +68,15 @@ class Extension extends AbstractExtension
     {
         $callbacks = $this->getCallbacks($this->functions);
 
-        $mappedFunctions = array_map(static fn($function, $callback) => new TwigFunction($function, $callback), array_keys($callbacks), $callbacks);
-        $mappedFunctions[] = new TwigFunction(sprintf('%s_function', Vairogs::VAIROGS), fn(string $function, ...$arguments): mixed => $this->getFunction($function, $arguments));
+        $mappedFunctions = array_map(static fn(string $function, callable $callback) => new TwigFunction($function, $callback), array_keys($callbacks), $callbacks);
+        $mappedFunctions[] = new TwigFunction(sprintf('%s_function', Vairogs::VAIROGS), fn(string $function, array...$arguments): mixed => $this->getFunction($function, $arguments));
 
         return $mappedFunctions;
     }
 
+    /**
+     * @param array $arguments
+     */
     public function getFunction(string $function, ...$arguments): mixed
     {
         return $function(...$arguments);

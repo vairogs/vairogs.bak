@@ -23,6 +23,8 @@ class Sort
     public const DESC = 'DESC';
     public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
 
+    private static string $field = '';
+
     #[Annotation\TwigFunction]
     public static function swap(mixed &$foo, mixed &$bar): void
     {
@@ -139,7 +141,7 @@ class Sort
 
     #[Annotation\TwigFunction]
     #[Pure]
-    public static function isSortable(mixed $item, mixed $field): bool
+    public static function isSortable(mixed $item, int|string $field): bool
     {
         if (is_array($item)) {
             return array_key_exists($field, $item);
@@ -153,9 +155,9 @@ class Sort
     }
 
     #[Annotation\TwigFilter]
-    public static function usort(mixed $parameter, string $order): callable
+    public static function usort(string $parameter, string $order): callable
     {
-        return static function ($a, $b) use ($parameter, $order): int {
+        return static function (array|object $a, array|object $b) use ($parameter, $order): int {
             $flip = ($order === self::DESC) ? -1 : 1;
 
             if (($aSort = Php::getParameter($a, $parameter)) === ($bSort = Php::getParameter($b, $parameter))) {
@@ -171,18 +173,22 @@ class Sort
     }
 
     #[Annotation\TwigFilter]
-    public static function sortLatvian(array $names): bool
+    public static function sortLatvian(array &$names, string $field): bool
     {
-        return usort($names, [
+        self::$field = $field;
+        $result = usort($names, [
             self::class,
             'compareLatvian',
         ]);
+        self::$field = '';
+
+        return $result;
     }
 
-    private static function compareLatvian(mixed $a, mixed $b, mixed $field): int
+    private static function compareLatvian(array|object $a, array|object $b): int
     {
-        $a = mb_strtolower(Php::getParameter($a, $field));
-        $b = mb_strtolower(Php::getParameter($b, $field));
+        $a = mb_strtolower(Php::getParameter($a, self::$field));
+        $b = mb_strtolower(Php::getParameter($b, self::$field));
 
         $len = mb_strlen($a);
 

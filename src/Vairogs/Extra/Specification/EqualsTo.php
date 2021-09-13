@@ -6,7 +6,7 @@ use function sprintf;
 
 class EqualsTo extends AbstractSpecification
 {
-    public function isSatisfiedBy($expectedValue, $actualValue = null): bool
+    public function isSatisfiedBy(mixed $expectedValue, mixed $actualValue = null): bool
     {
         if ($expectedValue === $actualValue) {
             return true;

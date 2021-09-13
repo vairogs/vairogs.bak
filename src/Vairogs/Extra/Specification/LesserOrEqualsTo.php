@@ -6,7 +6,7 @@ use function sprintf;
 
 class LesserOrEqualsTo extends AbstractSpecification
 {
-    public function isSatisfiedBy($expectedValue, $actualValue = null): bool
+    public function isSatisfiedBy(mixed $expectedValue, mixed $actualValue = null): bool
     {
         /** @noinspection InsufficientTypesControlInspection */
         if ($actualValue <= $expectedValue) {

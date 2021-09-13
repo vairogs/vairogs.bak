@@ -8,7 +8,7 @@ class OrSpecification extends CompositeSpecification
     {
     }
 
-    public function isSatisfiedBy($expectedValue, $actualValue = null): bool
+    public function isSatisfiedBy(mixed $expectedValue, mixed $actualValue = null): bool
     {
         return $this->one->isSatisfiedBy($expectedValue) || $this->other->isSatisfiedBy($expectedValue);
     }

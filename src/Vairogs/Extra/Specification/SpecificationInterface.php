@@ -4,7 +4,7 @@ namespace Vairogs\Extra\Specification;
 
 interface SpecificationInterface
 {
-    public function isSatisfiedBy($expectedValue, $actualValue = null): bool;
+    public function isSatisfiedBy(mixed $expectedValue, mixed $actualValue = null): bool;
 
     public function andX(SpecificationInterface $specification): SpecificationInterface;
 

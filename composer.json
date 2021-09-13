@@ -71,6 +71,9 @@
         "symfony/validator": "~5.3",
         "twig/twig": "3.*"
     },
+    "require-dev": {
+        "vimeo/psalm": "*"
+    },
     "replace": {
         "vairogs/addon": "self.version",
         "vairogs/addon-auth": "self.version",
