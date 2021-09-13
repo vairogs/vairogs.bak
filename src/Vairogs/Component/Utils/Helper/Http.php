@@ -78,7 +78,7 @@ class Http
     #[Annotation\TwigFunction]
     public static function getMethods(): array
     {
-        return Iter::arrayValuesFiltered(Php::getClassConstants(Request::class), 'METHOD_');
+        return Iteration::arrayValuesFiltered(Php::getClassConstants(Request::class), 'METHOD_');
     }
 
     protected static function checkHttps(Request $request): bool

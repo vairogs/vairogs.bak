@@ -1,10 +1,10 @@
 {
-    "name": "vairogs/twig-helper-iter",
-    "description": "Twig extension that implements vairogs/utils Iter helper functions in Twig template",
+    "name": "vairogs/twig-helper-iteration",
+    "description": "Twig extension that implements vairogs/utils Iteration helper functions in Twig template",
     "type": "library",
     "keywords": [
         "symfony",
-        "iter",
+        "iteration",
         "twig",
         "twig-extension",
         "utils",
@@ -46,7 +46,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Twig\\Helper\\Iter\\": ""
+            "Vairogs\\Twig\\Helper\\Iteration\\": ""
         }
     },
     "config": {

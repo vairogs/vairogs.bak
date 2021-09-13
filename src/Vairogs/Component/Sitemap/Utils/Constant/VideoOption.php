@@ -3,7 +3,7 @@
 namespace Vairogs\Component\Sitemap\Utils\Constant;
 
 use ReflectionException;
-use Vairogs\Component\Utils\Helper\Iter;
+use Vairogs\Component\Utils\Helper\Iteration;
 use Vairogs\Component\Utils\Helper\Php;
 
 final class VideoOption
@@ -21,7 +21,7 @@ final class VideoOption
      */
     public static function getRestrictions(): array
     {
-        return Iter::arrayValuesFiltered(Php::getClassConstants(self::class), 'RESTRICTION_');
+        return Iteration::arrayValuesFiltered(Php::getClassConstants(self::class), 'RESTRICTION_');
     }
 
     /**
@@ -29,7 +29,7 @@ final class VideoOption
      */
     public static function getPlatforms(): array
     {
-        return Iter::arrayValuesFiltered(Php::getClassConstants(self::class), 'PLATFORM_');
+        return Iteration::arrayValuesFiltered(Php::getClassConstants(self::class), 'PLATFORM_');
     }
 
     /**
@@ -37,6 +37,6 @@ final class VideoOption
      */
     public static function getOptions(): array
     {
-        return Iter::arrayValuesFiltered(Php::getClassConstants(self::class), 'OPTION_');
+        return Iteration::arrayValuesFiltered(Php::getClassConstants(self::class), 'OPTION_');
     }
 }

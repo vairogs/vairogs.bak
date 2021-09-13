@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Vairogs\Component\Auth\OpenID\OpenIDProvider;
 use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
-use Vairogs\Component\Utils\Helper\Iter;
+use Vairogs\Component\Utils\Helper\Iteration;
 use Vairogs\Component\Utils\Vairogs;
 use Vairogs\Extra\Constants\Type\Basic;
 use function sprintf;
@@ -56,7 +56,7 @@ class AuthOpenIDDependency implements Dependency
                 $config = (new Processor())->process($tree->buildTree(), [$clientConfig]);
                 $clientServiceKey = $clientsKey . '.' . $key;
 
-                foreach (Iter::makeOneDimension($config, $clientServiceKey) as $tkey => $value) {
+                foreach (Iteration::makeOneDimension($config, $clientServiceKey) as $tkey => $value) {
                     $containerBuilder->setParameter($tkey, $value);
                 }
 

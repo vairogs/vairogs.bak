@@ -23,7 +23,7 @@ use function sprintf;
 use function str_ends_with;
 use function str_starts_with;
 
-class Iter
+class Iteration
 {
     public const DOT = '.';
 

@@ -10,7 +10,7 @@ use Vairogs\Component\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Component\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Component\Sitemap\DependencyInjection\SitemapDependency;
 use Vairogs\Component\Translation\DependencyInjection\TranslationDependency;
-use Vairogs\Component\Utils\Helper\Iter;
+use Vairogs\Component\Utils\Helper\Iteration;
 use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Vairogs;
 use function class_exists;
@@ -31,7 +31,7 @@ class VairogsExtension extends Extension
     {
         $parameters = $this->processConfiguration($configuration, $configs) ?? [];
 
-        foreach (Iter::makeOneDimension([$this->getAlias() => $parameters]) as $key => $value) {
+        foreach (Iteration::makeOneDimension([$this->getAlias() => $parameters]) as $key => $value) {
             $container->setParameter($key, $value);
         }
     }

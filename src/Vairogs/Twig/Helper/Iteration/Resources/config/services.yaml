@@ -1,5 +1,5 @@
 services:
-    Vairogs\Twig\Helper\Iter\Extension:
+    Vairogs\Twig\Helper\Iteration\Extension:
         public: false
         tags:
             -

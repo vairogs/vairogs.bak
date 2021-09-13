@@ -104,8 +104,8 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-identification.git"
     },
     {
-        "path": "src/Vairogs/Twig/Helper/Iter",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-iter.git"
+        "path": "src/Vairogs/Twig/Helper/Iteration",
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-iteration.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Json",

@@ -6,7 +6,7 @@ use Attribute;
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 use Vairogs\Component\Cache\Utils\Strategy;
-use Vairogs\Component\Utils\Helper\Iter;
+use Vairogs\Component\Utils\Helper\Iteration;
 use function hash;
 use function http_build_query;
 use function is_array;
@@ -35,8 +35,8 @@ final class Cache
             $key = $value ?: '';
         } else {
             if (!empty($this->attributes)) {
-                $flipped = Iter::arrayFlipRecursive($this->attributes);
-                $value = Iter::arrayIntersectKeyRecursive($value, $flipped);
+                $flipped = Iteration::arrayFlipRecursive($this->attributes);
+                $value = Iteration::arrayIntersectKeyRecursive($value, $flipped);
             }
 
             $key = str_replace('=', '_', http_build_query($value, '', '_'));
