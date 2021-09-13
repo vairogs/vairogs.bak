@@ -5,6 +5,7 @@ namespace Vairogs\Component\Sitemap\Utils;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Vairogs\Extra\Constants\ContentType;
 
 class ErrorResponse
 {
@@ -13,7 +14,7 @@ class ErrorResponse
     public function __construct(private ConstraintViolationListInterface $constraintViolationList)
     {
         $this->response = new Response();
-        $this->response->headers->set('Content-Type', 'application/xml');
+        $this->response->headers->set('Content-Type', ContentType::XML);
         $this->response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 

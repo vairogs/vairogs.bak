@@ -17,6 +17,7 @@ use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Component\Utils\Helper\Json;
 use Vairogs\Component\Utils\Helper\Uri;
+use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Extra\Constants\Type\Basic;
 use function array_keys;
 use function explode;
@@ -108,7 +109,7 @@ class OpenIDProvider
         $context = stream_context_create([
             'http' => [
                 'method' => Request::METHOD_POST,
-                'header' => "Accept-language: en\r\n" . "Content-type: application/x-www-form-urlencoded\r\n" . 'Content-Length: ' . strlen($data) . "\r\n",
+                'header' => "Accept-language: en\r\n" . 'Content-type: ' . ContentType::X_WWW_FORM_URLENCODED . "\r\n" . 'Content-Length: ' . strlen($data) . "\r\n",
                 'content' => $data,
                 'timeout' => $timeout,
             ],

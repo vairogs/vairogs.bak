@@ -2,9 +2,6 @@
 
 namespace Vairogs\Component\Sitemap\Utils\Constant;
 
-use ReflectionException;
-use Vairogs\Component\Utils\Helper\Php;
-
 final class ChangeFrequency
 {
     public const ALWAYS = 'always';
@@ -15,12 +12,4 @@ final class ChangeFrequency
     public const YEARLY = 'yearly';
     public const NEVER = 'never';
     public const EMPTY = null;
-
-    /**
-     * @throws ReflectionException
-     */
-    public static function getChangeFrequencies(): array
-    {
-        return Php::getClassConstantsValues(self::class);
-    }
 }
