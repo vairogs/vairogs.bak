@@ -8,11 +8,11 @@ trait Id
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
-    #[ORM\Column(unique: true)]
+    #[ORM\Column(type: 'integer', unique: true)]
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Column(unique=true)
+     * @ORM\Column(type="integer", unique=true)
      */
     protected ?int $id = null;
 

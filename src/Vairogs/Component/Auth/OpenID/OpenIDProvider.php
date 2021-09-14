@@ -18,7 +18,6 @@ use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Component\Utils\Helper\Json;
 use Vairogs\Component\Utils\Helper\Uri;
 use Vairogs\Extra\Constants\ContentType;
-use Vairogs\Extra\Constants\Type\Basic;
 use function array_keys;
 use function explode;
 use function file_get_contents;
@@ -157,14 +156,14 @@ class OpenIDProvider
     }
 
     #[ArrayShape([
-        OpenID::NS => Basic::STRING,
-        OpenID::MODE => Basic::STRING,
+        OpenID::NS => 'string',
+        OpenID::MODE => 'string',
         OpenID::RETURN_TO => 'string|string[]',
         OpenID::REALM => 'null|string',
-        OpenID::IDENTITY => Basic::STRING,
-        OpenID::CLAIMED_ID => Basic::STRING,
+        OpenID::IDENTITY => 'string',
+        OpenID::CLAIMED_ID => 'string',
         OpenID::SREG_REQUIRED => 'array|mixed',
-        OpenID::NS_SREG => Basic::STRING,
+        OpenID::NS_SREG => 'string',
     ])]
     private function getParams(string $return, ?string $realm): array
     {

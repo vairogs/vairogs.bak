@@ -6,6 +6,7 @@ final class Component
 {
     public const AUTH = 'auth';
     public const AUTH_OPENID = 'openid';
+    public const AUTH_OPENIDCONNECT = 'openidconnect';
     public const CACHE = 'cache';
     public const CAPTCHA = 'captcha';
     public const SITEMAP = 'sitemap';

@@ -84,7 +84,7 @@ class AuthOpenIDConnectDependency implements Dependency
             ->arrayNode('redirect')
                 ->addDefaultsIfNotSet()
                 ->children()
-                    ->enumNode('type')->values(array('route', 'uri'))->defaultValue('route')->end()
+                    ->enumNode('type')->values(['route', 'uri'])->defaultValue('route')->end()
                     ->scalarNode('route')->defaultValue(null)->end()
                     ->scalarNode('uri')->defaultValue(null)->end()
                     ->arrayNode('params')->prototype('variable')->end()->end()

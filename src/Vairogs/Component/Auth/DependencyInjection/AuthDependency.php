@@ -6,6 +6,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Component\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
+use Vairogs\Component\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
 use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use Vairogs\Component\Utils\Helper\Php;
@@ -23,6 +24,7 @@ class AuthDependency implements Dependency
                 ->arrayNode(Component::AUTH)
                 ->canBeEnabled();
         $this->appendOpenIDConfiguration($authNode);
+        $this->appendOpenIDConnectConfiguration($authNode);
 
         $arrayNodeDefinition
             ->children()
@@ -39,6 +41,13 @@ class AuthDependency implements Dependency
     {
         if (class_exists(AuthOpenIDDependency::class) && Php::classImplements(AuthOpenIDDependency::class, Dependency::class)) {
             (new AuthOpenIDDependency())->getConfiguration($arrayNodeDefinition);
+        }
+    }
+
+    private function appendOpenIDConnectConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
+    {
+        if (class_exists(AuthOpenIDConnectDependency::class) && Php::classImplements(AuthOpenIDConnectDependency::class, Dependency::class)) {
+            (new AuthOpenIDConnectDependency())->getConfiguration($arrayNodeDefinition);
         }
     }
 

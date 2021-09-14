@@ -19,7 +19,6 @@ use Vairogs\Component\Cache\Annotation\Cache as Annotation;
 use Vairogs\Component\Cache\Utils\Event;
 use Vairogs\Component\Cache\Utils\Header;
 use Vairogs\Component\Cache\Utils\Pool;
-use Vairogs\Extra\Constants\Type\Basic;
 use function class_exists;
 use function in_array;
 use function is_string;
@@ -45,9 +44,9 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     #[ArrayShape([
-        KernelEvents::CONTROLLER => Basic::ARRAY,
-        KernelEvents::RESPONSE => Basic::STRING,
-        KernelEvents::REQUEST => Basic::STRING,
+        KernelEvents::CONTROLLER => 'array',
+        KernelEvents::RESPONSE => 'string',
+        KernelEvents::REQUEST => 'string',
     ])]
     public static function getSubscribedEvents(): array
     {
