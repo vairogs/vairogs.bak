@@ -23,10 +23,10 @@ class Extension extends AbstractExtension
 
     public function getFilters(): array
     {
-        $callbacks = $this->getCallbacks($this->filters);
+        $callbacks = $this->getCallbacks(callables: $this->filters);
 
-        $mappedFilters = array_map(static fn (string $function, callable $callback) => new TwigFilter($function, $callback), array_keys($callbacks), $callbacks);
-        $mappedFilters[] = new TwigFilter(sprintf('%s_filter', Vairogs::VAIROGS), fn (mixed $object, string $filter, array ...$arguments): mixed => $this->getFilter($object, $filter, $arguments));
+        $mappedFilters = array_map(static fn (string $function, callable $callback) => new TwigFilter(name: $function, callable: $callback), array_keys($callbacks), $callbacks);
+        $mappedFilters[] = new TwigFilter(name: sprintf('%s_filter', Vairogs::VAIROGS), callable: fn (mixed $object, string $filter, array ...$arguments): mixed => $this->getFilter(object: $object, filter: $filter, arguments: $arguments));
 
         return $mappedFilters;
     }
@@ -39,9 +39,9 @@ class Extension extends AbstractExtension
     {
         $callbacks = [];
         foreach ($callables as $function) {
-            if (is_array($function) && !is_numeric(key($function))) {
-                $callback = current($function);
-                $function = key($function);
+            if (is_array(value: $function) && !is_numeric(value: key(array: $function))) {
+                $callback = current(array: $function);
+                $function = key(array: $function);
             } else {
                 $callback = $function;
             }
@@ -68,8 +68,8 @@ class Extension extends AbstractExtension
     {
         $callbacks = $this->getCallbacks($this->functions);
 
-        $mappedFunctions = array_map(static fn (string $function, callable $callback) => new TwigFunction($function, $callback), array_keys($callbacks), $callbacks);
-        $mappedFunctions[] = new TwigFunction(sprintf('%s_function', Vairogs::VAIROGS), fn (string $function, array ...$arguments): mixed => $this->getFunction($function, $arguments));
+        $mappedFunctions = array_map(static fn (string $function, callable $callback) => new TwigFunction(name: $function, callable: $callback), array_keys($callbacks), $callbacks);
+        $mappedFunctions[] = new TwigFunction(name: sprintf('%s_function', Vairogs::VAIROGS), callable: fn (string $function, array ...$arguments): mixed => $this->getFunction(function: $function, arguments: $arguments));
 
         return $mappedFunctions;
     }
