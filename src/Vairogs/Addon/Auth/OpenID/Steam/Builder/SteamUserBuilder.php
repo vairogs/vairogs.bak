@@ -17,22 +17,22 @@ class SteamUserBuilder implements OpenIDUserBuilder
 
     public function getUser(array $response): OpenIDUser
     {
-        return $this->getSteamUser($response);
+        return $this->getSteamUser(data: $response);
     }
 
     private function getSteamUser(array $data): User
     {
-        $user = UserArrayFactory::create(new $this->userClass(), $data['response']['players'][0]);
+        $user = UserArrayFactory::create(user: new $this->userClass(), bag: $data['response']['players'][0]);
 
-        return $user->setUsername($this->getUsername($user));
+        return $user->setUsername(username: $this->getUsername(user: $user));
     }
 
     private function getUsername(User $user): string
     {
-        if ($this->hasUsername($user)) {
-            $username = str_replace(self::PROFILE_URL_START, '', $user->getUrl());
+        if ($this->hasUsername(user: $user)) {
+            $username = str_replace(search: self::PROFILE_URL_START, replace: '', subject: $user->getUrl());
 
-            return rtrim($username, '/');
+            return rtrim(string: $username, characters: '/');
         }
 
         return $user->getOpenID();
@@ -40,7 +40,12 @@ class SteamUserBuilder implements OpenIDUserBuilder
 
     private function hasUsername(User $user): bool
     {
-        return str_starts_with($user->getUrl(), self::PROFILE_URL_START);
+        return str_starts_with(haystack: $user->getUrl(), needle: self::PROFILE_URL_START);
+    }
+
+    public function getUserClass(): string
+    {
+        return $this->userClass;
     }
 
     public function setUserClass(string $class): static
@@ -48,10 +53,5 @@ class SteamUserBuilder implements OpenIDUserBuilder
         $this->userClass = $class;
 
         return $this;
-    }
-
-    public function getUserClass(): string
-    {
-        return $this->userClass;
     }
 }

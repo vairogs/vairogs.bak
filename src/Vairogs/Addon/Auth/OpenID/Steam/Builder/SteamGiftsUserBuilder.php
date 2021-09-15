@@ -25,36 +25,36 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
     {
         $this->cacheDir = $response['cache_dir'];
 
-        return $this->getSteamGiftsUser($response);
+        return $this->getSteamGiftsUser(data: $response);
     }
 
     private function getSteamGiftsUser(array $data): User
     {
         $input = $data['response']['players'][0];
-        $input['username'] = $this->getUsername($input['steamid']);
+        $input['username'] = $this->getUsername(user: $input['steamid']);
 
-        return UserArrayFactory::create(new $this->userClass(), $input);
+        return UserArrayFactory::create(user: new $this->userClass(), bag: $input);
     }
 
     private function getUsername(string $user): ?string
     {
         $path = $this->cacheDir . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $user . '.txt';
 
-        if (File::mkdir($path) && !is_file($path)) {
-            exec('wget --no-verbose --spider --output-file=' . $path . " -e robots=off -U='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36' https://www.steamgifts.com/go/user/" . $user);
+        if (File::mkdir(path: $path) && !is_file(filename: $path)) {
+            exec(command: 'wget --no-verbose --spider --output-file=' . $path . " -e robots=off -U='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36' https://www.steamgifts.com/go/user/" . $user);
         }
 
-        if (!is_file($path)) {
+        if (!is_file(filename: $path)) {
             return null;
         }
 
-        $file = file_get_contents($path);
-        preg_match_all('#https?://\S+#', $file, $matches);
-        $expl = explode('/', $matches[0][0]);
+        $file = file_get_contents(filename: $path);
+        preg_match_all(pattern: '#https?://\S+#', subject: $file, matches: $matches);
+        $expl = explode(separator: '/', string: $matches[0][0]);
         $username = null;
 
-        if ('' !== trim(end($expl))) {
-            $username = end($expl);
+        if ('' !== trim(string: end(array: $expl))) {
+            $username = trim(string: end(array: $expl));
         }
 
         return $username;
