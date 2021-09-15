@@ -32,7 +32,6 @@ use Vairogs\Component\Utils\Helper\Json;
 use Vairogs\Extra\Specification;
 use function array_merge;
 use function base64_encode;
-use function is_array;
 use function json_last_error;
 use function sprintf;
 
@@ -52,7 +51,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider
     protected string $baseUri;
     protected ?string $baseUriPost;
 
-    public function __construct(protected string $name, array $options = [], array $collaborators = [], protected ?Router $router = null, ?RequestStack $requestStack = null)
+    public function __construct(protected string $name, protected Router $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
     {
         $this->signer = new Signer\Rsa\Sha256();
         $this->validatorChain = new ValidatorChain();
@@ -393,7 +392,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
 
     /**
      * @throws IdentityProviderException
-     * @throws ErrorException
      */
     public function getAccessTokenFunction($grant, array $options = []): ?ParsedToken
     {
@@ -406,9 +404,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         $params = $grant->prepareRequestParameters(defaults: $params, options: $options);
         $request = $this->getAccessTokenRequest(params: $params);
         $response = $this->getTokenResponse(request: $request);
-        if (!is_array($response)) {
-            throw new ErrorException(message: 'Invalid request parameters');
-        }
         $prepared = $this->prepareAccessTokenResponse(result: $response);
 
         return $this->createAccessToken(response: $prepared, grant: $grant);
@@ -417,10 +412,11 @@ abstract class OpenIDConnectProvider extends AbstractProvider
     /**
      * @throws IdentityProviderException
      */
-    public function getTokenResponse(RequestInterface $request): array|string|ResponseInterface
+    public function getTokenResponse(RequestInterface $request): array
     {
         $response = $this->getResponse(request: $request);
         $this->statusCode = $response->getStatusCode();
+        /** @var array $parsed */
         $parsed = $this->parseResponse(response: $response);
         $this->checkResponse(response: $response, data: $parsed);
 
