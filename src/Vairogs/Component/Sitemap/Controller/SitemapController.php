@@ -22,21 +22,21 @@ class SitemapController extends AbstractController
     #[Route(path: '/sitemap.xml', defaults: ['_format' => 'xml'], methods: [Request::METHOD_GET])]
     public function sitemapXml(Request $request, ValidatorInterface $validator, ?Provider $provider = null, array $options = []): Response
     {
-        if (is_file($sitemap = getcwd() . '/sitemap.xml')) {
-            return new Response(file_get_contents($sitemap));
+        if (is_file(filename: $sitemap = getcwd() . '/sitemap.xml')) {
+            return new Response(content: file_get_contents(filename: $sitemap));
         }
 
         if (null === $provider || (false === $options[Dependency::ENABLED])) {
-            throw new NotFoundHttpException('To use vairogs/sitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
         }
 
-        $model = $provider->populate($request->getSchemeAndHttpHost());
-        $constraintViolationList = $validator->validate($model);
+        $model = $provider->populate(host: $request->getSchemeAndHttpHost());
+        $constraintViolationList = $validator->validate(value: $model);
 
         if (0 !== $constraintViolationList->count()) {
-            return (new ErrorResponse($constraintViolationList))->getResponse();
+            return (new ErrorResponse(constraintViolationList: $constraintViolationList))->getResponse();
         }
 
-        return new Response((new Director(''))->build(new XmlBuilder($model)));
+        return new Response(content: (new Director(buffer: ''))->build(builder: new XmlBuilder(sitemap: $model)));
     }
 }

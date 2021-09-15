@@ -33,54 +33,54 @@ class SitemapCommand extends Command
     public function __construct(private ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
     {
         if (null === $provider || (false === $options[Dependency::ENABLED])) {
-            throw new NotFoundHttpException('To use vairogs/sitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
         }
 
         $this->options = $options;
         $this->provider = $provider;
-        parent::__construct(self::$defaultName);
+        parent::__construct(name: self::$defaultName);
     }
 
     protected function configure(): void
     {
         $host = $this->options[self::HOST] ?? null;
-        $this->setDescription('Regenerate sitemap.xml')
-            ->addArgument(self::HOST, $host ? InputArgument::OPTIONAL : InputArgument::REQUIRED, 'host to use in sitemap', $this->options[self::HOST])
-            ->addOption('filename', null, InputOption::VALUE_OPTIONAL, 'sitemap filename if not sitemap.xml', 'sitemap.xml');
+        $this->setDescription(description: 'Regenerate sitemap.xml')
+            ->addArgument(name: self::HOST, mode: $host ? InputArgument::OPTIONAL : InputArgument::REQUIRED, description: 'host to use in sitemap', default: $this->options[self::HOST])
+            ->addOption(name: 'filename', shortcut: null, mode: InputOption::VALUE_OPTIONAL, description: 'sitemap filename if not sitemap.xml', default: 'sitemap.xml');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $sitemap = $this->provider->populate($input->getArgument(self::HOST));
-        $constraintViolationList = $this->validator->validate($sitemap);
+        $sitemap = $this->provider->populate(host: $input->getArgument(name: self::HOST));
+        $constraintViolationList = $this->validator->validate(value: $sitemap);
 
         if (0 !== $constraintViolationList->count()) {
             /** @var ConstraintViolation $error */
             foreach ($constraintViolationList as $error) {
-                $output->writeln($error->getMessage());
+                $output->writeln(messages: $error->getMessage());
             }
         } else {
-            $output->writeln('<fg=blue>Generating sitemap</>');
-            $filename = getcwd() . '/public/' . $input->getOption('filename');
+            $output->writeln(messages: '<fg=blue>Generating sitemap</>');
+            $filename = getcwd() . '/public/' . $input->getOption(name: 'filename');
 
-            if (is_file($filename)) {
-                unlink($filename);
+            if (is_file(filename: $filename)) {
+                unlink(filename: $filename);
             }
 
-            $handle = fopen($filename, 'w+b');
+            $handle = fopen(filename: $filename, mode: 'w+b');
 
             try {
-                (new Director($handle))->build(new FileBuilder($sitemap));
-                $output->writeln(sprintf('<info>Sitemap generated as "%s"</info>', $filename));
+                (new Director(buffer: $handle))->build(builder: new FileBuilder(sitemap: $sitemap));
+                $output->writeln(messages: sprintf('<info>Sitemap generated as "%s"</info>', $filename));
             } catch (Exception $exception) {
-                if (is_file($filename)) {
-                    unlink($filename);
+                if (is_file(filename: $filename)) {
+                    unlink(filename: $filename);
                 }
 
-                $output->writeln('<error>' . $exception->getMessage() . '</error>');
+                $output->writeln(messages: '<error>' . $exception->getMessage() . '</error>');
             }
 
-            fclose($handle);
+            fclose(stream: $handle);
         }
     }
 }

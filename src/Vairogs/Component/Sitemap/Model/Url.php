@@ -31,7 +31,7 @@ class Url
 
     public function getLastmod(): ?string
     {
-        return $this->lastmod?->format(DateTimeInterface::ATOM);
+        return $this->lastmod?->format(format: DateTimeInterface::ATOM);
     }
 
     public function setLastmod(?DateTimeInterface $lastmod): static
@@ -56,7 +56,7 @@ class Url
     #[Pure]
     public function getPriority(): string
     {
-        return number_format($this->priority, 2);
+        return number_format(num: $this->priority, decimals: 2);
     }
 
     public function setPriority(float $priority): static
@@ -83,7 +83,7 @@ class Url
     #[Pure]
     public function toArray(): array
     {
-        return get_object_vars($this);
+        return get_object_vars(object: $this);
     }
 
     #[Pure]

@@ -7,6 +7,9 @@ use function method_exists;
 
 class Sitemap
 {
+    /**
+     * @var Url[]
+     */
     protected array $urls = [];
 
     public function addUrl(Url $url): static
@@ -52,10 +55,11 @@ class Sitemap
         return false;
     }
 
+    #[Pure]
     public function hasAlternates(): bool
     {
         foreach ($this->urls as $url) {
-            if (method_exists($url, 'hasAlternates') && $url->hasAlternates()) {
+            if (method_exists(object_or_class: $url, method: 'hasAlternates') && $url->hasAlternates()) {
                 return true;
             }
         }

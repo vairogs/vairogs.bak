@@ -27,17 +27,17 @@ abstract class AbstractBuilder implements Builder
                 unset($urlArray['alternateUrl']);
             }
 
-            $this->write($buffer, '<url>' . "\n");
+            $this->write(buffer: $buffer, text: '<url>' . "\n");
 
-            foreach (array_keys($urlArray) as $key) {
-                $this->write($buffer, $this->getBufferValue($url, $key));
+            foreach (array_keys(array: $urlArray) as $key) {
+                $this->write(buffer: $buffer, text: $this->getBufferValue(url: $url, key: $key));
             }
 
             foreach ($alternates as $locale => $alternate) {
-                $this->write($buffer, "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
+                $this->write(buffer: $buffer, text: "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
             }
 
-            $this->write($buffer, '</url>' . "\n");
+            $this->write(buffer: $buffer, text: '</url>' . "\n");
         }
     }
 
@@ -45,7 +45,7 @@ abstract class AbstractBuilder implements Builder
 
     protected function getBufferValue(Url $url, string $key): string
     {
-        if ($getter = $this->getGetterValue($url, $key)) {
+        if ($getter = $this->getGetterValue(url: $url, key: $key)) {
             return "\t" . sprintf('<%s>', $key) . $getter . sprintf('</%s>', $key) . "\n";
         }
 
@@ -54,7 +54,7 @@ abstract class AbstractBuilder implements Builder
 
     protected function getGetterValue(Url $url, string $key): ?string
     {
-        if (method_exists($url, $getter = 'get' . ucfirst($key)) && !empty($url->$getter())) {
+        if (method_exists(object_or_class: $url, method: $getter = 'get' . ucfirst(string: $key)) && !empty($url->$getter())) {
             return (string) $url->$getter();
         }
 
@@ -63,15 +63,15 @@ abstract class AbstractBuilder implements Builder
 
     public function end(&$buffer): void
     {
-        $this->write($buffer, '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
+        $this->write(buffer: $buffer, text: '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
     }
 
     public function start(&$buffer): void
     {
         // @formatter:off
         $this->write(
-            $buffer,
-            '<?xml version="1.0" encoding="UTF-8"?>' .
+            buffer: $buffer,
+            text: '<?xml version="1.0" encoding="UTF-8"?>' .
             "\n" .
             '<urlset ' .
             "\n\t" .
@@ -84,17 +84,17 @@ abstract class AbstractBuilder implements Builder
         // @formatter:on
 
         if ($this->sitemap->hasAlternates()) {
-            $this->write($buffer, "\n\t" . 'xmlns:xhtml="http://www.w3.org/1999/xhtml" ');
+            $this->write(buffer: $buffer, text: "\n\t" . 'xmlns:xhtml="http://www.w3.org/1999/xhtml" ');
         }
 
         if ($this->sitemap->hasVideos()) {
-            $this->write($buffer, "\n\t" . 'xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
+            $this->write(buffer: $buffer, text: "\n\t" . 'xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"');
         }
 
         if ($this->sitemap->hasImages()) {
-            $this->write($buffer, "\n\t" . 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
+            $this->write(buffer: $buffer, text: "\n\t" . 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"');
         }
 
-        $this->write($buffer, '>' . "\n");
+        $this->write(buffer: $buffer, text: '>' . "\n");
     }
 }

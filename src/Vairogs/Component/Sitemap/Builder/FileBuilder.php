@@ -13,6 +13,6 @@ class FileBuilder extends AbstractBuilder
 
     protected function write(&$buffer, string $text): void
     {
-        fwrite($buffer, $text);
+        fwrite(stream: $buffer, data: $text);
     }
 }
