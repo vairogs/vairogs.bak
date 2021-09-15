@@ -18,6 +18,6 @@ class File implements Cache
      */
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new PhpFilesAdapter($this->namespace, Cache::DEFAULT_LIFETIME);
+        return new PhpFilesAdapter(namespace: $this->namespace, defaultLifetime: Cache::DEFAULT_LIFETIME);
     }
 }

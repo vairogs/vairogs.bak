@@ -18,7 +18,7 @@ class CacheDependency implements Dependency
         // @formatter:off
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(Component::CACHE)
+            ->arrayNode(name: Component::CACHE)
                 ->canBeEnabled()
             ->end()
         ->end();
