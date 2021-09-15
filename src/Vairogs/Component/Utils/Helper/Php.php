@@ -6,6 +6,7 @@ use Closure;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
+use ReflectionClassConstant;
 use ReflectionException;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function array_diff;
@@ -85,7 +86,7 @@ class Php
     public static function getClassConstants(string $class): array
     {
         if (self::exists(class: $class)) {
-            return (new ReflectionClass(objectOrClass: $class))->getConstants();
+            return (new ReflectionClass(objectOrClass: $class))->getConstants(ReflectionClassConstant::IS_PUBLIC);
         }
 
         throw new InvalidArgumentException(message: sprintf('Invalid class "%s"', $class));
