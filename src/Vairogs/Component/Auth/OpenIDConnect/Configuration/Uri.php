@@ -20,15 +20,17 @@ class Uri
     protected array $urlParams = [];
     protected string $url;
     protected string $base;
+    protected ?string $basePost;
 
     public function __construct(array $options, array $additional = [], protected bool $useSession = false, protected string $method = Request::METHOD_POST, protected ?SessionInterface $session = null)
     {
-        $this->base = rtrim($additional['base_uri'], '/') . '/';
-        unset($additional['base_uri']);
+        $this->base = rtrim(string: $additional['base_uri'], characters: '/') . '/';
+        $this->basePost = null !== ($additional['base_uri_post'] ?? null) ? rtrim(string: $additional['base_uri_post'], characters: '/') . '/' : null;
+        unset($additional['base_uri'], $additional['base_uri_post']);
 
         $this->params = !empty($options['params']) ? $options['params'] : [];
 
-        $this->setGetParams($options, $additional);
+        $this->setGetParams(options: $options, additional: $additional);
     }
 
     private function setGetParams($options, $additional): void
@@ -47,7 +49,7 @@ class Uri
      */
     public function redirect(): Response
     {
-        return new RedirectResponse($this->getUrl());
+        return new RedirectResponse(url: $this->getUrl());
     }
 
     /**
@@ -55,7 +57,7 @@ class Uri
      */
     public function getUrl($language = null): string
     {
-        $this->buildUrl($language);
+        $this->buildUrl(language: $language);
 
         return $this->url;
     }
@@ -79,15 +81,21 @@ class Uri
         }
 
         $url = $this->base;
-        if (!empty($this->params)) {
-            $url .= implode('/', $this->params);
+        if (Request::METHOD_POST === $this->method && null !== $this->basePost) {
+            $url = $this->basePost;
         }
+
+        if (!empty($this->params)) {
+            $url .= implode(separator: '/', array: $this->params);
+        }
+
         if (!empty($this->urlParams)) {
-            $params = http_build_query($this->urlParams);
+            $params = http_build_query(data: $this->urlParams);
             $url .= '?' . $params;
         }
-        $url = urldecode($url);
-        $this->setUrl($url);
+
+        $url = urldecode(string: $url);
+        $this->setUrl(url: $url);
     }
 
     /**
@@ -95,9 +103,9 @@ class Uri
      */
     private function setIdToken(): void
     {
-        if (Request::METHOD_GET === $this->method && isset($this->urlParams['id_token_hint']) && null !== $this->session && $this->session->has('id_token')) {
+        if (Request::METHOD_GET === $this->method && isset($this->urlParams['id_token_hint']) && null !== $this->session && $this->session->has(name: 'id_token')) {
             if (false === $this->useSession) {
-                throw new ErrorException(sprintf('"%s" parameter must be set to "true" in order to use id_token_hint', 'use_session'));
+                throw new ErrorException(message: sprintf('"%s" parameter must be set to "true" in order to use id_token_hint', 'use_session'));
             }
             $this->urlParams['id_token_hint'] = $this->session->get('id_token');
         }
@@ -116,5 +124,10 @@ class Uri
     public function getBase(): string
     {
         return $this->base;
+    }
+
+    public function getBasePost(): ?string
+    {
+        return $this->basePost;
     }
 }

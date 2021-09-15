@@ -5,20 +5,20 @@ namespace Vairogs\Component\Auth\OpenIDConnect\Configuration;
 use Lcobucci\JWT\Configuration;
 use League\OAuth2\Client;
 
-class AccessToken extends Client\Token\AccessToken
+class ParsedToken extends Client\Token\AccessToken
 {
     protected IdToken $idToken;
     protected string $idTokenHint;
 
     public function __construct(array $options = [])
     {
-        parent::__construct($options);
+        parent::__construct(options: $options);
 
         $parser = Configuration::forUnsecuredSigner()
             ->parser();
 
         if (!empty($this->values['id_token'])) {
-            $this->idToken = new IdToken($parser->parse($this->values['id_token']));
+            $this->idToken = new IdToken(token: $parser->parse(jwt: $this->values['id_token']));
             $this->idTokenHint = $this->values['id_token'];
             unset($this->values['id_token']);
         }

@@ -28,6 +28,9 @@ return (new PhpCsFixer\Config())->setRules([
         'style' => 'post',
     ],
     'comment_to_phpdoc' => true,
+    'types_spaces' => [
+        'space' => 'none',
+    ],
 ])
     ->setRiskyAllowed(true)
     ->setCacheFile('.php-cs-fixer.cache');

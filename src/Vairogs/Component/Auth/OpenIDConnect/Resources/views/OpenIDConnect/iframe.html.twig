@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>iFrame RP Page</title>
+</head>
+<body onload="startChecking()">
+<iframe id="iframe_op" src="{{ target }}" style="border: 0" width="0" height="0"></iframe>
+</body>
+<script type="text/javascript">
+    let targetOP = "{{ issuer|trim('/', 'right') }}";
+    window.addEventListener("message", receiveMessage, false);
+    let origin = '{{ app.request.schemeAndHttpHost ~ app.request.baseUrl ~ '/' ~ app.request.locale ~ '/logout' }}';
+
+    function startChecking() {
+        checkStatus();
+        setInterval("checkStatus()", 1000 * 1800);
+    }
+
+    function checkStatus() {
+        let client = "help";
+        let session_state = getCookie("session_state");
+        if (session_state !== null) {
+            let text = client + ' ' + session_state;
+            let iframe = document.getElementById("iframe_op");
+            iframe.contentWindow.postMessage(text, targetOP);
+        } else {
+            window.top.location.href = origin;
+        }
+    }
+
+    function receiveMessage(event) {
+        if (event.origin !== targetOP) {
+            return;
+        }
+        if (event.data !== "unchanged") {
+            window.top.location.href = origin;
+        }
+    }
+
+    function getCookie(name) {
+        let re = new RegExp(name + "=([^;]+)");
+        let value = re.exec(document.cookie);
+        return (value != null)
+            ? unescape(value[1])
+            : null;
+    }
+</script>
+</html>

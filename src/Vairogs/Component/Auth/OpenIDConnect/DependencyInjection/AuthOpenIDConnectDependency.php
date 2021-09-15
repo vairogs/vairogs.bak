@@ -6,26 +6,68 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\HttpFoundation\Request;
+use Vairogs\Component\Auth\DependencyInjection\AbstractAuthComponentDependency;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Component\Utils\DependencyInjection\Component;
-use Vairogs\Component\Utils\DependencyInjection\Dependency;
+use Vairogs\Component\Utils\Vairogs;
 
-class AuthOpenIDConnectDependency implements Dependency
+class AuthOpenIDConnectDependency extends AbstractAuthComponentDependency
 {
-    /**
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
-     */
+    public static function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
+    {
+        $arrayNodeDefinition->addDefaultsIfNotSet();
+        $optionsNode = $arrayNodeDefinition->children();
+
+        // @formatter:off
+        $optionsNode
+            ->scalarNode(name: 'client_key')->isRequired()->defaultNull()->end()
+            ->scalarNode(name: 'client_secret')->defaultNull()->end()
+            ->scalarNode(name: 'id_token_issuer')->isRequired()->defaultNull()->end()
+            ->scalarNode(name: 'public_key')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode(name: 'base_uri')->isRequired()->end()
+            ->scalarNode(name: 'base_uri_post')->defaultNull()->end()
+            ->scalarNode(name: 'user_provider')->defaultValue(value: DefaultProvider::class)->end()
+            ->scalarNode(name: 'use_session')->defaultFalse()->end()
+            ->scalarNode(name: 'verify')->defaultTrue()->end()
+            ->arrayNode(name: 'redirect')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->enumNode(name: 'type')->values(values: ['route', 'uri'])->defaultValue(value: 'route')->end()
+                    ->scalarNode(name: 'route')->defaultNull()->end()
+                    ->scalarNode(name: 'uri')->defaultNull()->end()
+                    ->arrayNode(name: 'params')->prototype(type: 'variable')->end()->end()
+                ->end()
+            ->end()
+            ->arrayNode(name: 'uris')->prototype(type: 'array')->prototype(type: 'variable')->end()->end()
+        ->end();
+        // @formatter:on
+
+        $optionsNode->end();
+    }
+
+    public static function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
+    {
+        $clientDefinition = $containerBuilder->register(id: $clientServiceKey, class: $containerBuilder->getParameter(name: $clientServiceKey . '.user_provider'));
+        $clientDefinition->setArguments(arguments: [
+            $key,
+            $containerBuilder->getParameter(name: $clientServiceKey),
+            [],
+            new Reference(id: 'router'),
+            new Reference(id: 'request_stack'),
+        ])
+            ->addTag(name: $base);
+    }
+
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(Component::AUTH_OPENIDCONNECT)
+            ->arrayNode(name: Component::AUTH_OPENIDCONNECT)
                 ->canBeEnabled()
                 ->addDefaultsIfNotSet()
                 ->children()
-                    ->arrayNode('clients')->prototype('array')->prototype('variable')->end()->end()->end()
+                    ->arrayNode(name: 'clients')->prototype(type: 'array')->prototype(type: 'variable')->end()->end()->end()
                 ->end()
             ->end()
         ->end();
@@ -34,66 +76,7 @@ class AuthOpenIDConnectDependency implements Dependency
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
-    }
-
-    private function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base): void
-    {
-        $clientDefinition = $containerBuilder->register($clientServiceKey, $containerBuilder->getParameter($clientServiceKey . '.user_provider'));
-        $clientDefinition->setArguments([
-            $containerBuilder->getParameter($clientServiceKey),
-            [],
-            new Reference('router'),
-            new Reference('request_stack'),
-        ])
-            ->addTag($base);
-    }
-
-    private function configureUri(ArrayNodeDefinition $arrayNodeDefinition): void
-    {
-        $arrayNodeDefinition->addDefaultsIfNotSet();
-        $optionsNode = $arrayNodeDefinition->children();
-
-        // @formatter:off
-        $optionsNode
-            ->arrayNode('params')->prototype('variable')->end()->end()
-            ->arrayNode('url_params')->prototype('variable')->end()->end()
-            ->enumNode('method')->values([Request::METHOD_GET, Request::METHOD_POST])->cannotBeEmpty()->end();
-        // @formatter:on
-
-        $optionsNode->end();
-    }
-
-    /**
-     * @noinspection NullPointerExceptionInspection
-     */
-    private function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
-    {
-        $arrayNodeDefinition->addDefaultsIfNotSet();
-        $optionsNode = $arrayNodeDefinition->children();
-
-        // @formatter:off
-        $optionsNode
-            ->scalarNode('client_key')->isRequired()->defaultValue(null)->end()
-            ->scalarNode('client_secret')->defaultValue(null)->end()
-            ->scalarNode('id_token_issuer')->isRequired()->defaultValue(null)->end()
-            ->scalarNode('public_key')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('base_uri')->isRequired()->end()
-            ->scalarNode('user_provider')->defaultValue(DefaultProvider::class)->end()
-            ->scalarNode('use_session')->defaultValue(false)->end()
-            ->scalarNode('verify')->defaultValue(true)->end()
-            ->arrayNode('redirect')
-                ->addDefaultsIfNotSet()
-                ->children()
-                    ->enumNode('type')->values(['route', 'uri'])->defaultValue('route')->end()
-                    ->scalarNode('route')->defaultValue(null)->end()
-                    ->scalarNode('uri')->defaultValue(null)->end()
-                    ->arrayNode('params')->prototype('variable')->end()->end()
-                ->end()
-            ->end()
-            ->arrayNode('uris')->prototype('array')->prototype('variable')->end()->end()
-        ->end();
-        // @formatter:on
-
-        $optionsNode->end();
+        $baseKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENIDCONNECT;
+        $this->loadComponentConfiguration(base: $baseKey, containerBuilder: $containerBuilder);
     }
 }

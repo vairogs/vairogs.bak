@@ -4,14 +4,14 @@ namespace Vairogs\Component\Auth\OpenIDConnect\Configuration;
 
 use DateTimeInterface;
 use JetBrains\PhpStorm\Pure;
+use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Token\DataSet;
-use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Token\Signature;
 use Lcobucci\JWT\UnencryptedToken;
 
 class IdToken implements UnencryptedToken
 {
-    public function __construct(private Token | Plain $token)
+    public function __construct(private Token | Token\Plain $token)
     {
     }
 
@@ -19,7 +19,7 @@ class IdToken implements UnencryptedToken
     public function hasClaim(string $claim): bool
     {
         return $this->claims()
-            ->has($claim);
+            ->has(name: $claim);
     }
 
     #[Pure]
@@ -30,7 +30,7 @@ class IdToken implements UnencryptedToken
 
     public function hasBeenIssuedBefore(DateTimeInterface $now): bool
     {
-        return $this->token->hasBeenIssuedBefore($now);
+        return $this->token->hasBeenIssuedBefore(now: $now);
     }
 
     public function hasBeenIssuedBy(string ...$issuers): bool
@@ -45,27 +45,27 @@ class IdToken implements UnencryptedToken
 
     public function isExpired(DateTimeInterface $now): bool
     {
-        return $this->token->isExpired($now);
+        return $this->token->isExpired(now: $now);
     }
 
     public function isIdentifiedBy(string $id): bool
     {
-        return $this->token->isIdentifiedBy($id);
+        return $this->token->isIdentifiedBy(id: $id);
     }
 
     public function isMinimumTimeBefore(DateTimeInterface $now): bool
     {
-        return $this->token->isMinimumTimeBefore($now);
+        return $this->token->isMinimumTimeBefore(now: $now);
     }
 
     public function isPermittedFor(string $audience): bool
     {
-        return $this->token->isPermittedFor($audience);
+        return $this->token->isPermittedFor(audience: $audience);
     }
 
     public function isRelatedTo(string $subject): bool
     {
-        return $this->token->isRelatedTo($subject);
+        return $this->token->isRelatedTo(subject: $subject);
     }
 
     public function payload(): string
@@ -87,6 +87,6 @@ class IdToken implements UnencryptedToken
     public function getClaim(string $claim): mixed
     {
         return $this->claims()
-            ->get($claim);
+            ->get(name: $claim);
     }
 }

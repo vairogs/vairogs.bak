@@ -6,6 +6,9 @@ use Vairogs\Extra\Specification\AbstractSpecification;
 
 class ValidatorChain
 {
+    /**
+     * @var AbstractSpecification[]
+     */
     protected array $validators = [];
     protected array $messages = [];
 
@@ -14,7 +17,7 @@ class ValidatorChain
         $this->validators = [];
 
         foreach ($validators as $validator) {
-            $this->addValidator($validator);
+            $this->addValidator(validator: $validator);
         }
 
         return $this;
@@ -31,13 +34,13 @@ class ValidatorChain
     {
         $valid = true;
         foreach ($this->validators as $claim => $validator) {
-            if (false === $token->hasClaim($claim)) {
+            if (false === $token->hasClaim(claim: $claim)) {
                 if ($validator->isRequired()) {
                     $valid = false;
                     $this->messages[$claim] = sprintf('Missing required value for claim %s', $claim);
                 }
             } else {
-                if (isset($data[$claim]) && !$validator->isSatisfiedBy($data[$claim], $token->getClaim($claim))) {
+                if (isset($data[$claim]) && !$validator->isSatisfiedBy(expectedValue: $data[$claim], actualValue: $token->getClaim($claim))) {
                     $valid = false;
                     $this->messages[$claim] = $validator->getMessage();
                 }
