@@ -9,18 +9,18 @@ abstract class CompositeSpecification implements SpecificationInterface
     #[Pure]
     public function andX(SpecificationInterface $specification): SpecificationInterface
     {
-        return new AndSpecification($this, $specification);
+        return new AndSpecification(one: $this, other: $specification);
     }
 
     #[Pure]
     public function not(): SpecificationInterface
     {
-        return new NotSpecification($this);
+        return new NotSpecification(specification: $this);
     }
 
     #[Pure]
     public function orX(SpecificationInterface $specification): SpecificationInterface
     {
-        return new OrSpecification($this, $specification);
+        return new OrSpecification(one: $this, other: $specification);
     }
 }

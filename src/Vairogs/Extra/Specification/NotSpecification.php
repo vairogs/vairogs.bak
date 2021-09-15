@@ -10,6 +10,6 @@ class NotSpecification extends CompositeSpecification
 
     public function isSatisfiedBy(mixed $expectedValue, mixed $actualValue = null): bool
     {
-        return !$this->specification->isSatisfiedBy($expectedValue);
+        return !$this->specification->isSatisfiedBy(expectedValue: $expectedValue);
     }
 }
