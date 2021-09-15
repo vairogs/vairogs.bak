@@ -15,18 +15,18 @@ class Helper
      */
     public static function getFiltered(string $class, string $filterClass, bool $withClass = true): array
     {
-        $methods = (new ReflectionClass($class))->getMethods(ReflectionMethod::IS_PUBLIC);
+        $methods = (new ReflectionClass(objectOrClass: $class))->getMethods(filter: ReflectionMethod::IS_PUBLIC);
         $filtered = [];
 
         foreach ($methods as $method) {
-            if (self::filterExists($method, $filterClass)) {
+            if (self::filterExists(method: $method, filterClass: $filterClass)) {
                 if ($withClass) {
-                    $filtered[Text::fromCamelCase($method->getName())] = [
+                    $filtered[Text::fromCamelCase(string: $method->getName())] = [
                         $class,
                         $method->getName(),
                     ];
                 } else {
-                    $filtered[Text::fromCamelCase($method->getName())] = $method->getName();
+                    $filtered[Text::fromCamelCase(string: $method->getName())] = $method->getName();
                 }
             }
         }
@@ -36,6 +36,6 @@ class Helper
 
     private static function filterExists(ReflectionMethod $method, string $filterClass): bool
     {
-        return null !== (new AnnotationReader())->getMethodAnnotation($method, $filterClass) || [] !== $method->getAttributes($filterClass);
+        return null !== (new AnnotationReader())->getMethodAnnotation(method: $method, annotationName: $filterClass) || [] !== $method->getAttributes(name: $filterClass);
     }
 }

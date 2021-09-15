@@ -15,12 +15,13 @@ class SingleColumnArrayHydrator extends AbstractHydrator
     {
         $result = [];
 
-        if (!class_exists(PDO::class)) {
-            throw new LogicException(sprintf('%s class (ext-pdo) is missing', PDO::class));
+        if (!class_exists(class: PDO::class)) {
+            throw new LogicException(message: sprintf('%s class (ext-pdo) is missing', PDO::class));
         }
 
-        while ($data = $this->_stmt->fetch(PDO::FETCH_NUM)) {
-            $result[] = Text::getNormalizedValue($data[0]);
+        /* @noinspection PhpNamedArgumentMightBeUnresolvedInspection */
+        while ($data = $this->_stmt->fetch(fetchMode: PDO::FETCH_NUM)) {
+            $result[] = Text::getNormalizedValue(value: $data[0]);
         }
 
         return $result;

@@ -43,10 +43,10 @@ trait CreatedModified
     #[ORM\PreUpdate]
     public function updatedTimestamps(): static
     {
-        $this->setModificationDate(new DateTime());
+        $this->setModificationDate(modificationDate: new DateTime());
 
         if (null === $this->creationDate) {
-            $this->setCreationDate(new DateTime());
+            $this->setCreationDate(creationDate: new DateTime());
         }
 
         return $this;

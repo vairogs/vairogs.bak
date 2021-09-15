@@ -40,11 +40,11 @@ class Sort
     #[Annotation\TwigFilter]
     public static function bubbleSort(array &$array): void
     {
-        $count = count($array);
+        $count = count(value: $array);
         for ($foo = 0; $foo < $count; $foo++) {
             for ($bar = 0; $bar < $count - 1; $bar++) {
                 if ($bar < $count && $array[$bar] > $array[$bar + 1]) {
-                    self::swapArray($array, $bar, $bar + 1);
+                    self::swapArray(array: $array, foo: $bar, bar: $bar + 1);
                 }
             }
         }
@@ -66,18 +66,18 @@ class Sort
     #[Annotation\TwigFilter]
     public static function mergeSort(array $array): array
     {
-        if (1 === count($array)) {
+        if (1 === count(value: $array)) {
             return $array;
         }
 
-        $middle = (int) round(count($array) / 2);
-        $left = array_slice($array, 0, $middle);
-        $right = array_slice($array, $middle);
+        $middle = (int) round(num: count(value: $array) / 2);
+        $left = array_slice(array: $array, offset: 0, length: $middle);
+        $right = array_slice(array: $array, offset: $middle);
 
-        $left = self::mergeSort($left);
-        $right = self::mergeSort($right);
+        $left = self::mergeSort(array: $left);
+        $right = self::mergeSort(array: $right);
 
-        return self::merge($left, $right);
+        return self::merge(left: $left, right: $right);
     }
 
     private static function merge(array $left, array $right): array
@@ -85,8 +85,8 @@ class Sort
         $result = [];
         $i = $j = 0;
 
-        $leftCount = count($left);
-        $rightCount = count($right);
+        $leftCount = count(value: $left);
+        $rightCount = count(value: $right);
 
         while ($i < $leftCount && $j < $rightCount) {
             if ($left[$i] > $right[$j]) {
@@ -118,23 +118,23 @@ class Sort
             $data = $data->toArray();
         }
 
-        if (!is_array($data)) {
-            throw new InvalidArgumentException('Only iterable variables can be sorted');
+        if (!is_array(value: $data)) {
+            throw new InvalidArgumentException(message: 'Only iterable variables can be sorted');
         }
 
-        if (count($data) < 2) {
+        if (count(value: $data) < 2) {
             return $data;
         }
 
         if (null === $parameter) {
-            throw new InvalidArgumentException('No sorting parameter pased');
+            throw new InvalidArgumentException(message: 'No sorting parameter pased');
         }
 
-        if (!self::isSortable(current($data), $parameter)) {
-            throw new InvalidArgumentException("Sorting parameter doesn't exist in sortable variable");
+        if (!self::isSortable(item: current(array: $data), field: $parameter)) {
+            throw new InvalidArgumentException(message: "Sorting parameter doesn't exist in sortable variable");
         }
 
-        usort($data, self::usort($parameter, strtoupper($order)));
+        usort(array: $data, callback: self::usort(parameter: $parameter, order: strtoupper(string: $order)));
 
         return $data;
     }
@@ -143,12 +143,12 @@ class Sort
     #[Pure]
     public static function isSortable(mixed $item, int|string $field): bool
     {
-        if (is_array($item)) {
-            return array_key_exists($field, $item);
+        if (is_array(value: $item)) {
+            return array_key_exists(key: $field, array: $item);
         }
 
-        if (is_object($item)) {
-            return isset($item->$field) || property_exists($item, $field);
+        if (is_object(value: $item)) {
+            return isset($item->$field) || property_exists(object_or_class: $item, property: $field);
         }
 
         return false;
@@ -160,7 +160,7 @@ class Sort
         return static function (array|object $a, array|object $b) use ($parameter, $order): int {
             $flip = (self::DESC === $order) ? -1 : 1;
 
-            if (($aSort = Php::getParameter($a, $parameter)) === ($bSort = Php::getParameter($b, $parameter))) {
+            if (($aSort = Php::getParameter(variable: $a, key: $parameter)) === ($bSort = Php::getParameter(variable: $b, key: $parameter))) {
                 return 0;
             }
 
@@ -176,7 +176,7 @@ class Sort
     public static function sortLatvian(array &$names, string $field): bool
     {
         self::$field = $field;
-        $result = usort($names, [
+        $result = usort(array: $names, callback: [
             self::class,
             'compareLatvian',
         ]);
@@ -187,17 +187,17 @@ class Sort
 
     private static function compareLatvian(array|object $a, array|object $b): int
     {
-        $a = mb_strtolower(Php::getParameter($a, self::$field));
-        $b = mb_strtolower(Php::getParameter($b, self::$field));
+        $a = mb_strtolower(string: Php::getParameter(variable: $a, key: self::$field));
+        $b = mb_strtolower(string: Php::getParameter(variable: $b, key: self::$field));
 
-        $len = mb_strlen($a);
+        $len = mb_strlen(string: $a);
 
         for ($i = 0; $i < $len; $i++) {
-            if (mb_substr($a, $i, 1) === mb_substr($b, $i, 1)) {
+            if (mb_substr(string: $a, start: $i, length: 1) === mb_substr(string: $b, start: $i, length: 1)) {
                 continue;
             }
 
-            if ($i > mb_strlen($b) || mb_strpos(self::ALPHABET, mb_substr($a, $i, 1)) > mb_strpos(self::ALPHABET, mb_substr($b, $i, 1))) {
+            if ($i > mb_strlen(string: $b) || mb_strpos(haystack: self::ALPHABET, needle: mb_substr(string: $a, start: $i, length: 1)) > mb_strpos(haystack: self::ALPHABET, needle: mb_substr(string: $b, start: $i, length: 1))) {
                 return 1;
             }
 

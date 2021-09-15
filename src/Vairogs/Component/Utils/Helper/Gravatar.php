@@ -31,7 +31,7 @@ class Gravatar
     #[Annotation\TwigFilter]
     public static function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
     {
-        if (empty($email) || !Email::isValid($email)) {
+        if (empty($email) || !Email::isValid(email: $email)) {
             $email = self::DEFAULT_EMAIL;
         }
 
@@ -40,8 +40,8 @@ class Gravatar
             $host = self::HTTPS_HOST;
         }
 
-        if (Uri::isAbsolute($default)) {
-            $default = urldecode($default);
+        if (Uri::isAbsolute(path: $default)) {
+            $default = urldecode(string: $default);
         } else {
             $default = self::getIcons()['ICON_' . $default] ?? self::ICON_IDENTICON;
         }
@@ -51,7 +51,7 @@ class Gravatar
             'd' => $default,
         ];
 
-        return $host . '/avatar/' . hash('md5', strtolower(trim($email))) . '/?' . http_build_query($query);
+        return $host . '/avatar/' . hash(algo: 'md5', data: strtolower(string: trim(string: $email))) . '/?' . http_build_query(data: $query);
     }
 
     /**
@@ -60,6 +60,6 @@ class Gravatar
      */
     private static function getIcons(): array
     {
-        return Iteration::filterKeyStartsWith(Php::getClassConstants(self::class), 'ICON_');
+        return Iteration::filterKeyStartsWith(input: Php::getClassConstants(class: self::class), startsWith: 'ICON_');
     }
 }

@@ -25,12 +25,12 @@ class Translit
     #[Annotation\TwigFilter]
     public static function cyrillicToLatin(string $text): string
     {
-        return str_replace(self::MAP_CYRILLIC, self::MAP_LATIN, $text);
+        return str_replace(search: self::MAP_CYRILLIC, replace: self::MAP_LATIN, subject: $text);
     }
 
     #[Annotation\TwigFilter]
     public static function latinToCyrillic(string $text): string
     {
-        return str_replace(self::MAP_LATIN, self::MAP_CYRILLIC, $text);
+        return str_replace(search: self::MAP_LATIN, replace: self::MAP_CYRILLIC, subject: $text);
     }
 }

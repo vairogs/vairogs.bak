@@ -30,9 +30,9 @@ class Php
     #[Annotation\TwigFunction]
     public static function hijackSet(object $object, string $property, mixed $value): void
     {
-        self::call(function () use ($object, $property, $value): void {
+        self::call(function: function () use ($object, $property, $value): void {
             $object->$property = $value;
-        }, $object);
+        }, clone: $object);
     }
 
     /**
@@ -41,7 +41,7 @@ class Php
     #[Annotation\TwigFunction]
     public static function call(callable $function, object $clone, bool $return = false): mixed
     {
-        $func = Closure::bind($function, $clone, $clone::class);
+        $func = Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
 
         if ($return) {
             return $func();
@@ -50,26 +50,20 @@ class Php
         $func();
     }
 
-    #[Annotation\TwigFunction]
-    public static function hijackGet(object $object, string $property): mixed
-    {
-        return self::call(fn () => $object->$property, $object, true);
-    }
-
     #[Annotation\TwigFilter]
     #[Pure]
     public static function boolval(mixed $value): bool
     {
-        if (is_bool($value)) {
+        if (is_bool(value: $value)) {
             return $value;
         }
 
-        $value = strtolower((string) $value);
+        $value = strtolower(string: (string) $value);
 
         return match ($value) {
             'y' => true,
             'n' => false,
-            default => filter_var($value, FILTER_VALIDATE_BOOL),
+            default => filter_var(value: $value, filter: FILTER_VALIDATE_BOOL),
         };
     }
 
@@ -80,7 +74,7 @@ class Php
     #[Annotation\TwigFunction]
     public static function getClassConstantsValues(string $class): array
     {
-        return array_values(self::getClassConstants($class));
+        return array_values(array: self::getClassConstants(class: $class));
     }
 
     /**
@@ -90,34 +84,36 @@ class Php
     #[Annotation\TwigFunction]
     public static function getClassConstants(string $class): array
     {
-        if (self::exists($class)) {
-            return (new ReflectionClass($class))->getConstants();
+        if (self::exists(class: $class)) {
+            return (new ReflectionClass(objectOrClass: $class))->getConstants();
         }
 
-        throw new InvalidArgumentException(sprintf('Invalid class "%s"', $class));
+        throw new InvalidArgumentException(message: sprintf('Invalid class "%s"', $class));
     }
 
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
     public static function exists(string $class, $checkTrait = false): bool
     {
+        $exists = class_exists(class: $class) || interface_exists(interface: $class);
+
         if (!$checkTrait) {
-            return class_exists($class) || interface_exists($class);
+            return $exists;
         }
 
-        return class_exists($class) || interface_exists($class) || trait_exists($class);
+        return $exists || trait_exists(trait: $class);
     }
 
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
     public static function getParameter(array|object $variable, mixed $key): mixed
     {
-        if (is_array($variable)) {
+        if (is_array(value: $variable)) {
             return $variable[$key];
         }
 
-        if (method_exists($variable, 'get' . ucfirst($key))) {
-            return $variable->{'get' . ucfirst($key)}();
+        if (method_exists(object_or_class: $variable, method: $method = 'get' . ucfirst(string: $key))) {
+            return $variable->{$method}();
         }
 
         return $variable->$key;
@@ -127,9 +123,9 @@ class Php
     #[Annotation\TwigFilter]
     public static function getClassMethods(string $class, ?string $parent = null): array
     {
-        $methods = get_class_methods($class);
+        $methods = get_class_methods(object_or_class: $class);
         if (null !== $parent) {
-            return array_diff($methods, get_class_methods($parent));
+            return array_diff(array: $methods, excludes: get_class_methods($parent));
         }
 
         return $methods;
@@ -141,8 +137,8 @@ class Php
     #[Annotation\TwigFilter]
     public static function getShortName(string $class): string
     {
-        if (self::exists($class, true)) {
-            return (new ReflectionClass($class))->getShortName();
+        if (self::exists(class: $class, checkTrait: true)) {
+            return (new ReflectionClass(objectOrClass: $class))->getShortName();
         }
 
         return $class;
@@ -152,14 +148,14 @@ class Php
     #[Annotation\TwigFilter]
     public static function classImplements(string $class, string $interface): bool
     {
-        return isset(class_implements($class)[$interface]);
+        return isset(class_implements(object_or_class: $class)[$interface]);
     }
 
     #[Annotation\TwigFunction]
     #[Pure]
     public static function getEnv(string $varname, bool $localOnly = false): mixed
     {
-        if ($env = getenv($varname, $localOnly)) {
+        if ($env = getenv(name: $varname, local_only: $localOnly)) {
             return $env;
         }
 
@@ -170,13 +166,19 @@ class Php
     #[Annotation\TwigFilter]
     public static function getArray(array|object $input): array
     {
-        if (is_object($object = $input)) {
+        if (is_object(value: $object = $input)) {
             $input = [];
-            foreach ((new ReflectionClass($object))->getProperties() as $property) {
-                $input[$name = $property->getName()] = self::hijackGet($object, $name);
+            foreach ((new ReflectionClass(objectOrClass: $object))->getProperties() as $property) {
+                $input[$name = $property->getName()] = self::hijackGet(object: $object, property: $name);
             }
         }
 
         return $input;
+    }
+
+    #[Annotation\TwigFunction]
+    public static function hijackGet(object $object, string $property): mixed
+    {
+        return self::call(function: fn () => $object->$property, clone: $object, return: true);
     }
 }

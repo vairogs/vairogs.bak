@@ -3,11 +3,15 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use Exception;
+use JetBrains\PhpStorm\Pure;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function bin2hex;
+use function ceil;
 use function floor;
 use function random_bytes;
+use function str_repeat;
 use function str_replace;
+use function str_shuffle;
 use function strlen;
 use function substr;
 
@@ -16,14 +20,14 @@ class Identification
     #[Annotation\TwigFunction]
     public static function validatePersonCode(string $personCode): bool
     {
-        $personCode = Text::keepNumeric($personCode);
+        $personCode = Text::keepNumeric(string: $personCode);
 
-        if (32 === (int) substr($personCode, 0, 2)) {
-            if (!self::validateNewPersonCode($personCode)) {
+        if (32 === (int) substr(string: $personCode, offset: 0, length: 2)) {
+            if (!self::validateNewPersonCode(personCode: $personCode)) {
                 return false;
             }
         } else {
-            if (!Date::validateDate($personCode) || !self::validateOldPersonCode($personCode)) {
+            if (!Date::validateDate(date: $personCode) || !self::validateOldPersonCode(personCode: $personCode)) {
                 return false;
             }
         }
@@ -34,11 +38,11 @@ class Identification
     #[Annotation\TwigFunction]
     public static function validateNewPersonCode(string $personCode): bool
     {
-        if (11 !== strlen($personCode)) {
+        if (11 !== strlen(string: $personCode)) {
             return false;
         }
 
-        $personCode = str_replace('-', '', $personCode);
+        $personCode = str_replace(search: '-', replace: '', subject: $personCode);
         // @formatter:off
         $calculations = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
         // @formatter:on
@@ -60,28 +64,36 @@ class Identification
     #[Annotation\TwigFunction]
     public static function validateOldPersonCode(string $personCode): bool
     {
-        if (11 !== strlen($personCode)) {
+        if (11 !== strlen(string: $personCode)) {
             return false;
         }
 
-        $personCode = str_replace('-', '', $personCode);
+        $personCode = str_replace(search: '-', replace: '', subject: $personCode);
         $check = '01060307091005080402';
         $checksum = 1;
 
         for ($i = 0; $i < 10; $i++) {
-            $checksum -= (int) $personCode[$i] * (int) substr($check, $i * 2, 2);
+            $checksum -= (int) $personCode[$i] * (int) substr(string: $check, offset: $i * 2, length: 2);
         }
 
-        return (int) ($checksum - floor($checksum / 11) * 11) === (int) $personCode[10];
+        return (int) ($checksum - floor(num: $checksum / 11) * 11) === (int) $personCode[10];
     }
 
     #[Annotation\TwigFunction]
     public static function getUniqueId(int $length = 20): string
     {
         try {
-            return substr(bin2hex(random_bytes($length)), 0, $length);
+            return substr(string: bin2hex(string: random_bytes(length: $length)), offset: 0, length: $length);
         } catch (Exception) {
-            return Generator::getRandomString($length);
+            return self::getRandomString(length: $length);
         }
+    }
+
+    #[Annotation\TwigFunction]
+    #[Pure]
+    public static function getRandomString(int $length = 20, string $chars = Generator::RAND_BASIC): string
+    {
+        /* @noinspection NonSecureStrShuffleUsageInspection */
+        return substr(string: str_shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
     }
 }

@@ -3,20 +3,15 @@
 namespace Vairogs\Component\Utils\Helper;
 
 use Exception;
-use JetBrains\PhpStorm\Pure;
 use LogicException;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function array_rand;
-use function ceil;
 use function count;
 use function function_exists;
 use function is_array;
 use function random_int;
-use function str_repeat;
 use function str_shuffle;
 use function str_split;
-use function strlen;
-use function substr;
 
 class Generator
 {
@@ -37,14 +32,6 @@ class Generator
     private string $digits = self::PASS_DIGITS;
     private string $symbols = self::PASS_SYMBOLS;
 
-    #[Annotation\TwigFunction]
-    #[Pure]
-    public static function getRandomString(int $length = 20, string $chars = self::RAND_BASIC): string
-    {
-        /* @noinspection NonSecureStrShuffleUsageInspection */
-        return substr(str_shuffle(str_repeat($chars, (int) ceil((int) (strlen($chars) / $length)))), 0, $length);
-    }
-
     /**
      * @throws LogicException
      * @throws Exception
@@ -53,28 +40,28 @@ class Generator
     public function generate(int $length = 20): string
     {
         if (empty($this->sets)) {
-            throw new LogicException('At least one set must be used!');
+            throw new LogicException(message: 'At least one set must be used!');
         }
 
         $all = $unique = '';
 
         foreach ($this->sets as $set) {
-            if (is_array($split = str_split($set))) {
+            if (is_array(value: $split = str_split(string: $set))) {
                 $unique .= $set[$this->tweak($split)];
                 $all .= $set;
             }
         }
 
-        if (is_array($all = str_split($all))) {
-            $setsCount = count($this->sets);
+        if (is_array(value: $all = str_split(string: $all))) {
+            $setsCount = count(value: $this->sets);
 
             for ($i = 0; $i < $length - $setsCount; $i++) {
-                $unique .= $all[$this->tweak($all)];
+                $unique .= $all[$this->tweak(array: $all)];
             }
         }
 
         /* @noinspection NonSecureStrShuffleUsageInspection */
-        return str_shuffle($unique);
+        return str_shuffle(string: $unique);
     }
 
     /**
@@ -82,11 +69,11 @@ class Generator
      */
     private function tweak(array $array): array|int|string
     {
-        if (function_exists('random_int')) {
-            return random_int(0, count($array) - 1);
+        if (function_exists(function: 'random_int')) {
+            return random_int(min: 0, max: count($array) - 1);
         }
 
-        return array_rand($array);
+        return array_rand(array: $array);
     }
 
     public function useLower(): static
