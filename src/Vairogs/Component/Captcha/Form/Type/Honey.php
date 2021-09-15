@@ -12,7 +12,7 @@ class Honey extends HiddenType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(defaults: [
             'attr' => ['value' => ''],
             'required' => false,
             'translation_domain' => sprintf('%s_%s', Vairogs::VAIROGS, Component::CAPTCHA),
