@@ -18,7 +18,7 @@ class TranslationDependency implements Dependency
         // @formatter:off
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(Component::TRANSLATION)
+            ->arrayNode(name: Component::TRANSLATION)
                 ->canBeEnabled()
             ->end()
         ->end();
