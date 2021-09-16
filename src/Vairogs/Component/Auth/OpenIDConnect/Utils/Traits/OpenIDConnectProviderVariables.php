@@ -3,8 +3,6 @@
 namespace Vairogs\Component\Auth\OpenIDConnect\Utils\Traits;
 
 use Lcobucci\JWT\Signer;
-use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
-use Psr\Http\Message\ResponseInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\Uri;
@@ -142,7 +140,7 @@ trait OpenIDConnectProviderVariables
 
     public function getUri($name): ?Uri
     {
-        return $this->uris[$name];
+        return $this->uris[$name] ?? null;
     }
 
     public function getStatusCode(): int
@@ -155,44 +153,6 @@ trait OpenIDConnectProviderVariables
         $this->statusCode = $statusCode;
 
         return $this;
-    }
-
-    protected function getRequiredOptions(): array
-    {
-        return [];
-    }
-
-    protected function checkResponse(ResponseInterface $response, $data): void
-    {
-    }
-
-    protected function createResourceOwner(array $response, BaseAccessToken $token): array
-    {
-        return [];
-    }
-
-    public function getBaseAccessTokenUrl(array $params): string
-    {
-        return '';
-    }
-
-    public function getBaseAuthorizationUrl(): string
-    {
-        return '';
-    }
-
-    public function getDefaultScopes(): array
-    {
-        return [];
-    }
-
-    public function getResourceOwnerDetailsUrl(BaseAccessToken $token): void
-    {
-    }
-
-    protected function getScopeSeparator(): string
-    {
-        return ' ';
     }
 
     protected function getIdTokenIssuer(): string

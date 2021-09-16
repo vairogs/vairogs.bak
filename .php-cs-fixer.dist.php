@@ -31,6 +31,8 @@ return (new PhpCsFixer\Config())->setRules([
     'types_spaces' => [
         'space' => 'none',
     ],
+    'native_function_type_declaration_casing' => true,
+    'magic_constant_casing' => true,
 ])
     ->setRiskyAllowed(true)
     ->setCacheFile('.php-cs-fixer.cache');

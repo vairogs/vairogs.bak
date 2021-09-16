@@ -20,7 +20,7 @@ class AuthOpenIDConnectDependency extends AbstractAuthComponentDependency
 
         // @formatter:off
         $optionsNode
-            ->scalarNode(name: 'client_key')->isRequired()->defaultNull()->end()
+            ->scalarNode(name: 'client_id')->isRequired()->defaultNull()->end()
             ->scalarNode(name: 'client_secret')->defaultNull()->end()
             ->scalarNode(name: 'id_token_issuer')->isRequired()->defaultNull()->end()
             ->scalarNode(name: 'public_key')->isRequired()->cannotBeEmpty()->end()
