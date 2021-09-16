@@ -5,7 +5,9 @@ namespace Vairogs\Component\Utils\Helper;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Component\Utils\Twig\Annotation;
 use function array_key_exists;
+use function base64_encode;
 use function filter_var;
+use function hash;
 use function html_entity_decode;
 use function iconv;
 use function is_numeric;
@@ -15,6 +17,7 @@ use function mb_strrpos;
 use function mb_substr;
 use function preg_match;
 use function preg_replace;
+use function round;
 use function rtrim;
 use function str_pad;
 use function str_replace;
@@ -22,6 +25,7 @@ use function strip_tags;
 use function strpbrk;
 use function strrev;
 use function strtolower;
+use function substr;
 use function ucwords;
 
 class Text
@@ -158,5 +162,14 @@ class Text
         }
 
         return $value;
+    }
+
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
+    public static function getHash(string $hashable, int $bit = 256): string
+    {
+        $hash = substr(string: hash(algo: 'sha' . $bit, data: $hashable, binary: true), offset: 0, length: (int) round(num: $bit / 16));
+
+        return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
     }
 }

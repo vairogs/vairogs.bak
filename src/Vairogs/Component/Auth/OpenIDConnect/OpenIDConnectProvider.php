@@ -11,7 +11,6 @@ use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use League\OAuth2\Client\Grant\AbstractGrant;
-use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
 use League\OAuth2\Client\Token\AccessTokenInterface;
@@ -23,6 +22,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use UnexpectedValueException;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ParsedToken;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Provider;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ValidatorChain;
 use Vairogs\Component\Auth\OpenIDConnect\Exception\OpenIDConnectException;
@@ -35,15 +35,11 @@ use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Extra\Specification;
 use function array_merge;
 use function base64_encode;
-use function hash;
 use function json_last_error;
 use function property_exists;
-use function round;
-use function rtrim;
 use function sprintf;
-use function substr;
 
-abstract class OpenIDConnectProvider extends AbstractProvider
+abstract class OpenIDConnectProvider extends Provider
 {
     use OpenIDConnectProviderVariables;
 
@@ -56,25 +52,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             ->getSession();
         parent::__construct(options: $options, collaborators: $collaborators);
         $this->buildParams(options: $options);
-    }
-
-    public function getBaseAccessTokenUrl(array $params): string
-    {
-        return '';
-    }
-
-    public function getResourceOwnerDetailsUrl(BaseAccessToken $token): void
-    {
-    }
-
-    public function getBaseAuthorizationUrl(): string
-    {
-        return '';
-    }
-
-    public function getDefaultScopes(): array
-    {
-        return [];
     }
 
     /**
@@ -91,8 +68,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
 
         return $this->getTokenResponse(request: $request);
     }
-
-    abstract public function getRefreshTokenUrl(): string;
 
     /**
      * @throws IdentityProviderException
@@ -155,7 +130,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             'nbf' => $currentTime,
             'aud' => [$this->clientId],
             'azp' => $this->clientId,
-            'at_hast' => $this->getATHash($accessToken->getToken()),
+            'at_hast' => Text::getHash($accessToken->getToken()),
         ];
 
         if (false === $this->validatorChain->validate(data: $data, token: $token)) {
@@ -166,8 +141,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
 
         return $accessToken;
     }
-
-    abstract public function getValidateTokenUrl(): string;
 
     /**
      * @throws IdentityProviderException
@@ -181,13 +154,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         $request = $this->getRevokeTokenRequest(params: $params);
 
         return $this->getTokenResponse(request: $request);
-    }
-
-    abstract public function getRevokeTokenUrl(): string;
-
-    public function check(mixed $response = null): bool
-    {
-        return null !== $response;
     }
 
     /**
@@ -262,11 +228,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         return Identification::getUniqueId(length: $length);
     }
 
-    protected function createResourceOwner(array $response, BaseAccessToken $token): array
-    {
-        return [];
-    }
-
     protected function buildUris(array $options = []): void
     {
         foreach ($options as $name => $uri) {
@@ -279,11 +240,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             ];
             $this->uris[$name] = new Uri(options: $uri, extra: $params, useSession: $this->useSession, method: $uri['method'] ?? Request::METHOD_POST, session: $this->session);
         }
-    }
-
-    protected function getScopeSeparator(): string
-    {
-        return ' ';
     }
 
     /**
@@ -348,18 +304,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         return $this->buildQueryString(params: $params);
     }
 
-    protected function getATHash(string $accessToken, int $bit = 256): string
-    {
-        $hash = substr(string: hash(algo: 'sha' . $bit, data: $accessToken, binary: true), offset: 0, length: (int) round(num: $bit / 16));
-
-        return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
-    }
-
-    protected function checkResponse(ResponseInterface $response, $data): void
-    {
-        // Override parent method
-    }
-
     protected function getValidateTokenRequest(array $params): RequestInterface
     {
         $method = $this->getAccessTokenMethod();
@@ -376,11 +320,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         $options = $this->getAccessTokenOptions(params: $params);
 
         return $this->getRequest(method: $method, url: $url, options: $options);
-    }
-
-    protected function getRequiredOptions(): array
-    {
-        return [];
     }
 
     protected function saveSession($accessToken): void
