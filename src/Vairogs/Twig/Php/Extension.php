@@ -32,27 +32,6 @@ class Extension extends AbstractExtension
     }
 
     /**
-     * @param callable[] $callables
-     */
-    #[Pure]
-    private function getCallbacks(array $callables = []): array
-    {
-        $callbacks = [];
-        foreach ($callables as $function) {
-            if (is_array(value: $function) && !is_numeric(value: key(array: $function))) {
-                $callback = current(array: $function);
-                $function = key(array: $function);
-            } else {
-                $callback = $function;
-            }
-
-            $callbacks[$function] = $callback;
-        }
-
-        return $callbacks;
-    }
-
-    /**
      * @param array $arguments
      */
     public function getFilter(mixed $object, string $filter, ...$arguments): mixed
@@ -80,5 +59,26 @@ class Extension extends AbstractExtension
     public function getFunction(string $function, ...$arguments): mixed
     {
         return $function(...$arguments);
+    }
+
+    /**
+     * @param callable[] $callables
+     */
+    #[Pure]
+    private function getCallbacks(array $callables = []): array
+    {
+        $callbacks = [];
+        foreach ($callables as $function) {
+            if (is_array(value: $function) && !is_numeric(value: key(array: $function))) {
+                $callback = current(array: $function);
+                $function = key(array: $function);
+            } else {
+                $callback = $function;
+            }
+
+            $callbacks[$function] = $callback;
+        }
+
+        return $callbacks;
     }
 }

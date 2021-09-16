@@ -18,13 +18,6 @@ class FixedLength
         $this->checkMinimumAllowed(maximumVisible: $this->maximumVisible);
     }
 
-    private function checkMinimumAllowed(int $maximumVisible): void
-    {
-        if ($this->maximumVisible < self::MIN_VISIBLE) {
-            throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d.', $maximumVisible, self::MIN_VISIBLE));
-        }
-    }
-
     public function withMaximumVisible(int $maximumVisible): static
     {
         $this->checkMinimumAllowed(maximumVisible: $maximumVisible);
@@ -33,11 +26,6 @@ class FixedLength
         $clone->setMaximumVisible(maximumVisible: $maximumVisible);
 
         return $clone;
-    }
-
-    private function setMaximumVisible(int $maximumVisible): void
-    {
-        $this->maximumVisible = $maximumVisible;
     }
 
     public function getMaximumVisible(): int
@@ -60,6 +48,24 @@ class FixedLength
         return $this->getPaginationDataWithTwoOmittedChunks(totalPages: $totalPages, currentPage: $currentPage, omittedPagesIndicator: $indicator);
     }
 
+    #[Pure]
+    public function hasSingleOmittedChunk(int $totalPages, int $currentPage): bool
+    {
+        return $this->hasSingleOmittedChunkNearLastPage(currentPage: $currentPage) || $this->hasSingleOmittedChunkNearStartPage(totalPages: $totalPages, currentPage: $currentPage);
+    }
+
+    private function checkMinimumAllowed(int $maximumVisible): void
+    {
+        if ($this->maximumVisible < self::MIN_VISIBLE) {
+            throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d.', $maximumVisible, self::MIN_VISIBLE));
+        }
+    }
+
+    private function setMaximumVisible(int $maximumVisible): void
+    {
+        $this->maximumVisible = $maximumVisible;
+    }
+
     private function validate(int $totalPages, int $currentPage, int $indicator = -1): void
     {
         if ($totalPages < 1) {
@@ -77,12 +83,6 @@ class FixedLength
         if ($indicator >= 1 && $indicator <= $totalPages) {
             throw new InvalidArgumentException(message: sprintf('Omitted pages indicator (%d) should not be between 1 and total number of pages (%d)', $indicator, $totalPages));
         }
-    }
-
-    #[Pure]
-    public function hasSingleOmittedChunk(int $totalPages, int $currentPage): bool
-    {
-        return $this->hasSingleOmittedChunkNearLastPage(currentPage: $currentPage) || $this->hasSingleOmittedChunkNearStartPage(totalPages: $totalPages, currentPage: $currentPage);
     }
 
     #[Pure]

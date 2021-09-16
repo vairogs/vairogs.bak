@@ -32,7 +32,7 @@ class Php
     public static function hijackSet(object $object, string $property, mixed $value): void
     {
         self::call(function: function () use ($object, $property, $value): void {
-            $object->$property = $value;
+            $object->{$property} = $value;
         }, clone: $object);
     }
 
@@ -117,7 +117,7 @@ class Php
             return $variable->{$method}();
         }
 
-        return $variable->$key;
+        return $variable->{$key};
     }
 
     #[Annotation\TwigFunction]
@@ -180,6 +180,6 @@ class Php
     #[Annotation\TwigFunction]
     public static function hijackGet(object $object, string $property): mixed
     {
-        return self::call(function: fn () => $object->$property, clone: $object, return: true);
+        return self::call(function: fn () => $object->{$property}, clone: $object, return: true);
     }
 }

@@ -52,15 +52,6 @@ trait LocaleResolverTrait
         return null;
     }
 
-    private function preg($hostLanguage): ?string
-    {
-        if (preg_match(pattern: '#^[a-z]{2}(?:_[a-z]{2})?$#i', subject: $hostLanguage)) {
-            return $hostLanguage;
-        }
-
-        return null;
-    }
-
     protected function returnByPreviousSession(Request $request): ?string
     {
         if ($request->hasPreviousSession()) {
@@ -89,6 +80,15 @@ trait LocaleResolverTrait
             if (in_array(needle: $lang, haystack: $availableLocales, strict: true)) {
                 return $lang;
             }
+        }
+
+        return null;
+    }
+
+    private function preg($hostLanguage): ?string
+    {
+        if (preg_match(pattern: '#^[a-z]{2}(?:_[a-z]{2})?$#i', subject: $hostLanguage)) {
+            return $hostLanguage;
         }
 
         return null;

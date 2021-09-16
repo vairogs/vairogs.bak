@@ -91,6 +91,45 @@ class CacheEventListener implements EventSubscriberInterface
         }
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     */
+    public function onKernelRequest(RequestEvent $requestEvent): void
+    {
+        if (!$this->check(kernelEvent: $requestEvent)) {
+            return;
+        }
+
+        /** @var $annotation Annotation */
+        if (($annotation = $this->event->getAnnotation(kernelEvent: $requestEvent, class: Annotation::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
+            $annotation->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Annotation::class));
+            $this->adapter->deleteItem(key: $annotation->getKey(prefix: $this->getRoute(kernelEvent: $requestEvent)));
+        }
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     * @throws ReflectionException
+     */
+    public function onKernelResponse(ResponseEvent $responseEvent): void
+    {
+        if (!$this->check(kernelEvent: $responseEvent)) {
+            return;
+        }
+
+        /** @var $annotation Annotation */
+        if (null !== ($annotation = $this->event->getAnnotation(kernelEvent: $responseEvent, class: Annotation::class))) {
+            $annotation->setData(data: $this->event->getAttributes(kernelEvent: $responseEvent, class: Annotation::class));
+            $key = $annotation->getKey(prefix: $this->getRoute(kernelEvent: $responseEvent));
+            $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
+
+            if (null === $this->getCache(key: $key) && !$skip) {
+                $this->setCache(key: $key, value: $responseEvent->getResponse(), expires: $annotation->getExpires());
+            }
+        }
+    }
+
     private function check(ControllerEvent|RequestEvent|ResponseEvent $kernelEvent): bool
     {
         if (!$this->enabled || !$kernelEvent->isMainRequest()) {
@@ -132,45 +171,6 @@ class CacheEventListener implements EventSubscriberInterface
         }
 
         return null;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     */
-    public function onKernelRequest(RequestEvent $requestEvent): void
-    {
-        if (!$this->check(kernelEvent: $requestEvent)) {
-            return;
-        }
-
-        /** @var $annotation Annotation */
-        if (($annotation = $this->event->getAnnotation(kernelEvent: $requestEvent, class: Annotation::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
-            $annotation->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Annotation::class));
-            $this->adapter->deleteItem(key: $annotation->getKey(prefix: $this->getRoute(kernelEvent: $requestEvent)));
-        }
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     * @throws ReflectionException
-     */
-    public function onKernelResponse(ResponseEvent $responseEvent): void
-    {
-        if (!$this->check(kernelEvent: $responseEvent)) {
-            return;
-        }
-
-        /** @var $annotation Annotation */
-        if (null !== ($annotation = $this->event->getAnnotation(kernelEvent: $responseEvent, class: Annotation::class))) {
-            $annotation->setData(data: $this->event->getAttributes(kernelEvent: $responseEvent, class: Annotation::class));
-            $key = $annotation->getKey(prefix: $this->getRoute(kernelEvent: $responseEvent));
-            $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
-
-            if (null === $this->getCache(key: $key) && !$skip) {
-                $this->setCache(key: $key, value: $responseEvent->getResponse(), expires: $annotation->getExpires());
-            }
-        }
     }
 
     /**

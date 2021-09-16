@@ -28,6 +28,18 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         return $this->getSteamGiftsUser(data: $response);
     }
 
+    public function setUserClass(string $class): static
+    {
+        $this->userClass = $class;
+
+        return $this;
+    }
+
+    public function getUserClass(): string
+    {
+        return $this->userClass;
+    }
+
     private function getSteamGiftsUser(array $data): User
     {
         $input = $data['response']['players'][0];
@@ -58,17 +70,5 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         }
 
         return $username;
-    }
-
-    public function setUserClass(string $class): static
-    {
-        $this->userClass = $class;
-
-        return $this;
-    }
-
-    public function getUserClass(): string
-    {
-        return $this->userClass;
     }
 }

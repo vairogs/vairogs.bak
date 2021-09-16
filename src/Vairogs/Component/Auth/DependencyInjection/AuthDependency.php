@@ -37,6 +37,16 @@ class AuthDependency implements Dependency
         // @formatter:on
     }
 
+    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
+    {
+        $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Dependency::ENABLED);
+
+        if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
+            $this->loadOpenIDComponent(containerBuilder: $containerBuilder, configuration: $configuration);
+            $this->loadOpenIDConnectComponent(containerBuilder: $containerBuilder, configuration: $configuration);
+        }
+    }
+
     private function appendOpenIDConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if (class_exists(class: AuthOpenIDDependency::class) && Php::classImplements(class: AuthOpenIDDependency::class, interface: Dependency::class)) {
@@ -48,16 +58,6 @@ class AuthDependency implements Dependency
     {
         if (class_exists(class: AuthOpenIDConnectDependency::class) && Php::classImplements(class: AuthOpenIDConnectDependency::class, interface: Dependency::class)) {
             (new AuthOpenIDConnectDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
-        }
-    }
-
-    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
-    {
-        $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Dependency::ENABLED);
-
-        if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
-            $this->loadOpenIDComponent(containerBuilder: $containerBuilder, configuration: $configuration);
-            $this->loadOpenIDConnectComponent(containerBuilder: $containerBuilder, configuration: $configuration);
         }
     }
 

@@ -80,37 +80,6 @@ class Sort
         return self::merge(left: $left, right: $right);
     }
 
-    private static function merge(array $left, array $right): array
-    {
-        $result = [];
-        $i = $j = 0;
-
-        $leftCount = count(value: $left);
-        $rightCount = count(value: $right);
-
-        while ($i < $leftCount && $j < $rightCount) {
-            if ($left[$i] > $right[$j]) {
-                $result[] = $right[$j];
-                $j++;
-            } else {
-                $result[] = $left[$i];
-                $i++;
-            }
-        }
-
-        while ($i < $leftCount) {
-            $result[] = $left[$i];
-            $i++;
-        }
-
-        while ($j < $rightCount) {
-            $result[] = $right[$j];
-            $j++;
-        }
-
-        return $result;
-    }
-
     #[Annotation\TwigFilter]
     public static function sort(mixed $data, ?string $parameter = null, string $order = self::ASC): array
     {
@@ -148,7 +117,7 @@ class Sort
         }
 
         if (is_object(value: $item)) {
-            return isset($item->$field) || property_exists(object_or_class: $item, property: $field);
+            return isset($item->{$field}) || property_exists(object_or_class: $item, property: $field);
         }
 
         return false;
@@ -181,6 +150,37 @@ class Sort
             'compareLatvian',
         ]);
         self::$field = '';
+
+        return $result;
+    }
+
+    private static function merge(array $left, array $right): array
+    {
+        $result = [];
+        $i = $j = 0;
+
+        $leftCount = count(value: $left);
+        $rightCount = count(value: $right);
+
+        while ($i < $leftCount && $j < $rightCount) {
+            if ($left[$i] > $right[$j]) {
+                $result[] = $right[$j];
+                $j++;
+            } else {
+                $result[] = $left[$i];
+                $i++;
+            }
+        }
+
+        while ($i < $leftCount) {
+            $result[] = $left[$i];
+            $i++;
+        }
+
+        while ($j < $rightCount) {
+            $result[] = $right[$j];
+            $j++;
+        }
 
         return $result;
     }

@@ -41,26 +41,6 @@ abstract class AbstractBuilder implements Builder
         }
     }
 
-    abstract protected function write(&$buffer, string $text): void;
-
-    protected function getBufferValue(Url $url, string $key): string
-    {
-        if ($getter = $this->getGetterValue(url: $url, key: $key)) {
-            return "\t" . sprintf('<%s>', $key) . $getter . sprintf('</%s>', $key) . "\n";
-        }
-
-        return '';
-    }
-
-    protected function getGetterValue(Url $url, string $key): ?string
-    {
-        if (method_exists(object_or_class: $url, method: $getter = 'get' . ucfirst(string: $key)) && !empty($url->$getter())) {
-            return (string) $url->$getter();
-        }
-
-        return null;
-    }
-
     public function end(&$buffer): void
     {
         $this->write(buffer: $buffer, text: '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
@@ -96,5 +76,25 @@ abstract class AbstractBuilder implements Builder
         }
 
         $this->write(buffer: $buffer, text: '>' . "\n");
+    }
+
+    abstract protected function write(&$buffer, string $text): void;
+
+    protected function getBufferValue(Url $url, string $key): string
+    {
+        if ($getter = $this->getGetterValue(url: $url, key: $key)) {
+            return "\t" . sprintf('<%s>', $key) . $getter . sprintf('</%s>', $key) . "\n";
+        }
+
+        return '';
+    }
+
+    protected function getGetterValue(Url $url, string $key): ?string
+    {
+        if (method_exists(object_or_class: $url, method: $getter = 'get' . ucfirst(string: $key)) && !empty($url->{$getter}())) {
+            return (string) $url->{$getter}();
+        }
+
+        return null;
     }
 }

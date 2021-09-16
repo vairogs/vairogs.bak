@@ -33,17 +33,6 @@ class Uri
         $this->setGetParams(options: $options, additional: $extra);
     }
 
-    private function setGetParams($options, $additional): void
-    {
-        if (Request::METHOD_GET === $this->method) {
-            if (isset($options['url_params']['post_logout_redirect_uri'])) {
-                $options['url_params']['post_logout_redirect_uri'] = $additional['redirect_uri'];
-                unset($additional['redirect_uri']);
-            }
-            $this->urlParams = !empty($options['url_params']) ? array_merge($options['url_params'], $additional) : $additional;
-        }
-    }
-
     /**
      * @throws OpenIDConnectException
      */
@@ -67,6 +56,26 @@ class Uri
         $this->url = $url;
 
         return $this;
+    }
+
+    public function addParam($value): void
+    {
+        $this->params[] = $value;
+    }
+
+    public function addUrlParam($name, $value): void
+    {
+        $this->urlParams[$name] = $value;
+    }
+
+    public function getBase(): string
+    {
+        return $this->base;
+    }
+
+    public function getBasePost(): ?string
+    {
+        return $this->basePost;
     }
 
     /**
@@ -96,6 +105,17 @@ class Uri
         $this->setUrl(url: urldecode(string: $clientUrl));
     }
 
+    private function setGetParams($options, $additional): void
+    {
+        if (Request::METHOD_GET === $this->method) {
+            if (isset($options['url_params']['post_logout_redirect_uri'])) {
+                $options['url_params']['post_logout_redirect_uri'] = $additional['redirect_uri'];
+                unset($additional['redirect_uri']);
+            }
+            $this->urlParams = !empty($options['url_params']) ? array_merge($options['url_params'], $additional) : $additional;
+        }
+    }
+
     /**
      * @throws OpenIDConnectException
      */
@@ -107,25 +127,5 @@ class Uri
             }
             $this->urlParams['id_token_hint'] = $this->session->get('id_token');
         }
-    }
-
-    public function addParam($value): void
-    {
-        $this->params[] = $value;
-    }
-
-    public function addUrlParam($name, $value): void
-    {
-        $this->urlParams[$name] = $value;
-    }
-
-    public function getBase(): string
-    {
-        return $this->base;
-    }
-
-    public function getBasePost(): ?string
-    {
-        return $this->basePost;
     }
 }

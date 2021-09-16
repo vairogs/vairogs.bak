@@ -155,15 +155,15 @@ trait OpenIDConnectProviderVariables
         return $this;
     }
 
-    protected function getIdTokenIssuer(): string
-    {
-        return $this->idTokenIssuer;
-    }
-
     public function setIdTokenIssuer(string $idTokenIssuer): static
     {
         $this->idTokenIssuer = $idTokenIssuer;
 
         return $this;
+    }
+
+    protected function getIdTokenIssuer(): string
+    {
+        return $this->idTokenIssuer;
     }
 }

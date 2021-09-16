@@ -64,18 +64,6 @@ class Generator
         return str_shuffle(string: $unique);
     }
 
-    /**
-     * @throws Exception
-     */
-    private function tweak(array $array): array|int|string
-    {
-        if (function_exists(function: 'random_int')) {
-            return random_int(min: 0, max: count(value: $array) - 1);
-        }
-
-        return array_rand(array: $array);
-    }
-
     public function useLower(): static
     {
         $this->sets[self::LOWER] = $this->lowerCase;
@@ -142,5 +130,17 @@ class Generator
     public function getSets(): array
     {
         return $this->sets;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function tweak(array $array): array|int|string
+    {
+        if (function_exists(function: 'random_int')) {
+            return random_int(min: 0, max: count(value: $array) - 1);
+        }
+
+        return array_rand(array: $array);
     }
 }

@@ -119,14 +119,6 @@ class OpenIDProvider
         return 1 === preg_match(pattern: "#is_valid\s*:\s*true#i", subject: file_get_contents(filename: $this->options['openid_url'] . '/' . $this->options['api_key'], use_include_path: false, context: $context)) ? $openID : null;
     }
 
-    /**
-     * @throws JsonException
-     */
-    private function getData(string $openID): mixed
-    {
-        return Json::decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: 1);
-    }
-
     public function redirect(): RedirectResponse
     {
         $redirectUri = $this->router->generate(name: $this->options['redirect_route'], parameters: $this->options[self::PROVIDER_OPTIONS]['redirect_route_params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL);
@@ -147,6 +139,14 @@ class OpenIDProvider
         }
 
         return $this->options['openid_url'] . '/' . $this->options['api_key'] . '/?' . http_build_query(data: $this->getParams(return: $return, realm: $realm));
+    }
+
+    /**
+     * @throws JsonException
+     */
+    private function getData(string $openID): mixed
+    {
+        return Json::decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: 1);
     }
 
     #[Pure]

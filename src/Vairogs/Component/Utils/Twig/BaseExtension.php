@@ -40,6 +40,14 @@ abstract class BaseExtension extends AbstractExtension
     /**
      * @throws ReflectionException
      */
+    public function getFunctions(): array
+    {
+        return $this->getMethods(filter: Annotation\TwigFunction::class, class: Twig\TwigFunction::class);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
     private function getMethods(string $filter, string $class): array
     {
         return $this->makeArray(input: Helper::getFiltered($this->vars['class'], $filter), key: $this->getPrefix(), class: $class);
@@ -69,13 +77,5 @@ abstract class BaseExtension extends AbstractExtension
         }
 
         return strtolower(string: $base);
-    }
-
-    /**
-     * @throws ReflectionException
-     */
-    public function getFunctions(): array
-    {
-        return $this->getMethods(filter: Annotation\TwigFunction::class, class: Twig\TwigFunction::class);
     }
 }
