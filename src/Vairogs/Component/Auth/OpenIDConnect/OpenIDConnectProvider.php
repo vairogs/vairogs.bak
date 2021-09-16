@@ -21,35 +21,31 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use UnexpectedValueException;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ParsedToken;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ValidatorChain;
+use Vairogs\Component\Auth\OpenIDConnect\Utils\Traits\OpenIDConnectProviderVariables;
 use Vairogs\Component\Utils\Helper\Identification;
+use Vairogs\Component\Utils\Helper\Iteration;
 use Vairogs\Component\Utils\Helper\Json;
+use Vairogs\Component\Utils\Helper\Text;
 use Vairogs\Extra\Specification;
 use function array_merge;
 use function base64_encode;
+use function dump;
+use function hash;
 use function json_last_error;
+use function property_exists;
+use function round;
+use function rtrim;
 use function sprintf;
+use function substr;
 
 abstract class OpenIDConnectProvider extends AbstractProvider
 {
-    /**
-     * @var Uri[]
-     */
-    protected array $uris = [];
-    protected string $publicKey;
-    protected Signer $signer;
-    protected ValidatorChain $validatorChain;
-    protected string $idTokenIssuer;
-    protected bool $useSession = false;
-    protected SessionInterface $session;
-    protected int $statusCode;
-    protected string $baseUri;
-    protected ?string $baseUriPost;
+    use OpenIDConnectProviderVariables;
 
     public function __construct(protected string $name, protected Router $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
     {
@@ -62,42 +58,46 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         $this->buildParams(options: $options);
     }
 
-    private function setValidators(): void
+    protected function setValidators(): void
     {
         $this->validatorChain->setValidators(validators: [
-            new Specification\NotEmpty(name: 'iat', required: true),
-            new Specification\GreaterOrEqualsTo(name: 'exp', required: true),
-            new Specification\EqualsTo(name: 'iss', required: true),
+            new Specification\EqualsTo(name: 'at_hash', required: true),
             new Specification\EqualsTo(name: 'aud', required: true),
-            new Specification\NotEmpty(name: 'sub', required: true),
-            new Specification\LesserOrEqualsTo(name: 'nbf'),
-            new Specification\EqualsTo(name: 'jti'),
             new Specification\EqualsTo(name: 'azp'),
+            new Specification\EqualsTo(name: 'iss', required: true),
+            new Specification\EqualsTo(name: 'jti'),
             new Specification\EqualsTo(name: 'nonce'),
+            new Specification\GreaterOrEqualsTo(name: 'exp', required: true),
+            new Specification\LesserOrEqualsTo(name: 'nbf'),
+            new Specification\NotEmpty(name: 'iat', required: true),
+            new Specification\NotEmpty(name: 'sub', required: true),
         ]);
     }
 
-    private function buildParams(array $options = []): void
+    protected function buildParams(array $options = []): void
     {
         if ([] !== $options) {
-            $this->clientId = $options['client_key'];
-            $this->clientSecret = $options['client_secret'];
-            unset($options['client_secret'], $options['client_key']);
-            $this->idTokenIssuer = $options['id_token_issuer'];
-            $this->publicKey = 'file://' . $options['public_key'];
             $this->state = $this->getRandomState();
-            $this->baseUri = $options['base_uri'];
-            $this->baseUriPost = $options['base_uri_post'] ?? null;
-            $this->useSession = $options['use_session'];
-            $params = !empty($options['redirect']['params']) ? $options['redirect']['params'] : [];
+
             $url = match ($options['redirect']['type']) {
                 'uri' => $options['redirect']['uri'],
-                'route' => $this->router->generate(name: $options['redirect']['route'], parameters: $params, referenceType: UrlGeneratorInterface::ABSOLUTE_URL),
+                'route' => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL),
                 default => null,
             };
-            $this->redirectUri = $url;
 
-            $this->buildUris(options: $options);
+            $this->redirectUri = $url;
+            $uris = $options['uris'] ?? [];
+            unset($options['redirect'], $options['uris']);
+
+            foreach (Iteration::makeOneDimension(array: $options, onlyLast: false, maxDepth: 0) as $key => $value) {
+                if (property_exists(object_or_class: $this, property: $var = Text::toCamelCase(string: $key))) {
+                    $this->{$var} = $value;
+                }
+            }
+
+            $this->publicKey = 'file://' . $this->publicKey;
+
+            $this->buildUris(options: $uris);
         }
     }
 
@@ -106,75 +106,19 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         return Identification::getUniqueId(length: $length);
     }
 
-    private function buildUris($options = []): void
+    protected function buildUris(array $options = []): void
     {
-        foreach ($options['uris'] as $name => $uri) {
+        foreach ($options as $name => $uri) {
             $opt = [
-                'client_id' => $this->clientId,
+                'client_id' => $this->clientKey,
                 'redirect_uri' => $this->redirectUri,
                 'state' => $this->state,
                 'base_uri' => $this->baseUri,
-                'base_uri_post' => $this->baseUriPost,
+                'base_uri_post' => $this->baseUriPost ?? $this->baseUri,
             ];
             $method = $uri['method'] ?? Request::METHOD_POST;
             $this->uris[$name] = new Uri(options: $uri, additional: $opt, useSession: $this->useSession, method: $method, session: $this->session);
         }
-    }
-
-    public function getResourceOwnerDetailsUrl(BaseAccessToken $token): void
-    {
-    }
-
-    protected function getScopeSeparator(): string
-    {
-        return ' ';
-    }
-
-    /**
-     * @throws ErrorException
-     * @throws IdentityProviderException
-     */
-    public function getAccessToken($grant, array $options = []): AccessTokenInterface|BaseAccessToken
-    {
-        /** @var ParsedToken $accessToken */
-        $accessToken = $this->getAccessTokenFunction(grant: $grant, options: $options);
-
-        if (null === $accessToken) {
-            throw new ErrorException(message: 'Invalid access token.');
-        }
-
-        // id_token is empty.
-        if (null === $token = $accessToken->getIdToken()) {
-            throw new ErrorException(message: 'Expected an id_token but did not receive one from the authorization server');
-        }
-
-        try {
-            (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->assert(token: $token);
-        } catch (Exception) {
-            throw new ErrorException(message: 'Received an invalid id_token from authorization server');
-        }
-
-        $currentTime = new DateTime(datetime: 'now');
-        $data = [
-            'iss' => $this->getIdTokenIssuer(),
-            'exp' => $currentTime,
-            'auth_time' => $currentTime,
-            'iat' => $currentTime,
-            'nbf' => $currentTime,
-            'aud' => [$this->clientId],
-        ];
-
-        if ($token->hasClaim(claim: 'azp')) {
-            $data['azp'] = $this->clientId;
-        }
-
-        if (false === $this->validatorChain->validate(data: $data, token: $token)) {
-            throw new ErrorException(message: 'The id_token did not pass validation.');
-        }
-
-        $this->saveSession(accessToken: $accessToken);
-
-        return $accessToken;
     }
 
     /**
@@ -194,40 +138,11 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         return $content;
     }
 
-    public function getName(): string
+    protected function getATHash(string $accessToken, int $bit = 256): string
     {
-        return $this->name;
-    }
+        $hash = substr(string: hash(algo: 'sha' . $bit, data: $accessToken, binary: true), offset: 0, length: (int) round(num: $bit / 16));
 
-    public function getValidatorChain(): ValidatorChain
-    {
-        return $this->validatorChain;
-    }
-
-    public function getUri($name): ?Uri
-    {
-        return $this->uris[$name];
-    }
-
-    private function saveSession($accessToken): void
-    {
-        if ($this->useSession) {
-            $this->session->set(name: 'access_token', value: $accessToken->getToken());
-            $this->session->set(name: 'refresh_token', value: $accessToken->getRefreshToken());
-            $this->session->set(name: 'id_token', value: $accessToken->getIdTokenHint());
-        }
-    }
-
-    public function getStatusCode(): int
-    {
-        return $this->statusCode;
-    }
-
-    public function setStatusCode(int $statusCode): static
-    {
-        $this->statusCode = $statusCode;
-
-        return $this;
+        return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
     }
 
     /**
@@ -252,6 +167,52 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         $options = $this->getAccessTokenOptions(params: $params);
 
         return $this->getRequest(method: $method, url: $url, options: $options);
+    }
+
+    /**
+     * @throws ErrorException
+     * @throws IdentityProviderException
+     */
+    public function getAccessToken($grant, array $options = []): AccessTokenInterface|BaseAccessToken
+    {
+        /** @var ParsedToken $accessToken */
+        $accessToken = $this->getAccessTokenFunction(grant: $grant, options: $options);
+
+        if (null === $accessToken) {
+            throw new ErrorException(message: 'Invalid access token.');
+        }
+
+        // id_token is empty.
+        if (null === $token = $accessToken->getIdToken()) {
+            throw new ErrorException(message: 'Expected an id_token but did not receive one from the authorization server');
+        }
+
+        try {
+            (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->assert(token: $token);
+        } catch (Exception $e) {
+            dump($e);
+            throw new ErrorException(message: 'Received an invalid id_token from authorization server');
+        }
+
+        $currentTime = new DateTime(datetime: 'now');
+        $data = [
+            'iss' => $this->getIdTokenIssuer(),
+            'exp' => $currentTime,
+            'auth_time' => $currentTime,
+            'iat' => $currentTime,
+            'nbf' => $currentTime,
+            'aud' => [$this->clientKey],
+            'azp' => $this->clientKey,
+            'at_hast' => $this->getATHash($accessToken->getToken()),
+        ];
+
+        if (false === $this->validatorChain->validate(data: $data, token: $token)) {
+            throw new ErrorException(message: 'The id_token did not pass validation.');
+        }
+
+        $this->saveSession(accessToken: $accessToken);
+
+        return $accessToken;
     }
 
     abstract public function getRefreshTokenUrl(): string;
@@ -279,11 +240,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         return $this->getRequest(method: $method, url: $url, options: $options);
     }
 
-    public function check(mixed $response = null): bool
-    {
-        return null !== $response;
-    }
-
     abstract public function getValidateTokenUrl(): string;
 
     /**
@@ -309,6 +265,22 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         return $this->getRequest(method: $method, url: $url, options: $options);
     }
 
+    abstract public function getRevokeTokenUrl(): string;
+
+    protected function saveSession($accessToken): void
+    {
+        if ($this->useSession) {
+            $this->session->set(name: 'access_token', value: $accessToken->getToken());
+            $this->session->set(name: 'refresh_token', value: $accessToken->getRefreshToken());
+            $this->session->set(name: 'id_token', value: $accessToken->getIdTokenHint());
+        }
+    }
+
+    public function check(mixed $response = null): bool
+    {
+        return null !== $response;
+    }
+
     protected function getAccessTokenRequest(array $params): RequestInterface
     {
         $method = $this->getAccessTokenMethod();
@@ -318,13 +290,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         return $this->getRequest(method: $method, url: $url, options: $options);
     }
 
-    abstract public function getRevokeTokenUrl(): string;
-
-    protected function getRequiredOptions(): array
-    {
-        return [];
-    }
-
     #[ArrayShape([
         'headers' => 'string[]',
         'body' => 'mixed',
@@ -332,7 +297,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider
     protected function getAccessTokenOptions(array $params): array
     {
         $options = $this->getBaseTokenOptions(params: $params);
-        $options['headers']['authorization'] = 'Basic ' . base64_encode(string: $this->clientId . ':' . $this->clientSecret);
+        $options['headers']['authorization'] = 'Basic ' . base64_encode(string: $this->clientKey . ':' . $this->clientSecret);
 
         return $options;
     }
@@ -359,35 +324,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
     protected function getAccessTokenBody(array $params): string
     {
         return $this->buildQueryString($params);
-    }
-
-    protected function checkResponse(ResponseInterface $response, $data): void
-    {
-    }
-
-    protected function createResourceOwner(array $response, BaseAccessToken $token): array
-    {
-        return [];
-    }
-
-    public function getBaseAccessTokenUrl(array $params): string
-    {
-        return '';
-    }
-
-    public function getBaseAuthorizationUrl(): string
-    {
-        return '';
-    }
-
-    public function getDefaultScopes(): array
-    {
-        return [];
-    }
-
-    protected function getIdTokenIssuer(): string
-    {
-        return $this->idTokenIssuer;
     }
 
     /**

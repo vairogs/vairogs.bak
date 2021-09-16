@@ -48,11 +48,13 @@ class AuthOpenIDConnectDependency extends AbstractAuthComponentDependency
     public static function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
     {
         $clientDefinition = $containerBuilder->register(id: $clientServiceKey, class: $containerBuilder->getParameter(name: $clientServiceKey . '.user_provider'));
+        $options = $containerBuilder->getParameter(name: $clientServiceKey);
+        unset($options['user_provider']);
         $clientDefinition->setArguments(arguments: [
             $key,
             new Reference(id: 'router'),
             new Reference(id: 'request_stack'),
-            $containerBuilder->getParameter(name: $clientServiceKey),
+            $options,
             [],
         ])
             ->addTag(name: $base);
