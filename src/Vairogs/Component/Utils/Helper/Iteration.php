@@ -80,24 +80,26 @@ class Iteration
     }
 
     #[Annotation\TwigFilter]
-    public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false): array
+    public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX): array
     {
         $result = [];
 
-        foreach ($array as $key => $value) {
-            $key = ltrim(string: $base . self::DOT . $key, characters: self::DOT);
+        if ($depth <= $maxDepth) {
+            foreach ($array as $key => $value) {
+                $key = ltrim(string: $base . self::DOT . $key, characters: self::DOT);
 
-            if (is_array(value: $value) && self::isAssociative(array: $value)) {
-                foreach (self::makeOneDimension(array: $value, base: $key, separator: $separator) as $ik => $iv) {
-                    $result[$ik] = $iv;
+                if (self::isAssociative(array: $value)) {
+                    foreach (self::makeOneDimension(array: $value, base: $key, separator: $separator, depth: $depth + 1, maxDepth: $maxDepth) as $itemKey => $itemValue) {
+                        $result[$itemKey] = $itemValue;
+                    }
+
+                    if ($onlyLast) {
+                        continue;
+                    }
                 }
 
-                if ($onlyLast) {
-                    continue;
-                }
+                $result[$key] = $value;
             }
-
-            $result[$key] = $value;
         }
 
         return $result;
@@ -105,9 +107,9 @@ class Iteration
 
     #[Annotation\TwigFunction]
     #[Pure]
-    public static function isAssociative(array $array): bool
+    public static function isAssociative(mixed $array): bool
     {
-        if ([] === $array) {
+        if (!is_array(value: $array) || [] === $array) {
             return false;
         }
 
