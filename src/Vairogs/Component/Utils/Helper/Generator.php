@@ -70,7 +70,7 @@ class Generator
     private function tweak(array $array): array|int|string
     {
         if (function_exists(function: 'random_int')) {
-            return random_int(min: 0, max: count($array) - 1);
+            return random_int(min: 0, max: count(value: $array) - 1);
         }
 
         return array_rand(array: $array);

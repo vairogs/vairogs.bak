@@ -113,7 +113,7 @@ class Iteration
             return false;
         }
 
-        return array_keys(array: $array) !== range(start: 0, end: count($array) - 1);
+        return array_keys(array: $array) !== range(start: 0, end: count(value: $array) - 1);
     }
 
     #[Annotation\TwigFilter]
