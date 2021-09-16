@@ -11,6 +11,7 @@ class FileBuilder extends AbstractBuilder
         return 'resource';
     }
 
+    /** @noinspection PhpParameterByRefIsNotUsedAsReferenceInspection */
     protected function write(&$buffer, string $text): void
     {
         fwrite(stream: $buffer, data: $text);

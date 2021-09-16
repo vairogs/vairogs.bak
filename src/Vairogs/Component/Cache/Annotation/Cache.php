@@ -38,7 +38,7 @@ final class Cache
                 $value = Iteration::arrayIntersectKeyRecursive(first: $value, second: $flipped);
             }
 
-            $key = str_replace(search: '=', replace: '_', subject: http_build_query(data: $value, numeric_prefix: '', arg_separator: '_'));
+            $key = str_replace(search: '=', replace: '_', subject: http_build_query(data: $value, arg_separator: '_'));
         }
 
         return hash(algo: $this->algorithm, data: $prefix . '_' . $key);

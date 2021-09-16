@@ -46,7 +46,7 @@ class SitemapCommand extends Command
         $host = $this->options[self::HOST] ?? null;
         $this->setDescription(description: 'Regenerate sitemap.xml')
             ->addArgument(name: self::HOST, mode: $host ? InputArgument::OPTIONAL : InputArgument::REQUIRED, description: 'host to use in sitemap', default: $this->options[self::HOST])
-            ->addOption(name: 'filename', shortcut: null, mode: InputOption::VALUE_OPTIONAL, description: 'sitemap filename if not sitemap.xml', default: 'sitemap.xml');
+            ->addOption(name: 'filename', mode: InputOption::VALUE_OPTIONAL, description: 'sitemap filename if not sitemap.xml', default: 'sitemap.xml');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void

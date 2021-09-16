@@ -19,7 +19,7 @@ class File
     {
         $dir = dirname(path: $path);
 
-        if (!is_dir(filename: $dir) && !mkdir(directory: $dir, permissions: 0777, recursive: true) && !is_dir(filename: $dir)) {
+        if (!is_dir(filename: $dir) && !mkdir(directory: $dir, recursive: true) && !is_dir(filename: $dir)) {
             throw new UnexpectedValueException(message: sprintf('Directory "%s" was not created', $dir));
         }
 
