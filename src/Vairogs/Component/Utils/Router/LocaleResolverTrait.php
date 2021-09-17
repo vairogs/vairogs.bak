@@ -44,18 +44,9 @@ trait LocaleResolverTrait
         foreach (['hl', 'lang'] as $parameter) {
             // @formatter:on
 
-            if ($request->query->has($parameter) && $result = $this->preg($request->query->get($parameter))) {
+            if ($request->query->has(key: $parameter) && $result = $this->preg(hostLanguage: $request->query->get(key: $parameter))) {
                 return $result;
             }
-        }
-
-        return null;
-    }
-
-    private function preg($hostLanguage): ?string
-    {
-        if (preg_match('#^[a-z]{2}(?:_[a-z]{2})?$#i', $hostLanguage)) {
-            return $hostLanguage;
         }
 
         return null;
@@ -66,8 +57,8 @@ trait LocaleResolverTrait
         if ($request->hasPreviousSession()) {
             $session = $request->getSession();
 
-            if ($session && $session->has('_locale')) {
-                return $session->get('_locale');
+            if ($session && $session->has(name: '_locale')) {
+                return $session->get(name: '_locale');
             }
         }
 
@@ -76,7 +67,7 @@ trait LocaleResolverTrait
 
     protected function returnByCookie(Request $request): ?string
     {
-        if ($request->cookies->has($this->cookieName) && $result = $this->preg($request->cookies->get($this->cookieName))) {
+        if ($request->cookies->has(key: $this->cookieName) && $result = $this->preg(hostLanguage: $request->cookies->get(key: $this->cookieName))) {
             return $result;
         }
 
@@ -85,10 +76,19 @@ trait LocaleResolverTrait
 
     protected function returnByLang(Request $request, array $availableLocales): ?string
     {
-        foreach ($this->parseLanguages($request) as $lang) {
-            if (in_array($lang, $availableLocales, true)) {
+        foreach ($this->parseLanguages(request: $request) as $lang) {
+            if (in_array(needle: $lang, haystack: $availableLocales, strict: true)) {
                 return $lang;
             }
+        }
+
+        return null;
+    }
+
+    private function preg($hostLanguage): ?string
+    {
+        if (preg_match(pattern: '#^[a-z]{2}(?:_[a-z]{2})?$#i', subject: $hostLanguage)) {
+            return $hostLanguage;
         }
 
         return null;
@@ -98,14 +98,14 @@ trait LocaleResolverTrait
     {
         $languages = [];
         foreach ($request->getLanguages() as $language) {
-            if (2 !== strlen($language)) {
-                $newLang = explode('_', $language, 2);
-                $languages[] = reset($newLang);
+            if (2 !== strlen(string: $language)) {
+                $newLang = explode(separator: '_', string: $language, limit: 2);
+                $languages[] = reset(array: $newLang);
             } else {
                 $languages[] = $language;
             }
         }
 
-        return array_unique($languages) ?? [];
+        return array_unique(array: $languages) ?? [];
     }
 }

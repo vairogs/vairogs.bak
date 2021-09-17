@@ -23,16 +23,16 @@ class VairogsExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
-        $this->process($configs, $container, $configuration);
-        $this->processComponents($container, $configuration);
+        $this->process(configs: $configs, container: $container, configuration: $configuration);
+        $this->processComponents(container: $container, configuration: $configuration);
     }
 
     public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $parameters = $this->processConfiguration($configuration, $configs) ?? [];
+        $parameters = $this->processConfiguration(configuration: $configuration, configs: $configs) ?? [];
 
-        foreach (Iteration::makeOneDimension([$this->getAlias() => $parameters]) as $key => $value) {
-            $container->setParameter($key, $value);
+        foreach (Iteration::makeOneDimension(array: [$this->getAlias() => $parameters]) as $key => $value) {
+            $container->setParameter(name: $key, value: $value);
         }
     }
 
@@ -43,37 +43,37 @@ class VairogsExtension extends Extension
 
     private function processComponents(ContainerBuilder $container, Configuration $configuration): void
     {
-        $this->processCacheComponent($container, $configuration);
-        $this->processAuthComponent($container, $configuration);
-        $this->processSitemapComponent($container, $configuration);
-        $this->processTranslationComponent($container, $configuration);
+        $this->processCacheComponent(container: $container, configuration: $configuration);
+        $this->processAuthComponent(container: $container, configuration: $configuration);
+        $this->processSitemapComponent(container: $container, configuration: $configuration);
+        $this->processTranslationComponent(container: $container, configuration: $configuration);
     }
 
     private function processCacheComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(CacheDependency::class) && Php::classImplements(CacheDependency::class, Dependency::class)) {
-            (new CacheDependency())->loadComponent($container, $configuration);
+        if (class_exists(class: CacheDependency::class) && Php::classImplements(class: CacheDependency::class, interface: Dependency::class)) {
+            (new CacheDependency())->loadComponent(containerBuilder: $container, configuration: $configuration);
         }
     }
 
     private function processAuthComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(AuthDependency::class) && Php::classImplements(AuthDependency::class, Dependency::class)) {
-            (new AuthDependency())->loadComponent($container, $configuration);
+        if (class_exists(class: AuthDependency::class) && Php::classImplements(class: AuthDependency::class, interface: Dependency::class)) {
+            (new AuthDependency())->loadComponent(containerBuilder: $container, configuration: $configuration);
         }
     }
 
     private function processSitemapComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(SitemapDependency::class) && Php::classImplements(SitemapDependency::class, Dependency::class)) {
-            (new SitemapDependency())->loadComponent($container, $configuration);
+        if (class_exists(class: SitemapDependency::class) && Php::classImplements(class: SitemapDependency::class, interface: Dependency::class)) {
+            (new SitemapDependency())->loadComponent(containerBuilder: $container, configuration: $configuration);
         }
     }
 
     private function processTranslationComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        if (class_exists(TranslationDependency::class) && Php::classImplements(TranslationDependency::class, Dependency::class)) {
-            (new TranslationDependency())->loadComponent($container, $configuration);
+        if (class_exists(class: TranslationDependency::class) && Php::classImplements(class: TranslationDependency::class, interface: Dependency::class)) {
+            (new TranslationDependency())->loadComponent(containerBuilder: $container, configuration: $configuration);
         }
     }
 }

@@ -18,8 +18,8 @@ class Orm implements Cache
 {
     public function __construct(private EntityManagerInterface $entityManager, private string $namespace = Vairogs::VAIROGS)
     {
-        if (!Php::exists(Driver::class) || !Php::exists(Query::class)) {
-            throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'doctrine/orm', 'doctrine/dbal', self::class));
+        if (!Php::exists(class: Driver::class) || !Php::exists(class: Query::class)) {
+            throw new InvalidConfigurationException(message: sprintf('Packages %s and %s must be installed in order to use %s', 'doctrine/orm', 'doctrine/dbal', self::class));
         }
     }
 
@@ -31,20 +31,20 @@ class Orm implements Cache
         $table = sprintf('%s_items', $this->namespace);
         $schemaManager = $this->entityManager->getConnection()
             ->getSchemaManager();
-        $pdoAdapter = new PdoAdapter($this->entityManager->getConnection(), '', 0, ['db_table' => $table]);
+        $pdoAdapter = new PdoAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: 0, options: ['db_table' => $table]);
 
-        if ($schemaManager && !$schemaManager->tablesExist([$table])) {
+        if ($schemaManager && !$schemaManager->tablesExist(names: [$table])) {
             try {
                 $pdoAdapter->createTable();
             } catch (Exception $exception) {
-                throw new DBALException($exception->getMessage(), $exception->getCode(), $exception);
+                throw new DBALException(message: $exception->getMessage(), code: $exception->getCode(), previous: $exception);
             }
         }
 
-        if ($schemaManager && $schemaManager->tablesExist([$table])) {
+        if ($schemaManager && $schemaManager->tablesExist(names: [$table])) {
             return $pdoAdapter;
         }
 
-        throw DBALException::invalidTableName($table);
+        throw DBALException::invalidTableName(tableName: $table);
     }
 }

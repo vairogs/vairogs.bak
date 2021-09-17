@@ -20,7 +20,7 @@ class Pool
 
         foreach ($adapters as $adapter) {
             if (!$adapter instanceof Cache && !$adapter instanceof CacheItemPoolInterface) {
-                throw new InvalidArgumentException(sprintf('Adapter %s must implement %s or %s', $adapter::class, Cache::class, CacheItemPoolInterface::class));
+                throw new InvalidArgumentException(message: sprintf('Adapter %s must implement %s or %s', $adapter::class, Cache::class, CacheItemPoolInterface::class));
             }
 
             if ($adapter instanceof Cache) {
@@ -31,7 +31,7 @@ class Pool
         }
 
         if ([] === $pool) {
-            throw new BadMethodCallException(sprintf('At least one provider must be provided in order to use %s', $class));
+            throw new BadMethodCallException(message: sprintf('At least one provider must be provided in order to use %s', $class));
         }
 
         return $pool;

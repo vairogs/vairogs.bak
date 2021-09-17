@@ -17,10 +17,10 @@ class File
     #[Annotation\TwigFunction]
     public static function mkdir(string $path): bool
     {
-        $dir = dirname($path);
+        $dir = dirname(path: $path);
 
-        if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {
-            throw new UnexpectedValueException(sprintf('Directory "%s" was not created', $dir));
+        if (!is_dir(filename: $dir) && !mkdir(directory: $dir, recursive: true) && !is_dir(filename: $dir)) {
+            throw new UnexpectedValueException(message: sprintf('Directory "%s" was not created', $dir));
         }
 
         return true;
@@ -30,6 +30,6 @@ class File
     #[Pure]
     public static function fileExistsPublic(string $filename): bool
     {
-        return is_file(getcwd() . '/' . $filename);
+        return is_file(filename: getcwd() . '/' . $filename);
     }
 }

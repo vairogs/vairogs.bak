@@ -17,42 +17,42 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder(Vairogs::VAIROGS);
+        $treeBuilder = new TreeBuilder(name: Vairogs::VAIROGS);
         $rootNode = $treeBuilder->getRootNode();
 
-        $this->appendCacheNode($rootNode);
-        $this->appendAuthNode($rootNode);
-        $this->appendSitemapNode($rootNode);
-        $this->appendTranslationNode($rootNode);
+        $this->appendCacheNode(arrayNodeDefinition: $rootNode);
+        $this->appendAuthNode(arrayNodeDefinition: $rootNode);
+        $this->appendSitemapNode(arrayNodeDefinition: $rootNode);
+        $this->appendTranslationNode(arrayNodeDefinition: $rootNode);
 
         return $treeBuilder;
     }
 
     private function appendCacheNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(CacheDependency::class) && Php::classImplements(CacheDependency::class, Dependency::class)) {
-            (new CacheDependency())->getConfiguration($arrayNodeDefinition);
+        if (class_exists(class: CacheDependency::class) && Php::classImplements(class: CacheDependency::class, interface: Dependency::class)) {
+            (new CacheDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
         }
     }
 
     private function appendAuthNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(AuthDependency::class) && Php::classImplements(AuthDependency::class, Dependency::class)) {
-            (new AuthDependency())->getConfiguration($arrayNodeDefinition);
+        if (class_exists(class: AuthDependency::class) && Php::classImplements(class: AuthDependency::class, interface: Dependency::class)) {
+            (new AuthDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
         }
     }
 
     private function appendSitemapNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(SitemapDependency::class) && Php::classImplements(SitemapDependency::class, Dependency::class)) {
-            (new SitemapDependency())->getConfiguration($arrayNodeDefinition);
+        if (class_exists(class: SitemapDependency::class) && Php::classImplements(class: SitemapDependency::class, interface: Dependency::class)) {
+            (new SitemapDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
         }
     }
 
     private function appendTranslationNode(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        if (class_exists(TranslationDependency::class) && Php::classImplements(TranslationDependency::class, Dependency::class)) {
-            (new TranslationDependency())->getConfiguration($arrayNodeDefinition);
+        if (class_exists(class: TranslationDependency::class) && Php::classImplements(class: TranslationDependency::class, interface: Dependency::class)) {
+            (new TranslationDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
         }
     }
 }

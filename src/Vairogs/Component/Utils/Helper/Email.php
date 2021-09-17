@@ -16,8 +16,8 @@ class Email
             return false;
         }
 
-        $email = filter_var($email, FILTER_SANITIZE_STRING);
+        $email = filter_var(value: $email, filter: FILTER_SANITIZE_STRING);
 
-        return false !== filter_var($email, FILTER_VALIDATE_EMAIL);
+        return false !== filter_var(value: $email, filter: FILTER_VALIDATE_EMAIL);
     }
 }

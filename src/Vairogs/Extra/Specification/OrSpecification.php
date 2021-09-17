@@ -10,6 +10,6 @@ class OrSpecification extends CompositeSpecification
 
     public function isSatisfiedBy(mixed $expectedValue, mixed $actualValue = null): bool
     {
-        return $this->one->isSatisfiedBy($expectedValue) || $this->other->isSatisfiedBy($expectedValue);
+        return $this->one->isSatisfiedBy(expectedValue: $expectedValue) || $this->other->isSatisfiedBy(expectedValue: $expectedValue);
     }
 }

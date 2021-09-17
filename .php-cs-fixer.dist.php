@@ -28,6 +28,29 @@ return (new PhpCsFixer\Config())->setRules([
         'style' => 'post',
     ],
     'comment_to_phpdoc' => true,
+    'types_spaces' => [
+        'space' => 'none',
+    ],
+    'native_function_type_declaration_casing' => true,
+    'magic_constant_casing' => true,
+    'ordered_imports' => [
+        'sort_algorithm' => 'alpha',
+        'imports_order' => [
+            'class',
+            'function',
+            'const',
+        ],
+    ],
+    'multiline_whitespace_before_semicolons' => [
+        'strategy' => 'no_multi_line',
+    ],
+    'method_chaining_indentation' => false,
+    'return_assignment' => true,
+    'ordered_class_elements' => [
+        'sort_algorithm' => 'none',
+    ],
+    'simple_to_complex_string_variable' => true,
+    'explicit_indirect_variable' => true,
 ])
     ->setRiskyAllowed(true)
     ->setCacheFile('.php-cs-fixer.cache');

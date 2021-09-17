@@ -13,8 +13,8 @@ class ColumnHydrator extends ArrayHydrator
 {
     protected function hydrateAllData(): array
     {
-        if (!isset($this->_rsm->indexByMap['scalars']) && class_exists(PDO::class)) {
-            return $this->_stmt->fetchAll(PDO::FETCH_COLUMN);
+        if (!isset($this->_rsm->indexByMap['scalars']) && class_exists(class: PDO::class)) {
+            return $this->_stmt->fetchAll(fetchMode: PDO::FETCH_COLUMN);
         }
 
         if ([] === ($result = parent::hydrateAllData())) {
@@ -22,8 +22,8 @@ class ColumnHydrator extends ArrayHydrator
         }
 
         $indexColumn = $this->_rsm->scalarMappings[$this->_rsm->indexByMap['scalars']];
-        $keys = array_keys(reset($result));
+        $keys = array_keys(array: reset(array: $result));
 
-        return array_column($result, isset($keys[1]) && $indexColumn === $keys[0] ? $keys[1] : $keys[0], $indexColumn);
+        return array_column(array: $result, column_key: isset($keys[1]) && $indexColumn === $keys[0] ? $keys[1] : $keys[0], index_key: $indexColumn);
     }
 }

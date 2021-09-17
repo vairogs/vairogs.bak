@@ -14,7 +14,7 @@ class StreamResponse extends Response
 
     public function __construct(ResponseInterface $response, private int $bufferSize = self::BUFFER_SIZE)
     {
-        parent::__construct(null, $response->getStatusCode(), $response->getHeaders());
+        parent::__construct(content: null, status: $response->getStatusCode(), headers: $response->getHeaders());
 
         $this->content = $response->getBody();
     }
@@ -26,10 +26,10 @@ class StreamResponse extends Response
 
     public function sendContent(): void
     {
-        $chunked = $this->headers->has('Transfer-Encoding');
-        $this->content->seek(0);
+        $chunked = $this->headers->has(key: 'Transfer-Encoding');
+        $this->content->seek(offset: 0);
         while (true) {
-            $chunk = $this->content->read($this->bufferSize);
+            $chunk = $this->content->read(length: $this->bufferSize);
 
             if ($chunked) {
                 echo sprintf("%x\r\n", strlen($chunk));

@@ -43,7 +43,7 @@ class Http
     public static function getRemoteIp(Request $request, bool $trust = false): string
     {
         if (!$trust) {
-            return $request->server->get(self::REMOTE_ADDR);
+            return $request->server->get(key: self::REMOTE_ADDR);
         }
 
         $parameters = [
@@ -53,22 +53,22 @@ class Http
         ];
 
         foreach ($parameters as $parameter) {
-            if ($request->server->has($parameter)) {
-                return $request->server->get($parameter);
+            if ($request->server->has(key: $parameter)) {
+                return $request->server->get(key: $parameter);
             }
         }
 
-        return $request->server->get(self::REMOTE_ADDR);
+        return $request->server->get(key: self::REMOTE_ADDR);
     }
 
     #[Annotation\TwigFunction]
     public static function getRemoteIpCF(Request $request): string
     {
-        if ($request->server->has('HTTP_CF_CONNECTING_IP')) {
-            return $request->server->get('HTTP_CF_CONNECTING_IP');
+        if ($request->server->has(key: 'HTTP_CF_CONNECTING_IP')) {
+            return $request->server->get(key: 'HTTP_CF_CONNECTING_IP');
         }
 
-        return $request->server->get(self::REMOTE_ADDR);
+        return $request->server->get(key: self::REMOTE_ADDR);
     }
 
     /**
@@ -78,26 +78,26 @@ class Http
     #[Annotation\TwigFunction]
     public static function getMethods(): array
     {
-        return Iteration::arrayValuesFiltered(Php::getClassConstants(Request::class), 'METHOD_');
+        return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: Request::class), with: 'METHOD_');
     }
 
     protected static function checkHttps(Request $request): bool
     {
-        return $request->server->has(self::HEADER_HTTPS) && 'on' === $request->server->get(self::HEADER_HTTPS);
+        return $request->server->has(key: self::HEADER_HTTPS) && 'on' === $request->server->get(key: self::HEADER_HTTPS);
     }
 
     protected static function checkServerPort(Request $request): bool
     {
-        return $request->server->has(self::HEADER_PORT) && self::HTTPS === (int) $request->server->get(self::HEADER_PORT);
+        return $request->server->has(key: self::HEADER_PORT) && self::HTTPS === (int) $request->server->get(key: self::HEADER_PORT);
     }
 
     protected static function checkHttpXForwardedSsl(Request $request): bool
     {
-        return $request->server->has(self::HEADER_SSL) && 'on' === $request->server->get(self::HEADER_SSL);
+        return $request->server->has(key: self::HEADER_SSL) && 'on' === $request->server->get(key: self::HEADER_SSL);
     }
 
     protected static function checkHttpXForwardedProto(Request $request): bool
     {
-        return $request->server->has(self::HEADER_PROTO) && 'https' === $request->server->get(self::HEADER_PROTO);
+        return $request->server->has(key: self::HEADER_PROTO) && 'https' === $request->server->get(key: self::HEADER_PROTO);
     }
 }

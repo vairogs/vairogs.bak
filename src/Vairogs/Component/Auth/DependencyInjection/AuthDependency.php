@@ -6,6 +6,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Component\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
+use Vairogs\Component\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
 use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use Vairogs\Component\Utils\Helper\Php;
@@ -20,34 +21,57 @@ class AuthDependency implements Dependency
         // @formatter:off
         $authNode = $arrayNodeDefinition
             ->children()
-                ->arrayNode(Component::AUTH)
+                ->arrayNode(name: Component::AUTH)
                 ->canBeEnabled();
-        $this->appendOpenIDConfiguration($authNode);
+        $this->appendOpenIDConfiguration(arrayNodeDefinition: $authNode);
+        $this->appendOpenIDConnectConfiguration(arrayNodeDefinition: $authNode);
 
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(Component::AUTH)
+            ->arrayNode(name: Component::AUTH)
             ->children();
 
         $arrayNodeDefinition
-            ->append($authNode)
+            ->append(node: $authNode)
             ->end();
         // @formatter:on
-    }
-
-    private function appendOpenIDConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
-    {
-        if (class_exists(AuthOpenIDDependency::class) && Php::classImplements(AuthOpenIDDependency::class, Dependency::class)) {
-            (new AuthOpenIDDependency())->getConfiguration($arrayNodeDefinition);
-        }
     }
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Dependency::ENABLED);
 
-        if ($containerBuilder->hasParameter($enabledKey) && true === $containerBuilder->getParameter($enabledKey) && class_exists(AuthOpenIDDependency::class)) {
-            (new AuthOpenIDDependency())->loadComponent($containerBuilder, $configuration);
+        if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
+            $this->loadOpenIDComponent(containerBuilder: $containerBuilder, configuration: $configuration);
+            $this->loadOpenIDConnectComponent(containerBuilder: $containerBuilder, configuration: $configuration);
+        }
+    }
+
+    private function appendOpenIDConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
+    {
+        if (class_exists(class: AuthOpenIDDependency::class) && Php::classImplements(class: AuthOpenIDDependency::class, interface: Dependency::class)) {
+            (new AuthOpenIDDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
+        }
+    }
+
+    private function appendOpenIDConnectConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
+    {
+        if (class_exists(class: AuthOpenIDConnectDependency::class) && Php::classImplements(class: AuthOpenIDConnectDependency::class, interface: Dependency::class)) {
+            (new AuthOpenIDConnectDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
+        }
+    }
+
+    private function loadOpenIDComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
+    {
+        if (class_exists(class: AuthOpenIDDependency::class) && Php::classImplements(class: AuthOpenIDDependency::class, interface: Dependency::class)) {
+            (new AuthOpenIDDependency())->loadComponent(containerBuilder: $containerBuilder, configuration: $configuration);
+        }
+    }
+
+    private function loadOpenIDConnectComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
+    {
+        if (class_exists(class: AuthOpenIDConnectDependency::class) && Php::classImplements(class: AuthOpenIDConnectDependency::class, interface: Dependency::class)) {
+            (new AuthOpenIDConnectDependency())->loadComponent(containerBuilder: $containerBuilder, configuration: $configuration);
         }
     }
 }

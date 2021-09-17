@@ -9,7 +9,6 @@ use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\Traits\SteamGetters;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\Traits\SteamSetters;
 use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
-use Vairogs\Extra\Constants\Type\Numeric;
 
 /**
  * @ORM\MappedSuperclass()
@@ -82,9 +81,9 @@ class Steam implements OpenIDUser, User, Stringable
     protected ?string $name = null;
 
     /**
-     * @ORM\Column(type=Numeric::BIGINT, nullable=true)
+     * @ORM\Column(type="bigint", nullable=true)
      */
-    #[ORM\Column(type: Numeric::BIGINT, nullable: true)]
+    #[ORM\Column(type: 'bigint', nullable: true)]
     protected ?int $clanId = null;
 
     /**

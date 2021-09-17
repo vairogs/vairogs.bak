@@ -15,13 +15,13 @@ class PhpRedis implements Cache
 {
     public function __construct(private Redis $client, private string $namespace = Vairogs::VAIROGS)
     {
-        if (!Php::exists(SncRedisBundle::class) || !Php::exists(Redis::class)) {
-            throw new InvalidConfigurationException(sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'ext-redis', self::class));
+        if (!Php::exists(class: SncRedisBundle::class) || !Php::exists(class: Redis::class)) {
+            throw new InvalidConfigurationException(message: sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'ext-redis', self::class));
         }
     }
 
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new RedisAdapter($this->client, $this->namespace, Cache::DEFAULT_LIFETIME);
+        return new RedisAdapter(redis: $this->client, namespace: $this->namespace, defaultLifetime: Cache::DEFAULT_LIFETIME);
     }
 }

@@ -28,6 +28,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/auth-openid.git"
     },
     {
+        "path": "src/Vairogs/Component/Auth/OpenIDConnect",
+        "repo": "https://GH_TOKEN@github.com/vairogs/auth-openidconnect.git"
+    },
+    {
         "path": "src/Vairogs/Component/Cache",
         "repo": "https://GH_TOKEN@github.com/vairogs/cache.git"
     },

@@ -13,6 +13,6 @@ class Extension extends BaseExtension
     #[Annotation\TwigFunction]
     public function pagination(int $visible, int $total, int $current, int $ommit = -1): array
     {
-        return (new FixedLength($visible))->getPaginationData($total, $current, $ommit);
+        return (new FixedLength(maximumVisible: $visible))->getPaginationData(totalPages: $total, currentPage: $current, indicator: $ommit);
     }
 }

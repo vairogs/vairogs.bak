@@ -30,18 +30,18 @@ final class Cache
     {
         $value = $this->data;
 
-        if (!is_array($value)) {
+        if (!is_array(value: $value)) {
             $key = $value ?: '';
         } else {
             if (!empty($this->attributes)) {
-                $flipped = Iteration::arrayFlipRecursive($this->attributes);
-                $value = Iteration::arrayIntersectKeyRecursive($value, $flipped);
+                $flipped = Iteration::arrayFlipRecursive(input: $this->attributes);
+                $value = Iteration::arrayIntersectKeyRecursive(first: $value, second: $flipped);
             }
 
-            $key = str_replace('=', '_', http_build_query($value, '', '_'));
+            $key = str_replace(search: '=', replace: '_', subject: http_build_query(data: $value, arg_separator: '_'));
         }
 
-        return hash($this->algorithm, $prefix . '_' . $key);
+        return hash(algo: $this->algorithm, data: $prefix . '_' . $key);
     }
 
     public function getData(): mixed

@@ -38,12 +38,12 @@ class Uri
     {
         $result = [];
 
-        foreach (Php::getArray($data) as $key => $value) {
+        foreach (Php::getArray(input: $data) as $key => $value) {
             $newKey = $parent ? sprintf('%s[%s]', $parent, $key) : $key;
 
-            if (!$value instanceof CURLFile && (is_array($value) || is_object($value))) {
+            if (!$value instanceof CURLFile && (is_array(value: $value) || is_object(value: $value))) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
-                $result = array_merge($result, self::buildHttpQueryArray($value, $newKey));
+                $result = array_merge($result, self::buildHttpQueryArray(data: $value, parent: $newKey));
             } else {
                 $result[$newKey] = $value;
             }
@@ -55,7 +55,7 @@ class Uri
     #[Annotation\TwigFilter]
     public static function urlEncode(string $url): string
     {
-        $urlParsed = parse_url($url);
+        $urlParsed = parse_url(url: $url);
 
         $scheme = $urlParsed['scheme'] . '://';
         $host = $urlParsed['host'];
@@ -65,7 +65,7 @@ class Uri
 
         if (null !== $query) {
             /** @var string $query */
-            $query = '?' . http_build_query(self::arrayFromQueryString($query));
+            $query = '?' . http_build_query(data: self::arrayFromQueryString(query: $query));
         }
 
         if ($port && ':' !== $port[0]) {
@@ -78,22 +78,22 @@ class Uri
     #[Annotation\TwigFilter]
     public static function arrayFromQueryString(string $query): array
     {
-        $query = preg_replace_callback('#(?:^|(?<=&))[^=[]+#', static fn ($match) => bin2hex(urldecode($match[0])), $query);
+        $query = preg_replace_callback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(urldecode($match[0])), subject: $query);
 
-        parse_str($query, $values);
+        parse_str(string: $query, result: $values);
 
-        return array_combine(array_map('hex2bin', array_keys($values)), $values);
+        return array_combine(keys: array_map(callback: 'hex2bin', array: array_keys(array: $values)), values: $values);
     }
 
     #[Annotation\TwigFilter]
     public static function parseHeaders(string $rawHeaders = ''): array
     {
         $headers = [];
-        $headerArray = str_replace("\r", '', $rawHeaders);
-        $headerArray = explode("\n", $headerArray);
+        $headerArray = str_replace(search: "\r", replace: '', subject: $rawHeaders);
+        $headerArray = explode(separator: "\n", string: $headerArray);
 
         foreach ($headerArray as $value) {
-            $header = explode(': ', $value, 2);
+            $header = explode(separator: ': ', string: $value, limit: 2);
 
             if ($header[0] && !$header[1]) {
                 $headers['status'] = $header[0];
@@ -110,23 +110,23 @@ class Uri
     public static function isUrl(string $url): bool
     {
         /* @noinspection BypassedUrlValidationInspection */
-        return false !== filter_var(filter_var($url, FILTER_SANITIZE_URL), FILTER_VALIDATE_URL);
+        return false !== filter_var(value: filter_var(value: $url, filter: FILTER_SANITIZE_URL), filter: FILTER_VALIDATE_URL);
     }
 
     #[Annotation\TwigFilter]
     public static function parseQueryPath(string $path): bool|string
     {
-        $path = '/' . ltrim($path, '/');
-        $path = preg_replace('#[\x00-\x1F\x7F]#', '', $path);
+        $path = '/' . ltrim(string: $path, characters: '/');
+        $path = preg_replace(pattern: '#[\x00-\x1F\x7F]#', replacement: '', subject: $path);
 
-        while (false !== $pos = strpos($path, '/../')) {
-            $leftSlashNext = strrpos(substr($path, 0, $pos), '/');
+        while (false !== $pos = strpos(haystack: $path, needle: '/../')) {
+            $leftSlashNext = strrpos(haystack: substr(string: $path, offset: 0, length: $pos), needle: '/');
 
             if (!$leftSlashNext) {
                 return false;
             }
 
-            $path = substr($path, 0, $leftSlashNext + 1) . substr($path, $pos + 4);
+            $path = substr(string: $path, offset: 0, length: $leftSlashNext + 1) . substr(string: $path, offset: $pos + 4);
         }
 
         return $path;
@@ -136,12 +136,12 @@ class Uri
     #[Annotation\TwigFilter]
     public static function getSchema(Request $request): string
     {
-        return Http::isHttps($request) ? 'https://' : 'http://';
+        return Http::isHttps(request: $request) ? 'https://' : 'http://';
     }
 
     #[Annotation\TwigFunction]
     public static function isAbsolute(string $path): bool
     {
-        return str_starts_with($path, '//') || preg_match('#^[a-z-]{3,}://#i', $path);
+        return str_starts_with(haystack: $path, needle: '//') || preg_match(pattern: '#^[a-z-]{3,}://#i', subject: $path);
     }
 }

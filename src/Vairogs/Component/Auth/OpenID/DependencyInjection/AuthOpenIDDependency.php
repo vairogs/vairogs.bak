@@ -3,38 +3,62 @@
 namespace Vairogs\Component\Auth\OpenID\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Vairogs\Component\Auth\DependencyInjection\AbstractAuthComponentDependency;
 use Vairogs\Component\Auth\OpenID\OpenIDProvider;
 use Vairogs\Component\Utils\DependencyInjection\Component;
-use Vairogs\Component\Utils\DependencyInjection\Dependency;
-use Vairogs\Component\Utils\Helper\Iteration;
 use Vairogs\Component\Utils\Vairogs;
-use Vairogs\Extra\Constants\Type\Basic;
-use function sprintf;
 
-class AuthOpenIDDependency implements Dependency
+class AuthOpenIDDependency extends AbstractAuthComponentDependency
 {
+    public static function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
+    {
+        $arrayNodeDefinition->addDefaultsIfNotSet();
+        $optionsNode = $arrayNodeDefinition->children();
+
+        // @formatter:off
+        $optionsNode
+            ->scalarNode(name: 'api_key')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode(name: 'openid_url')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode(name: 'preg_check')->isRequired()->cannotBeEmpty()->end()
+            ->scalarNode(name: 'ns_mode')->defaultValue(value: 'sreg')->end()
+            ->scalarNode(name: 'user_builder')->isRequired()->end()
+            ->scalarNode(name: 'user_class')->defaultNull()->end()
+            ->scalarNode(name: 'redirect_route')->isRequired()->cannotBeEmpty()->end()
+            ->arrayNode(name: 'provider_options')->prototype(type: 'variable')->end()->end();
+        // @formatter:on
+
+        $optionsNode->end();
+    }
+
+    public static function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
+    {
+        $clientDefinition = $containerBuilder->register(id: $clientServiceKey, class: OpenIDProvider::class);
+        $clientDefinition->setArguments(arguments: [
+            new Reference(id: 'request_stack'),
+            new Reference(id: 'router'),
+            $key,
+            $containerBuilder->getParameter(name: 'kernel.cache_dir'),
+            $containerBuilder->getParameter(name: $clientServiceKey),
+        ])
+            ->addTag(name: $base);
+    }
+
     /**
-     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     * @noinspection NullPointerExceptionInspection
      */
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(Component::AUTH_OPENID)
+            ->arrayNode(name: Component::AUTH_OPENID)
                 ->canBeEnabled()
                 ->addDefaultsIfNotSet()
                 ->children()
-                    ->arrayNode('clients')
-                        ->prototype(Basic::ARRAY)
-                            ->prototype('variable')->end()
-                        ->end()
-                    ->end()
+                    ->arrayNode(name: 'clients')->prototype(type: 'array')->prototype(type: 'variable')->end()->end()->end()
                 ->end()
             ->end()
         ->end();
@@ -44,60 +68,6 @@ class AuthOpenIDDependency implements Dependency
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
         $baseKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID;
-        $enabledKey = sprintf('%s.%s', $baseKey, Dependency::ENABLED);
-
-        if ($containerBuilder->hasParameter($enabledKey) && true === $containerBuilder->getParameter($enabledKey)) {
-            $clientsKey = $baseKey . '.clients';
-
-            foreach ($containerBuilder->getParameter($clientsKey) as $key => $clientConfig) {
-                $tree = new TreeBuilder($key);
-                $node = $tree->getRootNode();
-                $this->buildClientConfiguration($node);
-                $config = (new Processor())->process($tree->buildTree(), [$clientConfig]);
-                $clientServiceKey = $clientsKey . '.' . $key;
-
-                foreach (Iteration::makeOneDimension($config, $clientServiceKey) as $tkey => $value) {
-                    $containerBuilder->setParameter($tkey, $value);
-                }
-
-                $this->configureClient($containerBuilder, $clientServiceKey, $clientsKey, $key);
-            }
-        }
-    }
-
-    /**
-     * @noinspection NullPointerExceptionInspection
-     */
-    private function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
-    {
-        $arrayNodeDefinition->addDefaultsIfNotSet();
-        $optionsNode = $arrayNodeDefinition->children();
-
-        // @formatter:off
-        $optionsNode
-            ->scalarNode('api_key')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('openid_url')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('preg_check')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('ns_mode')->defaultValue('sreg')->end()
-            ->scalarNode('user_builder')->isRequired()->end()
-            ->scalarNode('user_class')->defaultNull()->end()
-            ->scalarNode('redirect_route')->isRequired()->cannotBeEmpty()->end()
-            ->arrayNode('provider_options')->prototype('variable')->end()->end();
-        // @formatter:on
-
-        $optionsNode->end();
-    }
-
-    private function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
-    {
-        $clientDefinition = $containerBuilder->register($clientServiceKey, OpenIDProvider::class);
-        $clientDefinition->setArguments([
-            new Reference('request_stack'),
-            new Reference('router'),
-            $key,
-            $containerBuilder->getParameter('kernel.cache_dir'),
-            $containerBuilder->getParameter($clientServiceKey),
-        ])
-            ->addTag($base);
+        $this->loadComponentConfiguration(base: $baseKey, containerBuilder: $containerBuilder);
     }
 }

@@ -14,8 +14,8 @@ class ErrorResponse
     public function __construct(private ConstraintViolationListInterface $constraintViolationList)
     {
         $this->response = new Response();
-        $this->response->headers->set('Content-Type', ContentType::XML);
-        $this->response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->response->headers->set(key: 'Content-Type', values: ContentType::XML);
+        $this->response->setStatusCode(code: Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     public function getResponse(): Response
@@ -39,7 +39,7 @@ class ErrorResponse
         $buffer .= '</errors>
 <!-- error from sitemap library for Symfony vairogs/sitemap -->';
 
-        $this->response->setContent($buffer);
+        $this->response->setContent(content: $buffer);
 
         return $this->response;
     }

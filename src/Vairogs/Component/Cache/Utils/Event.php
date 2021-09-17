@@ -29,22 +29,22 @@ class Event
      */
     public function getAttributes(KernelEvent $kernelEvent, string $class): array
     {
-        if (null !== ($annotation = $this->getAnnotation($kernelEvent, $class))) {
+        if (null !== ($annotation = $this->getAnnotation(kernelEvent: $kernelEvent, class: $class))) {
             $request = $kernelEvent->getRequest();
 
             $user = $this->getUser();
 
             return match ($annotation->getStrategy()) {
-                Strategy::GET => $request->attributes->get(self::PARAMS) + $request->query->all(),
+                Strategy::GET => $request->attributes->get(key: self::PARAMS) + $request->query->all(),
                 Strategy::POST => $request->request->all(),
                 Strategy::USER => $user,
                 Strategy::MIXED => [
-                    Strategy::GET => $request->attributes->get(self::PARAMS) + $request->query->all(),
+                    Strategy::GET => $request->attributes->get(key: self::PARAMS) + $request->query->all(),
                     Strategy::POST => $request->request->all(),
                     Strategy::USER => $user,
                 ],
-                Strategy::ALL => $request->attributes->get(self::PARAMS) + $request->query->all() + $request->request->all() + $user,
-                default => throw new InvalidArgumentException(sprintf('Unknown strategy: %s', $annotation->getStrategy())),
+                Strategy::ALL => $request->attributes->get(key: self::PARAMS) + $request->query->all() + $request->request->all() + $user,
+                default => throw new InvalidArgumentException(message: sprintf('Unknown strategy: %s', $annotation->getStrategy())),
             };
         }
 
@@ -56,16 +56,17 @@ class Event
      */
     public function getAnnotation(KernelEvent $kernelEvent, string $class): ?object
     {
-        $controller = $this->getController($kernelEvent);
+        $controller = $this->getController(kernelEvent: $kernelEvent);
 
-        if ($method = (new ReflectionClass(reset($controller)))->getMethod(end($controller))) {
-            foreach ($method->getAttributes($class) as $attribute) {
+        if ($method = (new ReflectionClass(objectOrClass: reset(array: $controller)))->getMethod(name: end(array: $controller))) {
+            foreach ($method->getAttributes(name: $class) as $attribute) {
                 if ($class === $attribute->getName()) {
                     return $attribute->newInstance();
                 }
             }
 
-            if (($object = $this->reader->getMethodAnnotation($method, $class)) instanceof $class) {
+            /* @noinspection PhpNamedArgumentMightBeUnresolvedInspection */
+            if (($object = $this->reader->getMethodAnnotation(method: $method, annotationName: $class)) instanceof $class) {
                 return $object;
             }
         }
@@ -76,9 +77,9 @@ class Event
     public function getController(KernelEvent $kernelEvent): array
     {
         $controller = $kernelEvent->getRequest()
-            ->get('_controller');
+            ->get(key: '_controller');
 
-        if ((null !== $controller) && is_array($instance = explode('::', $controller, 2)) && isset($instance[1])) {
+        if ((null !== $controller) && is_array(value: $instance = explode(separator: '::', string: $controller, limit: 2)) && isset($instance[1])) {
             return $instance;
         }
 

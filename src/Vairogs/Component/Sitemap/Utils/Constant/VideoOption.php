@@ -21,7 +21,7 @@ final class VideoOption
      */
     public static function getRestrictions(): array
     {
-        return Iteration::arrayValuesFiltered(Php::getClassConstants(self::class), 'RESTRICTION_');
+        return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: self::class), with: 'RESTRICTION_');
     }
 
     /**
@@ -29,7 +29,7 @@ final class VideoOption
      */
     public static function getPlatforms(): array
     {
-        return Iteration::arrayValuesFiltered(Php::getClassConstants(self::class), 'PLATFORM_');
+        return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: self::class), with: 'PLATFORM_');
     }
 
     /**
@@ -37,6 +37,6 @@ final class VideoOption
      */
     public static function getOptions(): array
     {
-        return Iteration::arrayValuesFiltered(Php::getClassConstants(self::class), 'OPTION_');
+        return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: self::class), with: 'OPTION_');
     }
 }
