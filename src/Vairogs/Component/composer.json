@@ -95,7 +95,7 @@
         "vairogs/auth-openidconnect": "self.version",
         "vairogs/cache": "self.version",
         "vairogs/cache-utils": "self.version",
-        "vairogs/captcha": "self.version",
+        "vairogs/component-captcha": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/utils": "self.version"
     },

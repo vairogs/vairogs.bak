@@ -1,4 +1,4 @@
-# captcha
+# component-captcha
 
 Installation
 ------------
@@ -6,7 +6,7 @@ Installation
 The recommended way to install is via Composer:
 
 ```
-composer require vairogs/captcha
+composer require vairogs/component-captcha
 ```
 
 This package requires at least PHP 8.0.0
