@@ -45,7 +45,7 @@
         "symfony/options-resolver": "~5.3",
         "symfony/translation": "~5.3",
         "symfony/validator": "~5.3",
-        "vairogs/utils": "3.x-dev"
+        "vairogs/component-utils": "3.x-dev"
     },
     "autoload": {
         "psr-4": {

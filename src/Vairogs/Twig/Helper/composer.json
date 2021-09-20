@@ -1,6 +1,6 @@
 {
     "name": "vairogs/twig-helper",
-    "description": "Twig extension that implements vairogs/utils helper functions in Twig template",
+    "description": "Twig extension that implements vairogs/component-utils helper functions in Twig template",
     "type": "library",
     "keywords": [
         "array",
@@ -62,7 +62,7 @@
         "php": ">=8.0.0",
         "jetbrains/phpstorm-attributes": "*",
         "twig/twig": "3.*",
-        "vairogs/utils": "3.x-dev"
+        "vairogs/component-utils": "3.x-dev"
     },
     "replace": {
         "vairogs/twig-helper-date": "self.version",

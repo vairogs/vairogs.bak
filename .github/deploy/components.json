@@ -57,7 +57,7 @@
     },
     {
         "path": "src/Vairogs/Component/Utils",
-        "repo": "https://GH_TOKEN@github.com/vairogs/utils.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/component-utils.git"
     },
     {
         "path": "src/Vairogs/Extra",

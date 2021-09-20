@@ -1,5 +1,5 @@
 {
-    "name": "vairogs/utils",
+    "name": "vairogs/component-utils",
     "description": "Utils: Symfony utility classes",
     "type": "library",
     "keywords": [

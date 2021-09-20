@@ -98,7 +98,7 @@
         "vairogs/component-captcha": "self.version",
         "vairogs/component-sitemap": "self.version",
         "vairogs/component-translation": "self.version",
-        "vairogs/utils": "self.version"
+        "vairogs/component-utils": "self.version"
     },
     "autoload": {
         "psr-4": {
