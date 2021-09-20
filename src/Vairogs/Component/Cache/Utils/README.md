@@ -1,4 +1,4 @@
-# cache-utils
+# component-cache-utils
 
 Installation
 ------------
@@ -6,7 +6,7 @@ Installation
 The recommended way to install is via Composer:
 
 ```
-composer require vairogs/cache-utils
+composer require vairogs/component-cache-utils
 ```
 
 This package requires at least PHP 8.0.0

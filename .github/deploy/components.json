@@ -37,11 +37,11 @@
     },
     {
         "path": "src/Vairogs/Component/Cache",
-        "repo": "https://GH_TOKEN@github.com/vairogs/cache.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/component-cache.git"
     },
     {
         "path": "src/Vairogs/Component/Cache/Utils",
-        "repo": "https://GH_TOKEN@github.com/vairogs/cache-utils.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/component-cache-utils.git"
     },
     {
         "path": "src/Vairogs/Component/Captcha",

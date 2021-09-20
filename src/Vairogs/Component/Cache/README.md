@@ -1,4 +1,4 @@
-# cache
+# component-cache
 
 Based on: [phpsed/cache](https://github.com/phpsed/cache)
 
@@ -8,7 +8,7 @@ Installation
 The recommended way to install is via Composer:
 
 ```
-composer require vairogs/cache
+composer require vairogs/component-cache
 ```
 
 This package requires at least PHP 8.0.0
