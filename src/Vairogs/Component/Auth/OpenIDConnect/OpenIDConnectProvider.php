@@ -48,59 +48,14 @@ abstract class OpenIDConnectProvider extends Provider
         $this->signer = new Signer\Rsa\Sha256();
         $this->validatorChain = new ValidatorChain();
         $this->setValidators();
-        $this->session = $requestStack->getCurrentRequest()
-            ->getSession();
+        try {
+            $this->session = $requestStack->getCurrentRequest()?->getSession() ?? null;
+        } catch (Exception) {
+        }
         parent::__construct(options: $options, collaborators: $collaborators);
         $this->buildParams(options: $options);
     }
 
-    /**
-     * @throws IdentityProviderException
-     */
-    public function getRefreshToken($token, array $options = []): array|string|ResponseInterface
-    {
-        $params = [
-            'token' => $token,
-            'grant_type' => 'refresh_token',
-        ];
-        $params = array_merge($params, $options);
-        $request = $this->getRefreshTokenRequest(params: $params);
-
-        return $this->getTokenResponse(request: $request);
-    }
-
-    /**
-     * @throws IdentityProviderException
-     */
-    public function getTokenResponse(RequestInterface $request): array
-    {
-        $response = $this->getResponse(request: $request);
-        $this->statusCode = $response->getStatusCode();
-        /** @var array $parsed */
-        $parsed = $this->parseResponse(response: $response);
-        $this->checkResponse(response: $response, data: $parsed);
-
-        return $parsed;
-    }
-
-    /**
-     * @throws IdentityProviderException
-     */
-    public function getValidateToken($token, array $options = []): array|string|ResponseInterface
-    {
-        $params = [
-            'token' => $token,
-        ];
-        $params = array_merge($params, $options);
-        $request = $this->getValidateTokenRequest(params: $params);
-
-        return $this->getTokenResponse(request: $request);
-    }
-
-    /**
-     * @throws IdentityProviderException
-     * @throws OpenIDConnectException
-     */
     public function getAccessToken($grant, array $options = []): AccessTokenInterface|BaseAccessToken
     {
         /** @var ParsedToken $accessToken */
@@ -145,13 +100,14 @@ abstract class OpenIDConnectProvider extends Provider
     /**
      * @throws IdentityProviderException
      */
-    public function getRevokeToken($token, array $options = []): array|string|ResponseInterface
+    public function getRefreshToken($token, array $options = []): array|string|ResponseInterface
     {
         $params = [
             'token' => $token,
+            'grant_type' => 'refresh_token',
         ];
         $params = array_merge($params, $options);
-        $request = $this->getRevokeTokenRequest(params: $params);
+        $request = $this->getRefreshTokenRequest(params: $params);
 
         return $this->getTokenResponse(request: $request);
     }
@@ -178,6 +134,48 @@ abstract class OpenIDConnectProvider extends Provider
     public function getPublicKey(): Key
     {
         return Key\InMemory::plainText(contents: $this->publicKey);
+    }
+
+    /**
+     * @throws IdentityProviderException
+     */
+    public function getTokenResponse(RequestInterface $request): array
+    {
+        $response = $this->getResponse(request: $request);
+        $this->statusCode = $response->getStatusCode();
+        /** @var array $parsed */
+        $parsed = $this->parseResponse(response: $response);
+        $this->checkResponse(response: $response, data: $parsed);
+
+        return $parsed;
+    }
+
+    /**
+     * @throws IdentityProviderException
+     */
+    public function getValidateToken($token, array $options = []): array|string|ResponseInterface
+    {
+        $params = [
+            'token' => $token,
+        ];
+        $params = array_merge($params, $options);
+        $request = $this->getValidateTokenRequest(params: $params);
+
+        return $this->getTokenResponse(request: $request);
+    }
+
+    /**
+     * @throws IdentityProviderException
+     */
+    public function getRevokeToken($token, array $options = []): array|string|ResponseInterface
+    {
+        $params = [
+            'token' => $token,
+        ];
+        $params = array_merge($params, $options);
+        $request = $this->getRevokeTokenRequest(params: $params);
+
+        return $this->getTokenResponse(request: $request);
     }
 
     protected function setValidators(): void
@@ -241,6 +239,11 @@ abstract class OpenIDConnectProvider extends Provider
             $this->uris[$name] = new Uri(options: $uri, extra: $params, useSession: $this->useSession, method: $uri['method'] ?? Request::METHOD_POST, session: $this->session);
         }
     }
+
+    /**
+     * @throws IdentityProviderException
+     * @throws OpenIDConnectException
+     */
 
     /**
      * @throws JsonException

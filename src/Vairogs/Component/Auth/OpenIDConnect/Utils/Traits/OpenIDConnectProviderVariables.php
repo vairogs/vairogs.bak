@@ -19,7 +19,7 @@ trait OpenIDConnectProviderVariables
     protected ValidatorChain $validatorChain;
     protected string $idTokenIssuer;
     protected bool $useSession = false;
-    protected SessionInterface $session;
+    protected ?SessionInterface $session = null;
     protected int $statusCode;
     protected string $baseUri;
     protected ?string $baseUriPost;
@@ -73,12 +73,12 @@ trait OpenIDConnectProviderVariables
         return $this;
     }
 
-    public function getSession(): callable|SessionInterface
+    public function getSession(): ?SessionInterface
     {
         return $this->session;
     }
 
-    public function setSession(callable|SessionInterface $session): static
+    public function setSession(?SessionInterface $session): static
     {
         $this->session = $session;
 

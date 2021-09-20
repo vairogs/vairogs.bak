@@ -51,6 +51,10 @@ return (new PhpCsFixer\Config())->setRules([
     ],
     'simple_to_complex_string_variable' => true,
     'explicit_indirect_variable' => true,
+    'no_superfluous_phpdoc_tags' => [
+        'allow_mixed' => true,
+        'remove_inheritdoc' => true,
+    ],
 ])
     ->setRiskyAllowed(true)
     ->setCacheFile('.php-cs-fixer.cache');
