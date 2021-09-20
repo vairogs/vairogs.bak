@@ -52,6 +52,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/component-sitemap.git"
     },
     {
+        "path": "src/Vairogs/Component/Translation",
+        "repo": "https://GH_TOKEN@github.com/vairogs/component-translation.git"
+    },
+    {
         "path": "src/Vairogs/Component/Utils",
         "repo": "https://GH_TOKEN@github.com/vairogs/utils.git"
     },
