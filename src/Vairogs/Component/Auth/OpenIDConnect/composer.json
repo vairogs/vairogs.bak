@@ -1,5 +1,5 @@
 {
-    "name": "vairogs/auth-openidconnect",
+    "name": "vairogs/component-auth-openidconnect",
     "description": "Utils: Auth library OpenIDConnect client",
     "type": "library",
     "keywords": [

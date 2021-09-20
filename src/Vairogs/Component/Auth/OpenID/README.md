@@ -1,4 +1,4 @@
-# auth-openid
+# component-auth-openid
 
 Installation
 ------------
@@ -6,7 +6,7 @@ Installation
 The recommended way to install is via Composer:
 
 ```
-composer require vairogs/auth-openid
+composer require vairogs/component-auth-openid
 ```
 
 This package requires at least PHP 8.0.0

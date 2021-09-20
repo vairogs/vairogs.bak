@@ -42,7 +42,7 @@
         "php": ">=8.0.0",
         "doctrine/orm": "~2.6",
         "jetbrains/phpstorm-attributes": "*",
-        "vairogs/auth-openid": "3.x-dev"
+        "vairogs/component-auth-openid": "3.x-dev"
     },
     "autoload": {
         "psr-4": {

@@ -25,15 +25,15 @@
     },
     {
         "path": "src/Vairogs/Component/Auth",
-        "repo": "https://GH_TOKEN@github.com/vairogs/auth.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/component-auth.git"
     },
     {
         "path": "src/Vairogs/Component/Auth/OpenID",
-        "repo": "https://GH_TOKEN@github.com/vairogs/auth-openid.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/component-auth-openid.git"
     },
     {
         "path": "src/Vairogs/Component/Auth/OpenIDConnect",
-        "repo": "https://GH_TOKEN@github.com/vairogs/auth-openidconnect.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/component-auth-openidconnect.git"
     },
     {
         "path": "src/Vairogs/Component/Cache",

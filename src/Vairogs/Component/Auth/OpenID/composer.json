@@ -1,5 +1,5 @@
 {
-    "name": "vairogs/auth-openid",
+    "name": "vairogs/component-auth-openid",
     "description": "Utils: Auth library OpenID client",
     "type": "library",
     "keywords": [

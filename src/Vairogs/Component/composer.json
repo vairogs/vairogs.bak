@@ -90,9 +90,9 @@
         "twig/twig": "3.*"
     },
     "replace": {
-        "vairogs/auth": "self.version",
-        "vairogs/auth-openid": "self.version",
-        "vairogs/auth-openidconnect": "self.version",
+        "vairogs/component-auth": "self.version",
+        "vairogs/component-auth-openid": "self.version",
+        "vairogs/component-auth-openidconnect": "self.version",
         "vairogs/component-cache": "self.version",
         "vairogs/component-cache-utils": "self.version",
         "vairogs/component-captcha": "self.version",
