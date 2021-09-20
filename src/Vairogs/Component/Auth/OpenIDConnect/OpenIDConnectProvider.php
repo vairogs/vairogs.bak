@@ -328,7 +328,7 @@ abstract class OpenIDConnectProvider extends Provider
 
     protected function saveSession($accessToken): void
     {
-        if ($this->useSession) {
+        if ($this->useSession && null !== $this->session) {
             $this->session->set(name: 'access_token', value: $accessToken->getToken());
             $this->session->set(name: 'refresh_token', value: $accessToken->getRefreshToken());
             $this->session->set(name: 'id_token', value: $accessToken->getIdTokenHint());
