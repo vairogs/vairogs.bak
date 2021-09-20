@@ -49,7 +49,7 @@
     },
     {
         "path": "src/Vairogs/Component/Sitemap",
-        "repo": "https://GH_TOKEN@github.com/vairogs/sitemap.git"
+        "repo": "https://GH_TOKEN@github.com/vairogs/component-sitemap.git"
     },
     {
         "path": "src/Vairogs/Component/Utils",

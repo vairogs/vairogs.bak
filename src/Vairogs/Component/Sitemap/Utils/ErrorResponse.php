@@ -37,7 +37,7 @@ class ErrorResponse
         }
 
         $buffer .= '</errors>
-<!-- error from sitemap library for Symfony vairogs/sitemap -->';
+<!-- error from sitemap library for Symfony vairogs/component-sitemap -->';
 
         $this->response->setContent(content: $buffer);
 

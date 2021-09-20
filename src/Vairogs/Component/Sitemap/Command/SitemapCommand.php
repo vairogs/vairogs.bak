@@ -33,7 +33,7 @@ class SitemapCommand extends Command
     public function __construct(private ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
     {
         if (null === $provider || (false === $options[Dependency::ENABLED])) {
-            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException(message: 'To use vairogs/component-sitemap, you must enable it and provide a Provider');
         }
 
         $this->options = $options;

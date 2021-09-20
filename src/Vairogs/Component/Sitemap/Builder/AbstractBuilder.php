@@ -43,7 +43,7 @@ abstract class AbstractBuilder implements Builder
 
     public function end(&$buffer): void
     {
-        $this->write(buffer: $buffer, text: '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
+        $this->write(buffer: $buffer, text: '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/component-sitemap -->');
     }
 
     public function start(&$buffer): void
