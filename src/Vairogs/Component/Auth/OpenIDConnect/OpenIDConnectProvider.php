@@ -51,6 +51,7 @@ abstract class OpenIDConnectProvider extends Provider
         try {
             $this->session = $requestStack->getCurrentRequest()?->getSession() ?? null;
         } catch (Exception) {
+            // Set session = null if session not available at this point
         }
         parent::__construct(options: $options, collaborators: $collaborators);
         $this->buildParams(options: $options);
