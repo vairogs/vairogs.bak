@@ -25,7 +25,7 @@ class AuthOpenIDDependency extends AbstractAuthComponentDependency
             ->scalarNode(name: 'preg_check')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode(name: 'ns_mode')->defaultValue(value: 'sreg')->end()
             ->scalarNode(name: 'user_builder')->isRequired()->end()
-            ->scalarNode(name: 'user_class')->defaultNull()->end()
+            ->scalarNode(name: 'user_class')->defaultValue(value: null)->end()
             ->scalarNode(name: 'redirect_route')->isRequired()->cannotBeEmpty()->end()
             ->arrayNode(name: 'provider_options')->prototype(type: 'variable')->end()->end();
         // @formatter:on

@@ -57,7 +57,7 @@ class FixedLength
     private function checkMinimumAllowed(int $maximumVisible): void
     {
         if ($this->maximumVisible < self::MIN_VISIBLE) {
-            throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d.', $maximumVisible, self::MIN_VISIBLE));
+            throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d', $maximumVisible, self::MIN_VISIBLE));
         }
     }
 

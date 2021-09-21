@@ -13,13 +13,16 @@ class OpenIDConnectRegistry
     /**
      * @var OpenIDConnectProvider[]
      */
-    private array $clients;
+    private array $clients = [];
 
     public function __construct(Traversable $clients)
     {
         $this->clients = iterator_to_array(iterator: $clients, preserve_keys: true);
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function getClient(string $name): OpenIDConnectProvider
     {
         foreach ($this->clients as $client) {

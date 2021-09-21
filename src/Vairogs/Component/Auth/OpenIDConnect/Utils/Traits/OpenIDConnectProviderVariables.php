@@ -19,7 +19,7 @@ trait OpenIDConnectProviderVariables
     protected ValidatorChain $validatorChain;
     protected string $idTokenIssuer;
     protected bool $useSession = false;
-    protected ?SessionInterface $session = null;
+    protected ?SessionInterface $session;
     protected int $statusCode;
     protected string $baseUri;
     protected ?string $baseUriPost;
@@ -49,12 +49,12 @@ trait OpenIDConnectProviderVariables
         return $this;
     }
 
-    public function getSigner(): Signer\Rsa\Sha256|Signer
+    public function getSigner(): Signer
     {
         return $this->signer;
     }
 
-    public function setSigner(Signer\Rsa\Sha256|Signer $signer): static
+    public function setSigner(Signer $signer): static
     {
         $this->signer = $signer;
 
@@ -138,7 +138,7 @@ trait OpenIDConnectProviderVariables
         return $this;
     }
 
-    public function getUri($name): ?Uri
+    public function getUri(string $name): ?Uri
     {
         return $this->uris[$name] ?? null;
     }

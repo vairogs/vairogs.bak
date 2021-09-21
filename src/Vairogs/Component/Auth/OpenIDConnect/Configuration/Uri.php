@@ -125,7 +125,7 @@ class Uri
             if (false === $this->useSession) {
                 throw new OpenIDConnectException(message: sprintf('"%s" parameter must be set to "true" in order to use id_token_hint', 'use_session'));
             }
-            $this->urlParams['id_token_hint'] = $this->session->get('id_token');
+            $this->urlParams['id_token_hint'] = $this->session->get(name: 'id_token');
         }
     }
 }

@@ -55,6 +55,7 @@ return (new PhpCsFixer\Config())->setRules([
         'allow_mixed' => true,
         'remove_inheritdoc' => true,
     ],
+    'no_useless_sprintf' => true,
 ])
     ->setRiskyAllowed(true)
     ->setCacheFile('.php-cs-fixer.cache');

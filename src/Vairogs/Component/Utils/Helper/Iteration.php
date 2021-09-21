@@ -147,7 +147,7 @@ class Iteration
             ], strict: true)) {
                 $result[$element] = $key;
             } else {
-                throw new InvalidArgumentException(message: 'Value should be array, string or integer.');
+                throw new InvalidArgumentException(message: 'Value should be array, string or integer');
             }
         }
 
