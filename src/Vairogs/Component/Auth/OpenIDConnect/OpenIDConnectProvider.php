@@ -201,21 +201,16 @@ abstract class OpenIDConnectProvider extends Provider
 
             $this->publicKey = 'file://' . $this->publicKey;
 
-            $this->buildUris(options: $uris);
-        }
-    }
-
-    protected function buildUris(array $options = []): void
-    {
-        foreach ($options as $name => $uri) {
-            $params = [
-                'client_id' => $this->clientId,
-                'redirect_uri' => $this->redirectUri,
-                'state' => $this->state,
-                'base_uri' => $this->baseUri,
-                'base_uri_post' => $this->baseUriPost ?? $this->baseUri,
-            ];
-            $this->uris[$name] = new Uri(options: $uri, extra: $params, useSession: $this->useSession, method: $uri['method'] ?? Request::METHOD_POST, session: $this->session);
+            foreach ($options as $name => $uri) {
+                $params = [
+                    'client_id' => $this->clientId,
+                    'redirect_uri' => $this->redirectUri,
+                    'state' => $this->state,
+                    'base_uri' => $this->baseUri,
+                    'base_uri_post' => $this->baseUriPost ?? $this->baseUri,
+                ];
+                $this->uris[$name] = new Uri(options: $uri, extra: $params, useSession: $this->useSession, method: $uri['method'] ?? Request::METHOD_POST, session: $this->session);
+            }
         }
     }
 
