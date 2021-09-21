@@ -6,7 +6,7 @@ abstract class AbstractSpecification extends CompositeSpecification
 {
     protected string $message = '';
 
-    public function __construct(protected string $name, protected bool $required = false)
+    public function __construct(protected bool $required = false, protected ?string $name = null)
     {
     }
 

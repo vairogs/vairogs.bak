@@ -9,6 +9,7 @@ use JetBrains\PhpStorm\Pure;
 use JsonException;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Validation\Constraint\IssuedBy;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use League\OAuth2\Client\Grant\AbstractGrant;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -21,8 +22,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use UnexpectedValueException;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\AbstractProvider;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ParsedToken;
-use Vairogs\Component\Auth\OpenIDConnect\Configuration\Provider;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ValidatorChain;
 use Vairogs\Component\Auth\OpenIDConnect\Exception\OpenIDConnectException;
@@ -38,7 +39,7 @@ use function json_last_error;
 use function property_exists;
 use function sprintf;
 
-abstract class OpenIDConnectProvider extends Provider
+abstract class OpenIDConnectProvider extends AbstractProvider
 {
     use OpenIDConnectProviderVariables;
 
@@ -52,7 +53,7 @@ abstract class OpenIDConnectProvider extends Provider
             $this->session = null;
         }
         parent::__construct(options: $options, collaborators: $collaborators);
-        $this->buildParams(options: $options);
+        $this->configure(options: $options);
     }
 
     /**
@@ -72,14 +73,9 @@ abstract class OpenIDConnectProvider extends Provider
             throw new OpenIDConnectException(message: 'Expected an id_token but did not receive one from the authorization server');
         }
 
-        try {
-            (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->assert(token: $token);
-        } catch (Exception) {
-            throw new OpenIDConnectException(message: 'Received an invalid id_token from authorization server');
-        }
-
-        $currentTime = new DateTime(datetime: 'now');
+        $currentTime = new DateTime();
         $data = [
+            'token' => $token,
             'iss' => $this->getIdTokenIssuer(),
             'exp' => $currentTime,
             'auth_time' => $currentTime,
@@ -87,11 +83,11 @@ abstract class OpenIDConnectProvider extends Provider
             'nbf' => $currentTime,
             'aud' => [$this->clientId],
             'azp' => $this->clientId,
-            'at_hast' => Text::getHash($accessToken->getToken()),
+            'at_hast' => Text::getHash(hashable: $accessToken->getToken()),
         ];
         $this->setValidators();
 
-        if (false === $this->validatorChain->validate(data: $data, token: $token)) {
+        if (false === $this->validatorChain->validate(data: $data, object: $token)) {
             throw new OpenIDConnectException(message: 'The id_token did not pass validation');
         }
 
@@ -179,7 +175,7 @@ abstract class OpenIDConnectProvider extends Provider
         return $this->getTokenResponse(request: $request);
     }
 
-    protected function buildParams(array $options = []): void
+    protected function configure(array $options = []): void
     {
         if ([] !== $options) {
             $this->state = $this->getRandomState();
@@ -201,7 +197,7 @@ abstract class OpenIDConnectProvider extends Provider
 
             $this->publicKey = 'file://' . $this->publicKey;
 
-            foreach ($options as $name => $uri) {
+            foreach ($uris as $name => $uri) {
                 $params = [
                     'client_id' => $this->clientId,
                     'redirect_uri' => $this->redirectUri,
@@ -243,18 +239,24 @@ abstract class OpenIDConnectProvider extends Provider
 
     protected function setValidators(): void
     {
-        $this->validatorChain->setValidators(validators: [
-            new Specification\EqualsTo(name: 'at_hash', required: true),
-            new Specification\EqualsTo(name: 'aud', required: true),
-            new Specification\EqualsTo(name: 'azp'),
-            new Specification\EqualsTo(name: 'iss', required: true),
-            new Specification\EqualsTo(name: 'jti'),
-            new Specification\EqualsTo(name: 'nonce'),
-            new Specification\GreaterOrEqualsTo(name: 'exp', required: true),
-            new Specification\LesserOrEqualsTo(name: 'nbf'),
-            new Specification\NotEmpty(name: 'iat', required: true),
-            new Specification\NotEmpty(name: 'sub', required: true),
-        ]);
+        // @formatter:off
+        $this->validatorChain
+            ->setAssertions(assertions: [
+                'token' => new SignedWith(signer: $this->signer, key: $this->getPublicKey()),
+                'iss' => new IssuedBy($this->getIdTokenIssuer()),
+            ])
+            ->setValidators(validators: [
+                'at_hash' => new Specification\EqualsTo(required: true),
+                'aud' => new Specification\EqualsTo(required: true),
+                'azp' => new Specification\EqualsTo(),
+                'jti' => new Specification\EqualsTo(),
+                'nonce' => new Specification\EqualsTo(),
+                'exp' => new Specification\GreaterOrEqualsTo(required: true),
+                'nbf' => new Specification\LesserOrEqualsTo(),
+                'iat' => new Specification\NotEmpty(required: true),
+                'sub' => new Specification\NotEmpty(required: true),
+            ]);
+        // @formatter:on
     }
 
     /**
@@ -338,14 +340,5 @@ abstract class OpenIDConnectProvider extends Provider
         }
 
         return null;
-    }
-
-    protected function getAllowedClientOptions(array $options): array
-    {
-        return [
-            'timeout',
-            'proxy',
-            'verify',
-        ];
     }
 }

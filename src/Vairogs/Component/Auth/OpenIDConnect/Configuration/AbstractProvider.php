@@ -2,11 +2,11 @@
 
 namespace Vairogs\Component\Auth\OpenIDConnect\Configuration;
 
-use League\OAuth2\Client\Provider\AbstractProvider;
+use League\OAuth2\Client\Provider\AbstractProvider as BaseProvider;
 use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class Provider extends AbstractProvider
+abstract class AbstractProvider extends BaseProvider
 {
     public function getBaseAccessTokenUrl(array $params): string
     {
@@ -56,5 +56,14 @@ abstract class Provider extends AbstractProvider
     protected function getRequiredOptions(): array
     {
         return [];
+    }
+
+    protected function getAllowedClientOptions(array $options): array
+    {
+        return [
+            'timeout',
+            'proxy',
+            'verify',
+        ];
     }
 }

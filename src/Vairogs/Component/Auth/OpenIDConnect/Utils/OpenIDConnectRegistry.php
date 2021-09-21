@@ -13,7 +13,7 @@ class OpenIDConnectRegistry
     /**
      * @var OpenIDConnectProvider[]
      */
-    private array $clients = [];
+    private array $clients;
 
     public function __construct(Traversable $clients)
     {
