@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Auth\OpenIDConnect;
 
 use DateTime;
+use DateTimeImmutable;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
@@ -23,6 +24,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use UnexpectedValueException;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\AbstractProvider;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\IsEqual;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ParsedToken;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ValidatorChain;
@@ -243,12 +245,14 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         $this->validatorChain
             ->setAssertions(assertions: [
                 'token' => new SignedWith(signer: $this->signer, key: $this->getPublicKey()),
-                'iss' => new IssuedBy($this->getIdTokenIssuer()),
+                'iss' => new IssuedBy(issuers: $this->getIdTokenIssuer()),
+                //'exp' => new IsEqual(claim: 'exp', expected: new DateTimeImmutable(), required: true),
+                'azp' => new IsEqual('azp', $this->clientId),
             ])
             ->setValidators(validators: [
                 'at_hash' => new Specification\EqualsTo(required: true),
                 'aud' => new Specification\EqualsTo(required: true),
-                'azp' => new Specification\EqualsTo(),
+                //'azp' => new Specification\EqualsTo(),
                 'jti' => new Specification\EqualsTo(),
                 'nonce' => new Specification\EqualsTo(),
                 'exp' => new Specification\GreaterOrEqualsTo(required: true),

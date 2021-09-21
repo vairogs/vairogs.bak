@@ -3,9 +3,9 @@
 namespace Vairogs\Component\Auth\OpenIDConnect\Configuration;
 
 use Lcobucci\JWT\Configuration;
-use League\OAuth2\Client;
+use League\OAuth2\Client\Token\AccessToken;
 
-class ParsedToken extends Client\Token\AccessToken
+class ParsedToken extends AccessToken
 {
     protected IdToken $idToken;
     protected string $idTokenHint;
