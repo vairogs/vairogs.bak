@@ -4,6 +4,7 @@ namespace Vairogs\Component\Auth\OpenIDConnect\Configuration;
 
 use Exception;
 use Lcobucci\JWT\Validation\Constraint;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\AbstractConstraint;
 use Vairogs\Component\Auth\OpenIDConnect\Exception\InvalidConstraintException;
 use Vairogs\Extra\Specification\ValidatorChain as BaseValidatorChain;
 use function sprintf;
@@ -32,6 +33,10 @@ class ValidatorChain extends BaseValidatorChain
         $valid = true;
 
         foreach ($this->assertions as $claim => $assertion) {
+            if ($assertion instanceof AbstractConstraint) {
+                $claim = $assertion->getClaim();
+            }
+
             try {
                 $assertion->assert(token: $object);
             } catch (InvalidConstraintException $e) {

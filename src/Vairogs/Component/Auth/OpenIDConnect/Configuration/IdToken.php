@@ -11,8 +11,22 @@ use Lcobucci\JWT\UnencryptedToken;
 
 class IdToken implements UnencryptedToken
 {
+    protected ?string $accessTokenString;
+
     public function __construct(private Token | Token\Plain $token)
     {
+    }
+
+    public function getAccessTokenString(): ?string
+    {
+        return $this->accessTokenString;
+    }
+
+    public function setAccessTokenString(?string $accessTokenString): self
+    {
+        $this->accessTokenString = $accessTokenString;
+
+        return $this;
     }
 
     #[Pure]
