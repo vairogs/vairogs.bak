@@ -3,22 +3,45 @@
 namespace Vairogs\Component\Auth\OpenIDConnect\Configuration;
 
 use Exception;
+use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Validation\Constraint;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\AbstractConstraint;
 use Vairogs\Component\Auth\OpenIDConnect\Exception\InvalidConstraintException;
-use Vairogs\Extra\Specification\ValidatorChain as BaseValidatorChain;
+use Vairogs\Component\Auth\OpenIDConnect\Exception\OpenIDConnectException;
+use Vairogs\Component\Utils\Helper\Text;
+use function http_build_query;
 use function sprintf;
 
-class ValidatorChain extends BaseValidatorChain
+class ValidatorChain implements Constraint
 {
     /**
      * @var Constraint[]
      */
     protected array $assertions = [];
 
-    public function validate(array $data, mixed $object): bool
+    public function assert(Token $token): void
     {
-        return $this->validateAssertions(object: $object) && $this->validateSpecifications(data: $data, object: $object);
+        $valid = true;
+        $messages = [];
+
+        foreach ($this->assertions as $claim => $assertion) {
+            if ($assertion instanceof AbstractConstraint) {
+                $claim = $assertion->getClaim() ?? Text::getLastPart(string: $assertion::class, delimiter: '\\');
+            }
+
+            try {
+                $assertion->assert(token: $token);
+            } catch (InvalidConstraintException $e) {
+                $messages[$claim] = $e->getMessage();
+            } catch (Exception $e) {
+                $valid = false;
+                $messages[$claim] = $e->getMessage();
+            }
+        }
+
+        if (false === $valid) {
+            throw new OpenIDConnectException(message: sprintf('Unable to verify JWT claims: %s', http_build_query($messages)));
+        }
     }
 
     public function setAssertions(array $assertions): self
@@ -26,48 +49,5 @@ class ValidatorChain extends BaseValidatorChain
         $this->assertions = $assertions;
 
         return $this;
-    }
-
-    protected function validateAssertions(mixed $object): bool
-    {
-        $valid = true;
-
-        foreach ($this->assertions as $claim => $assertion) {
-            if ($assertion instanceof AbstractConstraint) {
-                $claim = $assertion->getClaim();
-            }
-
-            try {
-                $assertion->assert(token: $object);
-            } catch (InvalidConstraintException $e) {
-                $this->messages[$claim] = $e->getMessage();
-            } catch (Exception $e) {
-                $valid = false;
-                $this->messages[$claim] = $e->getMessage();
-            }
-        }
-
-        return $valid;
-    }
-
-    protected function validateSpecifications(array $data, mixed $object): bool
-    {
-        $valid = true;
-
-        foreach ($this->validators as $claim => $validator) {
-            if (false === $object->hasClaim(claim: $claim)) {
-                if ($validator->isRequired()) {
-                    $valid = false;
-                    $this->messages[$claim] = sprintf('Missing required value for claim %s', $claim);
-                }
-            } else {
-                if (isset($data[$claim]) && !$validator->isSatisfiedBy(expectedValue: $data[$claim], actualValue: $object->getClaim(claim: $claim))) {
-                    $valid = false;
-                    $this->messages[$claim] = $validator->getMessage();
-                }
-            }
-        }
-
-        return $valid;
     }
 }

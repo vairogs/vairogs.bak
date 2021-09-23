@@ -8,7 +8,7 @@ use Lcobucci\JWT\Validation\ConstraintViolation;
 use Vairogs\Component\Auth\OpenIDConnect\Exception\InvalidConstraintException;
 use function sprintf;
 
-final class IsEqual extends AbstractConstraint
+class LesserOrEqual extends AbstractConstraint
 {
     public function __construct(private mixed $expected)
     {
@@ -23,8 +23,8 @@ final class IsEqual extends AbstractConstraint
         if ($value instanceof DateTimeInterface) {
             $value = $value->getTimestamp();
         }
-        if ($this->expected !== $value) {
-            $message = sprintf('%s expected, got %s', $this->expected, $value);
+        if ($this->expected < $value) {
+            $message = sprintf('Given value %s should be lesser or equal to %s', $value, $this->expected);
             if ($this->required) {
                 throw new ConstraintViolation(message: $message);
             }
