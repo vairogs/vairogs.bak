@@ -9,8 +9,7 @@ use JetBrains\PhpStorm\Pure;
 use JsonException;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Validation\Constraint\IssuedBy;
-use Lcobucci\JWT\Validation\Constraint\SignedWith;
+use Lcobucci\JWT\Token\RegisteredClaims;
 use League\OAuth2\Client\Grant\AbstractGrant;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
@@ -23,6 +22,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use UnexpectedValueException;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\AbstractProvider;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\Equal;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\Exists;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\GreaterOrEqual;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\Hashed;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\IssuedBy;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\LesserOrEqual;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint\SignedWith;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ParsedToken;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Component\Auth\OpenIDConnect\Configuration\ValidatorChain;
@@ -32,7 +38,6 @@ use Vairogs\Component\Utils\Helper\Iteration;
 use Vairogs\Component\Utils\Helper\Json;
 use Vairogs\Component\Utils\Helper\Text;
 use Vairogs\Extra\Constants\ContentType;
-use Vairogs\Extra\Specification;
 use function array_merge;
 use function base64_encode;
 use function json_last_error;
@@ -73,23 +78,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             throw new OpenIDConnectException(message: 'Expected an id_token but did not receive one from the authorization server');
         }
 
-        $currentTime = new DateTime();
-        $data = [
-            'token' => $token,
-            'iss' => $this->getIdTokenIssuer(),
-            'exp' => $currentTime,
-            'auth_time' => $currentTime,
-            'iat' => $currentTime,
-            'nbf' => $currentTime,
-            'aud' => [$this->clientId],
-            'azp' => $this->clientId,
-            'at_hast' => Text::getHash(hashable: $accessToken->getToken()),
-        ];
         $this->setValidators();
-
-        if (false === $this->validatorChain->validate(data: $data, object: $token)) {
-            throw new OpenIDConnectException(message: 'The id_token did not pass validation');
-        }
+        $this->validatorChain->assert(token: $token);
 
         return $this->saveSession(accessToken: $accessToken);
     }
@@ -242,19 +232,15 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         // @formatter:off
         $this->validatorChain
             ->setAssertions(assertions: [
-                'token' => new SignedWith(signer: $this->signer, key: $this->getPublicKey()),
-                'iss' => new IssuedBy($this->getIdTokenIssuer()),
-            ])
-            ->setValidators(validators: [
-                'at_hash' => new Specification\EqualsTo(required: true),
-                'aud' => new Specification\EqualsTo(required: true),
-                'azp' => new Specification\EqualsTo(),
-                'jti' => new Specification\EqualsTo(),
-                'nonce' => new Specification\EqualsTo(),
-                'exp' => new Specification\GreaterOrEqualsTo(required: true),
-                'nbf' => new Specification\LesserOrEqualsTo(),
-                'iat' => new Specification\NotEmpty(required: true),
-                'sub' => new Specification\NotEmpty(required: true),
+                (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->setRequired(true),
+                (new IssuedBy(issuers: $this->getIdTokenIssuer()))->setRequired(true),
+                (new Equal(expected: $this->clientId))->setClaim('azp'),
+                (new Equal(expected: [$this->clientId]))->setClaim(RegisteredClaims::AUDIENCE),
+                (new Hashed())->setClaim('at_hash')->setRequired(true),
+                (new Exists())->setClaim(RegisteredClaims::SUBJECT)->setRequired(true),
+                (new Exists())->setClaim(RegisteredClaims::ISSUED_AT)->setRequired(true),
+                (new GreaterOrEqual((new DateTime())->getTimestamp()))->setClaim(RegisteredClaims::EXPIRATION_TIME)->setRequired(true),
+                (new LesserOrEqual((new DateTime())->getTimestamp()))->setClaim(RegisteredClaims::NOT_BEFORE),
             ]);
         // @formatter:on
     }

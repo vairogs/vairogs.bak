@@ -6,18 +6,22 @@ use Vairogs\Component\Auth\OpenIDConnect\OpenIDConnectProvider;
 
 class DefaultProvider extends OpenIDConnectProvider
 {
-    public function getValidateTokenUrl(): string
-    {
-        return '';
-    }
+    protected string $validateTokenUrl = '';
+    protected string $refreshTokenUrl = '';
+    protected string $revokeTokenUrl = '';
 
     public function getRefreshTokenUrl(): string
     {
-        return '';
+        return $this->refreshTokenUrl;
     }
 
     public function getRevokeTokenUrl(): string
     {
-        return '';
+        return $this->revokeTokenUrl;
+    }
+
+    public function getValidateTokenUrl(): string
+    {
+        return $this->validateTokenUrl;
     }
 }

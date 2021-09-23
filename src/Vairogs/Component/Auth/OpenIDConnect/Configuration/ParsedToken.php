@@ -3,9 +3,9 @@
 namespace Vairogs\Component\Auth\OpenIDConnect\Configuration;
 
 use Lcobucci\JWT\Configuration;
-use League\OAuth2\Client;
+use League\OAuth2\Client\Token\AccessToken;
 
-class ParsedToken extends Client\Token\AccessToken
+class ParsedToken extends AccessToken
 {
     protected IdToken $idToken;
     protected string $idTokenHint;
@@ -19,6 +19,7 @@ class ParsedToken extends Client\Token\AccessToken
 
         if (!empty($this->values['id_token'])) {
             $this->idToken = new IdToken(token: $parser->parse(jwt: $this->values['id_token']));
+            $this->idToken->setAccessTokenString($this->getToken());
             $this->idTokenHint = $this->values['id_token'];
             unset($this->values['id_token']);
         }

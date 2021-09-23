@@ -1,0 +1,24 @@
+<?php declare(strict_types = 1);
+
+namespace Vairogs\Component\Auth\OpenIDConnect\Configuration\Constraint;
+
+use Lcobucci\JWT\Token;
+use Lcobucci\JWT\Validation\ConstraintViolation;
+use Vairogs\Component\Auth\OpenIDConnect\Configuration\IdToken;
+use Vairogs\Component\Utils\Helper\Text;
+use function sprintf;
+
+final class Hashed extends AbstractConstraint
+{
+    public function assert(Token $token): void
+    {
+        parent::assert($token);
+        /* @var IdToken $token */
+        $this->assertClaimSet();
+
+        $hash = Text::getHash($token->getAccessTokenString());
+        if ($hash !== $token->claims()->get($this->claim)) {
+            throw new ConstraintViolation(message: sprintf('Invalid %s', $this->claim));
+        }
+    }
+}

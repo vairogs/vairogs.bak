@@ -8,9 +8,14 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractProvider extends BaseProvider
 {
+    protected array $scopes = [];
+    protected array $options = [];
+    protected string $baseAccessTokenUrl = '';
+    protected string $baseAuthorizationUrl = '';
+
     public function getBaseAccessTokenUrl(array $params): string
     {
-        return '';
+        return $this->baseAccessTokenUrl;
     }
 
     public function getResourceOwnerDetailsUrl(BaseAccessToken $token): void
@@ -19,12 +24,12 @@ abstract class AbstractProvider extends BaseProvider
 
     public function getBaseAuthorizationUrl(): string
     {
-        return '';
+        return $this->baseAuthorizationUrl;
     }
 
     public function getDefaultScopes(): array
     {
-        return [];
+        return $this->scopes;
     }
 
     abstract public function getRefreshTokenUrl(): string;
@@ -55,7 +60,7 @@ abstract class AbstractProvider extends BaseProvider
 
     protected function getRequiredOptions(): array
     {
-        return [];
+        return $this->options;
     }
 
     protected function getAllowedClientOptions(array $options): array
