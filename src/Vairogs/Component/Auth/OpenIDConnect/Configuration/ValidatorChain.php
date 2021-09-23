@@ -40,7 +40,7 @@ class ValidatorChain implements Constraint
         }
 
         if (false === $valid) {
-            throw new OpenIDConnectException(message: sprintf('Unable to verify JWT claims: %s', http_build_query($messages)));
+            throw new OpenIDConnectException(message: sprintf('Unable to verify JWT claims: %s', http_build_query(data: $messages)));
         }
     }
 

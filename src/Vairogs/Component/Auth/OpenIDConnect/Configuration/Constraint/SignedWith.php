@@ -19,8 +19,8 @@ final class SignedWith extends AbstractConstraint
 
     public function assert(Token $token): void
     {
-        parent::assert($token);
+        parent::assert(token: $token);
 
-        $this->constraint->assert($token);
+        $this->constraint->assert(token: $token);
     }
 }

@@ -19,7 +19,7 @@ class ParsedToken extends AccessToken
 
         if (!empty($this->values['id_token'])) {
             $this->idToken = new IdToken(token: $parser->parse(jwt: $this->values['id_token']));
-            $this->idToken->setAccessTokenString($this->getToken());
+            $this->idToken->setAccessTokenString(accessTokenString: $this->getToken());
             $this->idTokenHint = $this->values['id_token'];
             unset($this->values['id_token']);
         }

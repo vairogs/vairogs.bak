@@ -232,15 +232,15 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         // @formatter:off
         $this->validatorChain
             ->setAssertions(assertions: [
-                (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->setRequired(true),
-                (new IssuedBy(issuers: $this->getIdTokenIssuer()))->setRequired(true),
-                (new Equal(expected: $this->clientId))->setClaim('azp'),
-                (new Equal(expected: [$this->clientId]))->setClaim(RegisteredClaims::AUDIENCE),
-                (new Hashed())->setClaim('at_hash')->setRequired(true),
-                (new Exists())->setClaim(RegisteredClaims::SUBJECT)->setRequired(true),
-                (new Exists())->setClaim(RegisteredClaims::ISSUED_AT)->setRequired(true),
-                (new GreaterOrEqual((new DateTime())->getTimestamp()))->setClaim(RegisteredClaims::EXPIRATION_TIME)->setRequired(true),
-                (new LesserOrEqual((new DateTime())->getTimestamp()))->setClaim(RegisteredClaims::NOT_BEFORE),
+                (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->setRequired(required: true),
+                (new IssuedBy(issuers: $this->getIdTokenIssuer()))->setRequired(required: true),
+                (new Equal(expected: $this->clientId))->setClaim(claim: 'azp'),
+                (new Equal(expected: [$this->clientId]))->setClaim(claim: RegisteredClaims::AUDIENCE),
+                (new Hashed())->setClaim(claim: 'at_hash')->setRequired(required: true),
+                (new Exists())->setClaim(claim: RegisteredClaims::SUBJECT)->setRequired(required: true),
+                (new Exists())->setClaim(claim: RegisteredClaims::ISSUED_AT)->setRequired(required: true),
+                (new GreaterOrEqual(expected: (new DateTime())->getTimestamp()))->setClaim(claim: RegisteredClaims::EXPIRATION_TIME)->setRequired(required: true),
+                (new LesserOrEqual(expected: (new DateTime())->getTimestamp()))->setClaim(claim: RegisteredClaims::NOT_BEFORE),
             ]);
         // @formatter:on
     }

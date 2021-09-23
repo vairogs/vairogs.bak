@@ -16,8 +16,8 @@ final class Hashed extends AbstractConstraint
         /* @var IdToken $token */
         $this->assertClaimSet();
 
-        $hash = Text::getHash($token->getAccessTokenString());
-        if ($hash !== $token->claims()->get($this->claim)) {
+        $hash = Text::getHash(hashable: $token->getAccessTokenString());
+        if ($hash !== $token->claims()->get(name: $this->claim)) {
             throw new ConstraintViolation(message: sprintf('Invalid %s', $this->claim));
         }
     }
