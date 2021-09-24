@@ -12,7 +12,7 @@ final class Hashed extends AbstractConstraint
 {
     public function assert(Token $token): void
     {
-        parent::assert($token);
+        parent::assert(token: $token);
         /* @var IdToken $token */
         $this->assertClaimSet();
 

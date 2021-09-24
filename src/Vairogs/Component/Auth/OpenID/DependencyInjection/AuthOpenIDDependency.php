@@ -6,12 +6,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Vairogs\Component\Auth\DependencyInjection\AbstractAuthComponentDependency;
+use Vairogs\Component\Auth\DependencyInjection\AbstractAuthDependency;
 use Vairogs\Component\Auth\OpenID\OpenIDProvider;
 use Vairogs\Component\Utils\DependencyInjection\Component;
-use Vairogs\Component\Utils\Vairogs;
 
-class AuthOpenIDDependency extends AbstractAuthComponentDependency
+class AuthOpenIDDependency extends AbstractAuthDependency
 {
     public static function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
@@ -67,7 +66,6 @@ class AuthOpenIDDependency extends AbstractAuthComponentDependency
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
-        $baseKey = Vairogs::VAIROGS . '.' . Component::AUTH . '.' . Component::AUTH_OPENID;
-        $this->loadComponentConfiguration(base: $baseKey, containerBuilder: $containerBuilder);
+        $this->loadComponentConfiguration(base: AbstractAuthDependency::AUTH . '.' . Component::AUTH_OPENID, containerBuilder: $containerBuilder);
     }
 }

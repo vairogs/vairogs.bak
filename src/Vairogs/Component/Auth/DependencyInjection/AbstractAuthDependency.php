@@ -6,12 +6,16 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use Vairogs\Component\Utils\Helper\Iteration;
+use Vairogs\Component\Utils\Vairogs;
 use function sprintf;
 
-abstract class AbstractAuthComponentDependency implements Dependency
+abstract class AbstractAuthDependency implements Dependency
 {
+    public const AUTH = Vairogs::VAIROGS . '.' . Component::AUTH;
+
     public function loadComponentConfiguration(string $base, ContainerBuilder $containerBuilder): void
     {
         $enabledKey = sprintf('%s.%s', $base, Dependency::ENABLED);
