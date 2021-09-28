@@ -56,7 +56,7 @@
         "snc/redis-bundle": "For Predis or PhpRedis adapter usage",
         "doctrine/orm": "For Orm adapter usage",
         "doctrine/dbal": "For Orm adapter usage",
-        "ext-redis": "For PhpRedis or Predis adapter",
+        "ext-redis": "For PhpRedis and Predis adapter",
         "ext-phpiredis": "For PhpRedis adapter"
     },
     "autoload": {
