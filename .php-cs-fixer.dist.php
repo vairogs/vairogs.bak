@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
 
 if (!file_exists(__DIR__ . '/src')) {
-    exit(0);
+    exit;
 }
 
 return (new PhpCsFixer\Config())->setRules([
@@ -56,6 +56,11 @@ return (new PhpCsFixer\Config())->setRules([
         'remove_inheritdoc' => true,
     ],
     'no_useless_sprintf' => true,
+    'global_namespace_import' => [
+        'import_constants' => null,
+        'import_functions' => true,
+        'import_classes' => true,
+    ],
 ])
     ->setRiskyAllowed(true)
     ->setCacheFile('.php-cs-fixer.cache');
