@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Captcha\Form\Model;
+namespace Vairogs\Captcha\Form\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

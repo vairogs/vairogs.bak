@@ -44,8 +44,8 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/component-cache-utils.git"
     },
     {
-        "path": "src/Vairogs/Component/Captcha",
-        "repo": "https://GH_TOKEN@github.com/vairogs/component-captcha.git"
+        "path": "src/Vairogs/Captcha",
+        "repo": "https://GH_TOKEN@github.com/vairogs/captcha.git"
     },
     {
         "path": "src/Vairogs/Component/Sitemap",

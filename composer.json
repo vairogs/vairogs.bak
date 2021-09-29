@@ -83,7 +83,7 @@
         "vairogs/component-auth-openidconnect": "self.version",
         "vairogs/component-cache": "self.version",
         "vairogs/component-cache-utils": "self.version",
-        "vairogs/component-captcha": "self.version",
+        "vairogs/captcha": "self.version",
         "vairogs/cms": "self.version",
         "vairogs/components": "self.version",
         "vairogs/extra": "self.version",

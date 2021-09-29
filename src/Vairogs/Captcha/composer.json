@@ -1,11 +1,10 @@
 {
-    "name": "vairogs/component-captcha",
+    "name": "vairogs/captcha",
     "description": "Utils: Captcha library",
     "type": "library",
     "keywords": [
         "captcha",
         "honey",
-        "recaptcha",
         "symfony",
         "vairogs"
     ],
@@ -49,7 +48,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\Captcha\\\\": ""
+            "Vairog\\Captcha\\\\": ""
         }
     },
     "config": {

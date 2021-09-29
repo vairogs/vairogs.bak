@@ -6,7 +6,6 @@
         "array",
         "auth",
         "cache",
-        "captcha",
         "date",
         "doctrine",
         "http",
@@ -95,7 +94,6 @@
         "vairogs/component-auth-openidconnect": "self.version",
         "vairogs/component-cache": "self.version",
         "vairogs/component-cache-utils": "self.version",
-        "vairogs/component-captcha": "self.version",
         "vairogs/component-sitemap": "self.version",
         "vairogs/component-translation": "self.version",
         "vairogs/component-utils": "self.version"
