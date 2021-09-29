@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Translation\Form\Type;
+namespace Vairogs\Translation\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 

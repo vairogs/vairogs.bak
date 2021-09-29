@@ -1,4 +1,4 @@
-# component-translation
+# translation
 
 Installation
 ------------
@@ -6,7 +6,7 @@ Installation
 The recommended way to install is via Composer:
 
 ```
-composer require vairogs/component-translation
+composer require vairogs/translation
 ```
 
 This package requires at least PHP 8.0.0

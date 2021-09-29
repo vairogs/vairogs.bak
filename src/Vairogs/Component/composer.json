@@ -95,7 +95,6 @@
         "vairogs/component-cache": "self.version",
         "vairogs/component-cache-utils": "self.version",
         "vairogs/component-sitemap": "self.version",
-        "vairogs/component-translation": "self.version",
         "vairogs/component-utils": "self.version"
     },
     "autoload": {

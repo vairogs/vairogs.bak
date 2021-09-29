@@ -8,9 +8,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Vairogs\Component\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Component\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Component\Sitemap\DependencyInjection\SitemapDependency;
-use Vairogs\Component\Translation\DependencyInjection\TranslationDependency;
 use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Translation\DependencyInjection\TranslationDependency;
 use function class_exists;
 
 class Configuration implements ConfigurationInterface

@@ -1,5 +1,5 @@
 {
-    "name": "vairogs/component-translation",
+    "name": "vairogs/translation",
     "description": "Utils: Translation library",
     "type": "library",
     "keywords": [
@@ -47,7 +47,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\Translation\\": ""
+            "Vairogs\\Translation\\": ""
         }
     },
     "config": {

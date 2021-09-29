@@ -90,7 +90,7 @@
         "vairogs/extra-constants": "self.version",
         "vairogs/extra-specification": "self.version",
         "vairogs/component-sitemap": "self.version",
-        "vairogs/component-translation": "self.version",
+        "vairogs/translation": "self.version",
         "vairogs/twig": "self.version",
         "vairogs/twig-helper": "self.version",
         "vairogs/twig-helper-date": "self.version",

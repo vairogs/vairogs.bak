@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Translation\Annotation;
+namespace Vairogs\Translation\Annotation;
 
 use Attribute;
 use Doctrine\Common\Annotations\Annotation;
