@@ -41,7 +41,7 @@
         "php": ">=8.0.0",
         "jetbrains/phpstorm-attributes": "*",
         "twig/twig": "3.*",
-        "vairogs/component-utils": "3.x-dev"
+        "vairogs/utils": "3.x-dev"
     },
     "autoload": {
         "psr-4": {

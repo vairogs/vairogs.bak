@@ -2,8 +2,8 @@
 
 namespace Vairogs\Twig\Helper\Json;
 
-use Vairogs\Component\Utils\Helper\Json;
-use Vairogs\Component\Utils\Twig\BaseExtension;
+use Vairogs\Utils\Helper\Json;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

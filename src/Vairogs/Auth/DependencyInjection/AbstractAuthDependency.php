@@ -6,10 +6,10 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Vairogs\Component\Utils\DependencyInjection\Component;
-use Vairogs\Component\Utils\DependencyInjection\Dependency;
-use Vairogs\Component\Utils\Helper\Iteration;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Utils\DependencyInjection\Component;
+use Vairogs\Utils\DependencyInjection\Dependency;
+use Vairogs\Utils\Helper\Iteration;
+use Vairogs\Utils\Vairogs;
 use function sprintf;
 
 abstract class AbstractAuthDependency implements Dependency

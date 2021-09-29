@@ -2,8 +2,8 @@
 
 namespace Vairogs\Twig\Helper\Iteration;
 
-use Vairogs\Component\Utils\Helper\Iteration;
-use Vairogs\Component\Utils\Twig\BaseExtension;
+use Vairogs\Utils\Helper\Iteration;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

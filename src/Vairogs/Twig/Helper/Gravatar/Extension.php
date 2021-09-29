@@ -2,8 +2,8 @@
 
 namespace Vairogs\Twig\Helper\Gravatar;
 
-use Vairogs\Component\Utils\Helper\Gravatar;
-use Vairogs\Component\Utils\Twig\BaseExtension;
+use Vairogs\Utils\Helper\Gravatar;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

@@ -2,8 +2,8 @@
 
 namespace Vairogs\Twig\Helper\Php;
 
-use Vairogs\Component\Utils\Helper\Php;
-use Vairogs\Component\Utils\Twig\BaseExtension;
+use Vairogs\Utils\Helper\Php;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

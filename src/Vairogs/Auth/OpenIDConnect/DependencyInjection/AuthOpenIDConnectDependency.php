@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Vairogs\Auth\DependencyInjection\AbstractAuthDependency;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
-use Vairogs\Component\Utils\DependencyInjection\Component;
+use Vairogs\Utils\DependencyInjection\Component;
 
 class AuthOpenIDConnectDependency extends AbstractAuthDependency
 {

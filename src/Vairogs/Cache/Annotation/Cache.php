@@ -6,7 +6,7 @@ use Attribute;
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 use Vairogs\Cache\Utils\Strategy;
-use Vairogs\Component\Utils\Helper\Iteration;
+use Vairogs\Utils\Helper\Iteration;
 use function hash;
 use function http_build_query;
 use function is_array;

@@ -7,10 +7,10 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
-use Vairogs\Component\Utils\DependencyInjection\Component;
-use Vairogs\Component\Utils\DependencyInjection\Dependency;
-use Vairogs\Component\Utils\Helper\Php;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Utils\DependencyInjection\Component;
+use Vairogs\Utils\DependencyInjection\Dependency;
+use Vairogs\Utils\Helper\Php;
+use Vairogs\Utils\Vairogs;
 use function class_exists;
 use function sprintf;
 

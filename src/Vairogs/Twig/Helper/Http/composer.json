@@ -1,6 +1,6 @@
 {
     "name": "vairogs/twig-helper-http",
-    "description": "Twig extension that implements vairogs/component-utils Http helper functions in Twig template",
+    "description": "Twig extension that implements vairogs/utils Http helper functions in Twig template",
     "type": "library",
     "keywords": [
         "symfony",
@@ -42,7 +42,7 @@
         "php": ">=8.0.0",
         "jetbrains/phpstorm-attributes": "*",
         "twig/twig": "3.*",
-        "vairogs/component-utils": "3.x-dev"
+        "vairogs/utils": "3.x-dev"
     },
     "autoload": {
         "psr-4": {

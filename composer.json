@@ -6,7 +6,6 @@
         "auth",
         "cache",
         "captcha",
-        "components",
         "openid",
         "sitemap",
         "steam",
@@ -85,7 +84,6 @@
         "vairogs/cache-utils": "self.version",
         "vairogs/captcha": "self.version",
         "vairogs/cms": "self.version",
-        "vairogs/components": "self.version",
         "vairogs/extra": "self.version",
         "vairogs/extra-constants": "self.version",
         "vairogs/extra-specification": "self.version",
@@ -109,7 +107,7 @@
         "vairogs/twig-helper-util": "self.version",
         "vairogs/twig-pagination": "self.version",
         "vairogs/twig-php": "self.version",
-        "vairogs/component-utils": "self.version"
+        "vairogs/utils": "self.version"
     },
     "autoload": {
         "psr-4": {

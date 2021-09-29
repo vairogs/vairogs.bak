@@ -2,8 +2,8 @@
 
 namespace Vairogs\Twig\Helper\Date;
 
-use Vairogs\Component\Utils\Helper\Date;
-use Vairogs\Component\Utils\Twig\BaseExtension;
+use Vairogs\Utils\Helper\Date;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

@@ -2,8 +2,8 @@
 
 namespace Vairogs\Twig\Helper\Sort;
 
-use Vairogs\Component\Utils\Helper\Sort;
-use Vairogs\Component\Utils\Twig\BaseExtension;
+use Vairogs\Utils\Helper\Sort;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

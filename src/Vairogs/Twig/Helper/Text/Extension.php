@@ -2,8 +2,8 @@
 
 namespace Vairogs\Twig\Helper\Text;
 
-use Vairogs\Component\Utils\Helper\Text;
-use Vairogs\Component\Utils\Twig\BaseExtension;
+use Vairogs\Utils\Helper\Text;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

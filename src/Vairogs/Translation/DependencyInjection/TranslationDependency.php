@@ -5,9 +5,9 @@ namespace Vairogs\Translation\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Vairogs\Component\Utils\DependencyInjection\Component;
-use Vairogs\Component\Utils\DependencyInjection\Dependency;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Utils\DependencyInjection\Component;
+use Vairogs\Utils\DependencyInjection\Dependency;
+use Vairogs\Utils\Vairogs;
 use function sprintf;
 
 class TranslationDependency implements Dependency

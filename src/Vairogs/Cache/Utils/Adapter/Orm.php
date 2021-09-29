@@ -10,8 +10,8 @@ use Exception;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\PdoAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Vairogs\Component\Utils\Helper\Php;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Utils\Helper\Php;
+use Vairogs\Utils\Vairogs;
 use function sprintf;
 
 class Orm implements Cache

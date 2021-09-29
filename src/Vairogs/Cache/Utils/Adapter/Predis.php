@@ -7,8 +7,8 @@ use Psr\Cache\CacheItemPoolInterface;
 use Snc\RedisBundle\SncRedisBundle;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Vairogs\Component\Utils\Helper\Php;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Utils\Helper\Php;
+use Vairogs\Utils\Vairogs;
 use function sprintf;
 
 class Predis implements Cache

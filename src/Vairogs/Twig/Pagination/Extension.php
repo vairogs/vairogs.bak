@@ -2,9 +2,9 @@
 
 namespace Vairogs\Twig\Pagination;
 
-use Vairogs\Component\Utils\Twig\Annotation;
-use Vairogs\Component\Utils\Twig\BaseExtension;
 use Vairogs\Twig\Pagination\Behaviour\FixedLength;
+use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

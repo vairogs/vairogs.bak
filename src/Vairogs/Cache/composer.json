@@ -59,7 +59,7 @@
         "symfony/http-foundation": "~5.3",
         "symfony/http-kernel": "~5.3",
         "symfony/security-core": "~5.3",
-        "vairogs/component-utils": "3.x-dev"
+        "vairogs/utils": "3.x-dev"
     },
     "replace": {
         "vairogs/cache-utils": "self.version"

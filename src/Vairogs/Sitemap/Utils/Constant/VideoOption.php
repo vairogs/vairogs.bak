@@ -3,8 +3,8 @@
 namespace Vairogs\Sitemap\Utils\Constant;
 
 use ReflectionException;
-use Vairogs\Component\Utils\Helper\Iteration;
-use Vairogs\Component\Utils\Helper\Php;
+use Vairogs\Utils\Helper\Iteration;
+use Vairogs\Utils\Helper\Php;
 
 final class VideoOption
 {

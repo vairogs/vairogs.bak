@@ -2,8 +2,8 @@
 
 namespace Vairogs\Twig\Helper\Generator;
 
-use Vairogs\Component\Utils\Helper\Generator;
-use Vairogs\Component\Utils\Twig\BaseExtension;
+use Vairogs\Utils\Helper\Generator;
+use Vairogs\Utils\Twig\BaseExtension;
 
 class Extension extends BaseExtension
 {

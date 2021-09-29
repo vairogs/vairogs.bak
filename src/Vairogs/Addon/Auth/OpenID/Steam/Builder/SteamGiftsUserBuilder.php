@@ -7,7 +7,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamGifts;
 use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
-use Vairogs\Component\Utils\Helper\File;
+use Vairogs\Utils\Helper\File;
 use function end;
 use function exec;
 use function explode;

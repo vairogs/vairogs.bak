@@ -6,7 +6,7 @@ use JetBrains\PhpStorm\Pure;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use Vairogs\Component\Utils\Vairogs;
+use Vairogs\Utils\Vairogs;
 use function array_keys;
 use function array_map;
 use function current;
