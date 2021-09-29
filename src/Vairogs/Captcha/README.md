@@ -1,4 +1,4 @@
-# -captcha
+# captcha
 
 Installation
 ------------
