@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Model\Traits;
+namespace Vairogs\Sitemap\Model\Traits;
 
 use DateTimeInterface;
 

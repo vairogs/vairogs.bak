@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Model;
+namespace Vairogs\Sitemap\Model;
 
 use JetBrains\PhpStorm\Pure;
 use function method_exists;

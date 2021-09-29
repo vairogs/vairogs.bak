@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Component\Auth\DependencyInjection\AuthDependency;
-use Vairogs\Component\Sitemap\DependencyInjection\SitemapDependency;
+use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
 use Vairogs\Component\Utils\Helper\Iteration;
 use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Vairogs;

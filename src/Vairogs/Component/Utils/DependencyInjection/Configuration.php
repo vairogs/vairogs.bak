@@ -7,7 +7,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Component\Auth\DependencyInjection\AuthDependency;
-use Vairogs\Component\Sitemap\DependencyInjection\SitemapDependency;
+use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
 use Vairogs\Component\Utils\Helper\Php;
 use Vairogs\Component\Utils\Vairogs;
 use Vairogs\Translation\DependencyInjection\TranslationDependency;

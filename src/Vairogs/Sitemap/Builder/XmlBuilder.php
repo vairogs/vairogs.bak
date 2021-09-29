@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Builder;
+namespace Vairogs\Sitemap\Builder;
 
 class XmlBuilder extends AbstractBuilder
 {

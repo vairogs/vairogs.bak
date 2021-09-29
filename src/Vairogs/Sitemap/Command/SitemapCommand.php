@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Command;
+namespace Vairogs\Sitemap\Command;
 
 use Exception;
 use Symfony\Component\Console\Command\Command;
@@ -11,9 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Vairogs\Component\Sitemap\Builder\Director;
-use Vairogs\Component\Sitemap\Builder\FileBuilder;
-use Vairogs\Component\Sitemap\Provider;
+use Vairogs\Sitemap\Builder\Director;
+use Vairogs\Sitemap\Builder\FileBuilder;
+use Vairogs\Sitemap\Provider;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use function fclose;
 use function fopen;
@@ -33,7 +33,7 @@ class SitemapCommand extends Command
     public function __construct(private ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
     {
         if (null === $provider || (false === $options[Dependency::ENABLED])) {
-            throw new NotFoundHttpException(message: 'To use vairogs/component-sitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
         }
 
         $this->options = $options;

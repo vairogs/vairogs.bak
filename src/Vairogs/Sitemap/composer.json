@@ -1,5 +1,5 @@
 {
-    "name": "vairogs/component-sitemap",
+    "name": "vairogs/sitemap",
     "description": "Utils: Sitemap library",
     "type": "library",
     "keywords": [
@@ -51,7 +51,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\Sitemap\\": ""
+            "Vairogs\\Sitemap\\": ""
         }
     },
     "config": {

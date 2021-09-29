@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Utils\Constant;
+namespace Vairogs\Sitemap\Utils\Constant;
 
 final class ChangeFrequency
 {

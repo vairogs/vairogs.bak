@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Builder;
+namespace Vairogs\Sitemap\Builder;
 
-use Vairogs\Component\Sitemap\Model\RichUrl;
-use Vairogs\Component\Sitemap\Model\Sitemap;
-use Vairogs\Component\Sitemap\Model\Url;
+use Vairogs\Sitemap\Model\RichUrl;
+use Vairogs\Sitemap\Model\Sitemap;
+use Vairogs\Sitemap\Model\Url;
 use function array_keys;
 use function method_exists;
 use function sprintf;
@@ -43,7 +43,7 @@ abstract class AbstractBuilder implements Builder
 
     public function end(&$buffer): void
     {
-        $this->write(buffer: $buffer, text: '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/component-sitemap -->');
+        $this->write(buffer: $buffer, text: '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
     }
 
     public function start(&$buffer): void

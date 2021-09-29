@@ -48,8 +48,8 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/captcha.git"
     },
     {
-        "path": "src/Vairogs/Component/Sitemap",
-        "repo": "https://GH_TOKEN@github.com/vairogs/component-sitemap.git"
+        "path": "src/Vairogs/Sitemap",
+        "repo": "https://GH_TOKEN@github.com/vairogs/sitemap.git"
     },
     {
         "path": "src/Vairogs/Translation",

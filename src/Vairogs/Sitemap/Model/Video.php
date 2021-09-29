@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Model;
+namespace Vairogs\Sitemap\Model;
 
 use DateTimeInterface;
-use Vairogs\Component\Sitemap\Model\Traits\VideoGetters;
-use Vairogs\Component\Sitemap\Model\Traits\VideoSetters;
+use Vairogs\Sitemap\Model\Traits\VideoGetters;
+use Vairogs\Sitemap\Model\Traits\VideoSetters;
 
 class Video
 {

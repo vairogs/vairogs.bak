@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Controller;
+namespace Vairogs\Sitemap\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,10 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Vairogs\Component\Sitemap\Builder\Director;
-use Vairogs\Component\Sitemap\Builder\XmlBuilder;
-use Vairogs\Component\Sitemap\Provider;
-use Vairogs\Component\Sitemap\Utils\ErrorResponse;
+use Vairogs\Sitemap\Builder\Director;
+use Vairogs\Sitemap\Builder\XmlBuilder;
+use Vairogs\Sitemap\Provider;
+use Vairogs\Sitemap\Utils\ErrorResponse;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
 use function file_get_contents;
 use function getcwd;
@@ -27,7 +27,7 @@ class SitemapController extends AbstractController
         }
 
         if (null === $provider || (false === $options[Dependency::ENABLED])) {
-            throw new NotFoundHttpException(message: 'To use vairogs/component-sitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
         }
 
         $model = $provider->populate(host: $request->getSchemeAndHttpHost());

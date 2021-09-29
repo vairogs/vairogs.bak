@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Sitemap\Utils;
+namespace Vairogs\Sitemap\Utils;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -37,7 +37,7 @@ class ErrorResponse
         }
 
         $buffer .= '</errors>
-<!-- error from sitemap library for Symfony vairogs/component-sitemap -->';
+<!-- error from sitemap library for Symfony vairogs/sitemap -->';
 
         $this->response->setContent(content: $buffer);
 
