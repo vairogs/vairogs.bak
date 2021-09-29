@@ -8,7 +8,7 @@ use Stringable;
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\Traits\SteamGetters;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\Traits\SteamSetters;
-use Vairogs\Component\Auth\OpenID\Contracts\OpenIDUser;
+use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 
 /**
  * @ORM\MappedSuperclass()

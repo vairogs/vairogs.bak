@@ -1,12 +1,10 @@
 {
-    "name": "vairogs/addon",
-    "description": "Utils: Models",
+    "name": "vairogs/auth",
+    "description": "Utils: Auth library",
     "type": "library",
     "keywords": [
-        "addon",
         "auth",
         "openid",
-        "steam",
         "symfony",
         "vairogs"
     ],
@@ -40,18 +38,23 @@
     ],
     "require": {
         "php": ">=8.0.0",
-        "doctrine/orm": "~2.6",
         "jetbrains/phpstorm-attributes": "*",
-        "vairogs/auth-openid": "3.x-dev"
+        "lcobucci/jwt": "^4.1",
+        "league/oauth2-client": "^2.6",
+        "symfony/config": "~5.3",
+        "symfony/dependency-injection": "~5.3",
+        "symfony/http-foundation": "~5.3",
+        "symfony/http-kernel": "~5.3",
+        "symfony/routing": "~5.3",
+        "vairogs/component-utils": "3.x-dev"
     },
     "replace": {
-        "vairogs/addon-auth": "self.version",
-        "vairogs/addon-auth-openid": "self.version",
-        "vairogs/addon-auth-openid-steam": "self.version"
+        "vairogs/auth-openid": "self.version",
+        "vairogs/auth-openidconnect": "self.version"
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Addon\\": ""
+            "Vairogs\\Auth\\": ""
         }
     },
     "config": {
