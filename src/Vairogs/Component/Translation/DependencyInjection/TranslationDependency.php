@@ -7,6 +7,8 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Component\Utils\DependencyInjection\Component;
 use Vairogs\Component\Utils\DependencyInjection\Dependency;
+use Vairogs\Component\Utils\Vairogs;
+use function sprintf;
 
 class TranslationDependency implements Dependency
 {
@@ -20,6 +22,15 @@ class TranslationDependency implements Dependency
             ->children()
             ->arrayNode(name: Component::TRANSLATION)
                 ->canBeEnabled()
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->scalarNode(name: 'table')->defaultValue(value: sprintf('%s_translations', Vairogs::VAIROGS))->end()
+                    ->scalarNode(name: 'default_locale')->defaultValue(value: 'en')->end()
+                    ->arrayNode(name: 'locales')
+                        ->addDefaultChildrenIfNoneSet()
+                        ->prototype(type: 'scalar')->defaultValue(value: 'en')->end()
+                    ->end()
+                ->end()
             ->end()
         ->end();
         // @formatter:on
