@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Cache\Utils;
+namespace Vairogs\Cache\Utils;
 
 use BadMethodCallException;
 use InvalidArgumentException;
 use Psr\Cache\CacheItemPoolInterface;
-use Vairogs\Component\Cache\Utils\Adapter\Cache;
+use Vairogs\Cache\Utils\Adapter\Cache;
 use function sprintf;
 
 class Pool

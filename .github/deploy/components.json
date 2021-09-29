@@ -36,12 +36,12 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/component-auth-openidconnect.git"
     },
     {
-        "path": "src/Vairogs/Component/Cache",
-        "repo": "https://GH_TOKEN@github.com/vairogs/component-cache.git"
+        "path": "src/Vairogs/Cache",
+        "repo": "https://GH_TOKEN@github.com/vairogs/cache.git"
     },
     {
-        "path": "src/Vairogs/Component/Cache/Utils",
-        "repo": "https://GH_TOKEN@github.com/vairogs/component-cache-utils.git"
+        "path": "src/Vairogs/Cache/Utils",
+        "repo": "https://GH_TOKEN@github.com/vairogs/cache-utils.git"
     },
     {
         "path": "src/Vairogs/Captcha",

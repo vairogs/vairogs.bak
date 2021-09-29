@@ -1,5 +1,5 @@
 {
-    "name": "vairogs/component-cache",
+    "name": "vairogs/cache",
     "description": "Utils: Cache library",
     "type": "library",
     "keywords": [
@@ -62,7 +62,7 @@
         "vairogs/component-utils": "3.x-dev"
     },
     "replace": {
-        "vairogs/component-cache-utils": "self.version"
+        "vairogs/cache-utils": "self.version"
     },
     "suggest": {
         "snc/redis-bundle": "For Predis or PhpRedis adapter usage",
@@ -73,7 +73,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\Cache\\": ""
+            "Vairogs\\Cache\\": ""
         }
     },
     "config": {

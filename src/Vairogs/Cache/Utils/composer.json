@@ -1,5 +1,5 @@
 {
-    "name": "vairogs/component-cache-utils",
+    "name": "vairogs/cache-utils",
     "description": "Utils: Cache library utils",
     "type": "library",
     "keywords": [
@@ -61,7 +61,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\Cache\\Utils\\": ""
+            "Vairogs\\Cache\\Utils\\": ""
         }
     },
     "config": {

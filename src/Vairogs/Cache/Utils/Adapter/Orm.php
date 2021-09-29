@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Cache\Utils\Adapter;
+namespace Vairogs\Cache\Utils\Adapter;
 
 use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Exception as DBALException;

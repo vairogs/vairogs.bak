@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Cache;
+namespace Vairogs\Cache;
 
 final class Header
 {

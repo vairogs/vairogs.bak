@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Cache\EventListener;
+namespace Vairogs\Cache\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
 use JetBrains\PhpStorm\ArrayShape;
@@ -15,10 +15,10 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Vairogs\Component\Cache\Annotation\Cache as Annotation;
-use Vairogs\Component\Cache\Header;
-use Vairogs\Component\Cache\Utils\Event;
-use Vairogs\Component\Cache\Utils\Pool;
+use Vairogs\Cache\Annotation\Cache as Annotation;
+use Vairogs\Cache\Header;
+use Vairogs\Cache\Utils\Event;
+use Vairogs\Cache\Utils\Pool;
 use function class_exists;
 use function in_array;
 use function is_string;

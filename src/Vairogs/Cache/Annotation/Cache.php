@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\Cache\Annotation;
+namespace Vairogs\Cache\Annotation;
 
 use Attribute;
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
-use Vairogs\Component\Cache\Utils\Strategy;
+use Vairogs\Cache\Utils\Strategy;
 use Vairogs\Component\Utils\Helper\Iteration;
 use function hash;
 use function http_build_query;
