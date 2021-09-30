@@ -37,7 +37,7 @@ class Generator
      * @throws Exception
      */
     #[Annotation\TwigFunction]
-    public function generate(int $length = 20): string
+    public function generate(int $length = 32): string
     {
         if (empty($this->sets)) {
             throw new LogicException(message: 'At least one set must be used!');
@@ -47,7 +47,7 @@ class Generator
 
         foreach ($this->sets as $set) {
             if (is_array(value: $split = str_split(string: $set))) {
-                $unique .= $set[$this->tweak($split)];
+                $unique .= $set[$this->tweak(array: $split)];
                 $all .= $set;
             }
         }

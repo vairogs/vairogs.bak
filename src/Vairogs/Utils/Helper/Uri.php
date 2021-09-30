@@ -5,6 +5,7 @@ namespace Vairogs\Utils\Helper;
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\Request;
+use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Annotation;
 use function array_combine;
 use function array_keys;
@@ -136,7 +137,7 @@ class Uri
     #[Annotation\TwigFilter]
     public static function getSchema(Request $request): string
     {
-        return Http::isHttps(request: $request) ? 'https://' : 'http://';
+        return Http::isHttps(req: $request) ? Constants\Http::SCHEMA_HTTPS : Constants\Http::SCHEMA_HTTP;
     }
 
     #[Annotation\TwigFunction]

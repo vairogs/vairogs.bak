@@ -13,7 +13,7 @@ use function array_map;
 use function array_unique;
 use function array_values;
 use function count;
-use function gettype;
+use function get_debug_type;
 use function in_array;
 use function is_array;
 use function is_object;
@@ -141,8 +141,8 @@ class Iteration
         foreach ($input as $key => $element) {
             if (is_array(value: $element) || is_object(value: $element)) {
                 $result[$key] = self::arrayFlipRecursive(input: (array) $element);
-            } elseif (in_array(needle: gettype(value: $element), haystack: [
-                'integer',
+            } elseif (in_array(needle: get_debug_type(value: $element), haystack: [
+                'int',
                 'string',
             ], strict: true)) {
                 $result[$element] = $key;

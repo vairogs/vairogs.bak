@@ -44,14 +44,14 @@ class Date
         }
 
         // @formatter:off
-        $months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        $daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         // @formatter:on
 
         if (0 === (int) substr(string: $date, offset: 4, length: 2) % 4) {
-            $months[1] = 29;
+            $daysInMonth[1] = 29;
         }
 
-        return 0 < $day && $months[$month - 1] >= $day;
+        return 0 < $day && $daysInMonth[$month - 1] >= $day;
     }
 
     #[Annotation\TwigFilter]

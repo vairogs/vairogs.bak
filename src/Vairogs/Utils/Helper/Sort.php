@@ -11,6 +11,7 @@ use function array_slice;
 use function count;
 use function current;
 use function is_array;
+use function is_iterable;
 use function is_object;
 use function property_exists;
 use function round;
@@ -81,22 +82,18 @@ class Sort
     }
 
     #[Annotation\TwigFilter]
-    public static function sort(mixed $data, ?string $parameter = null, string $order = self::ASC): array
+    public static function sort(iterable|Collection $data, string $parameter, string $order = self::ASC): array
     {
         if ($data instanceof Collection) {
             $data = $data->toArray();
         }
 
-        if (!is_array(value: $data)) {
+        if (!is_iterable(value: $data)) {
             throw new InvalidArgumentException(message: 'Only iterable variables can be sorted');
         }
 
         if (count(value: $data) < 2) {
             return $data;
-        }
-
-        if (null === $parameter) {
-            throw new InvalidArgumentException(message: 'No sorting parameter pased');
         }
 
         if (!self::isSortable(item: current(array: $data), field: $parameter)) {

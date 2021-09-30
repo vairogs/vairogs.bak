@@ -19,7 +19,6 @@ use function preg_match;
 use function preg_replace;
 use function round;
 use function rtrim;
-use function str_pad;
 use function str_replace;
 use function strip_tags;
 use function strpbrk;
@@ -73,13 +72,6 @@ class Text
     public static function stripSpace(string $string): string
     {
         return preg_replace(pattern: '#\s+#', replacement: '', subject: $string);
-    }
-
-    #[Annotation\TwigFilter]
-    #[Pure]
-    public static function pad(string $input, int $length, string $padding, string $type = STR_PAD_LEFT): string
-    {
-        return str_pad(string: $input, length: $length, pad_string: $padding, pad_type: $type);
     }
 
     #[Annotation\TwigFilter]
@@ -138,6 +130,12 @@ class Text
     public static function keepNumeric(string $string): string
     {
         return preg_replace(pattern: '#\D#', replacement: '', subject: $string);
+    }
+
+    #[Annotation\TwigFilter]
+    public static function keepAscii(string $string): string
+    {
+        return preg_replace(pattern: '#[[:^ascii:]]#', replacement: '', subject: $string);
     }
 
     #[Annotation\TwigFilter]
