@@ -7,15 +7,17 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\DependencyInjection\Component;
+use Vairogs\Utils\DependencyInjection\DependecyLoaderTrait;
 use Vairogs\Utils\DependencyInjection\Dependency;
-use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Vairogs;
-use function class_exists;
 use function sprintf;
 
 class AuthDependency implements Dependency
 {
+    use DependecyLoaderTrait;
+
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
@@ -23,8 +25,9 @@ class AuthDependency implements Dependency
             ->children()
                 ->arrayNode(name: Component::AUTH)
                 ->canBeEnabled();
-        $this->appendOpenIDConfiguration(arrayNodeDefinition: $authNode);
-        $this->appendOpenIDConnectConfiguration(arrayNodeDefinition: $authNode);
+
+        $this->getComponentConfiguration(class: AuthOpenIDDependency::class, arrayNodeDefinition: $authNode);
+        $this->getComponentConfiguration(class: AuthOpenIDConnectDependency::class, arrayNodeDefinition: $authNode);
 
         $arrayNodeDefinition
             ->children()
@@ -39,39 +42,11 @@ class AuthDependency implements Dependency
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
     {
-        $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Dependency::ENABLED);
+        $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Status::ENABLED);
 
         if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
-            $this->loadOpenIDComponent(containerBuilder: $containerBuilder, configuration: $configuration);
-            $this->loadOpenIDConnectComponent(containerBuilder: $containerBuilder, configuration: $configuration);
-        }
-    }
-
-    private function appendOpenIDConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
-    {
-        if (class_exists(class: AuthOpenIDDependency::class) && Php::classImplements(class: AuthOpenIDDependency::class, interface: Dependency::class)) {
-            (new AuthOpenIDDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
-        }
-    }
-
-    private function appendOpenIDConnectConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
-    {
-        if (class_exists(class: AuthOpenIDConnectDependency::class) && Php::classImplements(class: AuthOpenIDConnectDependency::class, interface: Dependency::class)) {
-            (new AuthOpenIDConnectDependency())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);
-        }
-    }
-
-    private function loadOpenIDComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
-    {
-        if (class_exists(class: AuthOpenIDDependency::class) && Php::classImplements(class: AuthOpenIDDependency::class, interface: Dependency::class)) {
-            (new AuthOpenIDDependency())->loadComponent(containerBuilder: $containerBuilder, configuration: $configuration);
-        }
-    }
-
-    private function loadOpenIDConnectComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
-    {
-        if (class_exists(class: AuthOpenIDConnectDependency::class) && Php::classImplements(class: AuthOpenIDConnectDependency::class, interface: Dependency::class)) {
-            (new AuthOpenIDConnectDependency())->loadComponent(containerBuilder: $containerBuilder, configuration: $configuration);
+            $this->configureComponent(class: AuthOpenIDDependency::class, container: $containerBuilder, configuration: $configuration);
+            $this->configureComponent(class: AuthOpenIDConnectDependency::class, container: $containerBuilder, configuration: $configuration);
         }
     }
 }

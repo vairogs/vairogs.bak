@@ -8,15 +8,16 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
+use Vairogs\I18n\DependencyInjection\I18nDependency;
 use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
 use Vairogs\Translation\DependencyInjection\TranslationDependency;
 use Vairogs\Utils\Helper\Iteration;
-use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Vairogs;
-use function class_exists;
 
 class VairogsExtension extends Extension
 {
+    use DependecyLoaderTrait;
+
     /**
      * @throws Exception
      */
@@ -24,7 +25,12 @@ class VairogsExtension extends Extension
     {
         $configuration = new Configuration();
         $this->process(configs: $configs, container: $container, configuration: $configuration);
-        $this->processComponents(container: $container, configuration: $configuration);
+
+        $this->configureComponent(class: CacheDependency::class, container: $container, configuration: $configuration);
+        $this->configureComponent(class: AuthDependency::class, container: $container, configuration: $configuration);
+        $this->configureComponent(class: SitemapDependency::class, container: $container, configuration: $configuration);
+        $this->configureComponent(class: TranslationDependency::class, container: $container, configuration: $configuration);
+        $this->configureComponent(class: I18nDependency::class, container: $container, configuration: $configuration);
     }
 
     public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void
@@ -39,41 +45,5 @@ class VairogsExtension extends Extension
     public function getAlias(): string
     {
         return Vairogs::VAIROGS;
-    }
-
-    private function processComponents(ContainerBuilder $container, Configuration $configuration): void
-    {
-        $this->processCacheComponent(container: $container, configuration: $configuration);
-        $this->processAuthComponent(container: $container, configuration: $configuration);
-        $this->processSitemapComponent(container: $container, configuration: $configuration);
-        $this->processTranslationComponent(container: $container, configuration: $configuration);
-    }
-
-    private function processCacheComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
-    {
-        if (class_exists(class: CacheDependency::class) && Php::classImplements(class: CacheDependency::class, interface: Dependency::class)) {
-            (new CacheDependency())->loadComponent(containerBuilder: $container, configuration: $configuration);
-        }
-    }
-
-    private function processAuthComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
-    {
-        if (class_exists(class: AuthDependency::class) && Php::classImplements(class: AuthDependency::class, interface: Dependency::class)) {
-            (new AuthDependency())->loadComponent(containerBuilder: $container, configuration: $configuration);
-        }
-    }
-
-    private function processSitemapComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
-    {
-        if (class_exists(class: SitemapDependency::class) && Php::classImplements(class: SitemapDependency::class, interface: Dependency::class)) {
-            (new SitemapDependency())->loadComponent(containerBuilder: $container, configuration: $configuration);
-        }
-    }
-
-    private function processTranslationComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
-    {
-        if (class_exists(class: TranslationDependency::class) && Php::classImplements(class: TranslationDependency::class, interface: Dependency::class)) {
-            (new TranslationDependency())->loadComponent(containerBuilder: $container, configuration: $configuration);
-        }
     }
 }

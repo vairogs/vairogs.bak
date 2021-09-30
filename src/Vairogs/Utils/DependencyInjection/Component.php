@@ -9,6 +9,7 @@ final class Component
     public const AUTH_OPENIDCONNECT = 'openidconnect';
     public const CACHE = 'cache';
     public const CAPTCHA = 'captcha';
+    public const I18N = 'i18n';
     public const SITEMAP = 'sitemap';
     public const TRANSLATION = 'translation';
     public const UTILS = 'utils';

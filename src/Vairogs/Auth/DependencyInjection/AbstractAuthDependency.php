@@ -6,6 +6,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\DependencyInjection\Component;
 use Vairogs\Utils\DependencyInjection\Dependency;
 use Vairogs\Utils\Helper\Iteration;
@@ -18,7 +19,7 @@ abstract class AbstractAuthDependency implements Dependency
 
     public function loadComponentConfiguration(string $base, ContainerBuilder $containerBuilder): void
     {
-        $enabledKey = sprintf('%s.%s', $base, Dependency::ENABLED);
+        $enabledKey = sprintf('%s.%s', $base, Status::ENABLED);
 
         if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
             $clientsKey = $base . '.clients';
