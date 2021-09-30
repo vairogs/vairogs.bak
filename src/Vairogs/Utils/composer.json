@@ -72,7 +72,8 @@
         "symfony/dependency-injection": "~5.3",
         "symfony/http-foundation": "~5.3",
         "symfony/http-kernel": "~5.3",
-        "twig/twig": "3.*"
+        "twig/twig": "3.*",
+        "vairogs/extra-constants": "*"
     },
     "autoload": {
         "psr-4": {

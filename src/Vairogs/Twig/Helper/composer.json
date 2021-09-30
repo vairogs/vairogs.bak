@@ -62,7 +62,7 @@
         "php": ">=8.0.0",
         "jetbrains/phpstorm-attributes": "*",
         "twig/twig": "3.*",
-        "vairogs/utils": "3.x-dev"
+        "vairogs/utils": "self.version"
     },
     "replace": {
         "vairogs/twig-helper-date": "self.version",

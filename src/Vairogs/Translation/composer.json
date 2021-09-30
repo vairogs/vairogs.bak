@@ -43,7 +43,7 @@
         "jetbrains/phpstorm-attributes": "*",
         "symfony/config": "~5.3",
         "symfony/dependency-injection": "~5.3",
-        "vairogs/utils": "3.x-dev"
+        "vairogs/utils": "self.version"
     },
     "autoload": {
         "psr-4": {
