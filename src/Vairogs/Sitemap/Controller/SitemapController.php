@@ -8,14 +8,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Sitemap\Builder\Director;
 use Vairogs\Sitemap\Builder\XmlBuilder;
 use Vairogs\Sitemap\Provider;
 use Vairogs\Sitemap\Utils\ErrorResponse;
-use Vairogs\Utils\DependencyInjection\Dependency;
+use Vairogs\Utils\DependencyInjection\Component;
+use Vairogs\Utils\Vairogs;
 use function file_get_contents;
 use function getcwd;
 use function is_file;
+use function sprintf;
 
 class SitemapController extends AbstractController
 {
@@ -26,7 +29,7 @@ class SitemapController extends AbstractController
             return new Response(content: file_get_contents(filename: $sitemap));
         }
 
-        if (null === $provider || (false === $options[Dependency::ENABLED])) {
+        if (null === $provider || false === $this->getParameter(sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::SITEMAP, Status::ENABLED))) {
             throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
         }
 

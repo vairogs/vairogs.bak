@@ -2,10 +2,10 @@
 
 namespace Vairogs\Utils\Twig;
 
-use Doctrine\Common\Annotations\AnnotationReader;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
+use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Helper\Text;
 
 class Helper
@@ -19,7 +19,7 @@ class Helper
         $filtered = [];
 
         foreach ($methods as $method) {
-            if (self::filterExists(method: $method, filterClass: $filterClass)) {
+            if (Php::filterExists(method: $method, filterClass: $filterClass)) {
                 if ($withClass) {
                     $filtered[Text::fromCamelCase(string: $method->getName())] = [
                         $class,
@@ -32,10 +32,5 @@ class Helper
         }
 
         return $filtered;
-    }
-
-    private static function filterExists(ReflectionMethod $method, string $filterClass): bool
-    {
-        return null !== (new AnnotationReader())->getMethodAnnotation(method: $method, annotationName: $filterClass) || [] !== $method->getAttributes(name: $filterClass);
     }
 }

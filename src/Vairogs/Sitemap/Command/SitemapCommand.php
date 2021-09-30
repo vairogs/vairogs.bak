@@ -11,10 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Sitemap\Builder\Director;
 use Vairogs\Sitemap\Builder\FileBuilder;
 use Vairogs\Sitemap\Provider;
-use Vairogs\Utils\DependencyInjection\Dependency;
 use function fclose;
 use function fopen;
 use function getcwd;
@@ -32,7 +32,7 @@ class SitemapCommand extends Command
 
     public function __construct(private ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
     {
-        if (null === $provider || (false === $options[Dependency::ENABLED])) {
+        if (null === $provider || (false === $options[Status::ENABLED])) {
             throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
         }
 

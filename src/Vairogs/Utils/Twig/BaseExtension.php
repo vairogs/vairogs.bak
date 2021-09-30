@@ -18,6 +18,8 @@ abstract class BaseExtension extends AbstractExtension
 {
     use TwigTrait;
 
+    public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
+
     protected static string $class;
     protected static string $key = '';
     protected static ?string $prefix = null;
@@ -62,7 +64,7 @@ abstract class BaseExtension extends AbstractExtension
         $ns = (new ReflectionClass($this->vars['class']))->getNamespaceName();
         $short = Php::getShortName(class: $this->vars['class']);
 
-        if (Vairogs::HELPER_NAMESPACE === $ns) {
+        if (self::HELPER_NAMESPACE === $ns) {
             $base = sprintf('%s_%s', 'helper', $short);
         } elseif ('Extension' === $short) {
             $base = Text::getLastPart(string: $ns, delimiter: '\\');

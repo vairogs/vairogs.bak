@@ -3,11 +3,13 @@
 namespace Vairogs\Utils\Helper;
 
 use Closure;
+use Doctrine\Common\Annotations\AnnotationReader;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
 use ReflectionClassConstant;
 use ReflectionException;
+use ReflectionMethod;
 use Vairogs\Utils\Twig\Annotation;
 use function array_diff;
 use function array_values;
@@ -149,7 +151,7 @@ class Php
     #[Annotation\TwigFilter]
     public static function classImplements(string $class, string $interface): bool
     {
-        return isset(class_implements(object_or_class: $class)[$interface]);
+        return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
     }
 
     #[Annotation\TwigFunction]
@@ -181,5 +183,12 @@ class Php
     public static function hijackGet(object $object, string $property): mixed
     {
         return self::call(function: fn () => $object->{$property}, clone: $object, return: true);
+    }
+
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
+    public static function filterExists(ReflectionMethod $method, string $filterClass): bool
+    {
+        return null !== (new AnnotationReader())->getMethodAnnotation(method: $method, annotationName: $filterClass) || [] !== $method->getAttributes(name: $filterClass);
     }
 }

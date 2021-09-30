@@ -2,10 +2,16 @@
 
 namespace Vairogs\Utils;
 
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Vairogs\I18n\DependencyInjection\Compiler\RouterPass;
 
 final class Vairogs extends Bundle
 {
     public const VAIROGS = 'vairogs';
-    public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
+
+    public function build(ContainerBuilder $container): void
+    {
+        $container->addCompilerPass(new RouterPass());
+    }
 }
