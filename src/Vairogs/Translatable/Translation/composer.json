@@ -1,11 +1,14 @@
 {
-    "name": "vairogs/i18n",
-    "description": "Utils: I18n library",
+    "name": "vairogs/translatable-translation",
+    "description": "Utils: Translatable library: Translation",
     "type": "library",
     "keywords": [
-        "i18n",
+        "doctrine",
+        "filesystem",
+        "orm",
         "symfony",
         "translation",
+        "translatable",
         "vairogs"
     ],
     "license": "MIT",
@@ -45,7 +48,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\I18n\\": ""
+            "Vairogs\\Translatable\\Translation\\": ""
         }
     },
     "config": {

@@ -1,6 +1,6 @@
 {
-    "name": "vairogs/translation",
-    "description": "Utils: Translation library",
+    "name": "vairogs/translatable",
+    "description": "Utils: Translatable library",
     "type": "library",
     "keywords": [
         "doctrine",
@@ -8,6 +8,10 @@
         "orm",
         "symfony",
         "translation",
+        "translatable",
+        "i18n",
+        "admin",
+        "sonata-admin",
         "vairogs"
     ],
     "license": "MIT",
@@ -45,9 +49,14 @@
         "symfony/dependency-injection": "~5.3",
         "vairogs/utils": "self.version"
     },
+    "replace": {
+        "vairogs/translatable-translation": "self.version",
+        "vairogs/translatable-i18n": "self.version",
+        "vairogs/translatable-admintype": "self.version"
+    },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Translation\\": ""
+            "Vairogs\\Translatable\\": ""
         }
     },
     "config": {

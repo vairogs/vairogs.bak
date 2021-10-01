@@ -48,8 +48,20 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/sitemap.git"
     },
     {
-        "path": "src/Vairogs/Translation",
-        "repo": "https://GH_TOKEN@github.com/vairogs/translation.git"
+        "path": "src/Vairogs/Translatable",
+        "repo": "https://GH_TOKEN@github.com/vairogs/translatable.git"
+    },
+    {
+        "path": "src/Vairogs/Translatable/AdminType",
+        "repo": "https://GH_TOKEN@github.com/vairogs/translatable-admintype.git"
+    },
+    {
+        "path": "src/Vairogs/Translatable/I18n",
+        "repo": "https://GH_TOKEN@github.com/vairogs/translatable-i18n.git"
+    },
+    {
+        "path": "src/Vairogs/Translatable/Translation",
+        "repo": "https://GH_TOKEN@github.com/vairogs/translatable-translation.git"
     },
     {
         "path": "src/Vairogs/Utils",

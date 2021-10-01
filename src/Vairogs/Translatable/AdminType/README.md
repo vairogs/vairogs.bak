@@ -1,4 +1,4 @@
-# i18n
+# translatable-admintype
 
 Installation
 ------------
@@ -6,7 +6,7 @@ Installation
 The recommended way to install is via Composer:
 
 ```
-composer require vairogs/i18n
+composer require vairogs/translatable-admintype
 ```
 
 This package requires at least PHP 8.0.0
