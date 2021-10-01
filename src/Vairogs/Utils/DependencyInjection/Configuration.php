@@ -20,11 +20,11 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder(name: Vairogs::VAIROGS);
         $rootNode = $treeBuilder->getRootNode();
 
-        $this->getComponentConfiguration(class: CacheDependency::class, arrayNodeDefinition: $rootNode);
-        $this->getComponentConfiguration(class: AuthDependency::class, arrayNodeDefinition: $rootNode);
-        $this->getComponentConfiguration(class: SitemapDependency::class, arrayNodeDefinition: $rootNode);
-        $this->getComponentConfiguration(class: TranslationDependency::class, arrayNodeDefinition: $rootNode);
-        $this->getComponentConfiguration(class: I18nDependency::class, arrayNodeDefinition: $rootNode);
+        $this->appendComponent(class: CacheDependency::class, arrayNodeDefinition: $rootNode);
+        $this->appendComponent(class: AuthDependency::class, arrayNodeDefinition: $rootNode);
+        $this->appendComponent(class: SitemapDependency::class, arrayNodeDefinition: $rootNode);
+        $this->appendComponent(class: TranslationDependency::class, arrayNodeDefinition: $rootNode);
+        $this->appendComponent(class: I18nDependency::class, arrayNodeDefinition: $rootNode);
 
         return $treeBuilder;
     }

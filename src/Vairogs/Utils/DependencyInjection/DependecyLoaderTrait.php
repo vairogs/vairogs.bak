@@ -9,7 +9,7 @@ use Vairogs\Utils\Helper\Php;
 
 trait DependecyLoaderTrait
 {
-    protected function getComponentConfiguration(string $class, ArrayNodeDefinition $arrayNodeDefinition): void
+    protected function appendComponent(string $class, ArrayNodeDefinition $arrayNodeDefinition): void
     {
         if ($this->checkImplementation(class: $class)) {
             (new $class())->getConfiguration(arrayNodeDefinition: $arrayNodeDefinition);

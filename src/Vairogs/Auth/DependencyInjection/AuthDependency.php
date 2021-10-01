@@ -26,8 +26,8 @@ class AuthDependency implements Dependency
                 ->arrayNode(name: Component::AUTH)
                 ->canBeEnabled();
 
-        $this->getComponentConfiguration(class: AuthOpenIDDependency::class, arrayNodeDefinition: $authNode);
-        $this->getComponentConfiguration(class: AuthOpenIDConnectDependency::class, arrayNodeDefinition: $authNode);
+        $this->appendComponent(class: AuthOpenIDDependency::class, arrayNodeDefinition: $authNode);
+        $this->appendComponent(class: AuthOpenIDConnectDependency::class, arrayNodeDefinition: $authNode);
 
         $arrayNodeDefinition
             ->children()
