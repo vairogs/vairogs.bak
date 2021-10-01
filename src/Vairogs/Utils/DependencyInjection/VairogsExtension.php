@@ -8,9 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
-use Vairogs\I18n\DependencyInjection\I18nDependency;
 use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
-use Vairogs\Translation\DependencyInjection\TranslationDependency;
+use Vairogs\Translatable\DependencyInjection\TranslatableDependency;
 use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Vairogs;
 
@@ -29,8 +28,7 @@ class VairogsExtension extends Extension
         $this->configureComponent(class: CacheDependency::class, container: $container, configuration: $configuration);
         $this->configureComponent(class: AuthDependency::class, container: $container, configuration: $configuration);
         $this->configureComponent(class: SitemapDependency::class, container: $container, configuration: $configuration);
-        $this->configureComponent(class: TranslationDependency::class, container: $container, configuration: $configuration);
-        $this->configureComponent(class: I18nDependency::class, container: $container, configuration: $configuration);
+        $this->configureComponent(class: TranslatableDependency::class, container: $container, configuration: $configuration);
     }
 
     public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void

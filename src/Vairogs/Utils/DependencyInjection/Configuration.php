@@ -6,9 +6,8 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
-use Vairogs\I18n\DependencyInjection\I18nDependency;
 use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
-use Vairogs\Translation\DependencyInjection\TranslationDependency;
+use Vairogs\Translatable\DependencyInjection\TranslatableDependency;
 use Vairogs\Utils\Vairogs;
 
 class Configuration implements ConfigurationInterface
@@ -23,8 +22,7 @@ class Configuration implements ConfigurationInterface
         $this->appendComponent(class: CacheDependency::class, arrayNodeDefinition: $rootNode);
         $this->appendComponent(class: AuthDependency::class, arrayNodeDefinition: $rootNode);
         $this->appendComponent(class: SitemapDependency::class, arrayNodeDefinition: $rootNode);
-        $this->appendComponent(class: TranslationDependency::class, arrayNodeDefinition: $rootNode);
-        $this->appendComponent(class: I18nDependency::class, arrayNodeDefinition: $rootNode);
+        $this->appendComponent(class: TranslatableDependency::class, arrayNodeDefinition: $rootNode);
 
         return $treeBuilder;
     }

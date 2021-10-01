@@ -12,6 +12,6 @@ final class Vairogs extends Bundle
 
     public function build(ContainerBuilder $container): void
     {
-        //$container->addCompilerPass(new RouterPass());
+        $container->addCompilerPass(new RouterPass());
     }
 }
