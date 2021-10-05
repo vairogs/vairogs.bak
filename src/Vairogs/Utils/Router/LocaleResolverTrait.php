@@ -16,7 +16,7 @@ trait LocaleResolverTrait
     protected array $hostMap;
     protected Request $request;
 
-    public function resolveLocale(Request $request, array $availableLocales): mixed
+    public function resolveLocale(Request $request, array $availableLocales = []): ?string
     {
         if (!empty($this->hostMap[$request->getHost()])) {
             return $this->hostMap[$request->getHost()];

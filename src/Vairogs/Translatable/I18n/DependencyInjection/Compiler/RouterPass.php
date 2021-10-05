@@ -11,8 +11,8 @@ class RouterPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (true === $container->getParameter(sprintf('%s.%s', TranslatableI18nDependency::ALIAS, Status::ENABLED))) {
-            $container->setAlias('router', sprintf('%s.router', TranslatableI18nDependency::ALIAS))->setPublic(true);
+        if (true === $container->getParameter(name: sprintf('%s.%s', TranslatableI18nDependency::ALIAS, Status::ENABLED))) {
+            $container->setAlias(alias: 'router', id: sprintf('%s.router', TranslatableI18nDependency::ALIAS))->setPublic(boolean: true);
         }
     }
 }

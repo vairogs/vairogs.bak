@@ -5,6 +5,7 @@ namespace Vairogs\Utils;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Vairogs\Translatable\I18n\DependencyInjection\Compiler\RouterPass;
+use function class_exists;
 
 final class Vairogs extends Bundle
 {
@@ -12,6 +13,8 @@ final class Vairogs extends Bundle
 
     public function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new RouterPass());
+        if (class_exists(class: RouterPass::class)) {
+            $container->addCompilerPass(pass: new RouterPass());
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace Vairogs\Utils\Router;
 use Symfony\Component\HttpFoundation\RequestStack;
 use function in_array;
 
-final class LocaleResolver
+final class LocaleResolver implements LocaleResolverInterface
 {
     use LocaleResolverTrait;
 
