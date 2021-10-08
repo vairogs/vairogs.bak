@@ -2,6 +2,9 @@
 
 namespace Vairogs\Translatable\I18n\Utils;
 
-class RouteExtractor
+use Vairogs\Translatable\I18n\Router\I18nRouter;
+
+
+class RouteExtractor implements ExtractorInterface
 {
 }
