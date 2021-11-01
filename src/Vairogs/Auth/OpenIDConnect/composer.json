@@ -41,11 +41,11 @@
         "jetbrains/phpstorm-attributes": "*",
         "lcobucci/jwt": "^4.1",
         "league/oauth2-client": "^2.6",
-        "symfony/config": "~5.3",
-        "symfony/dependency-injection": "~5.3",
-        "symfony/http-foundation": "~5.3",
-        "symfony/http-kernel": "~5.3",
-        "symfony/routing": "~5.3",
+        "symfony/config": "~5.3|~5.4|~6.0",
+        "symfony/dependency-injection": "~5.3|~5.4|~6.0",
+        "symfony/http-foundation": "~5.3|~5.4|~6.0",
+        "symfony/http-kernel": "~5.3|~5.4|~6.0",
+        "symfony/routing": "~5.3|~5.4|~6.0",
         "vairogs/utils": "self.version"
     },
     "autoload": {
