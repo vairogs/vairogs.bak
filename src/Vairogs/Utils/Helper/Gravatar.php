@@ -11,7 +11,7 @@ use function strtolower;
 use function trim;
 use function urldecode;
 
-class Gravatar
+final class Gravatar
 {
     public const ICON_404 = '404';
     public const ICON_MM = 'mm';

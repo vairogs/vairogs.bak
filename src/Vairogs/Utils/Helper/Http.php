@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Annotation;
 
-class Http
+final class Http
 {
     #[Annotation\TwigFunction]
     public static function isHttps(Request $req): bool

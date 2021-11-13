@@ -5,7 +5,7 @@ namespace Vairogs\Utils\Helper;
 use Vairogs\Utils\Twig\Annotation;
 use function str_replace;
 
-class Translit
+final class Translit
 {
     // @formatter:off
     public const MAP_CYRILLIC = [

@@ -6,7 +6,7 @@ use JetBrains\PhpStorm\Pure;
 use Vairogs\Utils\Twig\Annotation;
 use function filter_var;
 
-class Email
+final class Email
 {
     #[Annotation\TwigFunction]
     #[Pure]

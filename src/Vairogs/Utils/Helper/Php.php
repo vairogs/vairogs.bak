@@ -28,7 +28,7 @@ use function strtolower;
 use function trait_exists;
 use function ucfirst;
 
-class Php
+final class Php
 {
     #[Annotation\TwigFunction]
     public static function hijackSet(object $object, string $property, mixed $value): void

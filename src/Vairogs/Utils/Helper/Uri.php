@@ -31,7 +31,7 @@ use function strrpos;
 use function substr;
 use function urldecode;
 
-class Uri
+final class Uri
 {
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]

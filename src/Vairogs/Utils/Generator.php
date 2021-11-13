@@ -1,10 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils\Helper;
+namespace Vairogs\Utils;
 
 use Exception;
 use LogicException;
-use Vairogs\Utils\Twig\Annotation;
 use function array_rand;
 use function count;
 use function function_exists;
@@ -13,7 +12,7 @@ use function random_int;
 use function str_shuffle;
 use function str_split;
 
-class Generator
+final class Generator
 {
     public const PASS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
     public const PASS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -36,7 +35,6 @@ class Generator
      * @throws LogicException
      * @throws Exception
      */
-    #[Annotation\TwigFunction]
     public function generate(int $length = 32): string
     {
         if (empty($this->sets)) {
@@ -64,63 +62,63 @@ class Generator
         return str_shuffle(string: $unique);
     }
 
-    public function useLower(): static
+    public function useLower(): self
     {
         $this->sets[self::LOWER] = $this->lowerCase;
 
         return $this;
     }
 
-    public function useUpper(): static
+    public function useUpper(): self
     {
         $this->sets[self::UPPER] = $this->upperCase;
 
         return $this;
     }
 
-    public function useDigits(): static
+    public function useDigits(): self
     {
         $this->sets[self::DIGITS] = $this->digits;
 
         return $this;
     }
 
-    public function useSymbols(): static
+    public function useSymbols(): self
     {
         $this->sets[self::SYMBOLS] = $this->symbols;
 
         return $this;
     }
 
-    public function setLowerCase(string $lowerCase): static
+    public function setLowerCase(string $lowerCase): self
     {
         $this->lowerCase = $lowerCase;
 
         return $this;
     }
 
-    public function setUpperCase(string $upperCase): static
+    public function setUpperCase(string $upperCase): self
     {
         $this->upperCase = $upperCase;
 
         return $this;
     }
 
-    public function setDigits(string $digits): static
+    public function setDigits(string $digits): self
     {
         $this->digits = $digits;
 
         return $this;
     }
 
-    public function setSymbols(string $symbols): static
+    public function setSymbols(string $symbols): self
     {
         $this->symbols = $symbols;
 
         return $this;
     }
 
-    public function reset(): static
+    public function reset(): self
     {
         $this->sets = [];
 

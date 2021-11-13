@@ -12,7 +12,7 @@ use function is_file;
 use function mkdir;
 use function sprintf;
 
-class File
+final class File
 {
     #[Annotation\TwigFunction]
     public static function mkdir(string $path): bool

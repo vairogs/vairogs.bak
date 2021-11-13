@@ -27,7 +27,7 @@ use function strtolower;
 use function substr;
 use function ucwords;
 
-class Text
+final class Text
 {
     public const UTF8 = 'UTF-8';
 

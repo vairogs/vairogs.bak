@@ -10,7 +10,7 @@ use function json_encode;
 use function json_last_error;
 use function json_last_error_msg;
 
-class Json
+final class Json
 {
     public const FORCE_ARRAY = 0b0001;
     public const PRETTY = 0b0010;

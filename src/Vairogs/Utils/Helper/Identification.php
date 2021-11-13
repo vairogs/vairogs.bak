@@ -15,7 +15,7 @@ use function str_shuffle;
 use function strlen;
 use function substr;
 
-class Identification
+final class Identification
 {
     #[Annotation\TwigFunction]
     public static function validatePersonCode(string $personCode): bool

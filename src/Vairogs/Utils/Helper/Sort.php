@@ -18,7 +18,7 @@ use function round;
 use function strtoupper;
 use function usort;
 
-class Sort
+final class Sort
 {
     public const ASC = 'ASC';
     public const DESC = 'DESC';

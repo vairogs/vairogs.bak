@@ -7,7 +7,7 @@ use function array_fill;
 use function implode;
 use function preg_match;
 
-class Util
+final class Util
 {
     #[Annotation\TwigFunction]
     public static function isPrime(int $number): bool

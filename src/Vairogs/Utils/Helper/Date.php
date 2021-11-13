@@ -15,7 +15,7 @@ use function round;
 use function substr;
 use function trim;
 
-class Date
+final class Date
 {
     public const FORMAT = 'd-m-Y H:i:s';
     public const FORMAT_TS = 'D M d Y H:i:s T';
