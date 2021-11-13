@@ -13,7 +13,7 @@ use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Vairogs;
 use function sprintf;
 
-abstract class AbstractAuthDependency implements Dependency
+abstract class AbstractAuthChildDependency implements Dependency
 {
     public const AUTH = Vairogs::VAIROGS . '.' . Component::AUTH;
 
