@@ -17,12 +17,6 @@ services:
             -
                 name: twig.extension
 
-    Vairogs\Twig\Helper\Generator\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension
-
     Vairogs\Twig\Helper\Gravatar\Extension:
         public: false
         tags:

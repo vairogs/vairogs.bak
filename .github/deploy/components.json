@@ -108,10 +108,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-file.git"
     },
     {
-        "path": "src/Vairogs/Twig/Helper/Generator",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-generator.git"
-    },
-    {
         "path": "src/Vairogs/Twig/Helper/Gravatar",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-gravatar.git"
     },
