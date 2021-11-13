@@ -104,7 +104,7 @@ class MessageCollection
         $oldDesc = $oldMessage->getDesc();
         $newDesc = $newMessage->getDesc();
 
-        if ($oldDesc !== $newDesc && 0 < strlen($oldDesc) && 0 < strlen($newDesc)) {
+        if ($oldDesc !== $newDesc && '' !== $oldDesc && '' !== $newDesc) {
             throw new RuntimeException(sprintf("The message '%s' exists with two different descs: '%s' in %s, and '%s' in %s", $oldMessage->getId(), $oldMessage->getDesc(), current($oldMessage->getSources()), $newMessage->getDesc(), current($newMessage->getSources())));
         }
     }
