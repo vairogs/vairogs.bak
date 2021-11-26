@@ -19,6 +19,7 @@ use function preg_match;
 use function preg_replace;
 use function round;
 use function rtrim;
+use function str_pad;
 use function str_replace;
 use function strip_tags;
 use function strpbrk;
@@ -169,5 +170,12 @@ final class Text
         $hash = substr(string: hash(algo: 'sha' . $bit, data: $hashable, binary: true), offset: 0, length: (int) round(num: $bit / 16));
 
         return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
+    }
+
+    #[Annotation\TwigFilter]
+    #[Pure]
+    public static function pad(string $input, int $length, string $padding, int $type = STR_PAD_LEFT): string
+    {
+        return str_pad(string: $input, length: $length, pad_string: $padding, pad_type: $type);
     }
 }

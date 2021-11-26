@@ -4,6 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use Exception;
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Utils\Generator;
 use Vairogs\Utils\Twig\Annotation;
 use function bin2hex;
 use function ceil;

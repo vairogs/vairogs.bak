@@ -5,8 +5,8 @@ namespace Vairogs\Auth\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDChildDependency;
-use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectChildDependency;
+use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
+use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\DependencyInjection\Component;
 use Vairogs\Utils\DependencyInjection\DependecyLoaderTrait;
@@ -26,8 +26,8 @@ class AuthDependency implements Dependency
                 ->arrayNode(name: Component::AUTH)
                 ->canBeEnabled();
 
-        $this->appendComponent(class: AuthOpenIDChildDependency::class, arrayNodeDefinition: $authNode);
-        $this->appendComponent(class: AuthOpenIDConnectChildDependency::class, arrayNodeDefinition: $authNode);
+        $this->appendComponent(class: AuthOpenIDDependency::class, arrayNodeDefinition: $authNode);
+        $this->appendComponent(class: AuthOpenIDConnectDependency::class, arrayNodeDefinition: $authNode);
 
         $arrayNodeDefinition
             ->children()
@@ -45,8 +45,8 @@ class AuthDependency implements Dependency
         $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Status::ENABLED);
 
         if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
-            $this->configureComponent(class: AuthOpenIDChildDependency::class, container: $containerBuilder, configuration: $configuration);
-            $this->configureComponent(class: AuthOpenIDConnectChildDependency::class, container: $containerBuilder, configuration: $configuration);
+            $this->configureComponent(class: AuthOpenIDDependency::class, container: $containerBuilder, configuration: $configuration);
+            $this->configureComponent(class: AuthOpenIDConnectDependency::class, container: $containerBuilder, configuration: $configuration);
         }
     }
 }
