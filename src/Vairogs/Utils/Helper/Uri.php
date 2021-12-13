@@ -35,22 +35,38 @@ final class Uri
 {
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
-    public static function buildHttpQueryArray(array|object $data, ?string $parent = null): array
+    public static function buildHttpQueryArray(array|object $input, ?string $parent = null, bool $setArray = false): array
     {
         $result = [];
 
-        foreach (Php::getArray(input: $data) as $key => $value) {
+        foreach (Php::getArray(input: $input) as $key => $value) {
             $newKey = $parent ? sprintf('%s[%s]', $parent, $key) : $key;
 
             if (!$value instanceof CURLFile && (is_array(value: $value) || is_object(value: $value))) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
-                $result = array_merge($result, self::buildHttpQueryArray(data: $value, parent: $newKey));
+                $result = array_merge($result, self::buildHttpQueryArray(input: $value, parent: $newKey));
             } else {
                 $result[$newKey] = $value;
             }
         }
 
         return $result;
+    }
+
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
+    public static function buildArrayFromObject(object $object): array
+    {
+        parse_str(self::buildHttpQueryString($object), $result);
+
+        return $result;
+    }
+
+    #[Annotation\TwigFunction]
+    #[Annotation\TwigFilter]
+    public static function buildHttpQueryString(object $object): string
+    {
+        return http_build_query(self::buildHttpQueryArray($object));
     }
 
     #[Annotation\TwigFilter]
