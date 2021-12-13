@@ -10,6 +10,7 @@ use ReflectionClass;
 use ReflectionClassConstant;
 use ReflectionException;
 use ReflectionMethod;
+use ReflectionProperty;
 use Vairogs\Utils\Twig\Annotation;
 use function array_diff;
 use function array_values;
@@ -182,6 +183,10 @@ final class Php
     #[Annotation\TwigFunction]
     public static function hijackGet(object $object, string $property): mixed
     {
+        if ((new ReflectionProperty($object, $property))->isStatic()) {
+            return self::call(function: fn () => $object::${$property}, clone: $object, return: true);
+        }
+
         return self::call(function: fn () => $object->{$property}, clone: $object, return: true);
     }
 
