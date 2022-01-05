@@ -38,7 +38,7 @@
         }
     ],
     "require": {
-        "php": ">=8.0.0",
+        "php": ">=8.1.0",
         "jetbrains/phpstorm-attributes": "*",
         "twig/twig": "3.*",
         "vairogs/utils": "self.version"

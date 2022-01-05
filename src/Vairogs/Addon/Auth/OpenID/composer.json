@@ -39,7 +39,7 @@
         }
     ],
     "require": {
-        "php": ">=8.0.0",
+        "php": ">=8.1.0",
         "doctrine/orm": "~2.6",
         "jetbrains/phpstorm-attributes": "*",
         "vairogs/auth-openid": "self.version"

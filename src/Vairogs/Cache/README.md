@@ -11,4 +11,4 @@ The recommended way to install is via Composer:
 composer require vairogs/cache
 ```
 
-This package requires at least PHP 8.0.0
+This package requires at least PHP 8.1.0

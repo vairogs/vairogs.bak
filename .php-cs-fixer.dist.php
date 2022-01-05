@@ -6,6 +6,7 @@ if (!file_exists(__DIR__ . '/src')) {
 
 return (new PhpCsFixer\Config())->setRules([
     '@PHP80Migration:risky' => true,
+    '@PHP81Migration' => true,
     '@Symfony' => true,
     '@Symfony:risky' => true,
     '@PSR12' => true,
