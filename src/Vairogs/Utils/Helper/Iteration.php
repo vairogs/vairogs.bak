@@ -12,12 +12,10 @@ use function array_keys;
 use function array_map;
 use function array_unique;
 use function array_values;
-use function count;
 use function get_debug_type;
 use function in_array;
 use function is_array;
 use function is_object;
-use function range;
 use function sprintf;
 use function str_ends_with;
 use function str_starts_with;
@@ -106,20 +104,19 @@ final class Iteration
     }
 
     #[Annotation\TwigFunction]
-    #[Pure]
     public static function isAssociative(mixed $array): bool
     {
         if (!is_array(value: $array) || [] === $array) {
             return false;
         }
 
-        return array_keys(array: $array) !== range(start: 0, end: count(value: $array) - 1);
+        return !array_is_list($array);
     }
 
     #[Annotation\TwigFilter]
     public static function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
-        $result = array_intersect_key(array1: $first, array2: $second);
+        $result = array_intersect_key($first, $second);
 
         foreach (array_keys(array: $result) as $key) {
             if (is_array(value: $first[$key]) && is_array(value: $second[$key])) {

@@ -124,7 +124,7 @@ class CacheEventListener implements EventSubscriberInterface
             $key = $annotation->getKey(prefix: $this->getRoute(kernelEvent: $responseEvent));
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
 
-            if (null === $this->getCache(key: $key) && !$skip) {
+            if (!$skip && null === $this->getCache(key: $key)) {
                 $this->setCache(key: $key, value: $responseEvent->getResponse(), expires: $annotation->getExpires());
             }
         }

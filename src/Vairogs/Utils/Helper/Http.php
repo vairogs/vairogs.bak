@@ -58,22 +58,22 @@ final class Http
         return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: Request::class), with: 'METHOD_');
     }
 
-    protected static function checkHttps(Request $req): bool
+    private static function checkHttps(Request $req): bool
     {
         return $req->server->has(key: Constants\Http::HEADER_HTTPS) && 'on' === $req->server->get(key: Constants\Http::HEADER_HTTPS);
     }
 
-    protected static function checkServerPort(Request $req): bool
+    private static function checkServerPort(Request $req): bool
     {
         return $req->server->has(key: Constants\Http::HEADER_PORT) && Constants\Http::HTTPS === (int) $req->server->get(key: Constants\Http::HEADER_PORT);
     }
 
-    protected static function checkHttpXForwardedSsl(Request $req): bool
+    private static function checkHttpXForwardedSsl(Request $req): bool
     {
         return $req->server->has(key: Constants\Http::HEADER_SSL) && 'on' === $req->server->get(key: Constants\Http::HEADER_SSL);
     }
 
-    protected static function checkHttpXForwardedProto(Request $req): bool
+    private static function checkHttpXForwardedProto(Request $req): bool
     {
         return $req->server->has(key: Constants\Http::HEADER_PROTO) && 'https' === $req->server->get(key: Constants\Http::HEADER_PROTO);
     }

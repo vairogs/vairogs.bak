@@ -19,7 +19,7 @@ class SingleColumnArrayHydrator extends AbstractHydrator
             throw new LogicException(message: sprintf('%s class (ext-pdo) is missing', PDO::class));
         }
 
-        /* @noinspection PhpNamedArgumentMightBeUnresolvedInspection */
+        /* @noinspection PhpDeprecationInspection */
         while ($data = $this->_stmt->fetch(fetchMode: PDO::FETCH_NUM)) {
             $result[] = Text::getNormalizedValue(value: $data[0]);
         }

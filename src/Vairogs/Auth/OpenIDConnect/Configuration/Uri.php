@@ -122,7 +122,7 @@ class Uri
     private function setIdToken(): void
     {
         if (Request::METHOD_GET === $this->method && isset($this->urlParams['id_token_hint']) && null !== $this->session && $this->session->has(name: 'id_token')) {
-            if (false === $this->useSession) {
+            if (!$this->useSession) {
                 throw new OpenIDConnectException(message: sprintf('"%s" parameter must be set to "true" in order to use id_token_hint', 'use_session'));
             }
             $this->urlParams['id_token_hint'] = $this->session->get(name: 'id_token');

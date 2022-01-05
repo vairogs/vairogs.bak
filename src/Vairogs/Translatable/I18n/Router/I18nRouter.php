@@ -124,7 +124,6 @@ class I18nRouter extends Router
         $matcher = $this->getMatcher();
         $pathInfo = $request->getPathInfo();
         if (!$matcher instanceof RequestMatcherInterface) {
-            /* @noinspection PhpNamedArgumentMightBeUnresolvedInspection */
             return $this->matchI18n(params: $matcher->match(pathinfo: $pathInfo), url: $pathInfo);
         }
 

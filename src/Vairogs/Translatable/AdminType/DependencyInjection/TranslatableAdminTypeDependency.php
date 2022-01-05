@@ -13,6 +13,7 @@ class TranslatableAdminTypeDependency implements Dependency
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
+        /* @noinspection NullPointerExceptionInspection */
         $arrayNodeDefinition
             ->children()
                 ->arrayNode(name: Component::TRANSLATABLE_ADMINTYPE)

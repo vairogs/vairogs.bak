@@ -3,8 +3,8 @@
 namespace Vairogs\Auth\OpenIDConnect\Utils\Traits;
 
 use Lcobucci\JWT\Signer;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 
@@ -32,7 +32,7 @@ trait OpenIDConnectProviderVariables
         return $this;
     }
 
-    public function getRouter(): Router
+    public function getRouter(): RouterInterface
     {
         return $this->router;
     }

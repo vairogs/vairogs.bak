@@ -18,6 +18,8 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
         $optionsNode = $arrayNodeDefinition->children();
 
         // @formatter:off
+        /* @noinspection NullPointerExceptionInspection */
+        /* @noinspection PhpPossiblePolymorphicInvocationInspection */
         $optionsNode
             ->scalarNode(name: 'client_id')->isRequired()->defaultValue(value: null)->end()
             ->scalarNode(name: 'client_secret')->defaultValue(value: null)->end()
@@ -62,6 +64,7 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         // @formatter:off
+        /* @noinspection PhpPossiblePolymorphicInvocationInspection */
         $arrayNodeDefinition
             ->children()
             ->arrayNode(name: Component::AUTH_OPENIDCONNECT)

@@ -19,7 +19,7 @@ abstract class AbstractConstraint implements Constraint
             throw new ConstraintViolation(message: 'You should pass a plain token');
         }
 
-        if (null !== $this->claim && true === $this->required && !$token->claims()->has(name: $this->claim)) {
+        if (null !== $this->claim && $this->required && !$token->claims()->has(name: $this->claim)) {
             throw new ConstraintViolation(message: sprintf('%s claim is required', $this->claim));
         }
     }

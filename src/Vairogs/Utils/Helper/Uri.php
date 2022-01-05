@@ -4,6 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
+use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Annotation;
@@ -33,9 +34,12 @@ use function urldecode;
 
 final class Uri
 {
+    /**
+     * @throws ReflectionException
+     */
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
-    public static function buildHttpQueryArray(array|object $input, ?string $parent = null, bool $setArray = false): array
+    public static function buildHttpQueryArray(array|object $input, ?string $parent = null): array
     {
         $result = [];
 
@@ -53,20 +57,26 @@ final class Uri
         return $result;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
     public static function buildArrayFromObject(object $object): array
     {
-        parse_str(self::buildHttpQueryString($object), $result);
+        parse_str(string: self::buildHttpQueryString($object), result: $result);
 
         return $result;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
     public static function buildHttpQueryString(object $object): string
     {
-        return http_build_query(self::buildHttpQueryArray($object));
+        return http_build_query(data: self::buildHttpQueryArray(input: $object));
     }
 
     #[Annotation\TwigFilter]
@@ -95,7 +105,7 @@ final class Uri
     #[Annotation\TwigFilter]
     public static function arrayFromQueryString(string $query): array
     {
-        $query = preg_replace_callback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(urldecode($match[0])), subject: $query);
+        $query = preg_replace_callback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(string: urldecode(string: $match[0])), subject: $query);
 
         parse_str(string: $query, result: $values);
 

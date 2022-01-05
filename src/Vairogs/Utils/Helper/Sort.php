@@ -96,6 +96,7 @@ final class Sort
             return $data;
         }
 
+        $data = (array) $data;
         if (!self::isSortable(item: current(array: $data), field: $parameter)) {
             throw new InvalidArgumentException(message: "Sorting parameter doesn't exist in sortable variable");
         }

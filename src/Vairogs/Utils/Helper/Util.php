@@ -2,6 +2,7 @@
 
 namespace Vairogs\Utils\Helper;
 
+use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Utils\Twig\Annotation;
 use function array_fill;
@@ -19,16 +20,18 @@ final class Util
         return isset($matches[1]);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
     public static function getRequestIdentity(Request $request): array
     {
-        $requestData = Uri::buildArrayFromObject($request);
         $additionalData = [
-            'actualIp' => file_get_contents('https://ident.me'),
-            'uuid' => time() . Identification::getUniqueId(),
+            'actualIp' => file_get_contents(filename: 'https://ident.me'),
+            'uuid' => time() . Identification::getUniqueId(length: 32),
         ];
 
-        return array_merge($requestData, $additionalData);
+        return array_merge(Uri::buildArrayFromObject(object: $request), $additionalData);
     }
 }

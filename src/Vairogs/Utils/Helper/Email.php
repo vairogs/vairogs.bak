@@ -16,6 +16,6 @@ final class Email
             return false;
         }
 
-        return false !== filter_var(value: filter_var(value: $email, filter: FILTER_SANITIZE_STRING), filter: FILTER_VALIDATE_EMAIL);
+        return false !== filter_var(value: filter_var(value: $email, filter: FILTER_UNSAFE_RAW), filter: FILTER_VALIDATE_EMAIL);
     }
 }

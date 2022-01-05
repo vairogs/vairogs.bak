@@ -3,7 +3,6 @@
 namespace Vairogs\Utils\Helper;
 
 use Exception;
-use JetBrains\PhpStorm\Pure;
 use Vairogs\Utils\Generator;
 use Vairogs\Utils\Twig\Annotation;
 use function bin2hex;
@@ -27,10 +26,8 @@ final class Identification
             if (!self::validateNewPersonCode(personCode: $personCode)) {
                 return false;
             }
-        } else {
-            if (!Date::validateDate(date: $personCode) || !self::validateOldPersonCode(personCode: $personCode)) {
-                return false;
-            }
+        } elseif (!Date::validateDate(date: $personCode) || !self::validateOldPersonCode(personCode: $personCode)) {
+            return false;
         }
 
         return true;
@@ -91,7 +88,6 @@ final class Identification
     }
 
     #[Annotation\TwigFunction]
-    #[Pure]
     public static function getRandomString(int $length = 20, string $chars = Generator::RAND_BASIC): string
     {
         /* @noinspection NonSecureStrShuffleUsageInspection */

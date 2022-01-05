@@ -31,6 +31,9 @@ use function ucfirst;
 
 final class Php
 {
+    /**
+     * @noinspection StaticClosureCanBeUsedInspection
+     */
     #[Annotation\TwigFunction]
     public static function hijackSet(object $object, string $property, mixed $value): void
     {
@@ -89,7 +92,7 @@ final class Php
     public static function getClassConstants(string $class): array
     {
         if (self::exists(class: $class)) {
-            return (new ReflectionClass(objectOrClass: $class))->getConstants(ReflectionClassConstant::IS_PUBLIC);
+            return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
         }
 
         throw new InvalidArgumentException(message: sprintf('Invalid class "%s"', $class));
@@ -129,7 +132,7 @@ final class Php
     {
         $methods = get_class_methods(object_or_class: $class);
         if (null !== $parent) {
-            return array_diff(array: $methods, excludes: get_class_methods($parent));
+            return array_diff(array: $methods, excludes: get_class_methods(object_or_class: $parent));
         }
 
         return $methods;
@@ -166,6 +169,9 @@ final class Php
         return $_ENV[$varname] ?? $varname;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Annotation\TwigFunction]
     #[Annotation\TwigFilter]
     public static function getArray(array|object $input): array
@@ -180,6 +186,10 @@ final class Php
         return $input;
     }
 
+    /**
+     * @throws ReflectionException
+     * @noinspection StaticClosureCanBeUsedInspection
+     */
     #[Annotation\TwigFunction]
     public static function hijackGet(object $object, string $property): mixed
     {

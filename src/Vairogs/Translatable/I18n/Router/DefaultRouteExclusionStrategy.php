@@ -13,6 +13,6 @@ class DefaultRouteExclusionStrategy implements RouteExclusionStrategyInterface
             return true;
         }
 
-        return false === Php::boolval(value: $route->getOption(name: 'i18n'));
+        return !Php::boolval(value: $route->getOption(name: 'i18n'));
     }
 }

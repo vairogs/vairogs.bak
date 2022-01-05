@@ -16,10 +16,10 @@ use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
 use UnexpectedValueException;
 use Vairogs\Auth\OpenIDConnect\Configuration\AbstractProvider;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Equal;
@@ -48,7 +48,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider
 {
     use OpenIDConnectProviderVariables;
 
-    public function __construct(protected string $name, protected Router $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
+    public function __construct(protected string $name, protected RouterInterface $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
     {
         $this->signer = new Signer\Rsa\Sha256();
         $this->validatorChain = new ValidatorChain();
