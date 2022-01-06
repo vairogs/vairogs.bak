@@ -7,7 +7,7 @@ use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionException;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function array_merge;
 use function floor;
 use function gmdate;
@@ -32,7 +32,7 @@ final class Date
         'second' => self::SEC,
     ];
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function validateDate(string $date): bool
     {
         $date = Text::keepNumeric(string: $date);
@@ -54,7 +54,7 @@ final class Date
         return 0 < $day && $daysInMonth[$month - 1] >= $day;
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function excelDate(int $timestamp, string $format = self::FORMAT): int|string
     {
         $base = 25569;
@@ -72,7 +72,7 @@ final class Date
         return $timestamp;
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function validateDateBasic(mixed $date, string $format = self::FORMAT): bool
     {
         $object = DateTime::createFromFormat(format: $format, datetime: $date);
@@ -80,7 +80,7 @@ final class Date
         return $object && $date === $object->format(format: $format);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function format(int|float $timestamp): string
     {
@@ -106,7 +106,7 @@ final class Date
         return trim(string: $str);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function formatToArray(int|float $timestamp): array
     {
@@ -132,13 +132,13 @@ final class Date
         return $result;
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function formatDate(string $string, string $format = self::FORMAT): string
     {
         return DateTime::createFromFormat(format: $format, datetime: $string)?->format(format: self::FORMAT);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function getDateNullable(?string $format = null, ?string $dateString = null): ?DateTime
     {
         if (null === $dateString || !$date = DateTime::createFromFormat(format: $format, datetime: $dateString)) {
@@ -151,7 +151,7 @@ final class Date
     /**
      * @throws InvalidArgumentException
      */
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function getDate(?string $format = null, ?string $dateString = null): DateTime
     {
         if (null === $dateString || !$date = DateTime::createFromFormat(format: $format, datetime: $dateString)) {
@@ -164,7 +164,7 @@ final class Date
     /**
      * @throws Exception
      */
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string
     {
         return (new DateTime())->setTimestamp(timestamp: $timestamp)
@@ -174,7 +174,7 @@ final class Date
     /**
      * @throws ReflectionException
      */
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function guessDateFormat(string $date): DateTime|string
     {
         $formats = array_merge(Php::getClassConstantsValues(class: DateTime::class), self::EXTRA_FORMATS);

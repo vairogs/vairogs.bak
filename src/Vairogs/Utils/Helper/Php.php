@@ -3,7 +3,6 @@
 namespace Vairogs\Utils\Helper;
 
 use Closure;
-use Doctrine\Common\Annotations\AnnotationReader;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
@@ -11,7 +10,7 @@ use ReflectionClassConstant;
 use ReflectionException;
 use ReflectionMethod;
 use ReflectionProperty;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function array_diff;
 use function array_values;
 use function class_exists;
@@ -34,7 +33,7 @@ final class Php
     /**
      * @noinspection StaticClosureCanBeUsedInspection
      */
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function hijackSet(object $object, string $property, mixed $value): void
     {
         self::call(function: function () use ($object, $property, $value): void {
@@ -45,7 +44,7 @@ final class Php
     /**
      * @noinspection PhpInconsistentReturnPointsInspection
      */
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function call(callable $function, object $clone, bool $return = false): mixed
     {
         $func = Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
@@ -57,7 +56,7 @@ final class Php
         $func();
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function boolval(mixed $value): bool
     {
@@ -78,7 +77,7 @@ final class Php
      * @throws ReflectionException
      * @throws InvalidArgumentException
      */
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function getClassConstantsValues(string $class): array
     {
         return array_values(array: self::getClassConstants(class: $class));
@@ -88,7 +87,7 @@ final class Php
      * @throws InvalidArgumentException
      * @throws ReflectionException
      */
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function getClassConstants(string $class): array
     {
         if (self::exists(class: $class)) {
@@ -98,8 +97,8 @@ final class Php
         throw new InvalidArgumentException(message: sprintf('Invalid class "%s"', $class));
     }
 
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function exists(string $class, $checkTrait = false): bool
     {
         $exists = class_exists(class: $class) || interface_exists(interface: $class);
@@ -111,8 +110,8 @@ final class Php
         return $exists || trait_exists(trait: $class);
     }
 
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getParameter(array|object $variable, mixed $key): mixed
     {
         if (is_array(value: $variable)) {
@@ -126,8 +125,8 @@ final class Php
         return $variable->{$key};
     }
 
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getClassMethods(string $class, ?string $parent = null): array
     {
         $methods = get_class_methods(object_or_class: $class);
@@ -141,7 +140,7 @@ final class Php
     /**
      * @throws ReflectionException
      */
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function getShortName(string $class): string
     {
         if (self::exists(class: $class, checkTrait: true)) {
@@ -151,14 +150,14 @@ final class Php
         return $class;
     }
 
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function classImplements(string $class, string $interface): bool
     {
         return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     #[Pure]
     public static function getEnv(string $varname, bool $localOnly = false): mixed
     {
@@ -172,8 +171,8 @@ final class Php
     /**
      * @throws ReflectionException
      */
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getArray(array|object $input): array
     {
         if (is_object(value: $object = $input)) {
@@ -190,7 +189,7 @@ final class Php
      * @throws ReflectionException
      * @noinspection StaticClosureCanBeUsedInspection
      */
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function hijackGet(object $object, string $property): mixed
     {
         if ((new ReflectionProperty($object, $property))->isStatic()) {
@@ -200,10 +199,11 @@ final class Php
         return self::call(function: fn () => $object->{$property}, clone: $object, return: true);
     }
 
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Pure]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function filterExists(ReflectionMethod $method, string $filterClass): bool
     {
-        return null !== (new AnnotationReader())->getMethodAnnotation(method: $method, annotationName: $filterClass) || [] !== $method->getAttributes(name: $filterClass);
+        return [] !== $method->getAttributes(name: $filterClass);
     }
 }

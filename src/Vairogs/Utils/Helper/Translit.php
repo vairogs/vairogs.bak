@@ -2,7 +2,7 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function str_replace;
 
 final class Translit
@@ -22,13 +22,13 @@ final class Translit
     ];
     // @formatter:on
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function cyrillicToLatin(string $text): string
     {
         return str_replace(search: self::MAP_CYRILLIC, replace: self::MAP_LATIN, subject: $text);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function latinToCyrillic(string $text): string
     {
         return str_replace(search: self::MAP_LATIN, replace: self::MAP_CYRILLIC, subject: $text);

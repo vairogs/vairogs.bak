@@ -11,7 +11,7 @@ use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Vairogs;
 use function sprintf;
 
-class Predis implements Cache
+class Predis implements Adapter
 {
     public function __construct(private ClientInterface $client, private string $namespace = Vairogs::VAIROGS)
     {
@@ -22,6 +22,6 @@ class Predis implements Cache
 
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new RedisAdapter(redis: $this->client, namespace: $this->namespace, defaultLifetime: Cache::DEFAULT_LIFETIME);
+        return new RedisAdapter(redis: $this->client, namespace: $this->namespace, defaultLifetime: Adapter::DEFAULT_LIFETIME);
     }
 }

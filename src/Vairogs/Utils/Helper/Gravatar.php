@@ -4,7 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use ReflectionException;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function hash;
 use function http_build_query;
 use function strtolower;
@@ -28,7 +28,7 @@ final class Gravatar
      * @throws ReflectionException
      * @throws InvalidArgumentException
      */
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
     {
         if (empty($email) || !Email::isValid(email: $email)) {

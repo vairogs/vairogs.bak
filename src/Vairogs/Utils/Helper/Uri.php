@@ -7,7 +7,7 @@ use JetBrains\PhpStorm\Pure;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function array_combine;
 use function array_keys;
 use function array_map;
@@ -37,8 +37,8 @@ final class Uri
     /**
      * @throws ReflectionException
      */
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function buildHttpQueryArray(array|object $input, ?string $parent = null): array
     {
         $result = [];
@@ -60,8 +60,8 @@ final class Uri
     /**
      * @throws ReflectionException
      */
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function buildArrayFromObject(object $object): array
     {
         parse_str(string: self::buildHttpQueryString($object), result: $result);
@@ -72,14 +72,14 @@ final class Uri
     /**
      * @throws ReflectionException
      */
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function buildHttpQueryString(object $object): string
     {
         return http_build_query(data: self::buildHttpQueryArray(input: $object));
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function urlEncode(string $url): string
     {
         $urlParsed = parse_url(url: $url);
@@ -102,7 +102,7 @@ final class Uri
         return $scheme . $host . $port . $path . $query;
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function arrayFromQueryString(string $query): array
     {
         $query = preg_replace_callback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(string: urldecode(string: $match[0])), subject: $query);
@@ -112,7 +112,7 @@ final class Uri
         return array_combine(keys: array_map(callback: 'hex2bin', array: array_keys(array: $values)), values: $values);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function parseHeaders(string $rawHeaders = ''): array
     {
         $headers = [];
@@ -132,7 +132,7 @@ final class Uri
         return $headers;
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     #[Pure]
     public static function isUrl(string $url): bool
     {
@@ -140,7 +140,7 @@ final class Uri
         return false !== filter_var(value: filter_var(value: $url, filter: FILTER_SANITIZE_URL), filter: FILTER_VALIDATE_URL);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function parseQueryPath(string $path): bool|string
     {
         $path = '/' . ltrim(string: $path, characters: '/');
@@ -159,14 +159,14 @@ final class Uri
         return $path;
     }
 
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getSchema(Request $request): string
     {
         return Http::isHttps(req: $request) ? Constants\Http::SCHEMA_HTTPS : Constants\Http::SCHEMA_HTTP;
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function isAbsolute(string $path): bool
     {
         return str_starts_with(haystack: $path, needle: '//') || preg_match(pattern: '#^[a-z-]{3,}://#i', subject: $path);

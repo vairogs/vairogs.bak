@@ -4,7 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use Exception;
 use Vairogs\Utils\Generator;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function bin2hex;
 use function ceil;
 use function floor;
@@ -17,7 +17,7 @@ use function substr;
 
 final class Identification
 {
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function validatePersonCode(string $personCode): bool
     {
         $personCode = Text::keepNumeric(string: $personCode);
@@ -33,7 +33,7 @@ final class Identification
         return true;
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function validateNewPersonCode(string $personCode): bool
     {
         if (11 !== strlen(string: $personCode)) {
@@ -59,7 +59,7 @@ final class Identification
         return (1 - $remainder) === (int) $personCode[10];
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function validateOldPersonCode(string $personCode): bool
     {
         if (11 !== strlen(string: $personCode)) {
@@ -77,7 +77,7 @@ final class Identification
         return (int) ($checksum - floor(num: $checksum / 11) * 11) === (int) $personCode[10];
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function getUniqueId(int $length = 20): string
     {
         try {
@@ -87,7 +87,7 @@ final class Identification
         }
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function getRandomString(int $length = 20, string $chars = Generator::RAND_BASIC): string
     {
         /* @noinspection NonSecureStrShuffleUsageInspection */

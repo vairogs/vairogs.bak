@@ -14,7 +14,7 @@ use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Vairogs;
 use function sprintf;
 
-class Orm implements Cache
+class Orm implements Adapter
 {
     public function __construct(private EntityManagerInterface $entityManager, private string $namespace = Vairogs::VAIROGS)
     {

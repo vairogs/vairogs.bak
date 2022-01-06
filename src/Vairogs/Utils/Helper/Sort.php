@@ -5,7 +5,7 @@ namespace Vairogs\Utils\Helper;
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function array_key_exists;
 use function array_slice;
 use function count;
@@ -26,7 +26,7 @@ final class Sort
 
     private static string $field = '';
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function swap(mixed &$foo, mixed &$bar): void
     {
         if ($foo === $bar) {
@@ -38,7 +38,7 @@ final class Sort
         $bar = $tmp;
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function bubbleSort(array &$array): void
     {
         $count = count(value: $array);
@@ -51,8 +51,8 @@ final class Sort
         }
     }
 
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function swapArray(array &$array, mixed $foo, mixed $bar): void
     {
         if ($array[$foo] === $array[$bar]) {
@@ -64,7 +64,7 @@ final class Sort
         $array[$bar] = $tmp;
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function mergeSort(array $array): array
     {
         if (1 === count(value: $array)) {
@@ -81,7 +81,7 @@ final class Sort
         return self::merge(left: $left, right: $right);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function sort(iterable|Collection $data, string $parameter, string $order = self::ASC): array
     {
         if ($data instanceof Collection) {
@@ -106,7 +106,7 @@ final class Sort
         return $data;
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     #[Pure]
     public static function isSortable(mixed $item, int|string $field): bool
     {
@@ -121,7 +121,7 @@ final class Sort
         return false;
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function usort(string $parameter, string $order): callable
     {
         return static function (array|object $a, array|object $b) use ($parameter, $order): int {
@@ -139,7 +139,7 @@ final class Sort
         };
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function sortLatvian(array &$names, string $field): bool
     {
         self::$field = $field;

@@ -4,7 +4,7 @@ namespace Vairogs\Cache\Utils\Adapter;
 
 use Psr\Cache\CacheItemPoolInterface;
 
-interface Cache
+interface Adapter
 {
     public const DEFAULT_LIFETIME = 0;
 

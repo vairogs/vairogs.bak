@@ -6,17 +6,17 @@ use InvalidArgumentException;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 
 final class Http
 {
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function isHttps(Request $req): bool
     {
         return self::checkHttps(req: $req) || self::checkServerPort(req: $req) || self::checkHttpXForwardedSsl(req: $req) || self::checkHttpXForwardedProto(req: $req);
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function getRemoteIp(Request $request, bool $trust = false): string
     {
         if (false === $trust) {
@@ -38,7 +38,7 @@ final class Http
         return $request->server->get(key: Constants\Http::REMOTE_ADDR);
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function getRemoteIpCF(Request $request, bool $trust = false): string
     {
         if ($request->server->has(key: Constants\Http::HTTP_CF_CONNECTING_IP)) {
@@ -52,7 +52,7 @@ final class Http
      * @throws InvalidArgumentException
      * @throws ReflectionException
      */
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function getMethods(): array
     {
         return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: Request::class), with: 'METHOD_');

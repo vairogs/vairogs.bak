@@ -7,7 +7,7 @@ use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
 use Vairogs\Utils\Vairogs;
 
-class File implements Cache
+class File implements Adapter
 {
     public function __construct(private string $namespace = Vairogs::VAIROGS)
     {
@@ -18,6 +18,6 @@ class File implements Cache
      */
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new PhpFilesAdapter(namespace: $this->namespace, defaultLifetime: Cache::DEFAULT_LIFETIME);
+        return new PhpFilesAdapter(namespace: $this->namespace, defaultLifetime: Adapter::DEFAULT_LIFETIME);
     }
 }

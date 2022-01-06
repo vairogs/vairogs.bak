@@ -4,7 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function array_fill;
 use function file_get_contents;
 use function implode;
@@ -12,7 +12,7 @@ use function preg_match;
 
 final class Util
 {
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function isPrime(int $number): bool
     {
         preg_match(pattern: '#^1?$|^(11+?)\1+$#', subject: implode(separator: '1', array: array_fill(start_index: 0, count: $number, value: null)), matches: $matches);
@@ -23,8 +23,8 @@ final class Util
     /**
      * @throws ReflectionException
      */
-    #[Annotation\TwigFunction]
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getRequestIdentity(Request $request): array
     {
         $additionalData = [

@@ -1,18 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Translatable\Translation\Annotation;
+namespace Vairogs\Translatable\Translation\Attribute;
 
 use Attribute;
-use Doctrine\Common\Annotations\Annotation;
-use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
-use Doctrine\Common\Annotations\Annotation\Target;
 use function implode;
 
-/**
- * @Annotation
- * @Annotation\Target({Target::TARGET_PROPERTY})
- * @NamedArgumentConstructor()
- */
 #[Attribute(Attribute::TARGET_PROPERTY)]
 class Translatable
 {

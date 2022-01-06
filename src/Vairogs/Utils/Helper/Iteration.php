@@ -4,7 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function array_filter;
 use function array_flip;
 use function array_intersect_key;
@@ -24,7 +24,7 @@ final class Iteration
 {
     public const DOT = '.';
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function isEmpty(mixed $variable): bool
     {
         $result = true;
@@ -40,13 +40,13 @@ final class Iteration
         return $result;
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function uniqueMap(array &$array): void
     {
         $array = array_map(callback: '\unserialize', array: array_unique(array: array_map(callback: '\serialize', array: $array)));
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function unique(array $input, bool $keepKeys = false): array
     {
@@ -57,7 +57,7 @@ final class Iteration
         return array_keys(array: array_flip(array: $input));
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     #[Pure]
     public static function isMultiDimensional(array $keys = []): bool
     {
@@ -70,14 +70,14 @@ final class Iteration
         return false;
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     #[Pure]
     public static function isAnyKeyNull(array $keys = []): bool
     {
         return in_array(needle: null, haystack: $keys, strict: true);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX): array
     {
         $result = [];
@@ -103,7 +103,7 @@ final class Iteration
         return $result;
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function isAssociative(mixed $array): bool
     {
         if (!is_array(value: $array) || [] === $array) {
@@ -113,7 +113,7 @@ final class Iteration
         return !array_is_list($array);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
         $result = array_intersect_key($first, $second);
@@ -130,7 +130,7 @@ final class Iteration
     /**
      * @throws InvalidArgumentException
      */
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function arrayFlipRecursive(array $input = []): array
     {
         $result = [];
@@ -151,7 +151,7 @@ final class Iteration
         return $result;
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function removeFromArray(array &$input, mixed $value): void
     {
         if (in_array(needle: $value, haystack: $input, strict: true)) {
@@ -166,7 +166,7 @@ final class Iteration
     /**
      * @throws InvalidArgumentException
      */
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function arrayValuesFiltered(array $input, string $with, string $type = 'starts'): array
     {
         return match ($type) {
@@ -176,19 +176,19 @@ final class Iteration
         };
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function filterKeyStartsWith(array $input, string $startsWith): array
     {
         return array_filter(array: $input, callback: static fn ($key) => str_starts_with(haystack: $key, needle: $startsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function filterKeyEndsWith(array $input, string $endsWith): array
     {
         return array_filter(array: $input, callback: static fn ($key) => str_ends_with(haystack: $key, needle: $endsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
-    #[Annotation\TwigFilter]
+    #[Attribute\TwigFilter]
     public static function getIfNotEmpty(array $input, mixed $key): mixed
     {
         if (!isset($input[$key])) {

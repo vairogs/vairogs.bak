@@ -1,10 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Cache\Annotation;
+namespace Vairogs\Cache;
 
 use Attribute;
-use Doctrine\Common\Annotations\Annotation;
-use Doctrine\Common\Annotations\Annotation\NamedArgumentConstructor;
 use Vairogs\Cache\Utils\Strategy;
 use Vairogs\Utils\Helper\Iteration;
 use function hash;
@@ -12,11 +10,6 @@ use function http_build_query;
 use function is_array;
 use function str_replace;
 
-/**
- * @Annotation
- * @Annotation\Target({"METHOD"})
- * @NamedArgumentConstructor()
- */
 #[Attribute(Attribute::TARGET_METHOD)]
 final class Cache
 {

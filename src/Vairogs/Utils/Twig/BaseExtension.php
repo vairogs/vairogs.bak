@@ -36,7 +36,7 @@ abstract class BaseExtension extends AbstractExtension
      */
     public function getFilters(): array
     {
-        return $this->getMethods(filter: Annotation\TwigFilter::class, class: Twig\TwigFilter::class);
+        return $this->getMethods(filter: Attribute\TwigFilter::class, class: Twig\TwigFilter::class);
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class BaseExtension extends AbstractExtension
      */
     public function getFunctions(): array
     {
-        return $this->getMethods(filter: Annotation\TwigFunction::class, class: Twig\TwigFunction::class);
+        return $this->getMethods(filter: Attribute\TwigFunction::class, class: Twig\TwigFunction::class);
     }
 
     /**

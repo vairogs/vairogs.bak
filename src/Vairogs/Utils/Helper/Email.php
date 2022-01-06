@@ -3,12 +3,12 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function filter_var;
 
 final class Email
 {
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     #[Pure]
     public static function isValid(string $email): bool
     {

@@ -2,7 +2,6 @@
 
 namespace Vairogs\Cache\Utils;
 
-use Doctrine\Common\Annotations\Reader;
 use InvalidArgumentException;
 use JsonSerializable;
 use ReflectionClass;
@@ -19,7 +18,7 @@ class Event
 {
     private const PARAMS = '_route_params';
 
-    public function __construct(protected Reader $reader, protected ?TokenStorageInterface $tokenStorage = null)
+    public function __construct(protected ?TokenStorageInterface $tokenStorage = null)
     {
     }
 
@@ -29,12 +28,12 @@ class Event
      */
     public function getAttributes(KernelEvent $kernelEvent, string $class): array
     {
-        if (null !== ($annotation = $this->getAnnotation(kernelEvent: $kernelEvent, class: $class))) {
+        if (null !== ($attribute = $this->getAtribute(kernelEvent: $kernelEvent, class: $class))) {
             $request = $kernelEvent->getRequest();
 
             $user = $this->getUser();
 
-            return match ($annotation->getStrategy()) {
+            return match ($attribute->getStrategy()) {
                 Strategy::GET => $request->attributes->get(key: self::PARAMS) + $request->query->all(),
                 Strategy::POST => $request->request->all(),
                 Strategy::USER => $user,
@@ -44,7 +43,7 @@ class Event
                     Strategy::USER => $user,
                 ],
                 Strategy::ALL => $request->attributes->get(key: self::PARAMS) + $request->query->all() + $request->request->all() + $user,
-                default => throw new InvalidArgumentException(message: sprintf('Unknown strategy: %s', $annotation->getStrategy())),
+                default => throw new InvalidArgumentException(message: sprintf('Unknown strategy: %s', $attribute->getStrategy())),
             };
         }
 
@@ -54,7 +53,7 @@ class Event
     /**
      * @throws ReflectionException
      */
-    public function getAnnotation(KernelEvent $kernelEvent, string $class): ?object
+    public function getAtribute(KernelEvent $kernelEvent, string $class): ?object
     {
         $controller = $this->getController(kernelEvent: $kernelEvent);
 
@@ -63,11 +62,6 @@ class Event
                 if ($class === $attribute->getName()) {
                     return $attribute->newInstance();
                 }
-            }
-
-            /* @noinspection PhpNamedArgumentMightBeUnresolvedInspection */
-            if (($object = $this->reader->getMethodAnnotation(method: $method, annotationName: $class)) instanceof $class) {
-                return $object;
             }
         }
 

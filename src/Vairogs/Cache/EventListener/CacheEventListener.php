@@ -2,7 +2,6 @@
 
 namespace Vairogs\Cache\EventListener;
 
-use Doctrine\Common\Annotations\Reader;
 use JetBrains\PhpStorm\ArrayShape;
 use Psr\Cache\InvalidArgumentException;
 use ReflectionException;
@@ -15,7 +14,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Vairogs\Cache\Annotation\Cache as Annotation;
+use Vairogs\Cache\Cache;
 use Vairogs\Cache\Header;
 use Vairogs\Cache\Utils\Event;
 use Vairogs\Cache\Utils\Pool;
@@ -34,12 +33,12 @@ class CacheEventListener implements EventSubscriberInterface
     protected ChainAdapter $adapter;
     protected Event $event;
 
-    public function __construct(Reader $reader, protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
+    public function __construct(protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
     {
         if ($this->enabled) {
-            $this->adapter = new ChainAdapter(adapters: Pool::createPool(class: Annotation::class, adapters: $adapters));
+            $this->adapter = new ChainAdapter(adapters: Pool::createPool(class: Cache::class, adapters: $adapters));
             $this->adapter->prune();
-            $this->event = new Event(reader: $reader, tokenStorage: $tokenStorage);
+            $this->event = new Event(tokenStorage: $tokenStorage);
         }
     }
 
@@ -70,13 +69,13 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var $annotation Annotation */
-        if (null !== ($annotation = $this->event->getAnnotation(kernelEvent: $controllerEvent, class: Annotation::class))) {
-            $annotation->setData(data: $this->event->getAttributes(kernelEvent: $controllerEvent, class: Annotation::class));
+        /** @var Cache $attribute */
+        if (null !== ($attribute = $this->event->getAtribute(kernelEvent: $controllerEvent, class: Cache::class))) {
+            $attribute->setData(data: $this->event->getAttributes(kernelEvent: $controllerEvent, class: Cache::class));
             $response = null;
 
             if (is_string(value: $route = $this->getRoute(kernelEvent: $controllerEvent))) {
-                $key = $annotation->getKey(prefix: $route);
+                $key = $attribute->getKey(prefix: $route);
 
                 if (!$this->needsInvalidation(request: $controllerEvent->getRequest())) {
                     $response = $this->getCache(key: $key);
@@ -101,10 +100,10 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var $annotation Annotation */
-        if (($annotation = $this->event->getAnnotation(kernelEvent: $requestEvent, class: Annotation::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
-            $annotation->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Annotation::class));
-            $this->adapter->deleteItem(key: $annotation->getKey(prefix: $this->getRoute(kernelEvent: $requestEvent)));
+        /** @var Cache $attribute */
+        if (($attribute = $this->event->getAtribute(kernelEvent: $requestEvent, class: Cache::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
+            $attribute->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Cache::class));
+            $this->adapter->deleteItem(key: $attribute->getKey(prefix: $this->getRoute(kernelEvent: $requestEvent)));
         }
     }
 
@@ -118,14 +117,14 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var $annotation Annotation */
-        if (null !== ($annotation = $this->event->getAnnotation(kernelEvent: $responseEvent, class: Annotation::class))) {
-            $annotation->setData(data: $this->event->getAttributes(kernelEvent: $responseEvent, class: Annotation::class));
-            $key = $annotation->getKey(prefix: $this->getRoute(kernelEvent: $responseEvent));
+        /** @var Cache $attribute */
+        if (null !== ($attribute = $this->event->getAtribute(kernelEvent: $responseEvent, class: Cache::class))) {
+            $attribute->setData(data: $this->event->getAttributes(kernelEvent: $responseEvent, class: Cache::class));
+            $key = $attribute->getKey(prefix: $this->getRoute(kernelEvent: $responseEvent));
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
 
             if (!$skip && null === $this->getCache(key: $key)) {
-                $this->setCache(key: $key, value: $responseEvent->getResponse(), expires: $annotation->getExpires());
+                $this->setCache(key: $key, value: $responseEvent->getResponse(), expires: $attribute->getExpires());
             }
         }
     }

@@ -4,7 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
 use UnexpectedValueException;
-use Vairogs\Utils\Twig\Annotation;
+use Vairogs\Utils\Twig\Attribute;
 use function dirname;
 use function getcwd;
 use function is_dir;
@@ -14,7 +14,7 @@ use function sprintf;
 
 final class File
 {
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     public static function mkdir(string $path): bool
     {
         $dir = dirname(path: $path);
@@ -26,7 +26,7 @@ final class File
         return true;
     }
 
-    #[Annotation\TwigFunction]
+    #[Attribute\TwigFunction]
     #[Pure]
     public static function fileExistsPublic(string $filename): bool
     {

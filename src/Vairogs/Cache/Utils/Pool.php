@@ -5,7 +5,7 @@ namespace Vairogs\Cache\Utils;
 use BadMethodCallException;
 use InvalidArgumentException;
 use Psr\Cache\CacheItemPoolInterface;
-use Vairogs\Cache\Utils\Adapter\Cache;
+use Vairogs\Cache\Utils\Adapter\Adapter;
 use function sprintf;
 
 class Pool
@@ -19,11 +19,11 @@ class Pool
         $pool = [];
 
         foreach ($adapters as $adapter) {
-            if (!$adapter instanceof Cache && !$adapter instanceof CacheItemPoolInterface) {
-                throw new InvalidArgumentException(message: sprintf('Adapter %s must implement %s or %s', $adapter::class, Cache::class, CacheItemPoolInterface::class));
+            if (!$adapter instanceof Adapter && !$adapter instanceof CacheItemPoolInterface) {
+                throw new InvalidArgumentException(message: sprintf('Adapter %s must implement %s or %s', $adapter::class, Adapter::class, CacheItemPoolInterface::class));
             }
 
-            if ($adapter instanceof Cache) {
+            if ($adapter instanceof Adapter) {
                 $pool[] = $adapter->getAdapter();
             } else {
                 $pool[] = $adapter;
