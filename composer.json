@@ -52,7 +52,7 @@
         "ext-pdo": "*",
         "ext-zlib": "*",
         "doctrine/collections": "~1.6",
-        "doctrine/dbal": "~2.8",
+        "doctrine/dbal": "~2.8|~3.2",
         "doctrine/orm": "~2.6|~3",
         "doctrine/persistence": "~2.1",
         "jetbrains/phpstorm-attributes": "*",
