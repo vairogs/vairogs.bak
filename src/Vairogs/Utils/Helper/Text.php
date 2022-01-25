@@ -39,12 +39,12 @@ final class Text
     }
 
     #[Attribute\TwigFilter]
-    public static function toSnakeCase(string $string): string
+    public static function toSnakeCase(string $string, bool $skipCamel = false): string
     {
         $string = preg_replace(pattern: [
             '#([A-Z\d]+)([A-Z][a-z])#',
             '#([a-z\d])([A-Z])#',
-        ], replacement: '\1_\2', subject: self::toCamelCase(string: $string));
+        ], replacement: '\1_\2', subject: $skipCamel ? $string : self::toCamelCase(string: $string));
 
         return strtolower(string: str_replace(search: '-', replace: '_', subject: $string));
     }
