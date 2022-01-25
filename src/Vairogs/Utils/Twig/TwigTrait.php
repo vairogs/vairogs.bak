@@ -18,7 +18,7 @@ trait TwigTrait
             TwigFilter::class,
             TwigFunction::class,
         ], strict: true)) {
-            throw new InvalidArgumentException(message: sprintf('Invalid type "%s":. Allowed types are filter and function', $class));
+            throw new InvalidArgumentException(message: sprintf('Invalid type "%s":. Allowed types are %s and %s', $class, TwigFilter::class, TwigFunction::class));
         }
 
         $output = [];
