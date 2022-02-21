@@ -24,7 +24,7 @@ abstract class AbstractBuilder implements Builder
 
             if ($url instanceof RichUrl) {
                 $alternates = $url->getAlternateUrls();
-                unset($urlArray['alternateUrl']);
+                unset($urlArray['alternateUrls']);
             }
 
             $this->write(buffer: $buffer, text: '<url>' . "\n");

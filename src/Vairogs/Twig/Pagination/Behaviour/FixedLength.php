@@ -35,7 +35,7 @@ class FixedLength
 
     public function getPaginationData(int $totalPages, int $currentPage, int $indicator = -1): array
     {
-        $this->validate($totalPages, $currentPage, $indicator);
+        $this->validate(totalPages: $totalPages, currentPage: $currentPage, indicator: $indicator);
 
         if ($totalPages <= $this->maximumVisible) {
             return range(start: 1, end: $totalPages);
