@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Security;
 use Vairogs\Cache\Cache;
 use Vairogs\Cache\Header;
 use Vairogs\Cache\Utils\Event;
@@ -33,12 +33,13 @@ class CacheEventListener implements EventSubscriberInterface
     protected ChainAdapter $adapter;
     protected Event $event;
 
-    public function __construct(protected bool $enabled, ?TokenStorageInterface $tokenStorage, ...$adapters)
+    /** @noinspection InterfacesAsConstructorDependenciesInspection */
+    public function __construct(protected bool $enabled, Security $security, ...$adapters)
     {
         if ($this->enabled) {
             $this->adapter = new ChainAdapter(adapters: Pool::createPool(class: Cache::class, adapters: $adapters));
             $this->adapter->prune();
-            $this->event = new Event(tokenStorage: $tokenStorage);
+            $this->event = new Event(security: $security);
         }
     }
 

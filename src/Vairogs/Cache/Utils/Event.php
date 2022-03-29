@@ -7,7 +7,7 @@ use JsonSerializable;
 use ReflectionClass;
 use ReflectionException;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Security;
 use function end;
 use function explode;
 use function is_array;
@@ -18,7 +18,8 @@ class Event
 {
     private const PARAMS = '_route_params';
 
-    public function __construct(protected ?TokenStorageInterface $tokenStorage = null)
+    /** @noinspection InterfacesAsConstructorDependenciesInspection */
+    public function __construct(protected Security $security)
     {
     }
 
@@ -82,7 +83,7 @@ class Event
 
     private function getUser(): array
     {
-        $user = $this->tokenStorage?->getToken()?->getUser();
+        $user = $this->security->getUser();
 
         if ($user instanceof JsonSerializable) {
             return $user->jsonSerialize();
