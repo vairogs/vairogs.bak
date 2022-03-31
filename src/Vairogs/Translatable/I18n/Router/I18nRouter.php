@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
+use Symfony\Component\Routing\RouteCollection;
 use Vairogs\Translatable\I18n\Exception\NotAcceptableLanguageException;
 use Vairogs\Utils\Router\LocaleResolverInterface;
 
@@ -79,7 +79,6 @@ class I18nRouter extends Router
         }
         $needsHost = (self::NETWORK_PATH === $referenceType || self::ABSOLUTE_URL === $referenceType) && $this->hostMap;
 
-        /** @var UrlGeneratorInterface $generator */
         $generator = $this->getGenerator();
 
         $currentHost = $this->context->getHost();
@@ -109,12 +108,12 @@ class I18nRouter extends Router
         return $this->matchI18n(params: parent::match(pathinfo: $pathinfo), url: $pathinfo);
     }
 
-    public function getRouteCollection()
+    public function getRouteCollection(): RouteCollection
     {
         return $this->container->get(id: $this->i18nLoaderId)?->load(collection: parent::getRouteCollection());
     }
 
-    public function getOriginalRouteCollection(): array
+    public function getOriginalRouteCollection(): RouteCollection
     {
         return parent::getRouteCollection();
     }
