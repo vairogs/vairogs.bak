@@ -4,7 +4,7 @@ namespace Vairogs\Extra\Specification;
 
 class AndSpecification extends CompositeSpecification
 {
-    public function __construct(private SpecificationInterface $one, private SpecificationInterface $other)
+    public function __construct(private readonly SpecificationInterface $one, private readonly SpecificationInterface $other)
     {
     }
 

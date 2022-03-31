@@ -8,7 +8,7 @@ use function implode;
 #[Attribute(Attribute::TARGET_PROPERTY)]
 class Translatable
 {
-    public function __construct(private array $classes = [], private ?string $type = null)
+    public function __construct(private readonly array $classes = [], private readonly ?string $type = null)
     {
     }
 

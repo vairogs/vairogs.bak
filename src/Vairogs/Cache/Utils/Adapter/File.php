@@ -9,7 +9,7 @@ use Vairogs\Utils\Vairogs;
 
 class File implements Adapter
 {
-    public function __construct(private string $namespace = Vairogs::VAIROGS)
+    public function __construct(private readonly string $namespace = Vairogs::VAIROGS)
     {
     }
 

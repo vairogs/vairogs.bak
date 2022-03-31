@@ -13,7 +13,7 @@ class IdToken implements UnencryptedToken
 {
     protected ?string $accessTokenString;
 
-    public function __construct(private Token|Token\Plain $token)
+    public function __construct(private readonly Token|Token\Plain $token)
     {
     }
 

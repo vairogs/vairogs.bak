@@ -17,7 +17,7 @@ use function sprintf;
 
 class Extension extends AbstractExtension
 {
-    public function __construct(private array $functions = [], private array $filters = [])
+    public function __construct(private readonly array $functions = [], private readonly array $filters = [])
     {
     }
 

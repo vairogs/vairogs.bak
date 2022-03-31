@@ -6,7 +6,7 @@ use JetBrains\PhpStorm\Pure;
 
 class FileSource implements SourceInterface
 {
-    public function __construct(private string $path, private int $line)
+    public function __construct(private string $path, private readonly int $line)
     {
     }
 

@@ -4,7 +4,7 @@ namespace Vairogs\Extra\Specification;
 
 class NotSpecification extends CompositeSpecification
 {
-    public function __construct(private SpecificationInterface $specification)
+    public function __construct(private readonly SpecificationInterface $specification)
     {
     }
 

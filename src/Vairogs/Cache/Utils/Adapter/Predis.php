@@ -13,7 +13,7 @@ use function sprintf;
 
 class Predis implements Adapter
 {
-    public function __construct(private ClientInterface $client, private string $namespace = Vairogs::VAIROGS)
+    public function __construct(private readonly ClientInterface $client, private readonly string $namespace = Vairogs::VAIROGS)
     {
         if (!Php::exists(class: SncRedisBundle::class) || !Php::exists(class: ClientInterface::class)) {
             throw new InvalidConfigurationException(message: sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'predis/predis', self::class));

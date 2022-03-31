@@ -6,7 +6,7 @@ use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 class NotAcceptableLanguageException extends NotAcceptableHttpException
 {
-    public function __construct(private string $requestedLanguage, private array $availableLanguages)
+    public function __construct(private readonly string $requestedLanguage, private readonly array $availableLanguages)
     {
         parent::__construct(message: sprintf('The requested language "%s" is not available. Available languages are: "%s"', $requestedLanguage, implode(separator: ', ', array: $availableLanguages)));
     }

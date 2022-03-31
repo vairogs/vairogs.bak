@@ -15,7 +15,7 @@ final class Cache
 {
     private const ALGORITHM = 'sha1';
 
-    public function __construct(private ?int $expires = null, private array $attributes = [], private string $strategy = Strategy::ALL, private string $algorithm = self::ALGORITHM, private mixed $data = null)
+    public function __construct(private readonly ?int $expires = null, private readonly array $attributes = [], private string $strategy = Strategy::ALL, private readonly string $algorithm = self::ALGORITHM, private mixed $data = null)
     {
     }
 

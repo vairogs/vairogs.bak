@@ -8,7 +8,7 @@ class I18nLoader
 {
     public const ROUTING_PREFIX = '__RG__';
 
-    public function __construct(private RouteExclusionStrategyInterface $routeExclusionStrategy, private PatternGenerationStrategyInterface $patternGenerationStrategy)
+    public function __construct(private readonly RouteExclusionStrategyInterface $routeExclusionStrategy, private readonly PatternGenerationStrategyInterface $patternGenerationStrategy)
     {
     }
 

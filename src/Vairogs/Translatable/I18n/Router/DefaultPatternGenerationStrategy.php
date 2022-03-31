@@ -14,7 +14,7 @@ class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInter
     public const STRATEGY_PREFIX_EXCEPT_DEFAULT = 'prefix_except_default';
     public const STRATEGY_CUSTOM = 'custom';
 
-    public function __construct(private string $strategy, private TranslatorInterface $translator, private array $locales, private string $cacheDir, private string $translationDomain = 'routes', private string $defaultLocale = 'en')
+    public function __construct(private readonly string $strategy, private readonly TranslatorInterface $translator, private readonly array $locales, private readonly string $cacheDir, private readonly string $translationDomain = 'routes', private readonly string $defaultLocale = 'en')
     {
     }
 

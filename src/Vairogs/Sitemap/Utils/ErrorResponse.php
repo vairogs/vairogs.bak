@@ -11,7 +11,7 @@ class ErrorResponse
 {
     private Response $response;
 
-    public function __construct(private ConstraintViolationListInterface $constraintViolationList)
+    public function __construct(private readonly ConstraintViolationListInterface $constraintViolationList)
     {
         $this->response = new Response();
         $this->response->headers->set(key: 'Content-Type', values: ContentType::XML);

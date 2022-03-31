@@ -9,7 +9,7 @@ final class LocaleResolver implements LocaleResolverInterface
 {
     use LocaleResolverTrait;
 
-    public function __construct(private string $defaultLocale, private array $availableLocales = [])
+    public function __construct(private readonly string $defaultLocale, private readonly array $availableLocales = [])
     {
     }
 

@@ -13,7 +13,7 @@ use function sprintf;
 
 class PhpRedis implements Adapter
 {
-    public function __construct(private Redis $client, private string $namespace = Vairogs::VAIROGS)
+    public function __construct(private readonly Redis $client, private readonly string $namespace = Vairogs::VAIROGS)
     {
         if (!Php::exists(class: SncRedisBundle::class) || !Php::exists(class: Redis::class)) {
             throw new InvalidConfigurationException(message: sprintf('Packages %s and %s must be installed in order to use %s', 'snc/redis-bundle', 'ext-redis', self::class));

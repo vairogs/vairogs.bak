@@ -10,7 +10,7 @@ use function sprintf;
 
 class GreaterOrEqual extends AbstractConstraint
 {
-    public function __construct(private mixed $expected)
+    public function __construct(private readonly mixed $expected)
     {
     }
 

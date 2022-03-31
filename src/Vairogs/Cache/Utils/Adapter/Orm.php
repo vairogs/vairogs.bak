@@ -16,7 +16,7 @@ use function sprintf;
 
 class Orm implements Adapter
 {
-    public function __construct(private EntityManagerInterface $entityManager, private string $namespace = Vairogs::VAIROGS)
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly string $namespace = Vairogs::VAIROGS)
     {
         if (!Php::exists(class: Driver::class) || !Php::exists(class: Query::class)) {
             throw new InvalidConfigurationException(message: sprintf('Packages %s and %s must be installed in order to use %s', 'doctrine/orm', 'doctrine/dbal', self::class));
