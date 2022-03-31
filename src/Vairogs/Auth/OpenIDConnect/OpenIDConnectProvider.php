@@ -7,7 +7,7 @@ use Exception;
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;
 use JsonException;
-use Lcobucci\JWT\Signer;
+use Lcobucci\JWT;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Token\RegisteredClaims;
 use League\OAuth2\Client\Grant\AbstractGrant;
@@ -50,12 +50,12 @@ abstract class OpenIDConnectProvider extends AbstractProvider
 
     public function __construct(protected string $name, protected RouterInterface $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
     {
-        $this->signer = new Signer\Rsa\Sha256();
-        $this->validatorChain = new ValidatorChain();
+        $this->setSigner(signer: new JWT\Signer\Rsa\Sha256());
+        $this->setValidatorChain(validatorChain: new ValidatorChain());
         try {
-            $this->session = $requestStack->getCurrentRequest()?->getSession();
+            $this->setSession(session: $requestStack->getCurrentRequest()?->getSession());
         } catch (Exception) {
-            $this->session = null;
+            $this->setSession(session: null);
         }
         parent::__construct(options: $options, collaborators: $collaborators);
         $this->configure(options: $options);
