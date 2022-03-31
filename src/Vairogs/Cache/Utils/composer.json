@@ -45,11 +45,11 @@
     "require": {
         "php": ">=8.1.0",
         "psr/cache": "^1",
-        "symfony/cache": "~5.3|~5.4|~6.0",
-        "symfony/config": "~5.3|~5.4|~6.0",
-        "symfony/http-kernel": "~5.3|~5.4|~6.0",
-        "symfony/http-foundation": "~5.3|~5.4|~6.0",
-        "symfony/security-core": "~5.3|~5.4|~6.0",
+        "symfony/cache": "~5.4|~6.0",
+        "symfony/config": "~5.4|~6.0",
+        "symfony/http-kernel": "~5.4|~6.0",
+        "symfony/http-foundation": "~5.4|~6.0",
+        "symfony/security-core": "~5.4|~6.0",
         "vairogs/utils": "self.version"
     },
     "suggest": {
