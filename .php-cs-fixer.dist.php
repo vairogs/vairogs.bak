@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-if (!file_exists(__DIR__ . '/src')) {
+if (!file_exists(filename: __DIR__ . '/src')) {
     exit;
 }
 
-return (new PhpCsFixer\Config())->setRules([
+return (new PhpCsFixer\Config())->setRules(rules: [
     '@PHP80Migration:risky' => true,
     '@PHP81Migration' => true,
     '@Symfony' => true,
@@ -63,5 +63,5 @@ return (new PhpCsFixer\Config())->setRules([
         'import_classes' => true,
     ],
 ])
-    ->setRiskyAllowed(true)
-    ->setCacheFile('.php-cs-fixer.cache');
+    ->setRiskyAllowed(isRiskyAllowed: true)
+    ->setCacheFile(cacheFile: '.php-cs-fixer.cache');
