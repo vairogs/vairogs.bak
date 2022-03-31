@@ -14,5 +14,4 @@ final class Component
     public const TRANSLATABLE_ADMINTYPE = 'admintype';
     public const TRANSLATABLE_I18N = 'i18n';
     public const TRANSLATABLE_TRANSLATION = 'translation';
-    public const UTILS = 'utils';
 }
