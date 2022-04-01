@@ -45,8 +45,8 @@ trait TwigTrait
         $output = [];
 
         foreach ($input as $call => $function) {
-            if (is_numeric($call)) {
-                $call = Text::toSnakeCase($function, true);
+            if (is_numeric(value: $call)) {
+                $call = Text::toSnakeCase(string: $function, skipCamel: true);
             }
 
             $output[sprintf('%s_%s', $key, $call)] = $function;

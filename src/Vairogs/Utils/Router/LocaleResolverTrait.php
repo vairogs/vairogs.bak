@@ -57,7 +57,7 @@ trait LocaleResolverTrait
         if ($request->hasPreviousSession()) {
             $session = $request->getSession();
 
-            if ($session && $session->has(name: '_locale')) {
+            if ($session->isStarted() && $session->has(name: '_locale')) {
                 return $session->get(name: '_locale');
             }
         }

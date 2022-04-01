@@ -14,7 +14,7 @@ class ColumnHydrator extends ArrayHydrator
     protected function hydrateAllData(): array
     {
         if (!isset($this->_rsm->indexByMap['scalars']) && class_exists(class: PDO::class)) {
-            return $this->_stmt->fetchAll(fetchMode: PDO::FETCH_COLUMN);
+            return $this->_stmt->fetchAll(mode: PDO::FETCH_COLUMN);
         }
 
         if ([] === ($result = parent::hydrateAllData())) {

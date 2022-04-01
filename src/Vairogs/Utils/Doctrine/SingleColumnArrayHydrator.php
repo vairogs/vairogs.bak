@@ -2,6 +2,7 @@
 
 namespace Vairogs\Utils\Doctrine;
 
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\Internal\Hydration\AbstractHydrator;
 use LogicException;
 use PDO;
@@ -11,6 +12,9 @@ use function sprintf;
 
 class SingleColumnArrayHydrator extends AbstractHydrator
 {
+    /**
+     * @throws Exception
+     */
     protected function hydrateAllData(): array
     {
         $result = [];
@@ -20,7 +24,7 @@ class SingleColumnArrayHydrator extends AbstractHydrator
         }
 
         /* @noinspection PhpDeprecationInspection */
-        while ($data = $this->_stmt->fetch(fetchMode: PDO::FETCH_NUM)) {
+        while ($data = $this->_stmt->fetch(mode: PDO::FETCH_NUM)) {
             $result[] = Text::getNormalizedValue(value: $data[0]);
         }
 

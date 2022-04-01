@@ -15,7 +15,7 @@ class Helper
         try {
             $methods = (new ReflectionClass(objectOrClass: $class))->getMethods(filter: ReflectionMethod::IS_PUBLIC);
         } catch (Exception) {
-            $methods = [];
+            return [];
         }
 
         $filtered = [];

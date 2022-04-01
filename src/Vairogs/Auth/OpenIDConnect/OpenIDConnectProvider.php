@@ -180,7 +180,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             $uris = $options['uris'] ?? [];
             unset($options['redirect'], $options['uris']);
 
-            foreach (Iteration::makeOneDimension(array: $options, onlyLast: false, maxDepth: 0) as $key => $value) {
+            foreach (Iteration::makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
                 if (property_exists(object_or_class: $this, property: $var = Text::toCamelCase(string: $key))) {
                     $this->{$var} = $value;
                 }

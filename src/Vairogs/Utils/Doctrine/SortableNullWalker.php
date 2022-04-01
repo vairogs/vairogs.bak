@@ -5,7 +5,8 @@ namespace Vairogs\Utils\Doctrine;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
+use Doctrine\DBAL\Platforms\OraclePlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\Query\SqlWalker;
 use InvalidArgumentException;
 use function func_get_args;
@@ -33,8 +34,8 @@ class SortableNullWalker extends SqlWalker
         // @formatter:on
 
         $mysql = (new MySqlPlatform())->getName();
-        $postgres = (new PostgreSQL100Platform())->getName();
-        $oracle = (new PostgreSQL100Platform())->getName();
+        $postgres = (new PostgreSQLPlatform())->getName();
+        $oracle = (new OraclePlatform())->getName();
 
         if (is_array(value: $fields) && null !== $platform) {
             foreach ($fields as $field => $sorting) {

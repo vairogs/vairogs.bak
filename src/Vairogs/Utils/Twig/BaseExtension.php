@@ -53,7 +53,7 @@ abstract class BaseExtension extends AbstractExtension
         try {
             $ns = (new ReflectionClass(objectOrClass: $this->vars['class']))->getNamespaceName();
         } catch (Exception) {
-            $ns = '';
+            $ns = '\\';
         }
 
         $short = Php::getShortName(class: $this->vars['class']);
