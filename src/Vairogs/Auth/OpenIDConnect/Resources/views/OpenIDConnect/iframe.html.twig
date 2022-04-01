@@ -5,7 +5,7 @@
     <title>iFrame RP Page</title>
 </head>
 <body onload="startChecking()">
-<iframe id="iframe_op" src="{{ target }}" style="border: 0" width="0" height="0"></iframe>
+<iframe id="iframe_op" src="{{ target }}" style="border: 0" width="0" height="0" title="iframe_op"></iframe>
 </body>
 <script type="text/javascript">
     let targetOP = "{{ issuer|trim('/', 'right') }}";
