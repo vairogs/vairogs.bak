@@ -2,7 +2,7 @@
 
 namespace Vairogs\Sitemap\Utils\Constant;
 
-use ReflectionException;
+use RuntimeException;
 use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Helper\Php;
 
@@ -17,7 +17,7 @@ final class VideoOption
     public const OPTION_NO = 'no';
 
     /**
-     * @throws ReflectionException
+     * @throws RuntimeException
      */
     public static function getRestrictions(): array
     {
@@ -25,7 +25,7 @@ final class VideoOption
     }
 
     /**
-     * @throws ReflectionException
+     * @throws RuntimeException
      */
     public static function getPlatforms(): array
     {
@@ -33,7 +33,7 @@ final class VideoOption
     }
 
     /**
-     * @throws ReflectionException
+     * @throws RuntimeException
      */
     public static function getOptions(): array
     {

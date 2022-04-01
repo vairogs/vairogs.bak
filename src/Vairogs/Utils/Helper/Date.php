@@ -6,7 +6,6 @@ use DateTime;
 use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use ReflectionException;
 use Vairogs\Utils\Twig\Attribute;
 use function array_merge;
 use function floor;
@@ -171,9 +170,6 @@ final class Date
             ->format(format: $format ?? self::FORMAT);
     }
 
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFilter]
     public static function guessDateFormat(string $date): DateTime|string
     {

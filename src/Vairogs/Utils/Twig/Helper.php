@@ -2,20 +2,22 @@
 
 namespace Vairogs\Utils\Twig;
 
+use Exception;
 use ReflectionClass;
-use ReflectionException;
 use ReflectionMethod;
 use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Helper\Text;
 
 class Helper
 {
-    /**
-     * @throws ReflectionException
-     */
     public static function getFiltered(string $class, string $filterClass, bool $withClass = true): array
     {
-        $methods = (new ReflectionClass(objectOrClass: $class))->getMethods(filter: ReflectionMethod::IS_PUBLIC);
+        try {
+            $methods = (new ReflectionClass(objectOrClass: $class))->getMethods(filter: ReflectionMethod::IS_PUBLIC);
+        } catch (Exception) {
+            $methods = [];
+        }
+
         $filtered = [];
 
         foreach ($methods as $method) {

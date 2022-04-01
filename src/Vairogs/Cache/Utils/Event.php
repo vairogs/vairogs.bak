@@ -2,10 +2,10 @@
 
 namespace Vairogs\Cache\Utils;
 
+use Exception;
 use InvalidArgumentException;
 use JsonSerializable;
 use ReflectionClass;
-use ReflectionException;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\Security\Core\Security;
 use function end;
@@ -24,7 +24,6 @@ class Event
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidArgumentException
      */
     public function getAttributes(KernelEvent $kernelEvent, string $class): array
@@ -51,19 +50,19 @@ class Event
         return [];
     }
 
-    /**
-     * @throws ReflectionException
-     */
     public function getAtribute(KernelEvent $kernelEvent, string $class): ?object
     {
         $controller = $this->getController(kernelEvent: $kernelEvent);
 
-        if ($method = (new ReflectionClass(objectOrClass: reset(array: $controller)))->getMethod(name: end(array: $controller))) {
-            foreach ($method->getAttributes(name: $class) as $attribute) {
-                if ($class === $attribute->getName()) {
-                    return $attribute->newInstance();
+        try {
+            if ($method = (new ReflectionClass(objectOrClass: reset(array: $controller)))->getMethod(name: end(array: $controller))) {
+                foreach ($method->getAttributes(name: $class) as $attribute) {
+                    if ($class === $attribute->getName()) {
+                        return $attribute->newInstance();
+                    }
                 }
             }
+        } catch (Exception) {
         }
 
         return null;

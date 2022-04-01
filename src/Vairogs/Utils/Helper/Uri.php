@@ -4,7 +4,6 @@ namespace Vairogs\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
-use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Attribute;
@@ -34,9 +33,6 @@ use function urldecode;
 
 final class Uri
 {
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function buildHttpQueryArray(array|object $input, ?string $parent = null): array
@@ -57,9 +53,6 @@ final class Uri
         return $result;
     }
 
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function buildArrayFromObject(object $object): array
@@ -69,9 +62,6 @@ final class Uri
         return $result;
     }
 
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function buildHttpQueryString(object $object): string

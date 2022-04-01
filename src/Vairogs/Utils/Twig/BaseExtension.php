@@ -2,8 +2,8 @@
 
 namespace Vairogs\Utils\Twig;
 
+use Exception;
 use ReflectionClass;
-use ReflectionException;
 use Twig;
 use Twig\Extension\AbstractExtension;
 use Vairogs\Utils\Helper\Php;
@@ -31,37 +31,31 @@ abstract class BaseExtension extends AbstractExtension
         $this->vars = get_class_vars(class: static::class);
     }
 
-    /**
-     * @throws ReflectionException
-     */
     public function getFilters(): array
     {
         return $this->getMethods(filter: Attribute\TwigFilter::class, class: Twig\TwigFilter::class);
     }
 
-    /**
-     * @throws ReflectionException
-     */
     public function getFunctions(): array
     {
         return $this->getMethods(filter: Attribute\TwigFunction::class, class: Twig\TwigFunction::class);
     }
 
-    /**
-     * @throws ReflectionException
-     */
     private function getMethods(string $filter, string $class): array
     {
         return $this->makeArray(input: Helper::getFiltered($this->vars['class'], $filter), key: $this->getPrefix(), class: $class);
     }
 
-    /**
-     * @throws ReflectionException
-     */
     private function getPrefix(): string
     {
         $base = $this->vars['prefix'] ?? $this->vars['class'];
-        $ns = (new ReflectionClass($this->vars['class']))->getNamespaceName();
+
+        try {
+            $ns = (new ReflectionClass(objectOrClass: $this->vars['class']))->getNamespaceName();
+        } catch (Exception) {
+            $ns = '';
+        }
+
         $short = Php::getShortName(class: $this->vars['class']);
 
         if (self::HELPER_NAMESPACE === $ns) {

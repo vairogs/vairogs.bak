@@ -3,13 +3,14 @@
 namespace Vairogs\Utils\Helper;
 
 use Closure;
+use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
 use ReflectionClassConstant;
-use ReflectionException;
 use ReflectionMethod;
 use ReflectionProperty;
+use RuntimeException;
 use Vairogs\Utils\Twig\Attribute;
 use function array_diff;
 use function array_values;
@@ -74,7 +75,7 @@ final class Php
     }
 
     /**
-     * @throws ReflectionException
+     * @throws RuntimeException
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
@@ -85,13 +86,17 @@ final class Php
 
     /**
      * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws RuntimeException
      */
     #[Attribute\TwigFunction]
     public static function getClassConstants(string $class): array
     {
         if (self::exists(class: $class)) {
-            return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
+            try {
+                return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
+            } catch (Exception $e) {
+                throw new RuntimeException(message: $e->getMessage(), code: $e->getCode(), previous: $e);
+            }
         }
 
         throw new InvalidArgumentException(message: sprintf('Invalid class "%s"', $class));
@@ -137,14 +142,14 @@ final class Php
         return $methods;
     }
 
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFilter]
     public static function getShortName(string $class): string
     {
         if (self::exists(class: $class, checkTrait: true)) {
-            return (new ReflectionClass(objectOrClass: $class))->getShortName();
+            try {
+                return (new ReflectionClass(objectOrClass: $class))->getShortName();
+            } catch (Exception) {
+            }
         }
 
         return $class;
@@ -158,7 +163,6 @@ final class Php
     }
 
     #[Attribute\TwigFunction]
-    #[Pure]
     public static function getEnv(string $varname, bool $localOnly = false): mixed
     {
         if ($env = getenv(name: $varname, local_only: $localOnly)) {
@@ -168,17 +172,17 @@ final class Php
         return $_ENV[$varname] ?? $varname;
     }
 
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function getArray(array|object $input): array
     {
         if (is_object(value: $object = $input)) {
             $input = [];
-            foreach ((new ReflectionClass(objectOrClass: $object))->getProperties() as $property) {
-                $input[$name = $property->getName()] = self::hijackGet(object: $object, property: $name);
+            try {
+                foreach ((new ReflectionClass(objectOrClass: $object))->getProperties() as $property) {
+                    $input[$name = $property->getName()] = self::hijackGet(object: $object, property: $name);
+                }
+            } catch (Exception) {
             }
         }
 
@@ -186,14 +190,16 @@ final class Php
     }
 
     /**
-     * @throws ReflectionException
      * @noinspection StaticClosureCanBeUsedInspection
      */
     #[Attribute\TwigFunction]
     public static function hijackGet(object $object, string $property): mixed
     {
-        if ((new ReflectionProperty($object, $property))->isStatic()) {
-            return self::call(function: fn () => $object::${$property}, clone: $object, return: true);
+        try {
+            if ((new ReflectionProperty($object, $property))->isStatic()) {
+                return self::call(function: fn () => $object::${$property}, clone: $object, return: true);
+            }
+        } catch (Exception) {
         }
 
         return self::call(function: fn () => $object->{$property}, clone: $object, return: true);

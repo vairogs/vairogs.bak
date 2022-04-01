@@ -3,7 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
-use ReflectionException;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Attribute;
@@ -50,7 +50,7 @@ final class Http
 
     /**
      * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws RuntimeException
      */
     #[Attribute\TwigFunction]
     public static function getMethods(): array

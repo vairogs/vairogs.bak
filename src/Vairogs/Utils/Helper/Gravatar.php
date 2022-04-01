@@ -3,7 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
-use ReflectionException;
+use RuntimeException;
 use Vairogs\Utils\Twig\Attribute;
 use function hash;
 use function http_build_query;
@@ -25,7 +25,7 @@ final class Gravatar
     public const HTTPS_HOST = 'https://secure.gravatar.com';
 
     /**
-     * @throws ReflectionException
+     * @throws RuntimeException
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFilter]
@@ -56,7 +56,7 @@ final class Gravatar
 
     /**
      * @throws InvalidArgumentException
-     * @throws ReflectionException
+     * @throws RuntimeException
      */
     private static function getIcons(): array
     {

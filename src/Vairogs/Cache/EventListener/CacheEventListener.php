@@ -4,7 +4,6 @@ namespace Vairogs\Cache\EventListener;
 
 use JetBrains\PhpStorm\ArrayShape;
 use Psr\Cache\InvalidArgumentException;
-use ReflectionException;
 use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,7 +61,6 @@ class CacheEventListener implements EventSubscriberInterface
 
     /**
      * @throws InvalidArgumentException
-     * @throws ReflectionException
      */
     public function onKernelController(ControllerEvent $controllerEvent): void
     {
@@ -93,7 +91,6 @@ class CacheEventListener implements EventSubscriberInterface
 
     /**
      * @throws InvalidArgumentException
-     * @throws ReflectionException
      */
     public function onKernelRequest(RequestEvent $requestEvent): void
     {
@@ -110,7 +107,6 @@ class CacheEventListener implements EventSubscriberInterface
 
     /**
      * @throws InvalidArgumentException
-     * @throws ReflectionException
      */
     public function onKernelResponse(ResponseEvent $responseEvent): void
     {
