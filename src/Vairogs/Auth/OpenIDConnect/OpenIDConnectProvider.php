@@ -43,6 +43,7 @@ use function base64_encode;
 use function json_last_error;
 use function property_exists;
 use function sprintf;
+use const JSON_ERROR_NONE;
 
 abstract class OpenIDConnectProvider extends AbstractProvider
 {
