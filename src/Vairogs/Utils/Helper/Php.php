@@ -149,6 +149,7 @@ final class Php
             try {
                 return (new ReflectionClass(objectOrClass: $class))->getShortName();
             } catch (Exception) {
+                // exception === can't get short name
             }
         }
 
@@ -183,6 +184,7 @@ final class Php
                     $input[$name = $property->getName()] = self::hijackGet(object: $object, property: $name);
                 }
             } catch (Exception) {
+                // exception === not possible to convert object to array
             }
         }
 
@@ -200,6 +202,7 @@ final class Php
                 return self::call(function: fn () => $object::${$property}, clone: $object, return: true);
             }
         } catch (Exception) {
+            // exception === unable to get object property
         }
 
         return self::call(function: fn () => $object->{$property}, clone: $object, return: true);

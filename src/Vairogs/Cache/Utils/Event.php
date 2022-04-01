@@ -63,6 +63,7 @@ class Event
                 }
             }
         } catch (Exception) {
+            // exception === no attribute
         }
 
         return null;
