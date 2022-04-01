@@ -2,7 +2,6 @@
 
 namespace Vairogs\Utils\Helper;
 
-use JetBrains\PhpStorm\Pure;
 use UnexpectedValueException;
 use Vairogs\Utils\Twig\Attribute;
 use function dirname;
@@ -27,7 +26,6 @@ final class File
     }
 
     #[Attribute\TwigFunction]
-    #[Pure]
     public static function fileExistsPublic(string $filename): bool
     {
         return is_file(filename: getcwd() . '/' . $filename);

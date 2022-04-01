@@ -32,7 +32,6 @@ class CacheEventListener implements EventSubscriberInterface
     protected ChainAdapter $adapter;
     protected Event $event;
 
-    /** @noinspection InterfacesAsConstructorDependenciesInspection */
     public function __construct(protected bool $enabled, Security $security, ...$adapters)
     {
         if ($this->enabled) {

@@ -5,7 +5,6 @@ namespace Vairogs\Auth\OpenIDConnect;
 use DateTime;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
 use JsonException;
 use Lcobucci\JWT;
 use Lcobucci\JWT\Signer\Key;
@@ -294,7 +293,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
         return $options;
     }
 
-    #[Pure]
     protected function getAccessTokenBody(array $params): string
     {
         return $this->buildQueryString(params: $params);

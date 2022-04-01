@@ -4,21 +4,16 @@ namespace Vairogs\Utils\Doctrine\Traits;
 
 use DateTime;
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 
 trait CreatedModified
 {
-    #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
-     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $creationDate = null;
 
-    #[ORM\Column(type: 'datetime', options: ['default' => 'CURRENT_TIMESTAMP'])]
-    /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
-     */
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $modificationDate = null;
 
     public function getModificationDate(): DateTimeInterface
@@ -34,9 +29,6 @@ trait CreatedModified
     }
 
     /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     *
      * @throws Exception
      */
     #[ORM\PrePersist]

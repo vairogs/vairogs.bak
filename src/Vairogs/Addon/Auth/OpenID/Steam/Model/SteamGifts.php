@@ -5,9 +5,6 @@ namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 
-/**
- * @ORM\MappedSuperclass()
- */
 #[ORM\MappedSuperclass]
 class SteamGifts extends Steam
 {

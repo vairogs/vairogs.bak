@@ -23,7 +23,7 @@ use function sprintf;
 class SitemapController extends AbstractController
 {
     #[Route(path: '/sitemap.xml', defaults: ['_format' => 'xml'], methods: [Request::METHOD_GET])]
-    public function sitemapXml(Request $request, ValidatorInterface $validator, ?Provider $provider = null, array $options = []): Response
+    public function sitemapXml(Request $request, ValidatorInterface $validator, ?Provider $provider = null): Response
     {
         if (is_file(filename: $sitemap = getcwd() . '/sitemap.xml')) {
             return new Response(content: file_get_contents(filename: $sitemap));

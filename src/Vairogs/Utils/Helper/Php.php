@@ -11,6 +11,7 @@ use ReflectionClassConstant;
 use ReflectionMethod;
 use ReflectionProperty;
 use RuntimeException;
+use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Vairogs\Utils\Twig\Attribute;
 use function array_diff;
 use function array_values;
@@ -95,7 +96,7 @@ final class Php
             try {
                 return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
             } catch (Exception $e) {
-                throw new RuntimeException(message: $e->getMessage(), code: $e->getCode(), previous: $e);
+                throw new AccessException(message: $e->getMessage(), code: $e->getCode(), previous: $e);
             }
         }
 
@@ -104,7 +105,7 @@ final class Php
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function exists(string $class, $checkTrait = false): bool
+    public static function exists(string $class, bool $checkTrait = false): bool
     {
         $exists = class_exists(class: $class) || interface_exists(interface: $class);
 
