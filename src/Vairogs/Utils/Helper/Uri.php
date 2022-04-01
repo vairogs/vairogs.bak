@@ -40,7 +40,10 @@ final class Uri
         $result = [];
 
         foreach (Php::getArray(input: $input) as $key => $value) {
-            $newKey = $parent ? sprintf('%s[%s]', $parent, $key) : $key;
+            $newKey = match ($parent) {
+                null => $key,
+                default => sprintf('%s[%s]', $parent, $key)
+            };
 
             if (!$value instanceof CURLFile && (is_array(value: $value) || is_object(value: $value))) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */

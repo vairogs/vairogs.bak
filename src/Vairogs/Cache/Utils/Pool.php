@@ -23,11 +23,10 @@ class Pool
                 throw new InvalidArgumentException(message: sprintf('Adapter %s must implement %s or %s', $adapter::class, Adapter::class, CacheItemPoolInterface::class));
             }
 
-            if ($adapter instanceof Adapter) {
-                $pool[] = $adapter->getAdapter();
-            } else {
-                $pool[] = $adapter;
-            }
+            $pool[] = match (true) {
+                $adapter instanceof Adapter => $adapter->getAdapter(),
+                default => $adapter
+            };
         }
 
         if ([] === $pool) {

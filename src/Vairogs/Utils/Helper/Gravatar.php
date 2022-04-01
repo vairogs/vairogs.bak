@@ -35,16 +35,15 @@ final class Gravatar
             $email = self::DEFAULT_EMAIL;
         }
 
-        $host = self::HTTP_HOST;
-        if ($isSecure) {
-            $host = self::HTTPS_HOST;
-        }
+        $host = match ($isSecure) {
+            true => self::HTTPS_HOST,
+            false => self::HTTP_HOST
+        };
 
-        if (Uri::isAbsolute(path: $default)) {
-            $default = urldecode(string: $default);
-        } else {
-            $default = self::getIcons()['ICON_' . $default] ?? self::ICON_IDENTICON;
-        }
+        $default = match (true) {
+            Uri::isAbsolute(path: $default) => urldecode(string: $default),
+            default => self::getIcons()['ICON_' . $default] ?? self::ICON_IDENTICON
+        };
 
         $query = [
             's' => $size,

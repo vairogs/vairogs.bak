@@ -134,16 +134,11 @@ final class Iteration
         $result = [];
 
         foreach ($input as $key => $element) {
-            if (is_array(value: $element) || is_object(value: $element)) {
-                $result[$key] = self::arrayFlipRecursive(input: (array) $element);
-            } elseif (in_array(needle: get_debug_type(value: $element), haystack: [
-                'int',
-                'string',
-            ], strict: true)) {
-                $result[$element] = $key;
-            } else {
-                throw new InvalidArgumentException(message: 'Value should be array, string or integer');
-            }
+            $result[$key] = match (true) {
+                is_array(value: $element) || is_object(value: $element) => self::arrayFlipRecursive(input: (array) $element),
+                in_array(needle: get_debug_type(value: $element), haystack: ['int', 'string'], strict: true) => $key,
+                default => throw new InvalidArgumentException(message: 'Value should be array, string or integer')
+            };
         }
 
         return $result;

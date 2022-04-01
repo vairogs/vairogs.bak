@@ -11,6 +11,7 @@ use Doctrine\ORM\Query\SqlWalker;
 use InvalidArgumentException;
 use function func_get_args;
 use function is_array;
+use function is_object;
 use function preg_replace;
 use function preg_replace_callback;
 use function sprintf;
@@ -30,20 +31,16 @@ class SortableNullWalker extends SqlWalker
 
         // @formatter:off
         $fields = $this->getQuery()->getHint(name: self::FIELDS);
-        $platform = $this->getConnection()?->getDatabasePlatform()?->getName();
+        $platform = $this->getConnection()?->getDatabasePlatform();
         // @formatter:on
 
-        $mysql = (new MySqlPlatform())->getName();
-        $postgres = (new PostgreSQLPlatform())->getName();
-        $oracle = (new OraclePlatform())->getName();
-
-        if (is_array(value: $fields) && null !== $platform) {
+        if (is_array(value: $fields) && is_object(value: $platform)) {
             foreach ($fields as $field => $sorting) {
-                $sql = match ($platform) {
-                    $mysql => $this->stepMysql(sql: $sql, field: $field, sorting: $sorting),
-                    $oracle => $this->stepOracle(sql: $sql, field: $field, sorting: $sorting),
-                    $postgres => $this->stepPostgre(sql: $sql, field: $field, sorting: $sorting),
-                    default => throw new InvalidArgumentException(message: sprintf('Walker not implemented for "%s" platform', $platform)),
+                $sql = match (true) {
+                    $platform instanceof MySqlPlatform => $this->stepMySql(sql: $sql, field: $field, sorting: $sorting),
+                    $platform instanceof OraclePlatform => $this->stepOracle(sql: $sql, field: $field, sorting: $sorting),
+                    $platform instanceof PostgreSQLPlatform => $this->stepPostgreSQL(sql: $sql, field: $field, sorting: $sorting),
+                    default => throw new InvalidArgumentException(message: sprintf('Walker not implemented for "%s" platform', $platform::class)),
                 };
             }
         }
@@ -51,17 +48,15 @@ class SortableNullWalker extends SqlWalker
         return $sql;
     }
 
-    private function stepMysql(string $sql, string $field, string $sorting): string
+    private function stepMySql(string $sql, string $field, string $sorting): string
     {
         if (self::NULLS_LAST === $sorting) {
             return preg_replace_callback(pattern: '/ORDER BY (.+)' . '(' . $field . ') (' . Criteria::ASC . '|' . Criteria::DESC . ')/i', callback: static function ($matches): string {
-                if (Criteria::ASC === $matches[3]) {
-                    $order = Criteria::DESC;
-                } elseif (Criteria::DESC === $matches[3]) {
-                    $order = Criteria::ASC;
-                } else {
-                    throw new InvalidArgumentException(message: sprintf('Order must be "%s" or "%s"', Criteria::ASC, Criteria::DESC));
-                }
+                $order = match ($matches[3]) {
+                    Criteria::ASC => Criteria::ASC,
+                    Criteria::DESC => Criteria::DESC,
+                    default => throw new InvalidArgumentException(message: sprintf('Order must be "%s" or "%s"', Criteria::ASC, Criteria::DESC))
+                };
 
                 return 'ORDER BY -' . $matches[1] . $matches[2] . ' ' . $order;
             }, subject: $sql);
@@ -75,7 +70,7 @@ class SortableNullWalker extends SqlWalker
         return preg_replace(pattern: '/(\.' . $field . ') (' . Criteria::ASC . '|' . Criteria::DESC . ')?\s*/i', replacement: '$1 $2 ' . $sorting, subject: $sql);
     }
 
-    private function stepPostgre(string $sql, string $field, string $sorting): string
+    private function stepPostgreSQL(string $sql, string $field, string $sorting): string
     {
         return $this->stepOracle(...func_get_args());
     }
