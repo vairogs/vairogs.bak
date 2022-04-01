@@ -7,7 +7,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Translatable\AdminType\DependencyInjection\TranslatableAdminTypeDependency;
-use Vairogs\Translatable\I18n\DependencyInjection\TranslatableI18nDependency;
 use Vairogs\Translatable\Translation\DependencyInjection\TranslatableTranslationDependency;
 use Vairogs\Utils\DependencyInjection\Component;
 use Vairogs\Utils\DependencyInjection\DependecyLoaderTrait;
@@ -28,7 +27,6 @@ class TranslatableDependency implements Dependency
             ->canBeEnabled();
 
         $this->appendComponent(class: TranslatableAdminTypeDependency::class, arrayNodeDefinition: $translatableNode);
-        $this->appendComponent(class: TranslatableI18nDependency::class, arrayNodeDefinition: $translatableNode);
         $this->appendComponent(class: TranslatableTranslationDependency::class, arrayNodeDefinition: $translatableNode);
 
         $arrayNodeDefinition
@@ -48,7 +46,6 @@ class TranslatableDependency implements Dependency
 
         if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
             $this->configureComponent(class: TranslatableAdminTypeDependency::class, container: $containerBuilder, configuration: $configuration);
-            $this->configureComponent(class: TranslatableI18nDependency::class, container: $containerBuilder, configuration: $configuration);
             $this->configureComponent(class: TranslatableTranslationDependency::class, container: $containerBuilder, configuration: $configuration);
         }
     }
