@@ -6,7 +6,7 @@ use Psr\Cache\CacheItemPoolInterface;
 
 interface Adapter
 {
-    public const DEFAULT_LIFETIME = 0;
+    final public const DEFAULT_LIFETIME = 0;
 
     public function getAdapter(): CacheItemPoolInterface;
 }

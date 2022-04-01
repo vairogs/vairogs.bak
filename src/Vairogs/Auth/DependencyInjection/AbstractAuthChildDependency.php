@@ -15,7 +15,7 @@ use function sprintf;
 
 abstract class AbstractAuthChildDependency implements Dependency
 {
-    public const AUTH = Vairogs::VAIROGS . '.' . Component::AUTH;
+    final public const AUTH = Vairogs::VAIROGS . '.' . Component::AUTH;
 
     public function loadComponentConfiguration(string $base, ContainerBuilder $containerBuilder): void
     {

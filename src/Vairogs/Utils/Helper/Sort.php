@@ -20,9 +20,9 @@ use function usort;
 
 final class Sort
 {
-    public const ASC = 'ASC';
-    public const DESC = 'DESC';
-    public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
+    final public const ASC = 'ASC';
+    final public const DESC = 'DESC';
+    final public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
 
     private static string $field = '';
 

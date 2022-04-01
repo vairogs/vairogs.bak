@@ -4,12 +4,12 @@ namespace Vairogs\Sitemap\Utils\Constant;
 
 final class ChangeFrequency
 {
-    public const ALWAYS = 'always';
-    public const HOURLY = 'hourly';
-    public const DAILY = 'daily';
-    public const WEEKLY = 'weekly';
-    public const MONTHLY = 'monthly';
-    public const YEARLY = 'yearly';
-    public const NEVER = 'never';
-    public const EMPTY = null;
+    final public const ALWAYS = 'always';
+    final public const HOURLY = 'hourly';
+    final public const DAILY = 'daily';
+    final public const WEEKLY = 'weekly';
+    final public const MONTHLY = 'monthly';
+    final public const YEARLY = 'yearly';
+    final public const NEVER = 'never';
+    final public const EMPTY = null;
 }

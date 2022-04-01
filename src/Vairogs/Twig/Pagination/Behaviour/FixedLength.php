@@ -11,7 +11,7 @@ use function sprintf;
 
 class FixedLength
 {
-    public const MIN_VISIBLE = 3;
+    final public const MIN_VISIBLE = 3;
 
     public function __construct(private int $maximumVisible)
     {

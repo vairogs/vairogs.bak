@@ -16,16 +16,16 @@ use function trim;
 
 final class Date
 {
-    public const FORMAT = 'd-m-Y H:i:s';
-    public const FORMAT_TS = 'D M d Y H:i:s T';
-    public const EXTRA_FORMATS = [
+    final public const FORMAT = 'd-m-Y H:i:s';
+    final public const FORMAT_TS = 'D M d Y H:i:s T';
+    final public const EXTRA_FORMATS = [
         self::FORMAT,
         self::FORMAT_TS,
     ];
-    public const SEC = 1000;
-    public const MIN = 60 * self::SEC;
-    public const HOUR = 60 * self::MIN;
-    public const TIME = [
+    final public const SEC = 1000;
+    final public const MIN = 60 * self::SEC;
+    final public const HOUR = 60 * self::MIN;
+    final public const TIME = [
         'hour' => self::HOUR,
         'minute' => self::MIN,
         'second' => self::SEC,

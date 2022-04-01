@@ -16,9 +16,9 @@ use function sprintf;
 
 class SortableNullWalker extends SqlWalker
 {
-    public const NULLS_FIRST = 'NULLS FIRST';
-    public const NULLS_LAST = 'NULLS LAST';
-    public const FIELDS = self::class . '.fields';
+    final public const NULLS_FIRST = 'NULLS FIRST';
+    final public const NULLS_LAST = 'NULLS LAST';
+    final public const FIELDS = self::class . '.fields';
 
     /**
      * @throws Exception

@@ -6,6 +6,6 @@ use Symfony\Component\Form\AbstractType;
 
 class TranslatorType extends AbstractType
 {
-    public const DEFAULT_CLASS = '';
-    public const DEFAULT_TYPE = 'text';
+    final public const DEFAULT_CLASS = '';
+    final public const DEFAULT_TYPE = 'text';
 }

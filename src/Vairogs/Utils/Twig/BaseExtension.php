@@ -18,7 +18,7 @@ abstract class BaseExtension extends AbstractExtension
 {
     use TwigTrait;
 
-    public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
+    final public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
 
     protected static string $class;
     protected static string $key = '';

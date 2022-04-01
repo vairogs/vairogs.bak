@@ -12,8 +12,8 @@ use function json_last_error_msg;
 
 final class Json
 {
-    public const FORCE_ARRAY = 0b0001;
-    public const PRETTY = 0b0010;
+    final public const FORCE_ARRAY = 0b0001;
+    final public const PRETTY = 0b0010;
 
     /**
      * @throws JsonException

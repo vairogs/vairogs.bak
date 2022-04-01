@@ -14,16 +14,16 @@ use function str_split;
 
 final class Generator
 {
-    public const PASS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
-    public const PASS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    public const PASS_DIGITS = '0123456789';
-    public const PASS_SYMBOLS = '!@#$%^&*()_-=+;:.,?';
-    public const RAND_BASIC = self::PASS_LOWERCASE . self::PASS_UPPERCASE . self::PASS_DIGITS;
-    public const RAND_EXTENDED = self::RAND_BASIC . self::PASS_SYMBOLS;
-    public const LOWER = 'lower';
-    public const UPPER = 'upper';
-    public const DIGITS = 'digits';
-    public const SYMBOLS = 'symbols';
+    final public const PASS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+    final public const PASS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    final public const PASS_DIGITS = '0123456789';
+    final public const PASS_SYMBOLS = '!@#$%^&*()_-=+;:.,?';
+    final public const RAND_BASIC = self::PASS_LOWERCASE . self::PASS_UPPERCASE . self::PASS_DIGITS;
+    final public const RAND_EXTENDED = self::RAND_BASIC . self::PASS_SYMBOLS;
+    final public const LOWER = 'lower';
+    final public const UPPER = 'upper';
+    final public const DIGITS = 'digits';
+    final public const SYMBOLS = 'symbols';
 
     private array $sets = [];
     private string $lowerCase = self::PASS_LOWERCASE;

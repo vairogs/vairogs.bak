@@ -30,7 +30,7 @@ use function ucwords;
 
 final class Text
 {
-    public const UTF8 = 'UTF-8';
+    final public const UTF8 = 'UTF-8';
 
     #[Attribute\TwigFilter]
     public static function fromCamelCase(string $string, string $separator = '_'): string

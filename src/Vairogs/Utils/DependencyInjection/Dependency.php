@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 interface Dependency
 {
-    public const ENABLED = 'enabled';
+    final public const ENABLED = 'enabled';
 
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void;
 

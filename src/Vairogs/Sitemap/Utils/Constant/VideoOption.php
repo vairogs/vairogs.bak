@@ -8,13 +8,13 @@ use Vairogs\Utils\Helper\Php;
 
 final class VideoOption
 {
-    public const RESTRICTION_DENY = 'deny';
-    public const RESTRICTION_ALLOW = 'allow';
-    public const PLATFORM_TV = 'tv';
-    public const PLATFORM_MOBILE = 'mobile';
-    public const PLATFORM_WEB = 'web';
-    public const OPTION_YES = 'yes';
-    public const OPTION_NO = 'no';
+    final public const RESTRICTION_DENY = 'deny';
+    final public const RESTRICTION_ALLOW = 'allow';
+    final public const PLATFORM_TV = 'tv';
+    final public const PLATFORM_MOBILE = 'mobile';
+    final public const PLATFORM_WEB = 'web';
+    final public const OPTION_YES = 'yes';
+    final public const OPTION_NO = 'no';
 
     /**
      * @throws RuntimeException

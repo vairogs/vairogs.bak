@@ -22,8 +22,6 @@ use function str_starts_with;
 
 final class Iteration
 {
-    public const DOT = '.';
-
     #[Attribute\TwigFunction]
     public static function isEmpty(mixed $variable): bool
     {
@@ -84,7 +82,7 @@ final class Iteration
 
         if ($depth <= $maxDepth) {
             foreach ($array as $key => $value) {
-                $key = ltrim(string: $base . self::DOT . $key, characters: self::DOT);
+                $key = ltrim(string: $base . '.' . $key, characters: '.');
 
                 if (self::isAssociative(array: $value)) {
                     foreach (self::makeOneDimension(array: $value, base: $key, separator: $separator, depth: $depth + 1, maxDepth: $maxDepth) as $itemKey => $itemValue) {

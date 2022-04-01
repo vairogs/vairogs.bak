@@ -18,7 +18,8 @@ class Steam implements OpenIDUser, User, Stringable
 {
     use SteamGetters;
     use SteamSetters;
-    public const RETURNS_EMAIL = false;
+
+    final public const RETURNS_EMAIL = false;
 
     /**
      * @ORM\Column(unique=true)
