@@ -62,9 +62,8 @@ class OpenIDProvider
     public function fetchUser(): ?OpenIDUser
     {
         if (null !== $user = $this->validate()) {
-            $builderClass = $this->options['user_builder'];
             /** @var OpenIDUserBuilder $builder */
-            $builder = new $builderClass();
+            $builder = new $this->options['user_builder']();
             $builder->setUserClass(class: $this->userClass ?? $builder->getUserClass());
 
             if (null === $this->profileUrl) {

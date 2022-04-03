@@ -72,6 +72,7 @@
         "symfony/http-foundation": "~5.4|~6.0",
         "symfony/http-kernel": "~5.4|~6.0",
         "symfony/property-access": "~5.4|~6.0",
+        "symfony/property-info": "~5.4|~6.0",
         "twig/twig": "3.*",
         "vairogs/extra-constants": "*"
     },

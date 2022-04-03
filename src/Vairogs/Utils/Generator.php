@@ -4,6 +4,7 @@ namespace Vairogs\Utils;
 
 use Exception;
 use LogicException;
+use Vairogs\Extra\Constants\Symbol;
 use function array_rand;
 use function count;
 use function function_exists;
@@ -14,22 +15,16 @@ use function str_split;
 
 final class Generator
 {
-    final public const PASS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
-    final public const PASS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    final public const PASS_DIGITS = '0123456789';
-    final public const PASS_SYMBOLS = '!@#$%^&*()_-=+;:.,?';
-    final public const RAND_BASIC = self::PASS_LOWERCASE . self::PASS_UPPERCASE . self::PASS_DIGITS;
-    final public const RAND_EXTENDED = self::RAND_BASIC . self::PASS_SYMBOLS;
-    final public const LOWER = 'lower';
-    final public const UPPER = 'upper';
-    final public const DIGITS = 'digits';
-    final public const SYMBOLS = 'symbols';
+    final public const RAND_BASIC = Symbol::EN_LOWERCASE . Symbol::EN_UPPERCASE . Symbol::DIGITS;
+    final public const RAND_EXTENDED = self::RAND_BASIC . Symbol::SYMBOLS;
 
     private array $sets = [];
-    private string $lowerCase = self::PASS_LOWERCASE;
-    private string $upperCase = self::PASS_UPPERCASE;
-    private string $digits = self::PASS_DIGITS;
-    private string $symbols = self::PASS_SYMBOLS;
+
+    private string $lowerCase = Symbol::EN_LOWERCASE;
+    private string $upperCase = Symbol::EN_UPPERCASE;
+    private string $digits = Symbol::DIGITS;
+    private string $symbols = Symbol::SYMBOLS;
+    private string $latvian = Symbol::LV_ALPHABET;
 
     /**
      * @throws LogicException
@@ -64,28 +59,35 @@ final class Generator
 
     public function useLower(): self
     {
-        $this->sets[self::LOWER] = $this->lowerCase;
+        $this->sets['lower'] = $this->lowerCase;
 
         return $this;
     }
 
     public function useUpper(): self
     {
-        $this->sets[self::UPPER] = $this->upperCase;
+        $this->sets['upper'] = $this->upperCase;
 
         return $this;
     }
 
     public function useDigits(): self
     {
-        $this->sets[self::DIGITS] = $this->digits;
+        $this->sets['digits'] = $this->digits;
 
         return $this;
     }
 
     public function useSymbols(): self
     {
-        $this->sets[self::SYMBOLS] = $this->symbols;
+        $this->sets['symbols'] = $this->symbols;
+
+        return $this;
+    }
+
+    public function useLatvian(): self
+    {
+        $this->sets['latvian'] = $this->latvian;
 
         return $this;
     }
@@ -114,6 +116,13 @@ final class Generator
     public function setSymbols(string $symbols): self
     {
         $this->symbols = $symbols;
+
+        return $this;
+    }
+
+    public function setLatvian(string $latvian): self
+    {
+        $this->latvian = $latvian;
 
         return $this;
     }

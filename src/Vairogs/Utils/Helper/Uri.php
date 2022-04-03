@@ -30,6 +30,8 @@ use function strpos;
 use function strrpos;
 use function substr;
 use function urldecode;
+use const FILTER_SANITIZE_URL;
+use const FILTER_VALIDATE_URL;
 
 final class Uri
 {

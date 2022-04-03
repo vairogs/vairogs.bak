@@ -29,6 +29,7 @@ use function sprintf;
 use function strtolower;
 use function trait_exists;
 use function ucfirst;
+use const FILTER_VALIDATE_BOOL;
 
 final class Php
 {

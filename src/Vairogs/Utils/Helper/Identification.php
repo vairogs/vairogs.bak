@@ -41,9 +41,7 @@ final class Identification
         }
 
         $personCode = str_replace(search: '-', replace: '', subject: $personCode);
-        // @formatter:off
         $calculations = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-        // @formatter:on
         $sum = 0;
 
         foreach ($calculations as $key => $calculation) {

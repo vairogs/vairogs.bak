@@ -36,13 +36,14 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
     public static function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
     {
         $clientDefinition = $containerBuilder->register(id: $clientServiceKey, class: OpenIDProvider::class);
-        $clientDefinition->setArguments(arguments: [
-            new Reference(id: 'request_stack'),
-            new Reference(id: 'router'),
-            $key,
-            $containerBuilder->getParameter(name: 'kernel.cache_dir'),
-            $containerBuilder->getParameter(name: $clientServiceKey),
-        ])
+        $clientDefinition
+            ->setArguments(arguments: [
+                new Reference(id: 'request_stack'),
+                new Reference(id: 'router'),
+                $key,
+                $containerBuilder->getParameter(name: 'kernel.cache_dir'),
+                $containerBuilder->getParameter(name: $clientServiceKey),
+            ])
             ->addTag(name: $base);
     }
 

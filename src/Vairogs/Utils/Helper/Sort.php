@@ -3,8 +3,10 @@
 namespace Vairogs\Utils\Helper;
 
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Utils\Twig\Attribute;
 use function array_key_exists;
 use function array_slice;
@@ -13,6 +15,7 @@ use function current;
 use function is_array;
 use function is_iterable;
 use function is_object;
+use function method_exists;
 use function property_exists;
 use function round;
 use function strtoupper;
@@ -20,10 +23,6 @@ use function usort;
 
 final class Sort
 {
-    final public const ASC = 'ASC';
-    final public const DESC = 'DESC';
-    final public const ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
-
     private static string $field = '';
 
     #[Attribute\TwigFunction]
@@ -67,7 +66,7 @@ final class Sort
     #[Attribute\TwigFilter]
     public static function mergeSort(array $array): array
     {
-        if (1 === count(value: $array)) {
+        if (1 >= count(value: $array)) {
             return $array;
         }
 
@@ -82,9 +81,9 @@ final class Sort
     }
 
     #[Attribute\TwigFilter]
-    public static function sort(iterable|Collection $data, string $parameter, string $order = self::ASC): array
+    public static function sort(iterable|Collection $data, string $parameter, string $order = Criteria::ASC): array
     {
-        if ($data instanceof Collection) {
+        if ($data instanceof Collection && method_exists(object_or_class: $data, method: 'toArray')) {
             $data = $data->toArray();
         }
 
@@ -125,11 +124,11 @@ final class Sort
     public static function usort(string $parameter, string $order): callable
     {
         return static function (array|object $a, array|object $b) use ($parameter, $order): int {
-            $flip = (self::DESC === $order) ? -1 : 1;
-
             if (($aSort = Php::getParameter(variable: $a, key: $parameter)) === ($bSort = Php::getParameter(variable: $b, key: $parameter))) {
                 return 0;
             }
+
+            $flip = (Criteria::DESC === $order) ? -1 : 1;
 
             if ($aSort > $bSort) {
                 return $flip;
@@ -195,7 +194,7 @@ final class Sort
                 continue;
             }
 
-            if ($i > mb_strlen(string: $b) || mb_strpos(haystack: self::ALPHABET, needle: mb_substr(string: $a, start: $i, length: 1)) > mb_strpos(haystack: self::ALPHABET, needle: mb_substr(string: $b, start: $i, length: 1))) {
+            if ($i > mb_strlen(string: $b) || mb_strpos(haystack: Symbol::LV_ALPHABET, needle: mb_substr(string: $a, start: $i, length: 1)) > mb_strpos(haystack: Symbol::LV_ALPHABET, needle: mb_substr(string: $b, start: $i, length: 1))) {
                 return 1;
             }
 

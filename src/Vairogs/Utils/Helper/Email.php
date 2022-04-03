@@ -5,6 +5,8 @@ namespace Vairogs\Utils\Helper;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Utils\Twig\Attribute;
 use function filter_var;
+use const FILTER_UNSAFE_RAW;
+use const FILTER_VALIDATE_EMAIL;
 
 final class Email
 {

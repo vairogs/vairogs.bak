@@ -4,6 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Utils\Twig\Attribute;
 use function array_filter;
 use function array_flip;
@@ -19,9 +20,13 @@ use function is_object;
 use function sprintf;
 use function str_ends_with;
 use function str_starts_with;
+use const ARRAY_FILTER_USE_KEY;
 
 final class Iteration
 {
+    final public const STARTS = 'starts';
+    final public const ENDS = 'ends';
+
     #[Attribute\TwigFunction]
     public static function isEmpty(mixed $variable): bool
     {
@@ -136,7 +141,7 @@ final class Iteration
         foreach ($input as $key => $element) {
             $result[$key] = match (true) {
                 is_array(value: $element) || is_object(value: $element) => self::arrayFlipRecursive(input: (array) $element),
-                in_array(needle: get_debug_type(value: $element), haystack: ['int', 'string'], strict: true) => $key,
+                in_array(needle: get_debug_type(value: $element), haystack: [Type::BUILTIN_TYPE_INT, Type::BUILTIN_TYPE_STRING], strict: true) => $key,
                 default => throw new InvalidArgumentException(message: 'Value should be array, string or integer')
             };
         }
@@ -160,12 +165,12 @@ final class Iteration
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFilter]
-    public static function arrayValuesFiltered(array $input, string $with, string $type = 'starts'): array
+    public static function arrayValuesFiltered(array $input, string $with, string $type = self::STARTS): array
     {
         return match ($type) {
-            'starts' => array_values(array: self::filterKeyStartsWith(input: $input, startsWith: $with)),
-            'ends' => array_values(array: self::filterKeyEndsWith(input: $input, endsWith: $with)),
-            default => throw new InvalidArgumentException(message: sprintf('Invalid type "%s", allowed types are "starts" and "ends"', $type)),
+            self::STARTS => array_values(array: self::filterKeyStartsWith(input: $input, startsWith: $with)),
+            self::ENDS => array_values(array: self::filterKeyEndsWith(input: $input, endsWith: $with)),
+            default => throw new InvalidArgumentException(message: sprintf('Invalid type "%s", allowed types are "%s" and "%s"', $type, self::STARTS, self::ENDS)),
         };
     }
 

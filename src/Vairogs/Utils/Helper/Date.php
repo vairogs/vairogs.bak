@@ -42,9 +42,7 @@ final class Date
             return false;
         }
 
-        // @formatter:off
         $daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        // @formatter:on
 
         if (0 === (int) substr(string: $date, offset: 4, length: 2) % 4) {
             $daysInMonth[1] = 29;

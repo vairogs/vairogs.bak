@@ -2,13 +2,14 @@
 
 namespace Vairogs\Sitemap\Builder;
 
+use Symfony\Component\PropertyInfo\Type;
 use function fwrite;
 
 class FileBuilder extends AbstractBuilder
 {
     public function getType(): string
     {
-        return 'resource';
+        return Type::BUILTIN_TYPE_RESOURCE;
     }
 
     /** @noinspection PhpParameterByRefIsNotUsedAsReferenceInspection */
