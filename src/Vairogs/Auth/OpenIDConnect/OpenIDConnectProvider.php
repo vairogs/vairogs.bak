@@ -58,7 +58,10 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             $this->setSession(session: null);
         }
         parent::__construct(options: $options, collaborators: $collaborators);
-        $this->configure(options: $options);
+        if ([] !== $options) {
+            $this->state = $this->getRandomState();
+            $this->configure(options: $options);
+        }
     }
 
     /**
@@ -167,36 +170,32 @@ abstract class OpenIDConnectProvider extends AbstractProvider
 
     protected function configure(array $options = []): void
     {
-        if ([] !== $options) {
-            $this->state = $this->getRandomState();
+        $this->redirectUri = match ($options['redirect']['type']) {
+            'uri' => $options['redirect']['uri'],
+            'route' => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL),
+            default => null,
+        };
 
-            $this->redirectUri = match ($options['redirect']['type']) {
-                'uri' => $options['redirect']['uri'],
-                'route' => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL),
-                default => null,
-            };
+        $uris = $options['uris'] ?? [];
+        unset($options['redirect'], $options['uris']);
 
-            $uris = $options['uris'] ?? [];
-            unset($options['redirect'], $options['uris']);
-
-            foreach (Iteration::makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
-                if (property_exists(object_or_class: $this, property: $var = Text::toCamelCase(string: $key))) {
-                    $this->{$var} = $value;
-                }
+        foreach (Iteration::makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
+            if (property_exists(object_or_class: $this, property: $var = Text::toCamelCase(string: $key))) {
+                $this->{$var} = $value;
             }
+        }
 
-            $this->publicKey = 'file://' . $this->publicKey;
+        $this->setPublicKey(publicKey: 'file://' . $this->getPublicKey());
 
-            foreach ($uris as $name => $uri) {
-                $params = [
-                    'client_id' => $this->clientId,
-                    'redirect_uri' => $this->redirectUri,
-                    'state' => $this->state,
-                    'base_uri' => $this->baseUri,
-                    'base_uri_post' => $this->baseUriPost ?? $this->baseUri,
-                ];
-                $this->uris[$name] = new Uri(options: $uri, extra: $params, useSession: $this->useSession, method: $uri['method'] ?? Request::METHOD_POST, session: $this->session);
-            }
+        foreach ($uris as $name => $uri) {
+            $params = [
+                'client_id' => $this->clientId,
+                'redirect_uri' => $this->redirectUri,
+                'state' => $this->state,
+                'base_uri' => $this->getBaseUri(),
+                'base_uri_post' => $this->getBaseUriPost() ?? $this->getBaseUri(),
+            ];
+            $this->uris[$name] = new Uri(options: $uri, extra: $params, useSession: $this->getUseSession(), method: $uri['method'] ?? Request::METHOD_POST, session: $this->getSession());
         }
     }
 

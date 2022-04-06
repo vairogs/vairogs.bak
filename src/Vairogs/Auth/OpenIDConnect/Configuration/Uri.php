@@ -30,7 +30,9 @@ class Uri
 
         $this->params = !empty($options['params']) ? $options['params'] : [];
 
-        $this->setGetParams(options: $options, additional: $extra);
+        if (Request::METHOD_GET === $this->method) {
+            $this->setGetParams(options: $options, additional: $extra);
+        }
     }
 
     /**
@@ -44,8 +46,9 @@ class Uri
     /**
      * @throws OpenIDConnectException
      */
-    public function getUrl($language = null): string
+    public function getUrl(?string $language = null): string
     {
+        $this->setIdToken();
         $this->buildUrl(language: $language);
 
         return $this->url;
@@ -58,12 +61,12 @@ class Uri
         return $this;
     }
 
-    public function addParam($value): void
+    public function addParam(mixed $value): void
     {
         $this->params[] = $value;
     }
 
-    public function addUrlParam($name, $value): void
+    public function addUrlParam(string $name, mixed $value): void
     {
         $this->urlParams[$name] = $value;
     }
@@ -81,10 +84,8 @@ class Uri
     /**
      * @throws OpenIDConnectException
      */
-    protected function buildUrl($language = null): void
+    protected function buildUrl(?string $language = null): void
     {
-        $this->setIdToken();
-
         if (null !== $language) {
             $this->urlParams['lang'] = (string) $language;
         }
@@ -105,15 +106,13 @@ class Uri
         $this->setUrl(url: urldecode(string: $clientUrl));
     }
 
-    private function setGetParams($options, $additional): void
+    private function setGetParams(array $options = [], array $additional = []): void
     {
-        if (Request::METHOD_GET === $this->method) {
-            if (isset($options['url_params']['post_logout_redirect_uri'])) {
-                $options['url_params']['post_logout_redirect_uri'] = $additional['redirect_uri'];
-                unset($additional['redirect_uri']);
-            }
-            $this->urlParams = !empty($options['url_params']) ? array_merge($options['url_params'], $additional) : $additional;
+        if (isset($options['url_params']['post_logout_redirect_uri'])) {
+            $options['url_params']['post_logout_redirect_uri'] = $additional['redirect_uri'];
+            unset($additional['redirect_uri']);
         }
+        $this->urlParams = !empty($options['url_params']) ? array_merge($options['url_params'], $additional) : $additional;
     }
 
     /**

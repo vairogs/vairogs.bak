@@ -12,6 +12,8 @@ use ReflectionMethod;
 use ReflectionProperty;
 use RuntimeException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
+use Vairogs\Extra\Constants\Definition;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Twig\Attribute;
 use function array_diff;
 use function array_values;
@@ -70,8 +72,8 @@ final class Php
         $value = strtolower(string: (string) $value);
 
         return match ($value) {
-            'y' => true,
-            'n' => false,
+            Status::Y => true,
+            Status::N => false,
             default => filter_var(value: $value, filter: FILTER_VALIDATE_BOOL),
         };
     }
@@ -125,7 +127,7 @@ final class Php
             return $variable[$key];
         }
 
-        if (method_exists(object_or_class: $variable, method: $method = 'get' . ucfirst(string: $key))) {
+        if (method_exists(object_or_class: $variable, method: $method = Definition::GETTER_ . ucfirst(string: $key))) {
             return $variable->{$method}();
         }
 

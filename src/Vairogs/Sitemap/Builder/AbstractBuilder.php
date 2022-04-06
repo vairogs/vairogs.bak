@@ -2,6 +2,7 @@
 
 namespace Vairogs\Sitemap\Builder;
 
+use Vairogs\Extra\Constants\Definition;
 use Vairogs\Sitemap\Model\RichUrl;
 use Vairogs\Sitemap\Model\Sitemap;
 use Vairogs\Sitemap\Model\Url;
@@ -89,7 +90,7 @@ abstract class AbstractBuilder implements Builder
 
     protected function getGetterValue(Url $url, string $key): ?string
     {
-        if (method_exists(object_or_class: $url, method: $getter = 'get' . ucfirst(string: $key)) && !empty($url->{$getter}())) {
+        if (method_exists(object_or_class: $url, method: $getter = Definition::GETTER_ . ucfirst(string: $key)) && !empty($url->{$getter}())) {
             return (string) $url->{$getter}();
         }
 
