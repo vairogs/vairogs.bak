@@ -4,8 +4,8 @@ namespace Vairogs\Captcha\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vairogs\Utils\DependencyInjection\Component;
-use Vairogs\Utils\Vairogs;
+use Vairogs\Core\DependencyInjection\Component;
+use Vairogs\Core\Vairogs;
 use function sprintf;
 
 class Honey extends HiddenType

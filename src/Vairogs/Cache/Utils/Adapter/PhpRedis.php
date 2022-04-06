@@ -7,8 +7,8 @@ use Redis;
 use Snc\RedisBundle\SncRedisBundle;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Vairogs\Core\Vairogs;
 use Vairogs\Utils\Helper\Php;
-use Vairogs\Utils\Vairogs;
 use function sprintf;
 
 class PhpRedis implements Adapter

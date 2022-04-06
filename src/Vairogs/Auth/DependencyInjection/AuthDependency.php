@@ -7,11 +7,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
+use Vairogs\Core\DependencyInjection\Component;
+use Vairogs\Core\DependencyInjection\DependecyLoaderTrait;
+use Vairogs\Core\DependencyInjection\Dependency;
+use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
-use Vairogs\Utils\DependencyInjection\Component;
-use Vairogs\Utils\DependencyInjection\DependecyLoaderTrait;
-use Vairogs\Utils\DependencyInjection\Dependency;
-use Vairogs\Utils\Vairogs;
 use function sprintf;
 
 class AuthDependency implements Dependency
@@ -20,7 +20,6 @@ class AuthDependency implements Dependency
 
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        // @formatter:off
         $authNode = $arrayNodeDefinition
             ->children()
                 ->arrayNode(name: Component::AUTH)
@@ -37,7 +36,6 @@ class AuthDependency implements Dependency
         $arrayNodeDefinition
             ->append(node: $authNode)
             ->end();
-        // @formatter:on
     }
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void

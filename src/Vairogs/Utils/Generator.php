@@ -24,7 +24,8 @@ final class Generator
     private string $upperCase = Symbol::EN_UPPERCASE;
     private string $digits = Symbol::DIGITS;
     private string $symbols = Symbol::SYMBOLS;
-    private string $latvian = Symbol::LV_ALPHABET;
+    private string $latvianUpper = Symbol::LV_UPPERCASE;
+    private string $latvianLower = Symbol::LV_LOWERCASE;
 
     /**
      * @throws LogicException
@@ -85,9 +86,16 @@ final class Generator
         return $this;
     }
 
-    public function useLatvian(): self
+    public function useLatvianLowerCase(): self
     {
-        $this->sets['latvian'] = $this->latvian;
+        $this->sets['latvianlower'] = $this->latvianLower;
+
+        return $this;
+    }
+
+    public function useLatvianUpperCase(): self
+    {
+        $this->sets['latvianupper'] = $this->latvianUpper;
 
         return $this;
     }
@@ -120,9 +128,16 @@ final class Generator
         return $this;
     }
 
-    public function setLatvian(string $latvian): self
+    public function setLatvianLowerCase(string $latvianLowerCase): self
     {
-        $this->latvian = $latvian;
+        $this->latvianLower = $latvianLowerCase;
+
+        return $this;
+    }
+
+    public function setLatvianUpperCase(string $latvianUpperCase): self
+    {
+        $this->latvianUpper = $latvianUpperCase;
 
         return $this;
     }

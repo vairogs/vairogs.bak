@@ -48,7 +48,6 @@ abstract class AbstractBuilder implements Builder
 
     public function start(&$buffer): void
     {
-        // @formatter:off
         $this->write(
             buffer: $buffer,
             text: '<?xml version="1.0" encoding="UTF-8"?>' .
@@ -61,7 +60,6 @@ abstract class AbstractBuilder implements Builder
             "\n\t" .
             'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"'
         );
-        // @formatter:on
 
         if ($this->sitemap->hasAlternates()) {
             $this->write(buffer: $buffer, text: "\n\t" . 'xmlns:xhtml="http://www.w3.org/1999/xhtml" ');

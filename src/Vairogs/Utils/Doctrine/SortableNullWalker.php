@@ -29,10 +29,8 @@ class SortableNullWalker extends SqlWalker
     {
         $sql = parent::walkOrderByClause(orderByClause: $orderByClause);
 
-        // @formatter:off
         $fields = $this->getQuery()->getHint(name: self::FIELDS);
         $platform = $this->getConnection()?->getDatabasePlatform();
-        // @formatter:on
 
         if (is_array(value: $fields) && is_object(value: $platform)) {
             foreach ($fields as $field => $sorting) {

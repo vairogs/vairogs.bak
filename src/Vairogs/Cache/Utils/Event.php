@@ -18,7 +18,8 @@ class Event
 {
     private const PARAMS = '_route_params';
 
-    public function __construct(protected Security $security)
+    /** @noinspection InterfacesAsConstructorDependenciesInspection */
+    public function __construct(protected readonly Security $security)
     {
     }
 

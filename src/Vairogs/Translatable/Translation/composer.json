@@ -45,7 +45,8 @@
         "symfony/config": "~5.4|~6.0",
         "symfony/dependency-injection": "~5.4|~6.0",
         "symfony/form": "~5.4|~6.0",
-        "vairogs/utils": "self.version"
+        "vairogs/utils": "self.version",
+        "vairogs/core": "self.version"
     },
     "autoload": {
         "psr-4": {

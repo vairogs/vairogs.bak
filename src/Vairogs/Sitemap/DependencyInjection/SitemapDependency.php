@@ -5,8 +5,8 @@ namespace Vairogs\Sitemap\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Vairogs\Utils\DependencyInjection\Component;
-use Vairogs\Utils\DependencyInjection\Dependency;
+use Vairogs\Core\DependencyInjection\Component;
+use Vairogs\Core\DependencyInjection\Dependency;
 
 class SitemapDependency implements Dependency
 {
@@ -15,7 +15,6 @@ class SitemapDependency implements Dependency
      */
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        // @formatter:off
         $arrayNodeDefinition
             ->children()
             ->arrayNode(name: Component::SITEMAP)
@@ -27,7 +26,6 @@ class SitemapDependency implements Dependency
                 ->end()
             ->end()
         ->end();
-        // @formatter:on
     }
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void

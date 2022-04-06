@@ -5,7 +5,7 @@ namespace Vairogs\Cache\Utils\Adapter;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
-use Vairogs\Utils\Vairogs;
+use Vairogs\Core\Vairogs;
 
 class File implements Adapter
 {

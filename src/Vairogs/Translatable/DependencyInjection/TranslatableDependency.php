@@ -5,13 +5,13 @@ namespace Vairogs\Translatable\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Vairogs\Core\DependencyInjection\Component;
+use Vairogs\Core\DependencyInjection\DependecyLoaderTrait;
+use Vairogs\Core\DependencyInjection\Dependency;
+use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Translatable\AdminType\DependencyInjection\TranslatableAdminTypeDependency;
 use Vairogs\Translatable\Translation\DependencyInjection\TranslatableTranslationDependency;
-use Vairogs\Utils\DependencyInjection\Component;
-use Vairogs\Utils\DependencyInjection\DependecyLoaderTrait;
-use Vairogs\Utils\DependencyInjection\Dependency;
-use Vairogs\Utils\Vairogs;
 use function sprintf;
 
 class TranslatableDependency implements Dependency
@@ -20,7 +20,6 @@ class TranslatableDependency implements Dependency
 
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        // @formatter:off
         $translatableNode = $arrayNodeDefinition
             ->children()
             ->arrayNode(name: Component::TRANSLATABLE)
@@ -37,7 +36,6 @@ class TranslatableDependency implements Dependency
         $arrayNodeDefinition
             ->append(node: $translatableNode)
             ->end();
-        // @formatter:on
     }
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void

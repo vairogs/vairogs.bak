@@ -48,6 +48,7 @@
         "symfony/property-info": "~5.4|~6.0",
         "symfony/routing": "~5.4|~6.0",
         "symfony/validator": "~5.4|~6.0",
+        "vairogs/core": "self.version",
         "vairogs/utils": "self.version",
         "vairogs/extra-constants": "self.version"
 

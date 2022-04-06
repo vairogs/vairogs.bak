@@ -1,14 +1,14 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils\DependencyInjection;
+namespace Vairogs\Core\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
+use Vairogs\Core\Vairogs;
 use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
 use Vairogs\Translatable\DependencyInjection\TranslatableDependency;
-use Vairogs\Utils\Vairogs;
 
 class Configuration implements ConfigurationInterface
 {

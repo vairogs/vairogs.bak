@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Security\Core\Security;
 use Vairogs\Cache\Cache;
 use Vairogs\Cache\Header;
@@ -29,9 +30,10 @@ class CacheEventListener implements EventSubscriberInterface
         Header::SKIP,
     ];
 
-    protected ChainAdapter $adapter;
-    protected Event $event;
+    protected readonly ChainAdapter $adapter;
+    protected readonly Event $event;
 
+    /** @noinspection InterfacesAsConstructorDependenciesInspection */
     public function __construct(protected bool $enabled, Security $security, ...$adapters)
     {
         if ($this->enabled) {
@@ -42,9 +44,9 @@ class CacheEventListener implements EventSubscriberInterface
     }
 
     #[ArrayShape([
-        KernelEvents::CONTROLLER => 'array',
-        KernelEvents::RESPONSE => 'string',
-        KernelEvents::REQUEST => 'string',
+        KernelEvents::CONTROLLER => Type::BUILTIN_TYPE_ARRAY,
+        KernelEvents::RESPONSE => Type::BUILTIN_TYPE_STRING,
+        KernelEvents::REQUEST => Type::BUILTIN_TYPE_STRING,
     ])]
     public static function getSubscribedEvents(): array
     {

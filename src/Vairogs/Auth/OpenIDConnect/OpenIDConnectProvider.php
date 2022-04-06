@@ -229,7 +229,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
 
     protected function setValidators(): void
     {
-        // @formatter:off
         $this->validatorChain
             ->setAssertions(assertions: [
                 (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->setRequired(required: true),
@@ -242,7 +241,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
                 (new GreaterOrEqual(expected: (new DateTime())->getTimestamp()))->setClaim(claim: RegisteredClaims::EXPIRATION_TIME)->setRequired(required: true),
                 (new LesserOrEqual(expected: (new DateTime())->getTimestamp()))->setClaim(claim: RegisteredClaims::NOT_BEFORE),
             ]);
-        // @formatter:on
     }
 
     /**

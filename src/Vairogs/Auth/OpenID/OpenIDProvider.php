@@ -9,6 +9,7 @@ use JsonException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use UnexpectedValueException;
@@ -35,11 +36,11 @@ class OpenIDProvider
 {
     private const PROVIDER_OPTIONS = 'provider_options';
 
-    protected Request $request;
+    protected readonly Request $request;
     protected ?string $profileUrl;
     protected ?string $userClass;
 
-    public function __construct(RequestStack $requestStack, protected RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
+    public function __construct(RequestStack $requestStack, protected readonly RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
     {
         $this->request = $requestStack->getCurrentRequest();
         $this->profileUrl = $this->options[self::PROVIDER_OPTIONS]['profile_url'] ?? null;
@@ -155,14 +156,14 @@ class OpenIDProvider
     }
 
     #[ArrayShape([
-        OpenID::NS => 'string',
-        OpenID::MODE => 'string',
+        OpenID::NS => Type::BUILTIN_TYPE_STRING,
+        OpenID::MODE => Type::BUILTIN_TYPE_STRING,
         OpenID::RETURN_TO => 'string|string[]',
         OpenID::REALM => 'null|string',
-        OpenID::IDENTITY => 'string',
-        OpenID::CLAIMED_ID => 'string',
+        OpenID::IDENTITY => Type::BUILTIN_TYPE_STRING,
+        OpenID::CLAIMED_ID => Type::BUILTIN_TYPE_STRING,
         OpenID::SREG_REQUIRED => 'array|mixed',
-        OpenID::NS_SREG => 'string',
+        OpenID::NS_SREG => Type::BUILTIN_TYPE_STRING,
     ])]
     private function getParams(string $return, ?string $realm): array
     {

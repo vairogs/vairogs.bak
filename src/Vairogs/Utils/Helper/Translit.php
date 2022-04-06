@@ -7,7 +7,6 @@ use function str_replace;
 
 final class Translit
 {
-    // @formatter:off
     final public const MAP_CYRILLIC = [
         'е', 'ё', 'ж', 'х', 'ц', 'ч', 'ш', 'щ', 'ю', 'я',
         'Е', 'Ё', 'Ж', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ю', 'Я',
@@ -20,7 +19,6 @@ final class Translit
         'a', 'b', 'v', 'g', 'd', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'ʺ', 'y', '–', 'e',
         'A', 'B', 'V', 'G', 'D', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'ʺ', 'Y', '–', 'E',
     ];
-    // @formatter:on
 
     #[Attribute\TwigFilter]
     public static function cyrillicToLatin(string $text): string

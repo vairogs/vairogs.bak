@@ -6,9 +6,12 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Auth\DependencyInjection\AbstractAuthChildDependency;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
-use Vairogs\Utils\DependencyInjection\Component;
+use Vairogs\Core\DependencyInjection\Component;
+use Vairogs\Extra\Constants\Definition;
+use Vairogs\Extra\Constants\Service;
 
 class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
 {
@@ -17,7 +20,6 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
         $arrayNodeDefinition->addDefaultsIfNotSet();
         $optionsNode = $arrayNodeDefinition->children();
 
-        // @formatter:off
         /* @noinspection NullPointerExceptionInspection */
         /* @noinspection PhpPossiblePolymorphicInvocationInspection */
         $optionsNode
@@ -36,12 +38,11 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
                     ->enumNode(name: 'type')->values(values: ['route', 'uri'])->defaultValue(value: 'route')->end()
                     ->scalarNode(name: 'route')->defaultValue(value: null)->end()
                     ->scalarNode(name: 'uri')->defaultValue(value: null)->end()
-                    ->arrayNode(name: 'params')->prototype(type: 'variable')->end()->end()
+                    ->arrayNode(name: 'params')->prototype(type: Definition::VARIABLE)->end()->end()
                 ->end()
             ->end()
-            ->arrayNode(name: 'uris')->prototype(type: 'array')->prototype(type: 'variable')->end()->end()
+            ->arrayNode(name: 'uris')->prototype(type: Type::BUILTIN_TYPE_ARRAY)->prototype(type: Definition::VARIABLE)->end()->end()
         ->end();
-        // @formatter:on
 
         $optionsNode->end();
     }
@@ -53,8 +54,8 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
         unset($options['user_provider']);
         $clientDefinition->setArguments(arguments: [
             $key,
-            new Reference(id: 'router'),
-            new Reference(id: 'request_stack'),
+            new Reference(id: Service::ROUTER),
+            new Reference(id: Service::REQUEST_STACK),
             $options,
             [],
         ])
@@ -63,7 +64,6 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
 
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        // @formatter:off
         /* @noinspection PhpPossiblePolymorphicInvocationInspection */
         $arrayNodeDefinition
             ->children()
@@ -71,11 +71,10 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
                 ->canBeEnabled()
                 ->addDefaultsIfNotSet()
                 ->children()
-                    ->arrayNode(name: 'clients')->prototype(type: 'array')->prototype(type: 'variable')->end()->end()->end()
+                    ->arrayNode(name: 'clients')->prototype(type: Type::BUILTIN_TYPE_ARRAY)->prototype(type: Definition::VARIABLE)->end()->end()->end()
                 ->end()
             ->end()
         ->end();
-        // @formatter:on
     }
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void

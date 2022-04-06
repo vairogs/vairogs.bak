@@ -20,20 +20,16 @@ class ErrorResponse
 
     public function getResponse(): Response
     {
-        // @formatter:off
         $buffer = '<?xml version="1.0" encoding="UTF-8"?>
 <errors>
 ';
-        // @formatter:on
 
         /** @var ConstraintViolation $error */
         foreach ($this->constraintViolationList as $error) {
-            // @formatter:off
             $buffer .= "\t" . '<error>' .
                 "\n\t\t" . '<property_path>' . $error->getPropertyPath() . '</property_path>' .
                 "\n\t\t" . '<message>' . $error->getMessage() . '</message>' .
                 "\n\t" . '</error>' . "\n";
-            // @formatter:on
         }
 
         $buffer .= '</errors>

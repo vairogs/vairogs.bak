@@ -6,9 +6,12 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Auth\DependencyInjection\AbstractAuthChildDependency;
 use Vairogs\Auth\OpenID\OpenIDProvider;
-use Vairogs\Utils\DependencyInjection\Component;
+use Vairogs\Core\DependencyInjection\Component;
+use Vairogs\Extra\Constants\Definition;
+use Vairogs\Extra\Constants\Service;
 
 class AuthOpenIDDependency extends AbstractAuthChildDependency
 {
@@ -17,7 +20,6 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
         $arrayNodeDefinition->addDefaultsIfNotSet();
         $optionsNode = $arrayNodeDefinition->children();
 
-        // @formatter:off
         /* @noinspection NullPointerExceptionInspection */
         $optionsNode
             ->scalarNode(name: 'api_key')->isRequired()->cannotBeEmpty()->end()
@@ -27,8 +29,7 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
             ->scalarNode(name: 'user_builder')->isRequired()->end()
             ->scalarNode(name: 'user_class')->defaultValue(value: null)->end()
             ->scalarNode(name: 'redirect_route')->isRequired()->cannotBeEmpty()->end()
-            ->arrayNode(name: 'provider_options')->prototype(type: 'variable')->end()->end();
-        // @formatter:on
+            ->arrayNode(name: 'provider_options')->prototype(type: Definition::VARIABLE)->end()->end();
 
         $optionsNode->end();
     }
@@ -38,10 +39,10 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
         $clientDefinition = $containerBuilder->register(id: $clientServiceKey, class: OpenIDProvider::class);
         $clientDefinition
             ->setArguments(arguments: [
-                new Reference(id: 'request_stack'),
-                new Reference(id: 'router'),
+                new Reference(id: Service::REQUEST_STACK),
+                new Reference(id: Service::ROUTER),
                 $key,
-                $containerBuilder->getParameter(name: 'kernel.cache_dir'),
+                $containerBuilder->getParameter(name: Definition::KERNEL_CACHE_DIR),
                 $containerBuilder->getParameter(name: $clientServiceKey),
             ])
             ->addTag(name: $base);
@@ -52,7 +53,6 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
      */
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
-        // @formatter:off
         /* @noinspection PhpPossiblePolymorphicInvocationInspection */
         $arrayNodeDefinition
             ->children()
@@ -60,11 +60,10 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
                 ->canBeEnabled()
                 ->addDefaultsIfNotSet()
                 ->children()
-                    ->arrayNode(name: 'clients')->prototype(type: 'array')->prototype(type: 'variable')->end()->end()->end()
+                    ->arrayNode(name: 'clients')->prototype(type: Type::BUILTIN_TYPE_ARRAY)->prototype(type: Definition::VARIABLE)->end()->end()->end()
                 ->end()
             ->end()
         ->end();
-        // @formatter:on
     }
 
     public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void

@@ -8,5 +8,6 @@ final class Symbol
     final public const EN_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
     final public const EN_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     final public const SYMBOLS = '!@#$%^&*()_-=+;:.,?';
-    final public const LV_ALPHABET = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
+    final public const LV_LOWERCASE = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
+    final public const LV_UPPERCASE = 'AāBCČDEĒFGĢHIĪJKĶLĻMNŅOPRSŠTUŪVZŽ';
 }

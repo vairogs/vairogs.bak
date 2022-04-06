@@ -1,15 +1,10 @@
 {
-    "name": "vairogs/cache",
-    "description": "Utils: Cache library",
+    "name": "vairogs/core",
+    "description": "Utils: Core",
     "type": "library",
     "keywords": [
-        "cache",
-        "doctrine",
-        "filesystem",
-        "orm",
-        "phpsed",
-        "predis",
-        "redis",
+        "core",
+        "php",
         "symfony",
         "vairogs"
     ],
@@ -20,11 +15,6 @@
             "email": "k0d3r1s@vairogs.com",
             "homepage": "https://github.com/k0d3r1s",
             "role": "Developer"
-        },
-        {
-            "name": "phpsed",
-            "homepage": "https://github.com/phpsed",
-            "role": "Original Author"
         }
     ],
     "support": {
@@ -48,33 +38,12 @@
     ],
     "require": {
         "php": ">=8.1.0",
-        "ext-json": "*",
         "jetbrains/phpstorm-attributes": "*",
-        "psr/cache": "*",
-        "symfony/cache": "~5.4|~6.0",
-        "symfony/config": "~5.4|~6.0",
-        "symfony/dependency-injection": "~5.4|~6.0",
-        "symfony/event-dispatcher": "~5.4|~6.0",
-        "symfony/http-foundation": "~5.4|~6.0",
-        "symfony/http-kernel": "~5.4|~6.0",
-        "symfony/property-info": "~5.4|~6.0",
-        "symfony/security-core": "~5.4|~6.0",
-        "vairogs/core": "self.version",
         "vairogs/utils": "self.version"
-    },
-    "replace": {
-        "vairogs/cache-utils": "self.version"
-    },
-    "suggest": {
-        "snc/redis-bundle": "For Predis or PhpRedis adapter usage",
-        "doctrine/orm": "For Orm adapter usage",
-        "doctrine/dbal": "For Orm adapter usage",
-        "ext-redis": "For PhpRedis and Predis adapter",
-        "ext-phpiredis": "For PhpRedis adapter"
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Cache\\": ""
+            "Vairogs\\Core\\": ""
         }
     },
     "config": {

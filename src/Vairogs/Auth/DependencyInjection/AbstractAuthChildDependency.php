@@ -6,11 +6,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Vairogs\Core\DependencyInjection\Component;
+use Vairogs\Core\DependencyInjection\Dependency;
+use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
-use Vairogs\Utils\DependencyInjection\Component;
-use Vairogs\Utils\DependencyInjection\Dependency;
 use Vairogs\Utils\Helper\Iteration;
-use Vairogs\Utils\Vairogs;
 use function sprintf;
 
 abstract class AbstractAuthChildDependency implements Dependency

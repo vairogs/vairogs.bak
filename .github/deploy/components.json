@@ -142,5 +142,9 @@
     {
         "path": "src/Vairogs/Twig/Helper/Util",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-util.git"
+    },
+    {
+        "path": "src/Vairogs/Core",
+        "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
     }
 ]

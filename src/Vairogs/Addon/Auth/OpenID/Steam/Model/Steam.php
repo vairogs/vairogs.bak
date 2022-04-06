@@ -11,6 +11,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\Model\Traits\SteamGetters;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\Traits\SteamSetters;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 
+/** @noinspection PhpSuperClassIncompatibleWithInterfaceInspection */
 #[ORM\MappedSuperclass]
 class Steam implements OpenIDUser, User, Stringable
 {

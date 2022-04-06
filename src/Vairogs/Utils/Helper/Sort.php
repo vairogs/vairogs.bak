@@ -21,6 +21,7 @@ use function round;
 use function strtoupper;
 use function usort;
 
+/** @noinspection TypoSafeNamingInspection */
 final class Sort
 {
     private static string $field = '';
@@ -194,7 +195,7 @@ final class Sort
                 continue;
             }
 
-            if ($i > mb_strlen(string: $b) || mb_strpos(haystack: Symbol::LV_ALPHABET, needle: mb_substr(string: $a, start: $i, length: 1)) > mb_strpos(haystack: Symbol::LV_ALPHABET, needle: mb_substr(string: $b, start: $i, length: 1))) {
+            if ($i > mb_strlen(string: $b) || mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $a, start: $i, length: 1)) > mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $b, start: $i, length: 1))) {
                 return 1;
             }
 
