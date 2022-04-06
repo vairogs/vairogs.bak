@@ -10,7 +10,6 @@ use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Core\Vairogs;
 use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
-use Vairogs\Translatable\DependencyInjection\TranslatableDependency;
 use Vairogs\Utils\Helper\Iteration;
 
 class VairogsExtension extends Extension
@@ -28,7 +27,6 @@ class VairogsExtension extends Extension
         $this->configureComponent(class: CacheDependency::class, container: $container, configuration: $configuration);
         $this->configureComponent(class: AuthDependency::class, container: $container, configuration: $configuration);
         $this->configureComponent(class: SitemapDependency::class, container: $container, configuration: $configuration);
-        $this->configureComponent(class: TranslatableDependency::class, container: $container, configuration: $configuration);
     }
 
     public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void
