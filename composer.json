@@ -56,7 +56,7 @@
         "doctrine/persistence": "~2.1",
         "jetbrains/phpstorm-attributes": "*",
         "lcobucci/jwt": "^4.1",
-        "league/oauth2-client": "^2.6",
+        "league/oauth2-client": "*",
         "monolog/monolog": "~2.1",
         "psr/http-message": "*",
         "psr/cache": "*",
