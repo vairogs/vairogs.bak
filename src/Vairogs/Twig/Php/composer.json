@@ -40,8 +40,8 @@
     "require": {
         "php": ">=8.1.0",
         "jetbrains/phpstorm-attributes": "*",
-        "twig/twig": "3.*",
-        "vairogs/utils": "self.version"
+        "twig/twig": "*",
+        "vairogs/core": "self.version"
     },
     "autoload": {
         "psr-4": {

@@ -48,7 +48,6 @@
     ],
     "require": {
         "php": ">=8.1.0",
-        "ext-json": "*",
         "jetbrains/phpstorm-attributes": "*",
         "psr/cache": "*",
         "symfony/cache": "~5.4|~6.0",
@@ -59,8 +58,7 @@
         "symfony/http-kernel": "~5.4|~6.0",
         "symfony/property-info": "~5.4|~6.0",
         "symfony/security-core": "~5.4|~6.0",
-        "vairogs/core": "self.version",
-        "vairogs/utils": "self.version"
+        "vairogs/core": "self.version"
     },
     "replace": {
         "vairogs/cache-utils": "self.version"

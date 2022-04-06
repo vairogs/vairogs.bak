@@ -41,7 +41,8 @@
     ],
     "require": {
         "php": ">=8.1.0",
-        "jetbrains/phpstorm-attributes": "*"
+        "jetbrains/phpstorm-attributes": "*",
+        "symfony/http-foundation": "~5.4|~6.0"
     },
     "replace": {
         "vairogs/extra-constants": "self.version",
