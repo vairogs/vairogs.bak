@@ -185,7 +185,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             }
         }
 
-        $this->setPublicKey(publicKey: 'file://' . $this->getPublicKey());
+        $this->setPublicKey(publicKey: 'file://' . $this->publicKey);
 
         foreach ($uris as $name => $uri) {
             $params = [
