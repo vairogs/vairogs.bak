@@ -127,7 +127,7 @@ final class Php
             return $variable[$key];
         }
 
-        if (method_exists(object_or_class: $variable, method: $method = Definition::GETTER_ . ucfirst(string: $key))) {
+        if (method_exists(object_or_class: $variable, method: $method = Definition::GETTER . ucfirst(string: $key))) {
             return $variable->{$method}();
         }
 
