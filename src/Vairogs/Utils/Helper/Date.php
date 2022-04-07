@@ -38,7 +38,7 @@ final class Date
         $day = (int) substr(string: $date, offset: 0, length: 2);
         $month = (int) substr(string: $date, offset: 2, length: 2);
 
-        if ($month < 0 || $month > 12) {
+        if (1 > $month || 12 < $month) {
             return false;
         }
 
@@ -86,7 +86,7 @@ final class Date
 
         foreach (self::TIME as $unit => $value) {
             if ($timestamp >= $value) {
-                $time = floor(num: $timestamp / $value * 100.0 / 100.0);
+                $time = floor(num: $timestamp / $value);
 
                 if ($time > 0) {
                     $str .= $time . ' ' . $unit . (1.0 === $time ? '' : 's') . ' ';
