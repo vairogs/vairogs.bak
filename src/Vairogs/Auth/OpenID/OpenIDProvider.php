@@ -37,7 +37,7 @@ class OpenIDProvider
 {
     private const PROVIDER_OPTIONS = 'provider_options';
 
-    protected readonly Request $request;
+    protected Request $request;
     protected ?string $profileUrl;
     protected ?string $userClass;
 
