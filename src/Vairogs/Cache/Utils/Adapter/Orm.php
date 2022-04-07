@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Exception;
 use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Component\Cache\Adapter\PdoAdapter;
+use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Vairogs\Core\Vairogs;
 use Vairogs\Utils\Helper\Php;
@@ -29,22 +29,21 @@ class Orm implements Adapter
     public function getAdapter(): CacheItemPoolInterface
     {
         $table = sprintf('%s_items', $this->namespace);
-        $schemaManager = $this->entityManager->getConnection()
-            ->getSchemaManager();
-        $pdoAdapter = new PdoAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: Adapter::DEFAULT_LIFETIME, options: ['db_table' => $table]);
+        $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
+        $dbalAdapter = new DoctrineDbalAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: Adapter::DEFAULT_LIFETIME, options: ['db_table' => $table]);
 
-        if ($schemaManager && !$schemaManager->tablesExist(names: [$table])) {
+        if (!$schemaManager->tablesExist(names: [$table])) {
             try {
-                $pdoAdapter->createTable();
+                $dbalAdapter->createTable();
             } catch (Exception $exception) {
                 throw new DBALException(message: $exception->getMessage(), code: $exception->getCode(), previous: $exception);
             }
         }
 
-        if ($schemaManager && $schemaManager->tablesExist(names: [$table])) {
-            return $pdoAdapter;
+        if ($schemaManager->tablesExist(names: [$table])) {
+            return $dbalAdapter;
         }
 
-        throw DBALException::invalidTableName(tableName: $table);
+        throw new DBALException(message: sprintf('Invalid table name: "%s"', $table));
     }
 }
