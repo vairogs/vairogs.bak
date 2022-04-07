@@ -7,13 +7,14 @@ use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
+use Vairogs\Extra\Constants\Definition;
 
 trait CreatedModified
 {
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: [Definition::DEFAULT => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $creationDate = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: [Definition::DEFAULT => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $modificationDate = null;
 
     public function getModificationDate(): DateTimeInterface
@@ -21,7 +22,7 @@ trait CreatedModified
         return $this->modificationDate;
     }
 
-    public function setModificationDate(DateTimeInterface $modificationDate): static
+    public function setModificationDate(?DateTimeInterface $modificationDate): static
     {
         $this->modificationDate = $modificationDate;
 
@@ -49,7 +50,7 @@ trait CreatedModified
         return $this->creationDate;
     }
 
-    public function setCreationDate(DateTimeInterface $creationDate): static
+    public function setCreationDate(?DateTimeInterface $creationDate): static
     {
         $this->creationDate = $creationDate;
 
