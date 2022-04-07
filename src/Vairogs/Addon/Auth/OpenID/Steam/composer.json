@@ -44,6 +44,7 @@
         "doctrine/orm": "*",
         "jetbrains/phpstorm-attributes": "*",
         "vairogs/auth-openid": "self.version",
+        "vairogs/extra-constants": "self.version",
         "vairogs/utils": "self.version"
     },
     "autoload": {

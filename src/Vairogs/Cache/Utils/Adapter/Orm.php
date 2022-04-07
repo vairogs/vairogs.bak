@@ -31,7 +31,7 @@ class Orm implements Adapter
         $table = sprintf('%s_items', $this->namespace);
         $schemaManager = $this->entityManager->getConnection()
             ->getSchemaManager();
-        $pdoAdapter = new PdoAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: 0, options: ['db_table' => $table]);
+        $pdoAdapter = new PdoAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: Adapter::DEFAULT_LIFETIME, options: ['db_table' => $table]);
 
         if ($schemaManager && !$schemaManager->tablesExist(names: [$table])) {
             try {

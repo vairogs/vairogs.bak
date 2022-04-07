@@ -6,6 +6,7 @@ use DateTime;
 use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Twig\Attribute;
 use function array_merge;
 use function floor;
@@ -44,7 +45,7 @@ final class Date
 
         $daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-        if (0 === (int) substr(string: $date, offset: 4, length: 2) % 4) {
+        if (Status::ZERO === (int) substr(string: $date, offset: 4, length: 2) % 4) {
             $daysInMonth[1] = 29;
         }
 

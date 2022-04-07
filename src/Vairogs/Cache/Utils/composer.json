@@ -50,7 +50,8 @@
         "symfony/http-foundation": "~5.4|~6.0",
         "symfony/http-kernel": "~5.4|~6.0",
         "symfony/security-core": "~5.4|~6.0",
-        "vairogs/core": "self.version"
+        "vairogs/core": "self.version",
+        "vairogs/extra-constants": "self.version"
     },
     "suggest": {
         "snc/redis-bundle": "For Predis or PhpRedis adapter usage",

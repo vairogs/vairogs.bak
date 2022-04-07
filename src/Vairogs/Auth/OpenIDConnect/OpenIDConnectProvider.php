@@ -5,7 +5,6 @@ namespace Vairogs\Auth\OpenIDConnect;
 use DateTime;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use JsonException;
 use Lcobucci\JWT;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Token\RegisteredClaims;
@@ -34,15 +33,14 @@ use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 use Vairogs\Auth\OpenIDConnect\Utils\Traits\OpenIDConnectProviderVariables;
 use Vairogs\Extra\Constants\ContentType;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Helper\Json;
 use Vairogs\Utils\Helper\Text;
 use function array_merge;
 use function base64_encode;
-use function json_last_error;
 use function property_exists;
 use function sprintf;
-use const JSON_ERROR_NONE;
 
 abstract class OpenIDConnectProvider extends AbstractProvider
 {
@@ -52,12 +50,15 @@ abstract class OpenIDConnectProvider extends AbstractProvider
     {
         $this->setSigner(signer: new JWT\Signer\Rsa\Sha256());
         $this->setValidatorChain(validatorChain: new ValidatorChain());
+
         try {
             $this->setSession(session: $requestStack->getCurrentRequest()?->getSession());
         } catch (Exception) {
             $this->setSession(session: null);
         }
+
         parent::__construct(options: $options, collaborators: $collaborators);
+
         if ([] !== $options) {
             $this->state = $this->getRandomState();
             $this->configure(options: $options);
@@ -76,7 +77,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             throw new OpenIDConnectException(message: 'Invalid access token');
         }
 
-        // id_token is empty.
         if (null === $token = $accessToken->getIdToken()) {
             throw new OpenIDConnectException(message: 'Expected an id_token but did not receive one from the authorization server');
         }
@@ -243,7 +243,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
     }
 
     /**
-     * @throws JsonException
      * @throws UnexpectedValueException
      */
     protected function parseJson($content): array
@@ -252,12 +251,11 @@ abstract class OpenIDConnectProvider extends AbstractProvider
             return [];
         }
 
-        $content = Json::decode(json: $content, flags: 1);
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new UnexpectedValueException(message: sprintf('Failed to parse JSON response: %s', json_last_error_msg()));
+        try {
+            return Json::decode(json: $content, flags: Status::ONE);
+        } catch (Exception $exception) {
+            throw new UnexpectedValueException(message: sprintf('Failed to parse JSON response: %s', $exception->getMessage()), previous: $exception);
         }
-
-        return $content;
     }
 
     #[ArrayShape([

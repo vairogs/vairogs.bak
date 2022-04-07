@@ -36,7 +36,7 @@ class SitemapController extends AbstractController
         $model = $provider->populate(host: $request->getSchemeAndHttpHost());
         $constraintViolationList = $validator->validate(value: $model);
 
-        if (0 !== $constraintViolationList->count()) {
+        if (Status::ZERO !== $constraintViolationList->count()) {
             return (new ErrorResponse(constraintViolationList: $constraintViolationList))->getResponse();
         }
 
