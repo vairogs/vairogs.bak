@@ -81,7 +81,7 @@ final class Uri
 
         $scheme = $urlParsed['scheme'] . '://';
         $host = $urlParsed['host'];
-        $port = $urlParsed['port'] ?? null;
+        $port = (string) ($urlParsed['port'] ?? '');
         $path = $urlParsed['path'] ?? null;
         $query = $urlParsed['query'] ?? null;
 
