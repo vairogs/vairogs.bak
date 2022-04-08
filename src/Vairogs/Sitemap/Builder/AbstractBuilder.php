@@ -30,13 +30,8 @@ abstract class AbstractBuilder implements Builder
 
             $this->write(buffer: $buffer, text: '<url>' . "\n");
 
-            foreach (array_keys(array: $urlArray) as $key) {
-                $this->write(buffer: $buffer, text: $this->getBufferValue(url: $url, key: $key));
-            }
-
-            foreach ($alternates as $locale => $alternate) {
-                $this->write(buffer: $buffer, text: "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
-            }
+            $this->writeUrls(buffer: $buffer, url: $url, urlArray: $urlArray);
+            $this->writeAlternates(buffer: $buffer, alternates: $alternates);
 
             $this->write(buffer: $buffer, text: '</url>' . "\n");
         }
@@ -95,5 +90,19 @@ abstract class AbstractBuilder implements Builder
         }
 
         return null;
+    }
+
+    private function writeAlternates(&$buffer, array $alternates = []): void
+    {
+        foreach ($alternates as $locale => $alternate) {
+            $this->write(buffer: $buffer, text: "\t" . '<xhtml:link rel="alternate" hreflang="' . $locale . '" href="' . $alternate . '" />' . "\n");
+        }
+    }
+
+    private function writeUrls(&$buffer, Url|RichUrl $url, array $urlArray = []): void
+    {
+        foreach (array_keys(array: $urlArray) as $key) {
+            $this->write(buffer: $buffer, text: $this->getBufferValue(url: $url, key: $key));
+        }
     }
 }

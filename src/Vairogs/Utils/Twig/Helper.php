@@ -22,17 +22,22 @@ class Helper
 
         foreach ($methods as $method) {
             if (Php::filterExists(method: $method, filterClass: $filterClass)) {
-                if ($withClass) {
-                    $filtered[Text::fromCamelCase(string: $method->getName())] = [
-                        $class,
-                        $method->getName(),
-                    ];
-                } else {
-                    $filtered[Text::fromCamelCase(string: $method->getName())] = $method->getName();
-                }
+                $filtered[Text::fromCamelCase(string: $name = $method->getName())] = self::getFilter(class: $class, name: $name, withClass: $withClass);
             }
         }
 
         return $filtered;
+    }
+
+    private static function getFilter(string $class, string $name, bool $withClass = true): string|array
+    {
+        if ($withClass) {
+            return [
+                $class,
+                $name,
+            ];
+        }
+
+        return $name;
     }
 }
