@@ -47,7 +47,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
 {
     use OpenIDConnectProviderVariables;
 
-    public function __construct(protected string $name, protected RouterInterface $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
+    public function __construct(protected string $name, protected readonly RouterInterface $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
     {
         $this->setSigner(signer: new JWT\Signer\Rsa\Sha256());
         $this->setValidatorChain(validatorChain: new ValidatorChain());

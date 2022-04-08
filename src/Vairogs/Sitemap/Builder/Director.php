@@ -8,6 +8,7 @@ use function sprintf;
 
 class Director
 {
+    /** @noinspection PhpPropertyCanBeReadonlyInspection */
     public function __construct(private mixed $buffer)
     {
     }

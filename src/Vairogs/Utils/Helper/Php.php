@@ -212,7 +212,6 @@ final class Php
         return self::call(function: fn () => $object->{$property}, clone: $object, return: true);
     }
 
-    #[Pure]
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function filterExists(ReflectionMethod $method, string $filterClass): bool

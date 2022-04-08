@@ -47,11 +47,10 @@
         "symfony/http-foundation": "~5.4|~6.0",
         "symfony/property-info": "~5.4|~6.0",
         "symfony/routing": "~5.4|~6.0",
+        "vairogs/addon-auth-openid": "self.version",
         "vairogs/core": "self.version",
         "vairogs/extra-constants": "self.version",
-        "vairogs/utils": "self.version",
-        "vairogs/addon-auth-openid": "self.version",
-        "vairogs/extra-constants": "self.version"
+        "vairogs/utils": "self.version"
     },
     "replace": {
         "vairogs/auth-openid": "self.version",

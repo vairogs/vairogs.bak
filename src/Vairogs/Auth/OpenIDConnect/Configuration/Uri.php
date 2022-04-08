@@ -87,7 +87,7 @@ class Uri
     protected function buildUrl(?string $language = null): void
     {
         if (null !== $language) {
-            $this->urlParams['lang'] = (string) $language;
+            $this->urlParams['lang'] = $language;
         }
 
         $clientUrl = $this->base;
