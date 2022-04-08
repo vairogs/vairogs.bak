@@ -50,7 +50,7 @@ final class Php
      * @noinspection PhpInconsistentReturnPointsInspection
      */
     #[Attribute\TwigFunction]
-    public static function call(callable $function, object $clone, bool $return = false): mixed
+    public static function call(callable $function, object $clone, bool $return = false)
     {
         $func = Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
 
@@ -140,7 +140,7 @@ final class Php
     {
         $methods = get_class_methods(object_or_class: $class);
         if (null !== $parent) {
-            return array_diff(array: $methods, excludes: get_class_methods(object_or_class: $parent));
+            return array_diff($methods, get_class_methods(object_or_class: $parent));
         }
 
         return $methods;
@@ -170,7 +170,7 @@ final class Php
     #[Attribute\TwigFunction]
     public static function getEnv(string $varname, bool $localOnly = false): mixed
     {
-        if ($env = getenv(name: $varname, local_only: $localOnly)) {
+        if ($env = getenv($varname, local_only: $localOnly)) {
             return $env;
         }
 
