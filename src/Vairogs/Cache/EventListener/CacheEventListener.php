@@ -69,8 +69,8 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var Cache $attribute */
         if (null !== ($attribute = $this->event->getAtribute(kernelEvent: $controllerEvent, class: Cache::class))) {
+            /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $controllerEvent, class: Cache::class));
             $response = null;
 
@@ -99,8 +99,8 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var Cache $attribute */
         if (($attribute = $this->event->getAtribute(kernelEvent: $requestEvent, class: Cache::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
+            /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Cache::class));
             $this->adapter->deleteItem(key: $attribute->getKey(prefix: $this->getRoute(kernelEvent: $requestEvent)));
         }
@@ -115,8 +115,8 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var Cache $attribute */
         if (null !== ($attribute = $this->event->getAtribute(kernelEvent: $responseEvent, class: Cache::class))) {
+            /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $responseEvent, class: Cache::class));
             $key = $attribute->getKey(prefix: $this->getRoute(kernelEvent: $responseEvent));
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
