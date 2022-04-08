@@ -1,0 +1,11 @@
+language: php
+
+php:
+    - '8.1'
+    - master
+
+install:
+    - composer install -n --ignore-platform-reqs
+
+script:
+    - vendor/bin/phpunit tests

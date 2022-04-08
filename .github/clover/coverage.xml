@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649394799">
-  <project timestamp="1649394799">
+<coverage generated="1649406985">
+  <project timestamp="1649406985">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2296,13 +2296,13 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Email.php">
       <class name="Vairogs\Utils\Helper\Email" namespace="global">
-        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </class>
-      <line num="13" type="method" name="isValid" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <metrics loc="24" ncloc="24" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+      <line num="13" type="method" name="isValid" visibility="public" complexity="2" crap="2" count="5"/>
+      <line num="17" type="stmt" count="5"/>
+      <line num="18" type="stmt" count="1"/>
+      <line num="21" type="stmt" count="4"/>
+      <metrics loc="24" ncloc="24" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/File.php">
       <class name="Vairogs\Utils\Helper\File" namespace="global">
@@ -2987,6 +2987,6 @@
       <line num="52" type="stmt" count="0"/>
       <metrics loc="56" ncloc="56" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <metrics files="143" loc="7448" ncloc="7242" classes="96" methods="517" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="1688" coveredstatements="22" elements="2205" coveredelements="27"/>
+    <metrics files="143" loc="7448" ncloc="7242" classes="96" methods="517" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="1688" coveredstatements="25" elements="2205" coveredelements="31"/>
   </project>
 </coverage>
