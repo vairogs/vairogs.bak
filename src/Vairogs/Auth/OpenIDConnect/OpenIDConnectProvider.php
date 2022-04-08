@@ -32,7 +32,7 @@ use Vairogs\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 use Vairogs\Auth\OpenIDConnect\Utils\Traits\OpenIDConnectProviderVariables;
-use Vairogs\Auth\Registry\HasRegistry;
+use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Helper\Iteration;

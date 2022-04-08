@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Auth\Registry;
+namespace Vairogs\Core\Registry;
 
 use InvalidArgumentException;
 use Traversable;
 use function iterator_to_array;
 use function sprintf;
 
-class AuthRegistry
+class Registry
 {
     /**
      * @var HasRegistry[]

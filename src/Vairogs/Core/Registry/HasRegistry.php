@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Auth\Registry;
+namespace Vairogs\Core\Registry;
 
 interface HasRegistry
 {

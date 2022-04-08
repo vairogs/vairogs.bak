@@ -16,7 +16,7 @@ use UnexpectedValueException;
 use Vairogs\Addon\Auth\OpenID\Constants\OpenID;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
-use Vairogs\Auth\Registry\HasRegistry;
+use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Helper\Json;
