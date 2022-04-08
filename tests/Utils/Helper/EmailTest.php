@@ -18,11 +18,11 @@ class EmailTest extends TestCase
     public function dataProviderIsValid(): array
     {
         return [
-            ['vairogs@vairogs.com', true],
-            ['vairogs', false],
-            ['vairogs@vairogs', false],
+            ['vairogs@vairogs.com',  true],
+            ['vairogs',             false],
+            ['vairogs@vairogs',     false],
             ['vairogs@vairogs.123', false],
-            ['', false],
+            ['',                    false],
         ];
     }
 }

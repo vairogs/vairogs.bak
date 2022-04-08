@@ -1,7 +1,9 @@
 language: php
 
+dist: focal
+
 php:
-    - '8.1'
+    - '8.1.2'
 
 install:
     - composer install -n --ignore-platform-reqs

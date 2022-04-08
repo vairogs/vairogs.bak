@@ -26,7 +26,7 @@ class TranslitTest extends TestCase
     public function dataProvidertCyrillicToLatin(): array
     {
         return [
-            ['юнит-тест', 'yunit-tyest'],
+            ['юнит-тест',    'yunit-tyest'],
             ['интеграция', 'intyegratsiya'],
         ];
     }
@@ -34,7 +34,7 @@ class TranslitTest extends TestCase
     public function dataProvidertLatinToCyrillic(): array
     {
         return [
-            ['yunit-tyest', 'юнит-тест'],
+            ['yunit-tyest',    'юнит-тест'],
             ['intyegratsiya', 'интеграция'],
         ];
     }

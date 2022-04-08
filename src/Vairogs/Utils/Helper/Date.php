@@ -6,7 +6,7 @@ use DateTime;
 use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Extra\Constants\Status;
+use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Attribute;
 use function array_merge;
 use function floor;
@@ -17,19 +17,14 @@ use function trim;
 
 final class Date
 {
-    final public const FORMAT = 'd-m-Y H:i:s';
-    final public const FORMAT_TS = 'D M d Y H:i:s T';
     final public const EXTRA_FORMATS = [
-        self::FORMAT,
-        self::FORMAT_TS,
+        Constants\Date::FORMAT,
+        Constants\Date::FORMAT_TS,
     ];
-    final public const SEC = 1000;
-    final public const MIN = 60 * self::SEC;
-    final public const HOUR = 60 * self::MIN;
     final public const TIME = [
-        'hour' => self::HOUR,
-        'minute' => self::MIN,
-        'second' => self::SEC,
+        'hour' => Constants\Date::HOUR,
+        'minute' => Constants\Date::MIN,
+        'second' => Constants\Date::SEC,
     ];
 
     #[Attribute\TwigFunction]
@@ -45,7 +40,7 @@ final class Date
 
         $daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-        if (Status::ZERO === (int) substr(string: $date, offset: 4, length: 2) % 4) {
+        if (Constants\Status::ZERO === (int) substr(string: $date, offset: 4, length: 2) % 4) {
             $daysInMonth[1] = 29;
         }
 
@@ -53,7 +48,7 @@ final class Date
     }
 
     #[Attribute\TwigFilter]
-    public static function excelDate(int $timestamp, string $format = self::FORMAT): int|string
+    public static function excelDate(int $timestamp, string $format = Constants\Date::FORMAT): string
     {
         $base = 25569;
 
@@ -67,11 +62,11 @@ final class Date
             }
         }
 
-        return $timestamp;
+        return (string) $timestamp;
     }
 
     #[Attribute\TwigFunction]
-    public static function validateDateBasic(mixed $date, string $format = self::FORMAT): bool
+    public static function validateDateBasic(mixed $date, string $format = Constants\Date::FORMAT): bool
     {
         $object = DateTime::createFromFormat(format: $format, datetime: $date);
 
@@ -113,7 +108,7 @@ final class Date
 
         foreach (self::TIME as $unit => $value) {
             if ($timestamp >= $value) {
-                $time = floor(num: $timestamp / $value * 100.0 / 100.0);
+                $time = (int) floor(num: $timestamp / $value);
 
                 if ($time > 0) {
                     $result[$unit] = $time;
@@ -124,22 +119,26 @@ final class Date
         }
 
         if ($timestamp > 0) {
-            $result['micro'] = $timestamp;
+            $result['micro'] = (int) $timestamp;
         }
 
         return $result;
     }
 
     #[Attribute\TwigFilter]
-    public static function formatDate(string $string, string $format = self::FORMAT): string
+    public static function formatDate(string $string, string $format = Constants\Date::FORMAT): string|bool
     {
-        return DateTime::createFromFormat(format: $format, datetime: $string)->format(format: self::FORMAT);
+        if (($date = DateTime::createFromFormat(format: $format, datetime: $string)) instanceof DateTime) {
+            return $date->format(format: Constants\Date::FORMAT);
+        }
+
+        return false;
     }
 
     #[Attribute\TwigFilter]
-    public static function getDateNullable(?string $format = null, ?string $dateString = null): ?DateTime
+    public static function getDateNullable(?string $dateString = null, ?string $format = null): ?DateTime
     {
-        if (null === $dateString || !$date = DateTime::createFromFormat(format: $format, datetime: $dateString)) {
+        if (null === $dateString || null === $format || !$date = DateTime::createFromFormat(format: $format, datetime: $dateString)) {
             return null;
         }
 
@@ -150,7 +149,7 @@ final class Date
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFilter]
-    public static function getDate(?string $format = null, ?string $dateString = null): DateTime
+    public static function getDate(?string $dateString = null, ?string $format = null): DateTime
     {
         if (null === $dateString || !$date = DateTime::createFromFormat(format: $format, datetime: $dateString)) {
             throw new InvalidArgumentException(message: 'Invalid date string');
@@ -165,14 +164,13 @@ final class Date
     #[Attribute\TwigFilter]
     public static function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string
     {
-        return (new DateTime())->setTimestamp(timestamp: $timestamp)
-            ->format(format: $format ?? self::FORMAT);
+        return (new DateTime())->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Constants\Date::FORMAT);
     }
 
     #[Attribute\TwigFilter]
-    public static function guessDateFormat(string $date): DateTime|string
+    public static function getDateWithoutFormat(string $date, array $guesses = []): DateTime|string
     {
-        $formats = array_merge(Php::getClassConstantsValues(class: DateTime::class), self::EXTRA_FORMATS);
+        $formats = array_merge(Php::getClassConstantsValues(class: DateTime::class), self::EXTRA_FORMATS, $guesses);
 
         foreach ($formats as $format) {
             $datetime = DateTime::createFromFormat(format: $format, datetime: $date);
