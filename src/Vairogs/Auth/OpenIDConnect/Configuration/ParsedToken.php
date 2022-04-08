@@ -28,7 +28,7 @@ class ParsedToken extends AccessToken
         }
     }
 
-    public function getIdToken(): IdToken
+    public function getIdToken(): ?IdToken
     {
         return $this->idToken;
     }

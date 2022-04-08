@@ -70,7 +70,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider
      */
     public function getAccessToken($grant, array $options = []): AccessTokenInterface|BaseAccessToken
     {
-        /** @var ParsedToken $accessToken */
         $accessToken = $this->getAccessTokenFunction(grant: $grant, options: $options);
 
         if (null === $accessToken) {
