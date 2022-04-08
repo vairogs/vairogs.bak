@@ -2,7 +2,6 @@
 
 namespace Vairogs\Sitemap\Model;
 
-use DateTime;
 use DateTimeInterface;
 use JetBrains\PhpStorm\Pure;
 use function get_object_vars;
@@ -13,7 +12,7 @@ class Url
     protected array $videos = [];
     protected array $images = [];
     protected string $loc;
-    protected ?DateTime $lastmod = null;
+    protected ?DateTimeInterface $lastmod = null;
     protected ?string $changefreq = null;
     protected float $priority = 0.5;
 

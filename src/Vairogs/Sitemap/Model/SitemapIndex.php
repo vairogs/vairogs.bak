@@ -2,13 +2,12 @@
 
 namespace Vairogs\Sitemap\Model;
 
-use DateTime;
 use DateTimeInterface;
 
 class SitemapIndex
 {
     protected string $loc;
-    protected ?DateTime $lastmod = null;
+    protected ?DateTimeInterface $lastmod = null;
 
     public function getLoc(): string
     {
@@ -22,7 +21,7 @@ class SitemapIndex
         return $this;
     }
 
-    public function getLastmod(): ?DateTime
+    public function getLastmod(): ?DateTimeInterface
     {
         return $this->lastmod;
     }
