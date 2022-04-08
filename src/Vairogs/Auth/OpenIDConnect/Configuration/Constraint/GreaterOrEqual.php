@@ -10,7 +10,7 @@ use function sprintf;
 
 class GreaterOrEqual extends AbstractConstraint
 {
-    public function __construct(private readonly mixed $expected)
+    public function __construct(private readonly int $expected)
     {
     }
 
@@ -19,11 +19,11 @@ class GreaterOrEqual extends AbstractConstraint
         parent::assert(token: $token);
         $this->assertClaimSet();
 
-        /** @var string $this->claim */
         $value = $token->claims()->get(name: $this->claim);
         if ($value instanceof DateTimeInterface) {
             $value = $value->getTimestamp();
         }
+
         if ($this->expected > $value) {
             $message = sprintf('Given value %s should be greater or equal to %s', $value, $this->expected);
             if ($this->required) {

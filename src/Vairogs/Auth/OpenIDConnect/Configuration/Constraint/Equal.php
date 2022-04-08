@@ -19,7 +19,6 @@ final class Equal extends AbstractConstraint
         parent::assert(token: $token);
         $this->assertClaimSet();
 
-        /** @var string $this->claim */
         $value = $token->claims()->get(name: $this->claim);
         if ($value instanceof DateTimeInterface) {
             $value = $value->getTimestamp();
