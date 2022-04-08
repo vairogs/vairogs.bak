@@ -50,7 +50,7 @@ class SitemapCommand extends Command
             ->addOption(name: 'filename', mode: InputOption::VALUE_OPTIONAL, description: 'sitemap filename if not sitemap.xml', default: 'sitemap.xml');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sitemap = $this->provider->populate(host: $input->getArgument(name: self::HOST));
         $constraintViolationList = $this->validator->validate(value: $sitemap);
@@ -60,28 +60,34 @@ class SitemapCommand extends Command
             foreach ($constraintViolationList as $error) {
                 $output->writeln(messages: $error->getMessage());
             }
-        } else {
-            $output->writeln(messages: '<fg=blue>Generating sitemap</>');
-            $filename = getcwd() . '/public/' . $input->getOption(name: 'filename');
 
+            return 1;
+        }
+
+        $output->writeln(messages: '<fg=blue>Generating sitemap</>');
+        $filename = getcwd() . '/public/' . $input->getOption(name: 'filename');
+
+        if (is_file(filename: $filename)) {
+            unlink(filename: $filename);
+        }
+
+        $handle = fopen(filename: $filename, mode: 'w+b');
+
+        try {
+            (new Director(buffer: $handle))->build(builder: new FileBuilder(sitemap: $sitemap));
+            $output->writeln(messages: sprintf('<info>Sitemap generated as "%s"</info>', $filename));
+        } catch (Exception $exception) {
             if (is_file(filename: $filename)) {
                 unlink(filename: $filename);
             }
 
-            $handle = fopen(filename: $filename, mode: 'w+b');
+            $output->writeln(messages: '<error>' . $exception->getMessage() . '</error>');
 
-            try {
-                (new Director(buffer: $handle))->build(builder: new FileBuilder(sitemap: $sitemap));
-                $output->writeln(messages: sprintf('<info>Sitemap generated as "%s"</info>', $filename));
-            } catch (Exception $exception) {
-                if (is_file(filename: $filename)) {
-                    unlink(filename: $filename);
-                }
-
-                $output->writeln(messages: '<error>' . $exception->getMessage() . '</error>');
-            }
-
-            fclose(stream: $handle);
+            return 2;
         }
+
+        fclose(stream: $handle);
+
+        return 0;
     }
 }
