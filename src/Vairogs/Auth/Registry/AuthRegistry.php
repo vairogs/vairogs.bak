@@ -1,15 +1,17 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Auth\OpenID\Utils;
+namespace Vairogs\Auth\Registry;
 
 use InvalidArgumentException;
 use Traversable;
-use Vairogs\Auth\OpenID\OpenIDProvider;
 use function iterator_to_array;
 use function sprintf;
 
-class OpenIDRegistry
+class AuthRegistry
 {
+    /**
+     * @var HasRegistry[]
+     */
     private array $clients;
 
     public function __construct(Traversable $clients)
@@ -17,7 +19,7 @@ class OpenIDRegistry
         $this->clients = iterator_to_array(iterator: $clients, preserve_keys: true);
     }
 
-    public function getClient(string $name): OpenIDProvider
+    public function getClient(string $name): HasRegistry
     {
         foreach ($this->clients as $client) {
             if ($name === $client->getName()) {

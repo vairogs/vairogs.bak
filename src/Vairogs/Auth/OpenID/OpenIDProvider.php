@@ -16,6 +16,7 @@ use UnexpectedValueException;
 use Vairogs\Addon\Auth\OpenID\Constants\OpenID;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
+use Vairogs\Auth\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Helper\Json;
@@ -33,7 +34,7 @@ use function stripslashes;
 use function strlen;
 use function urldecode;
 
-class OpenIDProvider
+class OpenIDProvider implements HasRegistry
 {
     private const PROVIDER_OPTIONS = 'provider_options';
 

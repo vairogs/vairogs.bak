@@ -47,6 +47,7 @@
         "symfony/http-foundation": "~5.4|~6.0",
         "symfony/property-info": "~5.4|~6.0",
         "symfony/routing": "~5.4|~6.0",
+        "vairogs/auth": "self.version",
         "vairogs/core": "self.version",
         "vairogs/extra-constants": "self.version",
         "vairogs/utils": "self.version"
