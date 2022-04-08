@@ -77,6 +77,9 @@
         "symfony/validator": "~5.4|~6.0",
         "twig/twig": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": ">=9.5.0"
+    },
     "replace": {
         "vairogs/addon": "self.version",
         "vairogs/addon-auth": "self.version",
@@ -112,9 +115,17 @@
         "vairogs/twig-php": "self.version",
         "vairogs/utils": "self.version"
     },
+    "suggest": {
+        "ext-gmp": "to use gmp prime check function"
+    },
     "autoload": {
         "psr-4": {
             "Vairogs\\": "src/Vairogs/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vairogs\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
