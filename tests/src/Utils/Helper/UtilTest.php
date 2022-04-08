@@ -9,7 +9,7 @@ use function function_exists;
 class UtilTest extends TestCase
 {
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\UtilDataProvider::dataProviderIsPrime
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
      */
     public function testIsPrime(int $number, bool $expected, ?bool $expectedBelow): void
     {
@@ -17,7 +17,7 @@ class UtilTest extends TestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\UtilDataProvider::dataProviderIsPrime
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
      */
     public function testIsPrimeNoGMP(int $number, bool $expected, ?bool $expectedBelow): void
     {
@@ -29,7 +29,7 @@ class UtilTest extends TestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\UtilDataProvider::dataProviderIsPrime
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
      */
     public function testIsPrimeBelow1000(int $number, bool $expected, ?bool $expectedBelow): void
     {

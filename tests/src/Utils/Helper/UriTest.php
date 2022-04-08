@@ -9,7 +9,7 @@ use Vairogs\Utils\Helper\Uri;
 class UriTest extends TestCase
 {
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\UriDataProvider::dataProviderArrayFromQueryString
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UriDataProvider::dataProviderArrayFromQueryString
      */
     public function testArrayFromQueryString(string $query, array $expected): void
     {
@@ -17,7 +17,7 @@ class UriTest extends TestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\UriDataProvider::dataProviderGetSchema
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UriDataProvider::dataProviderGetSchema
      */
     public function testGetSchema(string $url, string $expected): void
     {
@@ -25,7 +25,7 @@ class UriTest extends TestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\UriDataProvider::dataUrlEncode
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UriDataProvider::dataUrlEncode
      */
     public function testUrlEncode(string $url): void
     {

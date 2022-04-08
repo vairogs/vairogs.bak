@@ -8,7 +8,7 @@ use Vairogs\Utils\Helper\Email;
 class EmailTest extends TestCase
 {
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\EmailDataProvider::dataProviderIsValid
+     * @dataProvider \Vairogs\Assets\Utils\Helper\EmailDataProvider::dataProviderIsValid
      */
     public function testIsValid(string $email, bool $expected): void
     {

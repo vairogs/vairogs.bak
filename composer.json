@@ -125,7 +125,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Vairogs\\Tests\\": "tests/"
+            "Vairogs\\Tests\\": "tests/src",
+            "Vairogs\\Assets\\": "tests/assets"
         }
     },
     "minimum-stability": "dev",

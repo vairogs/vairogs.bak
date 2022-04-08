@@ -8,7 +8,7 @@ use Vairogs\Utils\Helper\Translit;
 class TranslitTest extends TestCase
 {
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\TranslitDataProvider::dataProvidertCyrillicToLatin
+     * @dataProvider \Vairogs\Assets\Utils\Helper\TranslitDataProvider::dataProvidertCyrillicToLatin
      */
     public function testCyrillicToLatin(string $string, string $expected): void
     {
@@ -16,7 +16,7 @@ class TranslitTest extends TestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\TranslitDataProvider::dataProvidertLatinToCyrillic
+     * @dataProvider \Vairogs\Assets\Utils\Helper\TranslitDataProvider::dataProvidertLatinToCyrillic
      */
     public function testLatinToCyrillic(string $string, string $expected): void
     {
