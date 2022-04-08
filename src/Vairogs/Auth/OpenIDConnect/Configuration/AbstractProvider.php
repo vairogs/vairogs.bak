@@ -3,6 +3,8 @@
 namespace Vairogs\Auth\OpenIDConnect\Configuration;
 
 use League\OAuth2\Client\Provider\AbstractProvider as BaseProvider;
+use League\OAuth2\Client\Provider\GenericResourceOwner;
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
 use Psr\Http\Message\ResponseInterface;
 
@@ -18,8 +20,9 @@ abstract class AbstractProvider extends BaseProvider
         return $this->baseAccessTokenUrl;
     }
 
-    public function getResourceOwnerDetailsUrl(BaseAccessToken $token): void
+    public function getResourceOwnerDetailsUrl(BaseAccessToken $token): string
     {
+        return '';
     }
 
     public function getBaseAuthorizationUrl(): string
@@ -43,9 +46,9 @@ abstract class AbstractProvider extends BaseProvider
         return null !== $response;
     }
 
-    protected function createResourceOwner(array $response, BaseAccessToken $token): array
+    protected function createResourceOwner(array $response, BaseAccessToken $token): ResourceOwnerInterface
     {
-        return [];
+        return new GenericResourceOwner($response, $token->getToken());
     }
 
     protected function getScopeSeparator(): string

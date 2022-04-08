@@ -3,8 +3,6 @@
 namespace Vairogs\Auth\OpenIDConnect\Configuration;
 
 use DateTimeInterface;
-use JetBrains\PhpStorm\Pure;
-use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Token\DataSet;
 use Lcobucci\JWT\Token\Signature;
 use Lcobucci\JWT\UnencryptedToken;
@@ -13,7 +11,7 @@ class IdToken implements UnencryptedToken
 {
     protected ?string $accessTokenString;
 
-    public function __construct(private readonly Token|Token\Plain $token)
+    public function __construct(private readonly UnencryptedToken $token)
     {
     }
 
@@ -29,14 +27,11 @@ class IdToken implements UnencryptedToken
         return $this;
     }
 
-    #[Pure]
     public function hasClaim(string $claim): bool
     {
-        return $this->claims()
-            ->has(name: $claim);
+        return $this->claims()->has(name: $claim);
     }
 
-    #[Pure]
     public function claims(): DataSet
     {
         return $this->token->claims();
@@ -87,7 +82,6 @@ class IdToken implements UnencryptedToken
         return $this->token->payload();
     }
 
-    #[Pure]
     public function signature(): Signature
     {
         return $this->token->signature();
@@ -100,7 +94,6 @@ class IdToken implements UnencryptedToken
 
     public function getClaim(string $claim): mixed
     {
-        return $this->claims()
-            ->get(name: $claim);
+        return $this->claims()->get(name: $claim);
     }
 }
