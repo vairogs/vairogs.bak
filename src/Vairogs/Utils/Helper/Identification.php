@@ -45,7 +45,7 @@ final class Identification
         $sum = 0;
 
         foreach ($calculations as $key => $calculation) {
-            $sum += ($personCode[$key] * $calculation);
+            $sum += ((int) $personCode[$key] * $calculation);
         }
 
         $remainder = $sum % 11;
