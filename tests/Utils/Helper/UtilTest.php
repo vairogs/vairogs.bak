@@ -9,7 +9,7 @@ use function function_exists;
 class UtilTest extends TestCase
 {
     /**
-     * @dataProvider dataProvider
+     * @dataProvider dataProviderIsPrime
      */
     public function testIsPrime(int $a, bool $expected, ?bool $expectedBelow): void
     {
@@ -17,7 +17,7 @@ class UtilTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProvider
+     * @dataProvider dataProviderIsPrime
      */
     public function testIsPrimeNoGMP(int $a, bool $expected, ?bool $expectedBelow): void
     {
@@ -29,14 +29,14 @@ class UtilTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProvider
+     * @dataProvider dataProviderIsPrime
      */
     public function testIsPrimeBelow1000(int $a, bool $expected, ?bool $expectedBelow): void
     {
         $this->assertSame(expected: $expectedBelow, actual: Util::isPrimeBelow1000(number: $a));
     }
 
-    public function dataProvider(): array
+    public function dataProviderIsPrime(): array
     {
         return [
             [2,    true,   true],
