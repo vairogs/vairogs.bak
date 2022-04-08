@@ -3,3 +3,7 @@ composer.phar
 /vendor
 phpunit.xml
 .php-cs-fixer.cache
+
+.phpunit.result.cache
+.github/coverage/
+.phpunit.cache/
