@@ -8,7 +8,7 @@ use Vairogs\Utils\Helper\Translit;
 class TranslitTest extends TestCase
 {
     /**
-     * @dataProvider dataProvidertCyrillicToLatin
+     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\TranslitDataProvider::dataProvidertCyrillicToLatin
      */
     public function testCyrillicToLatin(string $string, string $expected): void
     {
@@ -16,26 +16,10 @@ class TranslitTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProvidertLatinToCyrillic
+     * @dataProvider \Vairogs\Tests\Utils\Helper\DataProvider\TranslitDataProvider::dataProvidertLatinToCyrillic
      */
     public function testLatinToCyrillic(string $string, string $expected): void
     {
         $this->assertSame(expected: $expected, actual: Translit::latinToCyrillic(text: $string));
-    }
-
-    public function dataProvidertCyrillicToLatin(): array
-    {
-        return [
-            ['юнит-тест',    'yunit-tyest'],
-            ['интеграция', 'intyegratsiya'],
-        ];
-    }
-
-    public function dataProvidertLatinToCyrillic(): array
-    {
-        return [
-            ['yunit-tyest',    'юнит-тест'],
-            ['intyegratsiya', 'интеграция'],
-        ];
     }
 }
