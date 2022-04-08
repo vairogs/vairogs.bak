@@ -1,7 +1,8 @@
 {
     "name": "vairogs/vairogs",
-    "description": "Vairogs",
+    "description": "⛨ Vairogs ⛨: Set of symfony tools and bundles to make coding a bit easier",
     "type": "library",
+    "homepage": "https://github.com/vairogs/vairogs/wiki",
     "keywords": [
         "auth",
         "cache",
