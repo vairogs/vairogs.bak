@@ -96,8 +96,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
             'token' => $token,
             'grant_type' => 'refresh_token',
         ];
-        $params = array_merge($params, $options);
-        $request = $this->getRefreshTokenRequest(params: $params);
+
+        $request = $this->getRefreshTokenRequest(params: array_merge($params, $options));
 
         return $this->getTokenResponse(request: $request);
     }
@@ -134,8 +134,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $params = [
             'token' => $token,
         ];
-        $params = array_merge($params, $options);
-        $request = $this->getValidateTokenRequest(params: $params);
+
+        $request = $this->getValidateTokenRequest(params: array_merge($params, $options));
 
         return $this->getTokenResponse(request: $request);
     }
@@ -162,8 +162,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $params = [
             'token' => $token,
         ];
-        $params = array_merge($params, $options);
-        $request = $this->getRevokeTokenRequest(params: $params);
+
+        $request = $this->getRevokeTokenRequest(params: array_merge($params, $options));
 
         return $this->getTokenResponse(request: $request);
     }
