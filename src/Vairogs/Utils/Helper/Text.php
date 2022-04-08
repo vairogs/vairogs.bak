@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Extra\Constants\Definition;
 use Vairogs\Utils\Twig\Attribute;
 use function array_key_exists;
 use function base64_encode;
@@ -30,8 +31,6 @@ use function ucwords;
 
 final class Text
 {
-    final public const UTF8 = 'UTF-8';
-
     #[Attribute\TwigFilter]
     public static function fromCamelCase(string $string, string $separator = '_'): string
     {
@@ -60,7 +59,7 @@ final class Text
     #[Attribute\TwigFilter]
     public static function cleanText(string $text): string
     {
-        return html_entity_decode(string: self::oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: self::UTF8, from_encoding: self::UTF8))));
+        return html_entity_decode(string: self::oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: Definition::UTF8, from_encoding: Definition::UTF8))));
     }
 
     #[Attribute\TwigFilter]
@@ -124,7 +123,7 @@ final class Text
     #[Pure]
     public static function reverse(string $string): string
     {
-        return iconv(from_encoding: 'UTF-32LE', to_encoding: self::UTF8, string: strrev(string: iconv(from_encoding: self::UTF8, to_encoding: 'UTF-32BE', string: $string)));
+        return iconv(from_encoding: 'UTF-32LE', to_encoding: Definition::UTF8, string: strrev(string: iconv(from_encoding: Definition::UTF8, to_encoding: 'UTF-32BE', string: $string)));
     }
 
     #[Attribute\TwigFilter]

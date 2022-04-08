@@ -9,4 +9,5 @@ final class Definition
     final public const GETTER = 'get';
     final public const SETTER = 'set';
     final public const DEFAULT = 'default';
+    final public const UTF8 = 'UTF-8';
 }
