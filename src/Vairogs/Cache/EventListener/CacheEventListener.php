@@ -142,7 +142,7 @@ class CacheEventListener implements EventSubscriberInterface
 
     private function getRoute(RequestEvent|ResponseEvent|ControllerEvent $kernelEvent): ?string
     {
-        return $kernelEvent->getRequest()?->get(key: '_route');
+        return $kernelEvent->getRequest()->get(key: '_route');
     }
 
     private function needsInvalidation(Request $request): bool

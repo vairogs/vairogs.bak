@@ -8,7 +8,6 @@ use Vairogs\Extra\Constants\Symbol;
 use function array_rand;
 use function count;
 use function function_exists;
-use function is_array;
 use function random_int;
 use function str_shuffle;
 use function str_split;
@@ -40,13 +39,13 @@ final class Generator
         $all = $unique = '';
 
         foreach ($this->sets as $set) {
-            if (is_array(value: $split = str_split(string: $set))) {
+            if ([] !== $split = str_split(string: $set)) {
                 $unique .= $set[$this->tweak(array: $split)];
                 $all .= $set;
             }
         }
 
-        if (is_array(value: $all = str_split(string: $all))) {
+        if ([] !== $all = str_split(string: $all)) {
             $setsCount = count(value: $this->sets);
 
             for ($i = 0; $i < $length - $setsCount; $i++) {

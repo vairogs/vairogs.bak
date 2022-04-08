@@ -55,11 +55,10 @@ class Event
         $controller = $this->getController(kernelEvent: $kernelEvent);
 
         try {
-            if ($method = (new ReflectionClass(objectOrClass: reset(array: $controller)))->getMethod(name: end(array: $controller))) {
-                foreach ($method->getAttributes(name: $class) as $attribute) {
-                    if ($class === $attribute->getName()) {
-                        return $attribute->newInstance();
-                    }
+            $method = (new ReflectionClass(objectOrClass: reset(array: $controller)))->getMethod(name: end(array: $controller));
+            foreach ($method->getAttributes(name: $class) as $attribute) {
+                if ($class === $attribute->getName()) {
+                    return $attribute->newInstance();
                 }
             }
         } catch (Exception) {

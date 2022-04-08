@@ -63,7 +63,7 @@ class OpenIDProvider
      */
     public function fetchUser(): ?OpenIDUser
     {
-        if (!$user = $this->validate()) {
+        if ($user = $this->validate()) {
             /** @var OpenIDUserBuilder $builder */
             $builder = new $this->options['user_builder']();
             $builder->setUserClass(class: $this->userClass ?? $builder->getUserClass());
@@ -83,7 +83,7 @@ class OpenIDProvider
             }
         }
 
-        if (null === $user) {
+        if (!$user instanceof OpenIDUser) {
             throw new UnexpectedValueException(message: 'Invalid login or request has timed out');
         }
 

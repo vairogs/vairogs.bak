@@ -133,7 +133,7 @@ final class Date
     #[Attribute\TwigFilter]
     public static function formatDate(string $string, string $format = self::FORMAT): string
     {
-        return DateTime::createFromFormat(format: $format, datetime: $string)?->format(format: self::FORMAT);
+        return DateTime::createFromFormat(format: $format, datetime: $string)->format(format: self::FORMAT);
     }
 
     #[Attribute\TwigFilter]

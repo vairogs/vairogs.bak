@@ -103,6 +103,6 @@ trait LocaleResolverTrait
             }
         }
 
-        return array_unique(array: $languages) ?? [];
+        return array_unique(array: $languages);
     }
 }

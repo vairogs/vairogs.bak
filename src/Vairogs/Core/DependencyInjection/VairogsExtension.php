@@ -31,7 +31,7 @@ class VairogsExtension extends Extension
 
     public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $parameters = $this->processConfiguration(configuration: $configuration, configs: $configs) ?? [];
+        $parameters = $this->processConfiguration(configuration: $configuration, configs: $configs);
 
         foreach (Iteration::makeOneDimension(array: [$this->getAlias() => $parameters]) as $key => $value) {
             $container->setParameter(name: $key, value: $value);
