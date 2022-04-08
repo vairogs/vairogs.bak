@@ -4,6 +4,7 @@ namespace Vairogs\Tests\Utils\Helper;
 
 use PHPUnit\Framework\TestCase;
 use Vairogs\Utils\Helper\Util;
+use function function_exists;
 
 class UtilTest extends TestCase
 {
@@ -12,6 +13,18 @@ class UtilTest extends TestCase
      */
     public function testIsPrime(int $a, bool $expected, ?bool $expectedBelow): void
     {
+        $this->assertSame(expected: $expected, actual: Util::isPrime(number: $a));
+    }
+
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testIsPrimeNoGMP(int $a, bool $expected, ?bool $expectedBelow): void
+    {
+        if (function_exists(function: 'runkit7_function_remove')) {
+            @runkit7_function_remove(function_name: 'gmp_prob_prime');
+        }
+
         $this->assertSame(expected: $expected, actual: Util::isPrime(number: $a));
     }
 

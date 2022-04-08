@@ -7,6 +7,8 @@ use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Attribute;
+use function array_merge;
+use function file_get_contents;
 
 final class Http
 {
@@ -56,6 +58,18 @@ final class Http
     public static function getMethods(): array
     {
         return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: Request::class), with: 'METHOD_');
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function getRequestIdentity(Request $request, string $ipUrl = 'https://ident.me'): array
+    {
+        $additionalData = [
+            'actualIp' => file_get_contents(filename: $ipUrl),
+            'uuid' => $request->server->get(key: 'REQUEST_TIME') . Identification::getUniqueId(length: 32),
+        ];
+
+        return array_merge(Uri::buildArrayFromObject(object: $request), $additionalData);
     }
 
     private static function checkHttps(Request $req): bool

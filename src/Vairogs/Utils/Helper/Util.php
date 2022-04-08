@@ -2,10 +2,8 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Utils\Twig\Attribute;
 use function array_fill;
-use function file_get_contents;
 use function function_exists;
 use function implode;
 use function preg_match;
@@ -48,18 +46,6 @@ final class Util
         }
 
         return true;
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function getRequestIdentity(Request $request, string $ipUrl = 'https://ident.me'): array
-    {
-        $additionalData = [
-            'actualIp' => file_get_contents(filename: $ipUrl),
-            'uuid' => $request->server->get(key: 'REQUEST_TIME') . Identification::getUniqueId(length: 32),
-        ];
-
-        return array_merge(Uri::buildArrayFromObject(object: $request), $additionalData);
     }
 
     private static function isPrimeGmp(string $number): ?bool
