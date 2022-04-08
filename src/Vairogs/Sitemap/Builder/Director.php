@@ -8,7 +8,7 @@ use function sprintf;
 
 class Director
 {
-    public function __construct(private readonly mixed $buffer)
+    public function __construct(private mixed $buffer)
     {
     }
 
