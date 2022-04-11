@@ -28,6 +28,7 @@ final class Iteration
     final public const ENDS = 'ends';
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function isEmpty(mixed $variable): bool
     {
         if (!empty($variable) && is_array(value: $variable)) {
@@ -43,12 +44,32 @@ final class Iteration
         return empty($variable);
     }
 
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function makeMultiDimensional(array $array): array
+    {
+        if (self::isMultiDimensional($array)) {
+            return $array;
+        }
+
+        $result = [];
+
+        /* @noinspection MissUsingForeachInspection */
+        foreach ($array as $item) {
+            $result[][] = $item;
+        }
+
+        return $result;
+    }
+
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function uniqueMap(array &$array): void
     {
         $array = array_map(callback: 'unserialize', array: array_unique(array: array_map(callback: 'serialize', array: $array)));
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
     public static function unique(array $input, bool $keepKeys = false): array
@@ -61,6 +82,7 @@ final class Iteration
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function isMultiDimensional(array $keys = []): bool
     {
@@ -74,39 +96,15 @@ final class Iteration
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function isAnyKeyNull(array $keys = []): bool
     {
         return in_array(needle: null, haystack: $keys, strict: true);
     }
 
-    #[Attribute\TwigFilter]
-    public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX): array
-    {
-        $result = [];
-
-        if ($depth <= $maxDepth) {
-            foreach ($array as $key => $value) {
-                $key = ltrim(string: $base . '.' . $key, characters: '.');
-
-                if (self::isAssociative(array: $value)) {
-                    foreach (self::makeOneDimension(array: $value, base: $key, separator: $separator, depth: $depth + 1, maxDepth: $maxDepth) as $itemKey => $itemValue) {
-                        $result[$itemKey] = $itemValue;
-                    }
-
-                    if ($onlyLast) {
-                        continue;
-                    }
-                }
-
-                $result[$key] = $value;
-            }
-        }
-
-        return $result;
-    }
-
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function isAssociative(mixed $array): bool
     {
         if (!is_array(value: $array) || [] === $array) {
@@ -116,6 +114,7 @@ final class Iteration
         return !array_is_list($array);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
@@ -133,6 +132,7 @@ final class Iteration
     /**
      * @throws InvalidArgumentException
      */
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function arrayFlipRecursive(array $input = []): array
     {
@@ -149,6 +149,7 @@ final class Iteration
         return $result;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function removeFromArray(array &$input, mixed $value): void
     {
@@ -164,6 +165,7 @@ final class Iteration
     /**
      * @throws InvalidArgumentException
      */
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function arrayValuesFiltered(array $input, string $with, string $type = self::STARTS): array
     {
@@ -174,18 +176,21 @@ final class Iteration
         };
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function filterKeyStartsWith(array $input, string $startsWith): array
     {
         return array_filter(array: $input, callback: static fn ($key) => str_starts_with(haystack: $key, needle: $startsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function filterKeyEndsWith(array $input, string $endsWith): array
     {
         return array_filter(array: $input, callback: static fn ($key) => str_ends_with(haystack: $key, needle: $endsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function getIfNotEmpty(array $input, mixed $key): mixed
     {

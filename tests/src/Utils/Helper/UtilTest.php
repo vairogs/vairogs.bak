@@ -35,4 +35,12 @@ class UtilTest extends TestCase
     {
         $this->assertSame(expected: $expectedBelow, actual: Util::isPrimeBelow1000(number: $number));
     }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderMakeOneDimension
+     */
+    public function testMakeOneDimension(array $input, bool $onlyLast, int $depth, int $maxDepth, array $expected): void
+    {
+        $this->assertSame($expected, Util::makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
+    }
 }
