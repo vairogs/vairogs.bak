@@ -52,16 +52,14 @@ final class Util
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX): array
+    public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX, array $result = []): array
     {
-        $result = [];
-
         if ($depth <= $maxDepth) {
             foreach ($array as $key => $value) {
                 $key = ltrim(string: $base . '.' . $key, characters: '.');
 
                 if (Iteration::isAssociative(array: $value)) {
-                    $result += self::makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth);
+                    $result = self::makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth, result: $result);
 
                     if ($onlyLast) {
                         continue;

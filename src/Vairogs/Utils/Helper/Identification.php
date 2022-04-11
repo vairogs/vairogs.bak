@@ -21,7 +21,7 @@ final class Identification
     #[Attribute\TwigFilter]
     public static function validatePersonCode(string $personCode): bool
     {
-        $personCode = Text::keepNumeric(string: $personCode);
+        $personCode = Text::keepNumeric(text: $personCode);
 
         if (32 === (int) substr(string: $personCode, offset: 0, length: 2)) {
             if (!self::validateNewPersonCode(personCode: $personCode)) {

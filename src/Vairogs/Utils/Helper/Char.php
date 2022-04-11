@@ -4,22 +4,18 @@ namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Utils\Twig\Attribute;
+use function filter_var;
 use function preg_replace;
-use function str_pad;
 use function str_replace;
 use function strtolower;
 use function ucwords;
-use const STR_PAD_LEFT;
+use const FILTER_FLAG_ALLOW_FRACTION;
+use const FILTER_SANITIZE_NUMBER_FLOAT;
 
 class Char
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    #[Pure]
-    public static function pad(string $input, int $length, string $padding, int $type = STR_PAD_LEFT): string
-    {
-        return str_pad(string: $input, length: $length, pad_string: $padding, pad_type: $type);
-    }
+    final public const LCFIRST = 'lcfirst';
+    final public const UCFIRST = 'ucfirst';
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
@@ -42,10 +38,16 @@ class Char
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function toCamelCase(string $string, bool $lowFirst = true): string
+    public static function toCamelCase(string $string, string $function = self::LCFIRST): string
     {
-        $function = true === $lowFirst ? 'lcfirst' : 'ucfirst';
-
         return preg_replace(pattern: '#\s+#', replacement: '', subject: $function(string: ucwords(string: strtolower(string: str_replace(search: '_', replace: ' ', subject: $string)))));
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    #[Pure]
+    public static function sanitizeFloat(string $string): float
+    {
+        return (float) filter_var(value: $string, filter: FILTER_SANITIZE_NUMBER_FLOAT, options: FILTER_FLAG_ALLOW_FRACTION);
     }
 }

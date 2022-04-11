@@ -61,7 +61,7 @@ abstract class BaseExtension extends AbstractExtension
         if (self::HELPER_NAMESPACE === $nameSpace) {
             $base = sprintf('%s_%s', 'helper', $short);
         } elseif ('Extension' === $short) {
-            $base = Text::getLastPart(string: $nameSpace, delimiter: '\\');
+            $base = Text::getLastPart(text: $nameSpace, delimiter: '\\');
         }
 
         if (str_starts_with(haystack: $nameSpace, needle: Php::getShortName(class: Vairogs::class))) {

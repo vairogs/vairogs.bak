@@ -7,7 +7,6 @@ use Vairogs\Extra\Constants\Definition;
 use Vairogs\Utils\Twig\Attribute;
 use function array_key_exists;
 use function base64_encode;
-use function filter_var;
 use function hash;
 use function html_entity_decode;
 use function iconv;
@@ -44,23 +43,23 @@ final class Text
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function stripSpace(string $string): string
+    public static function stripSpace(string $text): string
     {
-        return preg_replace(pattern: '#\s+#', replacement: '', subject: $string);
+        return preg_replace(pattern: '#\s+#', replacement: '', subject: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function truncateSafe(string $string, int $length, string $append = '...'): string
+    public static function truncateSafe(string $text, int $length, string $append = '...'): string
     {
-        $result = mb_substr(string: $string, start: 0, length: $length);
+        $result = mb_substr(string: $text, start: 0, length: $length);
         $lastSpace = mb_strrpos(haystack: $result, needle: ' ');
 
-        if (false !== $lastSpace && $string !== $result) {
+        if (false !== $lastSpace && $text !== $result) {
             $result = mb_substr(string: $result, start: 0, length: $lastSpace);
         }
 
-        if ($string !== $result) {
+        if ($text !== $result) {
             $result .= $append;
         }
 
@@ -69,22 +68,22 @@ final class Text
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function limitChars(string $string, int $length = 100, string $append = '...'): string
+    public static function limitChars(string $text, int $length = 100, string $append = '...'): string
     {
-        if ($length >= mb_strlen(string: $string)) {
-            return $string;
+        if ($length >= mb_strlen(string: $text)) {
+            return $text;
         }
 
-        return rtrim(string: mb_substr(string: $string, start: 0, length: $length)) . $append;
+        return rtrim(string: mb_substr(string: $text, start: 0, length: $length)) . $append;
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function limitWords(string $string, int $limit = 100, string $append = '...'): string
+    public static function limitWords(string $text, int $limit = 100, string $append = '...'): string
     {
-        preg_match(pattern: '/^\s*+(?:\S++\s*+){1,' . $limit . '}/u', subject: $string, matches: $matches);
-        if (!array_key_exists(key: 0, array: $matches) || mb_strlen(string: $string) === mb_strlen(string: $matches[0])) {
-            return $string;
+        preg_match(pattern: '/^\s*+(?:\S++\s*+){1,' . $limit . '}/u', subject: $text, matches: $matches);
+        if (!array_key_exists(key: 0, array: $matches) || mb_strlen(string: $text) === mb_strlen(string: $matches[0])) {
+            return $text;
         }
 
         return rtrim(string: $matches[0]) . $append;
@@ -101,40 +100,32 @@ final class Text
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
-    public static function reverse(string $string): string
+    public static function reverse(string $text): string
     {
-        return iconv(from_encoding: 'UTF-32LE', to_encoding: Definition::UTF8, string: strrev(string: iconv(from_encoding: Definition::UTF8, to_encoding: 'UTF-32BE', string: $string)));
+        return iconv(from_encoding: 'UTF-32LE', to_encoding: Definition::UTF8, string: strrev(string: iconv(from_encoding: Definition::UTF8, to_encoding: 'UTF-32BE', string: $text)));
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function keepNumeric(string $string): string
+    public static function keepNumeric(string $text): string
     {
-        return preg_replace(pattern: '#\D#', replacement: '', subject: $string);
+        return preg_replace(pattern: '#\D#', replacement: '', subject: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function keepAscii(string $string): string
+    public static function keepAscii(string $text): string
     {
-        return preg_replace(pattern: '#[[:^ascii:]]#', replacement: '', subject: $string);
+        return preg_replace(pattern: '#[[:^ascii:]]#', replacement: '', subject: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    #[Pure]
-    public static function sanitizeFloat(string $string): float
+    public static function getLastPart(string $text, string $delimiter): string
     {
-        return (float) filter_var(value: $string, filter: FILTER_SANITIZE_NUMBER_FLOAT, options: FILTER_FLAG_ALLOW_FRACTION);
-    }
+        $idx = strrpos(haystack: $text, needle: $delimiter);
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function getLastPart(string $string, string $delimiter): string
-    {
-        $idx = strrpos(haystack: $string, needle: $delimiter);
-
-        return false === $idx ? $string : substr(string: $string, offset: $idx + 1);
+        return false === $idx ? $text : substr(string: $text, offset: $idx + 1);
     }
 
     #[Attribute\TwigFunction]
@@ -150,9 +141,9 @@ final class Text
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getHash(string $hashable, int $bit = 256): string
+    public static function getHash(string $text, int $bits = 256): string
     {
-        $hash = substr(string: hash(algo: 'sha' . $bit, data: $hashable, binary: true), offset: 0, length: (int) round(num: $bit / 16));
+        $hash = substr(string: hash(algo: 'sha' . $bits, data: $text, binary: true), offset: 0, length: (int) round(num: $bits / 16));
 
         return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
     }

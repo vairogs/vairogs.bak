@@ -8,6 +8,7 @@ use Vairogs\Utils\Twig\Attribute;
 use function hash;
 use function http_build_query;
 use function strtolower;
+use function strtoupper;
 use function trim;
 use function urldecode;
 
@@ -43,7 +44,7 @@ final class Gravatar
 
         $default = match (true) {
             Uri::isAbsolute(path: $default) => urldecode(string: $default),
-            default => self::getIcons()['ICON_' . $default] ?? self::ICON_IDENTICON
+            default => self::getIcons()['ICON_' . strtoupper($default)] ?? self::ICON_IDENTICON
         };
 
         $query = [

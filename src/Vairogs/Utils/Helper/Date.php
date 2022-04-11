@@ -31,7 +31,7 @@ final class Date
     #[Attribute\TwigFilter]
     public static function validateDate(string $date): bool
     {
-        $date = Text::keepNumeric(string: $date);
+        $date = Text::keepNumeric(text: $date);
         $day = (int) substr(string: $date, offset: 0, length: 2);
         $month = (int) substr(string: $date, offset: 2, length: 2);
 
