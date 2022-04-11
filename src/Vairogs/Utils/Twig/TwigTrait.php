@@ -29,12 +29,13 @@ trait TwigTrait
                 $options = $function[2] ?? [];
                 unset($function[2]);
                 $output[] = new $class($call, $function, $options);
-            } else {
-                $output[] = new $class($call, [
-                    $this,
-                    $function,
-                ]);
+                continue;
             }
+
+            $output[] = new $class($call, [
+                $this,
+                $function,
+            ]);
         }
 
         return $output;

@@ -53,15 +53,15 @@ final class Php
      * @noinspection PhpInconsistentReturnPointsInspection
      */
     #[Attribute\TwigFunction]
-    public static function call(callable $function, object $clone, bool $return = false)
+    public static function call(callable $function, object $clone, bool $return = false, ...$arguments)
     {
         $func = Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
 
         if ($return) {
-            return $func();
+            return $func(...$arguments);
         }
 
-        $func();
+        $func(...$arguments);
     }
 
     #[Attribute\TwigFilter]
@@ -204,11 +204,11 @@ final class Php
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
-    public static function hijackGetStatic(object $object, string $property): mixed
+    public static function hijackGetStatic(object $object, string $property, array $arguments = []): mixed
     {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                return self::call(function: fn () => $object::${$property}, clone: $object, return: true);
+                return self::call(fn () => $object::${$property}, $object, true, ...$arguments);
             }
         } catch (Exception) {
             // exception === unable to get object property
@@ -223,7 +223,7 @@ final class Php
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
-    public static function hijackGetNonStatic(object $object, string $property): mixed
+    public static function hijackGetNonStatic(object $object, string $property, ...$arguments): mixed
     {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
@@ -234,7 +234,7 @@ final class Php
         }
 
         if (property_exists($object, $property)) {
-            return self::call(function: fn () => $object->{$property}, clone: $object, return: true);
+            return self::call(fn () => $object->{$property}, $object, true, ...$arguments);
         }
 
         throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
@@ -246,16 +246,16 @@ final class Php
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
-    public static function hijackGet(object $object, string $property)
+    public static function hijackGet(object $object, string $property, ...$arguments)
     {
         try {
-            return self::hijackGetStatic(object: $object, property: $property);
+            return self::hijackGetNonStatic($object, $property, ...$arguments);
         } catch (Exception) {
             // exception === unable to get object property
         }
 
         try {
-            return self::hijackGetNonStatic(object: $object, property: $property);
+            return self::hijackGetStatic($object, $property, ...$arguments);
         } catch (Exception) {
             // exception === unable to get object property
         }

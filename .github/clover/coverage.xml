@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649679748">
-  <project timestamp="1649679748">
+<coverage generated="1649686290">
+  <project timestamp="1649686290">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1251,6 +1251,34 @@
       <line num="43" type="stmt" count="0"/>
       <metrics loc="46" ncloc="43" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="12" coveredelements="0"/>
     </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Handler/AbstractHandler.php">
+      <class name="Vairogs\Core\Handler\AbstractHandler" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+      </class>
+      <line num="9" type="method" name="setNext" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="11" type="stmt" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <line num="16" type="method" name="handle" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <metrics loc="21" ncloc="21" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Handler/FunctionHandler.php">
+      <class name="Vairogs\Core\Handler\FunctionHandler" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+      </class>
+      <line num="12" type="method" name="setFunction" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="14" type="stmt" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="20" type="method" name="handle" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <metrics loc="29" ncloc="29" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Handler/Handler.php">
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Registry/HasRegistry.php">
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
@@ -1940,6 +1968,12 @@
       </class>
       <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Twig/Helper/SortLatvian/Extension.php">
+      <class name="Vairogs\Twig\Helper\SortLatvian\Extension" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Twig/Helper/Text/Extension.php">
       <class name="Vairogs\Twig\Helper\Text\Extension" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2595,111 +2629,117 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Sort.php">
       <class name="Vairogs\Utils\Helper\Sort" namespace="global">
-        <metrics complexity="45" methods="13" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="89" coveredstatements="0" elements="102" coveredelements="0"/>
+        <metrics complexity="31" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="0" elements="72" coveredelements="0"/>
       </class>
-      <line num="30" type="method" name="swap" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="26" type="method" name="swap" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="30" type="stmt" count="0"/>
       <line num="33" type="stmt" count="0"/>
       <line num="34" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="38" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="0"/>
-      <line num="42" type="method" name="bubbleSort" visibility="public" complexity="5" crap="30" count="0"/>
+      <line num="35" type="stmt" count="0"/>
+      <line num="38" type="method" name="bubbleSort" visibility="public" complexity="5" crap="30" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="42" type="stmt" count="0"/>
+      <line num="43" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
       <line num="45" type="stmt" count="0"/>
-      <line num="46" type="stmt" count="0"/>
-      <line num="47" type="stmt" count="0"/>
-      <line num="48" type="stmt" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="55" type="method" name="swapArray" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="51" type="method" name="swapArray" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="55" type="stmt" count="0"/>
+      <line num="56" type="stmt" count="0"/>
       <line num="59" type="stmt" count="0"/>
       <line num="60" type="stmt" count="0"/>
-      <line num="63" type="stmt" count="0"/>
-      <line num="64" type="stmt" count="0"/>
-      <line num="65" type="stmt" count="0"/>
-      <line num="68" type="method" name="mergeSort" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="61" type="stmt" count="0"/>
+      <line num="64" type="method" name="mergeSort" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="67" type="stmt" count="0"/>
+      <line num="68" type="stmt" count="0"/>
       <line num="71" type="stmt" count="0"/>
       <line num="72" type="stmt" count="0"/>
+      <line num="73" type="stmt" count="0"/>
       <line num="75" type="stmt" count="0"/>
       <line num="76" type="stmt" count="0"/>
-      <line num="77" type="stmt" count="0"/>
-      <line num="79" type="stmt" count="0"/>
-      <line num="80" type="stmt" count="0"/>
-      <line num="82" type="stmt" count="0"/>
-      <line num="88" type="method" name="sort" visibility="public" complexity="6" crap="42" count="0"/>
+      <line num="78" type="stmt" count="0"/>
+      <line num="84" type="method" name="sort" visibility="public" complexity="6" crap="42" count="0"/>
+      <line num="87" type="stmt" count="0"/>
+      <line num="88" type="stmt" count="0"/>
       <line num="91" type="stmt" count="0"/>
       <line num="92" type="stmt" count="0"/>
       <line num="95" type="stmt" count="0"/>
       <line num="96" type="stmt" count="0"/>
       <line num="99" type="stmt" count="0"/>
       <line num="100" type="stmt" count="0"/>
-      <line num="103" type="stmt" count="0"/>
+      <line num="101" type="stmt" count="0"/>
       <line num="104" type="stmt" count="0"/>
-      <line num="105" type="stmt" count="0"/>
-      <line num="108" type="stmt" count="0"/>
-      <line num="110" type="stmt" count="0"/>
-      <line num="113" type="method" name="isSortable" visibility="public" complexity="4" crap="20" count="0"/>
+      <line num="106" type="stmt" count="0"/>
+      <line num="109" type="method" name="isSortable" visibility="public" complexity="4" crap="20" count="0"/>
+      <line num="113" type="stmt" count="0"/>
+      <line num="114" type="stmt" count="0"/>
       <line num="117" type="stmt" count="0"/>
       <line num="118" type="stmt" count="0"/>
       <line num="121" type="stmt" count="0"/>
-      <line num="122" type="stmt" count="0"/>
-      <line num="125" type="stmt" count="0"/>
-      <line num="128" type="method" name="usort" visibility="public" complexity="4" crap="20" count="0"/>
-      <line num="131" type="stmt" count="0"/>
+      <line num="124" type="method" name="usort" visibility="public" complexity="4" crap="20" count="0"/>
+      <line num="127" type="stmt" count="0"/>
+      <line num="128" type="stmt" count="0"/>
+      <line num="129" type="stmt" count="0"/>
       <line num="132" type="stmt" count="0"/>
-      <line num="133" type="stmt" count="0"/>
-      <line num="136" type="stmt" count="0"/>
+      <line num="134" type="stmt" count="0"/>
+      <line num="135" type="stmt" count="0"/>
       <line num="138" type="stmt" count="0"/>
-      <line num="139" type="stmt" count="0"/>
-      <line num="142" type="stmt" count="0"/>
-      <line num="146" type="method" name="sortLatvian" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="142" type="method" name="merge" visibility="private" complexity="6" crap="42" count="0"/>
+      <line num="144" type="stmt" count="0"/>
+      <line num="145" type="stmt" count="0"/>
       <line num="147" type="stmt" count="0"/>
-      <line num="149" type="stmt" count="0"/>
+      <line num="148" type="stmt" count="0"/>
       <line num="150" type="stmt" count="0"/>
       <line num="151" type="stmt" count="0"/>
+      <line num="152" type="stmt" count="0"/>
       <line num="153" type="stmt" count="0"/>
-      <line num="156" type="method" name="compareLatvianArray" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="158" type="stmt" count="0"/>
-      <line num="159" type="stmt" count="0"/>
+      <line num="154" type="stmt" count="0"/>
+      <line num="155" type="stmt" count="0"/>
+      <line num="156" type="stmt" count="0"/>
+      <line num="160" type="stmt" count="0"/>
+      <line num="161" type="stmt" count="0"/>
       <line num="162" type="stmt" count="0"/>
-      <line num="165" type="method" name="compareLatvian" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="165" type="stmt" count="0"/>
+      <line num="166" type="stmt" count="0"/>
       <line num="167" type="stmt" count="0"/>
-      <line num="168" type="stmt" count="0"/>
-      <line num="169" type="stmt" count="0"/>
       <line num="170" type="stmt" count="0"/>
-      <line num="174" type="method" name="compareLatvianObject" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="176" type="stmt" count="0"/>
-      <line num="177" type="stmt" count="0"/>
-      <line num="178" type="stmt" count="0"/>
-      <line num="179" type="stmt" count="0"/>
-      <line num="180" type="stmt" count="0"/>
-      <line num="183" type="stmt" count="0"/>
-      <line num="186" type="method" name="compare" visibility="private" complexity="5" crap="30" count="0"/>
-      <line num="188" type="stmt" count="0"/>
-      <line num="189" type="stmt" count="0"/>
-      <line num="190" type="stmt" count="0"/>
-      <line num="193" type="stmt" count="0"/>
-      <line num="194" type="stmt" count="0"/>
-      <line num="197" type="stmt" count="0"/>
-      <line num="200" type="stmt" count="0"/>
-      <line num="203" type="method" name="merge" visibility="private" complexity="6" crap="42" count="0"/>
-      <line num="205" type="stmt" count="0"/>
-      <line num="206" type="stmt" count="0"/>
-      <line num="208" type="stmt" count="0"/>
-      <line num="209" type="stmt" count="0"/>
-      <line num="211" type="stmt" count="0"/>
-      <line num="212" type="stmt" count="0"/>
-      <line num="213" type="stmt" count="0"/>
-      <line num="214" type="stmt" count="0"/>
-      <line num="215" type="stmt" count="0"/>
-      <line num="216" type="stmt" count="0"/>
-      <line num="217" type="stmt" count="0"/>
-      <line num="221" type="stmt" count="0"/>
-      <line num="222" type="stmt" count="0"/>
-      <line num="223" type="stmt" count="0"/>
-      <line num="226" type="stmt" count="0"/>
-      <line num="227" type="stmt" count="0"/>
-      <line num="228" type="stmt" count="0"/>
-      <line num="231" type="stmt" count="0"/>
-      <metrics loc="234" ncloc="230" classes="1" methods="13" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="89" coveredstatements="0" elements="102" coveredelements="0"/>
+      <metrics loc="173" ncloc="169" classes="1" methods="8" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="0" elements="72" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/SortLatvian.php">
+      <class name="Vairogs\Utils\Helper\SortLatvian" namespace="global">
+        <metrics complexity="14" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="30" coveredelements="0"/>
+      </class>
+      <line num="16" type="method" name="sortLatvian" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="19" type="stmt" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <line num="21" type="stmt" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="26" type="method" name="compareLatvianArray" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="28" type="stmt" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="32" type="stmt" count="0"/>
+      <line num="35" type="method" name="compareLatvian" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="37" type="stmt" count="0"/>
+      <line num="38" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="40" type="stmt" count="0"/>
+      <line num="44" type="method" name="compareLatvianObject" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="46" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="48" type="stmt" count="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <line num="50" type="stmt" count="0"/>
+      <line num="53" type="stmt" count="0"/>
+      <line num="56" type="method" name="compare" visibility="private" complexity="5" crap="30" count="0"/>
+      <line num="58" type="stmt" count="0"/>
+      <line num="59" type="stmt" count="0"/>
+      <line num="60" type="stmt" count="0"/>
+      <line num="63" type="stmt" count="0"/>
+      <line num="64" type="stmt" count="0"/>
+      <line num="67" type="stmt" count="0"/>
+      <line num="70" type="stmt" count="0"/>
+      <metrics loc="73" ncloc="73" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="0" elements="30" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Text.php">
       <class name="Vairogs\Utils\Helper\Text" namespace="global">
@@ -2883,50 +2923,51 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Router/LocaleResolverTrait.php">
       <class name="Vairogs\Utils\Router\LocaleResolverTrait" namespace="global">
-        <metrics complexity="23" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="0" elements="42" coveredelements="0"/>
+        <metrics complexity="21" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="0" elements="43" coveredelements="0"/>
       </class>
-      <line num="19" type="method" name="resolveLocale" visibility="public" complexity="4" crap="20" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <line num="22" type="stmt" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
+      <line num="21" type="method" name="resolveLocale" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="28" type="stmt" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="30" type="stmt" count="0"/>
+      <line num="31" type="stmt" count="0"/>
       <line num="33" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
+      <line num="36" type="method" name="returnByQueryParameter" visibility="public" complexity="4" crap="20" count="0"/>
       <line num="38" type="stmt" count="0"/>
-      <line num="41" type="method" name="returnByQueryParameter" visibility="protected" complexity="4" crap="20" count="0"/>
-      <line num="43" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="40" type="stmt" count="0"/>
       <line num="44" type="stmt" count="0"/>
-      <line num="45" type="stmt" count="0"/>
+      <line num="47" type="method" name="returnByPreviousSession" visibility="public" complexity="4" crap="20" count="0"/>
       <line num="49" type="stmt" count="0"/>
-      <line num="52" type="method" name="returnByPreviousSession" visibility="protected" complexity="4" crap="20" count="0"/>
-      <line num="54" type="stmt" count="0"/>
-      <line num="55" type="stmt" count="0"/>
+      <line num="50" type="stmt" count="0"/>
+      <line num="52" type="stmt" count="0"/>
+      <line num="53" type="stmt" count="0"/>
       <line num="57" type="stmt" count="0"/>
-      <line num="58" type="stmt" count="0"/>
+      <line num="60" type="method" name="returnByCookie" visibility="public" complexity="3" crap="12" count="0"/>
       <line num="62" type="stmt" count="0"/>
-      <line num="65" type="method" name="returnByCookie" visibility="protected" complexity="3" crap="12" count="0"/>
-      <line num="67" type="stmt" count="0"/>
-      <line num="68" type="stmt" count="0"/>
+      <line num="63" type="stmt" count="0"/>
+      <line num="66" type="stmt" count="0"/>
+      <line num="69" type="method" name="returnByLang" visibility="public" complexity="3" crap="12" count="0"/>
       <line num="71" type="stmt" count="0"/>
-      <line num="74" type="method" name="returnByLang" visibility="protected" complexity="3" crap="12" count="0"/>
-      <line num="76" type="stmt" count="0"/>
+      <line num="72" type="stmt" count="0"/>
+      <line num="73" type="stmt" count="0"/>
       <line num="77" type="stmt" count="0"/>
-      <line num="78" type="stmt" count="0"/>
+      <line num="80" type="method" name="pregMatch" visibility="private" complexity="2" crap="6" count="0"/>
       <line num="82" type="stmt" count="0"/>
-      <line num="85" type="method" name="preg" visibility="private" complexity="2" crap="6" count="0"/>
-      <line num="87" type="stmt" count="0"/>
-      <line num="88" type="stmt" count="0"/>
+      <line num="83" type="stmt" count="0"/>
+      <line num="86" type="stmt" count="0"/>
+      <line num="89" type="method" name="parseLanguages" visibility="private" complexity="3" crap="12" count="0"/>
       <line num="91" type="stmt" count="0"/>
-      <line num="94" type="method" name="parseLanguages" visibility="private" complexity="3" crap="12" count="0"/>
+      <line num="92" type="stmt" count="0"/>
+      <line num="93" type="stmt" count="0"/>
+      <line num="94" type="stmt" count="0"/>
+      <line num="95" type="stmt" count="0"/>
       <line num="96" type="stmt" count="0"/>
-      <line num="97" type="stmt" count="0"/>
-      <line num="98" type="stmt" count="0"/>
       <line num="99" type="stmt" count="0"/>
-      <line num="100" type="stmt" count="0"/>
-      <line num="101" type="stmt" count="0"/>
       <line num="102" type="stmt" count="0"/>
-      <line num="106" type="stmt" count="0"/>
-      <metrics loc="109" ncloc="109" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="0" elements="42" coveredelements="0"/>
+      <metrics loc="105" ncloc="105" classes="1" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="0" elements="43" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Twig/Attribute/TwigFilter.php">
       <class name="Vairogs\Utils\Twig\Attribute\TwigFilter" namespace="global">
@@ -3005,16 +3046,16 @@
       <line num="30" type="stmt" count="0"/>
       <line num="31" type="stmt" count="0"/>
       <line num="32" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="43" type="method" name="makeInput" visibility="private" complexity="3" crap="12" count="0"/>
-      <line num="45" type="stmt" count="0"/>
-      <line num="47" type="stmt" count="0"/>
+      <line num="35" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="44" type="method" name="makeInput" visibility="private" complexity="3" crap="12" count="0"/>
+      <line num="46" type="stmt" count="0"/>
       <line num="48" type="stmt" count="0"/>
       <line num="49" type="stmt" count="0"/>
-      <line num="52" type="stmt" count="0"/>
-      <metrics loc="56" ncloc="56" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
+      <line num="50" type="stmt" count="0"/>
+      <line num="53" type="stmt" count="0"/>
+      <metrics loc="57" ncloc="57" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <metrics files="144" loc="7550" ncloc="7326" classes="96" methods="525" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="1702" coveredstatements="108" elements="2227" coveredelements="134"/>
+    <metrics files="149" loc="7632" ncloc="7408" classes="99" methods="529" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="1712" coveredstatements="108" elements="2241" coveredelements="134"/>
   </project>
 </coverage>
