@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Router;
 
 use Symfony\Component\HttpFoundation\Request;
+use Vairogs\Core\Handler\FunctionHandler;
 use function array_unique;
 use function explode;
 use function in_array;
@@ -15,33 +16,27 @@ trait LocaleResolverTrait
     protected string $cookieName;
     protected array $hostMap;
     protected Request $request;
+    protected array $availableLocales = [];
 
     public function resolveLocale(Request $request, array $availableLocales = []): ?string
     {
         if (!empty($this->hostMap[$request->getHost()])) {
             return $this->hostMap[$request->getHost()];
         }
+        $this->availableLocales = $availableLocales;
 
-        $functions = [
-            'returnByQueryParameter',
-            'returnByPreviousSession',
-            'returnByCookie',
-            'returnByLang',
-        ];
+        $returnByLang = (new FunctionHandler())->setFunction(function: 'returnByLang', object: $this);
+        $returnByCookie = (new FunctionHandler())->setFunction(function: 'returnByCookie', object: $this)->setNext(handler: $returnByLang);
+        $returnByPreviousSession = (new FunctionHandler())->setFunction(function: 'returnByPreviousSession', object: $this)->setNext(handler: $returnByCookie);
+        $returnByQueryParameter = (new FunctionHandler())->setFunction(function: 'returnByQueryParameter', object: $this)->setNext(handler: $returnByPreviousSession);
 
-        foreach ($functions as $function) {
-            if ($result = $this->{$function}($request, $availableLocales)) {
-                return $result;
-            }
-        }
-
-        return null;
+        return $returnByQueryParameter->handle(request: $request);
     }
 
-    protected function returnByQueryParameter(Request $request): ?string
+    public function returnByQueryParameter(Request $request): ?string
     {
         foreach (['hl', 'lang'] as $parameter) {
-            if ($request->query->has(key: $parameter) && $result = $this->preg(hostLanguage: $request->query->get(key: $parameter))) {
+            if ($request->query->has(key: $parameter) && $result = $this->pregMatch(hostLanguage: $request->query->get(key: $parameter))) {
                 return $result;
             }
         }
@@ -49,7 +44,7 @@ trait LocaleResolverTrait
         return null;
     }
 
-    protected function returnByPreviousSession(Request $request): ?string
+    public function returnByPreviousSession(Request $request): ?string
     {
         if ($request->hasPreviousSession()) {
             $session = $request->getSession();
@@ -62,19 +57,19 @@ trait LocaleResolverTrait
         return null;
     }
 
-    protected function returnByCookie(Request $request): ?string
+    public function returnByCookie(Request $request): ?string
     {
-        if ($request->cookies->has(key: $this->cookieName) && $result = $this->preg(hostLanguage: $request->cookies->get(key: $this->cookieName))) {
+        if ($request->cookies->has(key: $this->cookieName) && $result = $this->pregMatch(hostLanguage: $request->cookies->get(key: $this->cookieName))) {
             return $result;
         }
 
         return null;
     }
 
-    protected function returnByLang(Request $request, array $availableLocales): ?string
+    public function returnByLang(Request $request): ?string
     {
         foreach ($this->parseLanguages(request: $request) as $lang) {
-            if (in_array(needle: $lang, haystack: $availableLocales, strict: true)) {
+            if (in_array(needle: $lang, haystack: $this->availableLocales, strict: true)) {
                 return $lang;
             }
         }
@@ -82,7 +77,7 @@ trait LocaleResolverTrait
         return null;
     }
 
-    private function preg($hostLanguage): ?string
+    private function pregMatch($hostLanguage): ?string
     {
         if (preg_match(pattern: '#^[a-z]{2}(?:_[a-z]{2})?$#i', subject: $hostLanguage)) {
             return $hostLanguage;
@@ -98,9 +93,10 @@ trait LocaleResolverTrait
             if (2 !== strlen(string: $language)) {
                 $newLang = explode(separator: '_', string: $language, limit: 2);
                 $languages[] = reset(array: $newLang);
-            } else {
-                $languages[] = $language;
+                continue;
             }
+
+            $languages[] = $language;
         }
 
         return array_unique(array: $languages);
