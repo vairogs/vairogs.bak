@@ -83,10 +83,10 @@ final class Uri
         $scheme = $urlParsed['scheme'] . '://';
         $host = $urlParsed['host'];
         $port = (string) ($urlParsed['port'] ?? '');
-        $path = $urlParsed['path'] ?? null;
-        $query = $urlParsed['query'] ?? null;
+        $path = $urlParsed['path'] ?? '';
+        $query = $urlParsed['query'] ?? '';
 
-        if (null !== $query) {
+        if ('' !== $query) {
             /** @var string $query */
             $query = '?' . http_build_query(data: self::arrayFromQueryString(query: $query));
         }
