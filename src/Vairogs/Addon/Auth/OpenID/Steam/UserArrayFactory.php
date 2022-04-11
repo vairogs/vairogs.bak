@@ -3,7 +3,6 @@
 namespace Vairogs\Addon\Auth\OpenID\Steam;
 
 use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
-use Vairogs\Extra\Constants\Status;
 
 class UserArrayFactory
 {
@@ -19,21 +18,21 @@ class UserArrayFactory
         ];
 
         return $user->setOpenID(openId: $bag[self::STEAMID])
-            ->setCommunityState(communityState: $bag['communityvisibilitystate'] ?? Status::ZERO)
-            ->setProfileState(profileState: $bag['profilestate'] ?? Status::ZERO)
+            ->setCommunityState(communityState: $bag['communityvisibilitystate'] ?? 0)
+            ->setProfileState(profileState: $bag['profilestate'] ?? 0)
             ->setPersona(persona: $bag['personaname'] ?? $bag[self::STEAMID])
-            ->setCommentPermission(commentPermission: $bag['commentpermission'] ?? Status::ZERO)
+            ->setCommentPermission(commentPermission: $bag['commentpermission'] ?? 0)
             ->setUrl(url: $bag['profileurl'] ?? '')
-            ->setLogoff(logoff: $bag['lastlogoff'] ?? Status::ZERO)
-            ->setPersonaState(personaState: $bag['personastate'] ?? Status::ZERO)
+            ->setLogoff(logoff: $bag['lastlogoff'] ?? 0)
+            ->setPersonaState(personaState: $bag['personastate'] ?? 0)
             ->setName(name: $bag['realname'] ?? $bag['personaname'] ?? $bag[self::STEAMID])
-            ->setClanId(clanId: (int) ($bag['primaryclanid'] ?? Status::ZERO))
-            ->setCreatedAt(createdAt: $bag['timecreated'] ?? Status::ZERO)
-            ->setPersonaFlags(personaFlags: $bag['personastateflags'] ?? Status::ZERO)
+            ->setClanId(clanId: (int) ($bag['primaryclanid'] ?? 0))
+            ->setCreatedAt(createdAt: $bag['timecreated'] ?? 0)
+            ->setPersonaFlags(personaFlags: $bag['personastateflags'] ?? 0)
             ->setCountryCode(countryCode: $bag['loccountrycode'] ?? 'UNKNOWN')
-            ->setStateCode(stateCode: (int) ($bag['locstatecode'] ?? Status::ZERO))
+            ->setStateCode(stateCode: (int) ($bag['locstatecode'] ?? 0))
             ->setPlaying(playing: $bag['gameextrainfo'] ?? '')
-            ->setPlayingId(playingId: (int) ($bag['gameid'] ?? Status::ZERO))
+            ->setPlayingId(playingId: (int) ($bag['gameid'] ?? 0))
             ->setAvatar(avatar: $avatar)
             ->setUsername(username: $bag['username'] ?? null);
     }

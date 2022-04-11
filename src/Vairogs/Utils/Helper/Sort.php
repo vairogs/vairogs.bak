@@ -4,6 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants\Symbol;
@@ -81,6 +82,9 @@ final class Sort
         return self::merge(left: $left, right: $right);
     }
 
+    /**
+     * @throws InvalidArgumentException
+     */
     #[Attribute\TwigFilter]
     public static function sort(iterable|Collection $data, string $parameter, string $order = Criteria::ASC): array
     {
@@ -149,14 +153,39 @@ final class Sort
         return $result;
     }
 
+    public static function compareLatvianArray(array $first, array $second): int
+    {
+        if (null === ($firstValue = $first[self::$field] ?? null) || null === ($secondValue = $second[self::$field] ?? null)) {
+            return 0;
+        }
+
+        return self::compare(first: $firstValue, second: $secondValue);
+    }
+
     public static function compareLatvian(array|object $first, array|object $second): int
     {
-        $first = mb_strtolower(string: Php::getParameter(variable: $first, key: self::$field));
-        $second = mb_strtolower(string: Php::getParameter(variable: $second, key: self::$field));
+        return match (true) {
+            is_array(value: $first) && is_array(value: $second) => self::compareLatvianArray(first: $first, second: $second),
+            is_object(value: $first) && is_object(value: $second) => self::compareLatvianObject(first: $first, second: $second),
+            default => 0
+        };
+    }
 
-        $len = mb_strlen(string: $first);
+    public static function compareLatvianObject(object $first, object $second): int
+    {
+        try {
+            $firstValue = Php::hijackGet(object: $first, property: self::$field);
+            $secondValue = Php::hijackGet(object: $second, property: self::$field);
+        } catch (Exception) {
+            return 0;
+        }
 
-        for ($i = 0; $i < $len; $i++) {
+        return self::compare(first: $firstValue, second: $secondValue);
+    }
+
+    private static function compare(string $first, string $second): int
+    {
+        for ($i = 0, $len = mb_strlen(string: $first); $i < $len; $i++) {
             if (mb_substr(string: $first, start: $i, length: 1) === mb_substr(string: $second, start: $i, length: 1)) {
                 continue;
             }

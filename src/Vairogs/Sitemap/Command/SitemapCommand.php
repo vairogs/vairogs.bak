@@ -55,7 +55,7 @@ class SitemapCommand extends Command
         $sitemap = $this->provider->populate(host: $input->getArgument(name: self::HOST));
         $violations = $this->validator->validate(value: $sitemap);
 
-        if (Status::ZERO !== $violations->count()) {
+        if (0 !== $violations->count()) {
             /** @var ConstraintViolation $error */
             foreach ($violations as $error) {
                 $output->writeln(messages: $error->getMessage());

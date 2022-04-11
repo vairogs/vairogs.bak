@@ -33,7 +33,6 @@ class CacheEventListener implements EventSubscriberInterface
     protected readonly ChainAdapter $adapter;
     protected readonly Event $event;
 
-    /** @noinspection InterfacesAsConstructorDependenciesInspection */
     public function __construct(protected bool $enabled, Security $security, ...$adapters)
     {
         if ($this->enabled) {
@@ -173,7 +172,7 @@ class CacheEventListener implements EventSubscriberInterface
     /**
      * @throws InvalidArgumentException
      */
-    private function setCache(string $key, Response $value, ?int $expires): void
+    private function setCache(string $key, Response $value, int $expires): void
     {
         $cache = $this->adapter->getItem(key: $key);
         $cache->set(value: $value);

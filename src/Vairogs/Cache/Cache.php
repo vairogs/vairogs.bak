@@ -13,28 +13,26 @@ use function str_replace;
 #[Attribute(Attribute::TARGET_METHOD)]
 final class Cache
 {
+    final public const DEFAULT_LIFETIME = 86400;
     private const ALGORITHM = 'sha1';
 
-    public function __construct(private readonly ?int $expires = null, private readonly array $attributes = [], private string $strategy = Strategy::ALL, private readonly string $algorithm = self::ALGORITHM, private mixed $data = null)
+    public function __construct(private readonly int $expires = self::DEFAULT_LIFETIME, private readonly array $attributes = [], private string $strategy = Strategy::ALL, private readonly string $algorithm = self::ALGORITHM, private mixed $data = null)
     {
     }
 
     public function getKey(string $prefix = ''): string
     {
-        $value = $this->data;
-
-        if (!is_array(value: $value)) {
-            $key = $value ?: '';
-        } else {
-            if (!empty($this->attributes)) {
-                $flipped = Iteration::arrayFlipRecursive(input: $this->attributes);
-                $value = Iteration::arrayIntersectKeyRecursive(first: $value, second: $flipped);
-            }
-
-            $key = str_replace(search: '=', replace: '_', subject: http_build_query(data: $value, arg_separator: '_'));
+        if (!is_array(value: $this->data)) {
+            return hash(algo: $this->algorithm, data: $prefix . '_' . ($this->data ?: ''));
         }
 
-        return hash(algo: $this->algorithm, data: $prefix . '_' . $key);
+        $value = $this->data;
+
+        if (!empty($this->attributes)) {
+            $value = Iteration::arrayIntersectKeyRecursive(first: $this->data, second: Iteration::arrayFlipRecursive(input: $this->attributes));
+        }
+
+        return hash(algo: $this->algorithm, data: $prefix . '_' . str_replace(search: '=', replace: '_', subject: http_build_query(data: $value, arg_separator: '_')));
     }
 
     public function getData(): mixed
@@ -66,7 +64,7 @@ final class Cache
         return $this;
     }
 
-    public function getExpires(): ?int
+    public function getExpires(): int
     {
         return $this->expires;
     }

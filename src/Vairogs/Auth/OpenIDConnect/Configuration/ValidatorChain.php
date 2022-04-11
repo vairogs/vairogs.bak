@@ -18,29 +18,17 @@ class ValidatorChain implements Constraint
      * @var Constraint[]
      */
     protected array $assertions = [];
+    private array $messages = [];
+    private bool $valid = true;
 
     public function assert(Token $token): void
     {
-        $valid = true;
-        $messages = [];
-
         foreach ($this->assertions as $claim => $assertion) {
-            if ($assertion instanceof AbstractConstraint) {
-                $claim = $assertion->getClaim() ?? Text::getLastPart(string: $assertion::class, delimiter: '\\');
-            }
-
-            try {
-                $assertion->assert(token: $token);
-            } catch (InvalidConstraintException $e) {
-                $messages[$claim] = $e->getMessage();
-            } catch (Exception $e) {
-                $valid = false;
-                $messages[$claim] = $e->getMessage();
-            }
+            $this->assertConstraint(constraint: $assertion, claim: $claim, token: $token);
         }
 
-        if (false === $valid) {
-            throw new OpenIDConnectException(message: sprintf('Unable to verify JWT claims: %s', http_build_query(data: $messages)));
+        if (!$this->valid) {
+            throw new OpenIDConnectException(message: sprintf('Unable to verify JWT claims: %s', http_build_query(data: $this->messages)));
         }
     }
 
@@ -49,5 +37,21 @@ class ValidatorChain implements Constraint
         $this->assertions = $assertions;
 
         return $this;
+    }
+
+    private function assertConstraint(Constraint $constraint, string $claim, Token $token): void
+    {
+        if ($constraint instanceof AbstractConstraint) {
+            $claim = $constraint->getClaim() ?? Text::getLastPart(string: $constraint::class, delimiter: '\\');
+        }
+
+        try {
+            $constraint->assert(token: $token);
+        } catch (InvalidConstraintException $e) {
+            $this->messages[$claim] = $e->getMessage();
+        } catch (Exception $e) {
+            $this->valid = false;
+            $this->messages[$claim] = $e->getMessage();
+        }
     }
 }

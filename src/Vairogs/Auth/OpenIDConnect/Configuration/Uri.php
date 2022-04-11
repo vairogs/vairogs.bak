@@ -21,8 +21,10 @@ class Uri
     protected string $url;
     protected string $base;
     protected ?string $basePost;
+    protected bool $useSession = false;
+    protected ?SessionInterface $session = null;
 
-    public function __construct(array $options, array $extra = [], protected bool $useSession = false, protected string $method = Request::METHOD_POST, protected ?SessionInterface $session = null)
+    public function __construct(array $options, array $extra = [], protected string $method = Request::METHOD_POST)
     {
         $this->base = rtrim(string: $extra['base_uri'], characters: '/') . '/';
         $this->basePost = null !== ($extra['base_uri_post'] ?? null) ? rtrim(string: $extra['base_uri_post'], characters: '/') . '/' : null;
@@ -33,6 +35,20 @@ class Uri
         if (Request::METHOD_GET === $this->method) {
             $this->setGetParams(options: $options, additional: $extra);
         }
+    }
+
+    public function setUseSession(bool $useSession): self
+    {
+        $this->useSession = $useSession;
+
+        return $this;
+    }
+
+    public function setSession(?SessionInterface $session): self
+    {
+        $this->session = $session;
+
+        return $this;
     }
 
     /**

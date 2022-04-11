@@ -4,12 +4,12 @@ namespace Vairogs\Utils\Doctrine\Traits;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Vairogs\Extra\Constants;
+use Vairogs\Extra\Constants\Definition;
 
 trait Status
 {
-    #[ORM\Column(type: Types::INTEGER, nullable: false, options: [Constants\Definition::DEFAULT => Constants\Status::ZERO])]
-    private int $status = Constants\Status::ZERO;
+    #[ORM\Column(type: Types::INTEGER, nullable: false, options: [Definition::DEFAULT => Definition::DISABLED])]
+    private int $status = Definition::DISABLED;
 
     public function getStatus(): int
     {
@@ -18,8 +18,8 @@ trait Status
 
     public function setStatus(int $status): self
     {
-        if (Constants\Status::ONE !== $status) {
-            $status = Constants\Status::ZERO;
+        if (Definition::ENABLED !== $status) {
+            $status = Definition::DISABLED;
         }
 
         $this->status = $status;

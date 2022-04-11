@@ -3,7 +3,6 @@
 namespace Vairogs\Utils\Helper;
 
 use JsonException;
-use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Twig\Attribute;
 use function defined;
 use function json_decode;
@@ -19,14 +18,16 @@ final class Json
 {
     final public const FORCE_ARRAY = 0b0001;
     final public const PRETTY = 0b0010;
+    final public const ASSOCIATIVE = 1;
+    final public const OBJECT = 0;
 
     /**
      * @throws JsonException
      */
     #[Attribute\TwigFilter]
-    public static function encode(mixed $value, int $flags = Status::ZERO): string
+    public static function encode(mixed $value, int $flags = self::OBJECT): string
     {
-        $flags = (JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | ((Status::ZERO !== ($flags & self::PRETTY)) ? JSON_PRETTY_PRINT : Status::ZERO) | (defined(constant_name: 'JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : Status::ZERO));
+        $flags = (JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | ((self::OBJECT !== ($flags & self::PRETTY)) ? JSON_PRETTY_PRINT : self::OBJECT) | (defined(constant_name: 'JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : self::OBJECT));
 
         return json_encode(value: $value, flags: $flags | JSON_THROW_ON_ERROR);
     }
@@ -35,7 +36,7 @@ final class Json
      * @throws JsonException
      */
     #[Attribute\TwigFilter]
-    public static function decode(string $json, int $flags = Status::ZERO): mixed
+    public static function decode(string $json, int $flags = self::OBJECT): mixed
     {
         return json_decode(json: $json, associative: (bool) ($flags & self::FORCE_ARRAY), depth: JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING, flags: JSON_THROW_ON_ERROR);
     }

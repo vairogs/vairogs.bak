@@ -9,7 +9,7 @@ use function floor;
 use function range;
 use function sprintf;
 
-class FixedLength
+final class FixedLength
 {
     final public const MIN_VISIBLE = 3;
 
@@ -18,12 +18,12 @@ class FixedLength
         $this->checkMinimum(maxVisible: $this->maxVisible);
     }
 
-    public function withMaximumVisible(int $maxVisible): static
+    public function withMaximumVisible(int $maxVisible): self
     {
         $this->checkMinimum(maxVisible: $maxVisible);
 
         $clone = clone $this;
-        $clone->setMaximumVisible(maximumVisible: $maxVisible);
+        $clone->setMaximumVisible(maxVisible: $maxVisible);
 
         return $clone;
     }
@@ -54,19 +54,19 @@ class FixedLength
         return $this->hasSingleOmittedNearLast(current: $current) || $this->hasSingleOmittedNearStart(total: $total, current: $current);
     }
 
-    private function checkMinimum(int $maxVisible): void
+    public function checkMinimum(int $maxVisible): void
     {
         if ($this->maxVisible < self::MIN_VISIBLE) {
             throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d', $maxVisible, self::MIN_VISIBLE));
         }
     }
 
-    private function setMaximumVisible(int $maximumVisible): void
+    public function setMaximumVisible(int $maxVisible): void
     {
-        $this->maxVisible = $maximumVisible;
+        $this->maxVisible = $maxVisible;
     }
 
-    private function validate(int $total, int $current, int $indicator = -1): void
+    public function validate(int $total, int $current, int $indicator = -1): void
     {
         if ($total < 1) {
             throw new InvalidArgumentException(message: sprintf('Total number of pages (%d) should not be lower than 1', $total));
@@ -86,34 +86,34 @@ class FixedLength
     }
 
     #[Pure]
-    private function hasSingleOmittedNearLast(int $current): bool
+    public function hasSingleOmittedNearLast(int $current): bool
     {
         return $current <= $this->getSingleBreakpoint();
     }
 
     #[Pure]
-    private function getSingleBreakpoint(): int
+    public function getSingleBreakpoint(): int
     {
         return (int) floor(num: $this->maxVisible / 2) + 1;
     }
 
     #[Pure]
-    private function hasSingleOmittedNearStart(int $total, int $current): bool
+    public function hasSingleOmittedNearStart(int $total, int $current): bool
     {
         return $current >= $total - $this->getSingleBreakpoint() + 1;
     }
 
     #[Pure]
-    private function getDataWithSingleOmitted(int $total, int $current, int $indicator): array
+    public function getDataWithSingleOmitted(int $total, int $current, int $indicator): array
     {
+        $rest = $this->maxVisible - ($total - $current);
+        $omitPagesFrom = (int) ceil(num: $rest / 2);
+        $omitPagesTo = ($current - ($rest - $omitPagesFrom));
+
         if ($this->hasSingleOmittedNearLast(current: $current)) {
             $rest = $this->maxVisible - $current;
             $omitPagesFrom = ((int) ceil(num: $rest / 2)) + $current;
             $omitPagesTo = $total - ($this->maxVisible - $omitPagesFrom);
-        } else {
-            $rest = $this->maxVisible - ($total - $current);
-            $omitPagesFrom = (int) ceil(num: $rest / 2);
-            $omitPagesTo = ($current - ($rest - $omitPagesFrom));
         }
 
         return [
@@ -123,16 +123,16 @@ class FixedLength
         ];
     }
 
-    private function getDataWithTwoOmitted(int $total, int $current, int $omitted): array
+    public function getDataWithTwoOmitted(int $total, int $current, int $omitted): array
     {
         $withoutCurrent = ($this->maxVisible - 1) / 2;
+
+        $visibleLeft = floor(num: $withoutCurrent);
+        $visibleRight = ceil(num: $withoutCurrent);
 
         if ($current <= ceil(num: $total / 2)) {
             $visibleLeft = ceil(num: $withoutCurrent);
             $visibleRight = floor(num: $withoutCurrent);
-        } else {
-            $visibleLeft = floor(num: $withoutCurrent);
-            $visibleRight = ceil(num: $withoutCurrent);
         }
 
         $omitLeftFrom = floor(num: $visibleLeft / 2) + 1;

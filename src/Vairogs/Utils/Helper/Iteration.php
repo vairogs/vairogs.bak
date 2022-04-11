@@ -30,23 +30,23 @@ final class Iteration
     #[Attribute\TwigFunction]
     public static function isEmpty(mixed $variable): bool
     {
-        $result = true;
-
         if (!empty($variable) && is_array(value: $variable)) {
+            $result = true;
+
             foreach ($variable as $value) {
                 $result = $result && self::isEmpty(variable: $value);
             }
-        } else {
-            $result = empty($variable);
+
+            return $result;
         }
 
-        return $result;
+        return empty($variable);
     }
 
     #[Attribute\TwigFilter]
     public static function uniqueMap(array &$array): void
     {
-        $array = array_map(callback: '\unserialize', array: array_unique(array: array_map(callback: '\serialize', array: $array)));
+        $array = array_map(callback: 'unserialize', array: array_unique(array: array_map(callback: 'serialize', array: $array)));
     }
 
     #[Attribute\TwigFilter]
@@ -189,10 +189,6 @@ final class Iteration
     #[Attribute\TwigFilter]
     public static function getIfNotEmpty(array $input, mixed $key): mixed
     {
-        if (!isset($input[$key])) {
-            return null;
-        }
-
-        return empty($input[$key]) ? null : $input[$key];
+        return $input[$key] ?? null;
     }
 }

@@ -158,7 +158,7 @@ final class Uri
     #[Attribute\TwigFilter]
     public static function getSchema(Request $request): string
     {
-        return Http::isHttps(req: $request) ? Constants\Http::SCHEMA_HTTPS : Constants\Http::SCHEMA_HTTP;
+        return Http::isHttps(request: $request) ? Constants\Http::SCHEMA_HTTPS : Constants\Http::SCHEMA_HTTP;
     }
 
     #[Attribute\TwigFunction]

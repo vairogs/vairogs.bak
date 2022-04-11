@@ -10,4 +10,6 @@ final class Definition
     final public const SETTER = 'set';
     final public const DEFAULT = 'default';
     final public const UTF8 = 'UTF-8';
+    final public const ENABLED = 1;
+    final public const DISABLED = 0;
 }

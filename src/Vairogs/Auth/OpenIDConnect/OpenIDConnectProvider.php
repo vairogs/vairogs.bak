@@ -34,7 +34,6 @@ use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 use Vairogs\Auth\OpenIDConnect\Utils\Traits\OpenIDConnectProviderVariables;
 use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
-use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Helper\Json;
 use Vairogs\Utils\Helper\Text;
@@ -55,7 +54,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         try {
             $this->setSession(session: $requestStack->getCurrentRequest()?->getSession());
         } catch (Exception) {
-            $this->setSession(session: null);
+            // exception === use already set session (default: null)
         }
 
         parent::__construct(options: $options, collaborators: $collaborators);
@@ -195,7 +194,9 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
                 'base_uri' => $this->getBaseUri(),
                 'base_uri_post' => $this->getBaseUriPost() ?? $this->getBaseUri(),
             ];
-            $this->uris[$name] = new Uri(options: $uri, extra: $params, useSession: $this->getUseSession(), method: $uri['method'] ?? Request::METHOD_POST, session: $this->getSession());
+            $this->uris[$name] = (new Uri(options: $uri, extra: $params, method: $uri['method'] ?? Request::METHOD_POST))
+                ->setUseSession(useSession: $this->getUseSession())
+                ->setSession(session: $this->getSession());
         }
     }
 
@@ -252,7 +253,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         }
 
         try {
-            return Json::decode(json: $content, flags: Status::ONE);
+            return Json::decode(json: $content, flags: Json::ASSOCIATIVE);
         } catch (Exception $exception) {
             throw new UnexpectedValueException(message: sprintf('Failed to parse JSON response: %s', $exception->getMessage()), previous: $exception);
         }

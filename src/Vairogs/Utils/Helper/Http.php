@@ -13,9 +13,9 @@ use function file_get_contents;
 final class Http
 {
     #[Attribute\TwigFunction]
-    public static function isHttps(Request $req): bool
+    public static function isHttps(Request $request): bool
     {
-        return self::checkHttps(req: $req) || self::checkServerPort(req: $req) || self::checkHttpXForwardedSsl(req: $req) || self::checkHttpXForwardedProto(req: $req);
+        return self::checkHttps(req: $request) || self::checkServerPort(req: $request) || self::checkHttpXForwardedSsl(req: $request) || self::checkHttpXForwardedProto(req: $request);
     }
 
     #[Attribute\TwigFunction]

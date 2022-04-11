@@ -36,7 +36,7 @@ class SitemapController extends AbstractController
         $model = $provider->populate(host: $request->getSchemeAndHttpHost());
         $violations = $validator->validate(value: $model);
 
-        if (Status::ZERO !== $violations->count()) {
+        if (0 !== $violations->count()) {
             return (new ErrorResponse(violations: $violations))->getResponse();
         }
 

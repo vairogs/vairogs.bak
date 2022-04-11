@@ -3,11 +3,10 @@
 namespace Vairogs\Cache\Utils\Adapter;
 
 use Psr\Cache\CacheItemPoolInterface;
-use Vairogs\Extra\Constants\Status;
 
 interface Adapter
 {
-    final public const DEFAULT_LIFETIME = Status::ZERO;
+    final public const DEFAULT_LIFETIME = 0;
 
     public function getAdapter(): CacheItemPoolInterface;
 }

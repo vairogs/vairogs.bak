@@ -18,7 +18,6 @@ use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
-use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Helper\Json;
 use Vairogs\Utils\Helper\Uri;
 use function array_keys;
@@ -118,7 +117,7 @@ class OpenIDProvider implements HasRegistry
         preg_match(pattern: $this->options['preg_check'], subject: urldecode($get['openid_claimed_id']), matches: $matches);
         $openID = (is_array(value: $matches) && isset($matches[1])) ? $matches[1] : null;
 
-        return Status::ONE === preg_match(pattern: "#is_valid\s*:\s*true#i", subject: file_get_contents(filename: $this->options['openid_url'] . '/' . $this->options['api_key'], use_include_path: false, context: $context)) ? $openID : null;
+        return 1 === preg_match(pattern: "#is_valid\s*:\s*true#i", subject: file_get_contents(filename: $this->options['openid_url'] . '/' . $this->options['api_key'], use_include_path: false, context: $context)) ? $openID : null;
     }
 
     public function redirect(): RedirectResponse
@@ -148,7 +147,7 @@ class OpenIDProvider implements HasRegistry
      */
     private function getData(string $openID): mixed
     {
-        return Json::decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: Status::ONE);
+        return Json::decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: Json::ASSOCIATIVE);
     }
 
     #[Pure]

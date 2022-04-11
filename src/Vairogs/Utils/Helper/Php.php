@@ -27,6 +27,7 @@ use function is_array;
 use function is_bool;
 use function is_object;
 use function method_exists;
+use function property_exists;
 use function sprintf;
 use function strtolower;
 use function trait_exists;
@@ -39,11 +40,13 @@ final class Php
      * @noinspection StaticClosureCanBeUsedInspection
      */
     #[Attribute\TwigFunction]
-    public static function hijackSet(object $object, string $property, mixed $value): void
+    public static function hijackSet(object $object, string $property, mixed $value): object
     {
         self::call(function: function () use ($object, $property, $value): void {
             $object->{$property} = $value;
         }, clone: $object);
+
+        return $object;
     }
 
     /**
@@ -197,19 +200,67 @@ final class Php
 
     /**
      * @noinspection StaticClosureCanBeUsedInspection
+     *
+     * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
-    public static function hijackGet(object $object, string $property): mixed
+    public static function hijackGetStatic(object $object, string $property): mixed
     {
         try {
-            if ((new ReflectionProperty($object, $property))->isStatic()) {
+            if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
                 return self::call(function: fn () => $object::${$property}, clone: $object, return: true);
             }
         } catch (Exception) {
             // exception === unable to get object property
         }
 
-        return self::call(function: fn () => $object->{$property}, clone: $object, return: true);
+        throw new InvalidArgumentException(message: sprintf('Property "%s" is not static', $property));
+    }
+
+    /**
+     * @noinspection StaticClosureCanBeUsedInspection
+     *
+     * @throws InvalidArgumentException
+     */
+    #[Attribute\TwigFunction]
+    public static function hijackGetNonStatic(object $object, string $property): mixed
+    {
+        try {
+            if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
+                throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
+            }
+        } catch (Exception) {
+            // exception === unable to get object property
+        }
+
+        if (property_exists($object, $property)) {
+            return self::call(function: fn () => $object->{$property}, clone: $object, return: true);
+        }
+
+        throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
+    }
+
+    /**
+     * @noinspection StaticClosureCanBeUsedInspection
+     *
+     * @throws InvalidArgumentException
+     */
+    #[Attribute\TwigFunction]
+    public static function hijackGet(object $object, string $property)
+    {
+        try {
+            return self::hijackGetStatic(object: $object, property: $property);
+        } catch (Exception) {
+            // exception === unable to get object property
+        }
+
+        try {
+            return self::hijackGetNonStatic(object: $object, property: $property);
+        } catch (Exception) {
+            // exception === unable to get object property
+        }
+
+        throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
     }
 
     #[Attribute\TwigFunction]

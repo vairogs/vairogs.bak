@@ -19,7 +19,7 @@ trait OpenIDConnectProviderVariables
     protected ValidatorChain $validatorChain;
     protected string $idTokenIssuer;
     protected bool $useSession = false;
-    protected ?SessionInterface $session;
+    protected ?SessionInterface $session = null;
     protected int $statusCode;
     protected string $baseUri;
     protected ?string $baseUriPost;
