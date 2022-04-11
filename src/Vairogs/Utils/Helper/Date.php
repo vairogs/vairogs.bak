@@ -28,6 +28,7 @@ final class Date
     ];
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function validateDate(string $date): bool
     {
         $date = Text::keepNumeric(string: $date);
@@ -47,6 +48,7 @@ final class Date
         return 0 < $day && $daysInMonth[$month - 1] >= $day;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function excelDate(int $timestamp, string $format = Constants\Date::FORMAT): string
     {
@@ -66,6 +68,7 @@ final class Date
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function validateDateBasic(mixed $date, string $format = Constants\Date::FORMAT): bool
     {
         $object = DateTime::createFromFormat(format: $format, datetime: $date);
@@ -73,6 +76,7 @@ final class Date
         return $object && $date === $object->format(format: $format);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
     public static function format(int|float $timestamp): string
@@ -99,6 +103,7 @@ final class Date
         return trim(string: $str);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
     public static function formatToArray(int|float $timestamp): array
@@ -125,6 +130,7 @@ final class Date
         return $result;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function formatDate(string $string, string $format = Constants\Date::FORMAT): string|bool
     {
@@ -135,6 +141,7 @@ final class Date
         return false;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function getDateNullable(?string $dateString = null, ?string $format = null): ?DateTime
     {
@@ -148,6 +155,7 @@ final class Date
     /**
      * @throws InvalidArgumentException
      */
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function getDate(?string $dateString = null, ?string $format = null): DateTime
     {
@@ -161,12 +169,14 @@ final class Date
     /**
      * @throws Exception
      */
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string
     {
         return (new DateTime())->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Constants\Date::FORMAT);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function getDateWithoutFormat(string $date, array $guesses = []): DateTime|string
     {

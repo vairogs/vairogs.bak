@@ -20,12 +20,14 @@ final class Translit
         'A', 'B', 'V', 'G', 'D', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'ʺ', 'Y', '–', 'E',
     ];
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function cyrillicToLatin(string $text): string
     {
         return str_replace(search: self::MAP_CYRILLIC, replace: self::MAP_LATIN, subject: $text);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function latinToCyrillic(string $text): string
     {

@@ -14,6 +14,7 @@ use function sprintf;
 final class File
 {
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function mkdir(string $path): bool
     {
         $dir = dirname(path: $path);
@@ -26,6 +27,7 @@ final class File
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function fileExistsPublic(string $filename): bool
     {
         return is_file(filename: getcwd() . '/' . $filename);

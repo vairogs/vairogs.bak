@@ -24,6 +24,7 @@ final class Json
     /**
      * @throws JsonException
      */
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function encode(mixed $value, int $flags = self::OBJECT): string
     {
@@ -35,6 +36,7 @@ final class Json
     /**
      * @throws JsonException
      */
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function decode(string $json, int $flags = self::OBJECT): mixed
     {

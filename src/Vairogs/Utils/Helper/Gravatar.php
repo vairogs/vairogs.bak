@@ -28,6 +28,7 @@ final class Gravatar
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
     {

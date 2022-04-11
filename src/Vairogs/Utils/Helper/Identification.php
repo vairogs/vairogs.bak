@@ -18,6 +18,7 @@ use function substr;
 final class Identification
 {
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function validatePersonCode(string $personCode): bool
     {
         $personCode = Text::keepNumeric(string: $personCode);
@@ -34,6 +35,7 @@ final class Identification
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function validateNewPersonCode(string $personCode): bool
     {
         if (11 !== strlen(string: $personCode)) {
@@ -58,6 +60,7 @@ final class Identification
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function validateOldPersonCode(string $personCode): bool
     {
         if (11 !== strlen(string: $personCode)) {
@@ -76,6 +79,7 @@ final class Identification
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getUniqueId(int $length = 20): string
     {
         try {
@@ -86,6 +90,7 @@ final class Identification
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getRandomString(int $length = 20, string $chars = Generator::RAND_BASIC): string
     {
         /* @noinspection NonSecureStrShuffleUsageInspection */

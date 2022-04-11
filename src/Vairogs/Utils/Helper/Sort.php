@@ -24,6 +24,7 @@ use function usort;
 final class Sort
 {
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function swap(mixed &$foo, mixed &$bar): void
     {
         if ($foo === $bar) {
@@ -35,6 +36,7 @@ final class Sort
         $bar = $tmp;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function bubbleSort(array &$array): void
     {
@@ -61,6 +63,7 @@ final class Sort
         $array[$bar] = $tmp;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function mergeSort(array $array): array
     {
@@ -81,6 +84,7 @@ final class Sort
     /**
      * @throws InvalidArgumentException
      */
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function sort(iterable|Collection $data, string $parameter, string $order = Criteria::ASC): array
     {
@@ -107,6 +111,7 @@ final class Sort
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function isSortable(mixed $item, int|string $field): bool
     {
@@ -121,6 +126,7 @@ final class Sort
         return false;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function usort(string $parameter, string $order): callable
     {

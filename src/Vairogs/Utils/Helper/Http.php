@@ -13,12 +13,14 @@ use function file_get_contents;
 final class Http
 {
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function isHttps(Request $request): bool
     {
         return self::checkHttps(req: $request) || self::checkServerPort(req: $request) || self::checkHttpXForwardedSsl(req: $request) || self::checkHttpXForwardedProto(req: $request);
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getRemoteIp(Request $request, bool $trust = false): string
     {
         if (false === $trust) {
@@ -41,6 +43,7 @@ final class Http
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getRemoteIpCF(Request $request, bool $trust = false): string
     {
         if ($request->server->has(key: Constants\Http::HTTP_CF_CONNECTING_IP)) {
@@ -55,6 +58,7 @@ final class Http
      * @throws RuntimeException
      */
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getMethods(): array
     {
         return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: Request::class), with: 'METHOD_');

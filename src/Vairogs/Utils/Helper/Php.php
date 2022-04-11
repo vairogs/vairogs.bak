@@ -40,6 +40,7 @@ final class Php
      * @noinspection StaticClosureCanBeUsedInspection
      */
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function hijackSet(object $object, string $property, mixed $value): object
     {
         self::call(function: function () use ($object, $property, $value): void {
@@ -53,6 +54,7 @@ final class Php
      * @noinspection PhpInconsistentReturnPointsInspection
      */
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function call(callable $function, object $clone, bool $return = false, ...$arguments)
     {
         $func = Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
@@ -64,6 +66,7 @@ final class Php
         $func(...$arguments);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
     public static function boolval(mixed $value): bool
@@ -86,6 +89,7 @@ final class Php
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getClassConstantsValues(string $class): array
     {
         return array_values(array: self::getClassConstants(class: $class));
@@ -96,6 +100,7 @@ final class Php
      * @throws RuntimeException
      */
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getClassConstants(string $class): array
     {
         if (self::exists(class: $class)) {
@@ -149,6 +154,7 @@ final class Php
         return $methods;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function getShortName(string $class): string
     {
@@ -171,6 +177,7 @@ final class Php
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function getEnv(string $varname, bool $localOnly = false): mixed
     {
         if ($env = getenv($varname, local_only: $localOnly)) {
@@ -184,15 +191,24 @@ final class Php
     #[Attribute\TwigFilter]
     public static function getArray(array|object $input): array
     {
-        if (is_object(value: $object = $input)) {
-            $input = [];
-            try {
-                foreach ((new ReflectionClass(objectOrClass: $object))->getProperties() as $property) {
-                    $input[$name = $property->getName()] = self::hijackGet(object: $object, property: $name);
-                }
-            } catch (Exception) {
-                // exception === not possible to convert object to array
+        if (is_object(value: $input)) {
+            return self::getArrayFromObject($input);
+        }
+
+        return $input;
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function getArrayFromObject(object $object): array
+    {
+        $input = [];
+        try {
+            foreach ((new ReflectionClass(objectOrClass: $object))->getProperties() as $property) {
+                $input[$name = $property->getName()] = self::hijackGet(object: $object, property: $name);
             }
+        } catch (Exception) {
+            // exception === not possible to convert object to array
         }
 
         return $input;
@@ -204,7 +220,8 @@ final class Php
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
-    public static function hijackGetStatic(object $object, string $property, array $arguments = []): mixed
+    #[Attribute\TwigFilter]
+    public static function hijackGetStatic(object $object, string $property, ...$arguments): mixed
     {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
@@ -223,6 +240,7 @@ final class Php
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function hijackGetNonStatic(object $object, string $property, ...$arguments): mixed
     {
         try {
@@ -246,6 +264,7 @@ final class Php
      * @throws InvalidArgumentException
      */
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function hijackGet(object $object, string $property, ...$arguments)
     {
         try {

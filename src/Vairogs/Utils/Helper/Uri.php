@@ -74,6 +74,7 @@ final class Uri
         return http_build_query(data: self::buildHttpQueryArray(input: $object));
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function urlEncode(string $url): string
     {
@@ -97,6 +98,7 @@ final class Uri
         return $scheme . $host . $port . $path . $query;
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function arrayFromQueryString(string $query): array
     {
@@ -107,6 +109,7 @@ final class Uri
         return array_combine(keys: array_map(callback: 'hex2bin', array: array_keys(array: $values)), values: $values);
     }
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function parseHeaders(string $rawHeaders = ''): array
     {
@@ -128,6 +131,7 @@ final class Uri
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function isUrl(string $url): bool
     {
@@ -162,6 +166,7 @@ final class Uri
     }
 
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function isAbsolute(string $path): bool
     {
         return str_starts_with(haystack: $path, needle: '//') || preg_match(pattern: '#^[a-z-]{3,}://#i', subject: $path);

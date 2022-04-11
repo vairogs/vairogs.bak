@@ -11,6 +11,7 @@ use const FILTER_VALIDATE_EMAIL;
 final class Email
 {
     #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     #[Pure]
     public static function isValid(string $email): bool
     {
