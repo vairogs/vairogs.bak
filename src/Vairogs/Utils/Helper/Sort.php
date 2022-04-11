@@ -140,16 +140,35 @@ final class Sort
     }
 
     #[Attribute\TwigFilter]
-    public static function sortLatvian(array &$names, string $field): bool
+    public static function sortLatvian(array &$names, string $field, array $callback = [self::class, 'compareLatvian']): bool
     {
         self::$field = $field;
-        $result = usort(array: $names, callback: [
-            self::class,
-            'compareLatvian',
-        ]);
+        $result = usort(array: $names, callback: $callback);
         self::$field = '';
 
         return $result;
+    }
+
+    public static function compareLatvian(array|object $first, array|object $second): int
+    {
+        $first = mb_strtolower(string: Php::getParameter(variable: $first, key: self::$field));
+        $second = mb_strtolower(string: Php::getParameter(variable: $second, key: self::$field));
+
+        $len = mb_strlen(string: $first);
+
+        for ($i = 0; $i < $len; $i++) {
+            if (mb_substr(string: $first, start: $i, length: 1) === mb_substr(string: $second, start: $i, length: 1)) {
+                continue;
+            }
+
+            if ($i > mb_strlen(string: $second) || mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $first, start: $i, length: 1)) > mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $second, start: $i, length: 1))) {
+                return 1;
+            }
+
+            return -1;
+        }
+
+        return 0;
     }
 
     private static function merge(array $left, array $right): array
@@ -181,27 +200,5 @@ final class Sort
         }
 
         return $result;
-    }
-
-    private static function compareLatvian(array|object $first, array|object $second): int
-    {
-        $first = mb_strtolower(string: Php::getParameter(variable: $first, key: self::$field));
-        $second = mb_strtolower(string: Php::getParameter(variable: $second, key: self::$field));
-
-        $len = mb_strlen(string: $first);
-
-        for ($i = 0; $i < $len; $i++) {
-            if (mb_substr(string: $first, start: $i, length: 1) === mb_substr(string: $second, start: $i, length: 1)) {
-                continue;
-            }
-
-            if ($i > mb_strlen(string: $second) || mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $first, start: $i, length: 1)) > mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $second, start: $i, length: 1))) {
-                return 1;
-            }
-
-            return -1;
-        }
-
-        return 0;
     }
 }
