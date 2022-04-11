@@ -75,6 +75,7 @@
         "vairogs/twig-helper-json": "self.version",
         "vairogs/twig-helper-php": "self.version",
         "vairogs/twig-helper-sort": "self.version",
+        "vairogs/twig-helper-sortlatvian": "self.version",
         "vairogs/twig-helper-text": "self.version",
         "vairogs/twig-helper-uri": "self.version",
         "vairogs/twig-helper-util": "self.version"
