@@ -34,10 +34,10 @@ class SitemapController extends AbstractController
         }
 
         $model = $provider->populate(host: $request->getSchemeAndHttpHost());
-        $constraintViolationList = $validator->validate(value: $model);
+        $violations = $validator->validate(value: $model);
 
-        if (Status::ZERO !== $constraintViolationList->count()) {
-            return (new ErrorResponse(constraintViolationList: $constraintViolationList))->getResponse();
+        if (Status::ZERO !== $violations->count()) {
+            return (new ErrorResponse(violations: $violations))->getResponse();
         }
 
         return new Response(content: (new Director(buffer: ''))->build(builder: new XmlBuilder(sitemap: $model)));

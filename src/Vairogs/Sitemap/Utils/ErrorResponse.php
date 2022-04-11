@@ -11,7 +11,7 @@ class ErrorResponse
 {
     private Response $response;
 
-    public function __construct(private readonly ConstraintViolationListInterface $constraintViolationList)
+    public function __construct(private readonly ConstraintViolationListInterface $violations)
     {
         $this->response = new Response();
         $this->response->headers->set(key: 'Content-Type', values: ContentType::XML);
@@ -25,7 +25,7 @@ class ErrorResponse
 ';
 
         /** @var ConstraintViolation $error */
-        foreach ($this->constraintViolationList as $error) {
+        foreach ($this->violations as $error) {
             $buffer .= "\t" . '<error>' .
                 "\n\t\t" . '<property_path>' . $error->getPropertyPath() . '</property_path>' .
                 "\n\t\t" . '<message>' . $error->getMessage() . '</message>' .

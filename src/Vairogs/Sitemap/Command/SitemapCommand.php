@@ -53,11 +53,11 @@ class SitemapCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sitemap = $this->provider->populate(host: $input->getArgument(name: self::HOST));
-        $constraintViolationList = $this->validator->validate(value: $sitemap);
+        $violations = $this->validator->validate(value: $sitemap);
 
-        if (Status::ZERO !== $constraintViolationList->count()) {
+        if (Status::ZERO !== $violations->count()) {
             /** @var ConstraintViolation $error */
-            foreach ($constraintViolationList as $error) {
+            foreach ($violations as $error) {
                 $output->writeln(messages: $error->getMessage());
             }
 
