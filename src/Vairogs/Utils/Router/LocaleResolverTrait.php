@@ -25,15 +25,15 @@ trait LocaleResolverTrait
         }
         $this->availableLocales = $availableLocales;
 
-        $returnByLang = (new FunctionHandler())->setFunction(function: 'returnByLang', object: $this);
-        $returnByCookie = (new FunctionHandler())->setFunction(function: 'returnByCookie', object: $this)->setNext(handler: $returnByLang);
-        $returnByPreviousSession = (new FunctionHandler())->setFunction(function: 'returnByPreviousSession', object: $this)->setNext(handler: $returnByCookie);
-        $returnByQueryParameter = (new FunctionHandler())->setFunction(function: 'returnByQueryParameter', object: $this)->setNext(handler: $returnByPreviousSession);
+        $byLang = (new FunctionHandler())->setFunction(function: 'byLang', object: $this);
+        $byCookie = (new FunctionHandler())->setFunction(function: 'byCookie', object: $this)->setNext(handler: $byLang);
+        $bySession = (new FunctionHandler())->setFunction(function: 'bySession', object: $this)->setNext(handler: $byCookie);
+        $byParameter = (new FunctionHandler())->setFunction(function: 'byParameter', object: $this)->setNext(handler: $bySession);
 
-        return $returnByQueryParameter->handle(request: $request);
+        return $byParameter->handle(request: $request);
     }
 
-    public function returnByQueryParameter(Request $request): ?string
+    public function byParameter(Request $request): ?string
     {
         foreach (['hl', 'lang'] as $parameter) {
             if ($request->query->has(key: $parameter) && $result = $this->pregMatch(hostLanguage: $request->query->get(key: $parameter))) {
@@ -44,7 +44,7 @@ trait LocaleResolverTrait
         return null;
     }
 
-    public function returnByPreviousSession(Request $request): ?string
+    public function bySession(Request $request): ?string
     {
         if ($request->hasPreviousSession()) {
             $session = $request->getSession();
@@ -57,7 +57,7 @@ trait LocaleResolverTrait
         return null;
     }
 
-    public function returnByCookie(Request $request): ?string
+    public function byCookie(Request $request): ?string
     {
         if ($request->cookies->has(key: $this->cookieName) && $result = $this->pregMatch(hostLanguage: $request->cookies->get(key: $this->cookieName))) {
             return $result;
@@ -66,7 +66,7 @@ trait LocaleResolverTrait
         return null;
     }
 
-    public function returnByLang(Request $request): ?string
+    public function byLang(Request $request): ?string
     {
         foreach ($this->parseLanguages(request: $request) as $lang) {
             if (in_array(needle: $lang, haystack: $this->availableLocales, strict: true)) {

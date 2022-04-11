@@ -34,9 +34,9 @@ use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 use Vairogs\Auth\OpenIDConnect\Utils\Traits\OpenIDConnectProviderVariables;
 use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
-use Vairogs\Utils\Helper\Iteration;
+use Vairogs\Utils\Helper\Char;
 use Vairogs\Utils\Helper\Json;
-use Vairogs\Utils\Helper\Text;
+use Vairogs\Utils\Helper\Util;
 use function array_merge;
 use function base64_encode;
 use function property_exists;
@@ -178,8 +178,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $uris = $options['uris'] ?? [];
         unset($options['redirect'], $options['uris']);
 
-        foreach (Iteration::makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
-            if (property_exists(object_or_class: $this, property: $var = Text::toCamelCase(string: $key))) {
+        foreach (Util::makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
+            if (property_exists(object_or_class: $this, property: $var = Char::toCamelCase(string: $key))) {
                 $this->{$var} = $value;
             }
         }

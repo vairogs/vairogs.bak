@@ -120,6 +120,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-sortlatvian.git"
     },
     {
+        "path": "src/Vairogs/Twig/Helper/Char",
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-char.git"
+    },
+    {
         "path": "src/Vairogs/Twig/Helper/Text",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-text.git"
     },

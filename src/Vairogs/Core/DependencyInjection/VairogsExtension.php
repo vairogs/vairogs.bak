@@ -10,7 +10,7 @@ use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Core\Vairogs;
 use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
-use Vairogs\Utils\Helper\Iteration;
+use Vairogs\Utils\Helper\Util;
 
 class VairogsExtension extends Extension
 {
@@ -33,7 +33,7 @@ class VairogsExtension extends Extension
     {
         $parameters = $this->processConfiguration(configuration: $configuration, configs: $configs);
 
-        foreach (Iteration::makeOneDimension(array: [$this->getAlias() => $parameters]) as $key => $value) {
+        foreach (Util::makeOneDimension(array: [$this->getAlias() => $parameters]) as $key => $value) {
             $container->setParameter(name: $key, value: $value);
         }
     }

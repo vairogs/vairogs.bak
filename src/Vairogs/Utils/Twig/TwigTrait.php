@@ -5,7 +5,7 @@ namespace Vairogs\Utils\Twig;
 use InvalidArgumentException;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use Vairogs\Utils\Helper\Text;
+use Vairogs\Utils\Helper\Char;
 use function in_array;
 use function is_array;
 use function sprintf;
@@ -47,7 +47,7 @@ trait TwigTrait
 
         foreach ($input as $call => $function) {
             if (is_numeric(value: $call)) {
-                $call = Text::toSnakeCase(string: $function, skipCamel: true);
+                $call = Char::toSnakeCase(string: $function, skipCamel: true);
             }
 
             $output[sprintf('%s_%s', $key, $call)] = $function;

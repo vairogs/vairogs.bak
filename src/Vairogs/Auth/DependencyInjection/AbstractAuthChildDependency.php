@@ -10,7 +10,7 @@ use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Core\DependencyInjection\Dependency;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
-use Vairogs\Utils\Helper\Iteration;
+use Vairogs\Utils\Helper\Util;
 use function sprintf;
 
 abstract class AbstractAuthChildDependency implements Dependency
@@ -31,7 +31,7 @@ abstract class AbstractAuthChildDependency implements Dependency
                 $config = (new Processor())->process(configTree: $tree->buildTree(), configs: [$clientConfig]);
                 $clientServiceKey = $clientsKey . '.' . $key;
 
-                foreach (Iteration::makeOneDimension(array: $config, base: $clientServiceKey) as $tkey => $value) {
+                foreach (Util::makeOneDimension(array: $config, base: $clientServiceKey) as $tkey => $value) {
                     $containerBuilder->setParameter(name: $tkey, value: $value);
                 }
 

@@ -5,8 +5,8 @@ namespace Vairogs\Utils\Twig;
 use Exception;
 use ReflectionClass;
 use ReflectionMethod;
+use Vairogs\Utils\Helper\Char;
 use Vairogs\Utils\Helper\Php;
-use Vairogs\Utils\Helper\Text;
 
 class Helper
 {
@@ -22,7 +22,7 @@ class Helper
 
         foreach ($methods as $method) {
             if (Php::filterExists(method: $method, filterClass: $filterClass)) {
-                $filtered[Text::fromCamelCase(string: $name = $method->getName())] = self::getFilter(class: $class, name: $name, withClass: $withClass);
+                $filtered[Char::fromCamelCase(string: $name = $method->getName())] = self::getFilter(class: $class, name: $name, withClass: $withClass);
             }
         }
 

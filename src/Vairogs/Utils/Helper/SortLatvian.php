@@ -11,10 +11,11 @@ use function usort;
 
 class SortLatvian
 {
-    private static string $field = '';
+    private static int|string $field = '';
 
+    #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function sortLatvian(array &$names, string $field, array $callback = [self::class, 'compareLatvian']): bool
+    public static function sortLatvian(array &$names, string|int $field, array $callback = [self::class, 'compareLatvian']): bool
     {
         self::$field = $field;
         $result = usort(array: $names, callback: $callback);
@@ -56,11 +57,11 @@ class SortLatvian
     private static function compare(string $first, string $second): int
     {
         for ($i = 0, $len = mb_strlen(string: $first); $i < $len; $i++) {
-            if (mb_substr(string: $first, start: $i, length: 1) === mb_substr(string: $second, start: $i, length: 1)) {
+            if (($charFirst = mb_substr(string: $first, start: $i, length: 1)) === ($charSecond = mb_substr(string: $second, start: $i, length: 1))) {
                 continue;
             }
 
-            if ($i > mb_strlen(string: $second) || mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $first, start: $i, length: 1)) > mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $second, start: $i, length: 1))) {
+            if ($i > mb_strlen(string: $second) || mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: $charFirst) > mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: $charSecond)) {
                 return 1;
             }
 
