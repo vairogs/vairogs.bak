@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649695710">
-  <project timestamp="1649695710">
+<coverage generated="1649699184">
+  <project timestamp="1649699184">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2882,7 +2882,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Util.php">
       <class name="Vairogs\Utils\Helper\Util" namespace="global">
-        <metrics complexity="16" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="35" coveredelements="35"/>
+        <metrics complexity="15" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="34" coveredelements="34"/>
       </class>
       <line num="15" type="method" name="isPrime" visibility="public" complexity="3" crap="3" count="24"/>
       <line num="19" type="stmt" count="24"/>
@@ -2900,26 +2900,25 @@
       <line num="45" type="stmt" count="16"/>
       <line num="46" type="stmt" count="8"/>
       <line num="50" type="stmt" count="10"/>
-      <line num="53" type="method" name="makeOneDimension" visibility="public" complexity="6" crap="6" count="3"/>
+      <line num="53" type="method" name="makeOneDimension" visibility="public" complexity="5" crap="5" count="3"/>
       <line num="57" type="stmt" count="3"/>
       <line num="59" type="stmt" count="3"/>
       <line num="60" type="stmt" count="3"/>
       <line num="61" type="stmt" count="3"/>
       <line num="63" type="stmt" count="3"/>
       <line num="64" type="stmt" count="3"/>
-      <line num="65" type="stmt" count="2"/>
-      <line num="68" type="stmt" count="3"/>
-      <line num="69" type="stmt" count="1"/>
-      <line num="73" type="stmt" count="3"/>
-      <line num="77" type="stmt" count="3"/>
-      <line num="80" type="method" name="isPrimeGmp" visibility="private" complexity="2" crap="2" count="24"/>
-      <line num="82" type="stmt" count="24"/>
-      <line num="83" type="stmt" count="12"/>
-      <line num="84" type="stmt" count="6"/>
-      <line num="85" type="stmt" count="6"/>
-      <line num="86" type="stmt" count="12"/>
-      <line num="90" type="stmt" count="12"/>
-      <metrics loc="93" ncloc="93" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="35" coveredelements="35"/>
+      <line num="66" type="stmt" count="3"/>
+      <line num="67" type="stmt" count="1"/>
+      <line num="71" type="stmt" count="3"/>
+      <line num="75" type="stmt" count="3"/>
+      <line num="78" type="method" name="isPrimeGmp" visibility="private" complexity="2" crap="2" count="24"/>
+      <line num="80" type="stmt" count="24"/>
+      <line num="81" type="stmt" count="12"/>
+      <line num="82" type="stmt" count="6"/>
+      <line num="83" type="stmt" count="6"/>
+      <line num="84" type="stmt" count="12"/>
+      <line num="88" type="stmt" count="12"/>
+      <metrics loc="91" ncloc="91" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="34" coveredelements="34"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Router/LocaleResolver.php">
       <class name="Vairogs\Utils\Router\LocaleResolver" namespace="global">
@@ -3074,6 +3073,6 @@
       <line num="53" type="stmt" count="0"/>
       <metrics loc="57" ncloc="57" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <metrics files="151" loc="7767" ncloc="7542" classes="100" methods="531" coveredmethods="28" conditionals="0" coveredconditionals="0" statements="1716" coveredstatements="122" elements="2247" coveredelements="150"/>
+    <metrics files="151" loc="7765" ncloc="7540" classes="100" methods="531" coveredmethods="28" conditionals="0" coveredconditionals="0" statements="1715" coveredstatements="121" elements="2246" coveredelements="149"/>
   </project>
 </coverage>

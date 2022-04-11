@@ -61,9 +61,7 @@ final class Util
                 $key = ltrim(string: $base . '.' . $key, characters: '.');
 
                 if (Iteration::isAssociative(array: $value)) {
-                    foreach (self::makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth) as $itemKey => $itemValue) {
-                        $result[$itemKey] = $itemValue;
-                    }
+                    $result += self::makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth);
 
                     if ($onlyLast) {
                         continue;
