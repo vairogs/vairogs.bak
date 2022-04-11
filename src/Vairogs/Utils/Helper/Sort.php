@@ -124,14 +124,14 @@ final class Sort
     #[Attribute\TwigFilter]
     public static function usort(string $parameter, string $order): callable
     {
-        return static function (array|object $a, array|object $b) use ($parameter, $order): int {
-            if (($aSort = Php::getParameter(variable: $a, key: $parameter)) === ($bSort = Php::getParameter(variable: $b, key: $parameter))) {
+        return static function (array|object $first, array|object $second) use ($parameter, $order): int {
+            if (($firstSort = Php::getParameter(variable: $first, key: $parameter)) === ($secondSort = Php::getParameter(variable: $second, key: $parameter))) {
                 return 0;
             }
 
             $flip = (Criteria::DESC === $order) ? -1 : 1;
 
-            if ($aSort > $bSort) {
+            if ($firstSort > $secondSort) {
                 return $flip;
             }
 
@@ -183,19 +183,19 @@ final class Sort
         return $result;
     }
 
-    private static function compareLatvian(array|object $a, array|object $b): int
+    private static function compareLatvian(array|object $first, array|object $second): int
     {
-        $a = mb_strtolower(string: Php::getParameter(variable: $a, key: self::$field));
-        $b = mb_strtolower(string: Php::getParameter(variable: $b, key: self::$field));
+        $first = mb_strtolower(string: Php::getParameter(variable: $first, key: self::$field));
+        $second = mb_strtolower(string: Php::getParameter(variable: $second, key: self::$field));
 
-        $len = mb_strlen(string: $a);
+        $len = mb_strlen(string: $first);
 
         for ($i = 0; $i < $len; $i++) {
-            if (mb_substr(string: $a, start: $i, length: 1) === mb_substr(string: $b, start: $i, length: 1)) {
+            if (mb_substr(string: $first, start: $i, length: 1) === mb_substr(string: $second, start: $i, length: 1)) {
                 continue;
             }
 
-            if ($i > mb_strlen(string: $b) || mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $a, start: $i, length: 1)) > mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $b, start: $i, length: 1))) {
+            if ($i > mb_strlen(string: $second) || mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $first, start: $i, length: 1)) > mb_strpos(haystack: Symbol::LV_LOWERCASE, needle: mb_substr(string: $second, start: $i, length: 1))) {
                 return 1;
             }
 

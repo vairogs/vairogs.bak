@@ -51,20 +51,20 @@ abstract class BaseExtension extends AbstractExtension
         $base = $this->vars['prefix'] ?? $this->vars['class'];
 
         try {
-            $ns = (new ReflectionClass(objectOrClass: $this->vars['class']))->getNamespaceName();
+            $nameSpace = (new ReflectionClass(objectOrClass: $this->vars['class']))->getNamespaceName();
         } catch (Exception) {
-            $ns = '\\';
+            $nameSpace = '\\';
         }
 
         $short = Php::getShortName(class: $this->vars['class']);
 
-        if (self::HELPER_NAMESPACE === $ns) {
+        if (self::HELPER_NAMESPACE === $nameSpace) {
             $base = sprintf('%s_%s', 'helper', $short);
         } elseif ('Extension' === $short) {
-            $base = Text::getLastPart(string: $ns, delimiter: '\\');
+            $base = Text::getLastPart(string: $nameSpace, delimiter: '\\');
         }
 
-        if (str_starts_with(haystack: $ns, needle: Php::getShortName(class: Vairogs::class))) {
+        if (str_starts_with(haystack: $nameSpace, needle: Php::getShortName(class: Vairogs::class))) {
             $this->vars['key'] = Vairogs::VAIROGS;
         }
 

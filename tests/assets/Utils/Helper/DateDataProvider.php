@@ -22,7 +22,7 @@ class DateDataProvider
             [(new DateTime())->format(format: DateTime::ATOM)],
             [(new DateTime())->format(format: DateTime::RFC1123)],
             [(new DateTime())->format(format: DateTime::RFC3339_EXTENDED)],
-            [(new DateTime())->format(format: DateTime::ISO8601)],
+            [(new DateTime())->format(format: DateTime::W3C)],
         ];
     }
 

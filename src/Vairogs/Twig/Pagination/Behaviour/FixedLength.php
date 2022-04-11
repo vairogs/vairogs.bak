@@ -13,139 +13,139 @@ class FixedLength
 {
     final public const MIN_VISIBLE = 3;
 
-    public function __construct(private int $maximumVisible)
+    public function __construct(private int $maxVisible)
     {
-        $this->checkMinimumAllowed(maximumVisible: $this->maximumVisible);
+        $this->checkMinimum(maxVisible: $this->maxVisible);
     }
 
-    public function withMaximumVisible(int $maximumVisible): static
+    public function withMaximumVisible(int $maxVisible): static
     {
-        $this->checkMinimumAllowed(maximumVisible: $maximumVisible);
+        $this->checkMinimum(maxVisible: $maxVisible);
 
         $clone = clone $this;
-        $clone->setMaximumVisible(maximumVisible: $maximumVisible);
+        $clone->setMaximumVisible(maximumVisible: $maxVisible);
 
         return $clone;
     }
 
-    public function getMaximumVisible(): int
+    public function getMaxVisible(): int
     {
-        return $this->maximumVisible;
+        return $this->maxVisible;
     }
 
-    public function getPaginationData(int $totalPages, int $currentPage, int $indicator = -1): array
+    public function getPaginationData(int $total, int $current, int $indicator = -1): array
     {
-        $this->validate(totalPages: $totalPages, currentPage: $currentPage, indicator: $indicator);
+        $this->validate(total: $total, current: $current, indicator: $indicator);
 
-        if ($totalPages <= $this->maximumVisible) {
-            return range(start: 1, end: $totalPages);
+        if ($total <= $this->maxVisible) {
+            return range(start: 1, end: $total);
         }
 
-        if ($this->hasSingleOmittedChunk($totalPages, $currentPage)) {
-            return $this->getPaginationDataWithSingleOmittedChunk(totalPages: $totalPages, currentPage: $currentPage, omittedPagesIndicator: $indicator);
+        if ($this->hasSingleOmitted($total, $current)) {
+            return $this->getDataWithSingleOmitted(total: $total, current: $current, indicator: $indicator);
         }
 
-        return $this->getPaginationDataWithTwoOmittedChunks(totalPages: $totalPages, currentPage: $currentPage, omittedPagesIndicator: $indicator);
+        return $this->getDataWithTwoOmitted(total: $total, current: $current, omitted: $indicator);
     }
 
     #[Pure]
-    public function hasSingleOmittedChunk(int $totalPages, int $currentPage): bool
+    public function hasSingleOmitted(int $total, int $current): bool
     {
-        return $this->hasSingleOmittedChunkNearLastPage(currentPage: $currentPage) || $this->hasSingleOmittedChunkNearStartPage(totalPages: $totalPages, currentPage: $currentPage);
+        return $this->hasSingleOmittedNearLast(current: $current) || $this->hasSingleOmittedNearStart(total: $total, current: $current);
     }
 
-    private function checkMinimumAllowed(int $maximumVisible): void
+    private function checkMinimum(int $maxVisible): void
     {
-        if ($this->maximumVisible < self::MIN_VISIBLE) {
-            throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d', $maximumVisible, self::MIN_VISIBLE));
+        if ($this->maxVisible < self::MIN_VISIBLE) {
+            throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d', $maxVisible, self::MIN_VISIBLE));
         }
     }
 
     private function setMaximumVisible(int $maximumVisible): void
     {
-        $this->maximumVisible = $maximumVisible;
+        $this->maxVisible = $maximumVisible;
     }
 
-    private function validate(int $totalPages, int $currentPage, int $indicator = -1): void
+    private function validate(int $total, int $current, int $indicator = -1): void
     {
-        if ($totalPages < 1) {
-            throw new InvalidArgumentException(message: sprintf('Total number of pages (%d) should not be lower than 1', $totalPages));
+        if ($total < 1) {
+            throw new InvalidArgumentException(message: sprintf('Total number of pages (%d) should not be lower than 1', $total));
         }
 
-        if ($currentPage < 1) {
-            throw new InvalidArgumentException(message: sprintf('Current page (%d) should not be lower than 1', $currentPage));
+        if ($current < 1) {
+            throw new InvalidArgumentException(message: sprintf('Current page (%d) should not be lower than 1', $current));
         }
 
-        if ($currentPage > $totalPages) {
-            throw new InvalidArgumentException(message: sprintf('Current page (%d) should not be higher than total number of pages (%d)', $currentPage, $totalPages));
+        if ($current > $total) {
+            throw new InvalidArgumentException(message: sprintf('Current page (%d) should not be higher than total number of pages (%d)', $current, $total));
         }
 
-        if ($indicator >= 1 && $indicator <= $totalPages) {
-            throw new InvalidArgumentException(message: sprintf('Omitted pages indicator (%d) should not be between 1 and total number of pages (%d)', $indicator, $totalPages));
+        if ($indicator >= 1 && $indicator <= $total) {
+            throw new InvalidArgumentException(message: sprintf('Omitted pages indicator (%d) should not be between 1 and total number of pages (%d)', $indicator, $total));
         }
     }
 
     #[Pure]
-    private function hasSingleOmittedChunkNearLastPage(int $currentPage): bool
+    private function hasSingleOmittedNearLast(int $current): bool
     {
-        return $currentPage <= $this->getSingleOmissionBreakpoint();
+        return $current <= $this->getSingleBreakpoint();
     }
 
     #[Pure]
-    private function getSingleOmissionBreakpoint(): int
+    private function getSingleBreakpoint(): int
     {
-        return (int) floor(num: $this->maximumVisible / 2) + 1;
+        return (int) floor(num: $this->maxVisible / 2) + 1;
     }
 
     #[Pure]
-    private function hasSingleOmittedChunkNearStartPage(int $totalPages, int $currentPage): bool
+    private function hasSingleOmittedNearStart(int $total, int $current): bool
     {
-        return $currentPage >= $totalPages - $this->getSingleOmissionBreakpoint() + 1;
+        return $current >= $total - $this->getSingleBreakpoint() + 1;
     }
 
     #[Pure]
-    private function getPaginationDataWithSingleOmittedChunk(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
+    private function getDataWithSingleOmitted(int $total, int $current, int $indicator): array
     {
-        if ($this->hasSingleOmittedChunkNearLastPage(currentPage: $currentPage)) {
-            $rest = $this->maximumVisible - $currentPage;
-            $omitPagesFrom = ((int) ceil(num: $rest / 2)) + $currentPage;
-            $omitPagesTo = $totalPages - ($this->maximumVisible - $omitPagesFrom);
+        if ($this->hasSingleOmittedNearLast(current: $current)) {
+            $rest = $this->maxVisible - $current;
+            $omitPagesFrom = ((int) ceil(num: $rest / 2)) + $current;
+            $omitPagesTo = $total - ($this->maxVisible - $omitPagesFrom);
         } else {
-            $rest = $this->maximumVisible - ($totalPages - $currentPage);
+            $rest = $this->maxVisible - ($total - $current);
             $omitPagesFrom = (int) ceil(num: $rest / 2);
-            $omitPagesTo = ($currentPage - ($rest - $omitPagesFrom));
+            $omitPagesTo = ($current - ($rest - $omitPagesFrom));
         }
 
         return [
             ...range(start: 1, end: $omitPagesFrom - 1),
-            ...[$omittedPagesIndicator],
-            ...range(start: $omitPagesTo + 1, end: $totalPages),
+            ...[$indicator],
+            ...range(start: $omitPagesTo + 1, end: $total),
         ];
     }
 
-    private function getPaginationDataWithTwoOmittedChunks(int $totalPages, int $currentPage, int $omittedPagesIndicator): array
+    private function getDataWithTwoOmitted(int $total, int $current, int $omitted): array
     {
-        $visibleExceptForCurrent = ($this->maximumVisible - 1) / 2;
+        $withoutCurrent = ($this->maxVisible - 1) / 2;
 
-        if ($currentPage <= ceil(num: $totalPages / 2)) {
-            $visibleLeft = ceil(num: $visibleExceptForCurrent);
-            $visibleRight = floor(num: $visibleExceptForCurrent);
+        if ($current <= ceil(num: $total / 2)) {
+            $visibleLeft = ceil(num: $withoutCurrent);
+            $visibleRight = floor(num: $withoutCurrent);
         } else {
-            $visibleLeft = floor(num: $visibleExceptForCurrent);
-            $visibleRight = ceil(num: $visibleExceptForCurrent);
+            $visibleLeft = floor(num: $withoutCurrent);
+            $visibleRight = ceil(num: $withoutCurrent);
         }
 
-        $omitPagesLeftFrom = floor(num: $visibleLeft / 2) + 1;
-        $omitPagesLeftTo = $currentPage - ($visibleLeft - $omitPagesLeftFrom) - 1;
-        $omitPagesRightFrom = ceil(num: $visibleRight / 2) + $currentPage;
-        $omitPagesRightTo = $totalPages - ($visibleRight - ($omitPagesRightFrom - $currentPage));
+        $omitLeftFrom = floor(num: $visibleLeft / 2) + 1;
+        $omitLeftTo = $current - ($visibleLeft - $omitLeftFrom) - 1;
+        $omitRightFrom = ceil(num: $visibleRight / 2) + $current;
+        $omitRightTo = $total - ($visibleRight - ($omitRightFrom - $current));
 
         return [
-            ...range(start: 1, end: $omitPagesLeftFrom - 1),
-            ...[$omittedPagesIndicator],
-            ...range(start: $omitPagesLeftTo + 1, end: $omitPagesRightFrom - 1),
-            ...[$omittedPagesIndicator],
-            ...range(start: $omitPagesRightTo + 1, end: $totalPages),
+            ...range(start: 1, end: $omitLeftFrom - 1),
+            ...[$omitted],
+            ...range(start: $omitLeftTo + 1, end: $omitRightFrom - 1),
+            ...[$omitted],
+            ...range(start: $omitRightTo + 1, end: $total),
         ];
     }
 }
