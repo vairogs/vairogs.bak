@@ -1,0 +1,6 @@
+services:
+    Vairogs\Twig\Helper\SortLatvian\Extension:
+        public: false
+        tags:
+            -
+                name: twig.extension
