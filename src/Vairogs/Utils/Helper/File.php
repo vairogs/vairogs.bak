@@ -17,9 +17,7 @@ final class File
     #[Attribute\TwigFilter]
     public static function mkdir(string $path): bool
     {
-        $dir = dirname(path: $path);
-
-        if (!is_dir(filename: $dir) && !mkdir(directory: $dir, recursive: true) && !is_dir(filename: $dir)) {
+        if (!is_dir(filename: $dir = dirname(path: $path)) && !mkdir(directory: $dir, recursive: true) && !is_dir(filename: $dir)) {
             throw new UnexpectedValueException(message: sprintf('Directory "%s" was not created', $dir));
         }
 

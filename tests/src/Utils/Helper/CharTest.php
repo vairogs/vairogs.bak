@@ -20,7 +20,7 @@ class CharTest extends TestCase
      */
     public function testToSnakeCase(string $string, bool $skip, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Char::toSnakeCase($string, $skip));
+        $this->assertSame(expected: $expected, actual: Char::toSnakeCase(string: $string, skipCamel: $skip));
     }
 
     /**
@@ -28,6 +28,6 @@ class CharTest extends TestCase
      */
     public function testFromCamelCase(string $string, string $sep, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Char::fromCamelCase($string, $sep));
+        $this->assertSame(expected: $expected, actual: Char::fromCamelCase(string: $string, separator: $sep));
     }
 }

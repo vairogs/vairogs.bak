@@ -3,7 +3,6 @@
 namespace Vairogs\Utils\Helper;
 
 use Exception;
-use Vairogs\Utils\Generator;
 use Vairogs\Utils\Twig\Attribute;
 use function bin2hex;
 use function ceil;

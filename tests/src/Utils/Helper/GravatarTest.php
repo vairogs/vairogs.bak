@@ -12,6 +12,6 @@ class GravatarTest extends TestCase
      */
     public function testGetGravatarUrl(string $email, bool $secure, int $size, string $icon, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Gravatar::getGravatarUrl($email, $secure, $size, $icon));
+        $this->assertSame(expected: $expected, actual: Gravatar::getGravatarUrl(email: $email, isSecure: $secure, size: $size, default: $icon));
     }
 }
