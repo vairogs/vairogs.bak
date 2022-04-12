@@ -1,6 +1,6 @@
 {
     "name": "vairogs/addon-auth-openid-steam",
-    "description": "Utils: Auth library OpenID Steam models",
+    "description": "⛨ Vairogs ⛨: Addon: Auth: OpenID: Steam",
     "type": "library",
     "keywords": [
         "addon",

@@ -1,6 +1,6 @@
 {
     "name": "vairogs/addon-auth-openid",
-    "description": "Utils: Auth library OpenID models",
+    "description": "⛨ Vairogs ⛨: Addon: Auth: OpenID",
     "type": "library",
     "keywords": [
         "addon",

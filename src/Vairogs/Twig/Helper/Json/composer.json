@@ -1,6 +1,6 @@
 {
     "name": "vairogs/twig-helper-json",
-    "description": "Twig extension that implements vairogs/utils Json helper functions in Twig template",
+    "description": "⛨ Vairogs ⛨: Twig: Helper: Extension that implements vairogs/utils Json helper functions in Twig template",
     "type": "library",
     "keywords": [
         "symfony",

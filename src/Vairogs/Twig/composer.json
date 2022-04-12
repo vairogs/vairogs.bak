@@ -1,6 +1,6 @@
 {
     "name": "vairogs/twig",
-    "description": "Useful Twig extensions",
+    "description": "⛨ Vairogs ⛨: Twig",
     "type": "library",
     "keywords": [
         "env",

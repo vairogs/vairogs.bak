@@ -1,6 +1,6 @@
 {
     "name": "vairogs/twig-helper-translit",
-    "description": "Twig extension that implements vairogs/utils Translit helper functions in Twig template",
+    "description": "⛨ Vairogs ⛨: Twig: Helper: Extension that implements vairogs/utils Translit helper functions in Twig template",
     "type": "library",
     "keywords": [
         "symfony",

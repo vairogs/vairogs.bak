@@ -1,6 +1,6 @@
 {
     "name": "vairogs/addon-auth",
-    "description": "Utils: Auth library models",
+    "description": "⛨ Vairogs ⛨: Addon: Auth",
     "type": "library",
     "keywords": [
         "addon",

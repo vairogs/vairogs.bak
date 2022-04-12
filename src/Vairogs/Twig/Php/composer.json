@@ -1,6 +1,6 @@
 {
     "name": "vairogs/twig-php",
-    "description": "Twig extension that implements a way to use native PHP functions and filters in Twig template",
+    "description": "⛨ Vairogs ⛨: Twig: Extension that implements a way to use native PHP functions and filters in Twig template",
     "type": "library",
     "keywords": [
         "php",

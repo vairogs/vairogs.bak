@@ -1,6 +1,6 @@
 {
     "name": "vairogs/twig-pagination",
-    "description": "Twig extension that implements pagination in Twig template",
+    "description": "⛨ Vairogs ⛨: Twig: Etension that implements pagination in Twig template",
     "type": "library",
     "keywords": [
         "vairogs",

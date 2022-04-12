@@ -1,4 +1,10 @@
 services:
+    Vairogs\Twig\Helper\Char\Extension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
     Vairogs\Twig\Helper\Date\Extension:
         public: false
         tags:
@@ -54,6 +60,12 @@ services:
                 name: twig.extension
 
     Vairogs\Twig\Helper\Sort\Extension:
+        public: false
+        tags:
+            -
+                name: twig.extension
+
+    Vairogs\Twig\Helper\SortLatvian\Extension:
         public: false
         tags:
             -

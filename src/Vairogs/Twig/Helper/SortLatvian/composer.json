@@ -1,6 +1,6 @@
 {
     "name": "vairogs/twig-helper-sortlatvian",
-    "description": "Twig extension that implements vairogs/utils SortLatvian helper functions in Twig template",
+    "description": "⛨ Vairogs ⛨: Twig: Helper: Extension that implements vairogs/utils SortLatvian helper functions in Twig template",
     "type": "library",
     "keywords": [
         "symfony",
