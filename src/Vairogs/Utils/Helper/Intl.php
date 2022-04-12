@@ -2,10 +2,12 @@
 
 namespace Vairogs\Utils\Helper;
 
+use Symfony\Component\Intl\Countries;
 use Vairogs\Utils\Twig\Attribute;
 use function str_replace;
+use function strtoupper;
 
-final class Translit
+final class Intl
 {
     final public const MAP_CYRILLIC = [
         'е', 'ё', 'ж', 'х', 'ц', 'ч', 'ш', 'щ', 'ю', 'я',
@@ -22,15 +24,22 @@ final class Translit
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function cyrillicToLatin(string $text): string
+    public static function cyrillicToLatin(string $text, array $search = self::MAP_CYRILLIC, array $replace = self::MAP_LATIN): string
     {
-        return str_replace(search: self::MAP_CYRILLIC, replace: self::MAP_LATIN, subject: $text);
+        return str_replace(search: $search, replace: $replace, subject: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function latinToCyrillic(string $text): string
+    public static function latinToCyrillic(string $text, array $search = self::MAP_LATIN, array $replace = self::MAP_CYRILLIC): string
     {
-        return str_replace(search: self::MAP_LATIN, replace: self::MAP_CYRILLIC, subject: $text);
+        return str_replace(search: $search, replace: $replace, subject: $text);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function getCountryName(string $country, string $locale = 'en'): string
+    {
+        return Countries::getName(country: strtoupper(string: $country), displayLocale: $locale);
     }
 }

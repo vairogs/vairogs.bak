@@ -2,7 +2,7 @@
 
 namespace Vairogs\Assets\Utils\Helper;
 
-class TranslitDataProvider
+class IntlDataProvider
 {
     public function dataProvidertCyrillicToLatin(): array
     {
@@ -17,6 +17,14 @@ class TranslitDataProvider
         return [
             ['yunit-tyest',    'юнит-тест'],
             ['intyegratsiya', 'интеграция'],
+        ];
+    }
+
+    public function dataProviderGetCountryName(): array
+    {
+        return [
+            ['LV', 'en', 'Latvia'],
+            ['lv', 'lv', 'Latvija'],
         ];
     }
 }

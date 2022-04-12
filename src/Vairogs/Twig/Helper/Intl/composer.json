@@ -1,10 +1,11 @@
 {
-    "name": "vairogs/twig-helper-translit",
-    "description": "⛨ Vairogs ⛨: Twig: Helper: Extension that implements vairogs/utils Translit helper functions in Twig template",
+    "name": "vairogs/twig-helper-intl",
+    "description": "⛨ Vairogs ⛨: Twig: Helper: Extension that implements vairogs/utils Intl helper functions in Twig template",
     "type": "library",
     "keywords": [
         "symfony",
         "translit",
+        "intl",
         "twig",
         "twig-extension",
         "utils",
@@ -44,7 +45,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Twig\\Helper\\Translit\\": ""
+            "Vairogs\\Twig\\Helper\\Intl\\": ""
         }
     },
     "config": {

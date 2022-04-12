@@ -65,12 +65,14 @@
         "vairogs/utils": "self.version"
     },
     "replace": {
+        "vairogs/twig-helper-char": "self.version",
         "vairogs/twig-helper-date": "self.version",
         "vairogs/twig-helper-email": "self.version",
         "vairogs/twig-helper-file": "self.version",
         "vairogs/twig-helper-gravatar": "self.version",
         "vairogs/twig-helper-http": "self.version",
         "vairogs/twig-helper-identification": "self.version",
+        "vairogs/twig-helper-intl": "self.version",
         "vairogs/twig-helper-iteration": "self.version",
         "vairogs/twig-helper-json": "self.version",
         "vairogs/twig-helper-php": "self.version",

@@ -96,6 +96,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-identification.git"
     },
     {
+        "path": "src/Vairogs/Twig/Helper/Intl",
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-intl.git"
+    },
+    {
         "path": "src/Vairogs/Twig/Helper/Iteration",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-iteration.git"
     },
@@ -118,10 +122,6 @@
     {
         "path": "src/Vairogs/Twig/Helper/Text",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-text.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Translit",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-translit.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Uri",
