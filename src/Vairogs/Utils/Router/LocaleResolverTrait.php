@@ -3,7 +3,7 @@
 namespace Vairogs\Utils\Router;
 
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Core\Handler\FunctionHandler;
+use Vairogs\Utils\Handler\FunctionHandler;
 use function array_unique;
 use function explode;
 use function in_array;

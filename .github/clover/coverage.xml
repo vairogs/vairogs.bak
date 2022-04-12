@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649702176">
-  <project timestamp="1649702176">
+<coverage generated="1649747647">
+  <project timestamp="1649747647">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1251,34 +1251,6 @@
       <line num="43" type="stmt" count="0"/>
       <metrics loc="46" ncloc="43" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="12" coveredelements="0"/>
     </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Handler/AbstractHandler.php">
-      <class name="Vairogs\Core\Handler\AbstractHandler" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
-      </class>
-      <line num="9" type="method" name="setNext" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="11" type="stmt" count="0"/>
-      <line num="13" type="stmt" count="0"/>
-      <line num="16" type="method" name="handle" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <metrics loc="21" ncloc="21" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
-    </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Handler/FunctionHandler.php">
-      <class name="Vairogs\Core\Handler\FunctionHandler" namespace="global">
-        <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
-      </class>
-      <line num="12" type="method" name="setFunction" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="15" type="stmt" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <line num="20" type="method" name="handle" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="22" type="stmt" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <metrics loc="29" ncloc="29" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
-    </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Handler/Handler.php">
-      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Registry/HasRegistry.php">
       <metrics loc="8" ncloc="8" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
@@ -2270,6 +2242,34 @@
       <line num="162" type="stmt" count="0"/>
       <line num="165" type="stmt" count="0"/>
       <metrics loc="168" ncloc="160" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="58" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Handler/AbstractHandler.php">
+      <class name="Vairogs\Utils\Handler\AbstractHandler" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+      </class>
+      <line num="9" type="method" name="setNext" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="11" type="stmt" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <line num="16" type="method" name="handle" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <metrics loc="21" ncloc="21" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Handler/FunctionHandler.php">
+      <class name="Vairogs\Utils\Handler\FunctionHandler" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+      </class>
+      <line num="12" type="method" name="setFunction" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="14" type="stmt" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="20" type="method" name="handle" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <metrics loc="29" ncloc="29" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+    </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Handler/Handler.php">
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Char.php">
       <class name="Vairogs\Utils\Helper\Char" namespace="global">
