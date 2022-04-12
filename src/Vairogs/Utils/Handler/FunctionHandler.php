@@ -19,10 +19,14 @@ class FunctionHandler extends AbstractHandler
 
     public function handle(...$arguments): mixed
     {
+        $function = $this->function;
+
         if (null === $this->object) {
-            return ${$this->function}(...$arguments);
+            return $function(...$arguments);
         }
 
-        return Php::call(fn () => $this->object->{$this->function}(...$arguments), $this->object, true, ...$arguments) ?? parent::handle(...$arguments);
+        $object = $this->object;
+
+        return Php::call(fn () => $object->{$function}(...$arguments), $object, true, ...$arguments) ?? parent::handle(...$arguments);
     }
 }

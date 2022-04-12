@@ -2,6 +2,7 @@
 
 namespace Vairogs\Utils\Helper;
 
+use Vairogs\Utils\Handler\FunctionHandler;
 use Vairogs\Utils\Twig\Attribute;
 use function array_fill;
 use function function_exists;
@@ -16,14 +17,17 @@ final class Util
     #[Attribute\TwigFilter]
     public static function isPrime(int $number): bool
     {
-        if (null !== $prime = self::isPrimeGmp(number: (string) $number)) {
-            return $prime;
-        }
+        $function = (new FunctionHandler())->setFunction(function: 'isPrimeFunction', object: new self());
+        $below = (new FunctionHandler())->setFunction(function: 'isPrimeBelow1000', object: new self())->setNext(handler: $function);
+        $gmp = (new FunctionHandler())->setFunction(function: 'isPrimeGmp', object: new self())->setNext(handler: $below);
 
-        if (null !== $prime = self::isPrimeBelow1000(number: $number)) {
-            return $prime;
-        }
+        return $gmp->handle($number);
+    }
 
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function isPrimeFunction(int $number): bool
+    {
         preg_match(pattern: '#^1?$|^(11+?)\1+$#', subject: implode(separator: '1', array: array_fill(start_index: 0, count: $number, value: null)), matches: $matches);
 
         return isset($matches[1]);
@@ -37,17 +41,13 @@ final class Util
             return null;
         }
 
-        if (1 === $number) {
-            return false;
-        }
-
         for ($x = 2; $x < $number; $x++) {
             if (0 === $number % $x) {
                 return false;
             }
         }
 
-        return true;
+        return 1 !== $number;
     }
 
     #[Attribute\TwigFunction]
@@ -73,10 +73,10 @@ final class Util
         return $result;
     }
 
-    private static function isPrimeGmp(string $number): ?bool
+    public static function isPrimeGmp(int $number): ?bool
     {
         if (function_exists(function: 'gmp_prob_prime')) {
-            return match (gmp_prob_prime(num: $number)) {
+            return match (gmp_prob_prime(num: (string) $number)) {
                 0 => false,
                 2 => true,
                 default => null
