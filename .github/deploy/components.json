@@ -40,40 +40,36 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/captcha.git"
     },
     {
-        "path": "src/Vairogs/Sitemap",
-        "repo": "https://GH_TOKEN@github.com/vairogs/sitemap.git"
-    },
-    {
-        "path": "src/Vairogs/Utils",
-        "repo": "https://GH_TOKEN@github.com/vairogs/utils.git"
+        "path": "src/Vairogs/Core",
+        "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
     },
     {
         "path": "src/Vairogs/Extra",
         "repo": "https://GH_TOKEN@github.com/vairogs/extra.git"
     },
     {
+        "path": "src/Vairogs/Extra/Constants",
+        "repo": "https://GH_TOKEN@github.com/vairogs/extra-constants.git"
+    },
+    {
         "path": "src/Vairogs/Extra/Specification",
         "repo": "https://GH_TOKEN@github.com/vairogs/extra-specification.git"
     },
     {
-        "path": "src/Vairogs/Extra/Constants",
-        "repo": "https://GH_TOKEN@github.com/vairogs/extra-constants.git"
+        "path": "src/Vairogs/Sitemap",
+        "repo": "https://GH_TOKEN@github.com/vairogs/sitemap.git"
     },
     {
         "path": "src/Vairogs/Twig",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig.git"
     },
     {
-        "path": "src/Vairogs/Twig/Pagination",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-pagination.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Php",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-php.git"
-    },
-    {
         "path": "src/Vairogs/Twig/Helper",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Char",
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-char.git"
     },
     {
         "path": "src/Vairogs/Twig/Helper/Date",
@@ -120,10 +116,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-sortlatvian.git"
     },
     {
-        "path": "src/Vairogs/Twig/Helper/Char",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-char.git"
-    },
-    {
         "path": "src/Vairogs/Twig/Helper/Text",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-text.git"
     },
@@ -140,7 +132,15 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-util.git"
     },
     {
-        "path": "src/Vairogs/Core",
-        "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
+        "path": "src/Vairogs/Twig/Pagination",
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-pagination.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Php",
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-php.git"
+    },
+    {
+        "path": "src/Vairogs/Utils",
+        "repo": "https://GH_TOKEN@github.com/vairogs/utils.git"
     }
 ]
