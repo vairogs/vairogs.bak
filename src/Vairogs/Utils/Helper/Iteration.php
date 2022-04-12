@@ -97,14 +97,6 @@ final class Iteration
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    #[Pure]
-    public static function isAnyKeyNull(array $keys = []): bool
-    {
-        return in_array(needle: null, haystack: $keys, strict: true);
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
     public static function isAssociative(mixed $array): bool
     {
         if (!is_array(value: $array) || [] === $array) {
