@@ -76,6 +76,17 @@ final class Http
         return array_merge(Uri::buildArrayFromObject(object: $request), $additionalData);
     }
 
+    public static function isIE(Request $request): bool
+    {
+        foreach (['MSIE', 'Edge', 'Trident/7'] as $uaCheck) {
+            if (str_contains(haystack: $request->server->get(key: 'HTTP_USER_AGENT'), needle: $uaCheck)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static function checkHttps(Request $req): bool
     {
         return $req->server->has(key: Constants\Http::HEADER_HTTPS) && 'on' === $req->server->get(key: Constants\Http::HEADER_HTTPS);

@@ -147,4 +147,22 @@ final class Text
 
         return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
     }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function htmlEntityDecode(string $text): array|string|null
+    {
+        return preg_replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function detectLanguage(string $body): string
+    {
+        return match (true) {
+            str_starts_with(haystack: $body, needle: '<?xml') => 'xml',
+            str_starts_with(haystack: $body, needle: '{'), str_starts_with(haystack: $body, needle: '[') => 'json',
+            default => 'plain',
+        };
+    }
 }

@@ -5,6 +5,7 @@ namespace Vairogs\Utils\Helper;
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Attribute;
 use function array_combine;
@@ -170,5 +171,12 @@ final class Uri
     public static function isAbsolute(string $path): bool
     {
         return str_starts_with(haystack: $path, needle: '//') || preg_match(pattern: '#^[a-z-]{3,}://#i', subject: $path);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function routeExists(RouterInterface $router, string $route): bool
+    {
+        return null !== $router->getRouteCollection()->get(name: $route);
     }
 }
