@@ -11,7 +11,7 @@ jobs:
               id: branch
             - name: Split
               id: splitsh
-              uses: docker://k0d3r1s/action:split--latest
+              uses: docker://k0d3r1s/action:split--develop
               env:
                   BRANCH: ${{ steps.branch.outputs.branch }}
                   REPO: ${{ github.repository }}
