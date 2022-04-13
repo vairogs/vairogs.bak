@@ -1,6 +1,0 @@
-{
-    "require": {
-        "friendsofphp/php-cs-fixer": "dev-master",
-        "roave/security-advisories": "dev-latest"
-    }
-}
