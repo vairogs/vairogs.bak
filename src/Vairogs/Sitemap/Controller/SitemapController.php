@@ -5,6 +5,7 @@ namespace Vairogs\Sitemap\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -20,6 +21,7 @@ use function getcwd;
 use function is_file;
 use function sprintf;
 
+#[AsController]
 class SitemapController extends AbstractController
 {
     #[Route(path: '/sitemap.xml', defaults: ['_format' => 'xml'], methods: [Request::METHOD_GET])]
