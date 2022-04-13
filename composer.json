@@ -79,7 +79,8 @@
         "twig/twig": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": ">=9.5.0"
+        "phpunit/phpunit": ">=9.5.0",
+        "roave/security-advisories": "dev-latest"
     },
     "replace": {
         "vairogs/addon": "self.version",

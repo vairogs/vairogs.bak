@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649770474">
-  <project timestamp="1649770474">
+<coverage generated="1649877286">
+  <project timestamp="1649877286">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -322,7 +322,7 @@
       <line num="58" type="stmt" count="0"/>
       <line num="64" type="method" name="fetchUser" visibility="public" complexity="6" crap="42" count="0"/>
       <line num="66" type="stmt" count="0"/>
-      <line num="68" type="stmt" count="0"/>
+      <line num="67" type="stmt" count="0"/>
       <line num="69" type="stmt" count="0"/>
       <line num="71" type="stmt" count="0"/>
       <line num="72" type="stmt" count="0"/>
@@ -787,7 +787,7 @@
       <line num="145" type="method" name="getTokenResponse" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="147" type="stmt" count="0"/>
       <line num="148" type="stmt" count="0"/>
-      <line num="150" type="stmt" count="0"/>
+      <line num="149" type="stmt" count="0"/>
       <line num="151" type="stmt" count="0"/>
       <line num="153" type="stmt" count="0"/>
       <line num="159" type="method" name="getRevokeToken" visibility="public" complexity="1" crap="2" count="0"/>
@@ -1520,58 +1520,54 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Sitemap/Command/SitemapCommand.php">
       <class name="Vairogs\Sitemap\Command\SitemapCommand" namespace="global">
-        <metrics complexity="11" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="0" elements="34" coveredelements="0"/>
+        <metrics complexity="11" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="30" coveredelements="0"/>
       </class>
-      <line num="33" type="method" name="__construct" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="41" type="stmt" count="0"/>
-      <line num="44" type="method" name="configure" visibility="protected" complexity="2" crap="6" count="0"/>
-      <line num="46" type="stmt" count="0"/>
-      <line num="48" type="stmt" count="0"/>
+      <line num="31" type="method" name="__construct" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="33" type="stmt" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="37" type="stmt" count="0"/>
+      <line num="40" type="method" name="configure" visibility="protected" complexity="2" crap="6" count="0"/>
+      <line num="43" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="47" type="method" name="execute" visibility="protected" complexity="6" crap="42" count="0"/>
       <line num="49" type="stmt" count="0"/>
-      <line num="50" type="stmt" count="0"/>
-      <line num="53" type="method" name="execute" visibility="protected" complexity="6" crap="42" count="0"/>
-      <line num="55" type="stmt" count="0"/>
-      <line num="56" type="stmt" count="0"/>
-      <line num="58" type="stmt" count="0"/>
+      <line num="51" type="stmt" count="0"/>
+      <line num="52" type="stmt" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="57" type="stmt" count="0"/>
       <line num="60" type="stmt" count="0"/>
       <line num="61" type="stmt" count="0"/>
+      <line num="63" type="stmt" count="0"/>
       <line num="64" type="stmt" count="0"/>
       <line num="67" type="stmt" count="0"/>
-      <line num="68" type="stmt" count="0"/>
+      <line num="69" type="stmt" count="0"/>
       <line num="70" type="stmt" count="0"/>
       <line num="71" type="stmt" count="0"/>
+      <line num="72" type="stmt" count="0"/>
+      <line num="73" type="stmt" count="0"/>
       <line num="74" type="stmt" count="0"/>
-      <line num="76" type="stmt" count="0"/>
       <line num="77" type="stmt" count="0"/>
-      <line num="78" type="stmt" count="0"/>
       <line num="79" type="stmt" count="0"/>
-      <line num="80" type="stmt" count="0"/>
       <line num="81" type="stmt" count="0"/>
       <line num="84" type="stmt" count="0"/>
       <line num="86" type="stmt" count="0"/>
-      <line num="89" type="stmt" count="0"/>
-      <line num="91" type="stmt" count="0"/>
-      <metrics loc="94" ncloc="93" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="0" elements="34" coveredelements="0"/>
+      <metrics loc="89" ncloc="88" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="30" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Sitemap/Controller/SitemapController.php">
       <class name="Vairogs\Sitemap\Controller\SitemapController" namespace="global">
         <metrics complexity="5" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="11" coveredelements="0"/>
       </class>
-      <line num="25" type="method" name="sitemapXml" visibility="public" complexity="5" crap="30" count="0"/>
-      <line num="28" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
+      <line num="27" type="method" name="sitemapXml" visibility="public" complexity="5" crap="30" count="0"/>
+      <line num="30" type="stmt" count="0"/>
+      <line num="31" type="stmt" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="35" type="stmt" count="0"/>
+      <line num="38" type="stmt" count="0"/>
       <line num="39" type="stmt" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="43" type="stmt" count="0"/>
-      <metrics loc="46" ncloc="46" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="11" coveredelements="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="42" type="stmt" count="0"/>
+      <line num="45" type="stmt" count="0"/>
+      <metrics loc="48" ncloc="48" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="0" elements="11" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Sitemap/DependencyInjection/SitemapDependency.php">
       <class name="Vairogs\Sitemap\DependencyInjection\SitemapDependency" namespace="global">
@@ -1871,7 +1867,7 @@
       <line num="18" type="stmt" count="0"/>
       <line num="21" type="method" name="getResponse" visibility="public" complexity="2" crap="6" count="0"/>
       <line num="23" type="stmt" count="0"/>
-      <line num="28" type="stmt" count="0"/>
+      <line num="27" type="stmt" count="0"/>
       <line num="29" type="stmt" count="0"/>
       <line num="30" type="stmt" count="0"/>
       <line num="31" type="stmt" count="0"/>
@@ -3016,6 +3012,6 @@
       <line num="53" type="stmt" count="0"/>
       <metrics loc="57" ncloc="57" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <metrics files="148" loc="7649" ncloc="7424" classes="98" methods="525" coveredmethods="53" conditionals="0" coveredconditionals="0" statements="1677" coveredstatements="172" elements="2202" coveredelements="225"/>
+    <metrics files="148" loc="7646" ncloc="7421" classes="98" methods="525" coveredmethods="53" conditionals="0" coveredconditionals="0" statements="1673" coveredstatements="172" elements="2198" coveredelements="225"/>
   </project>
 </coverage>

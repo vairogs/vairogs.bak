@@ -18,7 +18,7 @@
         </exclude>
         <report>
             <html outputDirectory=".github/coverage"/>
-            <clover outputFile=".github/clover/coverage.xml"/>
+            <clover outputFile="coverage.xml"/>
         </report>
     </coverage>
 </phpunit>
