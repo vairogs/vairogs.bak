@@ -24,8 +24,8 @@ class ErrorResponse
 <errors>
 ';
 
-        /** @var ConstraintViolation $error */
         foreach ($this->violations as $error) {
+            /* @var ConstraintViolation $error */
             $buffer .= "\t" . '<error>' .
                 "\n\t\t" . '<property_path>' . $error->getPropertyPath() . '</property_path>' .
                 "\n\t\t" . '<message>' . $error->getMessage() . '</message>' .

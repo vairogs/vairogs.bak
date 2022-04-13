@@ -64,8 +64,8 @@ class OpenIDProvider implements HasRegistry
     public function fetchUser(): ?OpenIDUser
     {
         if ($user = $this->validate()) {
-            /** @var OpenIDUserBuilder $builder */
             $builder = new $this->options['user_builder']();
+            /* @var OpenIDUserBuilder $builder */
             $builder->setUserClass(class: $this->userClass ?? $builder->getUserClass());
 
             if (null === $this->profileUrl) {

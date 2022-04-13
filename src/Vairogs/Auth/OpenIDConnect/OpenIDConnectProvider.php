@@ -146,8 +146,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     {
         $response = $this->getResponse(request: $request);
         $this->statusCode = $response->getStatusCode();
-        /** @var array $parsed */
         $parsed = $this->parseResponse(response: $response);
+        /* @var array $parsed */
         $this->checkResponse(response: $response, data: $parsed);
 
         return $parsed;
