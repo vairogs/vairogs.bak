@@ -3,6 +3,7 @@
 namespace Vairogs\Sitemap\Command;
 
 use Exception;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,42 +23,34 @@ use function is_file;
 use function sprintf;
 use function unlink;
 
+#[AsCommand(name: 'vairogs:sitemap', description: 'Regenerate sitemap.xml')]
 class SitemapCommand extends Command
 {
     private const HOST = 'host';
 
-    protected static $defaultName = 'vairogs:sitemap';
-    private array $options;
-    private Provider $provider;
-
-    public function __construct(private readonly ValidatorInterface $validator, ?Provider $provider = null, array $options = [])
+    public function __construct(private readonly ValidatorInterface $validator, private readonly ?Provider $provider = null, private readonly array $options = [])
     {
         if (null === $provider || (false === $options[Status::ENABLED])) {
-            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and pass a Provider');
         }
 
-        $this->options = $options;
-        $this->provider = $provider;
-        parent::__construct(name: self::$defaultName);
+        parent::__construct();
     }
 
     protected function configure(): void
     {
-        $host = $this->options[self::HOST] ?? null;
         $this
-            ->setDescription(description: 'Regenerate sitemap.xml')
-            ->addArgument(name: self::HOST, mode: $host ? InputArgument::OPTIONAL : InputArgument::REQUIRED, description: 'host to use in sitemap', default: $this->options[self::HOST])
+            ->addArgument(name: self::HOST, mode: ($this->options[self::HOST] ?? null) ? InputArgument::OPTIONAL : InputArgument::REQUIRED, description: 'host to use in sitemap', default: $this->options[self::HOST])
             ->addOption(name: 'filename', mode: InputOption::VALUE_OPTIONAL, description: 'sitemap filename if not sitemap.xml', default: 'sitemap.xml');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $sitemap = $this->provider->populate(host: $input->getArgument(name: self::HOST));
-        $violations = $this->validator->validate(value: $sitemap);
 
-        if (0 !== $violations->count()) {
-            /** @var ConstraintViolation $error */
+        if (0 !== ($violations = $this->validator->validate(value: $sitemap))->count()) {
             foreach ($violations as $error) {
+                /* @var ConstraintViolation $error */
                 $output->writeln(messages: $error->getMessage());
             }
 
@@ -82,6 +75,8 @@ class SitemapCommand extends Command
             }
 
             $output->writeln(messages: '<error>' . $exception->getMessage() . '</error>');
+
+            fclose(stream: $handle);
 
             return 2;
         }
