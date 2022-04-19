@@ -15,9 +15,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Security\Core\Security;
 use Vairogs\Cache\Cache;
-use Vairogs\Cache\Header;
-use Vairogs\Cache\Utils\Event;
-use Vairogs\Cache\Utils\Pool;
+use Vairogs\Cache\Event\CacheEvent;
+use Vairogs\Cache\Pool;
+use Vairogs\Core\Cache\Header;
 use function class_exists;
 use function in_array;
 use function is_string;
@@ -31,14 +31,14 @@ class CacheEventListener implements EventSubscriberInterface
     ];
 
     protected readonly ChainAdapter $adapter;
-    protected readonly Event $event;
+    protected readonly CacheEvent $event;
 
     public function __construct(protected bool $enabled, Security $security, ...$adapters)
     {
         if ($this->enabled) {
             $this->adapter = new ChainAdapter(adapters: Pool::createPool(class: Cache::class, adapters: $adapters));
             $this->adapter->prune();
-            $this->event = new Event(security: $security);
+            $this->event = new CacheEvent(security: $security);
         }
     }
 

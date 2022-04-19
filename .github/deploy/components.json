@@ -32,10 +32,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/cache.git"
     },
     {
-        "path": "src/Vairogs/Cache/Utils",
-        "repo": "https://GH_TOKEN@github.com/vairogs/cache-utils.git"
-    },
-    {
         "path": "src/Vairogs/Captcha",
         "repo": "https://GH_TOKEN@github.com/vairogs/captcha.git"
     },

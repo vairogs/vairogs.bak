@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Cache\Utils;
+namespace Vairogs\Cache;
 
 use Symfony\Component\HttpFoundation\Request;
 

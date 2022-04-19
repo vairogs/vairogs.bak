@@ -1,14 +1,14 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Cache\Utils;
+namespace Vairogs\Cache;
 
 use BadMethodCallException;
 use InvalidArgumentException;
 use Psr\Cache\CacheItemPoolInterface;
-use Vairogs\Cache\Utils\Adapter\Adapter;
+use Vairogs\Cache\Adapter\Adapter;
 use function sprintf;
 
-class Pool
+final class Pool
 {
     /**
      * @throws BadMethodCallException

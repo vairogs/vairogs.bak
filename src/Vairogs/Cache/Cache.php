@@ -3,10 +3,11 @@
 namespace Vairogs\Cache;
 
 use Attribute;
-use Vairogs\Cache\Utils\Strategy;
 use Vairogs\Utils\Helper\Iteration;
 use function hash;
+use function hash_algos;
 use function http_build_query;
+use function in_array;
 use function is_array;
 use function str_replace;
 
@@ -14,10 +15,13 @@ use function str_replace;
 final class Cache
 {
     final public const DEFAULT_LIFETIME = 86400;
-    private const ALGORITHM = 'sha1';
+    final public const ALGORITHM = 'xxh3';
 
-    public function __construct(private readonly int $expires = self::DEFAULT_LIFETIME, private readonly array $attributes = [], private string $strategy = Strategy::ALL, private readonly string $algorithm = self::ALGORITHM, private mixed $data = null)
+    public function __construct(private readonly int $expires = self::DEFAULT_LIFETIME, private readonly array $attributes = [], private readonly string $strategy = Strategy::ALL, private string $algorithm = self::ALGORITHM, private mixed $data = null)
     {
+        if (!in_array(needle: $this->algorithm, haystack: hash_algos(), strict: true)) {
+            $this->algorithm = self::ALGORITHM;
+        }
     }
 
     public function getKey(string $prefix = ''): string
@@ -55,13 +59,6 @@ final class Cache
     public function getStrategy(): string
     {
         return $this->strategy;
-    }
-
-    public function setStrategy(string $strategy): self
-    {
-        $this->strategy = $strategy;
-
-        return $this;
     }
 
     public function getExpires(): int

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Cache\Utils;
+namespace Vairogs\Cache\Event;
 
 use Exception;
 use InvalidArgumentException;
@@ -8,18 +8,16 @@ use JsonSerializable;
 use ReflectionClass;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\Security\Core\Security;
+use Vairogs\Cache\Strategy;
 use function end;
 use function explode;
 use function is_array;
 use function reset;
 use function sprintf;
 
-class Event
+class CacheEvent
 {
-    private const PARAMS = '_route_params';
-
-    /** @noinspection InterfacesAsConstructorDependenciesInspection */
-    public function __construct(protected readonly Security $security)
+    public function __construct(private readonly Security $security)
     {
     }
 
@@ -28,21 +26,23 @@ class Event
      */
     public function getAttributes(KernelEvent $kernelEvent, string $class): array
     {
+        $params = '_route_params';
+
         if (null !== ($attribute = $this->getAtribute(kernelEvent: $kernelEvent, class: $class))) {
             $request = $kernelEvent->getRequest();
 
             $user = $this->getUser();
 
             return match ($attribute->getStrategy()) {
-                Strategy::GET => $request->attributes->get(key: self::PARAMS) + $request->query->all(),
+                Strategy::GET => $request->attributes->get(key: $params) + $request->query->all(),
                 Strategy::POST => $request->request->all(),
                 Strategy::USER => $user,
                 Strategy::MIXED => [
-                    Strategy::GET => $request->attributes->get(key: self::PARAMS) + $request->query->all(),
+                    Strategy::GET => $request->attributes->get(key: $params) + $request->query->all(),
                     Strategy::POST => $request->request->all(),
                     Strategy::USER => $user,
                 ],
-                Strategy::ALL => $request->attributes->get(key: self::PARAMS) + $request->query->all() + $request->request->all() + $user,
+                Strategy::ALL => $request->attributes->get(key: $params) + $request->query->all() + $request->request->all() + $user,
                 default => throw new InvalidArgumentException(message: sprintf('Unknown strategy: %s', $attribute->getStrategy())),
             };
         }
@@ -70,8 +70,7 @@ class Event
 
     public function getController(KernelEvent $kernelEvent): array
     {
-        $controller = $kernelEvent->getRequest()
-            ->get(key: '_controller');
+        $controller = $kernelEvent->getRequest()?->get(key: '_controller');
 
         if ((null !== $controller) && is_array(value: $instance = explode(separator: '::', string: $controller, limit: 2)) && isset($instance[1])) {
             return $instance;

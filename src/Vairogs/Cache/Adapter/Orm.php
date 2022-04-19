@@ -1,25 +1,23 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Cache\Utils\Adapter;
+namespace Vairogs\Cache\Adapter;
 
-use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query;
-use Exception;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Vairogs\Core\Vairogs;
-use Vairogs\Utils\Helper\Php;
+use Vairogs\Utils\Helper\Composer;
+use function implode;
 use function sprintf;
 
-class Orm implements Adapter
+final class Orm implements Adapter
 {
     public function __construct(private readonly EntityManagerInterface $entityManager, private readonly string $namespace = Vairogs::VAIROGS)
     {
-        if (!Php::exists(class: Driver::class) || !Php::exists(class: Query::class)) {
-            throw new InvalidConfigurationException(message: sprintf('Packages %s and %s must be installed in order to use %s', 'doctrine/orm', 'doctrine/dbal', self::class));
+        if (!Composer::isInstalled(packages: $packages = ['doctrine/dbal', 'doctrine/orm'], includeDevRequirements: false)) {
+            throw new InvalidConfigurationException(message: sprintf('In order to use %s, package(s)/extension(s) "%s" must be installed', self::class, implode(separator: ',', array: $packages)));
         }
     }
 
@@ -33,17 +31,13 @@ class Orm implements Adapter
         $dbalAdapter = new DoctrineDbalAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: Adapter::DEFAULT_LIFETIME, options: ['db_table' => $table]);
 
         if (!$schemaManager->tablesExist(names: [$table])) {
-            try {
-                $dbalAdapter->createTable();
-            } catch (Exception $exception) {
-                throw new DBALException(message: $exception->getMessage(), code: $exception->getCode(), previous: $exception);
-            }
+            $dbalAdapter->createTable();
         }
 
         if ($schemaManager->tablesExist(names: [$table])) {
             return $dbalAdapter;
         }
 
-        throw new DBALException(message: sprintf('Invalid table name: "%s"', $table));
+        throw new DBALException(message: sprintf('Invalid table: "%s"', $table));
     }
 }

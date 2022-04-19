@@ -59,17 +59,14 @@
         "symfony/property-info": "^5.4|^6.0",
         "symfony/security-core": "^5.4|^6.0",
         "vairogs/core": "self.version",
-        "vairogs/extra-constants": "self.version"
-    },
-    "replace": {
-        "vairogs/cache-utils": "self.version"
+        "vairogs/extra-constants": "self.version",
+        "vairogs/utils": "self.version"
     },
     "suggest": {
-        "ext-phpiredis": "For PhpRedis cache adapter",
+        "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol",
         "ext-redis": "For PhpRedis and Predis cache adapter",
         "doctrine/dbal": "For Orm cache adapter usage",
-        "doctrine/orm": "For Orm cache adapter usage",
-        "snc/redis-bundle": "For Predis or PhpRedis cache adapter usage"
+        "doctrine/orm": "For Orm cache adapter usage"
     },
     "autoload": {
         "psr-4": {

@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Cache\Utils\Adapter;
+namespace Vairogs\Cache\Adapter;
 
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
 use Vairogs\Core\Vairogs;
 
-class File implements Adapter
+final class File implements Adapter
 {
     public function __construct(private readonly string $namespace = Vairogs::VAIROGS)
     {
