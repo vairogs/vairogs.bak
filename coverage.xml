@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650335557">
-  <project timestamp="1650335557">
+<coverage generated="1650376824">
+  <project timestamp="1650376824">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -949,12 +949,12 @@
       <class name="Vairogs\Cache\Adapter\AbstractRedisAdapter" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="6" coveredelements="0"/>
       </class>
-      <line num="16" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="23" type="method" name="getAdapter" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <metrics loc="30" ncloc="30" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="6" coveredelements="0"/>
+      <line num="20" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="27" type="method" name="getAdapter" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <metrics loc="32" ncloc="32" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="6" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Cache/Adapter/Adapter.php">
       <metrics loc="13" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -988,23 +988,15 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Cache/Adapter/PhpRedis.php">
       <class name="Vairogs\Cache\Adapter\PhpRedis" namespace="global">
-        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <line num="12" type="method" name="checkDeclaration" visibility="protected" complexity="2" crap="6" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="15" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <metrics loc="21" ncloc="21" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Cache/Adapter/Predis.php">
       <class name="Vairogs\Cache\Adapter\Predis" namespace="global">
-        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <line num="12" type="method" name="checkDeclaration" visibility="protected" complexity="2" crap="6" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="15" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <metrics loc="21" ncloc="21" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Cache/Cache.php">
       <class name="Vairogs\Cache\Cache" namespace="global">
@@ -3032,6 +3024,6 @@
       <line num="53" type="stmt" count="0"/>
       <metrics loc="57" ncloc="57" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <metrics files="151" loc="7699" ncloc="7475" classes="100" methods="526" coveredmethods="54" conditionals="0" coveredconditionals="0" statements="1676" coveredstatements="168" elements="2202" coveredelements="222"/>
+    <metrics files="151" loc="7679" ncloc="7455" classes="98" methods="524" coveredmethods="54" conditionals="0" coveredconditionals="0" statements="1670" coveredstatements="168" elements="2194" coveredelements="222"/>
   </project>
 </coverage>
