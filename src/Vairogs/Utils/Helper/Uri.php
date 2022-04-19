@@ -81,10 +81,7 @@ final class Uri
     {
         $urlParsed = parse_url(url: $url);
 
-        $scheme = $urlParsed['scheme'] . '://';
-        $host = $urlParsed['host'];
         $port = (string) ($urlParsed['port'] ?? '');
-        $path = $urlParsed['path'] ?? '';
         $query = $urlParsed['query'] ?? '';
 
         if ('' !== $query) {
@@ -96,16 +93,14 @@ final class Uri
             $port = ':' . $port;
         }
 
-        return $scheme . $host . $port . $path . $query;
+        return $urlParsed['scheme'] . '://' . $urlParsed['host'] . $port . ($urlParsed['path'] ?? '') . $query;
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function arrayFromQueryString(string $query): array
     {
-        $query = preg_replace_callback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(string: urldecode(string: $match[0])), subject: $query);
-
-        parse_str(string: $query, result: $values);
+        parse_str(string: preg_replace_callback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(string: urldecode(string: $match[0])), subject: $query), result: $values);
 
         return array_combine(keys: array_map(callback: 'hex2bin', array: array_keys(array: $values)), values: $values);
     }

@@ -19,9 +19,8 @@ final class Util
     {
         $function = (new FunctionHandler())->setFunction(function: 'isPrimeFunction', object: new self());
         $below = (new FunctionHandler())->setFunction(function: 'isPrimeBelow1000', object: new self())->setNext(handler: $function);
-        $gmp = (new FunctionHandler())->setFunction(function: 'isPrimeGmp', object: new self())->setNext(handler: $below);
 
-        return $gmp->handle($number);
+        return (new FunctionHandler())->setFunction(function: 'isPrimeGmp', object: new self())->setNext(handler: $below)->handle($number);
     }
 
     #[Attribute\TwigFunction]

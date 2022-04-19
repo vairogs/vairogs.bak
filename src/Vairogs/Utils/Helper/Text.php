@@ -6,8 +6,7 @@ use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Utils\Twig\Attribute;
 use function array_key_exists;
-use function base64_encode;
-use function hash;
+use function function_exists;
 use function html_entity_decode;
 use function iconv;
 use function is_numeric;
@@ -17,12 +16,12 @@ use function mb_strrpos;
 use function mb_substr;
 use function preg_match;
 use function preg_replace;
-use function round;
 use function rtrim;
 use function str_replace;
 use function strip_tags;
 use function strpbrk;
 use function strrev;
+use function strrpos;
 use function substr;
 
 final class Text
@@ -31,21 +30,21 @@ final class Text
     #[Attribute\TwigFilter]
     public static function cleanText(string $text): string
     {
-        return html_entity_decode(string: self::oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: Definition::UTF8, from_encoding: Definition::UTF8))));
+        return self::htmlEntityDecode(text: self::oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: Definition::UTF8, from_encoding: Definition::UTF8))));
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function oneSpace(string $text): string
     {
-        return preg_replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
+        return self::replacePattern(pattern: '#\s+#S', replacement: ' ', text: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function stripSpace(string $text): string
     {
-        return preg_replace(pattern: '#\s+#', replacement: '', subject: $text);
+        return self::replacePattern(pattern: '#\s+#', text: $text);
     }
 
     #[Attribute\TwigFunction]
@@ -99,33 +98,41 @@ final class Text
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    #[Pure]
-    public static function reverse(string $text): string
+    public static function reverseUTF8(string $text): string
     {
-        return iconv(from_encoding: 'UTF-32LE', to_encoding: Definition::UTF8, string: strrev(string: iconv(from_encoding: Definition::UTF8, to_encoding: 'UTF-32BE', string: $text)));
+        if (function_exists(function: 'iconv')) {
+            return iconv(from_encoding: Definition::UTF32LE, to_encoding: Definition::UTF8, string: strrev(string: iconv(from_encoding: Definition::UTF8, to_encoding: Definition::UTF32LE, string: $text)));
+        }
+
+        return strrev(string: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function keepNumeric(string $text): string
     {
-        return preg_replace(pattern: '#\D#', replacement: '', subject: $text);
+        return self::replacePattern(pattern: '#\D#', text: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function keepAscii(string $text): string
     {
-        return preg_replace(pattern: '#[[:^ascii:]]#', replacement: '', subject: $text);
+        return self::replacePattern(pattern: '#[[:^ascii:]]#', text: $text);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function replacePattern(string $pattern, string $replacement = '', string $text = ''): string
+    {
+        return preg_replace(pattern: $pattern, replacement: $replacement, subject: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function getLastPart(string $text, string $delimiter): string
     {
-        $idx = strrpos(haystack: $text, needle: $delimiter);
-
-        return false === $idx ? $text : substr(string: $text, offset: $idx + 1);
+        return false === ($idx = strrpos(haystack: $text, needle: $delimiter)) ? $text : substr(string: $text, offset: $idx + 1);
     }
 
     #[Attribute\TwigFunction]
@@ -141,28 +148,8 @@ final class Text
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getHash(string $text, int $bits = 256): string
-    {
-        $hash = substr(string: hash(algo: 'sha' . $bits, data: $text, binary: true), offset: 0, length: (int) round(num: $bits / 16));
-
-        return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
     public static function htmlEntityDecode(string $text): array|string|null
     {
-        return preg_replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function detectLanguage(string $body): string
-    {
-        return match (true) {
-            str_starts_with(haystack: $body, needle: '<?xml') => 'xml',
-            str_starts_with(haystack: $body, needle: '{'), str_starts_with(haystack: $body, needle: '[') => 'json',
-            default => 'plain',
-        };
+        return self::replacePattern(pattern: '#\R+#', text: html_entity_decode(string: $text));
     }
 }

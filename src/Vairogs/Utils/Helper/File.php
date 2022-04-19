@@ -10,6 +10,7 @@ use function is_dir;
 use function is_file;
 use function mkdir;
 use function sprintf;
+use function str_starts_with;
 
 final class File
 {
@@ -29,5 +30,16 @@ final class File
     public static function fileExistsPublic(string $filename): bool
     {
         return is_file(filename: getcwd() . '/' . $filename);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function detectLanguage(string $body): string
+    {
+        return match (true) {
+            str_starts_with(haystack: $body, needle: '<?xml') => 'xml',
+            str_starts_with(haystack: $body, needle: '{'), str_starts_with(haystack: $body, needle: '[') => 'json',
+            default => 'plain',
+        };
     }
 }

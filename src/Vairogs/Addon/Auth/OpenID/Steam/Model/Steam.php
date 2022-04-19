@@ -19,8 +19,6 @@ class Steam implements OpenIDUser, User, Stringable
     use SteamGetters;
     use SteamSetters;
 
-    final public const RETURNS_EMAIL = false;
-
     #[ORM\Column(type: Types::STRING, unique: true)]
     protected string $openID;
 
@@ -83,6 +81,6 @@ class Steam implements OpenIDUser, User, Stringable
 
     public function returnsEmail(): bool
     {
-        return self::RETURNS_EMAIL;
+        return false;
     }
 }

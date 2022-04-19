@@ -4,10 +4,14 @@ namespace Vairogs\Utils\Helper;
 
 use Exception;
 use Vairogs\Utils\Twig\Attribute;
+use function base64_encode;
 use function bin2hex;
 use function ceil;
 use function floor;
+use function hash;
 use function random_bytes;
+use function round;
+use function rtrim;
 use function str_repeat;
 use function str_replace;
 use function str_shuffle;
@@ -94,5 +98,14 @@ final class Identification
     {
         /* @noinspection NonSecureStrShuffleUsageInspection */
         return substr(string: str_shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function getHash(string $text, int $bits = 256): string
+    {
+        $hash = substr(string: hash(algo: 'sha' . $bits, data: $text, binary: true), offset: 0, length: (int) round(num: $bits / 16));
+
+        return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
     }
 }
