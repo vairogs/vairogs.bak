@@ -5,6 +5,7 @@ namespace Vairogs\Utils\Helper;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\PropertyInfo\Type;
+use Vairogs\Extra\Constants\Enum\StartsEnds;
 use Vairogs\Utils\Twig\Attribute;
 use function array_filter;
 use function array_flip;
@@ -17,16 +18,12 @@ use function get_debug_type;
 use function in_array;
 use function is_array;
 use function is_object;
-use function sprintf;
 use function str_ends_with;
 use function str_starts_with;
 use const ARRAY_FILTER_USE_KEY;
 
 final class Iteration
 {
-    final public const STARTS = 'starts';
-    final public const ENDS = 'ends';
-
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function isEmpty(mixed $variable): bool
@@ -159,12 +156,11 @@ final class Iteration
      */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function arrayValuesFiltered(array $input, string $with, string $type = self::STARTS): array
+    public static function arrayValuesFiltered(array $input, string $with, StartsEnds $enum = StartsEnds::STARTS): array
     {
-        return match ($type) {
-            self::STARTS => array_values(array: self::filterKeyStartsWith(input: $input, startsWith: $with)),
-            self::ENDS => array_values(array: self::filterKeyEndsWith(input: $input, endsWith: $with)),
-            default => throw new InvalidArgumentException(message: sprintf('Invalid type "%s", allowed types are "%s" and "%s"', $type, self::STARTS, self::ENDS)),
+        return match ($enum) {
+            StartsEnds::STARTS => array_values(array: self::filterKeyStartsWith(input: $input, startsWith: $with)),
+            StartsEnds::ENDS => array_values(array: self::filterKeyEndsWith(input: $input, endsWith: $with))
         };
     }
 
