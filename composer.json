@@ -1,6 +1,6 @@
 {
     "name": "vairogs/vairogs",
-    "description": "⛨ Vairogs ⛨: Set of symfony tools and bundles to make coding a bit easier",
+    "description": "⛨ Vairogs ⛨: Set of php (mostly symfony) tools and libraries to make development a bit easier",
     "type": "library",
     "homepage": "https://github.com/vairogs/vairogs/wiki",
     "keywords": [
@@ -51,12 +51,15 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pdo": "*",
+        "ext-redis": "*",
+        "composer-runtime-api": ">=2.0.0",
         "doctrine/collections": "*",
         "doctrine/dbal": "*",
         "doctrine/orm": "*",
         "jetbrains/phpstorm-attributes": "*",
         "lcobucci/jwt": "*",
         "league/oauth2-client": "*",
+        "predis/predis": ">=1.1.0",
         "psr/cache": "*",
         "psr/http-message": "*",
         "symfony/cache": "^5.4|^6.0",
@@ -79,9 +82,12 @@
         "twig/twig": "*"
     },
     "require-dev": {
+        "ext-redis": "*",
+        "friendsofphp/php-cs-fixer": ">=v3.8.0",
         "phpunit/phpunit": ">=9.5.0",
+        "predis/predis": ">=1.1.0",
         "roave/security-advisories": "dev-latest",
-        "friendsofphp/php-cs-fixer": ">=v3.8.0"
+        "symfony/phpunit-bridge": "^5.4|^6.0"
     },
     "replace": {
         "vairogs/addon": "self.version",
@@ -92,7 +98,6 @@
         "vairogs/auth-openid": "self.version",
         "vairogs/auth-openidconnect": "self.version",
         "vairogs/cache": "self.version",
-        "vairogs/cache-utils": "self.version",
         "vairogs/captcha": "self.version",
         "vairogs/core": "self.version",
         "vairogs/extra": "self.version",
@@ -123,11 +128,8 @@
     },
     "suggest": {
         "ext-gmp": "to use gmp prime check function",
-        "ext-phpiredis": "For PhpRedis cache adapter",
-        "ext-redis": "For PhpRedis and Predis cache adapter",
-        "doctrine/dbal": "For Orm cache adapter usage",
-        "doctrine/orm": "For Orm cache adapter usage",
-        "snc/redis-bundle": "For Predis or PhpRedis cache adapter usage"
+        "ext-iconv": "To use some Helper functions",
+        "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
     },
     "autoload": {
         "psr-4": {

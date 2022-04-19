@@ -60,6 +60,7 @@
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "composer-runtime-api": ">=2.0.0",
         "doctrine/collections": "*",
         "doctrine/dbal": "*",
         "doctrine/orm": "*",
@@ -72,6 +73,9 @@
         "vairogs/core": "self.version",
         "vairogs/extra-constants": "self.version",
         "twig/twig": "*"
+    },
+    "suggest": {
+        "ext-iconv": "To use some Helper functions"
     },
     "autoload": {
         "psr-4": {

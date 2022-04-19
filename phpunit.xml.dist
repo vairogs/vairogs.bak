@@ -3,12 +3,15 @@
     <php>
         <ini name="error_reporting" value="-1"/>
         <ini name="memory_limit" value="-1"/>
+        <env name="SHELL_VERBOSITY" value="-1" />
     </php>
+
     <testsuites>
         <testsuite name="Vairogs Test Suite">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
+
     <coverage>
         <include>
             <directory suffix=".php">./src/Vairogs/</directory>
