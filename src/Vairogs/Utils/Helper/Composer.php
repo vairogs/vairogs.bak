@@ -4,9 +4,12 @@ namespace Vairogs\Utils\Helper;
 
 use Composer\InstalledVersions;
 use Vairogs\Utils\Twig\Attribute;
+use function class_exists;
+use function interface_exists;
 use function phpversion;
 use function str_replace;
 use function str_starts_with;
+use function trait_exists;
 
 class Composer
 {
@@ -29,5 +32,18 @@ class Composer
         }
 
         return true;
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function exists(string $class, bool $checkTrait = false): bool
+    {
+        $exists = class_exists(class: $class) || interface_exists(interface: $class);
+
+        if (!$checkTrait) {
+            return $exists;
+        }
+
+        return $exists || trait_exists(trait: $class);
     }
 }

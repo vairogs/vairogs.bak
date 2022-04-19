@@ -30,7 +30,6 @@ use function method_exists;
 use function property_exists;
 use function sprintf;
 use function strtolower;
-use function trait_exists;
 use function ucfirst;
 use const FILTER_VALIDATE_BOOL;
 
@@ -103,7 +102,7 @@ final class Php
     #[Attribute\TwigFilter]
     public static function getClassConstants(string $class): array
     {
-        if (self::exists(class: $class)) {
+        if (Composer::exists(class: $class)) {
             try {
                 return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
             } catch (Exception $e) {
@@ -112,19 +111,6 @@ final class Php
         }
 
         throw new InvalidArgumentException(message: sprintf('Invalid class "%s"', $class));
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function exists(string $class, bool $checkTrait = false): bool
-    {
-        $exists = class_exists(class: $class) || interface_exists(interface: $class);
-
-        if (!$checkTrait) {
-            return $exists;
-        }
-
-        return $exists || trait_exists(trait: $class);
     }
 
     #[Attribute\TwigFunction]
@@ -158,7 +144,7 @@ final class Php
     #[Attribute\TwigFilter]
     public static function getShortName(string $class): string
     {
-        if (self::exists(class: $class, checkTrait: true)) {
+        if (Composer::exists(class: $class, checkTrait: true)) {
             try {
                 return (new ReflectionClass(objectOrClass: $class))->getShortName();
             } catch (Exception) {
