@@ -5,8 +5,11 @@ namespace Vairogs\Utils\Helper;
 use Composer\InstalledVersions;
 use Vairogs\Utils\Twig\Attribute;
 use function class_exists;
+use function enum_exists;
+use function getenv;
 use function interface_exists;
 use function phpversion;
+use function str_contains;
 use function str_replace;
 use function str_starts_with;
 use function trait_exists;
@@ -15,18 +18,14 @@ class Composer
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isInstalled(array $packages, bool $includeDevRequirements = true): bool
+    public static function isInstalled(array $packages, bool $incDevReq = true): bool
     {
         foreach ($packages as $package) {
-            if (str_starts_with(haystack: $package, needle: $prefix = 'ext-')) {
-                if (false === phpversion(extension: str_replace(search: $prefix, replace: '', subject: $package))) {
-                    return false;
-                }
-
+            if (true === $installed = self::isExtensionInstalled(extension: $package)) {
                 continue;
             }
 
-            if (!InstalledVersions::isInstalled(packageName: $package, includeDevRequirements: $includeDevRequirements)) {
+            if (false === $installed || !InstalledVersions::isInstalled(packageName: $package, includeDevRequirements: $incDevReq)) {
                 return false;
             }
         }
@@ -36,14 +35,34 @@ class Composer
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function exists(string $class, bool $checkTrait = false): bool
+    public static function isExtensionInstalled(string $extension): ?bool
     {
-        $exists = class_exists(class: $class) || interface_exists(interface: $class);
-
-        if (!$checkTrait) {
-            return $exists;
+        if (str_contains(haystack: $extension, needle: '/')) {
+            return null;
         }
 
-        return $exists || trait_exists(trait: $class);
+        if (str_starts_with(haystack: $extension, needle: $prefix = 'ext-')) {
+            $extension = str_replace(search: $prefix, replace: '', subject: $extension);
+        }
+
+        return false !== phpversion(extension: $extension);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function exists(string $class): bool
+    {
+        return class_exists(class: $class) || interface_exists(interface: $class) || trait_exists(trait: $class) || enum_exists(enum: $class);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function getEnv(string $varname, bool $localOnly = true): mixed
+    {
+        if ($env = getenv($varname, local_only: $localOnly)) {
+            return $env;
+        }
+
+        return $_ENV[$varname] ?? $varname;
     }
 }

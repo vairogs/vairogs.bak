@@ -11,6 +11,7 @@ use function is_file;
 use function mkdir;
 use function sprintf;
 use function str_starts_with;
+use const DIRECTORY_SEPARATOR;
 
 final class File
 {
@@ -29,7 +30,7 @@ final class File
     #[Attribute\TwigFilter]
     public static function fileExistsPublic(string $filename): bool
     {
-        return is_file(filename: getcwd() . '/' . $filename);
+        return is_file(filename: getcwd() . DIRECTORY_SEPARATOR . $filename);
     }
 
     #[Attribute\TwigFunction]

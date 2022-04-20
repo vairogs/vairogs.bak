@@ -16,7 +16,7 @@ final class Orm implements Adapter
 {
     public function __construct(private readonly EntityManagerInterface $entityManager, private readonly string $namespace = Vairogs::VAIROGS)
     {
-        if (!Composer::isInstalled(packages: $packages = ['doctrine/dbal', 'doctrine/orm'], includeDevRequirements: false)) {
+        if (!Composer::isInstalled(packages: $packages = ['doctrine/dbal', 'doctrine/orm'], incDevReq: false)) {
             throw new InvalidConfigurationException(message: sprintf('In order to use %s, package(s)/extension(s) "%s" must be installed', self::class, implode(separator: ',', array: $packages)));
         }
     }

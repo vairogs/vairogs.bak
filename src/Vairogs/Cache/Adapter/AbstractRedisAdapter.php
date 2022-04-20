@@ -19,7 +19,7 @@ abstract class AbstractRedisAdapter implements Adapter
 
     public function __construct(protected readonly Redis|ClientInterface $client, protected readonly string $namespace = Vairogs::VAIROGS)
     {
-        if (!Composer::isInstalled(packages: $this->packages, includeDevRequirements: false)) {
+        if (!Composer::isInstalled(packages: $this->packages, incDevReq: false)) {
             throw new InvalidConfigurationException(message: sprintf('In order to use %s, package(s)/extension(s) "%s" must be installed', $this->class, implode(separator: ',', array: $this->packages)));
         }
     }

@@ -21,7 +21,6 @@ use function class_exists;
 use function class_implements;
 use function filter_var;
 use function get_class_methods;
-use function getenv;
 use function interface_exists;
 use function is_array;
 use function is_bool;
@@ -144,7 +143,7 @@ final class Php
     #[Attribute\TwigFilter]
     public static function getShortName(string $class): string
     {
-        if (Composer::exists(class: $class, checkTrait: true)) {
+        if (Composer::exists(class: $class)) {
             try {
                 return (new ReflectionClass(objectOrClass: $class))->getShortName();
             } catch (Exception) {
@@ -160,17 +159,6 @@ final class Php
     public static function classImplements(string $class, string $interface): bool
     {
         return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function getEnv(string $varname, bool $localOnly = false): mixed
-    {
-        if ($env = getenv($varname, local_only: $localOnly)) {
-            return $env;
-        }
-
-        return $_ENV[$varname] ?? $varname;
     }
 
     #[Attribute\TwigFunction]
