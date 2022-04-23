@@ -12,6 +12,6 @@ class FunctionHandlerTest extends TestCase
      */
     public function test(string $function, ?object $object, mixed $expected, ...$arguments): void
     {
-        $this->assertSame(expected: $expected, actual: (new FunctionHandler())->setFunction(function: $function, object: $object)->handle(...$arguments));
+        $this->assertSame(expected: $expected, actual: (new FunctionHandler())->setFunction(functionName: $function, instance: $object)->handle(...$arguments));
     }
 }

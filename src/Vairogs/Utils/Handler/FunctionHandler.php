@@ -6,26 +6,26 @@ use Vairogs\Utils\Helper\Php;
 
 class FunctionHandler extends AbstractHandler
 {
-    private ?object $object;
-    private string $function;
+    private ?object $instance;
+    private string $functionName;
 
-    public function setFunction(string $function, ?object $object = null): static
+    public function setFunction(string $functionName, ?object $instance = null): static
     {
-        $this->object = $object;
-        $this->function = $function;
+        $this->instance = $instance;
+        $this->functionName = $functionName;
 
         return $this;
     }
 
     public function handle(...$arguments): mixed
     {
-        $function = $this->function;
+        $function = $this->functionName;
 
-        if (null === $this->object) {
+        if (null === $this->instance) {
             return $function(...$arguments);
         }
 
-        $object = $this->object;
+        $object = $this->instance;
 
         return Php::call(fn () => $object->{$function}(...$arguments), $object, true, ...$arguments) ?? parent::handle(...$arguments);
     }

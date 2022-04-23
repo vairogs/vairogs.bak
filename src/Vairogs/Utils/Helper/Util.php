@@ -17,10 +17,10 @@ final class Util
     #[Attribute\TwigFilter]
     public static function isPrime(int $number): bool
     {
-        $function = (new FunctionHandler())->setFunction(function: 'isPrimeFunction', object: new self());
-        $below = (new FunctionHandler())->setFunction(function: 'isPrimeBelow1000', object: new self())->setNext(handler: $function);
+        $function = (new FunctionHandler())->setFunction(functionName: 'isPrimeFunction', instance: new self());
+        $below = (new FunctionHandler())->setFunction(functionName: 'isPrimeBelow1000', instance: new self())->setNext(handler: $function);
 
-        return (new FunctionHandler())->setFunction(function: 'isPrimeGmp', object: new self())->setNext(handler: $below)->handle($number);
+        return (new FunctionHandler())->setFunction(functionName: 'isPrimeGmp', instance: new self())->setNext(handler: $below)->handle($number);
     }
 
     #[Attribute\TwigFunction]
