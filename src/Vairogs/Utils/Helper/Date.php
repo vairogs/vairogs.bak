@@ -72,7 +72,7 @@ final class Date
     #[Attribute\TwigFilter]
     public static function validateDateBasic(mixed $date, string $format = Constants\Date::FORMAT): bool
     {
-        $object = DateTime::createFromFormat(format: $format, datetime: $date);
+        $object = DateTime::createFromFormat(format: '!' . $format, datetime: $date);
 
         return $object && $date === $object->format(format: $format);
     }
@@ -135,7 +135,7 @@ final class Date
     #[Attribute\TwigFilter]
     public static function formatDate(string $string, string $format = Constants\Date::FORMAT): string|bool
     {
-        if (($date = DateTime::createFromFormat(format: $format, datetime: $string)) instanceof DateTime) {
+        if (($date = DateTime::createFromFormat(format: '!' . $format, datetime: $string)) instanceof DateTime) {
             return $date->format(format: Constants\Date::FORMAT);
         }
 
@@ -146,7 +146,7 @@ final class Date
     #[Attribute\TwigFilter]
     public static function getDateNullable(?string $dateString = null, ?string $format = null): ?DateTime
     {
-        if (null === $dateString || null === $format || !$date = DateTime::createFromFormat(format: $format, datetime: $dateString)) {
+        if (null === $dateString || null === $format || !$date = DateTime::createFromFormat(format: '!' . $format, datetime: $dateString)) {
             return null;
         }
 
@@ -160,7 +160,7 @@ final class Date
     #[Attribute\TwigFilter]
     public static function getDate(?string $dateString = null, ?string $format = null): DateTime
     {
-        if (null === $dateString || !$date = DateTime::createFromFormat(format: $format, datetime: $dateString)) {
+        if (null === $dateString || !$date = DateTime::createFromFormat(format: '!' . $format, datetime: $dateString)) {
             throw new InvalidArgumentException(message: 'Invalid date string');
         }
 
@@ -184,7 +184,7 @@ final class Date
         $formats = array_merge(Php::getClassConstantsValues(class: DateTime::class), self::EXTRA_FORMATS, $guesses);
 
         foreach ($formats as $format) {
-            $datetime = DateTime::createFromFormat(format: $format, datetime: $date);
+            $datetime = DateTime::createFromFormat(format: '!' . $format, datetime: $date);
 
             if ($datetime instanceof DateTime) {
                 return $datetime;

@@ -16,6 +16,7 @@ return (new PhpCsFixer\Config())
         'blank_line_after_opening_tag' => false,
         'comment_to_phpdoc' => true,
         'concat_space' => ['spacing' => 'one'],
+        'date_time_create_from_format_call' => true,
         'declare_equal_normalize' => ['space' => 'single'],
         'declare_strict_types' => true,
         'explicit_indirect_variable' => true,
