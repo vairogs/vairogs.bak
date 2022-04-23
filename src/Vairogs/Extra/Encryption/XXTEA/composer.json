@@ -52,6 +52,8 @@
             "Vairogs\\Extra\\Encryption\\XXTEA\\": ""
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "config": {
         "sort-packages": true
     },

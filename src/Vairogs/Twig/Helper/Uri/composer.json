@@ -47,6 +47,8 @@
             "Vairogs\\Twig\\Helper\\Uri\\": ""
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "config": {
         "sort-packages": true
     },
