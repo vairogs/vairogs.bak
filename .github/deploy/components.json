@@ -48,6 +48,14 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/extra-constants.git"
     },
     {
+        "path": "src/Vairogs/Extra/Encryption",
+        "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption.git"
+    },
+    {
+        "path": "src/Vairogs/Extra/Encryption/XXTEA",
+        "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption-xxtea.git"
+    },
+    {
         "path": "src/Vairogs/Extra/Specification",
         "repo": "https://GH_TOKEN@github.com/vairogs/extra-specification.git"
     },

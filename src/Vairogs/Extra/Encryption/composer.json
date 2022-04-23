@@ -1,15 +1,18 @@
 {
-    "name": "vairogs/extra",
-    "description": "⛨ Vairogs ⛨: Extra",
+    "name": "vairogs/extra-encryption",
+    "description": "⛨ Vairogs ⛨: Extra: Encryption",
     "type": "library",
     "keywords": [
+        "decrypt",
+        "encrypt",
+        "encryption",
         "extra",
         "php",
-        "specification",
         "symfony",
         "tool",
         "utils",
-        "vairogs"
+        "vairogs",
+        "xxtea"
     ],
     "license": "MIT",
     "authors": [
@@ -42,17 +45,14 @@
     "require": {
         "php": ">=8.1.0",
         "jetbrains/phpstorm-attributes": "*",
-        "symfony/http-foundation": "^5.4|^6.0"
+        "vairogs/utils": "self.version"
     },
     "replace": {
-        "vairogs/extra-constants": "self.version",
-        "vairogs/extra-encryption": "self.version",
-        "vairogs/extra-encryption-xxtea": "self.version",
-        "vairogs/extra-specification": "self.version"
+        "vairogs/extra-encryption-xxtea": "self.version"
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Extra\\": ""
+            "Vairogs\\Extra\\Encryption\\": ""
         }
     },
     "config": {

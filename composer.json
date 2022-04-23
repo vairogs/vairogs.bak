@@ -102,6 +102,8 @@
         "vairogs/core": "self.version",
         "vairogs/extra": "self.version",
         "vairogs/extra-constants": "self.version",
+        "vairogs/extra-encryption": "self.version",
+        "vairogs/extra-encryption-xxtea": "self.version",
         "vairogs/extra-specification": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/twig": "self.version",
