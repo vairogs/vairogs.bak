@@ -1,0 +1,65 @@
+{
+    "name": "vairogs/position",
+    "description": "⛨ Vairogs ⛨: Position",
+    "type": "library",
+    "keywords": [
+        "php",
+        "position",
+        "symfony",
+        "tool",
+        "utils",
+        "vairogs"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
+            "homepage": "https://me.k0d3r1s.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@vairogs.com",
+        "issues": "https://github.com/vairogs/vairogs/issues",
+        "wiki": "https://github.com/vairogs/vairogs/wiki"
+    },
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/vairogs/vairogs"
+        }
+    ],
+    "require": {
+        "php": ">=8.1.0",
+        "jetbrains/phpstorm-attributes": "*",
+        "vairogs/utils": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Position\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        },
+        "thanks": {
+            "name": "vairogs/vairogs",
+            "url": "https://github.com/vairogs/vairogs"
+        }
+    }
+}

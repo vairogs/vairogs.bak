@@ -60,6 +60,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/extra-specification.git"
     },
     {
+        "path": "src/Vairogs/Position",
+        "repo": "https://GH_TOKEN@github.com/vairogs/position.git"
+    },
+    {
         "path": "src/Vairogs/Sitemap",
         "repo": "https://GH_TOKEN@github.com/vairogs/sitemap.git"
     },
