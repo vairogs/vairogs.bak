@@ -7,6 +7,7 @@ use Psr\Cache\CacheItemPoolInterface;
 use Redis;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Vairogs\Cache\Cache;
 use Vairogs\Core\Vairogs;
 use Vairogs\Utils\Helper\Composer;
 use function implode;
@@ -26,6 +27,6 @@ abstract class AbstractRedisAdapter implements Adapter
 
     public function getAdapter(): CacheItemPoolInterface
     {
-        return new RedisAdapter(redis: $this->client, namespace: $this->namespace, defaultLifetime: Adapter::DEFAULT_LIFETIME);
+        return new RedisAdapter(redis: $this->client, namespace: $this->namespace, defaultLifetime: Cache::DEFAULT_LIFETIME);
     }
 }

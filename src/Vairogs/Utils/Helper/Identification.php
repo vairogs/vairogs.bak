@@ -83,7 +83,7 @@ final class Identification
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getUniqueId(int $length = 20): string
+    public static function getUniqueId(int $length = 32): string
     {
         try {
             return substr(string: bin2hex(string: random_bytes(length: $length)), offset: 0, length: $length);
@@ -94,7 +94,7 @@ final class Identification
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getRandomString(int $length = 20, string $chars = Generator::RAND_BASIC): string
+    public static function getRandomString(int $length = 32, string $chars = Generator::RAND_BASIC): string
     {
         /* @noinspection NonSecureStrShuffleUsageInspection */
         return substr(string: str_shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);

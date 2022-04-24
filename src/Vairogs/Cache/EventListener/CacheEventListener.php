@@ -29,14 +29,15 @@ class CacheEventListener implements EventSubscriberInterface
         Header::INVALIDATE,
         Header::SKIP,
     ];
+    private const ROUTE = '_route';
 
     protected readonly ChainAdapter $adapter;
     protected readonly CacheEvent $event;
 
-    public function __construct(protected bool $enabled, Security $security, ...$adapters)
+    public function __construct(protected bool $enabled, Security $security, int $defaultLifeTime = Cache::DEFAULT_LIFETIME, ...$adapters)
     {
         if ($this->enabled) {
-            $this->adapter = new ChainAdapter(adapters: Pool::createPool(class: Cache::class, adapters: $adapters));
+            $this->adapter = new ChainAdapter(adapters: Pool::createPool(class: Cache::class, adapters: $adapters), defaultLifetime: $defaultLifeTime);
             $this->adapter->prune();
             $this->event = new CacheEvent(security: $security);
         }
@@ -73,7 +74,7 @@ class CacheEventListener implements EventSubscriberInterface
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $controllerEvent, class: Cache::class));
             $response = null;
 
-            if (is_string(value: $route = $this->getRoute(kernelEvent: $controllerEvent))) {
+            if (is_string(value: $route = $controllerEvent->getRequest()->get(key: self::ROUTE))) {
                 $key = $attribute->getKey(prefix: $route);
 
                 if (!$this->needsInvalidation(request: $controllerEvent->getRequest())) {
@@ -101,7 +102,7 @@ class CacheEventListener implements EventSubscriberInterface
         if (($attribute = $this->event->getAtribute(kernelEvent: $requestEvent, class: Cache::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
             /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Cache::class));
-            $this->adapter->deleteItem(key: $attribute->getKey(prefix: $this->getRoute(kernelEvent: $requestEvent)));
+            $this->adapter->deleteItem(key: $attribute->getKey(prefix: $requestEvent->getRequest()->get(key: self::ROUTE)));
         }
     }
 
@@ -114,14 +115,14 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        if (null !== ($attribute = $this->event->getAtribute(kernelEvent: $responseEvent, class: Cache::class))) {
+        if ($attribute = $this->event->getAtribute(kernelEvent: $responseEvent, class: Cache::class)) {
             /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $responseEvent, class: Cache::class));
-            $key = $attribute->getKey(prefix: $this->getRoute(kernelEvent: $responseEvent));
+            $key = $attribute->getKey(prefix: $responseEvent->getRequest()->get(key: self::ROUTE));
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
 
             if (!$skip && null === $this->getCache(key: $key)) {
-                $this->setCache(key: $key, value: $responseEvent->getResponse(), expires: $attribute->getExpires());
+                $this->setCache(key: $key, value: $responseEvent->getResponse(), expiresAfter: $attribute->getExpires());
             }
         }
     }
@@ -137,11 +138,6 @@ class CacheEventListener implements EventSubscriberInterface
         }
 
         return !empty($controller = $this->event->getController(kernelEvent: $kernelEvent)) && class_exists(class: $controller[0]);
-    }
-
-    private function getRoute(RequestEvent|ResponseEvent|ControllerEvent $kernelEvent): ?string
-    {
-        return $kernelEvent->getRequest()->get(key: '_route');
     }
 
     private function needsInvalidation(Request $request): bool
@@ -172,11 +168,11 @@ class CacheEventListener implements EventSubscriberInterface
     /**
      * @throws InvalidArgumentException
      */
-    private function setCache(string $key, Response $value, int $expires): void
+    private function setCache(string $key, Response $value, int $expiresAfter): void
     {
         $cache = $this->adapter->getItem(key: $key);
         $cache->set(value: $value);
-        $cache->expiresAfter(time: $expires);
+        $cache->expiresAfter(time: $expiresAfter);
 
         $this->adapter->save(item: $cache);
     }

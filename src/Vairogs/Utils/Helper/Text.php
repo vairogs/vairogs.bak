@@ -8,7 +8,6 @@ use Vairogs\Utils\Twig\Attribute;
 use function array_key_exists;
 use function function_exists;
 use function html_entity_decode;
-use function iconv;
 use function is_numeric;
 use function mb_convert_encoding;
 use function mb_strlen;
@@ -17,6 +16,7 @@ use function mb_substr;
 use function preg_match;
 use function preg_replace;
 use function rtrim;
+use function str_contains;
 use function str_replace;
 use function strip_tags;
 use function strpbrk;
@@ -91,9 +91,22 @@ final class Text
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
-    public static function containsAny(string $haystack, string $needle): bool
+    public static function contains(string $haystack, string $needle): bool
     {
         return false !== strpbrk(string: $haystack, characters: $needle);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function containsAny(string $haystack, array $needles = []): bool
+    {
+        foreach ($needles as $needle) {
+            if (str_contains(haystack: $haystack, needle: $needle)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     #[Attribute\TwigFunction]

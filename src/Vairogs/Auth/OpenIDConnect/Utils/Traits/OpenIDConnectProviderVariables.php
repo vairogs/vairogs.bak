@@ -3,6 +3,7 @@
 namespace Vairogs\Auth\OpenIDConnect\Utils\Traits;
 
 use Lcobucci\JWT\Signer;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Auth\OpenIDConnect\Configuration\Uri;
@@ -54,57 +55,9 @@ trait OpenIDConnectProviderVariables
         return $this->signer;
     }
 
-    public function setSigner(Signer $signer): static
+    public function setSigner(Signer $signer = new Sha256()): static
     {
         $this->signer = $signer;
-
-        return $this;
-    }
-
-    public function getUseSession(): bool
-    {
-        return $this->useSession;
-    }
-
-    public function setUseSession(bool $useSession): static
-    {
-        $this->useSession = $useSession;
-
-        return $this;
-    }
-
-    public function getSession(): ?SessionInterface
-    {
-        return $this->session;
-    }
-
-    public function setSession(?SessionInterface $session): static
-    {
-        $this->session = $session;
-
-        return $this;
-    }
-
-    public function getBaseUri(): string
-    {
-        return $this->baseUri;
-    }
-
-    public function setBaseUri(string $baseUri): static
-    {
-        $this->baseUri = $baseUri;
-
-        return $this;
-    }
-
-    public function getBaseUriPost(): ?string
-    {
-        return $this->baseUriPost;
-    }
-
-    public function setBaseUriPost(?string $baseUriPost): static
-    {
-        $this->baseUriPost = $baseUriPost;
 
         return $this;
     }
@@ -131,7 +84,7 @@ trait OpenIDConnectProviderVariables
         return $this->validatorChain;
     }
 
-    public function setValidatorChain(ValidatorChain $validatorChain): static
+    public function setValidatorChain(ValidatorChain $validatorChain = new ValidatorChain()): static
     {
         $this->validatorChain = $validatorChain;
 

@@ -5,7 +5,6 @@ namespace Vairogs\Auth\OpenIDConnect;
 use DateTime;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
-use Lcobucci\JWT;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Token\RegisteredClaims;
 use League\OAuth2\Client\Grant\AbstractGrant;
@@ -29,12 +28,12 @@ use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\LesserOrEqual;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\SignedWith;
 use Vairogs\Auth\OpenIDConnect\Configuration\ParsedToken;
 use Vairogs\Auth\OpenIDConnect\Configuration\Uri;
-use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 use Vairogs\Auth\OpenIDConnect\Utils\Traits\OpenIDConnectProviderVariables;
 use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Utils\Helper\Char;
+use Vairogs\Utils\Helper\Identification;
 use Vairogs\Utils\Helper\Json;
 use Vairogs\Utils\Helper\Util;
 use function array_merge;
@@ -48,11 +47,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
 
     public function __construct(protected string $name, protected readonly RouterInterface $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
     {
-        $this->setSigner(signer: new JWT\Signer\Rsa\Sha256());
-        $this->setValidatorChain(validatorChain: new ValidatorChain());
-
         try {
-            $this->setSession(session: $requestStack->getCurrentRequest()?->getSession());
+            $this->session = $requestStack->getCurrentRequest()?->getSession();
         } catch (Exception) {
             // exception === use already set session (default: null)
         }
@@ -60,7 +56,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         parent::__construct(options: $options, collaborators: $collaborators);
 
         if ([] !== $options) {
-            $this->state = $this->getRandomState();
+            $this->state = Identification::getUniqueId();
             $this->configure(options: $options);
         }
     }
@@ -72,18 +68,16 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     {
         $accessToken = $this->getAccessTokenFunction(grant: $grant, options: $options);
 
-        if (null === $accessToken) {
-            throw new OpenIDConnectException(message: 'Invalid access token');
-        }
-
-        if (null === $token = $accessToken->getIdToken()) {
+        if (null === $accessToken || null === $token = $accessToken->getIdToken()) {
             throw new OpenIDConnectException(message: 'Expected an id_token but did not receive one from the authorization server');
         }
 
         $this->setValidators();
         $this->validatorChain->assert(token: $token);
 
-        return $this->saveSession(accessToken: $accessToken);
+        $this->saveSession(accessToken: $accessToken);
+
+        return $accessToken;
     }
 
     /**
@@ -91,14 +85,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
      */
     public function getRefreshToken($token, array $options = []): array|string|ResponseInterface
     {
-        $params = [
-            'token' => $token,
-            'grant_type' => 'refresh_token',
-        ];
-
-        $request = $this->getRefreshTokenRequest(params: array_merge($params, $options));
-
-        return $this->getTokenResponse(request: $request);
+        return $this->getTokenResponse(request: $this->getRefreshTokenRequest(params: array_merge(['token' => $token, 'grant_type' => 'refresh_token'], $options)));
     }
 
     /**
@@ -108,11 +95,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     {
         $grant = $this->verifyGrant(grant: $grant);
 
-        $params = [
-            'redirect_uri' => $this->redirectUri,
-        ];
-
-        $params = $grant->prepareRequestParameters(defaults: $params, options: $options);
+        $params = $grant->prepareRequestParameters(defaults: ['redirect_uri' => $this->redirectUri], options: $options);
         $request = $this->getAccessTokenRequest(params: $params);
         $response = $this->getTokenResponse(request: $request);
         $prepared = $this->prepareAccessTokenResponse(result: $response);
@@ -130,13 +113,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
      */
     public function getValidateToken($token, array $options = []): array|string|ResponseInterface
     {
-        $params = [
-            'token' => $token,
-        ];
-
-        $request = $this->getValidateTokenRequest(params: array_merge($params, $options));
-
-        return $this->getTokenResponse(request: $request);
+        return $this->getTokenResponse(request: $this->getValidateTokenRequest(params: array_merge(['token' => $token], $options)));
     }
 
     /**
@@ -158,13 +135,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
      */
     public function getRevokeToken($token, array $options = []): array|string|ResponseInterface
     {
-        $params = [
-            'token' => $token,
-        ];
-
-        $request = $this->getRevokeTokenRequest(params: array_merge($params, $options));
-
-        return $this->getTokenResponse(request: $request);
+        return $this->getTokenResponse(request: $this->getRevokeTokenRequest(params: array_merge(['token' => $token], $options)));
     }
 
     protected function configure(array $options = []): void
@@ -185,46 +156,38 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         }
 
         $this->setPublicKey(publicKey: 'file://' . $this->publicKey);
+        $this->buildUris(uris: $uris);
+    }
 
+    protected function buildUris(array $uris): void
+    {
         foreach ($uris as $name => $uri) {
             $params = [
                 'client_id' => $this->clientId,
                 'redirect_uri' => $this->redirectUri,
                 'state' => $this->state,
-                'base_uri' => $this->getBaseUri(),
-                'base_uri_post' => $this->getBaseUriPost() ?? $this->getBaseUri(),
+                'base_uri' => $this->baseUri,
+                'base_uri_post' => $this->baseUriPost ?? $this->baseUri,
             ];
             $this->uris[$name] = (new Uri(options: $uri, extra: $params, method: $uri['method'] ?? Request::METHOD_POST))
-                ->setUseSession(useSession: $this->getUseSession())
-                ->setSession(session: $this->getSession());
+                ->setUseSession(useSession: $this->useSession)
+                ->setSession(session: $this->session);
         }
     }
 
     protected function getRefreshTokenRequest(array $params): RequestInterface
     {
-        $method = $this->getAccessTokenMethod();
-        $url = $this->getRefreshTokenUrl();
-        $options = $this->getAccessTokenOptions(params: $params);
-
-        return $this->getRequest(method: $method, url: $url, options: $options);
+        return $this->getRequest(method: Request::METHOD_POST, url: $this->getRefreshTokenUrl(), options: $this->getAccessTokenOptions(params: $params));
     }
 
     protected function getValidateTokenRequest(array $params): RequestInterface
     {
-        $method = $this->getAccessTokenMethod();
-        $url = $this->getValidateTokenUrl();
-        $options = $this->getBaseTokenOptions(params: $params);
-
-        return $this->getRequest(method: $method, url: $url, options: $options);
+        return $this->getRequest(method: Request::METHOD_POST, url: $this->getValidateTokenUrl(), options: $this->getBaseTokenOptions(params: $params));
     }
 
     protected function getRevokeTokenRequest(array $params): RequestInterface
     {
-        $method = $this->getAccessTokenMethod();
-        $url = $this->getRevokeTokenUrl();
-        $options = $this->getAccessTokenOptions(params: $params);
-
-        return $this->getRequest(method: $method, url: $url, options: $options);
+        return $this->getRequest(method: Request::METHOD_POST, url: $this->getRevokeTokenUrl(), options: $this->getAccessTokenOptions(params: $params));
     }
 
     protected function setValidators(): void
@@ -277,16 +240,12 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     ])]
     protected function getBaseTokenOptions(array $params): array
     {
-        $options = [
+        return [
             'headers' => [
                 'content-type' => ContentType::X_WWW_FORM_URLENCODED,
             ],
+            'body' => $this->getAccessTokenBody(params: $params),
         ];
-        if (self::METHOD_POST === $this->getAccessTokenMethod()) {
-            $options['body'] = $this->getAccessTokenBody(params: $params);
-        }
-
-        return $options;
     }
 
     protected function getAccessTokenBody(array $params): string
@@ -294,24 +253,18 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $this->buildQueryString(params: $params);
     }
 
-    protected function saveSession(ParsedToken $accessToken): ParsedToken
+    protected function saveSession(ParsedToken $accessToken): void
     {
         if ($this->useSession && null !== $this->session) {
             $this->session->set(name: 'access_token', value: $accessToken->getToken());
             $this->session->set(name: 'refresh_token', value: $accessToken->getRefreshToken());
             $this->session->set(name: 'id_token', value: $accessToken->getIdTokenHint());
         }
-
-        return $accessToken;
     }
 
     protected function getAccessTokenRequest(array $params): RequestInterface
     {
-        $method = $this->getAccessTokenMethod();
-        $url = $this->getAccessTokenUrl(params: $params);
-        $options = $this->getAccessTokenOptions(params: $params);
-
-        return $this->getRequest(method: $method, url: $url, options: $options);
+        return $this->getRequest(method: Request::METHOD_POST, url: $this->getAccessTokenUrl(params: $params), options: $this->getAccessTokenOptions(params: $params));
     }
 
     protected function createAccessToken(array $response, ?AbstractGrant $grant = null): ?ParsedToken

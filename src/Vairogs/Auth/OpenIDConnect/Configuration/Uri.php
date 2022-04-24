@@ -30,7 +30,9 @@ class Uri
         $this->basePost = null !== ($extra['base_uri_post'] ?? null) ? rtrim(string: $extra['base_uri_post'], characters: '/') . '/' : null;
         unset($extra['base_uri'], $extra['base_uri_post']);
 
-        $this->params = !empty($options['params']) ? $options['params'] : [];
+        if (!empty($params = $options['params'])) {
+            $this->params = $params;
+        }
 
         if (Request::METHOD_GET === $this->method) {
             $this->setGetParams(options: $options, additional: $extra);
@@ -70,13 +72,6 @@ class Uri
         return $this->url;
     }
 
-    public function setUrl(string $url): static
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
     public function addParam(mixed $value): void
     {
         $this->params[] = $value;
@@ -85,16 +80,6 @@ class Uri
     public function addUrlParam(string $name, mixed $value): void
     {
         $this->urlParams[$name] = $value;
-    }
-
-    public function getBase(): string
-    {
-        return $this->base;
-    }
-
-    public function getBasePost(): ?string
-    {
-        return $this->basePost;
     }
 
     /**
@@ -119,7 +104,7 @@ class Uri
             $clientUrl .= '?' . http_build_query(data: $this->urlParams);
         }
 
-        $this->setUrl(url: urldecode(string: $clientUrl));
+        $this->url = urldecode(string: $clientUrl);
     }
 
     private function setGetParams(array $options = [], array $additional = []): void
@@ -140,7 +125,7 @@ class Uri
             if (!$this->useSession) {
                 throw new OpenIDConnectException(message: sprintf('"%s" parameter must be set to "true" in order to use id_token_hint', 'use_session'));
             }
-            $this->urlParams['id_token_hint'] = $this->session->get(name: 'id_token');
+            $this->addUrlParam(name: 'id_token_hint', value: $this->session?->get(name: 'id_token'));
         }
     }
 }

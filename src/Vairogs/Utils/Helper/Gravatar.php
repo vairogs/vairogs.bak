@@ -47,12 +47,7 @@ final class Gravatar
             default => self::getIcons()['ICON_' . strtoupper($default)] ?? self::ICON_IDENTICON
         };
 
-        $query = [
-            's' => $size,
-            'd' => $default,
-        ];
-
-        return $host . '/avatar/' . hash(algo: 'md5', data: strtolower(string: trim(string: $email))) . '/?' . http_build_query(data: $query);
+        return $host . '/avatar/' . hash(algo: 'md5', data: strtolower(string: trim(string: $email))) . '/?' . http_build_query(data: ['s' => $size, 'd' => $default]);
     }
 
     /**

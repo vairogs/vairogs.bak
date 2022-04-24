@@ -16,7 +16,7 @@ final class Http
     #[Attribute\TwigFilter]
     public static function isHttps(Request $request): bool
     {
-        return self::checkHttps(req: $request) || self::checkServerPort(req: $request) || self::checkHttpXForwardedSsl(req: $request) || self::checkHttpXForwardedProto(req: $request);
+        return self::checkHttps(request: $request) || self::checkServerPort(request: $request) || self::checkHttpXForwardedSsl(request: $request) || self::checkHttpXForwardedProto(request: $request);
     }
 
     #[Attribute\TwigFunction]
@@ -70,40 +70,36 @@ final class Http
     {
         $additionalData = [
             'actualIp' => file_get_contents(filename: $ipUrl),
-            'uuid' => $request->server->get(key: 'REQUEST_TIME') . Identification::getUniqueId(length: 32),
+            'uuid' => $request->server->get(key: 'REQUEST_TIME', default: '') . Identification::getUniqueId(),
         ];
 
         return array_merge(Uri::buildArrayFromObject(object: $request), $additionalData);
     }
 
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     public static function isIE(Request $request): bool
     {
-        foreach (['MSIE', 'Edge', 'Trident/7'] as $uaCheck) {
-            if (str_contains(haystack: $request->server->get(key: 'HTTP_USER_AGENT'), needle: $uaCheck)) {
-                return true;
-            }
-        }
-
-        return false;
+        return Text::containsAny(haystack: $request->server->get(key: 'HTTP_USER_AGENT'), needles: ['MSIE', 'Edge', 'Trident/7']);
     }
 
-    private static function checkHttps(Request $req): bool
+    public static function checkHttps(Request $request): bool
     {
-        return $req->server->has(key: Constants\Http::HEADER_HTTPS) && 'on' === $req->server->get(key: Constants\Http::HEADER_HTTPS);
+        return $request->server->has(key: Constants\Http::HEADER_HTTPS) && Constants\Status::ON === $request->server->get(key: Constants\Http::HEADER_HTTPS);
     }
 
-    private static function checkServerPort(Request $req): bool
+    public static function checkServerPort(Request $request): bool
     {
-        return $req->server->has(key: Constants\Http::HEADER_PORT) && Constants\Http::HTTPS === (int) $req->server->get(key: Constants\Http::HEADER_PORT);
+        return $request->server->has(key: Constants\Http::HEADER_PORT) && Constants\Http::HTTPS === (int) $request->server->get(key: Constants\Http::HEADER_PORT);
     }
 
-    private static function checkHttpXForwardedSsl(Request $req): bool
+    public static function checkHttpXForwardedSsl(Request $request): bool
     {
-        return $req->server->has(key: Constants\Http::HEADER_SSL) && 'on' === $req->server->get(key: Constants\Http::HEADER_SSL);
+        return $request->server->has(key: Constants\Http::HEADER_SSL) && Constants\Status::ON === $request->server->get(key: Constants\Http::HEADER_SSL);
     }
 
-    private static function checkHttpXForwardedProto(Request $req): bool
+    public static function checkHttpXForwardedProto(Request $request): bool
     {
-        return $req->server->has(key: Constants\Http::HEADER_PROTO) && 'https' === $req->server->get(key: Constants\Http::HEADER_PROTO);
+        return $request->server->has(key: Constants\Http::HEADER_PROTO) && 'https' === $request->server->get(key: Constants\Http::HEADER_PROTO);
     }
 }
