@@ -88,10 +88,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-date.git"
     },
     {
-        "path": "src/Vairogs/Twig/Helper/Email",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-email.git"
-    },
-    {
         "path": "src/Vairogs/Twig/Helper/File",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-file.git"
     },
@@ -142,6 +138,10 @@
     {
         "path": "src/Vairogs/Twig/Helper/Util",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-util.git"
+    },
+    {
+        "path": "src/Vairogs/Twig/Helper/Validate",
+        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-validate.git"
     },
     {
         "path": "src/Vairogs/Twig/Pagination",

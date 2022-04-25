@@ -11,12 +11,6 @@ services:
             -
                 name: twig.extension
 
-    Vairogs\Twig\Helper\Email\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension
-
     Vairogs\Twig\Helper\File\Extension:
         public: false
         tags:
@@ -72,12 +66,6 @@ services:
                 name: twig.extension
 
     Vairogs\Twig\Helper\Text\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension
-
-    Vairogs\Twig\Helper\Translit\Extension:
         public: false
         tags:
             -

@@ -1,6 +1,6 @@
 {
-    "name": "vairogs/twig-helper-email",
-    "description": "⛨ Vairogs ⛨: Twig: Helper: Extension that implements vairogs/utils Email helper functions in Twig template",
+    "name": "vairogs/twig-helper-validate",
+    "description": "⛨ Vairogs ⛨: Twig: Helper: Extension that implements vairogs/utils Validate helper functions in Twig template",
     "type": "library",
     "keywords": [
         "symfony",
@@ -8,7 +8,8 @@
         "twig",
         "twig-extension",
         "utils",
-        "vairogs"
+        "vairogs",
+        "validate"
     ],
     "license": "MIT",
     "authors": [
@@ -44,7 +45,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Twig\\Helper\\Email\\": ""
+            "Vairogs\\Twig\\Helper\\Validate\\": ""
         }
     },
     "minimum-stability": "dev",

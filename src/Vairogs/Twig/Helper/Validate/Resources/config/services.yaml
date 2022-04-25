@@ -1,5 +1,5 @@
 services:
-    Vairogs\Twig\Helper\Email\Extension:
+    Vairogs\Twig\Helper\Validate\Extension:
         public: false
         tags:
             -

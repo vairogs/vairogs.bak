@@ -103,6 +103,7 @@
         "vairogs/extra": "self.version",
         "vairogs/extra-constants": "self.version",
         "vairogs/extra-encryption": "self.version",
+        "vairogs/extra-encryption-cross": "self.version",
         "vairogs/extra-encryption-xxtea": "self.version",
         "vairogs/extra-specification": "self.version",
         "vairogs/sitemap": "self.version",
@@ -110,7 +111,6 @@
         "vairogs/twig-helper": "self.version",
         "vairogs/twig-helper-char": "self.version",
         "vairogs/twig-helper-date": "self.version",
-        "vairogs/twig-helper-email": "self.version",
         "vairogs/twig-helper-file": "self.version",
         "vairogs/twig-helper-gravatar": "self.version",
         "vairogs/twig-helper-http": "self.version",
@@ -124,6 +124,7 @@
         "vairogs/twig-helper-text": "self.version",
         "vairogs/twig-helper-uri": "self.version",
         "vairogs/twig-helper-util": "self.version",
+        "vairogs/twig-helper-validate": "self.version",
         "vairogs/twig-pagination": "self.version",
         "vairogs/twig-php": "self.version",
         "vairogs/utils": "self.version"
