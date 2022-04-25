@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650880275">
-  <project timestamp="1650880275">
+<coverage generated="1650881843">
+  <project timestamp="1650881843">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2239,28 +2239,28 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Composer.php">
       <class name="Vairogs\Utils\Helper\Composer" namespace="global">
-        <metrics complexity="14" methods="4" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="1" elements="19" coveredelements="2"/>
+        <metrics complexity="14" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="19" coveredelements="19"/>
       </class>
-      <line num="19" type="method" name="isInstalled" visibility="public" complexity="5" crap="30" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <line num="24" type="stmt" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="28" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="36" type="method" name="isExtensionInstalled" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="41" type="stmt" count="0"/>
-      <line num="44" type="stmt" count="0"/>
-      <line num="45" type="stmt" count="0"/>
-      <line num="48" type="stmt" count="0"/>
+      <line num="19" type="method" name="isInstalled" visibility="public" complexity="5" crap="5" count="5"/>
+      <line num="23" type="stmt" count="5"/>
+      <line num="24" type="stmt" count="5"/>
+      <line num="25" type="stmt" count="2"/>
+      <line num="28" type="stmt" count="3"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="33" type="stmt" count="3"/>
+      <line num="36" type="method" name="isExtensionInstalled" visibility="public" complexity="3" crap="3" count="5"/>
+      <line num="40" type="stmt" count="5"/>
+      <line num="41" type="stmt" count="2"/>
+      <line num="44" type="stmt" count="3"/>
+      <line num="45" type="stmt" count="2"/>
+      <line num="48" type="stmt" count="3"/>
       <line num="51" type="method" name="exists" visibility="public" complexity="4" crap="4" count="12"/>
       <line num="55" type="stmt" count="12"/>
-      <line num="58" type="method" name="getEnv" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="62" type="stmt" count="0"/>
-      <line num="63" type="stmt" count="0"/>
-      <line num="66" type="stmt" count="0"/>
-      <metrics loc="69" ncloc="69" classes="1" methods="4" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="1" elements="19" coveredelements="2"/>
+      <line num="58" type="method" name="getEnv" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="62" type="stmt" count="1"/>
+      <line num="63" type="stmt" count="1"/>
+      <line num="66" type="stmt" count="1"/>
+      <metrics loc="69" ncloc="69" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="19" coveredelements="19"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Date.php">
       <class name="Vairogs\Utils\Helper\Date" namespace="global">
@@ -3043,6 +3043,6 @@
       <line num="53" type="stmt" count="0"/>
       <metrics loc="57" ncloc="57" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <metrics files="154" loc="7721" ncloc="7496" classes="100" methods="521" coveredmethods="70" conditionals="0" coveredconditionals="0" statements="1679" coveredstatements="282" elements="2200" coveredelements="352"/>
+    <metrics files="154" loc="7721" ncloc="7496" classes="100" methods="521" coveredmethods="73" conditionals="0" coveredconditionals="0" statements="1679" coveredstatements="296" elements="2200" coveredelements="369"/>
   </project>
 </coverage>
