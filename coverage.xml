@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650881843">
-  <project timestamp="1650881843">
+<coverage generated="1650883053">
+  <project timestamp="1650883053">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2361,67 +2361,67 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Generator.php">
       <class name="Vairogs\Utils\Helper\Generator" namespace="global">
-        <metrics complexity="22" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="58" coveredelements="0"/>
+        <metrics complexity="22" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="42" elements="58" coveredelements="58"/>
       </class>
-      <line num="33" type="method" name="generate" visibility="public" complexity="6" crap="42" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="0"/>
-      <line num="41" type="stmt" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <line num="43" type="stmt" count="0"/>
-      <line num="44" type="stmt" count="0"/>
-      <line num="48" type="stmt" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="51" type="stmt" count="0"/>
-      <line num="52" type="stmt" count="0"/>
-      <line num="57" type="stmt" count="0"/>
-      <line num="60" type="method" name="useLower" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="62" type="stmt" count="0"/>
-      <line num="64" type="stmt" count="0"/>
-      <line num="67" type="method" name="useUpper" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="69" type="stmt" count="0"/>
-      <line num="71" type="stmt" count="0"/>
-      <line num="74" type="method" name="useDigits" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="76" type="stmt" count="0"/>
-      <line num="78" type="stmt" count="0"/>
-      <line num="81" type="method" name="useSymbols" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="83" type="stmt" count="0"/>
-      <line num="85" type="stmt" count="0"/>
-      <line num="88" type="method" name="useLatvianLowerCase" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="90" type="stmt" count="0"/>
-      <line num="92" type="stmt" count="0"/>
-      <line num="95" type="method" name="useLatvianUpperCase" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="97" type="stmt" count="0"/>
-      <line num="99" type="stmt" count="0"/>
-      <line num="102" type="method" name="setLowerCase" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="104" type="stmt" count="0"/>
-      <line num="106" type="stmt" count="0"/>
-      <line num="109" type="method" name="setUpperCase" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="111" type="stmt" count="0"/>
-      <line num="113" type="stmt" count="0"/>
-      <line num="116" type="method" name="setDigits" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="118" type="stmt" count="0"/>
-      <line num="120" type="stmt" count="0"/>
-      <line num="123" type="method" name="setSymbols" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="125" type="stmt" count="0"/>
-      <line num="127" type="stmt" count="0"/>
-      <line num="130" type="method" name="setLatvianLowerCase" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="132" type="stmt" count="0"/>
-      <line num="134" type="stmt" count="0"/>
-      <line num="137" type="method" name="setLatvianUpperCase" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="139" type="stmt" count="0"/>
-      <line num="141" type="stmt" count="0"/>
-      <line num="144" type="method" name="reset" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="146" type="stmt" count="0"/>
-      <line num="148" type="stmt" count="0"/>
-      <line num="151" type="method" name="getSets" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="153" type="stmt" count="0"/>
-      <line num="159" type="method" name="tweak" visibility="private" complexity="2" crap="6" count="0"/>
-      <line num="161" type="stmt" count="0"/>
-      <line num="162" type="stmt" count="0"/>
-      <line num="165" type="stmt" count="0"/>
-      <metrics loc="168" ncloc="160" classes="1" methods="16" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="0" elements="58" coveredelements="0"/>
+      <line num="33" type="method" name="generate" visibility="public" complexity="6" crap="6" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="39" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="60" type="method" name="useLower" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="62" type="stmt" count="1"/>
+      <line num="64" type="stmt" count="1"/>
+      <line num="67" type="method" name="useUpper" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="69" type="stmt" count="1"/>
+      <line num="71" type="stmt" count="1"/>
+      <line num="74" type="method" name="useDigits" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="76" type="stmt" count="1"/>
+      <line num="78" type="stmt" count="1"/>
+      <line num="81" type="method" name="useSymbols" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="88" type="method" name="useLatvianLowerCase" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="90" type="stmt" count="1"/>
+      <line num="92" type="stmt" count="1"/>
+      <line num="95" type="method" name="useLatvianUpperCase" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="97" type="stmt" count="1"/>
+      <line num="99" type="stmt" count="1"/>
+      <line num="102" type="method" name="setLowerCase" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="104" type="stmt" count="1"/>
+      <line num="106" type="stmt" count="1"/>
+      <line num="109" type="method" name="setUpperCase" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="111" type="stmt" count="1"/>
+      <line num="113" type="stmt" count="1"/>
+      <line num="116" type="method" name="setDigits" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="118" type="stmt" count="1"/>
+      <line num="120" type="stmt" count="1"/>
+      <line num="123" type="method" name="setSymbols" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="125" type="stmt" count="1"/>
+      <line num="127" type="stmt" count="1"/>
+      <line num="130" type="method" name="setLatvianLowerCase" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="132" type="stmt" count="1"/>
+      <line num="134" type="stmt" count="1"/>
+      <line num="137" type="method" name="setLatvianUpperCase" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="139" type="stmt" count="1"/>
+      <line num="141" type="stmt" count="1"/>
+      <line num="144" type="method" name="reset" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="146" type="stmt" count="1"/>
+      <line num="148" type="stmt" count="1"/>
+      <line num="151" type="method" name="getSets" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="153" type="stmt" count="1"/>
+      <line num="159" type="method" name="tweak" visibility="private" complexity="2" crap="2" count="1"/>
+      <line num="161" type="stmt" count="1"/>
+      <line num="162" type="stmt" count="1"/>
+      <line num="165" type="stmt" count="1"/>
+      <metrics loc="168" ncloc="160" classes="1" methods="16" coveredmethods="16" conditionals="0" coveredconditionals="0" statements="42" coveredstatements="42" elements="58" coveredelements="58"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Gravatar.php">
       <class name="Vairogs\Utils\Helper\Gravatar" namespace="global">
@@ -2806,7 +2806,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Text.php">
       <class name="Vairogs\Utils\Helper\Text" namespace="global">
-        <metrics complexity="27" methods="15" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="2" elements="48" coveredelements="4"/>
+        <metrics complexity="27" methods="15" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="3" elements="48" coveredelements="6"/>
       </class>
       <line num="29" type="method" name="cleanText" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="33" type="stmt" count="0"/>
@@ -2831,8 +2831,8 @@
       <line num="84" type="stmt" count="0"/>
       <line num="85" type="stmt" count="0"/>
       <line num="88" type="stmt" count="0"/>
-      <line num="91" type="method" name="contains" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="96" type="stmt" count="0"/>
+      <line num="91" type="method" name="contains" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="96" type="stmt" count="1"/>
       <line num="99" type="method" name="containsAny" visibility="public" complexity="3" crap="12" count="0"/>
       <line num="103" type="stmt" count="0"/>
       <line num="104" type="stmt" count="0"/>
@@ -2856,7 +2856,7 @@
       <line num="159" type="stmt" count="0"/>
       <line num="162" type="method" name="htmlEntityDecode" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="166" type="stmt" count="0"/>
-      <metrics loc="169" ncloc="169" classes="1" methods="15" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="2" elements="48" coveredelements="4"/>
+      <metrics loc="169" ncloc="169" classes="1" methods="15" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="3" elements="48" coveredelements="6"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Uri.php">
       <class name="Vairogs\Utils\Helper\Uri" namespace="global">
@@ -3043,6 +3043,6 @@
       <line num="53" type="stmt" count="0"/>
       <metrics loc="57" ncloc="57" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <metrics files="154" loc="7721" ncloc="7496" classes="100" methods="521" coveredmethods="73" conditionals="0" coveredconditionals="0" statements="1679" coveredstatements="296" elements="2200" coveredelements="369"/>
+    <metrics files="154" loc="7721" ncloc="7496" classes="100" methods="521" coveredmethods="90" conditionals="0" coveredconditionals="0" statements="1679" coveredstatements="339" elements="2200" coveredelements="429"/>
   </project>
 </coverage>
