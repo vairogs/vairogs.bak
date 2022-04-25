@@ -1,8 +1,9 @@
 {
-    "name": "vairogs/extra-encryption",
-    "description": "⛨ Vairogs ⛨: Extra: Encryption",
+    "name": "vairogs/extra-encryption-cross",
+    "description": "⛨ Vairogs ⛨: Extra: Encryption: Cross",
     "type": "library",
     "keywords": [
+        "cross",
         "decrypt",
         "encrypt",
         "encryption",
@@ -11,8 +12,7 @@
         "symfony",
         "tool",
         "utils",
-        "vairogs",
-        "xxtea"
+        "vairogs"
     ],
     "license": "MIT",
     "authors": [
@@ -47,13 +47,9 @@
         "jetbrains/phpstorm-attributes": "*",
         "vairogs/utils": "self.version"
     },
-    "replace": {
-        "vairogs/extra-encryption-cross": "self.version",
-        "vairogs/extra-encryption-xxtea": "self.version"
-    },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Extra\\Encryption\\": ""
+            "Vairogs\\Extra\\Encryption\\Cross\\": ""
         }
     },
     "minimum-stability": "dev",

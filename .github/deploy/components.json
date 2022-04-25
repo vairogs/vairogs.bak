@@ -52,6 +52,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption.git"
     },
     {
+        "path": "src/Vairogs/Extra/Encryption/Cross",
+        "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption-cross.git"
+    },
+    {
         "path": "src/Vairogs/Extra/Encryption/XXTEA",
         "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption-xxtea.git"
     },
