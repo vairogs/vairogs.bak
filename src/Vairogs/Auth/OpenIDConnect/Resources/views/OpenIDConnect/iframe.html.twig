@@ -20,6 +20,7 @@
     function checkStatus() {
         let client = "help";
         let session_state = getCookie("session_state");
+
         if (session_state !== null) {
             let text = client + ' ' + session_state;
             let iframe = document.getElementById("iframe_op");
@@ -33,6 +34,7 @@
         if (event.origin !== targetOP) {
             return;
         }
+
         if (event.data !== "unchanged") {
             window.top.location.href = origin;
         }
@@ -41,9 +43,8 @@
     function getCookie(name) {
         let re = new RegExp(name + "=([^;]+)");
         let value = re.exec(document.cookie);
-        return (value != null)
-            ? unescape(value[1])
-            : null;
+
+        return (value != null) ? decodeURI(value[1]) : null;
     }
 </script>
 </html>
