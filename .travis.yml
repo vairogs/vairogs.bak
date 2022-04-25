@@ -10,3 +10,6 @@ install:
 
 script:
     - vendor/bin/phpunit tests
+
+env:
+    - PHP_CS_FIXER_IGNORE_ENV=1

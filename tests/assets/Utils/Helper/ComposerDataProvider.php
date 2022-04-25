@@ -7,9 +7,9 @@ class ComposerDataProvider
     public function dataProviderIsInstalled(): array
     {
         return [
-            ['redis', true, false],
+            ['json', true, false],
             ['ext-xdebug', true, true],
-            ['ext-mysql', false, true],
+            ['ext-oci8', false, true],
             ['phpunit/phpunit', true, true],
             ['phpunit/phpunit', false, false],
         ];
