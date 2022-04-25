@@ -54,7 +54,7 @@ class SortLatvian
         return self::compare(first: $firstValue, second: $secondValue);
     }
 
-    private static function compare(string $first, string $second): int
+    private static function compare(string $first, string $second)
     {
         for ($i = 0, $len = mb_strlen(string: $first); $i < $len; $i++) {
             if (($charFirst = mb_substr(string: $first, start: $i, length: 1)) === ($charSecond = mb_substr(string: $second, start: $i, length: 1))) {
@@ -67,7 +67,5 @@ class SortLatvian
 
             return -1;
         }
-
-        return 0;
     }
 }
