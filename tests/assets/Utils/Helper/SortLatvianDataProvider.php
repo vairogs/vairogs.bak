@@ -9,16 +9,16 @@ class SortLatvianDataProvider
     public function dataProviderSortLatvian(): array
     {
         [$std1 ,$std2 ,$std3 ,$std4, $std5] = [
-            (new Entity())->setName(name: 'zāle'),
-            (new Entity())->setName(name: 'āzis'),
-            (new Entity())->setName(name: 'zaķis'),
-            (new Entity())->setName(name: 'sala'),
-            (new Entity())->setName(name: 'ķēms'),
+            (new Entity())->setName(name: $n1 = 'zāle'),
+            (new Entity())->setName(name: $n2 = 'āzis'),
+            (new Entity())->setName(name: $n3 = 'zaķis'),
+            (new Entity())->setName(name: $n4 = 'sala'),
+            (new Entity())->setName(name: $n5 = 'ķēms'),
         ];
 
         return [
-            [[['zāle'], ['āzis'], ['zaķis'], ['sala'], ['ķēms']], 0, [['āzis'], ['ķēms'], ['sala'], ['zaķis'], ['zāle']]],
-            [[['zāle'], ['āzis'], ['zaķis'], ['sala'], ['ķēms']], 1, [['zāle'], ['āzis'], ['zaķis'], ['sala'], ['ķēms']]],
+            [[[$n1], [$n2], [$n3], [$n4], [$n5]], 0, [[$n2], [$n5], [$n4], [$n3], [$n1]]],
+            [[[$n1], [$n2], [$n3], [$n4], [$n5]], 1, [[$n1], [$n2], [$n3], [$n4], [$n5]]],
             [[$std1, $std2, $std3, $std4, $std5], 'name', [$std2, $std5, $std4, $std3, $std1]],
             [[$std1, $std2, $std3, $std4, $std5], 'test', [$std1, $std2, $std3, $std4, $std5]],
         ];

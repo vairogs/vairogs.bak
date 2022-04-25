@@ -17,7 +17,7 @@ class SortTest extends TestCase
     public function testSwap(int $a, int $b): void
     {
         $value = [$b, $a];
-        $swap = Sort::swap(foo: $a, bar: $b);
+        Sort::swap(foo: $a, bar: $b);
         $this->assertEquals(expected: $value, actual: [$a, $b]);
     }
 
