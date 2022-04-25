@@ -52,7 +52,7 @@ class SortTest extends TestCase
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\SortDataProvider::dataProviderSort
      */
-    public function testSort(iterable|Collection $data, string $parameter, Criteria $order, array $expected): void
+    public function testSort(array|object $data, string $parameter, Criteria $order, array $expected): void
     {
         $this->assertEquals(expected: $expected, actual: Sort::sort(data: $data, parameter: $parameter, order: $order));
     }
