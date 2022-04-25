@@ -1,7 +1,5 @@
 # cache
 
-Based on: [phpsed/cache](https://github.com/phpsed/cache)
-
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine)
 
 Installation

@@ -7,7 +7,7 @@
         "doctrine",
         "filesystem",
         "orm",
-        "phpsed",
+        "phpredis",
         "predis",
         "redis",
         "symfony",
@@ -20,11 +20,6 @@
             "email": "k0d3r1s@vairogs.com",
             "homepage": "https://me.k0d3r1s.com",
             "role": "Developer"
-        },
-        {
-            "name": "phpsed",
-            "homepage": "https://github.com/phpsed",
-            "role": "Original Author"
         }
     ],
     "support": {
