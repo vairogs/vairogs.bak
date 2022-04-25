@@ -2,22 +2,18 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Extra\Constants\Enum\Criteria;
 use Vairogs\Utils\Twig\Attribute;
 use function array_key_exists;
 use function array_slice;
 use function count;
 use function current;
 use function is_array;
-use function is_iterable;
 use function is_object;
-use function method_exists;
 use function property_exists;
 use function round;
-use function strtoupper;
 use function usort;
 
 /** @noinspection TypoSafeNamingInspection */
@@ -86,16 +82,8 @@ final class Sort
      */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function sort(iterable|Collection $data, string $parameter, string $order = Criteria::ASC): array
+    public static function sort(array|object $data, string $parameter, Criteria $order = Criteria::ASC): array
     {
-        if ($data instanceof Collection && method_exists(object_or_class: $data, method: 'toArray')) {
-            $data = $data->toArray();
-        }
-
-        if (!is_iterable(value: $data)) {
-            throw new InvalidArgumentException(message: 'Only iterable variables can be sorted');
-        }
-
         if (count(value: $data) < 2) {
             return $data;
         }
@@ -105,7 +93,7 @@ final class Sort
             throw new InvalidArgumentException(message: "Sorting parameter doesn't exist in sortable variable");
         }
 
-        usort(array: $data, callback: self::usort(parameter: $parameter, order: strtoupper(string: $order)));
+        usort(array: $data, callback: self::usort(parameter: $parameter, order: $order));
 
         return $data;
     }
@@ -128,7 +116,7 @@ final class Sort
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function usort(string $parameter, string $order): callable
+    public static function usort(string $parameter, Criteria $order): callable
     {
         return static function (array|object $first, array|object $second) use ($parameter, $order): int {
             if (($firstSort = Php::getParameter(variable: $first, key: $parameter)) === ($secondSort = Php::getParameter(variable: $second, key: $parameter))) {
