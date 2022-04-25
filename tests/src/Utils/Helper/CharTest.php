@@ -12,7 +12,7 @@ class CharTest extends TestCase
      */
     public function testSanitizeFloat(string $string, float $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Char::sanitizeFloat(string: $string));
+        $this->assertEquals(expected: $expected, actual: Char::sanitizeFloat(string: $string));
     }
 
     /**
@@ -20,7 +20,7 @@ class CharTest extends TestCase
      */
     public function testToSnakeCase(string $string, bool $skip, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Char::toSnakeCase(string: $string, skipCamel: $skip));
+        $this->assertEquals(expected: $expected, actual: Char::toSnakeCase(string: $string, skipCamel: $skip));
     }
 
     /**
@@ -28,6 +28,6 @@ class CharTest extends TestCase
      */
     public function testFromCamelCase(string $string, string $sep, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Char::fromCamelCase(string: $string, separator: $sep));
+        $this->assertEquals(expected: $expected, actual: Char::fromCamelCase(string: $string, separator: $sep));
     }
 }

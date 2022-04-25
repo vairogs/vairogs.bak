@@ -18,12 +18,12 @@ class EntityTest extends TestCase
             ->setStatus(status: $status)
             ->updatedTimestamps();
 
-        $this->assertSame(expected: $id, actual: $entity->getId());
-        $this->assertSame(expected: $status, actual: $entity->getStatus());
+        $this->assertEquals(expected: $id, actual: $entity->getId());
+        $this->assertEquals(expected: $status, actual: $entity->getStatus());
         $this->assertInstanceOf(expected: DateTimeInterface::class, actual: $entity->getCreationDate());
         $this->assertInstanceOf(expected: DateTimeInterface::class, actual: $entity->getModificationDate());
-        $this->assertSame(expected: $entity->getCreationDate()->format(format: DateTimeInterface::ATOM), actual: $entity->getModificationDate()->format(format: DateTimeInterface::ATOM));
+        $this->assertEquals(expected: $entity->getCreationDate()->format(format: DateTimeInterface::ATOM), actual: $entity->getModificationDate()->format(format: DateTimeInterface::ATOM));
         $this->assertIsArray(actual: $serial = $entity->jsonSerialize());
-        $this->assertSame(expected: $entity->getId(), actual: $serial['id']);
+        $this->assertEquals(expected: $entity->getId(), actual: $serial['id']);
     }
 }

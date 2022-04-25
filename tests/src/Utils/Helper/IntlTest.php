@@ -12,7 +12,7 @@ class IntlTest extends TestCase
      */
     public function testCyrillicToLatin(string $string, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Intl::cyrillicToLatin(text: $string));
+        $this->assertEquals(expected: $expected, actual: Intl::cyrillicToLatin(text: $string));
     }
 
     /**
@@ -20,7 +20,7 @@ class IntlTest extends TestCase
      */
     public function testLatinToCyrillic(string $string, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Intl::latinToCyrillic(text: $string));
+        $this->assertEquals(expected: $expected, actual: Intl::latinToCyrillic(text: $string));
     }
 
     /**
@@ -28,6 +28,6 @@ class IntlTest extends TestCase
      */
     public function testGetCountryName(string $country, string $locale, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Intl::getCountryName(country: $country, locale: $locale));
+        $this->assertEquals(expected: $expected, actual: Intl::getCountryName(country: $country, locale: $locale));
     }
 }

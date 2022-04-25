@@ -13,7 +13,7 @@ class UriTest extends TestCase
      */
     public function testArrayFromQueryString(string $query, array $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Uri::arrayFromQueryString(query: $query));
+        $this->assertEquals(expected: $expected, actual: Uri::arrayFromQueryString(query: $query));
     }
 
     /**
@@ -21,7 +21,7 @@ class UriTest extends TestCase
      */
     public function testGetSchema(string $url, string $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Uri::getSchema(request: Request::create(uri: $url)));
+        $this->assertEquals(expected: $expected, actual: Uri::getSchema(request: Request::create(uri: $url)));
     }
 
     /**
@@ -29,6 +29,6 @@ class UriTest extends TestCase
      */
     public function testUrlEncode(string $url): void
     {
-        $this->assertSame(expected: $url, actual: Uri::urlEncode(url: $url));
+        $this->assertEquals(expected: $url, actual: Uri::urlEncode(url: $url));
     }
 }

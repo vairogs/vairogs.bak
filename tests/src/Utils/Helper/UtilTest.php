@@ -13,7 +13,7 @@ class UtilTest extends TestCase
      */
     public function testIsPrime(int $number, bool $expected, ?bool $expectedBelow): void
     {
-        $this->assertSame(expected: $expected, actual: Util::isPrime(number: $number));
+        $this->assertEquals(expected: $expected, actual: Util::isPrime(number: $number));
     }
 
     /**
@@ -25,7 +25,7 @@ class UtilTest extends TestCase
             @runkit7_function_remove(function_name: 'gmp_prob_prime');
         }
 
-        $this->assertSame(expected: $expected, actual: Util::isPrime(number: $number));
+        $this->assertEquals(expected: $expected, actual: Util::isPrime(number: $number));
     }
 
     /**
@@ -33,7 +33,7 @@ class UtilTest extends TestCase
      */
     public function testIsPrimeBelow1000(int $number, bool $expected, ?bool $expectedBelow): void
     {
-        $this->assertSame(expected: $expectedBelow, actual: Util::isPrimeBelow1000(number: $number));
+        $this->assertEquals(expected: $expectedBelow, actual: Util::isPrimeBelow1000(number: $number));
     }
 
     /**
@@ -41,6 +41,6 @@ class UtilTest extends TestCase
      */
     public function testMakeOneDimension(array $input, bool $onlyLast, int $depth, int $maxDepth, array $expected): void
     {
-        $this->assertSame($expected, Util::makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
+        $this->assertEquals($expected, Util::makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
     }
 }

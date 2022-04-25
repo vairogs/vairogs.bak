@@ -9,9 +9,9 @@ class ComposerTest extends TestCase
 {
     public function testGetEnv(): void
     {
-        $this->assertSame(expected: '-1', actual: Composer::getEnv(varname: 'SHELL_VERBOSITY'));
-        $this->assertSame(expected: '1', actual: Composer::getEnv(varname: 'PHP_CS_FIXER_IGNORE_ENV', localOnly: false));
-        $this->assertSame(expected: 'TEST', actual: Composer::getEnv(varname: 'TEST'));
+        $this->assertEquals(expected: '-1', actual: Composer::getEnv(varname: 'SHELL_VERBOSITY'));
+        $this->assertEquals(expected: '1', actual: Composer::getEnv(varname: 'PHP_CS_FIXER_IGNORE_ENV', localOnly: false));
+        $this->assertEquals(expected: 'TEST', actual: Composer::getEnv(varname: 'TEST'));
     }
 
     /**
@@ -19,6 +19,6 @@ class ComposerTest extends TestCase
      */
     public function testIsInstalled(string $package, bool $installed, bool $incDevReq): void
     {
-        $this->assertSame(expected: $installed, actual: Composer::isInstalled(packages: [$package], incDevReq: $incDevReq));
+        $this->assertEquals(expected: $installed, actual: Composer::isInstalled(packages: [$package], incDevReq: $incDevReq));
     }
 }

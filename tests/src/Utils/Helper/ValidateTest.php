@@ -12,7 +12,7 @@ class ValidateTest extends TestCase
      */
     public function testValidateEmail(string $email, bool $expected): void
     {
-        $this->assertSame(expected: $expected, actual: Validate::validateEmail(email: $email));
+        $this->assertEquals(expected: $expected, actual: Validate::validateEmail(email: $email));
     }
 
     /**
