@@ -17,6 +17,7 @@ class FunctionHandler extends AbstractHandler
         return $this;
     }
 
+    /** @noinspection StaticClosureCanBeUsedInspection */
     public function handle(...$arguments): mixed
     {
         $function = $this->functionName;

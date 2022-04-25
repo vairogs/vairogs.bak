@@ -64,31 +64,19 @@ class Char
     public static function long2str(array $array, bool $wide = false): string
     {
         $length = count(value: $array);
-        $shiftLeft = $length << 2;
-
-        if ($wide) {
-            $lastElement = $array[$length - 1];
-            $shiftLeft -= 4;
-
-            if ($lastElement < $shiftLeft - 3 || $lastElement > $shiftLeft) {
-                return '';
-            }
-
-            $shiftLeft = $lastElement;
-        }
-
         $string = [];
+
         for ($i = 0; $i < $length; $i++) {
             $string[$i] = pack('V', $array[$i]);
         }
 
-        $result = implode(separator: '', array: $string);
-
         if ($wide) {
-            return substr(string: $result, offset: 0, length: $shiftLeft);
+            /* @noinspection PhpRedundantOptionalArgumentInspection */
+            return substr(string: implode(separator: '', array: $string), offset: 0, length: $array[$length - 1]);
         }
 
-        return $result;
+        /* @noinspection PhpRedundantOptionalArgumentInspection */
+        return implode(separator: '', array: $string);
     }
 
     #[Attribute\TwigFunction]
@@ -103,5 +91,56 @@ class Char
         }
 
         return $array;
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function char2byte(string $char): int
+    {
+        $pack = unpack(format: 'c', string: $char);
+
+        return (int) array_pop(array: $pack);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function byte2char(int $byte): string
+    {
+        return pack('c', $byte);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function base62Encode(int $number): string
+    {
+        $base = Generator::RAND_BASIC;
+        $length = strlen(string: $base);
+        $r = $number % $length;
+        $result = $base[$r];
+        $q = floor(num: $number / $length);
+
+        while ($q) {
+            $r = $q % $length;
+            $q = floor(num: $q / $length);
+            $result = $base[$r] . $result;
+        }
+
+        return $result;
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function base62Decode(string $string): int
+    {
+        $base = Generator::RAND_BASIC;
+        $length = strlen(string: $base);
+        $limit = strlen(string: $string);
+        $result = strpos(haystack: $base, needle: $string[0]);
+
+        for ($i = 1; $i < $limit; $i++) {
+            $result = $length * $result + strpos(haystack: $base, needle: $string[$i]);
+        }
+
+        return $result;
     }
 }

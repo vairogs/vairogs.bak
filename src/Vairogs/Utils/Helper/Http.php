@@ -9,6 +9,7 @@ use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Attribute;
 use function array_merge;
 use function file_get_contents;
+use function preg_match;
 
 final class Http
 {
@@ -59,7 +60,7 @@ final class Http
      */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getMethods(): array
+    public static function getRequestMethods(): array
     {
         return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: Request::class), with: 'METHOD_');
     }
@@ -101,5 +102,16 @@ final class Http
     public static function checkHttpXForwardedProto(Request $request): bool
     {
         return $request->server->has(key: Constants\Http::HEADER_PROTO) && 'https' === $request->server->get(key: Constants\Http::HEADER_PROTO);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function isCIDR(string $cidr): bool
+    {
+        if (preg_match(pattern: '/^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]))\/([1-9]|[1-2]\d|3[0-2])$/', subject: $cidr, matches: $matches) && $matches[1] && $matches[6]) {
+            return Validate::validateIP(ip: $matches[1], deny: false);
+        }
+
+        return false;
     }
 }

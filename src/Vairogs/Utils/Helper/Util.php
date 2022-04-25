@@ -4,11 +4,19 @@ namespace Vairogs\Utils\Helper;
 
 use Vairogs\Utils\Handler\FunctionHandler;
 use Vairogs\Utils\Twig\Attribute;
+use function acos;
 use function array_fill;
+use function cos;
+use function deg2rad;
+use function explode;
 use function function_exists;
 use function implode;
+use function long2ip;
 use function ltrim;
 use function preg_match;
+use function rad2deg;
+use function round;
+use function sin;
 use const PHP_INT_MAX;
 
 final class Util
@@ -83,5 +91,46 @@ final class Util
         }
 
         return null;
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function getCIDRRange(string $cidr, bool $int = true): ?array
+    {
+        [$base, $bits] = explode(separator: '/', string: $cidr);
+        /** @var string $base */
+        /** @var int $bits */
+        [$a, $b, $c, $d] = explode(separator: '.', string: $base);
+        /** @var int $a */
+        /** @var int $b */
+        /** @var int $c */
+        /** @var int $d */
+        $i = ($a << 24) + ($b << 16) + ($c << 8) + $d;
+        $mask = (0 === $bits) ? 0 : (~0 << (32 - $bits));
+
+        $low = $i & $mask;
+        $high = $i | (~$mask & 0xFFFFFFFF);
+
+        if ($int) {
+            return [$low, $high];
+        }
+
+        return [long2ip(ip: $low), long2ip(ip: $high)];
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function distanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km = true, int $precision = 4): float
+    {
+        if ($latitude1 === $latitude2 && $longitude1 === $longitude2) {
+            return 0.0;
+        }
+
+        $lat1rad = deg2rad(num: $latitude1);
+        $lat2rad = deg2rad(num: $latitude2);
+
+        $distance = rad2deg(num: acos(num: (sin(num: $lat1rad) * sin(num: $lat2rad)) + (cos(num: $lat1rad) * cos(num: $lat2rad) * cos(num: deg2rad(num: $longitude1 - $longitude2)))));
+
+        return round(num: $km ? $distance * 111.18957696 : $distance * 69.09, precision: $precision);
     }
 }

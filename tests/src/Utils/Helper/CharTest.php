@@ -30,9 +30,4 @@ class CharTest extends TestCase
     {
         $this->assertSame(expected: $expected, actual: Char::fromCamelCase(string: $string, separator: $sep));
     }
-
-    public function testLong2str(): void
-    {
-        $this->assertEquals(expected: '', actual: Char::long2str(array: [1, 2, 3, 4], wide: true));
-    }
 }

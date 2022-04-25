@@ -2,13 +2,10 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Exception;
 use LogicException;
 use Vairogs\Extra\Constants\Symbol;
 use function array_rand;
 use function count;
-use function function_exists;
-use function random_int;
 use function str_shuffle;
 use function str_split;
 
@@ -28,7 +25,6 @@ final class Generator
 
     /**
      * @throws LogicException
-     * @throws Exception
      */
     public function generate(int $length = 32): string
     {
@@ -40,7 +36,7 @@ final class Generator
 
         foreach ($this->sets as $set) {
             if ([] !== $split = str_split(string: $set)) {
-                $unique .= $set[$this->tweak(array: $split)];
+                $unique .= $set[array_rand(array: $split)];
                 $all .= $set;
             }
         }
@@ -49,7 +45,8 @@ final class Generator
             $setsCount = count(value: $this->sets);
 
             for ($i = 0; $i < $length - $setsCount; $i++) {
-                $unique .= $all[$this->tweak(array: $all)];
+                /* @noinspection NonSecureArrayRandUsageInspection */
+                $unique .= $all[array_rand(array: $all)];
             }
         }
 
@@ -151,17 +148,5 @@ final class Generator
     public function getSets(): array
     {
         return $this->sets;
-    }
-
-    /**
-     * @throws Exception
-     */
-    private function tweak(array $array): array|int|string
-    {
-        if (function_exists(function: 'random_int')) {
-            return random_int(min: 0, max: count(value: $array) - 1);
-        }
-
-        return array_rand(array: $array);
     }
 }
