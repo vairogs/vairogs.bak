@@ -30,4 +30,12 @@ class CharTest extends TestCase
     {
         $this->assertEquals(expected: $expected, actual: Char::fromCamelCase(string: $string, separator: $sep));
     }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\CharDataProvider::dataProviderBase62
+     */
+    public function testBase62(int $number): void
+    {
+        $this->assertEquals(expected: $number, actual: Char::base62Decode(string: Char::base62Encode(number: $number)));
+    }
 }

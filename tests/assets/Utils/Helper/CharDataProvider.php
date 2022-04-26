@@ -29,4 +29,14 @@ class CharDataProvider
             ['VairogsHelper', '', 'vairogshelper'],
         ];
     }
+
+    public function dataProviderBase62(): array
+    {
+        return [
+            [12578952],
+            [0],
+            [3],
+            [777],
+        ];
+    }
 }

@@ -97,6 +97,10 @@ final class Util
     #[Attribute\TwigFilter]
     public static function getCIDRRange(string $cidr, bool $int = true): ?array
     {
+        if (!Http::isCIDR(cidr: $cidr)) {
+            return null;
+        }
+
         [$base, $bits] = explode(separator: '/', string: $cidr);
         /** @var string $base */
         /** @var int $bits */

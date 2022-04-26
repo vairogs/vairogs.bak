@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650929573">
-  <project timestamp="1650929573">
+<coverage generated="1651016138">
+  <project timestamp="1651016138">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2232,7 +2232,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Char.php">
       <class name="Vairogs\Utils\Helper\Char" namespace="global">
-        <metrics complexity="16" methods="10" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="20" elements="47" coveredelements="28"/>
+        <metrics complexity="16" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="37" elements="47" coveredelements="47"/>
       </class>
       <line num="28" type="method" name="fromCamelCase" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="32" type="stmt" count="2"/>
@@ -2262,26 +2262,26 @@
       <line num="102" type="stmt" count="2"/>
       <line num="105" type="method" name="byte2char" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="109" type="stmt" count="2"/>
-      <line num="112" type="method" name="base62Encode" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="116" type="stmt" count="0"/>
-      <line num="117" type="stmt" count="0"/>
-      <line num="118" type="stmt" count="0"/>
-      <line num="119" type="stmt" count="0"/>
-      <line num="120" type="stmt" count="0"/>
-      <line num="122" type="stmt" count="0"/>
-      <line num="123" type="stmt" count="0"/>
-      <line num="124" type="stmt" count="0"/>
-      <line num="125" type="stmt" count="0"/>
-      <line num="128" type="stmt" count="0"/>
-      <line num="131" type="method" name="base62Decode" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="135" type="stmt" count="0"/>
-      <line num="136" type="stmt" count="0"/>
-      <line num="137" type="stmt" count="0"/>
-      <line num="138" type="stmt" count="0"/>
-      <line num="140" type="stmt" count="0"/>
-      <line num="141" type="stmt" count="0"/>
-      <line num="144" type="stmt" count="0"/>
-      <metrics loc="147" ncloc="144" classes="1" methods="10" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="20" elements="47" coveredelements="28"/>
+      <line num="112" type="method" name="base62Encode" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="116" type="stmt" count="4"/>
+      <line num="117" type="stmt" count="4"/>
+      <line num="118" type="stmt" count="4"/>
+      <line num="119" type="stmt" count="4"/>
+      <line num="120" type="stmt" count="4"/>
+      <line num="122" type="stmt" count="4"/>
+      <line num="123" type="stmt" count="2"/>
+      <line num="124" type="stmt" count="2"/>
+      <line num="125" type="stmt" count="2"/>
+      <line num="128" type="stmt" count="4"/>
+      <line num="131" type="method" name="base62Decode" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="135" type="stmt" count="4"/>
+      <line num="136" type="stmt" count="4"/>
+      <line num="137" type="stmt" count="4"/>
+      <line num="138" type="stmt" count="4"/>
+      <line num="140" type="stmt" count="4"/>
+      <line num="141" type="stmt" count="2"/>
+      <line num="144" type="stmt" count="4"/>
+      <metrics loc="147" ncloc="144" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="37" coveredstatements="37" elements="47" coveredelements="47"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Composer.php">
       <class name="Vairogs\Utils\Helper\Composer" namespace="global">
@@ -2509,10 +2509,10 @@
       <line num="99" type="stmt" count="2"/>
       <line num="102" type="method" name="checkHttpXForwardedProto" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="104" type="stmt" count="2"/>
-      <line num="107" type="method" name="isCIDR" visibility="public" complexity="4" crap="4" count="3"/>
-      <line num="111" type="stmt" count="3"/>
-      <line num="112" type="stmt" count="1"/>
-      <line num="115" type="stmt" count="2"/>
+      <line num="107" type="method" name="isCIDR" visibility="public" complexity="4" crap="4" count="6"/>
+      <line num="111" type="stmt" count="6"/>
+      <line num="112" type="stmt" count="3"/>
+      <line num="115" type="stmt" count="3"/>
       <metrics loc="118" ncloc="114" classes="1" methods="11" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="24" coveredstatements="8" elements="35" coveredelements="14"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Identification.php">
@@ -2637,14 +2637,14 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Json.php">
       <class name="Vairogs\Utils\Helper\Json" namespace="global">
-        <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+        <metrics complexity="4" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </class>
-      <line num="27" type="method" name="encode" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="39" type="method" name="decode" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="43" type="stmt" count="0"/>
-      <metrics loc="46" ncloc="40" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+      <line num="27" type="method" name="encode" visibility="public" complexity="3" crap="3" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="39" type="method" name="decode" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="43" type="stmt" count="2"/>
+      <metrics loc="46" ncloc="40" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Number.php">
       <class name="Vairogs\Utils\Helper\Number" namespace="global">
@@ -2849,31 +2849,31 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Text.php">
       <class name="Vairogs\Utils\Helper\Text" namespace="global">
-        <metrics complexity="27" methods="15" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="3" elements="48" coveredelements="6"/>
+        <metrics complexity="27" methods="15" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="19" elements="48" coveredelements="27"/>
       </class>
       <line num="29" type="method" name="cleanText" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="33" type="stmt" count="0"/>
-      <line num="36" type="method" name="oneSpace" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <line num="43" type="method" name="stripSpace" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="47" type="stmt" count="0"/>
-      <line num="50" type="method" name="truncateSafe" visibility="public" complexity="4" crap="20" count="0"/>
-      <line num="54" type="stmt" count="0"/>
-      <line num="55" type="stmt" count="0"/>
-      <line num="57" type="stmt" count="0"/>
-      <line num="58" type="stmt" count="0"/>
-      <line num="61" type="stmt" count="0"/>
-      <line num="62" type="stmt" count="0"/>
-      <line num="65" type="stmt" count="0"/>
-      <line num="68" type="method" name="limitChars" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="72" type="stmt" count="0"/>
-      <line num="73" type="stmt" count="0"/>
-      <line num="76" type="stmt" count="0"/>
-      <line num="79" type="method" name="limitWords" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="83" type="stmt" count="0"/>
-      <line num="84" type="stmt" count="0"/>
-      <line num="85" type="stmt" count="0"/>
-      <line num="88" type="stmt" count="0"/>
+      <line num="36" type="method" name="oneSpace" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="43" type="method" name="stripSpace" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="50" type="method" name="truncateSafe" visibility="public" complexity="4" crap="4" count="2"/>
+      <line num="54" type="stmt" count="2"/>
+      <line num="55" type="stmt" count="2"/>
+      <line num="57" type="stmt" count="2"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="61" type="stmt" count="2"/>
+      <line num="62" type="stmt" count="1"/>
+      <line num="65" type="stmt" count="2"/>
+      <line num="68" type="method" name="limitChars" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="72" type="stmt" count="2"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="76" type="stmt" count="1"/>
+      <line num="79" type="method" name="limitWords" visibility="public" complexity="3" crap="3" count="2"/>
+      <line num="83" type="stmt" count="2"/>
+      <line num="84" type="stmt" count="2"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="88" type="stmt" count="1"/>
       <line num="91" type="method" name="contains" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="96" type="stmt" count="1"/>
       <line num="99" type="method" name="containsAny" visibility="public" complexity="3" crap="12" count="0"/>
@@ -2889,8 +2889,8 @@
       <line num="127" type="stmt" count="3"/>
       <line num="130" type="method" name="keepAscii" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="134" type="stmt" count="0"/>
-      <line num="137" type="method" name="replacePattern" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="141" type="stmt" count="3"/>
+      <line num="137" type="method" name="replacePattern" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="141" type="stmt" count="4"/>
       <line num="144" type="method" name="getLastPart" visibility="public" complexity="2" crap="6" count="0"/>
       <line num="148" type="stmt" count="0"/>
       <line num="151" type="method" name="getNormalizedValue" visibility="public" complexity="3" crap="12" count="0"/>
@@ -2899,7 +2899,7 @@
       <line num="159" type="stmt" count="0"/>
       <line num="162" type="method" name="htmlEntityDecode" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="166" type="stmt" count="0"/>
-      <metrics loc="169" ncloc="169" classes="1" methods="15" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="3" elements="48" coveredelements="6"/>
+      <metrics loc="169" ncloc="169" classes="1" methods="15" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="19" elements="48" coveredelements="27"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Uri.php">
       <class name="Vairogs\Utils\Helper\Uri" namespace="global">
@@ -2964,7 +2964,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Util.php">
       <class name="Vairogs\Utils\Helper\Util" namespace="global">
-        <metrics complexity="20" methods="7" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="34" elements="48" coveredelements="39"/>
+        <metrics complexity="21" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="43" elements="50" coveredelements="50"/>
       </class>
       <line num="24" type="method" name="isPrime" visibility="public" complexity="1" crap="1" count="25"/>
       <line num="28" type="stmt" count="25"/>
@@ -2997,24 +2997,26 @@
       <line num="88" type="stmt" count="7"/>
       <line num="89" type="stmt" count="13"/>
       <line num="93" type="stmt" count="12"/>
-      <line num="96" type="method" name="getCIDRRange" visibility="public" complexity="3" crap="3.01" count="1"/>
-      <line num="100" type="stmt" count="1"/>
-      <line num="103" type="stmt" count="1"/>
-      <line num="108" type="stmt" count="1"/>
-      <line num="109" type="stmt" count="1"/>
-      <line num="111" type="stmt" count="1"/>
-      <line num="112" type="stmt" count="1"/>
-      <line num="114" type="stmt" count="1"/>
-      <line num="115" type="stmt" count="1"/>
-      <line num="118" type="stmt" count="0"/>
-      <line num="121" type="method" name="distanceBetweenPoints" visibility="public" complexity="4" crap="20" count="0"/>
-      <line num="125" type="stmt" count="0"/>
-      <line num="126" type="stmt" count="0"/>
-      <line num="129" type="stmt" count="0"/>
-      <line num="130" type="stmt" count="0"/>
-      <line num="132" type="stmt" count="0"/>
-      <line num="134" type="stmt" count="0"/>
-      <metrics loc="137" ncloc="131" classes="1" methods="7" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="41" coveredstatements="34" elements="48" coveredelements="39"/>
+      <line num="96" type="method" name="getCIDRRange" visibility="public" complexity="4" crap="4" count="4"/>
+      <line num="100" type="stmt" count="4"/>
+      <line num="101" type="stmt" count="1"/>
+      <line num="104" type="stmt" count="3"/>
+      <line num="107" type="stmt" count="3"/>
+      <line num="112" type="stmt" count="3"/>
+      <line num="113" type="stmt" count="3"/>
+      <line num="115" type="stmt" count="3"/>
+      <line num="116" type="stmt" count="3"/>
+      <line num="118" type="stmt" count="3"/>
+      <line num="119" type="stmt" count="2"/>
+      <line num="122" type="stmt" count="1"/>
+      <line num="125" type="method" name="distanceBetweenPoints" visibility="public" complexity="4" crap="4" count="3"/>
+      <line num="129" type="stmt" count="3"/>
+      <line num="130" type="stmt" count="1"/>
+      <line num="133" type="stmt" count="2"/>
+      <line num="134" type="stmt" count="2"/>
+      <line num="136" type="stmt" count="2"/>
+      <line num="138" type="stmt" count="2"/>
+      <metrics loc="141" ncloc="135" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="43" elements="50" coveredelements="50"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Validate.php">
       <class name="Vairogs\Utils\Helper\Validate" namespace="global">
@@ -3022,8 +3024,8 @@
       </class>
       <line num="19" type="method" name="validateEmail" visibility="public" complexity="1" crap="1" count="8"/>
       <line num="24" type="stmt" count="8"/>
-      <line num="27" type="method" name="validateIP" visibility="public" complexity="2" crap="2" count="7"/>
-      <line num="32" type="stmt" count="7"/>
+      <line num="27" type="method" name="validateIP" visibility="public" complexity="2" crap="2" count="9"/>
+      <line num="32" type="stmt" count="9"/>
       <line num="35" type="method" name="validateCIDR" visibility="public" complexity="2" crap="2" count="3"/>
       <line num="39" type="stmt" count="3"/>
       <line num="40" type="stmt" count="2"/>
@@ -3117,6 +3119,6 @@
       <line num="53" type="stmt" count="0"/>
       <metrics loc="57" ncloc="57" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="0" elements="19" coveredelements="0"/>
     </file>
-    <metrics files="155" loc="7919" ncloc="7688" classes="101" methods="535" coveredmethods="107" conditionals="0" coveredconditionals="0" statements="1733" coveredstatements="409" elements="2268" coveredelements="516"/>
+    <metrics files="155" loc="7923" ncloc="7692" classes="101" methods="535" coveredmethods="118" conditionals="0" coveredconditionals="0" statements="1735" coveredstatements="454" elements="2270" coveredelements="572"/>
   </project>
 </coverage>

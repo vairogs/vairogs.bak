@@ -43,4 +43,20 @@ class UtilTest extends TestCase
     {
         $this->assertEquals($expected, Util::makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
     }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderGetCIDRRange
+     */
+    public function testGetCIDRRange(string $cidr, bool $int, ?array $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: Util::getCIDRRange(cidr: $cidr, int: $int));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderDistanceBetweenPoints
+     */
+    public function testDistanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km, float $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: Util::distanceBetweenPoints(latitude1: $latitude1, latitude2: $latitude2, longitude1: $longitude1, longitude2: $longitude2, km: $km));
+    }
 }
