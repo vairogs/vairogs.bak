@@ -1,6 +1,0 @@
-services:
-    Vairogs\Twig\Helper\Gravatar\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension

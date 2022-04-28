@@ -1,6 +1,0 @@
-services:
-    Vairogs\Twig\Helper\Util\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension
