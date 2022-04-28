@@ -7,13 +7,12 @@ use function method_exists;
 
 /**
  * @method getContents()
- * @method getPathname()
  */
 class SplFileInfo
 {
     private Reader $reader;
 
-    public function __construct(private readonly FinderSplFileInfo $decorated)
+    public function __construct(private readonly FinderSplFileInfo $decorated, private readonly array $types = [])
     {
     }
 
@@ -29,7 +28,7 @@ class SplFileInfo
     public function getReader(string $namespace): Reader
     {
         if (!isset($this->reader)) {
-            $this->reader = new Reader(snippet: (string) $this->getContents(), namespace: $namespace);
+            $this->reader = new Reader(snippet: (string) $this->getContents(), namespace: $namespace, types: $this->types);
         }
 
         return $this->reader;

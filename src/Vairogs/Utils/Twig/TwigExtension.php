@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Twig;
 
 use Exception;
+use PhpParser\Node\Stmt\Class_;
 use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use ReflectionMethod;
@@ -72,7 +73,7 @@ final class TwigExtension extends AbstractExtension
     private function getMethods(string $filter, string $twig, string $type): array
     {
         try {
-            if (null !== $this->adapter && $methods = $this->getCache($this->adapter, $this->getKey($type))) {
+            if (null !== $this->adapter && $methods = $this->getCache(adapter: $this->adapter, key: $this->getKey(type: $type))) {
                 return $methods;
             }
         } catch (InvalidArgumentException) {
@@ -80,17 +81,17 @@ final class TwigExtension extends AbstractExtension
         }
 
         $methods = [[]];
-        $spls = (new Finder([getcwd() . self::HELPER_DIR], self::HELPER_NAMESPACE))->locate()->getClassMap();
+        $spls = (new Finder(directories: [getcwd() . self::HELPER_DIR], types: [Class_::class], namesapce: self::HELPER_NAMESPACE))->locate()->getClassMap();
 
         foreach (array_keys($spls) as $class) {
-            $methods[] = $this->makeArray(input: self::getFiltered($class, $filter), key: $this->getPrefix($class), class: $twig);
+            $methods[] = $this->makeArray(input: self::getFiltered(class: $class, filterClass: $filter), key: $this->getPrefix(base: $class), class: $twig);
         }
 
         $methods = array_merge(...$methods);
 
         if (null !== $this->adapter) {
             try {
-                $this->setCache($this->adapter, $this->getKey($type), $methods, $this->defaultLifetime);
+                $this->setCache(adapter: $this->adapter, key: $this->getKey(type: $type), value: $methods, expiresAfter: $this->defaultLifetime);
             } catch (InvalidArgumentException) {
                 // don't set cache if exception
             }
@@ -129,7 +130,7 @@ final class TwigExtension extends AbstractExtension
 
     private function getKey(string $type): string
     {
-        return hash(Common\Common::HASH_ALGORITHM, $this->getPrefix($type));
+        return hash(algo: Common\Common::HASH_ALGORITHM, data: $this->getPrefix($type));
     }
 
     private static function getFilter(string $class, string $name, bool $withClass = true): string|array

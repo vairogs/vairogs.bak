@@ -7,9 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Extra\Constants\Http;
 use Vairogs\Utils\Twig\Attribute;
+use function count;
 use function explode;
+use function is_numeric;
 use function long2ip;
-use function preg_match;
 
 final class IPAddress
 {
@@ -76,8 +77,10 @@ final class IPAddress
     #[Attribute\TwigFilter]
     public static function isCIDR(string $cidr): bool
     {
-        if (preg_match(pattern: '/^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]))\/([1-9]|[1-2]\d|3[0-2])$/', subject: $cidr, matches: $matches) && $matches[1] && $matches[6]) {
-            return Validate::validateIPAddress(ipAddress: $matches[1], deny: false);
+        $parts = explode(separator: '/', string: $cidr);
+
+        if (2 === count(value: $parts) && is_numeric(value: $parts[1]) && 32 >= (int) $parts[1]) {
+            return Validate::validateIPAddress(ipAddress: $parts[0], deny: false);
         }
 
         return false;

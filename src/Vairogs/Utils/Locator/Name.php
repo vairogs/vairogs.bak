@@ -2,7 +2,13 @@
 
 namespace Vairogs\Utils\Locator;
 
-use PhpParser\Node\Name as PhpParserName;
+use Vairogs\Utils\Helper\Text;
+use function array_pop;
+use function explode;
+use function implode;
+use function preg_match;
+use function preg_quote;
+use function strtolower;
 
 class Name
 {
@@ -18,32 +24,14 @@ class Name
         return implode(separator: '\\', array: $this->parts);
     }
 
-    public function createNode(): PhpParserName
-    {
-        return new PhpParserName(name: $this->parts);
-    }
-
-    public function isDefined(bool $autoload = true): bool
-    {
-        return class_exists(class: (string) $this, autoload: $autoload)
-            || interface_exists(interface: (string) $this, autoload: $autoload)
-            || trait_exists(trait: (string) $this, autoload: $autoload)
-            || function_exists(function: (string) $this);
-    }
-
     public function normalize(): string
     {
-        return preg_replace(pattern: '/^\\\*/', replacement: '', subject: (string) $this);
+        return Text::replacePattern(pattern: '/^\\\*/', text: (string) $this);
     }
 
-    public function keyize(): string
+    public function key(): string
     {
         return strtolower(string: $this->normalize());
-    }
-
-    public function getBasename(): self
-    {
-        return new self(name: (string) end(array: $this->parts));
     }
 
     public function getNamespace(): self
@@ -56,6 +44,6 @@ class Name
 
     public function inNamespace(self $namespace): bool
     {
-        return (bool) preg_match(pattern: '/^' . preg_quote(str: $namespace->keyize(), delimiter: '\\') . '/', subject: $this->getNamespace()->keyize());
+        return (bool) preg_match(pattern: '/^' . preg_quote(str: $namespace->key(), delimiter: '\\') . '/', subject: $this->getNamespace()->key());
     }
 }
