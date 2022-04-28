@@ -1,12 +1,12 @@
 {
-    "name": "vairogs/twig-helper-php",
-    "description": "⛨ Vairogs ⛨: Twig: Helper: Extension that implements vairogs/utils Php helper functions in Twig template",
+    "name": "vairogs/utils-locator",
+    "description": "⛨ Vairogs ⛨: Utils: Locator",
     "type": "library",
     "keywords": [
-        "symfony",
+        "locator",
         "php",
-        "twig",
-        "twig-extension",
+        "symfony",
+        "tool",
         "utils",
         "vairogs"
     ],
@@ -40,11 +40,13 @@
     ],
     "require": {
         "php": ">=8.1.0",
+        "nikic/php-parser": "*",
+        "symfony/finder": "^5.4|^6.0",
         "vairogs/utils": "self.version"
     },
     "autoload": {
         "psr-4": {
-            "Vairogs\\Twig\\Helper\\Php\\": ""
+            "Vairogs\\Utils\\Locator\\": ""
         }
     },
     "minimum-stability": "dev",
