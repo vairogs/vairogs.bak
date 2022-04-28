@@ -22,7 +22,7 @@ class Reader
             $this->types = [Class_::class, Interface_::class, Trait_::class];
         }
 
-        $this->findDefinitions(stmts: (new Parser\Php7(lexer: new Lexer(options: ['usedAttributes' => []])))->parse(code: $snippet), namespace: new Name(name: $namespace));
+        $this->findDefinitions(stmts: (new Parser\Php7(lexer: new Lexer(options: ['usedAttributes' => []])))->parse(code: $snippet) ?? [], namespace: new Name(name: $namespace));
     }
 
     public function getDefinitionNames(): array
