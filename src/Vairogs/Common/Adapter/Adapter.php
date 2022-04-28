@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Cache\Adapter;
+namespace Vairogs\Common\Adapter;
 
 use Psr\Cache\CacheItemPoolInterface;
 

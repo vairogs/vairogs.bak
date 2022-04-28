@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Cache;
+namespace Vairogs\Common;
 
 use BadMethodCallException;
 use InvalidArgumentException;
 use Psr\Cache\CacheItemPoolInterface;
-use Vairogs\Cache\Adapter\Adapter;
+use Vairogs\Common\Adapter\Adapter;
 use function sprintf;
 
 final class Pool
@@ -20,7 +20,7 @@ final class Pool
 
         foreach ($adapters as $adapter) {
             if (!$adapter instanceof Adapter && !$adapter instanceof CacheItemPoolInterface) {
-                throw new InvalidArgumentException(message: sprintf('Adapter %s must implement %s or %s', $adapter::class, Adapter::class, CacheItemPoolInterface::class));
+                throw new InvalidArgumentException(message: sprintf('Adapter must implement %s or %s', Adapter::class, CacheItemPoolInterface::class));
             }
 
             $pool[] = match (true) {
