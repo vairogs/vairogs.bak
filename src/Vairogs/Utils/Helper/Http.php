@@ -9,7 +9,6 @@ use Vairogs\Extra\Constants;
 use Vairogs\Utils\Twig\Attribute;
 use function array_merge;
 use function file_get_contents;
-use function preg_match;
 
 final class Http
 {
@@ -18,40 +17,6 @@ final class Http
     public static function isHttps(Request $request): bool
     {
         return self::checkHttps(request: $request) || self::checkServerPort(request: $request) || self::checkHttpXForwardedSsl(request: $request) || self::checkHttpXForwardedProto(request: $request);
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function getRemoteIp(Request $request, bool $trust = false): string
-    {
-        if (false === $trust) {
-            return $request->server->get(key: Constants\Http::REMOTE_ADDR);
-        }
-
-        $parameters = [
-            Constants\Http::HTTP_CLIENT_IP,
-            Constants\Http::HTTP_X_REAL_IP,
-            Constants\Http::HTTP_X_FORWARDED_FOR,
-        ];
-
-        foreach ($parameters as $parameter) {
-            if ($request->server->has(key: $parameter)) {
-                return $request->server->get(key: $parameter);
-            }
-        }
-
-        return $request->server->get(key: Constants\Http::REMOTE_ADDR);
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function getRemoteIpCF(Request $request, bool $trust = false): string
-    {
-        if ($request->server->has(key: Constants\Http::HTTP_CF_CONNECTING_IP)) {
-            return $request->server->get(key: Constants\Http::HTTP_CF_CONNECTING_IP);
-        }
-
-        return self::getRemoteIp(request: $request, trust: $trust);
     }
 
     /**
@@ -102,16 +67,5 @@ final class Http
     public static function checkHttpXForwardedProto(Request $request): bool
     {
         return $request->server->has(key: Constants\Http::HEADER_PROTO) && 'https' === $request->server->get(key: Constants\Http::HEADER_PROTO);
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function isCIDR(string $cidr): bool
-    {
-        if (preg_match(pattern: '/^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5]))\/([1-9]|[1-2]\d|3[0-2])$/', subject: $cidr, matches: $matches) && $matches[1] && $matches[6]) {
-            return Validate::validateIP(ip: $matches[1], deny: false);
-        }
-
-        return false;
     }
 }

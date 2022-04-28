@@ -8,10 +8,8 @@ use function acos;
 use function array_fill;
 use function cos;
 use function deg2rad;
-use function explode;
 use function function_exists;
 use function implode;
-use function long2ip;
 use function ltrim;
 use function preg_match;
 use function rad2deg;
@@ -91,35 +89,6 @@ final class Util
         }
 
         return null;
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public static function getCIDRRange(string $cidr, bool $int = true): ?array
-    {
-        if (!Http::isCIDR(cidr: $cidr)) {
-            return null;
-        }
-
-        [$base, $bits] = explode(separator: '/', string: $cidr);
-        /** @var string $base */
-        /** @var int $bits */
-        [$a, $b, $c, $d] = explode(separator: '.', string: $base);
-        /** @var int $a */
-        /** @var int $b */
-        /** @var int $c */
-        /** @var int $d */
-        $i = ($a << 24) + ($b << 16) + ($c << 8) + $d;
-        $mask = (0 === $bits) ? 0 : (~0 << (32 - $bits));
-
-        $low = $i & $mask;
-        $high = $i | (~$mask & 0xFFFFFFFF);
-
-        if ($int) {
-            return [$low, $high];
-        }
-
-        return [long2ip(ip: $low), long2ip(ip: $high)];
     }
 
     #[Attribute\TwigFunction]

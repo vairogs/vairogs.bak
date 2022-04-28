@@ -1,11 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Utils\Helper;
+namespace Vairogs\Tests\Helper;
 
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Vairogs\Extra\Constants\Symbol;
-use Vairogs\Utils\Helper\Generator;
+use Vairogs\Utils\Generator;
 use Vairogs\Utils\Helper\Text;
 use function function_exists;
 

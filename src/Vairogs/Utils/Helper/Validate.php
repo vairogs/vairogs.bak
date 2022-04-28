@@ -27,19 +27,19 @@ final class Validate
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
-    public static function validateIP(string $ip, bool $deny = true): bool
+    public static function validateIPAddress(string $ipAddress, bool $deny = true): bool
     {
-        return false !== filter_var(value: $ip, filter: FILTER_VALIDATE_IP, options: $deny ? FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE : FILTER_FLAG_NONE);
+        return false !== filter_var(value: $ipAddress, filter: FILTER_VALIDATE_IP, options: $deny ? FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE : FILTER_FLAG_NONE);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public static function validateCIDR(string $cidr): bool
     {
-        if (!Http::isCIDR(cidr: $cidr)) {
+        if (!IPAddress::isCIDR(cidr: $cidr)) {
             return false;
         }
 
-        return Util::getCIDRRange(cidr: $cidr)[0] === ip2long(ip: explode(separator: '/', string: $cidr, limit: 2)[0]);
+        return (int) IPAddress::getCIDRRange(cidr: $cidr)[0] === ip2long(ip: explode(separator: '/', string: $cidr, limit: 2)[0]);
     }
 }

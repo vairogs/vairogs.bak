@@ -36,6 +36,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/captcha.git"
     },
     {
+        "path": "src/Vairogs/Common",
+        "repo": "https://GH_TOKEN@github.com/vairogs/common.git"
+    },
+    {
         "path": "src/Vairogs/Core",
         "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
     },
@@ -80,70 +84,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper.git"
     },
     {
-        "path": "src/Vairogs/Twig/Helper/Char",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-char.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Date",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-date.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/File",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-file.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Gravatar",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-gravatar.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Http",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-http.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Identification",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-identification.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Intl",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-intl.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Iteration",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-iteration.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Json",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-json.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Php",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-php.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Sort",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-sort.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/SortLatvian",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-sortlatvian.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Text",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-text.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Uri",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-uri.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Util",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-util.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Helper/Validate",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-helper-validate.git"
-    },
-    {
         "path": "src/Vairogs/Twig/Pagination",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig-pagination.git"
     },
@@ -154,5 +94,9 @@
     {
         "path": "src/Vairogs/Utils",
         "repo": "https://GH_TOKEN@github.com/vairogs/utils.git"
+    },
+    {
+        "path": "src/Vairogs/Utils/Locator",
+        "repo": "https://GH_TOKEN@github.com/vairogs/utils-locator.git"
     }
 ]

@@ -65,14 +65,22 @@
         "doctrine/dbal": "*",
         "doctrine/orm": "*",
         "jetbrains/phpstorm-attributes": "*",
+        "nikic/php-parser": "*",
+        "psr/cache": "*",
+        "symfony/cache": "^5.4|^6.0",
+        "symfony/finder": "^5.4|^6.0",
         "symfony/http-foundation": "^5.4|^6.0",
         "symfony/intl": "^5.4|^6.0",
         "symfony/property-access": "^5.4|^6.0",
         "symfony/property-info": "^5.4|^6.0",
         "symfony/routing": "^5.4|^6.0",
+        "vairogs/common": "self.version",
         "vairogs/core": "self.version",
         "vairogs/extra-constants": "self.version",
         "twig/twig": "*"
+    },
+    "replace": {
+        "vairogs/utils-locator": "self.version"
     },
     "suggest": {
         "ext-iconv": "To use some Helper functions"

@@ -31,19 +31,19 @@ final class Number
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function greatestCommonDivisor(int $x, int $y): int
+    public static function greatestCommonDivisor(int $fisrt, int $second): int
     {
-        if (0 === $y) {
-            return $x;
+        if (0 === $second) {
+            return $fisrt;
         }
 
-        return self::greatestCommonDivisor(x: $y, y: $x % $y);
+        return self::greatestCommonDivisor(fisrt: $second, second: $fisrt % $second);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function leastCommonMultiple(int $x, int $y): int
+    public static function leastCommonMultiple(int $first, int $second): int
     {
-        return $x * $y / self::greatestCommonDivisor(x: $x, y: $y);
+        return $first * $second / self::greatestCommonDivisor(fisrt: $first, second: $second);
     }
 }

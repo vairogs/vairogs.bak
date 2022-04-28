@@ -45,14 +45,6 @@ class UtilTest extends TestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderGetCIDRRange
-     */
-    public function testGetCIDRRange(string $cidr, bool $int, ?array $expected): void
-    {
-        $this->assertEquals(expected: $expected, actual: Util::getCIDRRange(cidr: $cidr, int: $int));
-    }
-
-    /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderDistanceBetweenPoints
      */
     public function testDistanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km, float $expected): void

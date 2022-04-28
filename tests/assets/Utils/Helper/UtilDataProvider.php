@@ -61,15 +61,6 @@ class UtilDataProvider
         ];
     }
 
-    public function dataProviderGetCIDRRange(): array
-    {
-        return [
-            ['10.0.0.0/24', false, ['10.0.0.0', '10.0.0.255']],
-            ['10.0.0.0/24', true, [167772160, 167772415]],
-            ['vairogs', true, null],
-        ];
-    }
-
     public function dataProviderDistanceBetweenPoints(): array
     {
         return [

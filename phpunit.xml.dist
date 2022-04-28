@@ -4,6 +4,13 @@
         <ini name="error_reporting" value="-1"/>
         <ini name="memory_limit" value="-1"/>
         <env name="SHELL_VERBOSITY" value="-1" />
+        <env name="ENVIRONMENT" value="test" />
+        <env name="REDIS_DB_PREDIS" value="13" />
+        <env name="REDIS_DB_PHPREDIS" value="13" />
+        <env name="REDIS_URL" value="redis://Bqox56ewGRxrUY5MzFUNx0w23AXN0MY9@keydb:6379" />
+        <env name="DATABASE_URL" value="pgsql://postgres:Bqox56ewGRxrUY5MzFUNx0w23AXN0MY9@postgres14:5432/services_test" />
+        <env name="KERNEL_CLASS" value="Vairogs\Assets\TestKernel" />
+        <server name="APP_ENV" value="test" force="true" />
     </php>
 
     <testsuites>

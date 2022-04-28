@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils\Helper;
+namespace Vairogs\Utils;
 
 use LogicException;
 use Vairogs\Extra\Constants\Symbol;

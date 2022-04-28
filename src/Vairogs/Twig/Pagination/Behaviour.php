@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Twig\Pagination\Behaviour;
+namespace Vairogs\Twig\Pagination;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
@@ -9,35 +9,35 @@ use function floor;
 use function range;
 use function sprintf;
 
-final class FixedLength
+final class Behaviour
 {
     final public const MIN_VISIBLE = 3;
 
-    public function __construct(private int $maxVisible)
+    public function __construct(private int $visible)
     {
-        $this->checkMinimum(maxVisible: $this->maxVisible);
+        $this->checkMinimum(visible: $this->visible);
     }
 
-    public function withMaximumVisible(int $maxVisible): self
+    public function withVisible(int $visible): self
     {
-        $this->checkMinimum(maxVisible: $maxVisible);
+        $this->checkMinimum(visible: $visible);
 
         $clone = clone $this;
-        $clone->setMaximumVisible(maxVisible: $maxVisible);
+        $clone->setVisible(visible: $visible);
 
         return $clone;
     }
 
-    public function getMaxVisible(): int
+    public function getVisible(): int
     {
-        return $this->maxVisible;
+        return $this->visible;
     }
 
     public function getPaginationData(int $total, int $current, int $indicator = -1): array
     {
         $this->validate(total: $total, current: $current, indicator: $indicator);
 
-        if ($total <= $this->maxVisible) {
+        if ($total <= $this->visible) {
             return range(start: 1, end: $total);
         }
 
@@ -54,16 +54,16 @@ final class FixedLength
         return $this->hasSingleOmittedNearLast(current: $current) || $this->hasSingleOmittedNearStart(total: $total, current: $current);
     }
 
-    public function checkMinimum(int $maxVisible): void
+    public function checkMinimum(int $visible): void
     {
-        if ($this->maxVisible < self::MIN_VISIBLE) {
-            throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d', $maxVisible, self::MIN_VISIBLE));
+        if ($this->visible < self::MIN_VISIBLE) {
+            throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d', $visible, self::MIN_VISIBLE));
         }
     }
 
-    public function setMaximumVisible(int $maxVisible): void
+    public function setVisible(int $visible): void
     {
-        $this->maxVisible = $maxVisible;
+        $this->visible = $visible;
     }
 
     public function validate(int $total, int $current, int $indicator = -1): void
@@ -94,7 +94,7 @@ final class FixedLength
     #[Pure]
     public function getSingleBreakpoint(): int
     {
-        return (int) floor(num: $this->maxVisible / 2) + 1;
+        return (int) floor(num: $this->visible / 2) + 1;
     }
 
     #[Pure]
@@ -106,14 +106,14 @@ final class FixedLength
     #[Pure]
     public function getDataWithSingleOmitted(int $total, int $current, int $indicator): array
     {
-        $rest = $this->maxVisible - ($total - $current);
+        $rest = $this->visible - ($total - $current);
         $omitPagesFrom = (int) ceil(num: $rest / 2);
         $omitPagesTo = ($current - ($rest - $omitPagesFrom));
 
         if ($this->hasSingleOmittedNearLast(current: $current)) {
-            $rest = $this->maxVisible - $current;
+            $rest = $this->visible - $current;
             $omitPagesFrom = ((int) ceil(num: $rest / 2)) + $current;
-            $omitPagesTo = $total - ($this->maxVisible - $omitPagesFrom);
+            $omitPagesTo = $total - ($this->visible - $omitPagesFrom);
         }
 
         return [
@@ -125,7 +125,7 @@ final class FixedLength
 
     public function getDataWithTwoOmitted(int $total, int $current, int $omitted): array
     {
-        $withoutCurrent = ($this->maxVisible - 1) / 2;
+        $withoutCurrent = ($this->visible - 1) / 2;
 
         $visibleLeft = floor(num: $withoutCurrent);
         $visibleRight = ceil(num: $withoutCurrent);

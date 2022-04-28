@@ -54,7 +54,7 @@ abstract class AbstractBuilder implements Builder
             "\n\t" .
             'xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" ' .
             "\n\t" .
-            'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"'
+            'xsi:schemaLocation="https://www.sitemaps.org/schemas/sitemap/0.9 https://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"',
         );
 
         if ($this->sitemap->hasAlternates()) {

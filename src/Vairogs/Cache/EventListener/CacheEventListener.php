@@ -7,7 +7,6 @@ use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -16,7 +15,7 @@ use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Security\Core\Security;
 use Vairogs\Cache\Cache;
 use Vairogs\Cache\Event\CacheEvent;
-use Vairogs\Cache\Pool;
+use Vairogs\Common;
 use Vairogs\Core\Cache\Header;
 use function class_exists;
 use function in_array;
@@ -25,6 +24,8 @@ use function method_exists;
 
 class CacheEventListener implements EventSubscriberInterface
 {
+    use Common\Cache;
+
     private const HEADERS = [
         Header::INVALIDATE,
         Header::SKIP,
@@ -34,10 +35,10 @@ class CacheEventListener implements EventSubscriberInterface
     protected readonly ChainAdapter $adapter;
     protected readonly CacheEvent $event;
 
-    public function __construct(protected bool $enabled, Security $security, int $defaultLifeTime = Cache::DEFAULT_LIFETIME, ...$adapters)
+    public function __construct(protected bool $enabled, Security $security, int $defaultLifetime = Common\Common::DEFAULT_LIFETIME, ...$adapters)
     {
         if ($this->enabled) {
-            $this->adapter = new ChainAdapter(adapters: Pool::createPool(class: Cache::class, adapters: $adapters), defaultLifetime: $defaultLifeTime);
+            $this->adapter = (new Common\Common())->getChainAdapter(Cache::class, $defaultLifetime, ...$adapters);
             $this->adapter->prune();
             $this->event = new CacheEvent(security: $security);
         }
@@ -78,7 +79,7 @@ class CacheEventListener implements EventSubscriberInterface
                 $key = $attribute->getKey(prefix: $route);
 
                 if (!$this->needsInvalidation(request: $controllerEvent->getRequest())) {
-                    $response = $this->getCache(key: $key);
+                    $response = $this->getCache(adapter: $this->adapter, key: $key);
                 } else {
                     $this->adapter->deleteItem(key: $key);
                 }
@@ -121,8 +122,8 @@ class CacheEventListener implements EventSubscriberInterface
             $key = $attribute->getKey(prefix: $responseEvent->getRequest()->get(key: self::ROUTE));
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
 
-            if (!$skip && null === $this->getCache(key: $key)) {
-                $this->setCache(key: $key, value: $responseEvent->getResponse(), expiresAfter: $attribute->getExpires());
+            if (!$skip && null === $this->getCache(adapter: $this->adapter, key: $key)) {
+                $this->setCache(adapter: $this->adapter, key: $key, value: $responseEvent->getResponse(), expiresAfter: $attribute->getExpires());
             }
         }
     }
@@ -149,31 +150,5 @@ class CacheEventListener implements EventSubscriberInterface
         $invalidate = $request->headers->get(key: Header::CACHE_VAR);
 
         return null !== $invalidate && in_array(needle: $invalidate, haystack: self::HEADERS, strict: true);
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    private function getCache(string $key): mixed
-    {
-        $cache = $this->adapter->getItem(key: $key);
-
-        if ($cache->isHit()) {
-            return $cache->get();
-        }
-
-        return null;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    private function setCache(string $key, Response $value, int $expiresAfter): void
-    {
-        $cache = $this->adapter->getItem(key: $key);
-        $cache->set(value: $value);
-        $cache->expiresAfter(time: $expiresAfter);
-
-        $this->adapter->save(item: $cache);
     }
 }

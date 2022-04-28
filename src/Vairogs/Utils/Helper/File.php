@@ -38,9 +38,9 @@ final class File
     #[Attribute\TwigFilter]
     public static function humanFileSize(string $bytes, int $decimals = 2): string
     {
-        $sz = 'BKMGTP';
+        $units = 'BKMGTP';
         $factor = (int) floor(num: (strlen(string: $bytes) - 1) / 3);
 
-        return sprintf("%.{$decimals}f", $bytes / (1024 ** $factor)) . @$sz[$factor];
+        return sprintf("%.{$decimals}f", $bytes / (1024 ** $factor)) . @$units[$factor];
     }
 }

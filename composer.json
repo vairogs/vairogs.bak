@@ -7,6 +7,7 @@
         "auth",
         "cache",
         "captcha",
+        "common",
         "core",
         "extra",
         "openid",
@@ -59,6 +60,7 @@
         "jetbrains/phpstorm-attributes": "*",
         "lcobucci/jwt": "*",
         "league/oauth2-client": "*",
+        "nikic/php-parser": "*",
         "predis/predis": ">=1.1.0",
         "psr/cache": "*",
         "psr/http-message": "*",
@@ -67,6 +69,7 @@
         "symfony/console": "^5.4|^6.0",
         "symfony/dependency-injection": "^5.4|^6.0",
         "symfony/event-dispatcher": "^5.4|^6.0",
+        "symfony/finder": "^5.4|^6.0",
         "symfony/form": "^5.4|^6.0",
         "symfony/framework-bundle": "^5.4|^6.0",
         "symfony/http-foundation": "^5.4|^6.0",
@@ -83,11 +86,19 @@
     },
     "require-dev": {
         "ext-redis": "*",
+        "doctrine/dbal": "*",
+        "doctrine/orm": "*",
+        "doctrine/doctrine-bundle": "2.7.x-dev",
         "friendsofphp/php-cs-fixer": ">=v3.8.0",
         "phpunit/phpunit": ">=9.5.0",
         "predis/predis": ">=1.1.0",
+        "psr/container": "*",
         "roave/security-advisories": "dev-latest",
-        "symfony/phpunit-bridge": "^5.4|^6.0"
+        "snc/redis-bundle": "dev-master",
+        "symfony/framework-bundle": "^5.4|^6.0",
+        "symfony/phpunit-bridge": "^5.4|^6.0",
+        "symfony/proxy-manager-bridge": "^5.4|^6.0",
+        "symfony/runtime": "^5.4|^6.0"
     },
     "replace": {
         "vairogs/addon": "self.version",
@@ -99,6 +110,7 @@
         "vairogs/auth-openidconnect": "self.version",
         "vairogs/cache": "self.version",
         "vairogs/captcha": "self.version",
+        "vairogs/common": "self.version",
         "vairogs/core": "self.version",
         "vairogs/extra": "self.version",
         "vairogs/extra-constants": "self.version",
@@ -108,26 +120,10 @@
         "vairogs/extra-specification": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/twig": "self.version",
-        "vairogs/twig-helper": "self.version",
-        "vairogs/twig-helper-char": "self.version",
-        "vairogs/twig-helper-date": "self.version",
-        "vairogs/twig-helper-file": "self.version",
-        "vairogs/twig-helper-gravatar": "self.version",
-        "vairogs/twig-helper-http": "self.version",
-        "vairogs/twig-helper-identification": "self.version",
-        "vairogs/twig-helper-intl": "self.version",
-        "vairogs/twig-helper-iteration": "self.version",
-        "vairogs/twig-helper-json": "self.version",
-        "vairogs/twig-helper-php": "self.version",
-        "vairogs/twig-helper-sort": "self.version",
-        "vairogs/twig-helper-sortlatvian": "self.version",
-        "vairogs/twig-helper-text": "self.version",
-        "vairogs/twig-helper-uri": "self.version",
-        "vairogs/twig-helper-util": "self.version",
-        "vairogs/twig-helper-validate": "self.version",
         "vairogs/twig-pagination": "self.version",
         "vairogs/twig-php": "self.version",
-        "vairogs/utils": "self.version"
+        "vairogs/utils": "self.version",
+        "vairogs/utils-locator": "self.version"
     },
     "suggest": {
         "ext-gmp": "to use gmp prime check function",
@@ -142,13 +138,17 @@
     "autoload-dev": {
         "psr-4": {
             "Vairogs\\Assets\\": "tests/assets",
+            "Vairogs\\Entity\\": "tests/entity",
             "Vairogs\\Tests\\": "tests/src"
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/runtime": true
+        }
     },
     "extra": {
         "branch-alias": {

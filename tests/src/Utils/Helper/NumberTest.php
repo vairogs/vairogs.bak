@@ -28,7 +28,7 @@ class NumberTest extends TestCase
      */
     public function testGreatestCommonDivisor(int $x, int $y, int $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Number::greatestCommonDivisor(x: $x, y: $y));
+        $this->assertEquals(expected: $expected, actual: Number::greatestCommonDivisor(fisrt: $x, second: $y));
     }
 
     /**
@@ -36,6 +36,6 @@ class NumberTest extends TestCase
      */
     public function testLeastCommonMultiple(int $x, int $y, int $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Number::leastCommonMultiple(x: $x, y: $y));
+        $this->assertEquals(expected: $expected, actual: Number::leastCommonMultiple(first: $x, second: $y));
     }
 }

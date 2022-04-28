@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use Exception;
+use Vairogs\Utils\Generator;
 use Vairogs\Utils\Twig\Attribute;
 use function base64_encode;
 use function bin2hex;

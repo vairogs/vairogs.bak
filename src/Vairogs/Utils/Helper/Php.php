@@ -25,8 +25,6 @@ use function interface_exists;
 use function is_array;
 use function is_bool;
 use function is_object;
-use function method_exists;
-use function property_exists;
 use function sprintf;
 use function strtolower;
 use function ucfirst;
@@ -120,11 +118,7 @@ final class Php
             return $variable[$key];
         }
 
-        if (method_exists(object_or_class: $variable, method: $method = Definition::GETTER . ucfirst(string: $key))) {
-            return $variable->{$method}();
-        }
-
-        return $variable->{$key};
+        return self::hijackGet(object: $variable, property: $key);
     }
 
     #[Attribute\TwigFunction]
@@ -219,17 +213,13 @@ final class Php
     {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
+                throw new InvalidArgumentException(message: 'non static property');
             }
         } catch (Exception) {
-            // exception === unable to get object property
+            throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
         }
 
-        if (property_exists($object, $property)) {
-            return self::call(fn () => $object->{$property}, $object, true, ...$arguments);
-        }
-
-        throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
+        return self::call(fn () => $object->{$property}, $object, true, ...$arguments);
     }
 
     /**
@@ -261,5 +251,19 @@ final class Php
     public static function filterExists(ReflectionMethod $method, string $filterClass): bool
     {
         return [] !== $method->getAttributes(name: $filterClass);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function getter(string $variable): string
+    {
+        return sprintf('%s%s', Definition::GETTER, ucfirst(string: $variable));
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public static function setter(string $variable): string
+    {
+        return sprintf('%s%s', Definition::SETTER, ucfirst(string: $variable));
     }
 }

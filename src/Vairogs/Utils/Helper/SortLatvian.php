@@ -7,6 +7,9 @@ use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Utils\Twig\Attribute;
 use function is_array;
 use function is_object;
+use function mb_strlen;
+use function mb_strpos;
+use function mb_substr;
 use function usort;
 
 class SortLatvian
@@ -54,7 +57,7 @@ class SortLatvian
         return self::compare(first: $firstValue, second: $secondValue);
     }
 
-    private static function compare(string $first, string $second)
+    private static function compare(string $first, string $second): int
     {
         for ($i = 0, $len = mb_strlen(string: $first); $i < $len; $i++) {
             if (($charFirst = mb_substr(string: $first, start: $i, length: 1)) === ($charSecond = mb_substr(string: $second, start: $i, length: 1))) {
@@ -67,5 +70,7 @@ class SortLatvian
 
             return -1;
         }
+
+        return 0;
     }
 }

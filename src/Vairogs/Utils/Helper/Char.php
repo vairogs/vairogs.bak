@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Utils\Generator;
 use Vairogs\Utils\Twig\Attribute;
 use function array_values;
 use function count;
@@ -115,14 +116,14 @@ class Char
     {
         $base = Generator::RAND_BASIC;
         $length = strlen(string: $base);
-        $r = $number % $length;
-        $result = $base[$r];
-        $q = floor(num: $number / $length);
+        $remainder = $number % $length;
+        $result = $base[$remainder];
+        $divides = floor(num: $number / $length);
 
-        while ($q) {
-            $r = $q % $length;
-            $q = floor(num: $q / $length);
-            $result = $base[$r] . $result;
+        while ($divides) {
+            $remainder = $divides % $length;
+            $divides = floor(num: $divides / $length);
+            $result = $base[$remainder] . $result;
         }
 
         return $result;

@@ -20,7 +20,7 @@ class ValidateTest extends TestCase
      */
     public function testValidateIP(string $ip, bool $deny, bool $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Validate::validateIP(ip: $ip, deny: $deny));
+        $this->assertEquals(expected: $expected, actual: Validate::validateIPAddress(ipAddress: $ip, deny: $deny));
     }
 
     /**
