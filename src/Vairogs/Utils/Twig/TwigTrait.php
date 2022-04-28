@@ -8,23 +8,29 @@ use Twig\TwigFunction;
 use Vairogs\Utils\Helper\Char;
 use function in_array;
 use function is_array;
+use function is_numeric;
 use function sprintf;
 
 trait TwigTrait
 {
+    /**
+     * @throws InvalidArgumentException
+     */
     public function makeArray(array $input, string $key, string $class): array
     {
-        if (!in_array(needle: $class, haystack: [
-            TwigFilter::class,
-            TwigFunction::class,
-        ], strict: true)) {
-            throw new InvalidArgumentException(message: sprintf('Invalid type "%s":. Allowed types are %s and %s', $class, TwigFilter::class, TwigFunction::class));
+        $this->checkClass(class: $class);
+
+        $functions = [];
+        foreach ($input as $call => $function) {
+            if (is_numeric(value: $call)) {
+                $call = Char::toSnakeCase(string: $function, skipCamel: true);
+            }
+
+            $functions[sprintf('%s_%s', $key, $call)] = $function;
         }
 
         $output = [];
-        $this->makeInput(input: $input, key: $key, output: $input);
-
-        foreach ($input as $call => $function) {
+        foreach ($functions as $call => $function) {
             if (is_array(value: $function)) {
                 $options = $function[2] ?? [];
                 unset($function[2]);
@@ -32,25 +38,22 @@ trait TwigTrait
                 continue;
             }
 
-            $output[] = new $class($call, [
-                $this,
-                $function,
-            ]);
+            $output[] = new $class($call, [$this, $function, ]);
         }
 
         return $output;
     }
 
-    private function makeInput(array $input, string $key, array &$output): void
+    /**
+     * @throws InvalidArgumentException
+     */
+    public function checkClass(string $class): void
     {
-        $output = [];
-
-        foreach ($input as $call => $function) {
-            if (is_numeric(value: $call)) {
-                $call = Char::toSnakeCase(string: $function, skipCamel: true);
-            }
-
-            $output[sprintf('%s_%s', $key, $call)] = $function;
+        if (!in_array(needle: $class, haystack: [
+            TwigFilter::class,
+            TwigFunction::class,
+        ], strict: true)) {
+            throw new InvalidArgumentException(message: sprintf('Invalid type "%s":. Allowed types are %s and %s', $class, TwigFilter::class, TwigFunction::class));
         }
     }
 }
