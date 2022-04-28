@@ -20,7 +20,7 @@ class SplFileInfo
     public function __call(string $name, array $arguments): mixed
     {
         if (method_exists(object_or_class: $this->decorated, method: $name)) {
-            return $this->decorated->{$name}();
+            return $this->decorated->{$name}(...$arguments);
         }
 
         return null;

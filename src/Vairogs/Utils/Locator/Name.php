@@ -48,10 +48,10 @@ class Name
 
     public function getNamespace(): self
     {
-        $parts = $this->parts;
-        array_pop(array: $parts);
+        $namespaceParts = $this->parts;
+        array_pop(array: $namespaceParts);
 
-        return new self(name: implode(separator: '\\', array: $parts));
+        return new self(name: implode(separator: '\\', array: $namespaceParts));
     }
 
     public function inNamespace(self $namespace): bool

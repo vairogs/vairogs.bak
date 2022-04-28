@@ -4,7 +4,6 @@ namespace Vairogs\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use JsonSerializable;
 use Vairogs\Tests\Repository\TestClassRepository;
 use Vairogs\Utils\Doctrine\Traits\Entity;
 

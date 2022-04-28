@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+use Symfony\Component\HttpKernel\Kernel;
 use function dirname;
 use function is_file;
 
-class TestKernel extends BaseKernel
+class TestKernel extends Kernel
 {
     use MicroKernelTrait;
 
@@ -19,17 +19,17 @@ class TestKernel extends BaseKernel
         return dirname(path: __DIR__);
     }
 
-    private function getConfigDir(): string
+    protected function getConfigDir(): string
     {
         return $this->getProjectDir() . '/config';
     }
 
-    private function getBundlesPath(): string
+    protected function getBundlesPath(): string
     {
         return $this->getConfigDir() . '/bundles.php';
     }
 
-    private function configureContainer(ContainerConfigurator $container, LoaderInterface $loader, ContainerBuilder $builder): void
+    protected function configureContainer(ContainerConfigurator $container, LoaderInterface $loader, ContainerBuilder $builder): void
     {
         $configDir = $this->getConfigDir();
 
