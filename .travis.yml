@@ -8,5 +8,8 @@ php:
 install:
     - composer install -n --ignore-platform-reqs
 
+script:
+    - echo 'installed'
+
 env:
     - PHP_CS_FIXER_IGNORE_ENV=1
