@@ -7,14 +7,12 @@ use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Auth\OpenIDConnect\Configuration\Uri;
+use Vairogs\Auth\OpenIDConnect\Configuration\UriCollection;
 use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 
 trait OpenIDConnectProviderVariables
 {
-    /**
-     * @var Uri[]
-     */
-    protected array $uris = [];
+    protected UriCollection $uriCollection;
     protected string $publicKey;
     protected Signer $signer;
     protected ValidatorChain $validatorChain;
@@ -26,6 +24,76 @@ trait OpenIDConnectProviderVariables
     protected ?string $baseUriPost;
     protected bool $verify = true;
 
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    public function getRedirectUri(): string
+    {
+        return $this->redirectUri;
+    }
+
+    public function getUseSession(): bool
+    {
+        return $this->useSession;
+    }
+
+    public function setUseSession(bool $useSession): static
+    {
+        $this->useSession = $useSession;
+
+        return $this;
+    }
+
+    public function getSession(): ?SessionInterface
+    {
+        return $this->session;
+    }
+
+    public function setSession(?SessionInterface $session): static
+    {
+        $this->session = $session;
+
+        return $this;
+    }
+
+    public function getBaseUri(): string
+    {
+        return $this->baseUri;
+    }
+
+    public function setBaseUri(string $baseUri): static
+    {
+        $this->baseUri = $baseUri;
+
+        return $this;
+    }
+
+    public function getBaseUriPost(): ?string
+    {
+        return $this->baseUriPost;
+    }
+
+    public function setBaseUriPost(?string $baseUriPost): static
+    {
+        $this->baseUriPost = $baseUriPost;
+
+        return $this;
+    }
+
+    public function getUriCollection(): UriCollection
+    {
+        return $this->uriCollection;
+    }
+
+    public function setUriCollection(UriCollection $uriCollection): static
+    {
+        $this->uriCollection = $uriCollection;
+
+        return $this;
+    }
+
     public function setPublicKey(string $publicKey): static
     {
         $this->publicKey = $publicKey;
@@ -36,18 +104,6 @@ trait OpenIDConnectProviderVariables
     public function getRouter(): RouterInterface
     {
         return $this->router;
-    }
-
-    public function getUris(): array
-    {
-        return $this->uris;
-    }
-
-    public function setUris(array $uris): static
-    {
-        $this->uris = $uris;
-
-        return $this;
     }
 
     public function getSigner(): Signer
@@ -93,7 +149,7 @@ trait OpenIDConnectProviderVariables
 
     public function getUri(string $name): ?Uri
     {
-        return $this->uris[$name] ?? null;
+        return $this->uriCollection->getUri(name: $name);
     }
 
     public function getStatusCode(): int

@@ -26,13 +26,11 @@ final class Iteration
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isEmpty(mixed $variable): bool
+    public static function isEmpty(mixed $variable, bool $result = true): bool
     {
         if (!empty($variable) && is_array(value: $variable)) {
-            $result = true;
-
             foreach ($variable as $value) {
-                $result = $result && self::isEmpty(variable: $value);
+                $result = self::isEmpty(variable: $value, result: $result);
             }
 
             return $result;
@@ -45,7 +43,7 @@ final class Iteration
     #[Attribute\TwigFilter]
     public static function makeMultiDimensional(array $array): array
     {
-        if (self::isMultiDimensional($array)) {
+        if (self::isMultiDimensional(keys: $array)) {
             return $array;
         }
 
@@ -73,6 +71,10 @@ final class Iteration
     {
         if ($keepKeys) {
             return array_unique(array: $input);
+        }
+
+        if (self::isMultiDimensional(keys: $input)) {
+            return $input;
         }
 
         return array_keys(array: array_flip(array: $input));
