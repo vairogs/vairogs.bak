@@ -3,8 +3,11 @@
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Config\VairogsConfig;
+use Vairogs\Addon\Auth\OpenID\Steam\Builder\SteamGiftsUserBuilder;
+use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamGifts;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Core\Registry\Registry;
+use Vairogs\Utils\Helper\Composer;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
 return static function (VairogsConfig $config, ContainerConfigurator $containerConfigurator): void {
@@ -66,6 +69,30 @@ return static function (VairogsConfig $config, ContainerConfigurator $containerC
                                         'scope' => 'openid',
                                     ],
                                     'method' => Request::METHOD_GET,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'openid' => [
+                    'clients' => [
+                        'steamgifts' => [
+                            'api_key' => (new Composer())->getEnv(varname: 'STEAM_API_KEY'),
+                            'openid_url' => 'https://steamcommunity.com/openid/login',
+                            'preg_check' => '#^https://steamcommunity.com/openid/id/([0-9]{17,25})#',
+                            'user_builder' => SteamGiftsUserBuilder::class,
+                            'user_class' => SteamGifts::class,
+                            'redirect_route' => 'tests_foo',
+                            'provider_options' => [
+                                'profile_url' => 'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=#api_key#&steamids=#openid#',
+                                'profile_url_replace' => [
+                                    'api_key',
+                                    'openid',
+                                ],
+                                'owned_url' => 'https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=#api_key#&steamid=#openid#&format=json&skip_unvetted_apps=0&include_free_sub=1',
+                                'owned_url_json' => 'https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=#api_key#&format=json&input_json={"steamid":#openid#,"skip_unvetted_apps":0,"include_free_sub":1,"appids_filter":[#appid#]}',
+                                'owned_url_replace' => [
+                                    'api_key',
                                 ],
                             ],
                         ],
