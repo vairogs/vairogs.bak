@@ -3,6 +3,7 @@
 namespace Vairogs\Assets\Utils\Helper;
 
 use DateTime;
+use DateTimeInterface;
 use Vairogs\Extra\Constants;
 
 class DateDataProvider
@@ -19,10 +20,10 @@ class DateDataProvider
     public function dataProviderGetDateWithoutFormat(): array
     {
         return [
-            [(new DateTime())->format(format: DateTime::ATOM)],
-            [(new DateTime())->format(format: DateTime::RFC1123)],
-            [(new DateTime())->format(format: DateTime::RFC3339_EXTENDED)],
-            [(new DateTime())->format(format: DateTime::W3C)],
+            [(new DateTime())->format(format: DateTimeInterface::ATOM)],
+            [(new DateTime())->format(format: DateTimeInterface::RFC1123)],
+            [(new DateTime())->format(format: DateTimeInterface::RFC3339_EXTENDED)],
+            [(new DateTime())->format(format: DateTimeInterface::W3C)],
         ];
     }
 
@@ -72,8 +73,8 @@ class DateDataProvider
         $date = new DateTime();
 
         return [
-            [$date->format(format: DateTime::ATOM),             DateTime::ATOM,             $date->format(format: Constants\Date::FORMAT)],
-            [$date->format(format: DateTime::RFC3339_EXTENDED), DateTime::RFC3339_EXTENDED, $date->format(format: Constants\Date::FORMAT)],
+            [$date->format(format: DateTimeInterface::ATOM),             DateTimeInterface::ATOM,             $date->format(format: Constants\Date::FORMAT)],
+            [$date->format(format: DateTimeInterface::RFC3339_EXTENDED), DateTimeInterface::RFC3339_EXTENDED, $date->format(format: Constants\Date::FORMAT)],
         ];
     }
 
@@ -82,15 +83,15 @@ class DateDataProvider
         $date = new DateTime();
 
         return [
-            [$date->format(format: DateTime::ATOM),          DateTime::RFC1036],
-            [$date->format(format: DateTime::RFC3339_EXTENDED), DateTime::ATOM],
+            [$date->format(format: DateTimeInterface::ATOM),          DateTimeInterface::RFC1036],
+            [$date->format(format: DateTimeInterface::RFC3339_EXTENDED), DateTimeInterface::ATOM],
         ];
     }
 
     public function dataProviderCreateFromUnixTimestamp(): array
     {
         return [
-            [1649403032, DateTime::ATOM, (new DateTime())->setTimestamp(timestamp: 1649403032)->format(format: DateTime::ATOM)],
+            [1649403032, DateTimeInterface::ATOM, (new DateTime())->setTimestamp(timestamp: 1649403032)->format(format: DateTimeInterface::ATOM)],
             [1649403032, null,   (new DateTime())->setTimestamp(timestamp: 1649403032)->format(format: Constants\Date::FORMAT)],
         ];
     }
@@ -100,7 +101,7 @@ class DateDataProvider
         $date = new DateTime();
 
         return [
-            [$date->format(format: DateTime::ATOM), DateTime::ATOM, $date->format(format: Constants\Date::FORMAT)],
+            [$date->format(format: DateTimeInterface::ATOM), DateTimeInterface::ATOM, $date->format(format: Constants\Date::FORMAT)],
             [null, null, null],
         ];
     }
@@ -110,7 +111,7 @@ class DateDataProvider
         $date = new DateTime();
 
         return [
-            [$date->format(format: DateTime::ATOM), DateTime::ATOM, $date->format(format: DateTime::ATOM)],
+            [$date->format(format: DateTimeInterface::ATOM), DateTimeInterface::ATOM, $date->format(format: DateTimeInterface::ATOM)],
         ];
     }
 
@@ -118,7 +119,7 @@ class DateDataProvider
     {
         return [
             [null,             null],
-            ['test', DateTime::ATOM],
+            ['test', DateTimeInterface::ATOM],
         ];
     }
 }

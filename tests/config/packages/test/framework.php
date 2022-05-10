@@ -4,5 +4,6 @@ use Symfony\Config\FrameworkConfig;
 
 return static function (FrameworkConfig $config): void {
     $config
-        ->test(value: true);
+        ->test(value: true)
+        ->httpMethodOverride(value: true);
 };

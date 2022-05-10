@@ -2,16 +2,16 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Composer;
 
-class ComposerTest extends TestCase
+class ComposerTest extends VairogsTestCase
 {
     public function testGetEnv(): void
     {
-        $this->assertEquals(expected: '-1', actual: Composer::getEnv(varname: 'SHELL_VERBOSITY'));
-        $this->assertEquals(expected: '1', actual: Composer::getEnv(varname: 'PHP_CS_FIXER_IGNORE_ENV', localOnly: false));
-        $this->assertEquals(expected: 'TEST', actual: Composer::getEnv(varname: 'TEST'));
+        $this->assertEquals(expected: 'test', actual: (new Composer())->getEnv(varname: 'ENVIRONMENT'));
+        $this->assertEquals(expected: '1', actual: (new Composer())->getEnv(varname: 'PHP_CS_FIXER_IGNORE_ENV', localOnly: false));
+        $this->assertEquals(expected: 'TEST', actual: (new Composer())->getEnv(varname: 'TEST'));
     }
 
     /**
@@ -19,6 +19,6 @@ class ComposerTest extends TestCase
      */
     public function testIsInstalled(string $package, bool $installed, bool $incDevReq): void
     {
-        $this->assertEquals(expected: $installed, actual: Composer::isInstalled(packages: [$package], incDevReq: $incDevReq));
+        $this->assertEquals(expected: $installed, actual: (new Composer())->isInstalled(packages: [$package], incDevReq: $incDevReq));
     }
 }

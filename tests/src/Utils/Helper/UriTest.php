@@ -2,18 +2,18 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Uri;
 
-class UriTest extends TestCase
+class UriTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\UriDataProvider::dataProviderArrayFromQueryString
      */
     public function testArrayFromQueryString(string $query, array $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Uri::arrayFromQueryString(query: $query));
+        $this->assertEquals(expected: $expected, actual: (new Uri())->arrayFromQueryString(query: $query));
     }
 
     /**
@@ -21,7 +21,7 @@ class UriTest extends TestCase
      */
     public function testGetSchema(string $url, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Uri::getSchema(request: Request::create(uri: $url)));
+        $this->assertEquals(expected: $expected, actual: (new Uri())->getSchema(request: Request::create(uri: $url)));
     }
 
     /**
@@ -29,6 +29,6 @@ class UriTest extends TestCase
      */
     public function testUrlEncode(string $url): void
     {
-        $this->assertEquals(expected: $url, actual: Uri::urlEncode(url: $url));
+        $this->assertEquals(expected: $url, actual: (new Uri())->urlEncode(url: $url));
     }
 }

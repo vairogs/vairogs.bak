@@ -2,17 +2,17 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Iteration;
 
-class IterationTest extends TestCase
+class IterationTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\IterationDataProvider::dataProviderIsEmpty
      */
     public function testIsEmpty(mixed $value, bool $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Iteration::isEmpty(variable: $value));
+        $this->assertEquals(expected: $expected, actual: (new Iteration())->isEmpty(variable: $value));
     }
 
     /**
@@ -20,7 +20,7 @@ class IterationTest extends TestCase
      */
     public function testMakeMultiDimensional(array $input, array $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Iteration::makeMultiDimensional(array: $input));
+        $this->assertEquals(expected: $expected, actual: (new Iteration())->makeMultiDimensional(array: $input));
     }
 
     /**
@@ -28,7 +28,7 @@ class IterationTest extends TestCase
      */
     public function testUniqueMap(array $input, array $expected): void
     {
-        Iteration::uniqueMap(array: $input);
+        (new Iteration())->uniqueMap(array: $input);
         $this->assertEquals(expected: $expected, actual: $input);
     }
 
@@ -37,6 +37,6 @@ class IterationTest extends TestCase
      */
     public function testUnique(array $input, array $expected, bool $keep): void
     {
-        $this->assertEquals(expected: $expected, actual: Iteration::unique(input: $input, keepKeys: $keep));
+        $this->assertEquals(expected: $expected, actual: (new Iteration())->unique(input: $input, keepKeys: $keep));
     }
 }

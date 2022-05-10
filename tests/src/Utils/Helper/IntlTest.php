@@ -2,17 +2,17 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Intl;
 
-class IntlTest extends TestCase
+class IntlTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\IntlDataProvider::dataProviderCyrillicToLatin
      */
     public function testCyrillicToLatin(string $string, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Intl::cyrillicToLatin(text: $string));
+        $this->assertEquals(expected: $expected, actual: (new Intl())->cyrillicToLatin(text: $string));
     }
 
     /**
@@ -20,7 +20,7 @@ class IntlTest extends TestCase
      */
     public function testLatinToCyrillic(string $string, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Intl::latinToCyrillic(text: $string));
+        $this->assertEquals(expected: $expected, actual: (new Intl())->latinToCyrillic(text: $string));
     }
 
     /**
@@ -28,6 +28,6 @@ class IntlTest extends TestCase
      */
     public function testGetCountryName(string $country, string $locale, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Intl::getCountryName(country: $country, locale: $locale));
+        $this->assertEquals(expected: $expected, actual: (new Intl())->getCountryName(country: $country, locale: $locale));
     }
 }

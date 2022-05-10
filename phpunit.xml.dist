@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="vendor/autoload.php" failOnRisky="true" failOnWarning="true">
+<phpunit
+        backupGlobals="false"
+        bootstrap="vendor/autoload.php"
+        cacheResult="false"
+        colors="true"
+        failOnRisky="true"
+        failOnWarning="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+    >
     <php>
+        <env name="APP_ENV" value="test" />
+        <env name="DATABASE_URL" value="pgsql://postgres:Bqox56ewGRxrUY5MzFUNx0w23AXN0MY9@postgres14:5432/services_test" />
+        <env name="ENVIRONMENT" value="test" />
+        <env name="KERNEL_CLASS" value="Vairogs\Assets\TestKernel" />
+        <env name="REDIS_DB_PHPREDIS" value="13" />
+        <env name="REDIS_DB_PREDIS" value="13" />
+        <env name="REDIS_URL" value="redis://Bqox56ewGRxrUY5MzFUNx0w23AXN0MY9@keydb:6379" />
+        <env name="SHELL_VERBOSITY" value="-1" />
         <ini name="error_reporting" value="-1"/>
         <ini name="memory_limit" value="-1"/>
-        <env name="SHELL_VERBOSITY" value="-1" />
-        <env name="ENVIRONMENT" value="test" />
-        <env name="REDIS_DB_PREDIS" value="13" />
-        <env name="REDIS_DB_PHPREDIS" value="13" />
-        <env name="REDIS_URL" value="redis://Bqox56ewGRxrUY5MzFUNx0w23AXN0MY9@keydb:6379" />
-        <env name="DATABASE_URL" value="pgsql://postgres:Bqox56ewGRxrUY5MzFUNx0w23AXN0MY9@postgres14:5432/services_test" />
-        <env name="KERNEL_CLASS" value="Vairogs\Assets\TestKernel" />
         <server name="APP_ENV" value="test" force="true" />
+        <env name="SYMFONY_PHPUNIT_VERSION" value="10" />
     </php>
 
     <testsuites>

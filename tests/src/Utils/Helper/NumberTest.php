@@ -2,17 +2,17 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Number;
 
-class NumberTest extends TestCase
+class NumberTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\NumberDataProvider::dataProviderIsIntFloat
      */
     public function testIsInt(int|float $number, bool $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Number::isInt(value: $number));
+        $this->assertEquals(expected: $expected, actual: (new Number())->isInt(value: $number));
     }
 
     /**
@@ -20,7 +20,7 @@ class NumberTest extends TestCase
      */
     public function testIsFloat(int|float $number, bool $expected): void
     {
-        $this->assertEquals(expected: !$expected, actual: Number::isFloat(value: $number));
+        $this->assertEquals(expected: !$expected, actual: (new Number())->isFloat(value: $number));
     }
 
     /**
@@ -28,7 +28,7 @@ class NumberTest extends TestCase
      */
     public function testGreatestCommonDivisor(int $x, int $y, int $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Number::greatestCommonDivisor(fisrt: $x, second: $y));
+        $this->assertEquals(expected: $expected, actual: (new Number())->greatestCommonDivisor(fisrt: $x, second: $y));
     }
 
     /**
@@ -36,6 +36,6 @@ class NumberTest extends TestCase
      */
     public function testLeastCommonMultiple(int $x, int $y, int $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Number::leastCommonMultiple(first: $x, second: $y));
+        $this->assertEquals(expected: $expected, actual: (new Number())->leastCommonMultiple(first: $x, second: $y));
     }
 }

@@ -2,30 +2,28 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Util;
-use function function_exists;
 
-class UtilTest extends TestCase
+class UtilTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
      */
-    public function testIsPrime(int $number, bool $expected, ?bool $expectedBelow): void
+    public function testIsPrime(int $number, bool $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Util::isPrime(number: $number));
+        $this->assertEquals(expected: $expected, actual: (new Util())->isPrime(number: $number));
     }
 
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
+     * @noinspection PhpUndefinedFunctionInspection
      */
-    public function testIsPrimeNoGMP(int $number, bool $expected, ?bool $expectedBelow): void
+    public function testIsPrimeNoGMP(int $number, bool $expected): void
     {
-        if (function_exists(function: 'runkit7_function_remove')) {
-            @runkit7_function_remove(function_name: 'gmp_prob_prime');
-        }
+        @runkit7_function_remove(function_name: 'gmp_prob_prime');
 
-        $this->assertEquals(expected: $expected, actual: Util::isPrime(number: $number));
+        $this->assertEquals(expected: $expected, actual: (new Util())->isPrime(number: $number));
     }
 
     /**
@@ -33,7 +31,7 @@ class UtilTest extends TestCase
      */
     public function testIsPrimeBelow1000(int $number, bool $expected, ?bool $expectedBelow): void
     {
-        $this->assertEquals(expected: $expectedBelow, actual: Util::isPrimeBelow1000(number: $number));
+        $this->assertEquals(expected: $expectedBelow, actual: (new Util())->isPrimeBelow1000(number: $number));
     }
 
     /**
@@ -41,7 +39,7 @@ class UtilTest extends TestCase
      */
     public function testMakeOneDimension(array $input, bool $onlyLast, int $depth, int $maxDepth, array $expected): void
     {
-        $this->assertEquals($expected, Util::makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
+        $this->assertEquals($expected, (new Util())->makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
     }
 
     /**
@@ -49,6 +47,6 @@ class UtilTest extends TestCase
      */
     public function testDistanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km, float $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Util::distanceBetweenPoints(latitude1: $latitude1, latitude2: $latitude2, longitude1: $longitude1, longitude2: $longitude2, km: $km));
+        $this->assertEquals(expected: $expected, actual: (new Util())->distanceBetweenPoints(latitude1: $latitude1, longitude1: $longitude1, latitude2: $latitude2, longitude2: $longitude2, km: $km));
     }
 }

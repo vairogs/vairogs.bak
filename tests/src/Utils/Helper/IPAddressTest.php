@@ -2,16 +2,16 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\IPAddress;
 
-class IPAddressTest extends TestCase
+class IPAddressTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\IpAddressDataProvider::dataProviderGetCIDRRange
      */
     public function testGetCIDRRange(string $cidr, bool $int, ?array $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: IPAddress::getCIDRRange(cidr: $cidr, int: $int));
+        $this->assertEquals(expected: $expected, actual: (new IPAddress())->getCIDRRange(cidr: $cidr, int: $int));
     }
 }

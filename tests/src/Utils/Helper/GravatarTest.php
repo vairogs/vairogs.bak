@@ -2,16 +2,16 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Gravatar;
 
-class GravatarTest extends TestCase
+class GravatarTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\GravatarDataProvider::dataProviderGetGravatarUrl
      */
     public function testGetGravatarUrl(string $email, bool $secure, int $size, string $icon, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Gravatar::getGravatarUrl(email: $email, isSecure: $secure, size: $size, default: $icon));
+        $this->assertEquals(expected: $expected, actual: (new Gravatar())->getGravatarUrl(email: $email, isSecure: $secure, size: $size, default: $icon));
     }
 }

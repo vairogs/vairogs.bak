@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 use Symfony\Config\SncRedisConfig;
+use Vairogs\Core\Vairogs;
 
 return static function (SncRedisConfig $snc): void {
     $snc
@@ -14,7 +15,7 @@ return static function (SncRedisConfig $snc): void {
         ->options()
         ->connectionPersistent(value: true)
         ->throwErrors(value: true)
-        ->prefix(value: sprintf(\Vairogs\Core\Vairogs::VAIROGS . '_%%env(ENVIRONMENT)%%_%s_', $key));
+        ->prefix(value: sprintf(Vairogs::VAIROGS . '_%%env(ENVIRONMENT)%%_%s_', $key));
 
     $snc
         ->client(alias: $key = 'phpredis')
@@ -27,5 +28,5 @@ return static function (SncRedisConfig $snc): void {
         ->options()
         ->connectionPersistent(value: true)
         ->throwErrors(value: true)
-        ->prefix(value: sprintf(\Vairogs\Core\Vairogs::VAIROGS . '_%%env(ENVIRONMENT)%%_%s_', $key));
+        ->prefix(value: sprintf(Vairogs::VAIROGS . '_%%env(ENVIRONMENT)%%_%s_', $key));
 };

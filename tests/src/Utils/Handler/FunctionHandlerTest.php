@@ -2,10 +2,10 @@
 
 namespace Vairogs\Tests\Utils\Handler;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Handler\FunctionHandler;
 
-class FunctionHandlerTest extends TestCase
+class FunctionHandlerTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Handler\FunctionHandlerDataProvider::dataProvider

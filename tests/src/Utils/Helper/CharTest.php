@@ -2,17 +2,17 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Char;
 
-class CharTest extends TestCase
+class CharTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\CharDataProvider::dataProviderSanitizeFloat
      */
     public function testSanitizeFloat(string $string, float $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Char::sanitizeFloat(string: $string));
+        $this->assertEquals(expected: $expected, actual: (new Char())->sanitizeFloat(string: $string));
     }
 
     /**
@@ -20,7 +20,7 @@ class CharTest extends TestCase
      */
     public function testToSnakeCase(string $string, bool $skip, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Char::toSnakeCase(string: $string, skipCamel: $skip));
+        $this->assertEquals(expected: $expected, actual: (new Char())->toSnakeCase(string: $string, skipCamel: $skip));
     }
 
     /**
@@ -28,7 +28,7 @@ class CharTest extends TestCase
      */
     public function testFromCamelCase(string $string, string $sep, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Char::fromCamelCase(string: $string, separator: $sep));
+        $this->assertEquals(expected: $expected, actual: (new Char())->fromCamelCase(string: $string, separator: $sep));
     }
 
     /**
@@ -36,6 +36,6 @@ class CharTest extends TestCase
      */
     public function testBase62(int $number): void
     {
-        $this->assertEquals(expected: $number, actual: Char::base62Decode(string: Char::base62Encode(number: $number)));
+        $this->assertEquals(expected: $number, actual: (new Char())->base62Decode(string: (new Char())->base62Encode(number: $number)));
     }
 }

@@ -4,18 +4,18 @@ namespace Vairogs\Tests\Utils\Helper;
 
 use DateTime;
 use InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Constants;
 use Vairogs\Utils\Helper\Date;
 
-class DateTest extends TestCase
+class DateTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\DateDataProvider::dataProviderValidateDate
      */
     public function testValidateDate(string $date, bool $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Date::validateDate(date: $date));
+        $this->assertEquals(expected: $expected, actual: (new Date())->validateDate(date: $date));
     }
 
     /**
@@ -23,7 +23,7 @@ class DateTest extends TestCase
      */
     public function testGetDateWithoutFormat(string $date): void
     {
-        $this->assertInstanceOf(expected: DateTime::class, actual: Date::getDateWithoutFormat(date: $date));
+        $this->assertInstanceOf(expected: DateTime::class, actual: (new Date())->getDateWithoutFormat(date: $date));
     }
 
     /**
@@ -31,7 +31,7 @@ class DateTest extends TestCase
      */
     public function testGetDateWithoutFormatWrong(string $date): void
     {
-        $this->assertNotInstanceOf(expected: DateTime::class, actual: Date::getDateWithoutFormat(date: $date));
+        $this->assertNotInstanceOf(expected: DateTime::class, actual: (new Date())->getDateWithoutFormat(date: $date));
     }
 
     /**
@@ -39,7 +39,7 @@ class DateTest extends TestCase
      */
     public function testExcelDate(int $timestamp, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Date::excelDate($timestamp));
+        $this->assertEquals(expected: $expected, actual: (new Date())->excelDate($timestamp));
     }
 
     /**
@@ -47,7 +47,7 @@ class DateTest extends TestCase
      */
     public function testFormat(int|float $timestamp, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Date::format(timestamp: $timestamp));
+        $this->assertEquals(expected: $expected, actual: (new Date())->format(timestamp: $timestamp));
     }
 
     /**
@@ -55,7 +55,7 @@ class DateTest extends TestCase
      */
     public function testFormatToArray(int|float $timestamp, array $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Date::formatToArray(timestamp: $timestamp));
+        $this->assertEquals(expected: $expected, actual: (new Date())->formatToArray(timestamp: $timestamp));
     }
 
     /**
@@ -63,7 +63,7 @@ class DateTest extends TestCase
      */
     public function testFormatDate(string $date, string $format, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Date::formatDate(string: $date, format: $format));
+        $this->assertEquals(expected: $expected, actual: (new Date())->formatDate(string: $date, format: $format));
     }
 
     /**
@@ -71,15 +71,16 @@ class DateTest extends TestCase
      */
     public function testFormatDateWrong(string $date, string $format): void
     {
-        $this->assertFalse(condition: Date::formatDate(string: $date, format: $format));
+        $this->assertFalse(condition: (new Date())->formatDate(string: $date, format: $format));
     }
 
     /**
      * @dataProvider \Vairogs\Assets\Utils\Helper\DateDataProvider::dataProviderCreateFromUnixTimestamp
+     * @noinspection PhpUnhandledExceptionInspection
      */
     public function testCreateFromUnixTimestamp(int $timestamp, ?string $format, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Date::createFromUnixTimestamp(timestamp: $timestamp, format: $format));
+        $this->assertEquals(expected: $expected, actual: (new Date())->createFromUnixTimestamp(timestamp: $timestamp, format: $format));
     }
 
     /**
@@ -87,7 +88,7 @@ class DateTest extends TestCase
      */
     public function testGetDateNullable(?string $date, ?string $format, ?string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Date::getDateNullable(dateString: $date, format: $format)?->format(format: Constants\Date::FORMAT));
+        $this->assertEquals(expected: $expected, actual: (new Date())->getDateNullable(dateString: $date, format: $format)?->format(format: Constants\Date::FORMAT));
     }
 
     /**
@@ -95,7 +96,7 @@ class DateTest extends TestCase
      */
     public function testGetDate(string $date, string $format, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: Date::getDate(dateString: $date, format: $format)->format(format: $format));
+        $this->assertEquals(expected: $expected, actual: (new Date())->getDate(dateString: $date, format: $format)->format(format: $format));
     }
 
     /**
@@ -104,6 +105,6 @@ class DateTest extends TestCase
     public function testGetDateWrong(?string $date, ?string $format): void
     {
         $this->expectException(exception: InvalidArgumentException::class);
-        Date::getDate(dateString: $date, format: $format);
+        (new Date())->getDate(dateString: $date, format: $format);
     }
 }

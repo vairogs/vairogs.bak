@@ -3,6 +3,7 @@
 
 use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Vairogs\Assets\TestKernel;
 
 if (!is_file(filename: dirname(path: __DIR__, levels: 2) . '/vendor/autoload_runtime.php')) {
     throw new LogicException(message: 'Symfony Runtime is missing. Try running "composer require symfony/runtime".');
@@ -10,4 +11,4 @@ if (!is_file(filename: dirname(path: __DIR__, levels: 2) . '/vendor/autoload_run
 
 require_once dirname(path: __DIR__, levels: 2) . '/vendor/autoload_runtime.php';
 
-return static fn (array $context) => new Application(kernel: new \Vairogs\Assets\TestKernel(environment: $context['APP_ENV'], debug: (bool) $context['APP_DEBUG']));
+return static fn (array $context) => new Application(kernel: new TestKernel(environment: $context['APP_ENV'], debug: (bool) $context['APP_DEBUG']));

@@ -1,15 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Helper;
+namespace Vairogs\Tests\Utils;
 
 use LogicException;
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Utils\Generator;
 use Vairogs\Utils\Helper\Text;
 use function function_exists;
 
-class GeneratorTest extends TestCase
+class GeneratorTest extends VairogsTestCase
 {
     public function testGenerate(): void
     {
@@ -29,12 +29,12 @@ class GeneratorTest extends TestCase
 
         $result = $generator->generate(length: 256);
 
-        $this->assertTrue(condition: Text::contains(haystack: $result, needle: Symbol::DIGITS));
-        $this->assertTrue(condition: Text::contains(haystack: $result, needle: Symbol::LV_LOWERCASE));
-        $this->assertTrue(condition: Text::contains(haystack: $result, needle: Symbol::LV_UPPERCASE));
-        $this->assertTrue(condition: Text::contains(haystack: $result, needle: Symbol::EN_LOWERCASE));
-        $this->assertTrue(condition: Text::contains(haystack: $result, needle: Symbol::EN_UPPERCASE));
-        $this->assertTrue(condition: Text::contains(haystack: $result, needle: Symbol::SYMBOLS));
+        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::DIGITS));
+        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::LV_LOWERCASE));
+        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::LV_UPPERCASE));
+        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::EN_LOWERCASE));
+        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::EN_UPPERCASE));
+        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::SYMBOLS));
         $this->assertNotEmpty(actual: $generator->getSets());
 
         if (function_exists(function: 'runkit7_function_remove')) {
@@ -42,7 +42,7 @@ class GeneratorTest extends TestCase
         }
         $result = $generator->generate(length: 256);
 
-        $this->assertTrue(condition: Text::contains(haystack: $result, needle: Symbol::DIGITS));
+        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::DIGITS));
         $this->assertEmpty(actual: $reset->reset()->getSets());
         $this->expectException(exception: LogicException::class);
         $reset->generate();

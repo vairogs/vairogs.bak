@@ -2,16 +2,20 @@
 
 namespace Vairogs\Tests\Common;
 
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Symfony\Component\Cache\Adapter\NullAdapter;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Common\Cache;
 use Vairogs\Common\Common;
 
-class CommonTest extends TestCase
+class CommonTest extends VairogsTestCase
 {
     use Cache;
 
+    /**
+     * @noinspection PhpUnhandledExceptionInspection
+     * @noinspection UnnecessaryAssertionInspection
+     */
     public function testGetChainAdapter(): void
     {
         $adapter = (new Common())->getChainAdapter(class: __CLASS__);

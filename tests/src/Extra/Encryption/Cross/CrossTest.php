@@ -2,16 +2,16 @@
 
 namespace Vairogs\Tests\Extra\Encryption\Cross;
 
-use PHPUnit\Framework\TestCase;
+use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Encryption\Cross\Cross;
 
-class CrossTest extends TestCase
+class CrossTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Assets\Extra\Encryption\XXTEA\XXTEADataProvider::dataProvider
      */
     public function testDecrypt(string $string, string $key): void
     {
-        $this->assertEquals(expected: $string, actual: Cross::decrypt(string: Cross::encrypt(string: $string, key: $key), key: $key));
+        $this->assertEquals(expected: $string, actual: (new Cross())->decrypt(string: (new Cross())->encrypt(string: $string, key: $key), key: $key));
     }
 }

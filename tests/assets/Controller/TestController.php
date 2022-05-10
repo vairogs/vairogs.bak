@@ -1,13 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets;
+namespace Vairogs\Assets\Controller;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use UnexpectedValueException;
 use Vairogs\Cache\Cache;
 
+#[Route('/tests', name: 'tests_')]
 class TestController extends AbstractController
 {
     public function __call(string $method, array $arguments)
@@ -15,6 +17,12 @@ class TestController extends AbstractController
         return $this->{$method}(...$arguments);
     }
 
+    /**
+     * @noinspection PhpUnhandledExceptionInspection
+     * @noinspection PhpPossiblePolymorphicInvocationInspection
+     * @noinspection PhpUndefinedFieldInspection
+     * @noinspection PhpNamedArgumentMightBeUnresolvedInspection
+     */
     public function setContainer(ContainerInterface $container): ?ContainerInterface
     {
         if (!$this->throwOnUnexpectedService) {
@@ -36,10 +44,11 @@ class TestController extends AbstractController
             }
         }
 
-        return parent::setContainer($container);
+        return parent::setContainer(container: $container);
     }
 
     #[Cache(expires: 30)]
+    #[Route('/foo', name: 'foo')]
     public function fooAction(): JsonResponse
     {
         return new JsonResponse(data: time());
