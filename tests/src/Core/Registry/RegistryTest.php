@@ -5,13 +5,12 @@ namespace Vairogs\Tests\Core\Registry;
 use InvalidArgumentException;
 use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
-use Vairogs\Core\Registry\Registry;
 
 class RegistryTest extends VairogsTestCase
 {
     public function testRegistry(): void
     {
-        $registry = static::getContainer()->get(id: Registry::class);
+        $registry = static::getContainer()->get(id: 'vairogs.auth.openidconnect.registry');
         $this->assertCount(expectedCount: 1, haystack: $registry->getClients());
         $this->assertInstanceOf(expected: DefaultProvider::class, actual: $registry->getClient(name: 'vairogs'));
         $this->expectException(exception: InvalidArgumentException::class);

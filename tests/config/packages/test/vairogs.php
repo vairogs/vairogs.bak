@@ -34,9 +34,19 @@ return static function (VairogsConfig $config, ContainerConfigurator $containerC
         ->autoconfigure();
 
     $services
-        ->set(id: Registry::class)
+        ->set(id: 'vairogs.auth.openidconnect.registry')
+        ->class(class: Registry::class)
         ->public()
         ->args(arguments: [tagged_iterator(tag: 'vairogs.auth.openidconnect.clients')]);
+
+    $services
+        ->set(id: 'vairogs.auth.openid.registry')
+        ->class(class: Registry::class)
+        ->public()
+        ->args(arguments: [tagged_iterator(tag: 'vairogs.auth.openid.clients')]);
+
+    $services->alias(id: Registry::class . ' $$openIDConnectRegistry', referencedId: 'vairogs.auth.openidconnect.clients');
+    $services->alias(id: Registry::class . ' $$openIDRegistry', referencedId: 'vairogs.auth.openids.clients');
 
     $containerConfigurator->extension(
         namespace: 'vairogs',
