@@ -12,8 +12,9 @@ class SplFileInfo
 {
     private Reader $reader;
 
-    public function __construct(private readonly FinderSplFileInfo $decorated, private readonly array $types = [])
+    public function __construct(private readonly FinderSplFileInfo $decorated, private readonly array $types = [], string $namespace = '')
     {
+        $this->reader = new Reader(snippet: (string) $this->getContents(), namespace: $namespace, types: $this->types);
     }
 
     public function __call(string $name, array $arguments): mixed
@@ -25,12 +26,8 @@ class SplFileInfo
         return null;
     }
 
-    public function getReader(string $namespace): Reader
+    public function getReader(): Reader
     {
-        if (!isset($this->reader)) {
-            $this->reader = new Reader(snippet: (string) $this->getContents(), namespace: $namespace, types: $this->types);
-        }
-
         return $this->reader;
     }
 }
