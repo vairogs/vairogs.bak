@@ -52,7 +52,7 @@ final class TwigExtension extends AbstractExtension
         return $this->getMethods(filter: Attribute\TwigFunction::class, twig: Twig\TwigFunction::class, type: __FUNCTION__);
     }
 
-    public function getFiltered(string $class, string $filterClass): array
+    public function getFilteredMethods(string $class, string $filterClass): array
     {
         try {
             $methods = (new ReflectionClass(objectOrClass: $class))->getMethods(filter: ReflectionMethod::IS_PUBLIC);
@@ -64,7 +64,7 @@ final class TwigExtension extends AbstractExtension
 
         foreach ($methods as $method) {
             if ((new Php())->filterExists(method: $method, filterClass: $filterClass)) {
-                $filtered[(new Char())->fromCamelCase(string: $name = $method->getName())] = $this->getFilter(class: $class, name: $name, isStatic: $method->isStatic());
+                $filtered[(new Char())->fromCamelCase(string: $name = $method->getName())] = $this->filter(class: $class, name: $name, isStatic: $method->isStatic());
             }
         }
 
@@ -72,6 +72,29 @@ final class TwigExtension extends AbstractExtension
     }
 
     private function getMethods(string $filter, string $twig, string $type): array
+    {
+        if ([] !== $methods = $this->getMethodCache(type: $type)) {
+            return $methods;
+        }
+
+        $methods = $this->parseMethods(filter: $filter, twig: $twig);
+        $this->setMethodCache(type: $type, methods: $methods);
+
+        return $methods;
+    }
+
+    private function setMethodCache(string $type, array $methods): void
+    {
+        if (null !== $this->adapter) {
+            try {
+                $this->setCache(adapter: $this->adapter, key: $this->getKey(type: $type), value: $methods, expiresAfter: $this->defaultLifetime);
+            } catch (InvalidArgumentException) {
+                // do not set cache if exception
+            }
+        }
+    }
+
+    private function getMethodCache(string $type): array
     {
         try {
             if (null !== $this->adapter && [] !== $methods = ($this->getCache(adapter: $this->adapter, key: $this->getKey(type: $type)) ?? [])) {
@@ -81,24 +104,19 @@ final class TwigExtension extends AbstractExtension
             // cache not found
         }
 
+        return [];
+    }
+
+    private function parseMethods(string $filter, string $twig): array
+    {
         $methods = [[]];
         $spls = (new Finder(directories: [getcwd() . self::HELPER_DIR], types: [Class_::class], namespace: self::HELPER_NAMESPACE))->locate()->getClassMap();
 
-        foreach (array_keys($spls) as $class) {
-            $methods[] = $this->makeArray(input: $this->getFiltered(class: $class, filterClass: $filter), key: $this->getPrefix(base: $class), class: $twig);
+        foreach (array_keys(array: $spls) as $class) {
+            $methods[] = $this->makeArray(input: $this->getFilteredMethods(class: $class, filterClass: $filter), key: $this->getPrefix(base: $class), class: $twig);
         }
 
-        $methods = array_merge(...$methods);
-
-        if (null !== $this->adapter) {
-            try {
-                $this->setCache(adapter: $this->adapter, key: $this->getKey(type: $type), value: $methods, expiresAfter: $this->defaultLifetime);
-            } catch (InvalidArgumentException) {
-                // don't set cache if exception
-            }
-        }
-
-        return $methods;
+        return array_merge(...$methods);
     }
 
     private function getPrefix(string $base): string
@@ -131,10 +149,10 @@ final class TwigExtension extends AbstractExtension
 
     private function getKey(string $type): string
     {
-        return hash(algo: Common::HASH_ALGORITHM, data: $this->getPrefix($type));
+        return hash(algo: Common::HASH_ALGORITHM, data: $this->getPrefix(base: $type));
     }
 
-    private function getFilter(string $class, string $name, bool $isStatic = false): string|array
+    private function filter(string $class, string $name, bool $isStatic = false): string|array
     {
         if ($isStatic) {
             return [$class, $name, ];

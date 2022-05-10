@@ -15,11 +15,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Sitemap\Builder\Director;
 use Vairogs\Sitemap\Builder\FileBuilder;
+use Vairogs\Sitemap\Model\Sitemap;
 use Vairogs\Sitemap\Provider;
 use function fclose;
 use function fopen;
 use function getcwd;
 use function is_file;
+use function is_resource;
 use function sprintf;
 use function unlink;
 
@@ -27,6 +29,7 @@ use function unlink;
 class SitemapCommand extends Command
 {
     private const HOST = 'host';
+    private mixed $handle;
 
     public function __construct(private readonly ValidatorInterface $validator, private readonly ?Provider $provider = null, private readonly array $options = [])
     {
@@ -35,6 +38,13 @@ class SitemapCommand extends Command
         }
 
         parent::__construct();
+    }
+
+    public function __destruct()
+    {
+        if (is_resource(value: $this->handle)) {
+            fclose(stream: $this->handle);
+        }
     }
 
     protected function configure(): void
@@ -48,41 +58,49 @@ class SitemapCommand extends Command
     {
         $sitemap = $this->provider->populate(host: $input->getArgument(name: self::HOST));
 
-        if (0 !== ($violations = $this->validator->validate(value: $sitemap))->count()) {
-            foreach ($violations as $error) {
-                /* @var ConstraintViolation $error */
-                $output->writeln(messages: $error->getMessage());
-            }
-
+        if (!$this->validate(sitemap: $sitemap, output: $output)) {
             return 1;
         }
 
         $output->writeln(messages: '<fg=blue>Generating sitemap</>');
         $filename = getcwd() . '/public/' . $input->getOption(name: 'filename');
 
-        if (is_file(filename: $filename)) {
-            unlink(filename: $filename);
-        }
+        $this->unlink(filename: $filename);
 
-        $handle = fopen(filename: $filename, mode: 'w+b');
+        $this->handle = fopen(filename: $filename, mode: 'w+b');
 
         try {
-            (new Director(buffer: $handle))->build(builder: new FileBuilder(sitemap: $sitemap));
+            (new Director(buffer: $this->handle))->build(builder: new FileBuilder(sitemap: $sitemap));
             $output->writeln(messages: sprintf('<info>Sitemap generated as "%s"</info>', $filename));
         } catch (Exception $exception) {
-            if (is_file(filename: $filename)) {
-                unlink(filename: $filename);
-            }
+            $this->unlink(filename: $filename);
 
             $output->writeln(messages: '<error>' . $exception->getMessage() . '</error>');
-
-            fclose(stream: $handle);
 
             return 2;
         }
 
-        fclose(stream: $handle);
-
         return 0;
+    }
+
+    private function unlink(string $filename): void
+    {
+        if (is_file(filename: $filename)) {
+            unlink(filename: $filename);
+        }
+    }
+
+    private function validate(Sitemap $sitemap, OutputInterface $output): bool
+    {
+        if (0 !== ($violations = $this->validator->validate(value: $sitemap))->count()) {
+            foreach ($violations as $error) {
+                /* @var ConstraintViolation $error */
+                $output->writeln(messages: $error->getMessage());
+            }
+
+            return false;
+        }
+
+        return true;
     }
 }
