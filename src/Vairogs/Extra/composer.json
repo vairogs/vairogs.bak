@@ -5,7 +5,6 @@
     "keywords": [
         "extra",
         "php",
-        "specification",
         "symfony",
         "tool",
         "utils",
@@ -47,8 +46,7 @@
     "replace": {
         "vairogs/extra-constants": "self.version",
         "vairogs/extra-encryption": "self.version",
-        "vairogs/extra-encryption-xxtea": "self.version",
-        "vairogs/extra-specification": "self.version"
+        "vairogs/extra-encryption-xxtea": "self.version"
     },
     "autoload": {
         "psr-4": {
