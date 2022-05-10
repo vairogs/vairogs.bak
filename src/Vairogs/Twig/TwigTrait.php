@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils\Twig;
+namespace Vairogs\Twig;
 
 use InvalidArgumentException;
 use Twig\TwigFilter;
@@ -23,7 +23,7 @@ trait TwigTrait
         $functions = [];
         foreach ($input as $call => $function) {
             if (is_numeric(value: $call)) {
-                $call = Char::toSnakeCase(string: $function, skipCamel: true);
+                $call = (new Char())->toSnakeCase(string: $function, skipCamel: true);
             }
 
             $functions[sprintf('%s_%s', $key, $call)] = $function;

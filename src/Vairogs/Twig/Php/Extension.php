@@ -7,7 +7,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Vairogs\Core\Vairogs;
-use Vairogs\Utils\Twig\TwigTrait;
+use Vairogs\Twig\TwigTrait;
 use function array_keys;
 use function array_map;
 use function current;
