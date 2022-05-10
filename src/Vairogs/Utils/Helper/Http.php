@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
-use Vairogs\Utils\Twig\Attribute;
+use Vairogs\Twig\Attribute;
 use function array_merge;
 use function file_get_contents;
 
@@ -14,9 +14,9 @@ final class Http
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isHttps(Request $request): bool
+    public function isHttps(Request $request): bool
     {
-        return self::checkHttps(request: $request) || self::checkServerPort(request: $request) || self::checkHttpXForwardedSsl(request: $request) || self::checkHttpXForwardedProto(request: $request);
+        return $this->checkHttps(request: $request) || $this->checkServerPort(request: $request) || $this->checkHttpXForwardedSsl(request: $request) || $this->checkHttpXForwardedProto(request: $request);
     }
 
     /**
@@ -25,46 +25,46 @@ final class Http
      */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getRequestMethods(): array
+    public function getRequestMethods(): array
     {
-        return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: Request::class), with: 'METHOD_');
+        return (new Iteration())->arrayValuesFiltered(input: (new Php())->getClassConstants(class: Request::class), with: 'METHOD_');
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getRequestIdentity(Request $request, string $ipUrl = 'https://ident.me'): array
+    public function getRequestIdentity(Request $request, string $ipUrl = 'https://ident.me'): array
     {
         $additionalData = [
             'actualIp' => file_get_contents(filename: $ipUrl),
-            'uuid' => $request->server->get(key: 'REQUEST_TIME', default: '') . Identification::getUniqueId(),
+            'uuid' => $request->server->get(key: 'REQUEST_TIME', default: '') . (new Identification())->getUniqueId(),
         ];
 
-        return array_merge(Uri::buildArrayFromObject(object: $request), $additionalData);
+        return array_merge((new Uri())->buildArrayFromObject(object: $request), $additionalData);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isIE(Request $request): bool
+    public function isIE(Request $request): bool
     {
-        return Text::containsAny(haystack: $request->server->get(key: 'HTTP_USER_AGENT'), needles: ['MSIE', 'Edge', 'Trident/7']);
+        return (new Text())->containsAny(haystack: $request->server->get(key: 'HTTP_USER_AGENT'), needles: ['MSIE', 'Edge', 'Trident/7']);
     }
 
-    public static function checkHttps(Request $request): bool
+    public function checkHttps(Request $request): bool
     {
         return $request->server->has(key: Constants\Http::HEADER_HTTPS) && Constants\Status::ON === $request->server->get(key: Constants\Http::HEADER_HTTPS);
     }
 
-    public static function checkServerPort(Request $request): bool
+    public function checkServerPort(Request $request): bool
     {
         return $request->server->has(key: Constants\Http::HEADER_PORT) && Constants\Http::HTTPS === (int) $request->server->get(key: Constants\Http::HEADER_PORT);
     }
 
-    public static function checkHttpXForwardedSsl(Request $request): bool
+    public function checkHttpXForwardedSsl(Request $request): bool
     {
         return $request->server->has(key: Constants\Http::HEADER_SSL) && Constants\Status::ON === $request->server->get(key: Constants\Http::HEADER_SSL);
     }
 
-    public static function checkHttpXForwardedProto(Request $request): bool
+    public function checkHttpXForwardedProto(Request $request): bool
     {
         return $request->server->has(key: Constants\Http::HEADER_PROTO) && 'https' === $request->server->get(key: Constants\Http::HEADER_PROTO);
     }

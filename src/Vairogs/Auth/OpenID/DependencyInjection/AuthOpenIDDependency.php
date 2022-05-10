@@ -15,7 +15,7 @@ use Vairogs\Extra\Constants\Service;
 
 class AuthOpenIDDependency extends AbstractAuthChildDependency
 {
-    public static function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
+    public function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         $arrayNodeDefinition->addDefaultsIfNotSet();
         $optionsNode = $arrayNodeDefinition->children();
@@ -34,7 +34,7 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
         $optionsNode->end();
     }
 
-    public static function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
+    public function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
     {
         $clientDefinition = $containerBuilder->register(id: $clientServiceKey, class: OpenIDProvider::class);
         $clientDefinition

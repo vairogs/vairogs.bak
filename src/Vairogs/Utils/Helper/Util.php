@@ -2,8 +2,8 @@
 
 namespace Vairogs\Utils\Helper;
 
+use Vairogs\Twig\Attribute;
 use Vairogs\Utils\Handler\FunctionHandler;
-use Vairogs\Utils\Twig\Attribute;
 use function acos;
 use function array_fill;
 use function cos;
@@ -21,7 +21,7 @@ final class Util
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isPrime(int $number): bool
+    public function isPrime(int $number): bool
     {
         $function = (new FunctionHandler())->setFunction(functionName: 'isPrimeFunction', instance: new self());
         $below = (new FunctionHandler())->setFunction(functionName: 'isPrimeBelow1000', instance: new self())->setNext(handler: $function);
@@ -31,7 +31,7 @@ final class Util
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isPrimeFunction(int $number): bool
+    public function isPrimeFunction(int $number): bool
     {
         preg_match(pattern: '#^1?$|^(11+?)\1+$#', subject: implode(separator: '1', array: array_fill(start_index: 0, count: $number, value: null)), matches: $matches);
 
@@ -40,7 +40,7 @@ final class Util
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isPrimeBelow1000(int $number): ?bool
+    public function isPrimeBelow1000(int $number): ?bool
     {
         if (1000 <= $number) {
             return null;
@@ -57,14 +57,14 @@ final class Util
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX, array $result = []): array
+    public function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX, array $result = []): array
     {
         if ($depth <= $maxDepth) {
             foreach ($array as $key => $value) {
                 $key = ltrim(string: $base . '.' . $key, characters: '.');
 
-                if (Iteration::isAssociative(array: $value)) {
-                    $result = self::makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth, result: $result);
+                if ((new Iteration())->isAssociative(array: $value)) {
+                    $result = $this->makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth, result: $result);
 
                     if ($onlyLast) {
                         continue;
@@ -78,7 +78,7 @@ final class Util
         return $result;
     }
 
-    public static function isPrimeGmp(int $number): ?bool
+    public function isPrimeGmp(int $number): ?bool
     {
         if (function_exists(function: 'gmp_prob_prime')) {
             return match (gmp_prob_prime(num: (string) $number)) {
@@ -93,7 +93,7 @@ final class Util
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function distanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km = true, int $precision = 4): float
+    public function distanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km = true, int $precision = 4): float
     {
         if ($latitude1 === $latitude2 && $longitude1 === $longitude2) {
             return 0.0;

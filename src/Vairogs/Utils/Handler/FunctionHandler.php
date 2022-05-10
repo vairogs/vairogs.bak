@@ -28,6 +28,6 @@ class FunctionHandler extends AbstractHandler
 
         $object = $this->instance;
 
-        return Php::call(fn () => $object->{$function}(...$arguments), $object, true, ...$arguments) ?? parent::handle(...$arguments);
+        return (new Php())->call(fn () => $object->{$function}(...$arguments), $object, true, ...$arguments) ?? parent::handle(...$arguments);
     }
 }

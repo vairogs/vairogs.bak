@@ -4,7 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use RuntimeException;
-use Vairogs\Utils\Twig\Attribute;
+use Vairogs\Twig\Attribute;
 use function hash;
 use function http_build_query;
 use function strtolower;
@@ -31,9 +31,9 @@ final class Gravatar
      */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
+    public function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
     {
-        if (empty($email) || !Validate::validateEmail(email: $email)) {
+        if (empty($email) || !(new Validate())->validateEmail(email: $email)) {
             $email = self::DEFAULT_EMAIL;
         }
 
@@ -43,8 +43,8 @@ final class Gravatar
         };
 
         $default = match (true) {
-            Uri::isAbsolute(path: $default) => urldecode(string: $default),
-            default => self::getIcons()['ICON_' . strtoupper($default)] ?? self::ICON_IDENTICON
+            (new Uri())->isAbsolute(path: $default) => urldecode(string: $default),
+            default => $this->getIcons()['ICON_' . strtoupper($default)] ?? self::ICON_IDENTICON
         };
 
         return $host . '/avatar/' . hash(algo: 'md5', data: strtolower(string: trim(string: $email))) . '/?' . http_build_query(data: ['s' => $size, 'd' => $default]);
@@ -54,8 +54,8 @@ final class Gravatar
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    private static function getIcons(): array
+    private function getIcons(): array
     {
-        return Iteration::filterKeyStartsWith(input: Php::getClassConstants(class: self::class), startsWith: 'ICON_');
+        return (new Iteration())->filterKeyStartsWith(input: (new Php())->getClassConstants(class: self::class), startsWith: 'ICON_');
     }
 }

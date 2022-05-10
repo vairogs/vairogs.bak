@@ -3,7 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Utils\Twig\Attribute;
+use Vairogs\Twig\Attribute;
 use function explode;
 use function filter_var;
 use function ip2long;
@@ -19,7 +19,7 @@ final class Validate
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
-    public static function validateEmail(string $email): bool
+    public function validateEmail(string $email): bool
     {
         return false !== filter_var(value: filter_var(value: $email, filter: FILTER_UNSAFE_RAW), filter: FILTER_VALIDATE_EMAIL);
     }
@@ -27,19 +27,19 @@ final class Validate
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
-    public static function validateIPAddress(string $ipAddress, bool $deny = true): bool
+    public function validateIPAddress(string $ipAddress, bool $deny = true): bool
     {
         return false !== filter_var(value: $ipAddress, filter: FILTER_VALIDATE_IP, options: $deny ? FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE : FILTER_FLAG_NONE);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function validateCIDR(string $cidr): bool
+    public function validateCIDR(string $cidr): bool
     {
-        if (!IPAddress::isCIDR(cidr: $cidr)) {
+        if (!(new IPAddress())->isCIDR(cidr: $cidr)) {
             return false;
         }
 
-        return (int) IPAddress::getCIDRRange(cidr: $cidr)[0] === ip2long(ip: explode(separator: '/', string: $cidr, limit: 2)[0]);
+        return (int) (new IPAddress())->getCIDRRange(cidr: $cidr)[0] === ip2long(ip: explode(separator: '/', string: $cidr, limit: 2)[0]);
     }
 }

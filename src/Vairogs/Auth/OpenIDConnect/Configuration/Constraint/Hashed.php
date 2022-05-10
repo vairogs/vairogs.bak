@@ -15,7 +15,7 @@ final class Hashed extends AbstractConstraint
         $this->assertClaimSet();
 
         /** @noinspection PhpPossiblePolymorphicInvocationInspection */
-        $hash = Identification::getHash(text: $token->getAccessTokenString());
+        $hash = (new Identification())->getHash(text: $token->getAccessTokenString());
         if ($hash !== $token->claims()->get(name: $this->claim)) {
             throw new ConstraintViolation(message: sprintf('Invalid %s', $this->claim));
         }

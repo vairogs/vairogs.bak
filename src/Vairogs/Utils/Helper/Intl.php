@@ -3,7 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use Symfony\Component\Intl\Countries;
-use Vairogs\Utils\Twig\Attribute;
+use Vairogs\Twig\Attribute;
 use function str_replace;
 use function strtoupper;
 
@@ -24,21 +24,21 @@ final class Intl
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function cyrillicToLatin(string $text, array $search = self::MAP_CYRILLIC, array $replace = self::MAP_LATIN): string
+    public function cyrillicToLatin(string $text, array $search = self::MAP_CYRILLIC, array $replace = self::MAP_LATIN): string
     {
         return str_replace(search: $search, replace: $replace, subject: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function latinToCyrillic(string $text, array $search = self::MAP_LATIN, array $replace = self::MAP_CYRILLIC): string
+    public function latinToCyrillic(string $text, array $search = self::MAP_LATIN, array $replace = self::MAP_CYRILLIC): string
     {
         return str_replace(search: $search, replace: $replace, subject: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getCountryName(string $country, string $locale = 'en'): string
+    public function getCountryName(string $country, string $locale = 'en'): string
     {
         return Countries::getName(country: strtoupper(string: $country), displayLocale: $locale);
     }

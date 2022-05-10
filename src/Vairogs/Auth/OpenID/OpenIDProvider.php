@@ -129,7 +129,7 @@ class OpenIDProvider implements HasRegistry
 
     public function urlPath(?string $return = null, ?string $altRealm = null): string
     {
-        $realm = $altRealm ?: (Uri::getSchema(request: $this->request) . $this->request->server->get(key: 'HTTP_HOST'));
+        $realm = $altRealm ?: ((new Uri())->getSchema(request: $this->request) . $this->request->server->get(key: 'HTTP_HOST'));
 
         if (null !== $return) {
             if (!$this->validateUrl(url: $return)) {
@@ -147,13 +147,13 @@ class OpenIDProvider implements HasRegistry
      */
     private function getData(string $openID): mixed
     {
-        return Json::decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: Json::ASSOCIATIVE);
+        return (new Json())->decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: Json::ASSOCIATIVE);
     }
 
     #[Pure]
     private function validateUrl(string $url): bool
     {
-        return Uri::isUrl(url: $url);
+        return (new Uri())->isUrl(url: $url);
     }
 
     #[ArrayShape([

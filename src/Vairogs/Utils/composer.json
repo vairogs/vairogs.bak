@@ -77,6 +77,7 @@
         "vairogs/common": "self.version",
         "vairogs/core": "self.version",
         "vairogs/extra-constants": "self.version",
+        "vairogs/twig": "self.version",
         "twig/twig": "*"
     },
     "replace": {

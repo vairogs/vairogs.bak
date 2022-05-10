@@ -14,7 +14,7 @@ final class Pool
      * @throws BadMethodCallException
      * @throws InvalidArgumentException
      */
-    public static function createPool(string $class, array $adapters = []): array
+    public function createPool(string $class, array $adapters = []): array
     {
         $pool = [];
 

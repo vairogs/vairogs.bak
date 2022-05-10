@@ -8,7 +8,7 @@ class UserArrayFactory
 {
     private const STEAMID = 'steamid';
 
-    public static function create(User $user, array $bag): User
+    public function create(User $user, array $bag): User
     {
         $avatar = [
             'small' => $bag['avatar'] ?? '',

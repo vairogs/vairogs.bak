@@ -3,7 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use Composer\InstalledVersions;
-use Vairogs\Utils\Twig\Attribute;
+use Vairogs\Twig\Attribute;
 use function class_exists;
 use function enum_exists;
 use function getenv;
@@ -18,10 +18,10 @@ class Composer
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isInstalled(array $packages, bool $incDevReq = true): bool
+    public function isInstalled(array $packages, bool $incDevReq = true): bool
     {
         foreach ($packages as $package) {
-            if (true === $installed = self::isExtensionInstalled(extension: $package)) {
+            if (true === $installed = $this->isExtensionInstalled(extension: $package)) {
                 continue;
             }
 
@@ -35,7 +35,7 @@ class Composer
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isExtensionInstalled(string $extension): ?bool
+    public function isExtensionInstalled(string $extension): ?bool
     {
         if (str_contains(haystack: $extension, needle: '/')) {
             return null;
@@ -50,14 +50,14 @@ class Composer
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function exists(string $class): bool
+    public function exists(string $class): bool
     {
         return class_exists(class: $class) || interface_exists(interface: $class) || trait_exists(trait: $class) || enum_exists(enum: $class);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getEnv(string $varname, bool $localOnly = true): mixed
+    public function getEnv(string $varname, bool $localOnly = true): mixed
     {
         if ($env = getenv($varname, local_only: $localOnly)) {
             return $env;

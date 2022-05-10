@@ -7,7 +7,7 @@ use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Extra\Constants;
-use Vairogs\Utils\Twig\Attribute;
+use Vairogs\Twig\Attribute;
 use function array_combine;
 use function array_keys;
 use function array_map;
@@ -38,11 +38,11 @@ final class Uri
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function buildHttpQueryArray(array|object $input, ?string $parent = null): array
+    public function buildHttpQueryArray(array|object $input, ?string $parent = null): array
     {
         $result = [];
 
-        foreach (Php::getArray(input: $input) as $key => $value) {
+        foreach ((new Php())->getArray(input: $input) as $key => $value) {
             $newKey = match ($parent) {
                 null => $key,
                 default => sprintf('%s[%s]', $parent, $key)
@@ -50,7 +50,7 @@ final class Uri
 
             if (!$value instanceof CURLFile && (is_array(value: $value) || is_object(value: $value))) {
                 /** @noinspection SlowArrayOperationsInLoopInspection */
-                $result = array_merge($result, self::buildHttpQueryArray(input: $value, parent: $newKey));
+                $result = array_merge($result, $this->buildHttpQueryArray(input: $value, parent: $newKey));
             } else {
                 $result[$newKey] = $value;
             }
@@ -61,23 +61,23 @@ final class Uri
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function buildArrayFromObject(object $object): array
+    public function buildArrayFromObject(object $object): array
     {
-        parse_str(string: self::buildHttpQueryString($object), result: $result);
+        parse_str(string: $this->buildHttpQueryString($object), result: $result);
 
         return $result;
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function buildHttpQueryString(object $object): string
+    public function buildHttpQueryString(object $object): string
     {
-        return http_build_query(data: self::buildHttpQueryArray(input: $object));
+        return http_build_query(data: $this->buildHttpQueryArray(input: $object));
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function urlEncode(string $url): string
+    public function urlEncode(string $url): string
     {
         $urlParsed = parse_url(url: $url);
 
@@ -86,7 +86,7 @@ final class Uri
 
         if ('' !== $query) {
             /** @var string $query */
-            $query = '?' . http_build_query(data: self::arrayFromQueryString(query: $query));
+            $query = '?' . http_build_query(data: $this->arrayFromQueryString(query: $query));
         }
 
         if ($port && ':' !== $port[0]) {
@@ -98,7 +98,7 @@ final class Uri
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function arrayFromQueryString(string $query): array
+    public function arrayFromQueryString(string $query): array
     {
         parse_str(string: preg_replace_callback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(string: urldecode(string: $match[0])), subject: $query), result: $values);
 
@@ -107,7 +107,7 @@ final class Uri
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function parseHeaders(string $rawHeaders = ''): array
+    public function parseHeaders(string $rawHeaders = ''): array
     {
         $headers = [];
         $headerArray = str_replace(search: "\r", replace: '', subject: $rawHeaders);
@@ -129,14 +129,14 @@ final class Uri
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
-    public static function isUrl(string $url): bool
+    public function isUrl(string $url): bool
     {
         /* @noinspection BypassedUrlValidationInspection */
         return false !== filter_var(value: filter_var(value: $url, filter: FILTER_SANITIZE_URL), filter: FILTER_VALIDATE_URL);
     }
 
     #[Attribute\TwigFilter]
-    public static function parseQueryPath(string $path): bool|string
+    public function parseQueryPath(string $path): bool|string
     {
         $path = '/' . ltrim(string: $path, characters: '/');
         $path = preg_replace(pattern: '#[\x00-\x1F\x7F]#', replacement: '', subject: $path);
@@ -156,14 +156,14 @@ final class Uri
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getSchema(Request $request): string
+    public function getSchema(Request $request): string
     {
-        return Http::isHttps(request: $request) ? Constants\Http::SCHEMA_HTTPS : Constants\Http::SCHEMA_HTTP;
+        return (new Http())->isHttps(request: $request) ? Constants\Http::SCHEMA_HTTPS : Constants\Http::SCHEMA_HTTP;
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isAbsolute(string $path): bool
+    public function isAbsolute(string $path): bool
     {
         return str_starts_with(haystack: $path, needle: '//') || preg_match(pattern: '#^[a-z-]{3,}://#i', subject: $path);
     }

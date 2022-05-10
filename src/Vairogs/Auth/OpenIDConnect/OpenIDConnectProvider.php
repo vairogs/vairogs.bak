@@ -56,7 +56,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         parent::__construct(options: $options, collaborators: $collaborators);
 
         if ([] !== $options) {
-            $this->state = Identification::getUniqueId();
+            $this->state = (new Identification())->getUniqueId();
             $this->configure(options: $options);
         }
     }
@@ -153,8 +153,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $uris = $options['uris'] ?? [];
         unset($options['redirect'], $options['uris']);
 
-        foreach (Util::makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
-            if (property_exists(object_or_class: $this, property: $var = Char::toCamelCase(string: $key))) {
+        foreach ((new Util())->makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
+            if (property_exists(object_or_class: $this, property: $var = (new Char())->toCamelCase(string: $key))) {
                 $this->{$var} = $value;
             }
         }
@@ -194,7 +194,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         }
 
         try {
-            return Json::decode(json: $content, flags: Json::ASSOCIATIVE);
+            return (new Json())->decode(json: $content, flags: Json::ASSOCIATIVE);
         } catch (Exception $exception) {
             throw new UnexpectedValueException(message: sprintf('Failed to parse JSON response: %s', $exception->getMessage()), previous: $exception);
         }

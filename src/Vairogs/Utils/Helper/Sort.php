@@ -5,7 +5,7 @@ namespace Vairogs\Utils\Helper;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants\Enum\Criteria;
-use Vairogs\Utils\Twig\Attribute;
+use Vairogs\Twig\Attribute;
 use function array_key_exists;
 use function array_slice;
 use function count;
@@ -21,7 +21,7 @@ final class Sort
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function swap(mixed &$foo, mixed &$bar): void
+    public function swap(mixed &$foo, mixed &$bar): void
     {
         if ($foo === $bar) {
             return;
@@ -34,13 +34,13 @@ final class Sort
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function bubbleSort(array &$array): void
+    public function bubbleSort(array &$array): void
     {
         $count = count(value: $array);
         for ($foo = 0; $foo < $count; $foo++) {
             for ($bar = 0; $bar < $count - 1; $bar++) {
                 if ($bar < $count && $array[$bar] > $array[$bar + 1]) {
-                    self::swapArray(array: $array, foo: $bar, bar: $bar + 1);
+                    $this->swapArray(array: $array, foo: $bar, bar: $bar + 1);
                 }
             }
         }
@@ -48,7 +48,7 @@ final class Sort
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function swapArray(array &$array, mixed $foo, mixed $bar): void
+    public function swapArray(array &$array, mixed $foo, mixed $bar): void
     {
         if ($array[$foo] === $array[$bar]) {
             return;
@@ -61,7 +61,7 @@ final class Sort
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function mergeSort(array $array): array
+    public function mergeSort(array $array): array
     {
         if (1 >= count(value: $array)) {
             return $array;
@@ -71,10 +71,10 @@ final class Sort
         $left = array_slice(array: $array, offset: 0, length: $middle);
         $right = array_slice(array: $array, offset: $middle);
 
-        $left = self::mergeSort(array: $left);
-        $right = self::mergeSort(array: $right);
+        $left = $this->mergeSort(array: $left);
+        $right = $this->mergeSort(array: $right);
 
-        return self::merge(left: $left, right: $right);
+        return $this->merge(left: $left, right: $right);
     }
 
     /**
@@ -82,18 +82,18 @@ final class Sort
      */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function sort(array|object $data, string $parameter, Criteria $order = Criteria::ASC): array
+    public function sort(array|object $data, string $parameter, Criteria $order = Criteria::ASC): array
     {
         if (count(value: $data) < 2) {
             return $data;
         }
 
         $data = (array) $data;
-        if (!self::isSortable(item: current(array: $data), field: $parameter)) {
+        if (!$this->isSortable(item: current(array: $data), field: $parameter)) {
             throw new InvalidArgumentException(message: "Sorting parameter doesn't exist in sortable variable");
         }
 
-        usort(array: $data, callback: self::usort(parameter: $parameter, order: $order));
+        usort(array: $data, callback: $this->usort(parameter: $parameter, order: $order));
 
         return $data;
     }
@@ -101,7 +101,7 @@ final class Sort
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
-    public static function isSortable(mixed $item, int|string $field): bool
+    public function isSortable(mixed $item, int|string $field): bool
     {
         if (is_array(value: $item)) {
             return array_key_exists(key: $field, array: $item);
@@ -116,10 +116,10 @@ final class Sort
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function usort(string $parameter, Criteria $order): callable
+    public function usort(string $parameter, Criteria $order): callable
     {
         return static function (array|object $first, array|object $second) use ($parameter, $order): int {
-            if (($firstSort = Php::getParameter(variable: $first, key: $parameter)) === ($secondSort = Php::getParameter(variable: $second, key: $parameter))) {
+            if (($firstSort = (new Php())->getParameter(variable: $first, key: $parameter)) === ($secondSort = (new Php())->getParameter(variable: $second, key: $parameter))) {
                 return 0;
             }
 
@@ -133,7 +133,7 @@ final class Sort
         };
     }
 
-    private static function merge(array $left, array $right): array
+    private function merge(array $left, array $right): array
     {
         $result = [];
         $i = $j = 0;

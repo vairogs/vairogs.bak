@@ -5,8 +5,8 @@ namespace Vairogs\Utils\Helper;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyInfo\Type;
-use Vairogs\Extra\Constants\Http;
-use Vairogs\Utils\Twig\Attribute;
+use Vairogs\Extra\Constants;
+use Vairogs\Twig\Attribute;
 use function count;
 use function explode;
 use function is_numeric;
@@ -16,28 +16,28 @@ final class IPAddress
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getRemoteIp(Request $request, bool $trust = false): string
+    public function getRemoteIp(Request $request, bool $trust = false): string
     {
         if ($trust) {
-            foreach ([Http::HTTP_CLIENT_IP, Http::HTTP_X_REAL_IP, Http::HTTP_X_FORWARDED_FOR, ] as $parameter) {
+            foreach ([Constants\Http::HTTP_CLIENT_IP, Constants\Http::HTTP_X_REAL_IP, Constants\Http::HTTP_X_FORWARDED_FOR, ] as $parameter) {
                 if ($request->server->has(key: $parameter)) {
                     return $request->server->get(key: $parameter);
                 }
             }
         }
 
-        return $request->server->get(key: Http::REMOTE_ADDR);
+        return $request->server->get(key: Constants\Http::REMOTE_ADDR);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getRemoteIpCF(Request $request, bool $trust = false): string
+    public function getRemoteIpCF(Request $request, bool $trust = false): string
     {
-        if ($request->server->has(key: Http::HTTP_CF_CONNECTING_IP)) {
-            return $request->server->get(key: Http::HTTP_CF_CONNECTING_IP);
+        if ($request->server->has(key: Constants\Http::HTTP_CF_CONNECTING_IP)) {
+            return $request->server->get(key: Constants\Http::HTTP_CF_CONNECTING_IP);
         }
 
-        return self::getRemoteIp(request: $request, trust: $trust);
+        return $this->getRemoteIp(request: $request, trust: $trust);
     }
 
     #[Attribute\TwigFunction]
@@ -46,9 +46,9 @@ final class IPAddress
         Type::BUILTIN_TYPE_STRING,
         Type::BUILTIN_TYPE_STRING,
     ])]
-    public static function getCIDRRange(string $cidr, bool $int = true): array
+    public function getCIDRRange(string $cidr, bool $int = true): array
     {
-        if (!self::isCIDR(cidr: $cidr)) {
+        if (!$this->isCIDR(cidr: $cidr)) {
             return ['0', '0'];
         }
 
@@ -75,12 +75,12 @@ final class IPAddress
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function isCIDR(string $cidr): bool
+    public function isCIDR(string $cidr): bool
     {
         $parts = explode(separator: '/', string: $cidr);
 
         if (2 === count(value: $parts) && is_numeric(value: $parts[1]) && 32 >= (int) $parts[1]) {
-            return Validate::validateIPAddress(ipAddress: $parts[0], deny: false);
+            return (new Validate())->validateIPAddress(ipAddress: $parts[0], deny: false);
         }
 
         return false;

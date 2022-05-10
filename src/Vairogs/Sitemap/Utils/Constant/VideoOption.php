@@ -19,24 +19,24 @@ final class VideoOption
     /**
      * @throws RuntimeException
      */
-    public static function getRestrictions(): array
+    public function getRestrictions(): array
     {
-        return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: self::class), with: 'RESTRICTION_');
+        return (new Iteration())->arrayValuesFiltered(input: (new Php())->getClassConstants(class: self::class), with: 'RESTRICTION_');
     }
 
     /**
      * @throws RuntimeException
      */
-    public static function getPlatforms(): array
+    public function getPlatforms(): array
     {
-        return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: self::class), with: 'PLATFORM_');
+        return (new Iteration())->arrayValuesFiltered(input: (new Php())->getClassConstants(class: self::class), with: 'PLATFORM_');
     }
 
     /**
      * @throws RuntimeException
      */
-    public static function getOptions(): array
+    public function getOptions(): array
     {
-        return Iteration::arrayValuesFiltered(input: Php::getClassConstants(class: self::class), with: 'OPTION_');
+        return (new Iteration())->arrayValuesFiltered(input: (new Php())->getClassConstants(class: self::class), with: 'OPTION_');
     }
 }

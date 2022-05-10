@@ -34,7 +34,7 @@ class SteamUserBuilder implements OpenIDUserBuilder
 
     private function getSteamUser(array $data): User
     {
-        $user = UserArrayFactory::create(user: new $this->userClass(), bag: $data['response']['players'][0]);
+        $user = (new UserArrayFactory())->create(user: new $this->userClass(), bag: $data['response']['players'][0]);
 
         return $user->setUsername(username: $this->getUsername(user: $user));
     }

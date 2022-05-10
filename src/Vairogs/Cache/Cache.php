@@ -31,7 +31,7 @@ final class Cache
         $value = $this->data;
 
         if (!empty($this->attributes)) {
-            $value = Iteration::arrayIntersectKeyRecursive(first: $this->data, second: Iteration::arrayFlipRecursive(input: $this->attributes));
+            $value = (new Iteration())->arrayIntersectKeyRecursive(first: $this->data, second: (new Iteration())->arrayFlipRecursive(input: $this->attributes));
         }
 
         return hash(algo: $this->algorithm, data: $prefix . '_' . str_replace(search: '=', replace: '_', subject: http_build_query(data: $value, arg_separator: '_')));

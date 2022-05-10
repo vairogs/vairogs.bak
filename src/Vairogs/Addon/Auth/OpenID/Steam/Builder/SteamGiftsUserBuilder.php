@@ -45,14 +45,15 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         $input = $data['response']['players'][0];
         $input['username'] = $this->getUsername(user: $input['steamid']);
 
-        return UserArrayFactory::create(user: new $this->userClass(), bag: $input);
+        return (new UserArrayFactory())->create(user: new $this->userClass(), bag: $input);
     }
 
     private function getUsername(string $user): ?string
     {
         $path = $this->cacheDir . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $user . '.txt';
 
-        if (File::mkdir(path: $path) && !is_file(filename: $path)) {
+        /* @noinspection NotOptimalIfConditionsInspection */
+        if ((new File())->mkdir(path: $path) && !is_file(filename: $path)) {
             exec(command: 'wget --no-verbose --spider --output-file=' . $path . " -e robots=off -U='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36' https://www.steamgifts.com/go/user/" . $user);
         }
 

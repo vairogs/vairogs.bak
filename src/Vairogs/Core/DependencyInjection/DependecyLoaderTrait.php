@@ -25,6 +25,6 @@ trait DependecyLoaderTrait
 
     protected function checkImplementation(string $class): bool
     {
-        return Php::classImplements(class: $class, interface: Dependency::class);
+        return (new Php())->classImplements(class: $class, interface: Dependency::class);
     }
 }

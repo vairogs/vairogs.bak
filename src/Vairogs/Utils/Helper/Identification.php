@@ -3,8 +3,9 @@
 namespace Vairogs\Utils\Helper;
 
 use Exception;
-use Vairogs\Utils\Generator;
-use Vairogs\Utils\Twig\Attribute;
+use Throwable;
+use Vairogs\Extra\Constants\Symbol;
+use Vairogs\Twig\Attribute;
 use function base64_encode;
 use function bin2hex;
 use function ceil;
@@ -23,15 +24,15 @@ final class Identification
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function validatePersonCode(string $personCode): bool
+    public function validatePersonCode(string $personCode): bool
     {
-        $personCode = Text::keepNumeric(text: $personCode);
+        $personCode = (new Text())->keepNumeric(text: $personCode);
 
         if (32 === (int) substr(string: $personCode, offset: 0, length: 2)) {
-            if (!self::validateNewPersonCode(personCode: $personCode)) {
+            if (!$this->validateNewPersonCode(personCode: $personCode)) {
                 return false;
             }
-        } elseif (!Date::validateDate(date: $personCode) || !self::validateOldPersonCode(personCode: $personCode)) {
+        } elseif (!$this->validateOldPersonCode(personCode: $personCode) || !(new Date())->validateDate(date: $personCode)) {
             return false;
         }
 
@@ -40,7 +41,7 @@ final class Identification
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function validateNewPersonCode(string $personCode): bool
+    public function validateNewPersonCode(string $personCode): bool
     {
         if (11 !== strlen(string: $personCode)) {
             return false;
@@ -65,7 +66,7 @@ final class Identification
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function validateOldPersonCode(string $personCode): bool
+    public function validateOldPersonCode(string $personCode): bool
     {
         if (11 !== strlen(string: $personCode)) {
             return false;
@@ -84,18 +85,18 @@ final class Identification
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getUniqueId(int $length = 32): string
+    public function getUniqueId(int $length = 32): string
     {
         try {
             return substr(string: bin2hex(string: random_bytes(length: $length)), offset: 0, length: $length);
-        } catch (Exception) {
-            return self::getRandomString(length: $length);
+        } catch (Exception|Throwable) {
+            return $this->getRandomString(length: $length);
         }
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getRandomString(int $length = 32, string $chars = Generator::RAND_BASIC): string
+    public function getRandomString(int $length = 32, string $chars = Symbol::BASIC): string
     {
         /* @noinspection NonSecureStrShuffleUsageInspection */
         return substr(string: str_shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
@@ -103,7 +104,7 @@ final class Identification
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public static function getHash(string $text, int $bits = 256): string
+    public function getHash(string $text, int $bits = 256): string
     {
         $hash = substr(string: hash(algo: 'sha' . $bits, data: $text, binary: true), offset: 0, length: (int) round(num: $bits / 16));
 

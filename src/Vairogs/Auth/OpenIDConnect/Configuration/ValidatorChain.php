@@ -42,7 +42,7 @@ class ValidatorChain implements Constraint
     private function assertConstraint(Constraint $constraint, string $claim, Token $token): void
     {
         if ($constraint instanceof AbstractConstraint) {
-            $claim = $constraint->getClaim() ?? Text::getLastPart(text: $constraint::class, delimiter: '\\');
+            $claim = $constraint->getClaim() ?? (new Text())->getLastPart(text: $constraint::class, delimiter: '\\');
         }
 
         try {

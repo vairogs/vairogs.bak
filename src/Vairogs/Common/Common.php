@@ -16,6 +16,6 @@ final class Common
             $adapters[] = new File();
         }
 
-        return new ChainAdapter(adapters: Pool::createPool(class: $class, adapters: $adapters), defaultLifetime: $defaultLifetime);
+        return new ChainAdapter(adapters: (new Pool())->createPool(class: $class, adapters: $adapters), defaultLifetime: $defaultLifetime);
     }
 }
