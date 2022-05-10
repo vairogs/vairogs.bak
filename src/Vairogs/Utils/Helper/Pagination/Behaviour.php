@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Twig\Pagination;
+namespace Vairogs\Utils\Helper\Pagination;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
@@ -11,26 +11,11 @@ use function sprintf;
 
 final class Behaviour
 {
-    final public const MIN_VISIBLE = 3;
+    final public const MIN_VISIBLE = 5;
 
-    public function __construct(private int $visible)
+    public function __construct(private readonly int $visible)
     {
         $this->checkMinimum(visible: $this->visible);
-    }
-
-    public function withVisible(int $visible): self
-    {
-        $this->checkMinimum(visible: $visible);
-
-        $clone = clone $this;
-        $clone->setVisible(visible: $visible);
-
-        return $clone;
-    }
-
-    public function getVisible(): int
-    {
-        return $this->visible;
     }
 
     public function getPaginationData(int $total, int $current, int $indicator = -1): array
@@ -59,11 +44,6 @@ final class Behaviour
         if ($this->visible < self::MIN_VISIBLE) {
             throw new InvalidArgumentException(message: sprintf('Maximum of number of visible pages (%d) should be at least %d', $visible, self::MIN_VISIBLE));
         }
-    }
-
-    public function setVisible(int $visible): void
-    {
-        $this->visible = $visible;
     }
 
     public function validate(int $total, int $current, int $indicator = -1): void
