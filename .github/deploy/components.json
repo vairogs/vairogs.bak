@@ -64,10 +64,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption-xxtea.git"
     },
     {
-        "path": "src/Vairogs/Extra/Specification",
-        "repo": "https://GH_TOKEN@github.com/vairogs/extra-specification.git"
-    },
-    {
         "path": "src/Vairogs/Position",
         "repo": "https://GH_TOKEN@github.com/vairogs/position.git"
     },
@@ -78,10 +74,6 @@
     {
         "path": "src/Vairogs/Twig",
         "repo": "https://GH_TOKEN@github.com/vairogs/twig.git"
-    },
-    {
-        "path": "src/Vairogs/Twig/Pagination",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-pagination.git"
     },
     {
         "path": "src/Vairogs/Twig/Php",

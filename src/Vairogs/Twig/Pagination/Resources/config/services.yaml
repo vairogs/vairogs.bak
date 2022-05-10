@@ -1,6 +1,0 @@
-services:
-    Vairogs\Twig\Pagination\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension

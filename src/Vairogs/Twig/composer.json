@@ -43,12 +43,14 @@
     "require": {
         "php": ">=8.1.0",
         "jetbrains/phpstorm-attributes": "*",
+        "nikic/php-parser": "*",
+        "psr/cache": "*",
+        "symfony/cache": "^5.4|^6.0",
         "twig/twig": "*",
         "vairogs/core": "self.version",
         "vairogs/utils": "self.version"
     },
     "replace": {
-        "vairogs/twig-pagination": "self.version",
         "vairogs/twig-php": "self.version"
     },
     "autoload": {
