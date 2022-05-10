@@ -11,9 +11,6 @@ use function str_split;
 
 final class Generator
 {
-    final public const RAND_BASIC = Symbol::EN_LOWERCASE . Symbol::EN_UPPERCASE . Symbol::DIGITS;
-    final public const RAND_EXTENDED = self::RAND_BASIC . Symbol::SYMBOLS;
-
     private array $sets = [];
 
     private string $lowerCase = Symbol::EN_LOWERCASE;
