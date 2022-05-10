@@ -31,9 +31,9 @@ class SitemapCommand extends Command
     private const HOST = 'host';
     private mixed $handle;
 
-    public function __construct(private readonly ValidatorInterface $validator, private readonly ?Provider $provider = null, private readonly array $options = [])
+    public function __construct(private readonly ValidatorInterface $validator, private readonly Provider $provider, private readonly array $options = [])
     {
-        if (null === $provider || (false === $options[Status::ENABLED])) {
+        if (false === $options[Status::ENABLED]) {
             throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and pass a Provider');
         }
 

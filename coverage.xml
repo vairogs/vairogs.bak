@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1652197498">
-  <project timestamp="1652197498">
+<coverage generated="1652197665">
+  <project timestamp="1652197665">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1472,9 +1472,9 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Sitemap/Command/SitemapCommand.php">
       <class name="Vairogs\Sitemap\Command\SitemapCommand" namespace="global">
-        <metrics complexity="15" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="0" elements="36" coveredelements="0"/>
+        <metrics complexity="14" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="0" elements="36" coveredelements="0"/>
       </class>
-      <line num="34" type="method" name="__construct" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="34" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
       <line num="36" type="stmt" count="0"/>
       <line num="37" type="stmt" count="0"/>
       <line num="40" type="stmt" count="0"/>
