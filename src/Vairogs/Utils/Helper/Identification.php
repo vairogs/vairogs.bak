@@ -2,7 +2,6 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Exception;
 use Throwable;
 use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Twig\Attribute;
@@ -89,7 +88,7 @@ final class Identification
     {
         try {
             return substr(string: bin2hex(string: random_bytes(length: $length)), offset: 0, length: $length);
-        } catch (Exception|Throwable) {
+        } catch (Throwable) {
             return $this->getRandomString(length: $length);
         }
     }
