@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1652197665">
-  <project timestamp="1652197665">
+<coverage generated="1652306904">
+  <project timestamp="1652306904">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2196,8 +2196,8 @@
       <line num="55" type="stmt" count="12"/>
       <line num="58" type="method" name="getEnv" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="62" type="stmt" count="2"/>
-      <line num="63" type="stmt" count="1"/>
-      <line num="66" type="stmt" count="2"/>
+      <line num="63" type="stmt" count="2"/>
+      <line num="66" type="stmt" count="1"/>
       <metrics loc="69" ncloc="69" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="15" coveredstatements="15" elements="19" coveredelements="19"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Date.php">
