@@ -48,8 +48,8 @@ final class SortLatvian
     public function compareLatvianObject(object $first, object $second): int
     {
         try {
-            $firstValue = (new Php())->hijackGet(object: $first, property: self::$field);
-            $secondValue = (new Php())->hijackGet(object: $second, property: self::$field);
+            $firstValue = (new Closure())->hijackGet(object: $first, property: self::$field);
+            $secondValue = (new Closure())->hijackGet(object: $second, property: self::$field);
         } catch (Exception) {
             return 0;
         }

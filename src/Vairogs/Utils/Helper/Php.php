@@ -2,14 +2,14 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Closure;
 use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
 use ReflectionClassConstant;
+use ReflectionException;
 use ReflectionMethod;
-use ReflectionProperty;
+use ReflectionObject;
 use RuntimeException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Vairogs\Extra\Constants\Definition;
@@ -32,33 +32,6 @@ use const FILTER_VALIDATE_BOOL;
 
 final class Php
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function hijackSet(object $object, string $property, mixed $value): object
-    {
-        $this->call(function: function () use ($object, $property, $value): void {
-            $object->{$property} = $value;
-        }, clone: $object);
-
-        return $object;
-    }
-
-    /**
-     * @noinspection PhpInconsistentReturnPointsInspection
-     */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function call(callable $function, object $clone, bool $return = false, ...$arguments)
-    {
-        $func = Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
-
-        if ($return) {
-            return $func(...$arguments);
-        }
-
-        $func(...$arguments);
-    }
-
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     #[Pure]
@@ -96,17 +69,16 @@ final class Php
     #[Attribute\TwigFilter]
     public function getClassConstants(string $class): array
     {
-        if ((new Composer())->exists(class: $class)) {
-            try {
-                return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
-            } catch (Exception $e) {
-                throw new AccessException(message: $e->getMessage(), code: $e->getCode(), previous: $e);
-            }
+        try {
+            return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
+        } catch (Exception $e) {
+            throw new AccessException(message: $e->getMessage(), code: $e->getCode(), previous: $e);
         }
-
-        throw new InvalidArgumentException(message: sprintf('Invalid class "%s"', $class));
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function getParameter(array|object $variable, mixed $key): mixed
@@ -115,7 +87,7 @@ final class Php
             return $variable[$key];
         }
 
-        return $this->hijackGet(object: $variable, property: $key);
+        return (new Closure())->hijackGet(object: $variable, property: $key);
     }
 
     #[Attribute\TwigFunction]
@@ -134,12 +106,10 @@ final class Php
     #[Attribute\TwigFilter]
     public function getShortName(string $class): string
     {
-        if ((new Composer())->exists(class: $class)) {
-            try {
-                return (new ReflectionClass(objectOrClass: $class))->getShortName();
-            } catch (Exception) {
-                // exception === can't get short name
-            }
+        try {
+            return (new ReflectionClass(objectOrClass: $class))->getShortName();
+        } catch (Exception) {
+            // exception === can't get short name
         }
 
         return $class;
@@ -152,6 +122,9 @@ final class Php
         return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function getArray(array|object $input): array
@@ -163,78 +136,20 @@ final class Php
         return $input;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function getArrayFromObject(object $object): array
     {
         $input = [];
-        try {
-            foreach ((new ReflectionClass(objectOrClass: $object))->getProperties() as $property) {
-                $input[$name = $property->getName()] = $this->hijackGet(object: $object, property: $name);
-            }
-        } catch (Exception) {
-            // exception === not possible to convert object to array
+
+        foreach ((new ReflectionObject(object: $object))->getProperties() as $property) {
+            $input[$name = $property->getName()] = (new Closure())->hijackGet(object: $object, property: $name);
         }
 
         return $input;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function hijackGetStatic(object $object, string $property, ...$arguments): mixed
-    {
-        try {
-            if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                return $this->call(fn () => $object::${$property}, $object, true, ...$arguments);
-            }
-        } catch (Exception) {
-            // exception === unable to get object property
-        }
-
-        throw new InvalidArgumentException(message: sprintf('Property "%s" is not static', $property));
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function hijackGetNonStatic(object $object, string $property, ...$arguments): mixed
-    {
-        try {
-            if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                throw new InvalidArgumentException(message: 'non static property');
-            }
-        } catch (Exception) {
-            throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
-        }
-
-        return $this->call(fn () => $object->{$property}, $object, true, ...$arguments);
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function hijackGet(object $object, string $property, ...$arguments)
-    {
-        try {
-            return $this->hijackGetNonStatic($object, $property, ...$arguments);
-        } catch (Exception) {
-            // exception === unable to get object property
-        }
-
-        try {
-            return $this->hijackGetStatic($object, $property, ...$arguments);
-        } catch (Exception) {
-            // exception === unable to get object property
-        }
-
-        throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
     }
 
     #[Attribute\TwigFunction]

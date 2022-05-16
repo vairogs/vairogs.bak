@@ -2,7 +2,7 @@
 
 namespace Vairogs\Utils\Handler;
 
-use Vairogs\Utils\Helper\Php;
+use Vairogs\Utils\Helper\Closure;
 
 class FunctionHandler extends AbstractHandler
 {
@@ -17,7 +17,6 @@ class FunctionHandler extends AbstractHandler
         return $this;
     }
 
-    /** @noinspection StaticClosureCanBeUsedInspection */
     public function handle(...$arguments): mixed
     {
         $function = $this->functionName;
@@ -28,6 +27,6 @@ class FunctionHandler extends AbstractHandler
 
         $object = $this->instance;
 
-        return (new Php())->call(fn () => $object->{$function}(...$arguments), $object, true, ...$arguments) ?? parent::handle(...$arguments);
+        return (new Closure())->call(fn () => $object->{$function}(...$arguments), $object, true, ...$arguments) ?? parent::handle(...$arguments);
     }
 }
