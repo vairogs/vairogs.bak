@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1652742763">
-  <project timestamp="1652742763">
+<coverage generated="1652743886">
+  <project timestamp="1652743886">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2775,7 +2775,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/SortLatvian.php">
       <class name="Vairogs\Utils\Helper\SortLatvian" namespace="global">
-        <metrics complexity="14" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="27" coveredelements="27"/>
+        <metrics complexity="16" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="27" coveredelements="27"/>
       </class>
       <line num="19" type="method" name="sortLatvian" visibility="public" complexity="1" crap="1" count="6"/>
       <line num="23" type="stmt" count="6"/>
@@ -2790,7 +2790,7 @@
       <line num="42" type="stmt" count="6"/>
       <line num="43" type="stmt" count="3"/>
       <line num="44" type="stmt" count="6"/>
-      <line num="48" type="method" name="compareLatvianObject" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="48" type="method" name="compareLatvianObject" visibility="public" complexity="4" crap="4" count="3"/>
       <line num="51" type="stmt" count="3"/>
       <line num="52" type="stmt" count="2"/>
       <line num="53" type="stmt" count="1"/>

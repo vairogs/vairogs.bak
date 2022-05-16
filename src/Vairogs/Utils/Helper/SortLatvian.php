@@ -54,7 +54,7 @@ final class SortLatvian
             return 0;
         }
 
-        return $this->compare(first: $firstValue, second: $secondValue);
+        return null !== $firstValue && null !== $secondValue ? $this->compare(first: $firstValue, second: $secondValue) : 0;
     }
 
     private function compare(string $first, string $second): int

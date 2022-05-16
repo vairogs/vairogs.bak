@@ -3,7 +3,9 @@
 namespace Vairogs\Tests\Utils\Helper;
 
 use Exception;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Common\Common;
 use Vairogs\Utils\Helper\Uri;
@@ -41,7 +43,8 @@ class UriTest extends VairogsTestCase
      */
     public function testRouteExists(string $route, bool $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: (new Uri())->routeExists(router: $this->container->get(id: 'router'), route: $route));
+        $this->assertInstanceOf(expected: RouterInterface::class, actual: $router = $this->container->get(id: 'router', invalidBehavior: ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        $this->assertEquals(expected: $expected, actual: (new Uri())->routeExists(router: $router, route: $route));
     }
 
     /**
