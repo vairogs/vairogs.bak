@@ -2,8 +2,8 @@ on: [push]
 
 jobs:
     split:
-        runs-on: ubuntu-latest
-        name: splitsh-lite
+        runs-on: ubuntu-22.04
+        name: split
         steps:
             - name: Get branch name
               shell: bash
