@@ -8,6 +8,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Utils\Helper\File;
+use function dirname;
 use function end;
 use function exec;
 use function explode;
@@ -53,7 +54,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
         $path = $this->cacheDir . DIRECTORY_SEPARATOR . 'users' . DIRECTORY_SEPARATOR . $user . '.txt';
 
         /* @noinspection NotOptimalIfConditionsInspection */
-        if ((new File())->mkdir(path: $path) && !is_file(filename: $path)) {
+        if ((new File())->mkdir(dir: dirname(path: $path)) && !is_file(filename: $path)) {
             exec(command: 'wget --no-verbose --spider --output-file=' . $path . " -e robots=off -U='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36' https://www.steamgifts.com/go/user/" . $user);
         }
 

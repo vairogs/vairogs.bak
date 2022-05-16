@@ -5,7 +5,6 @@ namespace Vairogs\Utils\Helper;
 use UnexpectedValueException;
 use Vairogs\Twig\Attribute;
 use function array_map;
-use function dirname;
 use function floor;
 use function getcwd;
 use function glob;
@@ -23,9 +22,9 @@ final class File
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function mkdir(string $path): bool
+    public function mkdir(string $dir): bool
     {
-        if (!is_dir(filename: $dir = dirname(path: $path))) {
+        if (!is_dir(filename: $dir)) {
             @mkdir(directory: $dir, recursive: true);
             if (!is_dir(filename: $dir)) {
                 throw new UnexpectedValueException(message: sprintf('Directory "%s" was not created', $dir));
