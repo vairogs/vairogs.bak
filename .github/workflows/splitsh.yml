@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
     split:
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-latest
         name: split
         steps:
             - name: Get branch name
