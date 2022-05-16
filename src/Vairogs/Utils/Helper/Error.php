@@ -4,13 +4,8 @@ namespace Vairogs\Utils\Helper;
 
 use Exception;
 use Throwable;
-use function get_resource_type;
 use function implode;
-use function is_array;
-use function is_bool;
 use function is_object;
-use function is_resource;
-use function is_string;
 use function sprintf;
 
 final class Error
@@ -25,15 +20,9 @@ final class Error
             if (isset($frame['args'])) {
                 $arguments = [];
                 foreach ($frame['args'] as $arg) {
-                    $arguments[] = match (true) {
-                        is_array(value: $arg) => 'Array',
-                        is_bool(value: $arg) => $arg ? 'true' : 'false',
-                        is_object(value: $arg) => $arg::class,
-                        is_resource(value: $arg) => get_resource_type(resource: $arg),
-                        is_string(value: $arg) => "'" . $arg . "'",
-                        null === $arg => 'NULL',
-                        default => $arg,
-                    };
+                    if (is_object($arg)) {
+                        $arguments[] = $arg::class;
+                    }
                 }
                 $args = implode(separator: ', ', array: $arguments);
             }
