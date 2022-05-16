@@ -7,4 +7,11 @@ use Vairogs\Assets\Utils\Doctrine\Traits\Entity;
 class Entity1 extends Entity
 {
     use ExtraVariablesTrait;
+
+    protected static string $value = 'value';
+
+    public static function getStaticValue(): string
+    {
+        return self::$value;
+    }
 }

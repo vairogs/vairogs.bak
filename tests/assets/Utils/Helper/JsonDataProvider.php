@@ -7,8 +7,8 @@ class JsonDataProvider
     public function dataProviderJson(): array
     {
         return [
-            ['vairogs', 0],
-            [['vairogs'], 0],
+            ['vairogs', 0, ],
+            [['vairogs', ], 0, ],
         ];
     }
 }

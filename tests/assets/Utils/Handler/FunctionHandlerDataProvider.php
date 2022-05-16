@@ -10,9 +10,9 @@ class FunctionHandlerDataProvider
     public function dataProvider(): array
     {
         return [
-            ['is_string', null, true, 'vairogs'],
-            ['getIfNotEmpty', new Iteration(), null, [], 'vairogs'],
-            ['isPrime', new Util(), true, 3],
+            ['is_string', null, true, 'vairogs', ],
+            ['getIfNotEmpty', new Iteration(), null, [], 'vairogs', ],
+            ['isPrime', new Util(), true, 3, ],
         ];
     }
 }

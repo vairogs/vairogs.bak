@@ -21,4 +21,10 @@ class ComposerTest extends VairogsTestCase
     {
         $this->assertEquals(expected: $installed, actual: (new Composer())->isInstalled(packages: [$package], incDevReq: $incDevReq));
     }
+
+    public function testExists(): void
+    {
+        $this->assertTrue(condition: (new Composer())->exists(class: Composer::class));
+        $this->assertFalse(condition: (new Composer())->exists(class: 'Test'));
+    }
 }

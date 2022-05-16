@@ -2,6 +2,7 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
+use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Uri;
@@ -30,5 +31,32 @@ class UriTest extends VairogsTestCase
     public function testUrlEncode(string $url): void
     {
         $this->assertEquals(expected: $url, actual: (new Uri())->urlEncode(url: $url));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UriDataProvider::dataProviderRouteExists
+     *
+     * @throws Exception
+     */
+    public function testRouteExists(string $route, bool $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Uri())->routeExists(router: $this->container->get(id: 'router'), route: $route));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\UriDataProvider::dataProviderIsUrl
+     */
+    public function testIsUrl(string $url, bool $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Uri())->isUrl(url: $url));
+    }
+
+    public function testGetRawParseHeaders(): void
+    {
+        $headers = Request::create(uri: 'https://ip.vairogs.com/')->headers;
+        $headers->set(key: 'test', values: null);
+        $this->assertIsArray(actual: $headers = (new Uri())->parseHeaders(rawHeaders: (new Uri())->getRawHeaders(headers: $headers)));
+        $this->assertArrayHasKey(key: 'user-agent', array: $headers);
+        $this->assertEquals(expected: 'Symfony', actual: $headers['user-agent']);
     }
 }

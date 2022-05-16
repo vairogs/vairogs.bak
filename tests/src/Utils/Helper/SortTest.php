@@ -16,7 +16,7 @@ class SortTest extends VairogsTestCase
      */
     public function testSwap(int $a, int $b): void
     {
-        $value = [$b, $a];
+        $value = [$b, $a, ];
         (new Sort())->swap(foo: $a, bar: $b);
         $this->assertEquals(expected: $value, actual: [$a, $b]);
     }
@@ -26,8 +26,8 @@ class SortTest extends VairogsTestCase
      */
     public function testSwapArray(int $a, int $b): void
     {
-        $expected = [$a, $b];
-        $actual = [$b, $a];
+        $expected = [$a, $b, ];
+        $actual = [$b, $a, ];
         (new Sort())->swapArray(array: $actual, foo: 0, bar: 1);
         $this->assertEquals(expected: $expected, actual: $actual);
     }

@@ -13,6 +13,6 @@ class JsonTest extends VairogsTestCase
      */
     public function testJson(mixed $data, int $flags): void
     {
-        $this->assertEquals(expected: $data, actual: (new Json())->decode((new Json())->encode($data, $flags), $flags));
+        $this->assertEquals(expected: $data, actual: (new Json())->decode(json: (new Json())->encode(value: $data, flags: $flags), flags: $flags));
     }
 }

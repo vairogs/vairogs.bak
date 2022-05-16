@@ -37,7 +37,7 @@ class IdentificationTest extends VairogsTestCase
 
     public function testHash(): void
     {
-        $this->assertEquals(expected: (new Identification())->getHash('vairogs'), actual: (new Identification())->getHash('vairogs'));
-        $this->assertNotEquals(expected: (new Identification())->getHash('vairogs'), actual: (new Identification())->getHash('vairogs2'));
+        $this->assertEquals(expected: (new Identification())->getHash(text: 'vairogs'), actual: (new Identification())->getHash(text: 'vairogs'));
+        $this->assertNotEquals(expected: (new Identification())->getHash(text: 'vairogs'), actual: (new Identification())->getHash(text: 'vairogs2'));
     }
 }
