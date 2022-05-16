@@ -5,6 +5,7 @@ namespace Vairogs\Tests\Utils\Helper;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Common\Common;
 use Vairogs\Utils\Helper\Uri;
 
 class UriTest extends VairogsTestCase
@@ -53,7 +54,7 @@ class UriTest extends VairogsTestCase
 
     public function testGetRawParseHeaders(): void
     {
-        $headers = Request::create(uri: 'https://ip.vairogs.com/')->headers;
+        $headers = Request::create(uri: Common::IDENT)->headers;
         $headers->set(key: 'test', values: null);
         $this->assertIsArray(actual: $headers = (new Uri())->parseHeaders(rawHeaders: (new Uri())->getRawHeaders(headers: $headers)));
         $this->assertArrayHasKey(key: 'user-agent', array: $headers);

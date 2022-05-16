@@ -4,6 +4,7 @@ namespace Vairogs\Tests\Utils\Helper;
 
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Common\Common;
 use Vairogs\Extra\Constants\Http;
 use Vairogs\Utils\Helper\IPAddress;
 
@@ -22,7 +23,7 @@ class IPAddressTest extends VairogsTestCase
      */
     public function testGetRemoteIpCF(?string $ipHeader, ?string $ipCF, bool $trust, string $expected): void
     {
-        $request = Request::create(uri: 'https://ip.vairogs.com/');
+        $request = Request::create(uri: Common::IDENT);
 
         if (null !== $ipHeader) {
             $request->server->set(key: Http::HTTP_X_REAL_IP, value: $ipHeader);

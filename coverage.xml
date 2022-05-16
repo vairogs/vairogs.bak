@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1652741959">
-  <project timestamp="1652741959">
+<coverage generated="1652742763">
+  <project timestamp="1652742763">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1153,11 +1153,11 @@
       <class name="Vairogs\Common\Common" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </class>
-      <line num="13" type="method" name="getChainAdapter" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="15" type="stmt" count="1"/>
+      <line num="14" type="method" name="getChainAdapter" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="16" type="stmt" count="1"/>
-      <line num="19" type="stmt" count="1"/>
-      <metrics loc="22" ncloc="22" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      <line num="17" type="stmt" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <metrics loc="23" ncloc="23" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Common/Pool.php">
       <class name="Vairogs\Common\Pool" namespace="global">
@@ -2377,26 +2377,26 @@
       <class name="Vairogs\Utils\Helper\Http" namespace="global">
         <metrics complexity="15" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="19" coveredelements="19"/>
       </class>
-      <line num="15" type="method" name="isHttps" visibility="public" complexity="4" crap="4" count="3"/>
-      <line num="19" type="stmt" count="3"/>
-      <line num="26" type="method" name="getRequestMethods" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="30" type="stmt" count="1"/>
-      <line num="33" type="method" name="getRequestIdentity" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="37" type="stmt" count="1"/>
+      <line num="16" type="method" name="isHttps" visibility="public" complexity="4" crap="4" count="3"/>
+      <line num="20" type="stmt" count="3"/>
+      <line num="27" type="method" name="getRequestMethods" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="31" type="stmt" count="1"/>
+      <line num="34" type="method" name="getRequestIdentity" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="38" type="stmt" count="1"/>
       <line num="39" type="stmt" count="1"/>
-      <line num="42" type="stmt" count="1"/>
-      <line num="45" type="method" name="isIE" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="49" type="stmt" count="1"/>
-      <line num="52" type="method" name="checkHttps" visibility="public" complexity="2" crap="2" count="3"/>
-      <line num="54" type="stmt" count="3"/>
-      <line num="57" type="method" name="checkServerPort" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="59" type="stmt" count="2"/>
-      <line num="62" type="method" name="checkHttpXForwardedSsl" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="64" type="stmt" count="2"/>
-      <line num="67" type="method" name="checkHttpXForwardedProto" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="69" type="stmt" count="2"/>
-      <metrics loc="72" ncloc="68" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="19" coveredelements="19"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="43" type="stmt" count="1"/>
+      <line num="46" type="method" name="isIE" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="53" type="method" name="checkHttps" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="55" type="stmt" count="3"/>
+      <line num="58" type="method" name="checkServerPort" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="60" type="stmt" count="2"/>
+      <line num="63" type="method" name="checkHttpXForwardedSsl" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="65" type="stmt" count="2"/>
+      <line num="68" type="method" name="checkHttpXForwardedProto" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="70" type="stmt" count="2"/>
+      <metrics loc="73" ncloc="69" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="19" coveredelements="19"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/IPAddress.php">
       <class name="Vairogs\Utils\Helper\IPAddress" namespace="global">
@@ -3042,6 +3042,6 @@
       <line num="31" type="stmt" count="1"/>
       <metrics loc="34" ncloc="31" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="135" loc="7813" ncloc="7584" classes="99" methods="546" coveredmethods="230" conditionals="0" coveredconditionals="0" statements="1751" coveredstatements="920" elements="2297" coveredelements="1150"/>
+    <metrics files="135" loc="7815" ncloc="7586" classes="99" methods="546" coveredmethods="230" conditionals="0" coveredconditionals="0" statements="1751" coveredstatements="920" elements="2297" coveredelements="1150"/>
   </project>
 </coverage>

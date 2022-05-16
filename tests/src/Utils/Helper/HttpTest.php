@@ -4,13 +4,14 @@ namespace Vairogs\Tests\Utils\Helper;
 
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Common\Common;
 use Vairogs\Utils\Helper\Http;
 
 class HttpTest extends VairogsTestCase
 {
     public function testIsIE(): void
     {
-        $this->assertFalse(condition: (new Http())->isIE(request: Request::create(uri: 'https://ip.vairogs.com/')));
+        $this->assertFalse(condition: (new Http())->isIE(request: Request::create(uri: Common::IDENT)));
     }
 
     public function testGetRequestMethods(): void
@@ -21,8 +22,8 @@ class HttpTest extends VairogsTestCase
 
     public function testGetRequestIdentity(): void
     {
-        $request = Request::create(uri: 'https://ip.vairogs.com/');
+        $request = Request::create(uri: Common::IDENT);
         $request->initialize();
-        $this->assertIsArray(actual: $result = (new Http())->getRequestIdentity(request: $request));
+        $this->assertIsArray(actual: (new Http())->getRequestIdentity(request: $request));
     }
 }
