@@ -4,6 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
+use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Extra\Constants;
@@ -18,18 +19,13 @@ use function filter_var;
 use function http_build_query;
 use function is_array;
 use function is_object;
-use function ltrim;
 use function parse_str;
 use function parse_url;
 use function preg_match;
-use function preg_replace;
 use function preg_replace_callback;
 use function sprintf;
 use function str_replace;
 use function str_starts_with;
-use function strpos;
-use function strrpos;
-use function substr;
 use function urldecode;
 use const FILTER_SANITIZE_URL;
 use const FILTER_VALIDATE_URL;
@@ -110,8 +106,8 @@ final class Uri
     public function parseHeaders(string $rawHeaders = ''): array
     {
         $headers = [];
-        $headerArray = str_replace(search: "\r", replace: '', subject: $rawHeaders);
-        $headerArray = explode(separator: "\n", string: $headerArray);
+        $headerArray = str_replace(search: '\\r', replace: '', subject: $rawHeaders);
+        $headerArray = explode(separator: '\\n', string: $headerArray);
 
         foreach ($headerArray as $value) {
             $header = explode(separator: ': ', string: $value, limit: 2);
@@ -128,30 +124,24 @@ final class Uri
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
+    public function getRawHeaders(HeaderBag $headers): string
+    {
+        $string = '';
+
+        foreach ($headers->all() as $header => $value) {
+            $string .= $header . ': ' . $value[0] . '\r\n';
+        }
+
+        return $string;
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
     #[Pure]
     public function isUrl(string $url): bool
     {
         /* @noinspection BypassedUrlValidationInspection */
         return false !== filter_var(value: filter_var(value: $url, filter: FILTER_SANITIZE_URL), filter: FILTER_VALIDATE_URL);
-    }
-
-    #[Attribute\TwigFilter]
-    public function parseQueryPath(string $path): bool|string
-    {
-        $path = '/' . ltrim(string: $path, characters: '/');
-        $path = preg_replace(pattern: '#[\x00-\x1F\x7F]#', replacement: '', subject: $path);
-
-        while (false !== $pos = strpos(haystack: $path, needle: '/../')) {
-            $leftSlashNext = strrpos(haystack: substr(string: $path, offset: 0, length: $pos), needle: '/');
-
-            if (!$leftSlashNext) {
-                return false;
-            }
-
-            $path = substr(string: $path, offset: 0, length: $leftSlashNext + 1) . substr(string: $path, offset: $pos + 4);
-        }
-
-        return $path;
     }
 
     #[Attribute\TwigFunction]
