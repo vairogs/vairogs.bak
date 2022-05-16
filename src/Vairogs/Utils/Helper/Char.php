@@ -21,7 +21,7 @@ use function unpack;
 use const FILTER_FLAG_ALLOW_FRACTION;
 use const FILTER_SANITIZE_NUMBER_FLOAT;
 
-class Char
+final class Char
 {
     final public const LCFIRST = 'lcfirst';
     final public const UCFIRST = 'ucfirst';

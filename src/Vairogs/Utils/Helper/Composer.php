@@ -14,7 +14,7 @@ use function str_replace;
 use function str_starts_with;
 use function trait_exists;
 
-class Composer
+final class Composer
 {
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]

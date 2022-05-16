@@ -12,7 +12,7 @@ use function mb_strpos;
 use function mb_substr;
 use function usort;
 
-class SortLatvian
+final class SortLatvian
 {
     private static int|string $field = '';
 
