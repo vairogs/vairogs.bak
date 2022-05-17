@@ -9,13 +9,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
-use Vairogs\Core\Vairogs;
-use Vairogs\Utils\Helper\File;
 use function dirname;
-use function is_dir;
 use function is_file;
-use function sys_get_temp_dir;
-use const DIRECTORY_SEPARATOR;
 
 class TestKernel extends Kernel
 {
@@ -30,17 +25,6 @@ class TestKernel extends Kernel
     public function getCacheDir(): string
     {
         return $this->getProjectDir() . '/var/cache';
-    }
-
-    public function getTmpDir(): string
-    {
-        $directory = sys_get_temp_dir() . DIRECTORY_SEPARATOR . '_' . Vairogs::VAIROGS;
-
-        if (!is_dir(filename: $directory)) {
-            (new File())->mkdir(dir: $directory);
-        }
-
-        return $directory;
     }
 
     /** @noinspection ProjectDirParameter */
