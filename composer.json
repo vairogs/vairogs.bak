@@ -1,22 +1,21 @@
 {
     "name": "vairogs/vairogs",
-    "description": "⛨ Vairogs ⛨: Set of php (mostly symfony) tools and libraries to make development a bit easier",
+    "description": "⛨ Vairogs ⛨: Set of PHP (mostly Symfony) tools and libraries to make development a bit easier",
     "type": "library",
     "homepage": "https://github.com/vairogs/vairogs/wiki",
     "keywords": [
+        "addon",
         "auth",
         "cache",
         "captcha",
         "common",
         "core",
         "extra",
-        "openid",
-        "openidconnect",
+        "position",
         "sitemap",
-        "steam",
+        "twig",
         "utils",
-        "vairogs",
-        "twig"
+        "vairogs"
     ],
     "license": "MIT",
     "authors": [
