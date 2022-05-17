@@ -48,6 +48,7 @@
         "symfony/cache": "^5.4|^6.0",
         "twig/twig": "*",
         "vairogs/core": "self.version",
+        "vairogs/extra-constants": "self.version",
         "vairogs/utils": "self.version"
     },
     "replace": {

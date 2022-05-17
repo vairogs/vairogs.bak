@@ -13,6 +13,7 @@ use Twig\Extension\AbstractExtension;
 use Vairogs\Common\Cache;
 use Vairogs\Common\Common;
 use Vairogs\Core\Vairogs;
+use Vairogs\Extra\Constants\Definition;
 use Vairogs\Utils\Helper\Char;
 use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Helper\Text;
@@ -149,7 +150,7 @@ final class TwigExtension extends AbstractExtension
 
     private function getKey(string $type): string
     {
-        return hash(algo: Common::HASH_ALGORITHM, data: $this->getPrefix(base: $type));
+        return hash(algo: Definition::HASH_ALGORITHM, data: $this->getPrefix(base: $type));
     }
 
     private function filter(string $class, string $name, bool $isStatic = false): string|array

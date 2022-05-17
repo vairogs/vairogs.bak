@@ -5,7 +5,6 @@ namespace Vairogs\Utils\Helper;
 use InvalidArgumentException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Common\Common;
 use Vairogs\Extra\Constants;
 use Vairogs\Twig\Attribute;
 use function array_merge;
@@ -33,7 +32,7 @@ final class Http
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function getRequestIdentity(Request $request, string $ipUrl = Common::IDENT): array
+    public function getRequestIdentity(Request $request, string $ipUrl = Constants\Definition::IDENT): array
     {
         $additionalData = [
             'actualIp' => file_get_contents(filename: $ipUrl),

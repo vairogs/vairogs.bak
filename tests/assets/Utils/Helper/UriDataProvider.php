@@ -2,7 +2,7 @@
 
 namespace Vairogs\Assets\Utils\Helper;
 
-use Vairogs\Common\Common;
+use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Http;
 
 class UriDataProvider
@@ -19,7 +19,7 @@ class UriDataProvider
     public function dataProviderGetSchema(): array
     {
         return [
-            [Common::IDENT, Http::SCHEMA_HTTPS, ],
+            [Definition::IDENT, Http::SCHEMA_HTTPS, ],
             ['http://ident.me', Http::SCHEMA_HTTP, ],
             ['ident.me', Http::SCHEMA_HTTP, ],
         ];
@@ -28,7 +28,7 @@ class UriDataProvider
     public function dataUrlEncode(): array
     {
         return [
-            [Common::IDENT, ],
+            [Definition::IDENT, ],
             ['https://ident.me:8888', ],
             ['https://ident.me:8888?field1=value1&field2=value2&field3=value3', ],
             ['https://ident.me?field1=value1&field2=value2&field3=value3', ],
@@ -46,7 +46,7 @@ class UriDataProvider
     public function dataProviderIsUrl(): array
     {
         return [
-            [Common::IDENT, true, ],
+            [Definition::IDENT, true, ],
             ['vairogs', false, ],
         ];
     }

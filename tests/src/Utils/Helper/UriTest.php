@@ -7,7 +7,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Assets\VairogsTestCase;
-use Vairogs\Common\Common;
+use Vairogs\Extra\Constants\Definition;
+use Vairogs\Extra\Constants\Service;
 use Vairogs\Utils\Helper\Uri;
 
 class UriTest extends VairogsTestCase
@@ -43,7 +44,7 @@ class UriTest extends VairogsTestCase
      */
     public function testRouteExists(string $route, bool $expected): void
     {
-        $this->assertInstanceOf(expected: RouterInterface::class, actual: $router = $this->container->get(id: 'router', invalidBehavior: ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        $this->assertInstanceOf(expected: RouterInterface::class, actual: $router = $this->container->get(id: Service::ROUTER, invalidBehavior: ContainerInterface::NULL_ON_INVALID_REFERENCE));
         $this->assertEquals(expected: $expected, actual: (new Uri())->routeExists(router: $router, route: $route));
     }
 
@@ -57,7 +58,7 @@ class UriTest extends VairogsTestCase
 
     public function testGetRawParseHeaders(): void
     {
-        $headers = Request::create(uri: Common::IDENT)->headers;
+        $headers = Request::create(uri: Definition::IDENT)->headers;
         $headers->set(key: 'test', values: null);
         $this->assertIsArray(actual: $headers = (new Uri())->parseHeaders(rawHeaders: (new Uri())->getRawHeaders(headers: $headers)));
         $this->assertArrayHasKey(key: 'user-agent', array: $headers);

@@ -8,8 +8,6 @@ use Vairogs\Common\Adapter\File;
 final class Common
 {
     final public const DEFAULT_LIFETIME = 86400;
-    final public const HASH_ALGORITHM = 'xxh128';
-    final public const IDENT = 'https://ip.vairogs.com';
 
     public function getChainAdapter(string $class, int $defaultLifetime = self::DEFAULT_LIFETIME, ...$adapters): ChainAdapter
     {
