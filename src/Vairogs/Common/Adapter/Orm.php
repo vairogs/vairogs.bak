@@ -6,30 +6,28 @@ use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Vairogs\Common\Common;
 use Vairogs\Core\Vairogs;
-use Vairogs\Utils\Helper\Composer;
-use function implode;
+use Vairogs\Extra\Constants\Definition;
 use function sprintf;
 
-final class Orm implements Adapter
+final class Orm extends AbstractAdapter
 {
+    protected string $class = self::class;
+    protected array $packages = ['doctrine/dbal', 'doctrine/orm'];
+
     public function __construct(private readonly EntityManagerInterface $entityManager, private readonly string $namespace = Vairogs::VAIROGS)
     {
-        if (!(new Composer())->isInstalled(packages: $packages = ['doctrine/dbal', 'doctrine/orm'], incDevReq: false)) {
-            throw new InvalidConfigurationException(message: sprintf('In order to use %s, package(s)/extension(s) "%s" must be installed', self::class, implode(separator: ',', array: $packages)));
-        }
+        $this->checkRequirements();
     }
 
     /**
      * @throws DBALException
      */
-    public function getAdapter(): CacheItemPoolInterface
+    public function getAdapter(int $defaultLifetime = Definition::DEFAULT_LIFETIME): CacheItemPoolInterface
     {
         $table = sprintf('%s_items', $this->namespace);
         $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
-        $dbalAdapter = new DoctrineDbalAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: Common::DEFAULT_LIFETIME, options: ['db_table' => $table]);
+        $dbalAdapter = new DoctrineDbalAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: $defaultLifetime, options: ['db_table' => $table]);
 
         if (!$schemaManager->tablesExist(names: [$table])) {
             $dbalAdapter->createTable();

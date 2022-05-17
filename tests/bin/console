@@ -5,6 +5,9 @@ use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Vairogs\Assets\TestKernel;
 
+@stream_wrapper_unregister(protocol: 'ftp');
+@stream_wrapper_unregister(protocol: 'ftps');
+
 if (!is_file(filename: dirname(path: __DIR__, levels: 2) . '/vendor/autoload_runtime.php')) {
     throw new LogicException(message: 'Symfony Runtime is missing. Try running "composer require symfony/runtime".');
 }

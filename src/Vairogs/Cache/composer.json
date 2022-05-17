@@ -43,6 +43,7 @@
     ],
     "require": {
         "php": ">=8.1.0",
+        "ext-zend-opcache": "*",
         "jetbrains/phpstorm-attributes": "*",
         "psr/cache": "*",
         "symfony/cache": "^5.4|^6.0",

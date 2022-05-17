@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
+use ReflectionException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Extra\Constants;
@@ -30,6 +31,9 @@ final class Http
         return (new Iteration())->arrayValuesFiltered(input: (new Php())->getClassConstants(class: Request::class), with: 'METHOD_');
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function getRequestIdentity(Request $request, string $ipUrl = Constants\Definition::IDENT): array

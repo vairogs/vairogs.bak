@@ -2,10 +2,12 @@
 
 namespace Vairogs\Tests\Common\Adapter;
 
+use Exception;
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Common\Adapter\File;
 use Vairogs\Common\Adapter\Orm;
 use Vairogs\Common\Adapter\PhpRedis;
 use Vairogs\Common\Adapter\Predis;
@@ -39,13 +41,25 @@ class AdapterTest extends VairogsTestCase
 
         try {
             new PhpRedis(client: $this->container->get(id: 'snc_redis.phpredis'));
-        } catch (InvalidConfigurationException $exception) {
+        } catch (Exception $exception) {
+            $this->assertEquals(expected: InvalidConfigurationException::class, actual: $exception::class);
+        }
+
+        try {
+            new Predis(client: $this->container->get(id: 'snc_redis.predis'));
+        } catch (Exception $exception) {
             $this->assertEquals(expected: InvalidConfigurationException::class, actual: $exception::class);
         }
 
         try {
             new Orm($this->container->get('doctrine.orm.default_entity_manager'));
-        } catch (InvalidConfigurationException $exception) {
+        } catch (Exception $exception) {
+            $this->assertEquals(expected: InvalidConfigurationException::class, actual: $exception::class);
+        }
+
+        try {
+            new File();
+        } catch (Exception $exception) {
             $this->assertEquals(expected: InvalidConfigurationException::class, actual: $exception::class);
         }
 

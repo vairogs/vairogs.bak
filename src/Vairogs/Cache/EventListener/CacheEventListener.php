@@ -3,8 +3,6 @@
 namespace Vairogs\Cache\EventListener;
 
 use JetBrains\PhpStorm\ArrayShape;
-use Psr\Cache\InvalidArgumentException;
-use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
@@ -15,7 +13,7 @@ use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Security\Core\Security;
 use Vairogs\Cache\Cache;
 use Vairogs\Cache\Event\CacheEvent;
-use Vairogs\Common;
+use Vairogs\Common\CacheManager;
 use Vairogs\Core\Cache\Header;
 use function class_exists;
 use function in_array;
@@ -24,22 +22,17 @@ use function method_exists;
 
 class CacheEventListener implements EventSubscriberInterface
 {
-    use Common\Cache;
-
     private const HEADERS = [
         Header::INVALIDATE,
         Header::SKIP,
     ];
     private const ROUTE = '_route';
 
-    protected readonly ChainAdapter $adapter;
     protected readonly CacheEvent $event;
 
-    public function __construct(protected bool $enabled, Security $security, int $defaultLifetime = Common\Common::DEFAULT_LIFETIME, ...$adapters)
+    public function __construct(protected bool $enabled, Security $security, private readonly CacheManager $manager)
     {
         if ($this->enabled) {
-            $this->adapter = (new Common\Common())->getChainAdapter(Cache::class, $defaultLifetime, ...$adapters);
-            $this->adapter->prune();
             $this->event = new CacheEvent(security: $security);
         }
     }
@@ -61,9 +54,6 @@ class CacheEventListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     public function onKernelController(ControllerEvent $controllerEvent): void
     {
         if (!$this->check(kernelEvent: $controllerEvent)) {
@@ -79,9 +69,9 @@ class CacheEventListener implements EventSubscriberInterface
                 $key = $attribute->getKey(prefix: $route);
 
                 if (!$this->needsInvalidation(request: $controllerEvent->getRequest())) {
-                    $response = $this->getCache(adapter: $this->adapter, key: $key);
+                    $response = $this->manager->get(key: $key);
                 } else {
-                    $this->adapter->deleteItem(key: $key);
+                    $this->manager->delete(key: $key);
                 }
             }
 
@@ -91,9 +81,6 @@ class CacheEventListener implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     public function onKernelRequest(RequestEvent $requestEvent): void
     {
         if (!$this->check(kernelEvent: $requestEvent)) {
@@ -103,13 +90,10 @@ class CacheEventListener implements EventSubscriberInterface
         if (($attribute = $this->event->getAtribute(kernelEvent: $requestEvent, class: Cache::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
             /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Cache::class));
-            $this->adapter->deleteItem(key: $attribute->getKey(prefix: $requestEvent->getRequest()->get(key: self::ROUTE)));
+            $this->manager->delete(key: $attribute->getKey(prefix: $requestEvent->getRequest()->get(key: self::ROUTE)));
         }
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
     public function onKernelResponse(ResponseEvent $responseEvent): void
     {
         if (!$this->check(kernelEvent: $responseEvent)) {
@@ -122,8 +106,8 @@ class CacheEventListener implements EventSubscriberInterface
             $key = $attribute->getKey(prefix: $responseEvent->getRequest()->get(key: self::ROUTE));
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
 
-            if (!$skip && null === $this->getCache(adapter: $this->adapter, key: $key)) {
-                $this->setCache(adapter: $this->adapter, key: $key, value: $responseEvent->getResponse(), expiresAfter: $attribute->getExpires());
+            if (!$skip && null === $this->manager->get(key: $key)) {
+                $this->manager->set(key: $key, value: $responseEvent->getResponse(), expiresAfter: $attribute->getExpires());
             }
         }
     }

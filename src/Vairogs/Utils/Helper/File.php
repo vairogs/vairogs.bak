@@ -20,6 +20,7 @@ use const GLOB_NOSORT;
 
 final class File
 {
+    /** @noinspection MkdirRaceConditionInspection */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function mkdir(string $dir): bool

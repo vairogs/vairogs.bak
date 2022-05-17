@@ -2,6 +2,7 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
+use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Constants\Definition;
@@ -20,6 +21,9 @@ class HttpTest extends VairogsTestCase
         $this->assertContains(needle: Request::METHOD_POST, haystack: $methods);
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public function testGetRequestIdentity(): void
     {
         $request = Request::create(uri: Definition::IDENT);

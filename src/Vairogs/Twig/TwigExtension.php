@@ -4,14 +4,11 @@ namespace Vairogs\Twig;
 
 use Exception;
 use PhpParser\Node\Stmt\Class_;
-use Psr\Cache\InvalidArgumentException;
 use ReflectionClass;
 use ReflectionMethod;
-use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Twig;
 use Twig\Extension\AbstractExtension;
-use Vairogs\Common\Cache;
-use Vairogs\Common\Common;
+use Vairogs\Common\CacheManager;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Utils\Helper\Char;
@@ -28,19 +25,13 @@ use function strtolower;
 
 final class TwigExtension extends AbstractExtension
 {
-    use Cache;
     use TwigTrait;
 
     public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
     public const HELPER_DIR = '/../vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/';
 
-    private ?ChainAdapter $adapter = null;
-
-    public function __construct(private readonly int $defaultLifetime = Common::DEFAULT_LIFETIME, ...$adapters)
+    public function __construct(private readonly CacheManager $manager)
     {
-        if ([] !== $adapters) {
-            $this->adapter = (new Common())->getChainAdapter(self::class, $this->defaultLifetime, ...$adapters);
-        }
     }
 
     public function getFilters(): array
@@ -79,30 +70,15 @@ final class TwigExtension extends AbstractExtension
         }
 
         $methods = $this->parseMethods(filter: $filter, twig: $twig);
-        $this->setMethodCache(type: $type, methods: $methods);
+        $this->manager->set(key: $this->getKey(type: $type), value: $methods);
 
         return $methods;
     }
 
-    private function setMethodCache(string $type, array $methods): void
-    {
-        if (null !== $this->adapter) {
-            try {
-                $this->setCache(adapter: $this->adapter, key: $this->getKey(type: $type), value: $methods, expiresAfter: $this->defaultLifetime);
-            } catch (InvalidArgumentException) {
-                // do not set cache if exception
-            }
-        }
-    }
-
     private function getMethodCache(string $type): array
     {
-        try {
-            if (null !== $this->adapter && [] !== $methods = ($this->getCache(adapter: $this->adapter, key: $this->getKey(type: $type)) ?? [])) {
-                return $methods;
-            }
-        } catch (InvalidArgumentException) {
-            // cache not found
+        if ([] !== $methods = ($this->manager->get(key: $this->getKey(type: $type)) ?? [])) {
+            return $methods;
         }
 
         return [];
@@ -111,9 +87,9 @@ final class TwigExtension extends AbstractExtension
     private function parseMethods(string $filter, string $twig): array
     {
         $methods = [[]];
-        $spls = (new Finder(directories: [getcwd() . self::HELPER_DIR], types: [Class_::class], namespace: self::HELPER_NAMESPACE))->locate()->getClassMap();
+        $foundClasses = (new Finder(directories: [getcwd() . self::HELPER_DIR], types: [Class_::class], namespace: self::HELPER_NAMESPACE))->locate()->getClassMap();
 
-        foreach (array_keys(array: $spls) as $class) {
+        foreach (array_keys(array: $foundClasses) as $class) {
             $methods[] = $this->makeArray(input: $this->getFilteredMethods(class: $class, filterClass: $filter), key: $this->getPrefix(base: $class), class: $twig);
         }
 
@@ -131,7 +107,7 @@ final class TwigExtension extends AbstractExtension
         $short = (new Php())->getShortName(class: $base);
 
         if (self::HELPER_NAMESPACE === $nameSpace) {
-            $base = sprintf('%s_%s', 'helper', $short);
+            $base = sprintf('helper_%s', $short);
         } elseif ('Extension' === $short) {
             $base = (new Text())->getLastPart(text: $nameSpace, delimiter: '\\');
         }
@@ -153,7 +129,7 @@ final class TwigExtension extends AbstractExtension
         return hash(algo: Definition::HASH_ALGORITHM, data: $this->getPrefix(base: $type));
     }
 
-    private function filter(string $class, string $name, bool $isStatic = false): string|array
+    private function filter(string $class, string $name, bool $isStatic = false): array
     {
         if ($isStatic) {
             return [$class, $name, ];

@@ -5,6 +5,7 @@ namespace Vairogs\Extra\Constants;
 final class Definition
 {
     final public const DEFAULT = 'default';
+    final public const DEFAULT_LIFETIME = 86400;
     final public const DISABLED = 0;
     final public const ENABLED = 1;
     final public const HASH_ALGORITHM = 'xxh128';

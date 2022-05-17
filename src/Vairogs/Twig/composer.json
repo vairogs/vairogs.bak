@@ -42,6 +42,7 @@
     ],
     "require": {
         "php": ">=8.1.0",
+        "ext-zend-opcache": "*",
         "jetbrains/phpstorm-attributes": "*",
         "nikic/php-parser": "*",
         "psr/cache": "*",

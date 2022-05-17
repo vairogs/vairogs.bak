@@ -4,6 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use CURLFile;
 use JetBrains\PhpStorm\Pure;
+use ReflectionException;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -32,6 +33,9 @@ use const FILTER_VALIDATE_URL;
 
 final class Uri
 {
+    /**
+     * @throws ReflectionException
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function buildHttpQueryArray(array|object $input, ?string $parent = null): array
@@ -55,6 +59,9 @@ final class Uri
         return $result;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function buildArrayFromObject(object $object): array
@@ -64,6 +71,9 @@ final class Uri
         return $result;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function buildHttpQueryString(object $object): string
