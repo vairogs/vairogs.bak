@@ -37,13 +37,11 @@ class OpenIDProvider implements HasRegistry
 {
     private const PROVIDER_OPTIONS = 'provider_options';
 
-    protected Request $request;
     protected ?string $profileUrl;
     protected ?string $userClass;
 
-    public function __construct(RequestStack $requestStack, protected readonly RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
+    public function __construct(protected RequestStack $requestStack, protected readonly RouterInterface $router, protected string $name, protected string $cacheDir, protected array $options = [])
     {
-        $this->request = $requestStack->getCurrentRequest();
         $this->profileUrl = $this->options[self::PROVIDER_OPTIONS]['profile_url'] ?? null;
         $this->userClass = $this->options['user_class'] ?? null;
     }
@@ -69,7 +67,7 @@ class OpenIDProvider implements HasRegistry
             $builder->setUserClass(class: $this->userClass ?? $builder->getUserClass());
 
             if (null === $this->profileUrl) {
-                $user = $builder->getUser(response: $this->request->query->all());
+                $user = $builder->getUser(response: $this->requestStack->getCurrentRequest()->query->all());
             } else {
                 foreach ($this->options[self::PROVIDER_OPTIONS]['profile_url_replace'] as $option) {
                     if (null !== ($replace = $this->options[$option] ?? $this->options[self::PROVIDER_OPTIONS][$option] ?? null)) {
@@ -92,7 +90,7 @@ class OpenIDProvider implements HasRegistry
 
     public function validate(int $timeout = 30): ?string
     {
-        $get = $this->request->query->all();
+        $get = $this->requestStack->getCurrentRequest()->query->all();
         $params = [
             OpenID::ASSOC_HANDLE => $get['openid_assoc_handle'],
             OpenID::SIGNED => $get['openid_signed'],
@@ -129,14 +127,14 @@ class OpenIDProvider implements HasRegistry
 
     public function urlPath(?string $return = null, ?string $altRealm = null): string
     {
-        $realm = $altRealm ?: ((new Uri())->getSchema(request: $this->request) . $this->request->server->get(key: 'HTTP_HOST'));
+        $realm = $altRealm ?: ((new Uri())->getSchema(request: $this->requestStack->getCurrentRequest() ?? Request::createFromGlobals()) . $this->requestStack->getCurrentRequest()->server->get(key: 'HTTP_HOST'));
 
         if (null !== $return) {
             if (!$this->validateUrl(url: $return)) {
                 throw new InvalidArgumentException(message: 'Invalid return url');
             }
         } else {
-            $return = $realm . $this->request->server->get(key: 'SCRIPT_NAME');
+            $return = $realm . $this->requestStack->getCurrentRequest()->server->get(key: 'SCRIPT_NAME');
         }
 
         return $this->options['openid_url'] . '/' . $this->options['api_key'] . '/?' . http_build_query(data: $this->getParams(return: $return, realm: $realm));
