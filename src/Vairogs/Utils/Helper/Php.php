@@ -12,7 +12,6 @@ use ReflectionMethod;
 use ReflectionObject;
 use RuntimeException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
-use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Twig\Attribute;
 use function array_diff;
@@ -163,13 +162,13 @@ final class Php
     #[Attribute\TwigFilter]
     public function getter(string $variable): string
     {
-        return sprintf('%s%s', Definition::GETTER, ucfirst(string: $variable));
+        return sprintf('%s%s', 'get', ucfirst(string: $variable));
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function setter(string $variable): string
     {
-        return sprintf('%s%s', Definition::SETTER, ucfirst(string: $variable));
+        return sprintf('%s%s', 'set', ucfirst(string: $variable));
     }
 }
