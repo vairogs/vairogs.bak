@@ -120,7 +120,6 @@
         "vairogs/extra-encryption-xxtea": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/twig": "self.version",
-        "vairogs/twig-php": "self.version",
         "vairogs/utils": "self.version",
         "vairogs/utils-locator": "self.version"
     },

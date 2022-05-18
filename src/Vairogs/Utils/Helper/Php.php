@@ -15,6 +15,7 @@ use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Twig\Attribute;
 use function array_diff;
+use function array_unshift;
 use function array_values;
 use function class_exists;
 use function class_implements;
@@ -162,13 +163,31 @@ final class Php
     #[Attribute\TwigFilter]
     public function getter(string $variable): string
     {
-        return sprintf('%s%s', 'get', ucfirst(string: $variable));
+        return sprintf('get%s', ucfirst(string: $variable));
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function setter(string $variable): string
     {
-        return sprintf('%s%s', 'set', ucfirst(string: $variable));
+        return sprintf('set%s', ucfirst(string: $variable));
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function call(mixed $value, string $function, ...$arguments): mixed
+    {
+        array_unshift($arguments, $value);
+
+        return (new Closure())->hijackCall(null, $function, true, ...$arguments);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function callObject(mixed $value, object $object, string $function, ...$arguments): mixed
+    {
+        array_unshift($arguments, $value);
+
+        return (new Closure())->hijackCall($object, $function, true, ...$arguments);
     }
 }

@@ -76,10 +76,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/twig.git"
     },
     {
-        "path": "src/Vairogs/Twig/Php",
-        "repo": "https://GH_TOKEN@github.com/vairogs/twig-php.git"
-    },
-    {
         "path": "src/Vairogs/Utils",
         "repo": "https://GH_TOKEN@github.com/vairogs/utils.git"
     },

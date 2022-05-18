@@ -77,6 +77,8 @@ final class Closure
 
     /**
      * @throws ReflectionException
+     * @throws InvalidArgumentException
+     * @throws InvalidPropertyPathException
      */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
@@ -103,5 +105,25 @@ final class Closure
         }
 
         throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
+    }
+
+    /** @noinspection PhpInconsistentReturnPointsInspection */
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function hijackCall(?object $object, string $function, bool $return = false, ...$arguments)
+    {
+        if (null === $object) {
+            if ($return) {
+                return $function(...$arguments);
+            }
+
+            $function(...$arguments);
+        } else {
+            if ($return) {
+                return $this->call(fn () => $object->{$function}(...$arguments), $object, $return, ...$arguments);
+            }
+
+            $this->call(fn () => $object->{$function}(...$arguments), $object, $return, ...$arguments);
+        }
     }
 }

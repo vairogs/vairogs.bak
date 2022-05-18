@@ -3,11 +3,7 @@
     "description": "⛨ Vairogs ⛨: Twig",
     "type": "library",
     "keywords": [
-        "env",
-        "getenv",
-        "php",
         "vairogs",
-        "sort",
         "symfony",
         "twig",
         "twig-extension"
@@ -51,9 +47,6 @@
         "vairogs/core": "self.version",
         "vairogs/extra-constants": "self.version",
         "vairogs/utils": "self.version"
-    },
-    "replace": {
-        "vairogs/twig-php": "self.version"
     },
     "autoload": {
         "psr-4": {

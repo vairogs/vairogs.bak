@@ -1,6 +1,0 @@
-services:
-    Vairogs\Twig\Php\Extension:
-        public: false
-        tags:
-            -
-                name: twig.extension
