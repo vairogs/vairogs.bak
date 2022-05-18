@@ -83,9 +83,6 @@
     "replace": {
         "vairogs/utils-locator": "self.version"
     },
-    "suggest": {
-        "ext-iconv": "To use some Helper functions"
-    },
     "autoload": {
         "psr-4": {
             "Vairogs\\Utils\\": ""

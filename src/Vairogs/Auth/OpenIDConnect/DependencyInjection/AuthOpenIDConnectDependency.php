@@ -59,7 +59,7 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
             $options,
             [],
         ])
-            ->addTag(name: $base);
+        ->addTag(name: $base);
     }
 
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void

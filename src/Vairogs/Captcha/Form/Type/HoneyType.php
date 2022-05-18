@@ -8,7 +8,7 @@ use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Core\Vairogs;
 use function sprintf;
 
-class Honey extends HiddenType
+class HoneyType extends HiddenType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {

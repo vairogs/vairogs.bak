@@ -76,9 +76,6 @@ final class Php
         }
     }
 
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function getParameter(array|object $variable, mixed $key): mixed
@@ -136,9 +133,6 @@ final class Php
         return $input;
     }
 
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function getArrayFromObject(object $object): array

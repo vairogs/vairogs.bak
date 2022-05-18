@@ -2,6 +2,8 @@
 
 namespace Vairogs\Assets\Utils\Helper;
 
+use Vairogs\Utils\Helper\Iteration;
+
 class IterationDataProvider
 {
     public function dataProviderIsEmpty(): array
@@ -46,6 +48,15 @@ class IterationDataProvider
     {
         return [
             [[1 => 'test', 2 => 'data', ], ['test', 'test2', ], [1 => 'test', ], ],
+            [[['test', ], 'test2', ], [['test', ], 'test2', ], [['test', ], 'test2', ], ],
+        ];
+    }
+
+    public function dataProviderArrayFlipRecursive(): array
+    {
+        return [
+            [[1 => 'a', 2 => 'b', 'c' => 3, ], ['a' => 1, 'b' => 2, 3 => 'c', ], ],
+            [['1' => new Iteration(), 2 => 'test', ], [1 => new Iteration(), 'test' => 2, ], ],
         ];
     }
 }

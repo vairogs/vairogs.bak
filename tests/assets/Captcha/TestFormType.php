@@ -1,0 +1,18 @@
+<?php declare(strict_types = 1);
+
+namespace Vairogs\Assets\Captcha;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Vairogs\Captcha\Form\Type\HoneyType;
+
+class TestFormType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add(child: 'honey', type: HoneyType::class)
+            ->add(child: 'name', type: TextType::class);
+    }
+}

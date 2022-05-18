@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait HoneyTrait
 {
     #[Assert\IsNull(message: 'The CSRF token is invalid. Please try to resubmit the form')]
-    private mixed $honey;
+    private mixed $honey = null;
 
     public function getHoney(): mixed
     {

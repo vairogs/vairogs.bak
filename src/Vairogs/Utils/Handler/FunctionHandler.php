@@ -19,14 +19,6 @@ class FunctionHandler extends AbstractHandler
 
     public function handle(...$arguments): mixed
     {
-        $function = $this->functionName;
-
-        if (null === $this->instance) {
-            return $function(...$arguments);
-        }
-
-        $object = $this->instance;
-
-        return (new Closure())->call(fn () => $object->{$function}(...$arguments), $object, true, ...$arguments) ?? parent::handle(...$arguments);
+        return (new Closure())->hijackCall($this->instance, $this->functionName, true, ...$arguments) ?? parent::handle(...$arguments);
     }
 }

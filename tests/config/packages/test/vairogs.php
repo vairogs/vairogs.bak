@@ -87,7 +87,7 @@ return static function (VairogsConfig $config, ContainerConfigurator $containerC
                 'openid' => [
                     'clients' => [
                         'steamgifts' => [
-                            'api_key' => (new Composer())->getEnv(varname: 'STEAM_API_KEY'),
+                            'api_key' => (new Composer())->getenv(varname: 'STEAM_API_KEY'),
                             'openid_url' => 'https://steamcommunity.com/openid/login',
                             'preg_check' => '#^https://steamcommunity.com/openid/id/([0-9]{17,25})#',
                             'user_builder' => SteamGiftsUserBuilder::class,

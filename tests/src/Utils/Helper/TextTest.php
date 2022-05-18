@@ -4,6 +4,7 @@ namespace Vairogs\Tests\Utils\Helper;
 
 use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Text;
+use function htmlentities;
 
 class TextTest extends VairogsTestCase
 {
@@ -24,5 +25,53 @@ class TextTest extends VairogsTestCase
         $this->assertEquals(expected: $strict, actual: (new Text())->limitChars(text: $text, length: $limit, append: $append));
         $this->assertEquals(expected: $safe, actual: (new Text())->truncateSafe(text: $text, length: $limit, append: $append));
         $this->assertEquals(expected: $word, actual: (new Text())->limitWords(text: $text, limit: $words, append: $append));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderGetLastPart
+     */
+    public function testGetLastPart(string $string, string $delimiter, string $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Text())->getLastPart(text: $string, delimiter: $delimiter));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderGetNormalizedValue
+     */
+    public function testGetNormalizedValue(string $value, string $delimiter, int|float|string $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Text())->getNormalizedValue(value: $value, delimiter: $delimiter));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderHtmlEntityDecode
+     */
+    public function testHtmlEntityDecode(string $html): void
+    {
+        $this->assertEquals(expected: $html, actual: (new Text())->htmlEntityDecode(text: htmlentities(string: $html)));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProvideReverseUTF8
+     */
+    public function testReverseUTF8(string $text, string $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Text())->reverseUTF8(text: $text));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderHtmlEntityDecode
+     */
+    public function testCleanText(string $html): void
+    {
+        $this->assertEquals(expected: $html, actual: (new Text())->cleanText(text: htmlentities(string: $html)));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderContainsAny
+     */
+    public function testContainsAny(string $haystack, array $needles, bool $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Text())->containsAny(haystack: $haystack, needles: $needles));
     }
 }

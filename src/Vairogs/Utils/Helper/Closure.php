@@ -12,10 +12,65 @@ use function sprintf;
 
 final class Closure
 {
+    /**
+     * @throws InvalidArgumentException
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function hijackSet(object $object, string $property, mixed $value): object
     {
+        try {
+            (new ReflectionProperty(class: $object, property: $property));
+        } catch (ReflectionException) {
+            throw new InvalidArgumentException(message: sprintf('Unable to set property "%s" of object %s', $property, $object::class));
+        }
+
+        try {
+            return $this->hijackSetNonStatic(object: $object, property: $property, value: $value);
+        } catch (Exception) {
+            // exception === unable to get object property
+        }
+
+        return $this->hijackSetStatic(object: $object, property: $property, value: $value);
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function hijackSetStatic(object $object, string $property, mixed $value): object
+    {
+        try {
+            if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
+                $this->call(function: function () use ($object, $property, $value): void {
+                    $object::${$property} = $value;
+                }, clone: $object);
+
+                return $object;
+            }
+        } catch (Exception) {
+            // exception === unable to get object property
+        }
+
+        throw new InvalidArgumentException(message: sprintf('Property "%s" is not static', $property));
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     */
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function hijackSetNonStatic(object $object, string $property, mixed $value): object
+    {
+        try {
+            if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
+                throw new InvalidArgumentException(message: 'non static property');
+            }
+        } catch (Exception) {
+            throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
+        }
+
         $this->call(function: function () use ($object, $property, $value): void {
             $object->{$property} = $value;
         }, clone: $object);
@@ -76,7 +131,6 @@ final class Closure
     }
 
     /**
-     * @throws ReflectionException
      * @throws InvalidArgumentException
      * @throws InvalidPropertyPathException
      */
@@ -84,7 +138,13 @@ final class Closure
     #[Attribute\TwigFilter]
     public function hijackGet(object $object, string $property, bool $throwOnUnInitialized = false, ...$arguments)
     {
-        if (!(new ReflectionProperty(class: $object, property: $property))->isInitialized(object: $object)) {
+        try {
+            $objectProperty = (new ReflectionProperty(class: $object, property: $property));
+        } catch (ReflectionException) {
+            throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
+        }
+
+        if (!$objectProperty->isInitialized(object: $object)) {
             if ($throwOnUnInitialized) {
                 throw new InvalidPropertyPathException(message: sprintf('%s::%s must not be accessed before initialization', $object::class, $property));
             }
@@ -98,13 +158,7 @@ final class Closure
             // exception === unable to get object property
         }
 
-        try {
-            return $this->hijackGetStatic($object, $property, ...$arguments);
-        } catch (Exception) {
-            // exception === unable to get object property
-        }
-
-        throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
+        return $this->hijackGetStatic($object, $property, ...$arguments);
     }
 
     /** @noinspection PhpInconsistentReturnPointsInspection */

@@ -9,9 +9,9 @@ class ComposerTest extends VairogsTestCase
 {
     public function testGetEnv(): void
     {
-        $this->assertEquals(expected: 'test', actual: (new Composer())->getEnv(varname: 'ENVIRONMENT'));
-        $this->assertEquals(expected: '1', actual: (new Composer())->getEnv(varname: 'PHP_CS_FIXER_IGNORE_ENV', localOnly: false));
-        $this->assertEquals(expected: 'TEST', actual: (new Composer())->getEnv(varname: 'TEST'));
+        $this->assertEquals(expected: 'test', actual: (new Composer())->getenv(varname: 'ENVIRONMENT'));
+        $this->assertEquals(expected: '1', actual: (new Composer())->getenv(varname: 'PHP_CS_FIXER_IGNORE_ENV', localOnly: false));
+        $this->assertEquals(expected: 'TEST', actual: (new Composer())->getenv(varname: 'TEST'));
     }
 
     /**

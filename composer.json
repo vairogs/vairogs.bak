@@ -125,7 +125,6 @@
     },
     "suggest": {
         "ext-gmp": "to use gmp prime check function",
-        "ext-iconv": "To use some Helper functions",
         "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
     },
     "autoload": {

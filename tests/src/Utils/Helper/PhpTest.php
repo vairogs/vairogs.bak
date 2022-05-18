@@ -12,6 +12,7 @@ use Vairogs\Cache\Cache;
 use Vairogs\Core\Vairogs;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Utils\Helper\Php;
+use Vairogs\Utils\Helper\Text;
 
 class PhpTest extends VairogsTestCase
 {
@@ -65,5 +66,15 @@ class PhpTest extends VairogsTestCase
     {
         $this->assertEquals(expected: 'Vairogs', actual: (new Php())->getShortName(class: Vairogs::class));
         $this->assertEquals(expected: 'Test', actual: (new Php())->getShortName(class: 'Test'));
+    }
+
+    public function testCall(): void
+    {
+        $this->assertEquals(expected: 'sgoriav', actual: (new Php())->call(value: Vairogs::VAIROGS, function: 'strrev'));
+    }
+
+    public function testCallObject(): void
+    {
+        $this->assertEquals(expected: 'sgoriav', actual: (new Php())->callObject(value: Vairogs::VAIROGS, object: new Text(), function: 'reverseUTF8'));
     }
 }

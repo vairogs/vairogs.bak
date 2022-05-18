@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1652831002">
-  <project timestamp="1652831002">
+<coverage generated="1652918253">
+  <project timestamp="1652918253">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1059,24 +1059,24 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Captcha/Form/Model/HoneyTrait.php">
       <class name="Vairogs\Captcha\Form\Model\HoneyTrait" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </class>
-      <line num="12" type="method" name="getHoney" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="17" type="method" name="setHoney" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <metrics loc="24" ncloc="24" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="5" coveredelements="0"/>
+      <line num="12" type="method" name="getHoney" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="14" type="stmt" count="1"/>
+      <line num="17" type="method" name="setHoney" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="21" type="stmt" count="1"/>
+      <metrics loc="24" ncloc="24" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
     </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Captcha/Form/Type/Honey.php">
-      <class name="Vairogs\Captcha\Form\Type\Honey" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Captcha/Form/Type/HoneyType.php">
+      <class name="Vairogs\Captcha\Form\Type\HoneyType" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
       </class>
-      <line num="13" type="method" name="configureOptions" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="15" type="stmt" count="0"/>
-      <line num="16" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <metrics loc="22" ncloc="22" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+      <line num="13" type="method" name="configureOptions" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="15" type="stmt" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <line num="18" type="stmt" count="1"/>
+      <metrics loc="22" ncloc="22" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Common/Adapter/AbstractAdapter.php">
       <class name="Vairogs\Common\Adapter\AbstractAdapter" namespace="global">
@@ -1162,7 +1162,7 @@
       <line num="61" type="stmt" count="1"/>
       <line num="64" type="stmt" count="1"/>
       <line num="65" type="stmt" count="1"/>
-      <line num="73" type="method" name="getChainAdapter" visibility="private" complexity="4" crap="4" count="1"/>
+      <line num="73" type="method" name="getAdapter" visibility="private" complexity="4" crap="4" count="1"/>
       <line num="75" type="stmt" count="1"/>
       <line num="76" type="stmt" count="1"/>
       <line num="79" type="stmt" count="1"/>
@@ -1281,7 +1281,7 @@
       <class name="Vairogs\Extra\Constants\Definition" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="18" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="16" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Constants/Enum/Criteria.php">
       <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1317,7 +1317,7 @@
       <class name="Vairogs\Extra\Constants\Symbol" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="16" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="18" ncloc="18" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Encryption/Cross/Cross.php">
       <class name="Vairogs\Extra\Encryption\Cross\Cross" namespace="global">
@@ -1854,40 +1854,6 @@
       </class>
       <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Twig/Php/Extension.php">
-      <class name="Vairogs\Twig\Php\Extension" namespace="global">
-        <metrics complexity="10" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="0" elements="29" coveredelements="0"/>
-      </class>
-      <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="27" type="method" name="getFilters" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="40" type="method" name="getFilter" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <line num="43" type="stmt" count="0"/>
-      <line num="46" type="stmt" count="0"/>
-      <line num="49" type="method" name="getFunctions" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="51" type="stmt" count="0"/>
-      <line num="53" type="stmt" count="0"/>
-      <line num="54" type="stmt" count="0"/>
-      <line num="56" type="stmt" count="0"/>
-      <line num="62" type="method" name="getFunction" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="64" type="stmt" count="0"/>
-      <line num="70" type="method" name="getCallbacks" visibility="private" complexity="4" crap="20" count="0"/>
-      <line num="71" type="stmt" count="0"/>
-      <line num="73" type="stmt" count="0"/>
-      <line num="74" type="stmt" count="0"/>
-      <line num="75" type="stmt" count="0"/>
-      <line num="76" type="stmt" count="0"/>
-      <line num="77" type="stmt" count="0"/>
-      <line num="78" type="stmt" count="0"/>
-      <line num="79" type="stmt" count="0"/>
-      <line num="82" type="stmt" count="0"/>
-      <line num="85" type="stmt" count="0"/>
-      <metrics loc="88" ncloc="79" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="23" coveredstatements="0" elements="29" coveredelements="0"/>
-    </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Twig/TwigExtension.php">
       <class name="Vairogs\Twig\TwigExtension" namespace="global">
         <metrics complexity="22" methods="10" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="44" coveredstatements="0" elements="54" coveredelements="0"/>
@@ -2022,13 +1988,13 @@
       <class name="Vairogs\Utils\Doctrine\Traits\Status" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
       </class>
-      <line num="14" type="method" name="getStatus" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="16" type="stmt" count="2"/>
-      <line num="19" type="method" name="setStatus" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="21" type="stmt" count="2"/>
+      <line num="14" type="method" name="getStatus" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="16" type="stmt" count="3"/>
+      <line num="19" type="method" name="setStatus" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="21" type="stmt" count="3"/>
       <line num="22" type="stmt" count="1"/>
-      <line num="25" type="stmt" count="2"/>
-      <line num="27" type="stmt" count="2"/>
+      <line num="25" type="stmt" count="3"/>
+      <line num="27" type="stmt" count="3"/>
       <metrics loc="30" ncloc="30" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Generator.php">
@@ -2104,19 +2070,15 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Handler/FunctionHandler.php">
       <class name="Vairogs\Utils\Handler\FunctionHandler" namespace="global">
-        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
       </class>
       <line num="12" type="method" name="setFunction" visibility="public" complexity="1" crap="1" count="27"/>
       <line num="14" type="stmt" count="27"/>
       <line num="15" type="stmt" count="27"/>
       <line num="17" type="stmt" count="27"/>
-      <line num="20" type="method" name="handle" visibility="public" complexity="2" crap="2" count="27"/>
+      <line num="20" type="method" name="handle" visibility="public" complexity="1" crap="1" count="27"/>
       <line num="22" type="stmt" count="27"/>
-      <line num="24" type="stmt" count="27"/>
-      <line num="25" type="stmt" count="1"/>
-      <line num="28" type="stmt" count="26"/>
-      <line num="30" type="stmt" count="26"/>
-      <metrics loc="33" ncloc="33" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+      <metrics loc="25" ncloc="25" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Handler/Handler.php">
       <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2176,39 +2138,66 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Closure.php">
       <class name="Vairogs\Utils\Helper\Closure" namespace="global">
-        <metrics complexity="14" methods="5" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="16" elements="30" coveredelements="17"/>
+        <metrics complexity="26" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="49" elements="57" coveredelements="57"/>
       </class>
-      <line num="15" type="method" name="hijackSet" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <line num="29" type="method" name="call" visibility="public" complexity="2" crap="2.06" count="30"/>
-      <line num="33" type="stmt" count="30"/>
-      <line num="35" type="stmt" count="30"/>
-      <line num="36" type="stmt" count="30"/>
-      <line num="39" type="stmt" count="0"/>
-      <line num="45" type="method" name="hijackGetStatic" visibility="public" complexity="3" crap="4.12" count="3"/>
-      <line num="50" type="stmt" count="3"/>
-      <line num="51" type="stmt" count="3"/>
-      <line num="53" type="stmt" count="0"/>
-      <line num="57" type="stmt" count="0"/>
-      <line num="63" type="method" name="hijackGetNonStatic" visibility="public" complexity="3" crap="3" count="4"/>
-      <line num="68" type="stmt" count="4"/>
-      <line num="69" type="stmt" count="4"/>
-      <line num="71" type="stmt" count="3"/>
-      <line num="72" type="stmt" count="3"/>
-      <line num="75" type="stmt" count="2"/>
-      <line num="81" type="method" name="hijackGet" visibility="public" complexity="5" crap="5.93" count="5"/>
-      <line num="85" type="stmt" count="5"/>
-      <line num="86" type="stmt" count="1"/>
-      <line num="87" type="stmt" count="0"/>
-      <line num="90" type="stmt" count="1"/>
-      <line num="94" type="stmt" count="4"/>
-      <line num="95" type="stmt" count="3"/>
-      <line num="100" type="stmt" count="3"/>
-      <line num="101" type="stmt" count="0"/>
-      <line num="105" type="stmt" count="0"/>
-      <metrics loc="108" ncloc="93" classes="1" methods="5" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="16" elements="30" coveredelements="17"/>
+      <line num="18" type="method" name="hijackSet" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="24" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="29" type="stmt" count="1"/>
+      <line num="30" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="40" type="method" name="hijackSetStatic" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="62" type="method" name="hijackSetNonStatic" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="67" type="stmt" count="1"/>
+      <line num="68" type="stmt" count="1"/>
+      <line num="70" type="stmt" count="1"/>
+      <line num="71" type="stmt" count="1"/>
+      <line num="74" type="stmt" count="1"/>
+      <line num="75" type="stmt" count="1"/>
+      <line num="78" type="stmt" count="1"/>
+      <line num="84" type="method" name="call" visibility="public" complexity="2" crap="2" count="33"/>
+      <line num="88" type="stmt" count="33"/>
+      <line num="90" type="stmt" count="33"/>
+      <line num="91" type="stmt" count="32"/>
+      <line num="94" type="stmt" count="2"/>
+      <line num="100" type="method" name="hijackGetStatic" visibility="public" complexity="3" crap="3" count="4"/>
+      <line num="105" type="stmt" count="4"/>
+      <line num="106" type="stmt" count="4"/>
+      <line num="108" type="stmt" count="1"/>
+      <line num="112" type="stmt" count="1"/>
+      <line num="118" type="method" name="hijackGetNonStatic" visibility="public" complexity="3" crap="3" count="4"/>
+      <line num="123" type="stmt" count="4"/>
+      <line num="124" type="stmt" count="4"/>
+      <line num="126" type="stmt" count="3"/>
+      <line num="127" type="stmt" count="3"/>
+      <line num="130" type="stmt" count="2"/>
+      <line num="137" type="method" name="hijackGet" visibility="public" complexity="5" crap="5" count="6"/>
+      <line num="142" type="stmt" count="6"/>
+      <line num="143" type="stmt" count="2"/>
+      <line num="144" type="stmt" count="2"/>
+      <line num="147" type="stmt" count="5"/>
+      <line num="148" type="stmt" count="2"/>
+      <line num="149" type="stmt" count="1"/>
+      <line num="152" type="stmt" count="2"/>
+      <line num="156" type="stmt" count="4"/>
+      <line num="157" type="stmt" count="3"/>
+      <line num="161" type="stmt" count="3"/>
+      <line num="165" type="method" name="hijackCall" visibility="public" complexity="4" crap="4" count="31"/>
+      <line num="169" type="stmt" count="31"/>
+      <line num="170" type="stmt" count="3"/>
+      <line num="171" type="stmt" count="3"/>
+      <line num="174" type="stmt" count="1"/>
+      <line num="176" type="stmt" count="28"/>
+      <line num="177" type="stmt" count="28"/>
+      <line num="180" type="stmt" count="1"/>
+      <metrics loc="184" ncloc="157" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="49" coveredstatements="49" elements="57" coveredelements="57"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Composer.php">
       <class name="Vairogs\Utils\Helper\Composer" namespace="global">
@@ -2229,7 +2218,7 @@
       <line num="48" type="stmt" count="5"/>
       <line num="51" type="method" name="exists" visibility="public" complexity="4" crap="4" count="1"/>
       <line num="55" type="stmt" count="1"/>
-      <line num="58" type="method" name="getEnv" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="58" type="method" name="getenv" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="62" type="stmt" count="2"/>
       <line num="63" type="stmt" count="2"/>
       <line num="66" type="stmt" count="1"/>
@@ -2309,28 +2298,28 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Error.php">
       <class name="Vairogs\Utils\Helper\Error" namespace="global">
-        <metrics complexity="5" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="19" coveredelements="19"/>
+        <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="19" coveredelements="19"/>
       </class>
-      <line num="13" type="method" name="getExceptionTraceAsString" visibility="public" complexity="5" crap="5" count="1"/>
-      <line num="15" type="stmt" count="1"/>
-      <line num="16" type="stmt" count="1"/>
+      <line num="16" type="method" name="getExceptionTraceAsString" visibility="public" complexity="3" crap="3" count="1"/>
       <line num="18" type="stmt" count="1"/>
       <line num="19" type="stmt" count="1"/>
-      <line num="20" type="stmt" count="1"/>
       <line num="21" type="stmt" count="1"/>
       <line num="22" type="stmt" count="1"/>
       <line num="23" type="stmt" count="1"/>
       <line num="24" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="1"/>
+      <line num="26" type="stmt" count="1"/>
       <line num="27" type="stmt" count="1"/>
-      <line num="29" type="stmt" count="1"/>
+      <line num="28" type="stmt" count="1"/>
       <line num="32" type="stmt" count="1"/>
-      <line num="33" type="stmt" count="1"/>
-      <line num="34" type="stmt" count="1"/>
       <line num="35" type="stmt" count="1"/>
       <line num="36" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
       <line num="39" type="stmt" count="1"/>
-      <line num="42" type="stmt" count="1"/>
-      <metrics loc="45" ncloc="45" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="19" coveredelements="19"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <metrics loc="47" ncloc="47" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="19" coveredelements="19"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/File.php">
       <class name="Vairogs\Utils\Helper\File" namespace="global">
@@ -2488,7 +2477,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Iteration.php">
       <class name="Vairogs\Utils\Helper\Iteration" namespace="global">
-        <metrics complexity="34" methods="13" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="37" elements="59" coveredelements="48"/>
+        <metrics complexity="34" methods="13" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="46" elements="59" coveredelements="59"/>
       </class>
       <line num="27" type="method" name="isEmpty" visibility="public" complexity="4" crap="4" count="5"/>
       <line num="31" type="stmt" count="5"/>
@@ -2520,21 +2509,21 @@
       <line num="101" type="stmt" count="5"/>
       <line num="102" type="stmt" count="4"/>
       <line num="105" type="stmt" count="4"/>
-      <line num="108" type="method" name="arrayIntersectKeyRecursive" visibility="public" complexity="4" crap="4.13" count="1"/>
-      <line num="112" type="stmt" count="1"/>
-      <line num="114" type="stmt" count="1"/>
-      <line num="115" type="stmt" count="1"/>
-      <line num="116" type="stmt" count="0"/>
-      <line num="120" type="stmt" count="1"/>
-      <line num="126" type="method" name="arrayFlipRecursive" visibility="public" complexity="5" crap="30" count="0"/>
-      <line num="130" type="stmt" count="0"/>
-      <line num="132" type="stmt" count="0"/>
-      <line num="133" type="stmt" count="0"/>
-      <line num="134" type="stmt" count="0"/>
-      <line num="135" type="stmt" count="0"/>
-      <line num="136" type="stmt" count="0"/>
-      <line num="138" type="stmt" count="0"/>
-      <line num="142" type="stmt" count="0"/>
+      <line num="108" type="method" name="arrayIntersectKeyRecursive" visibility="public" complexity="4" crap="4" count="2"/>
+      <line num="112" type="stmt" count="2"/>
+      <line num="114" type="stmt" count="2"/>
+      <line num="115" type="stmt" count="2"/>
+      <line num="116" type="stmt" count="1"/>
+      <line num="120" type="stmt" count="2"/>
+      <line num="126" type="method" name="arrayFlipRecursive" visibility="public" complexity="5" crap="5" count="3"/>
+      <line num="130" type="stmt" count="3"/>
+      <line num="132" type="stmt" count="3"/>
+      <line num="133" type="stmt" count="3"/>
+      <line num="134" type="stmt" count="1"/>
+      <line num="135" type="stmt" count="3"/>
+      <line num="136" type="stmt" count="2"/>
+      <line num="138" type="stmt" count="1"/>
+      <line num="142" type="stmt" count="2"/>
       <line num="145" type="method" name="removeFromArray" visibility="public" complexity="4" crap="4" count="1"/>
       <line num="149" type="stmt" count="1"/>
       <line num="150" type="stmt" count="1"/>
@@ -2549,7 +2538,7 @@
       <line num="182" type="stmt" count="1"/>
       <line num="185" type="method" name="getIfNotEmpty" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="189" type="stmt" count="1"/>
-      <metrics loc="192" ncloc="185" classes="1" methods="13" coveredmethods="11" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="37" elements="59" coveredelements="48"/>
+      <metrics loc="192" ncloc="185" classes="1" methods="13" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="46" elements="59" coveredelements="59"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Json.php">
       <class name="Vairogs\Utils\Helper\Json" namespace="global">
@@ -2652,52 +2641,58 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Php.php">
       <class name="Vairogs\Utils\Helper\Php" namespace="global">
-        <metrics complexity="21" methods="12" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="43" coveredelements="43"/>
+        <metrics complexity="23" methods="14" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="35" elements="49" coveredelements="49"/>
       </class>
-      <line num="34" type="method" name="boolval" visibility="public" complexity="2" crap="2" count="6"/>
-      <line num="39" type="stmt" count="6"/>
-      <line num="40" type="stmt" count="1"/>
-      <line num="43" type="stmt" count="5"/>
-      <line num="46" type="stmt" count="5"/>
-      <line num="47" type="stmt" count="4"/>
-      <line num="48" type="stmt" count="5"/>
-      <line num="56" type="method" name="getClassConstantsValues" visibility="public" complexity="1" crap="1" count="8"/>
-      <line num="60" type="stmt" count="8"/>
-      <line num="67" type="method" name="getClassConstants" visibility="public" complexity="2" crap="2" count="15"/>
-      <line num="72" type="stmt" count="15"/>
-      <line num="73" type="stmt" count="1"/>
+      <line num="35" type="method" name="boolval" visibility="public" complexity="2" crap="2" count="6"/>
+      <line num="40" type="stmt" count="6"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="5"/>
+      <line num="47" type="stmt" count="5"/>
+      <line num="48" type="stmt" count="4"/>
+      <line num="49" type="stmt" count="5"/>
+      <line num="57" type="method" name="getClassConstantsValues" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="61" type="stmt" count="8"/>
+      <line num="68" type="method" name="getClassConstants" visibility="public" complexity="2" crap="2" count="15"/>
+      <line num="73" type="stmt" count="15"/>
       <line num="74" type="stmt" count="1"/>
-      <line num="81" type="method" name="getParameter" visibility="public" complexity="2" crap="2" count="4"/>
-      <line num="85" type="stmt" count="4"/>
-      <line num="86" type="stmt" count="3"/>
-      <line num="89" type="stmt" count="1"/>
-      <line num="92" type="method" name="getClassMethods" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="75" type="stmt" count="1"/>
+      <line num="79" type="method" name="getParameter" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="83" type="stmt" count="4"/>
+      <line num="84" type="stmt" count="3"/>
+      <line num="87" type="stmt" count="1"/>
+      <line num="90" type="method" name="getClassMethods" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="94" type="stmt" count="1"/>
+      <line num="95" type="stmt" count="1"/>
       <line num="96" type="stmt" count="1"/>
-      <line num="97" type="stmt" count="1"/>
-      <line num="98" type="stmt" count="1"/>
-      <line num="101" type="stmt" count="1"/>
-      <line num="104" type="method" name="getShortName" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="109" type="stmt" count="1"/>
-      <line num="110" type="stmt" count="1"/>
-      <line num="114" type="stmt" count="1"/>
-      <line num="117" type="method" name="classImplements" visibility="public" complexity="3" crap="3" count="1"/>
-      <line num="121" type="stmt" count="1"/>
-      <line num="127" type="method" name="getArray" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="131" type="stmt" count="1"/>
-      <line num="132" type="stmt" count="1"/>
-      <line num="135" type="stmt" count="1"/>
-      <line num="141" type="method" name="getArrayFromObject" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="145" type="stmt" count="1"/>
-      <line num="147" type="stmt" count="1"/>
-      <line num="148" type="stmt" count="1"/>
-      <line num="151" type="stmt" count="1"/>
-      <line num="154" type="method" name="filterExists" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="158" type="stmt" count="1"/>
-      <line num="161" type="method" name="getter" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="165" type="stmt" count="3"/>
-      <line num="168" type="method" name="setter" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="172" type="stmt" count="3"/>
-      <metrics loc="175" ncloc="157" classes="1" methods="12" coveredmethods="12" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="43" coveredelements="43"/>
+      <line num="99" type="stmt" count="1"/>
+      <line num="102" type="method" name="getShortName" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="107" type="stmt" count="1"/>
+      <line num="108" type="stmt" count="1"/>
+      <line num="112" type="stmt" count="1"/>
+      <line num="115" type="method" name="classImplements" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="119" type="stmt" count="1"/>
+      <line num="125" type="method" name="getArray" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="129" type="stmt" count="1"/>
+      <line num="130" type="stmt" count="1"/>
+      <line num="133" type="stmt" count="1"/>
+      <line num="136" type="method" name="getArrayFromObject" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="140" type="stmt" count="1"/>
+      <line num="142" type="stmt" count="1"/>
+      <line num="143" type="stmt" count="1"/>
+      <line num="146" type="stmt" count="1"/>
+      <line num="149" type="method" name="filterExists" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="153" type="stmt" count="1"/>
+      <line num="156" type="method" name="getter" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="160" type="stmt" count="3"/>
+      <line num="163" type="method" name="setter" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="167" type="stmt" count="3"/>
+      <line num="170" type="method" name="call" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="174" type="stmt" count="1"/>
+      <line num="176" type="stmt" count="1"/>
+      <line num="179" type="method" name="callObject" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="183" type="stmt" count="1"/>
+      <line num="185" type="stmt" count="1"/>
+      <metrics loc="188" ncloc="176" classes="1" methods="14" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="35" coveredstatements="35" elements="49" coveredelements="49"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Sort.php">
       <class name="Vairogs\Utils\Helper\Sort" namespace="global">
@@ -2807,12 +2802,12 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Text.php">
       <class name="Vairogs\Utils\Helper\Text" namespace="global">
-        <metrics complexity="27" methods="15" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="22" elements="48" coveredelements="30"/>
+        <metrics complexity="25" methods="14" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="44" coveredelements="44"/>
       </class>
-      <line num="29" type="method" name="cleanText" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="36" type="method" name="oneSpace" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="40" type="stmt" count="1"/>
+      <line num="29" type="method" name="cleanText" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="33" type="stmt" count="1"/>
+      <line num="36" type="method" name="oneSpace" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="40" type="stmt" count="2"/>
       <line num="43" type="method" name="stripSpace" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="47" type="stmt" count="1"/>
       <line num="50" type="method" name="truncateSafe" visibility="public" complexity="4" crap="4" count="2"/>
@@ -2834,30 +2829,26 @@
       <line num="88" type="stmt" count="1"/>
       <line num="91" type="method" name="contains" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="96" type="stmt" count="1"/>
-      <line num="99" type="method" name="containsAny" visibility="public" complexity="3" crap="3.14" count="1"/>
-      <line num="103" type="stmt" count="1"/>
-      <line num="104" type="stmt" count="1"/>
-      <line num="105" type="stmt" count="0"/>
-      <line num="109" type="stmt" count="1"/>
-      <line num="112" type="method" name="reverseUTF8" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="116" type="stmt" count="0"/>
-      <line num="117" type="stmt" count="0"/>
-      <line num="120" type="stmt" count="0"/>
-      <line num="123" type="method" name="keepNumeric" visibility="public" complexity="1" crap="1" count="8"/>
-      <line num="127" type="stmt" count="8"/>
-      <line num="130" type="method" name="keepAscii" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="134" type="stmt" count="0"/>
-      <line num="137" type="method" name="replacePattern" visibility="public" complexity="1" crap="1" count="10"/>
-      <line num="141" type="stmt" count="10"/>
-      <line num="144" type="method" name="getLastPart" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="148" type="stmt" count="0"/>
-      <line num="151" type="method" name="getNormalizedValue" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="155" type="stmt" count="0"/>
-      <line num="156" type="stmt" count="0"/>
-      <line num="159" type="stmt" count="0"/>
-      <line num="162" type="method" name="htmlEntityDecode" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="166" type="stmt" count="0"/>
-      <metrics loc="169" ncloc="169" classes="1" methods="15" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="22" elements="48" coveredelements="30"/>
+      <line num="99" type="method" name="containsAny" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="103" type="stmt" count="3"/>
+      <line num="104" type="stmt" count="3"/>
+      <line num="105" type="stmt" count="1"/>
+      <line num="109" type="stmt" count="2"/>
+      <line num="112" type="method" name="reverseUTF8" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="116" type="stmt" count="4"/>
+      <line num="119" type="method" name="keepNumeric" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="123" type="stmt" count="8"/>
+      <line num="126" type="method" name="replacePattern" visibility="public" complexity="1" crap="1" count="12"/>
+      <line num="130" type="stmt" count="12"/>
+      <line num="133" type="method" name="getLastPart" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="137" type="stmt" count="3"/>
+      <line num="140" type="method" name="getNormalizedValue" visibility="public" complexity="3" crap="3" count="5"/>
+      <line num="144" type="stmt" count="5"/>
+      <line num="145" type="stmt" count="3"/>
+      <line num="148" type="stmt" count="2"/>
+      <line num="151" type="method" name="htmlEntityDecode" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="155" type="stmt" count="2"/>
+      <metrics loc="158" ncloc="158" classes="1" methods="14" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="44" coveredelements="44"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Uri.php">
       <class name="Vairogs\Utils\Helper\Uri" namespace="global">
@@ -3041,6 +3032,6 @@
       <line num="31" type="stmt" count="1"/>
       <metrics loc="34" ncloc="31" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="134" loc="7822" ncloc="7590" classes="98" methods="549" coveredmethods="234" conditionals="0" coveredconditionals="0" statements="1754" coveredstatements="934" elements="2303" coveredelements="1168"/>
+    <metrics files="133" loc="7806" ncloc="7577" classes="97" methods="547" coveredmethods="254" conditionals="0" coveredconditionals="0" statements="1752" coveredstatements="990" elements="2299" coveredelements="1244"/>
   </project>
 </coverage>

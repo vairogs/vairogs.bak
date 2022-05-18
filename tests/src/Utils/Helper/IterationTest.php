@@ -2,6 +2,8 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
+use Exception;
+use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
 use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Iteration;
@@ -60,5 +62,22 @@ class IterationTest extends VairogsTestCase
     public function testArrayIntersectKeyRecursive(array $input, array $second, array $expected): void
     {
         $this->assertEquals(expected: $expected, actual: (new Iteration())->arrayIntersectKeyRecursive(first: $input, second: $second));
+    }
+
+    /**
+     * @dataProvider \Vairogs\Assets\Utils\Helper\IterationDataProvider::dataProviderArrayFlipRecursive
+     */
+    public function testArrayFlipRecursive(array $input, array $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Iteration())->arrayFlipRecursive(input: $input));
+    }
+
+    public function testArrayFlipRecursiveException(): void
+    {
+        try {
+            (new Iteration())->arrayFlipRecursive(input: ['1' => false]);
+        } catch (Exception $exception) {
+            $this->assertEquals(expected: InvalidArgumentException::class, actual: $exception::class);
+        }
     }
 }

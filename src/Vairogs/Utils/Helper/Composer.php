@@ -57,7 +57,7 @@ final class Composer
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function getEnv(string $varname, bool $localOnly = true): mixed
+    public function getenv(string $varname, bool $localOnly = true): mixed
     {
         if ($env = getenv($varname, local_only: $localOnly)) {
             return $env;

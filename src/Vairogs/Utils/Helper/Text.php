@@ -3,11 +3,12 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Extra\Constants\Definition;
+use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Twig\Attribute;
 use function array_key_exists;
-use function function_exists;
+use function array_reverse;
 use function html_entity_decode;
+use function implode;
 use function is_numeric;
 use function mb_convert_encoding;
 use function mb_strlen;
@@ -20,7 +21,6 @@ use function str_contains;
 use function str_replace;
 use function strip_tags;
 use function strpbrk;
-use function strrev;
 use function strrpos;
 use function substr;
 
@@ -30,7 +30,7 @@ final class Text
     #[Attribute\TwigFilter]
     public function cleanText(string $text): string
     {
-        return $this->htmlEntityDecode(text: $this->oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: Definition::UTF8, from_encoding: Definition::UTF8))));
+        return $this->htmlEntityDecode(text: $this->oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: Symbol::UTF8, from_encoding: Symbol::UTF8))));
     }
 
     #[Attribute\TwigFunction]
@@ -113,11 +113,7 @@ final class Text
     #[Attribute\TwigFilter]
     public function reverseUTF8(string $text): string
     {
-        if (function_exists(function: 'iconv')) {
-            return iconv(from_encoding: Definition::UTF32LE, to_encoding: Definition::UTF8, string: strrev(string: iconv(from_encoding: Definition::UTF8, to_encoding: Definition::UTF32LE, string: $text)));
-        }
-
-        return strrev(string: $text);
+        return implode(separator: '', array: array_reverse(array: mb_str_split(string: $text, encoding: mb_internal_encoding())));
     }
 
     #[Attribute\TwigFunction]
@@ -125,13 +121,6 @@ final class Text
     public function keepNumeric(string $text): string
     {
         return $this->replacePattern(pattern: '#\D#', text: $text);
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function keepAscii(string $text): string
-    {
-        return $this->replacePattern(pattern: '#[[:^ascii:]]#', text: $text);
     }
 
     #[Attribute\TwigFunction]
@@ -150,10 +139,10 @@ final class Text
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function getNormalizedValue(string $value): string|int|float
+    public function getNormalizedValue(string $value, string $delimiter = '.'): string|int|float
     {
         if (is_numeric(value: $value)) {
-            return str_contains(haystack: (string) $value, needle: '.') ? (float) $value : (int) $value;
+            return str_contains(haystack: (string) $value, needle: $delimiter) ? (float) $value : (int) $value;
         }
 
         return $value;

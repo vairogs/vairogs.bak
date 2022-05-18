@@ -11,7 +11,5 @@ final class Definition
     final public const HASH_ALGORITHM = 'xxh128';
     final public const IDENT = 'https://ip.vairogs.com';
     final public const KERNEL_CACHE_DIR = 'kernel.cache_dir';
-    final public const UTF32LE = 'UTF-32LE';
-    final public const UTF8 = 'UTF-8';
     final public const VARIABLE = 'variable';
 }
