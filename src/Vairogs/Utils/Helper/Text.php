@@ -113,7 +113,7 @@ final class Text
     #[Attribute\TwigFilter]
     public function reverseUTF8(string $text): string
     {
-        return implode(separator: '', array: array_reverse(array: mb_str_split(string: $text, encoding: mb_internal_encoding())));
+        return implode(separator: '', array: array_reverse(array: mb_str_split(string: $text, encoding: Symbol::UTF8)));
     }
 
     #[Attribute\TwigFunction]
