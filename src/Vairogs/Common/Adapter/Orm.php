@@ -20,9 +20,7 @@ final class Orm extends AbstractAdapter
         $this->checkRequirements();
     }
 
-    /**
-     * @throws DBALException
-     */
+    /** @throws DBALException */
     public function getAdapter(int $defaultLifetime = Definition::DEFAULT_LIFETIME): CacheItemPoolInterface
     {
         $table = sprintf('%s_items', $this->namespace);

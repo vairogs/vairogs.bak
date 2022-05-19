@@ -56,9 +56,7 @@ class OpenIDProvider implements HasRegistry
         return $this->name;
     }
 
-    /**
-     * @throws JsonException
-     */
+    /** @throws JsonException */
     public function fetchUser(): ?OpenIDUser
     {
         if ($user = $this->validate()) {
@@ -140,9 +138,7 @@ class OpenIDProvider implements HasRegistry
         return $this->options['openid_url'] . '/' . $this->options['api_key'] . '/?' . http_build_query(data: $this->getParams(return: $return, realm: $realm));
     }
 
-    /**
-     * @throws JsonException
-     */
+    /** @throws JsonException */
     private function getData(string $openID): mixed
     {
         return (new Json())->decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: Json::ASSOCIATIVE);

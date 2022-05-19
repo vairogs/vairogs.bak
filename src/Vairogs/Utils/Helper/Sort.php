@@ -77,9 +77,7 @@ final class Sort
         return $this->merge(left: $left, right: $right);
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
+    /** @throws InvalidArgumentException */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function sort(array|object $data, string $parameter, Criteria $order = Criteria::ASC): array

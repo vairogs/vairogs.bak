@@ -21,9 +21,7 @@ final class File extends AbstractAdapter
         $this->directory ??= sys_get_temp_dir() . DIRECTORY_SEPARATOR . $this->namespace;
     }
 
-    /**
-     * @throws CacheException
-     */
+    /** @throws CacheException */
     public function getAdapter(int $defaultLifetime = Definition::DEFAULT_LIFETIME): CacheItemPoolInterface
     {
         return new PhpFilesAdapter(namespace: $this->namespace, defaultLifetime: $defaultLifetime, directory: $this->directory, appendOnly: true);

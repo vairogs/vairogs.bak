@@ -21,9 +21,7 @@ final class Json
     final public const ASSOCIATIVE = 1;
     final public const OBJECT = 0;
 
-    /**
-     * @throws JsonException
-     */
+    /** @throws JsonException */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function encode(mixed $value, int $flags = self::OBJECT): string
@@ -33,9 +31,7 @@ final class Json
         return json_encode(value: $value, flags: $flags | JSON_THROW_ON_ERROR);
     }
 
-    /**
-     * @throws JsonException
-     */
+    /** @throws JsonException */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function decode(string $json, int $flags = self::OBJECT): mixed

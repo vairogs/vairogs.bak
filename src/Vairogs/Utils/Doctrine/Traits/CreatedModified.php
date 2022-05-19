@@ -29,9 +29,7 @@ trait CreatedModified
         return $this;
     }
 
-    /**
-     * @throws Exception
-     */
+    /** @throws Exception */
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
     public function updatedTimestamps(): static

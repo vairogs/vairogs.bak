@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
 use ReflectionClassConstant;
-use ReflectionException;
 use ReflectionMethod;
 use ReflectionObject;
 use RuntimeException;
@@ -119,9 +118,6 @@ final class Php
         return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
     }
 
-    /**
-     * @throws ReflectionException
-     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function getArray(array|object $input): array

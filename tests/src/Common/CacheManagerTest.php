@@ -11,9 +11,7 @@ use Vairogs\Utils\Helper\Identification;
 
 class CacheManagerTest extends VairogsTestCase
 {
-    /**
-     * @throws CacheException
-     */
+    /** @throws CacheException */
     public function testCacheManager(): void
     {
         $random = (new Identification())->getRandomString(chars: Symbol::EXTENDED);

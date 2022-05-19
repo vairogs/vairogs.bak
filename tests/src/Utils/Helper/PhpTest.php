@@ -33,9 +33,7 @@ class PhpTest extends VairogsTestCase
         $this->assertEquals(expected: $expSetter, actual: (new Php())->setter(variable: $variable));
     }
 
-    /**
-     * @throws ReflectionException
-     */
+    /** @throws ReflectionException */
     public function testFilterExists(): void
     {
         $method = new ReflectionMethod(objectOrMethod: (new Php()), method: 'filterExists');
@@ -43,9 +41,6 @@ class PhpTest extends VairogsTestCase
         $this->assertFalse(condition: (new Php())->filterExists(method: $method, filterClass: Cache::class));
     }
 
-    /**
-     * @throws ReflectionException
-     */
     public function testGetParameter(): void
     {
         $this->assertEquals(expected: 'value', actual: (new Php())->getParameter(variable: new Entity1(), key: 'value'));

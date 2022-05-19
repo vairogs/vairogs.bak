@@ -153,9 +153,7 @@ final class Date
         return $date;
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
+    /** @throws InvalidArgumentException */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function getDate(?string $dateString = null, ?string $format = null): DateTime
@@ -167,9 +165,7 @@ final class Date
         return $date;
     }
 
-    /**
-     * @throws Exception
-     */
+    /** @throws Exception */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string

@@ -120,9 +120,7 @@ final class Iteration
         return $result;
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
+    /** @throws InvalidArgumentException */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function arrayFlipRecursive(array $input = []): array
@@ -155,9 +153,7 @@ final class Iteration
         }
     }
 
-    /**
-     * @throws InvalidArgumentException
-     */
+    /** @throws InvalidArgumentException */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function arrayValuesFiltered(array $input, string $with, StartsEnds $enum = StartsEnds::STARTS): array

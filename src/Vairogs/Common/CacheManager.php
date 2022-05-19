@@ -16,9 +16,7 @@ final class CacheManager
 {
     private ArrayAdapter|ChainAdapter $adapter;
 
-    /**
-     * @throws CacheException
-     */
+    /** @throws CacheException */
     public function __construct(private readonly int $defaultLifetime = Definition::DEFAULT_LIFETIME, private readonly bool $useFile = true, ...$adapters)
     {
         $this->adapter = $this->getAdapter(...$adapters);
@@ -67,9 +65,7 @@ final class CacheManager
         }
     }
 
-    /**
-     * @throws CacheException
-     */
+    /** @throws CacheException */
     private function getAdapter(...$adapters): ArrayAdapter|ChainAdapter
     {
         if ([] === $adapters && $this->useFile) {
@@ -90,9 +86,7 @@ final class CacheManager
         }
     }
 
-    /**
-     * @throws CacheException
-     */
+    /** @throws CacheException */
     private function createPool(array $adapters = []): array
     {
         $pool = [];

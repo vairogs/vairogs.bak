@@ -53,17 +53,13 @@ class Uri
         return $this;
     }
 
-    /**
-     * @throws OpenIDConnectException
-     */
+    /** @throws OpenIDConnectException */
     public function redirect(): Response
     {
         return new RedirectResponse(url: $this->getUrl());
     }
 
-    /**
-     * @throws OpenIDConnectException
-     */
+    /** @throws OpenIDConnectException */
     public function getUrl(?string $language = null): string
     {
         $this->setIdToken();
@@ -82,9 +78,7 @@ class Uri
         $this->urlParams[$name] = $value;
     }
 
-    /**
-     * @throws OpenIDConnectException
-     */
+    /** @throws OpenIDConnectException */
     protected function buildUrl(?string $language = null): void
     {
         if (null !== $language) {
@@ -116,9 +110,7 @@ class Uri
         $this->urlParams = !empty($options['url_params']) ? array_merge($options['url_params'], $additional) : $additional;
     }
 
-    /**
-     * @throws OpenIDConnectException
-     */
+    /** @throws OpenIDConnectException */
     private function setIdToken(): void
     {
         if (Request::METHOD_GET === $this->method && isset($this->urlParams['id_token_hint']) && null !== $this->session && $this->session->has(name: 'id_token')) {
