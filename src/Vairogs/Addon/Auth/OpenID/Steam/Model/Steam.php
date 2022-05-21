@@ -10,7 +10,6 @@ use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\Traits\SteamGetters;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\Traits\SteamSetters;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
-use Vairogs\Extra\Constants\Definition;
 
 #[ORM\MappedSuperclass]
 class Steam implements OpenIDUser, User, Stringable
@@ -42,35 +41,35 @@ class Steam implements OpenIDUser, User, Stringable
     #[ORM\Column(type: Types::INTEGER)]
     protected int $personaState;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?int $logoff = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected int $logoff;
 
-    #[ORM\Column(type: Types::STRING, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?string $name = null;
+    #[ORM\Column(type: Types::STRING)]
+    protected string $name;
 
-    #[ORM\Column(type: Types::BIGINT, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?int $clanId = null;
+    #[ORM\Column(type: Types::BIGINT)]
+    protected int $clanId;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[ORM\Column(type: Types::INTEGER)]
     protected int $createdAt;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?int $personaFlags = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected int $personaFlags;
 
-    #[ORM\Column(type: Types::STRING, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?string $countryCode = null;
+    #[ORM\Column(type: Types::STRING)]
+    protected string $countryCode;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?int $stateCode = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected int $stateCode;
 
-    #[ORM\Column(type: Types::STRING, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?string $playing = null;
+    #[ORM\Column(type: Types::STRING)]
+    protected string $playing;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?int $playingId = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    protected int $playingId;
 
-    #[ORM\Column(type: Types::STRING, unique: true, nullable: true, options: [Definition::DEFAULT => null])]
-    protected ?string $username = null;
+    #[ORM\Column(type: Types::STRING, unique: true)]
+    protected string $username;
 
     #[Pure]
     public function __toString(): string

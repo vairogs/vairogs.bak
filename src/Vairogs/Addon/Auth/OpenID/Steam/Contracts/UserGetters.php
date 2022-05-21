@@ -4,9 +4,9 @@ namespace Vairogs\Addon\Auth\OpenID\Steam\Contracts;
 
 interface UserGetters
 {
-    public function getPlaying(): ?string;
+    public function getPlaying(): string;
 
-    public function getPlayingId(): ?int;
+    public function getPlayingId(): int;
 
     public function getCommunityState(): int;
 
@@ -20,21 +20,21 @@ interface UserGetters
 
     public function getAvatar(): array;
 
-    public function getLogoff(): ?int;
+    public function getLogoff(): int;
 
     public function getPersonaState(): int;
 
-    public function getName(): ?string;
+    public function getName(): string;
 
-    public function getClanId(): ?int;
+    public function getClanId(): int;
 
     public function getCreatedAt(): int;
 
-    public function getPersonaFlags(): ?int;
+    public function getPersonaFlags(): int;
 
-    public function getCountryCode(): ?string;
+    public function getCountryCode(): string;
 
-    public function getStateCode(): ?int;
+    public function getStateCode(): int;
 
-    public function getUsername(): ?string;
+    public function getUsername(): string;
 }

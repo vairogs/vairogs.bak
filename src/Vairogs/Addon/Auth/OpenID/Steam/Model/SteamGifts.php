@@ -11,6 +11,6 @@ class SteamGifts extends Steam
     #[Pure]
     public function __toString(): string
     {
-        return $this->getUsername() ?? $this->getOpenID();
+        return $this->getUsername();
     }
 }

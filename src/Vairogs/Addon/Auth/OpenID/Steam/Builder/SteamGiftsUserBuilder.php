@@ -16,6 +16,7 @@ use function file_get_contents;
 use function is_file;
 use function preg_match_all;
 use function trim;
+use const DIRECTORY_SEPARATOR;
 
 class SteamGiftsUserBuilder implements OpenIDUserBuilder
 {
@@ -24,7 +25,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
 
     public function getUser(array $response): OpenIDUser
     {
-        $this->cacheDir = $response['cache_dir'];
+        $this->cacheDir = (string) $response['cache_dir'];
 
         return $this->getSteamGiftsUser(data: $response);
     }
@@ -43,7 +44,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
 
     private function getSteamGiftsUser(array $data): User
     {
-        $input = $data['response']['players'][0];
+        $input = (array) $data['response']['players'][0];
         $input['username'] = $this->getUsername(user: $input['steamid']);
 
         return (new UserArrayFactory())->create(user: new $this->userClass(), bag: $input);

@@ -11,7 +11,7 @@ trait SteamSetters
         return $this;
     }
 
-    public function setClanId(?int $clanId): static
+    public function setClanId(int $clanId): static
     {
         $this->clanId = $clanId;
 
@@ -32,7 +32,7 @@ trait SteamSetters
         return $this;
     }
 
-    public function setCountryCode(?string $countryCode): static
+    public function setCountryCode(string $countryCode): static
     {
         $this->countryCode = $countryCode;
 
@@ -46,14 +46,14 @@ trait SteamSetters
         return $this;
     }
 
-    public function setLogoff(?int $logoff): static
+    public function setLogoff(int $logoff): static
     {
         $this->logoff = $logoff;
 
         return $this;
     }
 
-    public function setName(?string $name): static
+    public function setName(string $name): static
     {
         $this->name = $name;
 
@@ -74,7 +74,7 @@ trait SteamSetters
         return $this;
     }
 
-    public function setPersonaFlags(?int $personaFlags): static
+    public function setPersonaFlags(int $personaFlags): static
     {
         $this->personaFlags = $personaFlags;
 
@@ -88,14 +88,14 @@ trait SteamSetters
         return $this;
     }
 
-    public function setPlaying(?string $playing): static
+    public function setPlaying(string $playing): static
     {
         $this->playing = $playing;
 
         return $this;
     }
 
-    public function setPlayingId(?int $playingId): static
+    public function setPlayingId(int $playingId): static
     {
         $this->playingId = $playingId;
 
@@ -109,7 +109,7 @@ trait SteamSetters
         return $this;
     }
 
-    public function setStateCode(?int $stateCode): static
+    public function setStateCode(int $stateCode): static
     {
         $this->stateCode = $stateCode;
 
@@ -123,7 +123,7 @@ trait SteamSetters
         return $this;
     }
 
-    public function setUsername(?string $username): static
+    public function setUsername(string $username): static
     {
         $this->username = $username;
 

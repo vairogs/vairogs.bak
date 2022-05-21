@@ -9,7 +9,7 @@ trait SteamGetters
         return $this->avatar;
     }
 
-    public function getClanId(): ?int
+    public function getClanId(): int
     {
         return $this->clanId;
     }
@@ -24,7 +24,7 @@ trait SteamGetters
         return $this->communityState;
     }
 
-    public function getCountryCode(): ?string
+    public function getCountryCode(): string
     {
         return $this->countryCode;
     }
@@ -34,17 +34,17 @@ trait SteamGetters
         return $this->createdAt;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
-        return null;
+        return '';
     }
 
-    public function getLogoff(): ?int
+    public function getLogoff(): int
     {
         return $this->logoff;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -59,7 +59,7 @@ trait SteamGetters
         return $this->persona;
     }
 
-    public function getPersonaFlags(): ?int
+    public function getPersonaFlags(): int
     {
         return $this->personaFlags;
     }
@@ -69,12 +69,12 @@ trait SteamGetters
         return $this->personaState;
     }
 
-    public function getPlaying(): ?string
+    public function getPlaying(): string
     {
         return $this->playing;
     }
 
-    public function getPlayingId(): ?int
+    public function getPlayingId(): int
     {
         return $this->playingId;
     }
@@ -84,7 +84,7 @@ trait SteamGetters
         return $this->profileState;
     }
 
-    public function getStateCode(): ?int
+    public function getStateCode(): int
     {
         return $this->stateCode;
     }
@@ -94,7 +94,7 @@ trait SteamGetters
         return $this->url;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->username;
     }
