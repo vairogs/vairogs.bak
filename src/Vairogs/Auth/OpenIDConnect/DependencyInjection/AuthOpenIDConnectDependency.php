@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Auth\DependencyInjection\AbstractAuthChildDependency;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
+use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
 use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Service;
@@ -35,9 +36,9 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
             ->arrayNode(name: 'redirect')
                 ->addDefaultsIfNotSet()
                 ->children()
-                    ->enumNode(name: 'type')->values(values: ['route', 'uri'])->defaultValue(value: 'route')->end()
-                    ->scalarNode(name: 'route')->defaultValue(value: null)->end()
-                    ->scalarNode(name: 'uri')->defaultValue(value: null)->end()
+                    ->enumNode(name: 'type')->values(values: Redirect::getCases())->defaultValue(value: Redirect::ROUTE->value)->end()
+                    ->scalarNode(name: Redirect::ROUTE->value)->defaultValue(value: null)->end()
+                    ->scalarNode(name: Redirect::URI->value)->defaultValue(value: null)->end()
                     ->arrayNode(name: 'params')->prototype(type: Definition::VARIABLE)->end()->end()
                 ->end()
             ->end()

@@ -28,6 +28,7 @@ use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\SignedWith;
 use Vairogs\Auth\OpenIDConnect\Configuration\ParsedToken;
 use Vairogs\Auth\OpenIDConnect\Configuration\UriCollection;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
+use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
 use Vairogs\Auth\OpenIDConnect\Utils\Traits\OpenIDConnectProviderVariables;
 use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
@@ -45,14 +46,10 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
 {
     use OpenIDConnectProviderVariables;
 
+    /** @noinspection TraitsPropertiesConflictsInspection */
     public function __construct(protected string $name, protected readonly RouterInterface $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
     {
-        try {
-            $this->session = $requestStack->getCurrentRequest()?->getSession();
-        } catch (Exception) {
-            // exception === use already set session (default: null)
-        }
-
+        $this->requestStack = $requestStack;
         parent::__construct(options: $options, collaborators: $collaborators);
 
         if ([] !== $options) {
@@ -61,9 +58,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         }
     }
 
-    /**
-     * @throws IdentityProviderException
-     */
+    /** @throws IdentityProviderException */
     public function getAccessToken($grant, array $options = []): AccessTokenInterface|BaseAccessToken
     {
         $accessToken = $this->getAccessTokenFunction(grant: $grant, options: $options);
@@ -80,17 +75,13 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $accessToken;
     }
 
-    /**
-     * @throws IdentityProviderException
-     */
+    /** @throws IdentityProviderException */
     public function getRefreshToken($token, array $options = []): array
     {
         return $this->getTokenResponse(request: $this->getTokenRequest(params: array_merge(['token' => $token, 'grant_type' => 'refresh_token'], $options), url: $this->getRefreshTokenUrl()));
     }
 
-    /**
-     * @throws IdentityProviderException
-     */
+    /** @throws IdentityProviderException */
     public function getAccessTokenFunction($grant, array $options = []): ?ParsedToken
     {
         $grant = $this->verifyGrant(grant: $grant);
@@ -108,17 +99,13 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return Key\InMemory::plainText(contents: $this->publicKey);
     }
 
-    /**
-     * @throws IdentityProviderException
-     */
+    /** @throws IdentityProviderException */
     public function getValidateToken($token, array $options = []): array
     {
         return $this->getTokenResponse(request: $this->getTokenRequest(params: array_merge(['token' => $token], $options), url: $this->getValidateTokenUrl()));
     }
 
-    /**
-     * @throws IdentityProviderException
-     */
+    /** @throws IdentityProviderException */
     public function getTokenResponse(RequestInterface $request): array
     {
         $response = $this->getResponse(request: $request);
@@ -134,9 +121,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $parsed;
     }
 
-    /**
-     * @throws IdentityProviderException
-     */
+    /** @throws IdentityProviderException */
     public function getRevokeToken($token, array $options = []): array
     {
         return $this->getTokenResponse(request: $this->getTokenRequest(params: array_merge(['token' => $token], $options), url: $this->getRevokeTokenUrl()));
@@ -145,9 +130,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     protected function configure(array $options = []): void
     {
         $this->redirectUri = match ($options['redirect']['type']) {
-            'uri' => $options['redirect']['uri'],
-            'route' => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL),
-            default => null,
+            Redirect::URI->value => $options['redirect']['uri'],
+            Redirect::ROUTE->value => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL)
         };
 
         $uris = $options['uris'] ?? [];
@@ -172,7 +156,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     {
         $this->validatorChain
             ->setAssertions(assertions: [
-                (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->setRequired(required: true),
+                (new SignedWith(signer: $this->getSigner(), key: $this->getPublicKey()))->setRequired(required: true),
                 (new IssuedBy(issuers: $this->getIdTokenIssuer()))->setRequired(required: true),
                 (new Equal(expected: $this->clientId))->setClaim(claim: 'azp'),
                 (new Equal(expected: [$this->clientId]))->setClaim(claim: RegisteredClaims::AUDIENCE),
@@ -184,12 +168,10 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
             ]);
     }
 
-    /**
-     * @throws UnexpectedValueException
-     */
+    /** @throws UnexpectedValueException */
     protected function parseJson($content): array
     {
-        if (empty($content)) {
+        if ('' === $content) {
             return [];
         }
 
@@ -226,10 +208,11 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
 
     protected function saveSession(ParsedToken $accessToken): void
     {
-        if ($this->useSession && null !== $this->session) {
-            $this->session->set(name: 'access_token', value: $accessToken->getToken());
-            $this->session->set(name: 'refresh_token', value: $accessToken->getRefreshToken());
-            $this->session->set(name: 'id_token', value: $accessToken->getIdTokenHint());
+        $session = $this->requestStack->getCurrentRequest()?->getSession();
+        if ($this->useSession && null !== $session) {
+            $session->set(name: 'access_token', value: $accessToken->getToken());
+            $session->set(name: 'refresh_token', value: $accessToken->getRefreshToken());
+            $session->set(name: 'id_token', value: $accessToken->getIdTokenHint());
         }
     }
 

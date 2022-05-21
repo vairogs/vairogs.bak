@@ -31,6 +31,7 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
             ->scalarNode(name: 'redirect_route')->isRequired()->cannotBeEmpty()->end()
             ->arrayNode(name: 'provider_options')->prototype(type: Definition::VARIABLE)->end()->end();
 
+        /* @noinspection PhpUnreachableStatementInspection */
         $optionsNode->end();
     }
 

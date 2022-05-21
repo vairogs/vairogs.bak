@@ -4,7 +4,6 @@ namespace Vairogs\Auth\OpenID;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
 use JsonException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -128,7 +127,7 @@ class OpenIDProvider implements HasRegistry
         $realm = $altRealm ?: ((new Uri())->getSchema(request: $this->requestStack->getCurrentRequest() ?? Request::createFromGlobals()) . $this->requestStack->getCurrentRequest()->server->get(key: 'HTTP_HOST'));
 
         if (null !== $return) {
-            if (!$this->validateUrl(url: $return)) {
+            if (!(new Uri())->isUrl(url: $return)) {
                 throw new InvalidArgumentException(message: 'Invalid return url');
             }
         } else {
@@ -142,12 +141,6 @@ class OpenIDProvider implements HasRegistry
     private function getData(string $openID): mixed
     {
         return (new Json())->decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: Json::ASSOCIATIVE);
-    }
-
-    #[Pure]
-    private function validateUrl(string $url): bool
-    {
-        return (new Uri())->isUrl(url: $url);
     }
 
     #[ArrayShape([
