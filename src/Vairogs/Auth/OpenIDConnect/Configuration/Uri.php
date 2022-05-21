@@ -30,7 +30,7 @@ class Uri
         $this->basePost = null !== ($extra['base_uri_post'] ?? null) ? rtrim(string: $extra['base_uri_post'], characters: '/') . '/' : null;
         unset($extra['base_uri'], $extra['base_uri_post']);
 
-        if (!empty($params = $options['params'])) {
+        if ([] !== $params = $options['params']) {
             $this->params = $params;
         }
 
@@ -90,11 +90,11 @@ class Uri
             $clientUrl = $this->basePost;
         }
 
-        if (!empty($this->params)) {
+        if ([] !== $this->params) {
             $clientUrl .= implode(separator: '/', array: $this->params);
         }
 
-        if (!empty($this->urlParams)) {
+        if ([] !== $this->urlParams) {
             $clientUrl .= '?' . http_build_query(data: $this->urlParams);
         }
 
@@ -107,7 +107,7 @@ class Uri
             $options['url_params']['post_logout_redirect_uri'] = $additional['redirect_uri'];
             unset($additional['redirect_uri']);
         }
-        $this->urlParams = !empty($options['url_params']) ? array_merge($options['url_params'], $additional) : $additional;
+        $this->urlParams = [] !== $options['url_params'] ? array_merge($options['url_params'], $additional) : $additional;
     }
 
     /** @throws OpenIDConnectException */

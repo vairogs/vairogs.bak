@@ -18,7 +18,7 @@ class ParsedToken extends AccessToken
         $parser = Configuration::forUnsecuredSigner()
             ->parser();
 
-        if (!empty($this->values['id_token'])) {
+        if ('' !== $this->values['id_token']) {
             $parse = $parser->parse(jwt: $this->values['id_token']);
             /* @var UnencryptedToken $parse */
             $this->idToken = new IdToken(token: $parse);

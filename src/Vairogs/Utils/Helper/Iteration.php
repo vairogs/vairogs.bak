@@ -28,7 +28,7 @@ final class Iteration
     #[Attribute\TwigFilter]
     public function isEmpty(mixed $variable, bool $result = true): bool
     {
-        if (!empty($variable) && is_array(value: $variable)) {
+        if (is_array(value: $variable) && [] !== $variable) {
             foreach ($variable as $value) {
                 $result = $this->isEmpty(variable: $value, result: $result);
             }

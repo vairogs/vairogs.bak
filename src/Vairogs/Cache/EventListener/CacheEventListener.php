@@ -122,7 +122,7 @@ class CacheEventListener implements EventSubscriberInterface
             return false;
         }
 
-        return !empty($controller = $this->event->getController(kernelEvent: $kernelEvent)) && class_exists(class: $controller[0]);
+        return [] !== ($controller = $this->event->getController(kernelEvent: $kernelEvent)) && class_exists(class: $controller[0]);
     }
 
     private function needsInvalidation(Request $request): bool

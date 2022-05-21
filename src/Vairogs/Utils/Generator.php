@@ -23,7 +23,7 @@ final class Generator
     /** @throws LogicException */
     public function generate(int $length = 32): string
     {
-        if (empty($this->sets)) {
+        if ([] === $this->sets) {
             throw new LogicException(message: 'At least one set must be used!');
         }
 

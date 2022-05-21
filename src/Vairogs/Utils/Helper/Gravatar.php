@@ -33,7 +33,7 @@ final class Gravatar
     #[Attribute\TwigFilter]
     public function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
     {
-        if (empty($email) || !(new Validate())->validateEmail(email: $email)) {
+        if (!(new Validate())->validateEmail(email: $email)) {
             $email = self::DEFAULT_EMAIL;
         }
 
