@@ -19,8 +19,8 @@ class CacheManagerTest extends VairogsTestCase
         $manager = (new CacheManager());
         $this->assertEquals(expected: null, actual: $manager->get(key: __FUNCTION__));
         $this->assertEquals(expected: null, actual: $manager->get(key: $random));
-        $manager->set(key: __FUNCTION__, value: __CLASS__, expiresAfter: 15);
-        $manager->set(key: $random, value: __CLASS__, expiresAfter: 15);
+        $manager->set(key: __FUNCTION__, value: __CLASS__, expiresAfter: 5);
+        $manager->set(key: $random, value: __CLASS__, expiresAfter: 5);
         $this->assertEquals(expected: __CLASS__, actual: $manager->get(key: __FUNCTION__));
         $manager->delete(key: __FUNCTION__);
         $manager->delete(key: $random);

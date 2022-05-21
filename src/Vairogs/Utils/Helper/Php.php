@@ -169,7 +169,7 @@ final class Php
     {
         array_unshift($arguments, $value);
 
-        return (new Closure())->hijackCall(null, $function, true, ...$arguments);
+        return (new Closure())->hijackReturn($function, ...$arguments);
     }
 
     #[Attribute\TwigFunction]
@@ -178,6 +178,6 @@ final class Php
     {
         array_unshift($arguments, $value);
 
-        return (new Closure())->hijackCall($object, $function, true, ...$arguments);
+        return (new Closure())->hijackReturnObject($object, $function, ...$arguments);
     }
 }

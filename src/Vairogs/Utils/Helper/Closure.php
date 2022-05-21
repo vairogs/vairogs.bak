@@ -39,7 +39,7 @@ final class Closure
     {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                $this->call(function: function () use ($object, $property, $value): void {
+                $this->void(function: function () use ($object, $property, $value): void {
                     $object::${$property} = $value;
                 }, clone: $object);
 
@@ -65,27 +65,25 @@ final class Closure
             throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
         }
 
-        $this->call(function: function () use ($object, $property, $value): void {
+        $this->void(function: function () use ($object, $property, $value): void {
             $object->{$property} = $value;
         }, clone: $object);
 
         return $object;
     }
 
-    /**
-     * @noinspection PhpInconsistentReturnPointsInspection
-     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function call(callable $function, object $clone, bool $return = false, ...$arguments)
+    public function return(callable $function, object $clone, ...$arguments): mixed
     {
-        $func = \Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
+        return $this->bind(function: $function, clone: $clone)(...$arguments);
+    }
 
-        if ($return) {
-            return $func(...$arguments);
-        }
-
-        $func(...$arguments);
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function void(callable $function, object $clone, ...$arguments): void
+    {
+        $this->bind(function: $function, clone: $clone)(...$arguments);
     }
 
     /** @throws InvalidArgumentException */
@@ -95,7 +93,7 @@ final class Closure
     {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                return $this->call(fn () => $object::${$property}, $object, true, ...$arguments);
+                return $this->return(fn () => $object::${$property}, $object, ...$arguments);
             }
         } catch (Exception) {
             // exception === unable to get object property
@@ -117,7 +115,7 @@ final class Closure
             throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
         }
 
-        return $this->call(fn () => $object->{$property}, $object, true, ...$arguments);
+        return $this->return(fn () => $object->{$property}, $object, ...$arguments);
     }
 
     /**
@@ -151,23 +149,36 @@ final class Closure
         return $this->hijackGetStatic($object, $property, ...$arguments);
     }
 
-    /** @noinspection PhpInconsistentReturnPointsInspection */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function hijackCall(?object $object, string $function, bool $return = false, ...$arguments)
+    public function hijackVoid(string $function, ...$arguments): void
     {
-        if (null === $object) {
-            if ($return) {
-                return $function(...$arguments);
-            }
+        $function(...$arguments);
+    }
 
-            $function(...$arguments);
-        } else {
-            if ($return) {
-                return $this->call(fn () => $object->{$function}(...$arguments), $object, $return, ...$arguments);
-            }
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function hijackVoidObject(object $object, string $function, ...$arguments): void
+    {
+        $this->void(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
+    }
 
-            $this->call(fn () => $object->{$function}(...$arguments), $object, $return, ...$arguments);
-        }
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function hijackReturn(string $function, ...$arguments): mixed
+    {
+        return $function(...$arguments);
+    }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function hijackReturnObject(object $object, string $function, ...$arguments): mixed
+    {
+        return $this->return(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
+    }
+
+    private function bind(callable $function, object $clone): \Closure|false|null
+    {
+        return \Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
     }
 }

@@ -18,7 +18,7 @@ class RichUrl extends Url
     #[Pure]
     public function hasAlternates(): bool
     {
-        return !empty($this->alternateUrls);
+        return [] !== $this->alternateUrls;
     }
 
     public function getAlternateUrls(): array

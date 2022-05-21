@@ -18,17 +18,8 @@ trait TwigTrait
     {
         $this->checkClass(class: $class);
 
-        $functions = [];
-        foreach ($input as $call => $function) {
-            if (is_numeric(value: $call)) {
-                $call = (new Char())->toSnakeCase(string: $function, skipCamel: true);
-            }
-
-            $functions[sprintf('%s_%s', $key, $call)] = $function;
-        }
-
         $output = [];
-        foreach ($functions as $call => $function) {
+        foreach ($this->parseFunctions(input: $input, key: $key) as $call => $function) {
             if (is_array(value: $function)) {
                 $options = $function[2] ?? [];
                 unset($function[2]);
@@ -51,5 +42,19 @@ trait TwigTrait
         ], strict: true)) {
             throw new InvalidArgumentException(message: sprintf('Invalid type "%s":. Allowed types are %s and %s', $class, TwigFilter::class, TwigFunction::class));
         }
+    }
+
+    private function parseFunctions(array $input, string $key): array
+    {
+        $functions = [];
+        foreach ($input as $call => $function) {
+            if (is_numeric(value: $call)) {
+                $call = (new Char())->toSnakeCase(string: $function, skipCamel: true);
+            }
+
+            $functions[sprintf('%s_%s', $key, $call)] = $function;
+        }
+
+        return $functions;
     }
 }

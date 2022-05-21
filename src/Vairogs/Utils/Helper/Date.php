@@ -93,7 +93,7 @@ final class Date
                     $str .= $time . ' ' . $unit . (1.0 === $time ? '' : 's') . ' ';
                 }
 
-                $timestamp -= ($time * $value);
+                $timestamp -= $time * $value;
             }
         }
 

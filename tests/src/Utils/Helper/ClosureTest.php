@@ -17,15 +17,15 @@ class ClosureTest extends VairogsTestCase
 {
     public function testHijackCall(): void
     {
-        (new Closure())->hijackCall(null, 'putenv', false, sprintf('%s=%s', __FUNCTION__, __CLASS__));
-        $this->assertEquals(expected: __CLASS__, actual: (new Closure())->hijackCall(null, 'getenv', true, __FUNCTION__));
+        (new Closure())->hijackVoid('putenv', sprintf('%s=%s', __FUNCTION__, __CLASS__));
+        $this->assertEquals(expected: __CLASS__, actual: (new Closure())->hijackReturn('getenv', __FUNCTION__));
     }
 
     public function testHijackCallObject(): void
     {
         $entity = new Entity();
-        (new Closure())->hijackCall($entity, 'setStatus', false, Definition::ENABLED);
-        $this->assertEquals(expected: Definition::ENABLED, actual: (new Closure())->hijackCall(object: $entity, function: 'getStatus', return: true));
+        (new Closure())->hijackVoidObject($entity, 'setStatus', Definition::ENABLED);
+        $this->assertEquals(expected: Definition::ENABLED, actual: (new Closure())->hijackReturnObject(object: $entity, function: 'getStatus'));
     }
 
     public function testHijackGet(): void

@@ -32,10 +32,10 @@ class CharTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\CharDataProvider::dataProviderBase62
+     * @dataProvider \Vairogs\Assets\Utils\Helper\CharDataProvider::dataProviderToCamelCase
      */
-    public function testBase62(int $number): void
+    public function testToCamelCase(string $input, string $function, string $expected): void
     {
-        $this->assertEquals(expected: $number, actual: (new Char())->base62Decode(string: (new Char())->base62Encode(number: $number)));
+        $this->assertEquals(expected: $expected, actual: (new Char())->toCamelCase(string: $input, function: $function));
     }
 }

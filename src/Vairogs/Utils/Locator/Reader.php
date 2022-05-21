@@ -33,7 +33,7 @@ class Reader
     private function findDefinitions(array $stmts, Name $namespace): void
     {
         foreach ($stmts as $stmt) {
-            $this->makeDefinition($stmt, $namespace);
+            $this->makeDefinition(stmt: $stmt, namespace: $namespace);
         }
     }
 

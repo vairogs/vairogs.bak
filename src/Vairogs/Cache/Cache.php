@@ -30,7 +30,7 @@ final class Cache
 
         $value = $this->data;
 
-        if (!empty($this->attributes)) {
+        if ([] !== $this->attributes) {
             $value = (new Iteration())->arrayIntersectKeyRecursive(first: $this->data, second: (new Iteration())->arrayFlipRecursive(input: $this->attributes));
         }
 

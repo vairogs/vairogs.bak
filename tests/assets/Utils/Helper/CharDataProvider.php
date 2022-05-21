@@ -2,6 +2,8 @@
 
 namespace Vairogs\Assets\Utils\Helper;
 
+use Vairogs\Utils\Helper\Char;
+
 class CharDataProvider
 {
     public function dataProviderSanitizeFloat(): array
@@ -30,13 +32,12 @@ class CharDataProvider
         ];
     }
 
-    public function dataProviderBase62(): array
+    public function dataProviderToCamelCase(): array
     {
         return [
-            [12578952, ],
-            [0, ],
-            [3, ],
-            [777, ],
+            ['vairogs_helper', Char::LCFIRST, 'vairogsHelper', ],
+            ['vairogshelper', Char::UCFIRST, 'Vairogshelper', ],
+            ['hello_world', Char::UCFIRST, 'HelloWorld', ],
         ];
     }
 }

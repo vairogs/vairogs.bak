@@ -3,12 +3,12 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Twig\Attribute;
 use function array_values;
 use function count;
 use function filter_var;
 use function implode;
+use function lcfirst;
 use function pack;
 use function preg_replace;
 use function str_repeat;
@@ -16,6 +16,7 @@ use function str_replace;
 use function strlen;
 use function strtolower;
 use function substr;
+use function ucfirst;
 use function ucwords;
 use function unpack;
 use const FILTER_FLAG_ALLOW_FRACTION;
@@ -49,7 +50,14 @@ final class Char
     #[Attribute\TwigFilter]
     public function toCamelCase(string $string, string $function = self::LCFIRST): string
     {
-        return preg_replace(pattern: '#\s+#', replacement: '', subject: $function(string: ucwords(string: strtolower(string: str_replace(search: '_', replace: ' ', subject: $string)))));
+        $subject = ucwords(string: strtolower(string: str_replace(search: '_', replace: ' ', subject: $string)));
+
+        $subject = match ($function) {
+            self::LCFIRST => lcfirst(string: $subject),
+            self::UCFIRST => ucfirst(string: $subject)
+        };
+
+        return preg_replace(pattern: '#\s+#', replacement: '', subject: $subject);
     }
 
     #[Attribute\TwigFunction]
@@ -73,13 +81,16 @@ final class Char
 
         if ($wide) {
             /* @noinspection PhpRedundantOptionalArgumentInspection */
-            return substr(string: implode(separator: '', array: $string), offset: 0, length: $array[$length - 1]);
+            return substr(string: implode(separator: '', array: $string), offset: 0, length: (int) $array[$length - 1]);
         }
 
         /* @noinspection PhpRedundantOptionalArgumentInspection */
         return implode(separator: '', array: $string);
     }
 
+    /**
+     * @return int[]
+     */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function str2long(string $string, bool $wide = false): array
@@ -108,40 +119,5 @@ final class Char
     public function byte2char(int $byte): string
     {
         return pack('c', $byte);
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function base62Encode(int $number): string
-    {
-        $base = Symbol::BASIC;
-        $length = strlen(string: $base);
-        $remainder = $number % $length;
-        $result = $base[$remainder];
-        $divides = floor(num: $number / $length);
-
-        while ($divides) {
-            $remainder = $divides % $length;
-            $divides = floor(num: $divides / $length);
-            $result = $base[$remainder] . $result;
-        }
-
-        return $result;
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function base62Decode(string $string): int
-    {
-        $base = Symbol::BASIC;
-        $length = strlen(string: $base);
-        $limit = strlen(string: $string);
-        $result = strpos(haystack: $base, needle: $string[0]);
-
-        for ($i = 1; $i < $limit; $i++) {
-            $result = $length * $result + strpos(haystack: $base, needle: $string[$i]);
-        }
-
-        return $result;
     }
 }

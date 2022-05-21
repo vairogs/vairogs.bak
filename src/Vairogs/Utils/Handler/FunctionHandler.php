@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Handler;
 
 use Vairogs\Utils\Helper\Closure;
+use function is_object;
 
 class FunctionHandler extends AbstractHandler
 {
@@ -19,6 +20,10 @@ class FunctionHandler extends AbstractHandler
 
     public function handle(...$arguments): mixed
     {
-        return (new Closure())->hijackCall($this->instance, $this->functionName, true, ...$arguments) ?? parent::handle(...$arguments);
+        if (!is_object(value: $this->instance)) {
+            return (new Closure())->hijackReturn($this->functionName, ...$arguments) ?? parent::handle(...$arguments);
+        }
+
+        return (new Closure())->hijackReturnObject($this->instance, $this->functionName, ...$arguments) ?? parent::handle(...$arguments);
     }
 }
