@@ -64,4 +64,12 @@ class TextDataProvider
             ['onetwothreevairogs', ['vairogs', 'one', ], true, ],
         ];
     }
+
+    public function dataProviderSanitize(): array
+    {
+        return [
+            ['<p>Pārtraukumi pakalpojumu darbībā</p>', 'Pārtraukumi pakalpojumu darbībā', ],
+            ['I walk the <b>dog</b> now', 'I walk the dog now', ],
+        ];
+    }
 }

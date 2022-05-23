@@ -74,4 +74,12 @@ class TextTest extends VairogsTestCase
     {
         $this->assertEquals(expected: $expected, actual: (new Text())->containsAny(haystack: $haystack, needles: $needles));
     }
+
+    /**
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderSanitize
+     */
+    public function testSanitize(string $input, string $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Text())->sanitize(text: $input));
+    }
 }

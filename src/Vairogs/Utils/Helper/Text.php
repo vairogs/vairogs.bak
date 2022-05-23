@@ -154,4 +154,12 @@ final class Text
     {
         return $this->replacePattern(pattern: '#\R+#', text: html_entity_decode(string: $text));
     }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function sanitize(string $text): string
+    {
+        /* @noinspection PhpDeprecationInspection */
+        return preg_replace(pattern: ['~[\r\n]+~', '#\s+#S'], replacement: ' ', subject: filter_var(value: $text, filter: FILTER_SANITIZE_STRING));
+    }
 }
