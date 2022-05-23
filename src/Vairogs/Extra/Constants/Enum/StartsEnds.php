@@ -4,6 +4,6 @@ namespace Vairogs\Extra\Constants\Enum;
 
 enum StartsEnds
 {
-    case STARTS;
     case ENDS;
+    case STARTS;
 }

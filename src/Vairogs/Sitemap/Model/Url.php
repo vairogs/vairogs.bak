@@ -9,12 +9,12 @@ use function number_format;
 
 class Url
 {
-    protected array $videos = [];
-    protected array $images = [];
-    protected string $loc;
     protected ?DateTimeInterface $lastmod = null;
     protected ?string $changefreq = null;
+    protected array $images = [];
+    protected array $videos = [];
     protected float $priority = 0.5;
+    protected string $loc;
 
     public function getLoc(): string
     {

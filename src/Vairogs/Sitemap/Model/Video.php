@@ -10,23 +10,23 @@ class Video
 {
     use VideoGetters;
     use VideoSetters;
-    protected string $thumbnailLoc;
-    protected string $title;
-    protected string $description;
-    protected array $tags = [];
-    protected array $restrictions = [];
-    protected array $platforms = [];
-    protected ?string $contentLoc = null;
-    protected ?string $playerLoc = null;
-    protected ?int $duration = null;
     protected ?DateTimeInterface $expirationDate = null;
-    protected ?float $rating = null;
-    protected ?int $viewCount = null;
     protected ?DateTimeInterface $publicationDate = null;
-    protected ?string $familyFriendly = null;
+    protected ?float $rating = null;
+    protected ?int $duration = null;
+    protected ?int $viewCount = null;
     protected ?string $category = null;
+    protected ?string $contentLoc = null;
+    protected ?string $familyFriendly = null;
     protected ?string $galleryLoc = null;
+    protected ?string $live = null;
+    protected ?string $playerLoc = null;
     protected ?string $requiresSubscription = null;
     protected ?string $uploader = null;
-    protected ?string $live = null;
+    protected array $platforms = [];
+    protected array $restrictions = [];
+    protected array $tags = [];
+    protected string $description;
+    protected string $thumbnailLoc;
+    protected string $title;
 }

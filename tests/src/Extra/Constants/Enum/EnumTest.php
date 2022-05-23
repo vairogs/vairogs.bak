@@ -10,6 +10,6 @@ class EnumTest extends VairogsTestCase
     public function testEnumTrait(): void
     {
         $this->assertEquals(expected: [], actual: TestEnum::getCases());
-        $this->assertEquals(expected: ['uri', 'route', ], actual: Redirect::getCases());
+        $this->assertEquals(expected: ['route', 'uri', ], actual: Redirect::getCases());
     }
 }

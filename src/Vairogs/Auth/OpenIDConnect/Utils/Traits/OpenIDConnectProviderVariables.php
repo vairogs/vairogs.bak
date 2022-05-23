@@ -13,17 +13,17 @@ use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 
 trait OpenIDConnectProviderVariables
 {
-    protected UriCollection $uriCollection;
-    protected string $publicKey;
     protected ?Signer $signer = null;
-    protected ValidatorChain $validatorChain;
-    protected string $idTokenIssuer;
-    protected bool $useSession = false;
+    protected ?string $baseUriPost;
     protected RequestStack $requestStack;
+    protected UriCollection $uriCollection;
+    protected ValidatorChain $validatorChain;
+    protected bool $useSession = false;
+    protected bool $verify = true;
     protected int $statusCode;
     protected string $baseUri;
-    protected ?string $baseUriPost;
-    protected bool $verify = true;
+    protected string $idTokenIssuer;
+    protected string $publicKey;
 
     public function getClientId(): string
     {

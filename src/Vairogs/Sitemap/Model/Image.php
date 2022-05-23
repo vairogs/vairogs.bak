@@ -4,11 +4,11 @@ namespace Vairogs\Sitemap\Model;
 
 class Image
 {
-    protected string $loc;
     protected ?string $caption = null;
     protected ?string $geoLocation = null;
-    protected ?string $title = null;
     protected ?string $license = null;
+    protected ?string $title = null;
+    protected string $loc;
 
     public function getLoc(): string
     {

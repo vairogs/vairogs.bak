@@ -6,8 +6,8 @@ use DateTimeInterface;
 
 class SitemapIndex
 {
-    protected string $loc;
     protected ?DateTimeInterface $lastmod = null;
+    protected string $loc;
 
     public function getLoc(): string
     {

@@ -130,8 +130,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     protected function configure(array $options = []): void
     {
         $this->redirectUri = match ($options['redirect']['type']) {
-            Redirect::URI->value => $options['redirect']['uri'],
-            Redirect::ROUTE->value => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL)
+            Redirect::ROUTE->value => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL),
+            Redirect::URI->value => $options['redirect']['uri']
         };
 
         $uris = $options['uris'] ?? [];
@@ -156,15 +156,15 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     {
         $this->validatorChain
             ->setAssertions(assertions: [
-                (new SignedWith(signer: $this->getSigner(), key: $this->getPublicKey()))->setRequired(required: true),
-                (new IssuedBy(issuers: $this->getIdTokenIssuer()))->setRequired(required: true),
                 (new Equal(expected: $this->clientId))->setClaim(claim: 'azp'),
                 (new Equal(expected: [$this->clientId]))->setClaim(claim: RegisteredClaims::AUDIENCE),
-                (new Hashed())->setClaim(claim: 'at_hash')->setRequired(required: true),
-                (new Exists())->setClaim(claim: RegisteredClaims::SUBJECT)->setRequired(required: true),
                 (new Exists())->setClaim(claim: RegisteredClaims::ISSUED_AT)->setRequired(required: true),
+                (new Exists())->setClaim(claim: RegisteredClaims::SUBJECT)->setRequired(required: true),
                 (new GreaterOrEqual(expected: (new DateTime())->getTimestamp()))->setClaim(claim: RegisteredClaims::EXPIRATION_TIME)->setRequired(required: true),
+                (new Hashed())->setClaim(claim: 'at_hash')->setRequired(required: true),
+                (new IssuedBy(issuers: $this->getIdTokenIssuer()))->setRequired(required: true),
                 (new LesserOrEqual(expected: (new DateTime())->getTimestamp()))->setClaim(claim: RegisteredClaims::NOT_BEFORE),
+                (new SignedWith(signer: $this->getSigner(), key: $this->getPublicKey()))->setRequired(required: true),
             ]);
     }
 
@@ -211,8 +211,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $session = $this->requestStack->getCurrentRequest()?->getSession();
         if ($this->useSession && null !== $session) {
             $session->set(name: 'access_token', value: $accessToken->getToken());
-            $session->set(name: 'refresh_token', value: $accessToken->getRefreshToken());
             $session->set(name: 'id_token', value: $accessToken->getIdTokenHint());
+            $session->set(name: 'refresh_token', value: $accessToken->getRefreshToken());
         }
     }
 

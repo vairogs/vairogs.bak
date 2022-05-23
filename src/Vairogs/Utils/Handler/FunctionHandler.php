@@ -8,12 +8,12 @@ use function is_object;
 class FunctionHandler extends AbstractHandler
 {
     private ?object $instance;
-    private string $functionName;
+    private string $function;
 
     public function setFunction(string $functionName, ?object $instance = null): static
     {
         $this->instance = $instance;
-        $this->functionName = $functionName;
+        $this->function = $functionName;
 
         return $this;
     }
@@ -21,9 +21,9 @@ class FunctionHandler extends AbstractHandler
     public function handle(...$arguments): mixed
     {
         if (!is_object(value: $this->instance)) {
-            return (new Closure())->hijackReturn($this->functionName, ...$arguments) ?? parent::handle(...$arguments);
+            return (new Closure())->hijackReturn($this->function, ...$arguments) ?? parent::handle(...$arguments);
         }
 
-        return (new Closure())->hijackReturnObject($this->instance, $this->functionName, ...$arguments) ?? parent::handle(...$arguments);
+        return (new Closure())->hijackReturnObject($this->instance, $this->function, ...$arguments) ?? parent::handle(...$arguments);
     }
 }

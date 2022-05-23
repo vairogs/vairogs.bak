@@ -21,8 +21,8 @@ class VairogsExtension extends Extension
         $configuration = new Configuration();
         $this->process(configs: $configs, container: $container, configuration: $configuration);
 
-        $this->configureComponent(class: CacheDependency::class, container: $container, configuration: $configuration);
         $this->configureComponent(class: AuthDependency::class, container: $container, configuration: $configuration);
+        $this->configureComponent(class: CacheDependency::class, container: $container, configuration: $configuration);
         $this->configureComponent(class: SitemapDependency::class, container: $container, configuration: $configuration);
     }
 

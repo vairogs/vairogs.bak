@@ -24,14 +24,14 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
         /* @noinspection NullPointerExceptionInspection */
         /* @noinspection PhpPossiblePolymorphicInvocationInspection */
         $optionsNode
+            ->scalarNode(name: 'base_uri')->isRequired()->end()
+            ->scalarNode(name: 'base_uri_post')->defaultValue(value: null)->end()
             ->scalarNode(name: 'client_id')->isRequired()->defaultValue(value: null)->end()
             ->scalarNode(name: 'client_secret')->defaultValue(value: null)->end()
             ->scalarNode(name: 'id_token_issuer')->isRequired()->defaultValue(value: null)->end()
             ->scalarNode(name: 'public_key')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode(name: 'base_uri')->isRequired()->end()
-            ->scalarNode(name: 'base_uri_post')->defaultValue(value: null)->end()
-            ->scalarNode(name: 'user_provider')->defaultValue(value: DefaultProvider::class)->end()
             ->scalarNode(name: 'use_session')->defaultValue(value: false)->end()
+            ->scalarNode(name: 'user_provider')->defaultValue(value: DefaultProvider::class)->end()
             ->scalarNode(name: 'verify')->defaultValue(value: true)->end()
             ->arrayNode(name: 'redirect')
                 ->addDefaultsIfNotSet()
@@ -45,6 +45,7 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
             ->arrayNode(name: 'uris')->prototype(type: Type::BUILTIN_TYPE_ARRAY)->prototype(type: Definition::VARIABLE)->end()->end()
         ->end();
 
+        /* @noinspection PhpUnreachableStatementInspection */
         $optionsNode->end();
     }
 

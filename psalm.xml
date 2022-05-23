@@ -9,14 +9,16 @@
     <projectFiles>
         <directory name="src"/>
         <ignoreFiles>
-            <directory name="vendor"/>
             <directory name="tests"/>
+            <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
-    <plugins><pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/></plugins>
-<issueHandlers>
-    <InvalidNamedArgument errorLevel="suppress" />
-    <MissingConstructor errorLevel="suppress" />
-    <MixedReturnTypeCoercion errorLevel="suppress" />
-</issueHandlers>
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
+    </plugins>
+    <issueHandlers>
+        <InvalidNamedArgument errorLevel="suppress" />
+        <MissingConstructor errorLevel="suppress" />
+        <MixedReturnTypeCoercion errorLevel="suppress" />
+    </issueHandlers>
 </psalm>

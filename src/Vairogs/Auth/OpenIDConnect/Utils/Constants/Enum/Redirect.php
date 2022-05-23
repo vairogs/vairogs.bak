@@ -8,6 +8,6 @@ enum Redirect: string
 {
     use Traits\CasesTrait;
 
-    case URI = 'uri';
     case ROUTE = 'route';
+    case URI = 'uri';
 }
