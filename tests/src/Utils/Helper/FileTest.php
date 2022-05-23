@@ -3,7 +3,7 @@
 namespace Vairogs\Tests\Utils\Helper;
 
 use UnexpectedValueException;
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\File;
 use Vairogs\Utils\Helper\Identification;
 use const DIRECTORY_SEPARATOR;
@@ -11,7 +11,7 @@ use const DIRECTORY_SEPARATOR;
 class FileTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\FileDataProvider::dataProviderHumanFileSize
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\FileDataProvider::dataProviderHumanFileSize
      */
     public function testHumanFileSize(int $bytes, int $decimals, string $expected): void
     {

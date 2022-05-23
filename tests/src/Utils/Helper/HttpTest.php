@@ -4,8 +4,8 @@ namespace Vairogs\Tests\Utils\Helper;
 
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Constants\Definition;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Http;
 
 class HttpTest extends VairogsTestCase

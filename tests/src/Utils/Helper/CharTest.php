@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Char;
 
 class CharTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\CharDataProvider::dataProviderSanitizeFloat
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\CharDataProvider::dataProviderSanitizeFloat
      */
     public function testSanitizeFloat(string $string, float $expected): void
     {
@@ -16,7 +16,7 @@ class CharTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\CharDataProvider::dataProviderToSnakeCase
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\CharDataProvider::dataProviderToSnakeCase
      */
     public function testToSnakeCase(string $string, bool $skip, string $expected): void
     {
@@ -24,7 +24,7 @@ class CharTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\CharDataProvider::dataProviderFromCamelCase
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\CharDataProvider::dataProviderFromCamelCase
      */
     public function testFromCamelCase(string $string, string $sep, string $expected): void
     {
@@ -32,7 +32,7 @@ class CharTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\CharDataProvider::dataProviderToCamelCase
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\CharDataProvider::dataProviderToCamelCase
      */
     public function testToCamelCase(string $input, string $function, string $expected): void
     {

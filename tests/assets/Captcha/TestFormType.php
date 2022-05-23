@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets\Captcha;
+namespace Vairogs\Tests\Assets\Captcha;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

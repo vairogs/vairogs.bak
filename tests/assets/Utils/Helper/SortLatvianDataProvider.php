@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets\Utils\Helper;
+namespace Vairogs\Tests\Assets\Utils\Helper;
 
-use Vairogs\Assets\Utils\Helper\Model\Entity1;
-use Vairogs\Assets\Utils\Helper\Model\Entity2;
-use Vairogs\Assets\Utils\Helper\Model\Entity3;
-use Vairogs\Assets\Utils\Helper\Model\Entity4;
-use Vairogs\Assets\Utils\Helper\Model\Entity5;
-use Vairogs\Assets\Utils\Helper\Model\Entity6;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity1;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity2;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity3;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity4;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity5;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity6;
 
 class SortLatvianDataProvider
 {

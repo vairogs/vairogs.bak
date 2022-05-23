@@ -3,8 +3,8 @@
 namespace Vairogs\Tests\Utils;
 
 use LogicException;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Constants\Symbol;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Generator;
 use Vairogs\Utils\Helper\Text;
 use function function_exists;

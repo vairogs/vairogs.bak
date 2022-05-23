@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Intl;
 
 class IntlTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IntlDataProvider::dataProviderCyrillicToLatin
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IntlDataProvider::dataProviderCyrillicToLatin
      */
     public function testCyrillicToLatin(string $string, string $expected): void
     {
@@ -16,7 +16,7 @@ class IntlTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IntlDataProvider::dataProviderLatinToCyrillic
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IntlDataProvider::dataProviderLatinToCyrillic
      */
     public function testLatinToCyrillic(string $string, string $expected): void
     {
@@ -24,7 +24,7 @@ class IntlTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IntlDataProvider::dataProviderGetCountryName
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IntlDataProvider::dataProviderGetCountryName
      */
     public function testGetCountryName(string $country, string $locale, string $expected): void
     {

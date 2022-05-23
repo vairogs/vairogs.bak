@@ -13,7 +13,7 @@
         <env name="APP_ENV" value="test" />
         <env name="DATABASE_URL" value="pgsql://postgres:Bqox56ewGRxrUY5MzFUNx0w23AXN0MY9@postgres14:5432/services_test" />
         <env name="ENVIRONMENT" value="test" />
-        <env name="KERNEL_CLASS" value="Vairogs\Assets\TestKernel" />
+        <env name="KERNEL_CLASS" value="Vairogs\Tests\Assets\TestKernel" />
         <env name="REDIS_DB_PHPREDIS" value="13" />
         <env name="REDIS_DB_PREDIS" value="13" />
         <env name="REDIS_URL" value="redis://Bqox56ewGRxrUY5MzFUNx0w23AXN0MY9@keydb:6379" />

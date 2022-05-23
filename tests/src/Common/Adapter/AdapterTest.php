@@ -4,10 +4,10 @@ namespace Vairogs\Tests\Common\Adapter;
 
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Common\Adapter\Orm;
 use Vairogs\Common\Adapter\PhpRedis;
 use Vairogs\Common\Adapter\Predis;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use function sprintf;
 
 class AdapterTest extends VairogsTestCase

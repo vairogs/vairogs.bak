@@ -15,8 +15,8 @@
     </projectFiles>
     <plugins><pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/></plugins>
 <issueHandlers>
+    <InvalidNamedArgument errorLevel="suppress" />
     <MissingConstructor errorLevel="suppress" />
     <MixedReturnTypeCoercion errorLevel="suppress" />
-    <InvalidNamedArgument errorLevel="suppress" />
 </issueHandlers>
 </psalm>

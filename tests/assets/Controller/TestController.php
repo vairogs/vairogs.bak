@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets\Controller;
+namespace Vairogs\Tests\Assets\Controller;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

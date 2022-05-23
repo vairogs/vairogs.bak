@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets;
+namespace Vairogs\Tests\Assets;
 
 use ReflectionObject;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;

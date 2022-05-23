@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Gravatar;
 
 class GravatarTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\GravatarDataProvider::dataProviderGetGravatarUrl
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\GravatarDataProvider::dataProviderGetGravatarUrl
      */
     public function testGetGravatarUrl(string $email, bool $secure, int $size, string $icon, string $expected): void
     {

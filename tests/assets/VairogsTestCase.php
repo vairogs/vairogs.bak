@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets;
+namespace Vairogs\Tests\Assets;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;

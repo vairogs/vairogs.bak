@@ -3,15 +3,15 @@
 namespace Vairogs\Tests\Utils\Helper;
 
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Http;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\IPAddress;
 
 class IPAddressTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IpAddressDataProvider::dataProviderGetCIDRRange
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IpAddressDataProvider::dataProviderGetCIDRRange
      */
     public function testGetCIDRRange(string $cidr, bool $int, ?array $expected): void
     {
@@ -19,7 +19,7 @@ class IPAddressTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IpAddressDataProvider::dataProviderGetRemoteIpCF
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IpAddressDataProvider::dataProviderGetRemoteIpCF
      */
     public function testGetRemoteIpCF(?string $ipHeader, ?string $ipCF, bool $trust, string $expected): void
     {

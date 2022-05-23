@@ -4,15 +4,15 @@ namespace Vairogs\Tests\Utils\Helper;
 
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
-use Vairogs\Assets\Utils\Doctrine\Traits\Entity;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Constants\Enum\Criteria;
+use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Sort;
 
 class SortTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\SortDataProvider::dataProviderSwap
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderSwap
      */
     public function testSwap(int $a, int $b): void
     {
@@ -22,7 +22,7 @@ class SortTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\SortDataProvider::dataProviderSwap
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderSwap
      */
     public function testSwapArray(int $a, int $b): void
     {
@@ -33,7 +33,7 @@ class SortTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\SortDataProvider::dataProviderBubbleSort
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderBubbleSort
      */
     public function testBubbleSort(array $unsorted, array $sorted): void
     {
@@ -42,7 +42,7 @@ class SortTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\SortDataProvider::dataProviderBubbleSort
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderBubbleSort
      */
     public function testMergeSort(array $unsorted, array $sorted): void
     {
@@ -50,7 +50,7 @@ class SortTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\SortDataProvider::dataProviderSort
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderSort
      */
     public function testSort(array|object $data, string $parameter, Criteria $order, array $expected): void
     {
@@ -58,7 +58,7 @@ class SortTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\SortDataProvider::dataProviderSortException
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderSortException
      */
     public function testSortException(iterable|Collection $data, string $parameter, Criteria $order): void
     {

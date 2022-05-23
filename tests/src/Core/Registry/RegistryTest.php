@@ -3,8 +3,8 @@
 namespace Vairogs\Tests\Core\Registry;
 
 use InvalidArgumentException;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
+use Vairogs\Tests\Assets\VairogsTestCase;
 
 class RegistryTest extends VairogsTestCase
 {

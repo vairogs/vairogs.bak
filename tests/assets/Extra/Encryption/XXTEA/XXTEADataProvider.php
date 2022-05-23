@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets\Extra\Encryption\XXTEA;
+namespace Vairogs\Tests\Assets\Extra\Encryption\XXTEA;
 
 class XXTEADataProvider
 {

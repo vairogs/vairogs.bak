@@ -4,14 +4,14 @@ namespace Vairogs\Tests\Utils\Helper;
 
 use DivisionByZeroError;
 use Throwable;
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Identification;
 use ValueError;
 
 class IdentificationTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IdentificationDataProvider::dataProviderValidatePersonCode
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IdentificationDataProvider::dataProviderValidatePersonCode
      */
     public function testValidatePersonCode(string $personCode, bool $expected): void
     {

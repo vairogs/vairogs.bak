@@ -4,9 +4,9 @@ namespace Vairogs\Tests\Common;
 
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Common\CacheManager;
 use Vairogs\Extra\Constants\Symbol;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Identification;
 
 class CacheManagerTest extends VairogsTestCase

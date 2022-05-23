@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Extra\Encryption\XXTEA;
 
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Encryption\XXTEA\XXTEA;
+use Vairogs\Tests\Assets\VairogsTestCase;
 
 class XXTEATest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Extra\Encryption\XXTEA\XXTEADataProvider::dataProvider
+     * @dataProvider \Vairogs\Tests\Assets\Extra\Encryption\XXTEA\XXTEADataProvider::dataProvider
      */
     public function testDecrypt(string $string, string $key): void
     {

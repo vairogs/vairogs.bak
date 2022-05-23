@@ -2,14 +2,14 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Text;
 use function htmlentities;
 
 class TextTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderOneStripSpace
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderOneStripSpace
      */
     public function testOneStripSpace(string $text, string $one, string $none): void
     {
@@ -18,7 +18,7 @@ class TextTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderLimit
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderLimit
      */
     public function testLimit(string $text, int $limit, int $words, string $append, string $strict, string $safe, string $word): void
     {
@@ -28,7 +28,7 @@ class TextTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderGetLastPart
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderGetLastPart
      */
     public function testGetLastPart(string $string, string $delimiter, string $expected): void
     {
@@ -36,7 +36,7 @@ class TextTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderGetNormalizedValue
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderGetNormalizedValue
      */
     public function testGetNormalizedValue(string $value, string $delimiter, int|float|string $expected): void
     {
@@ -44,7 +44,7 @@ class TextTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderHtmlEntityDecode
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderHtmlEntityDecode
      */
     public function testHtmlEntityDecode(string $html): void
     {
@@ -52,7 +52,7 @@ class TextTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProvideReverseUTF8
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProvideReverseUTF8
      */
     public function testReverseUTF8(string $text, string $expected): void
     {
@@ -60,7 +60,7 @@ class TextTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderHtmlEntityDecode
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderHtmlEntityDecode
      */
     public function testCleanText(string $html): void
     {
@@ -68,7 +68,7 @@ class TextTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\TextDataProvider::dataProviderContainsAny
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderContainsAny
      */
     public function testContainsAny(string $haystack, array $needles, bool $expected): void
     {

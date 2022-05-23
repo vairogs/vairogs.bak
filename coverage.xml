@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653100869">
-  <project timestamp="1653100869">
+<coverage generated="1653302804">
+  <project timestamp="1653302804">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2176,24 +2176,24 @@
       <class name="Vairogs\Utils\Helper\Composer" namespace="global">
         <metrics complexity="11" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="17" coveredelements="17"/>
       </class>
-      <line num="17" type="method" name="isInstalled" visibility="public" complexity="4" crap="4" count="8"/>
-      <line num="21" type="stmt" count="8"/>
-      <line num="22" type="stmt" count="8"/>
-      <line num="23" type="stmt" count="4"/>
-      <line num="26" type="stmt" count="5"/>
-      <line num="27" type="stmt" count="2"/>
-      <line num="31" type="stmt" count="6"/>
-      <line num="34" type="method" name="isExtensionInstalled" visibility="public" complexity="2" crap="2" count="8"/>
-      <line num="38" type="stmt" count="8"/>
-      <line num="39" type="stmt" count="3"/>
-      <line num="42" type="stmt" count="8"/>
-      <line num="45" type="method" name="exists" visibility="public" complexity="3" crap="3" count="1"/>
-      <line num="49" type="stmt" count="1"/>
-      <line num="52" type="method" name="getenv" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="56" type="stmt" count="2"/>
-      <line num="57" type="stmt" count="2"/>
-      <line num="60" type="stmt" count="1"/>
-      <metrics loc="63" ncloc="63" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="17" coveredelements="17"/>
+      <line num="20" type="method" name="isInstalled" visibility="public" complexity="4" crap="4" count="8"/>
+      <line num="24" type="stmt" count="8"/>
+      <line num="25" type="stmt" count="8"/>
+      <line num="26" type="stmt" count="4"/>
+      <line num="29" type="stmt" count="5"/>
+      <line num="30" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="6"/>
+      <line num="37" type="method" name="isExtensionInstalled" visibility="public" complexity="2" crap="2" count="8"/>
+      <line num="41" type="stmt" count="8"/>
+      <line num="42" type="stmt" count="3"/>
+      <line num="45" type="stmt" count="8"/>
+      <line num="48" type="method" name="exists" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="55" type="method" name="getenv" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="59" type="stmt" count="2"/>
+      <line num="60" type="stmt" count="2"/>
+      <line num="63" type="stmt" count="1"/>
+      <metrics loc="66" ncloc="63" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="13" elements="17" coveredelements="17"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Date.php">
       <class name="Vairogs\Utils\Helper\Date" namespace="global">
@@ -3003,6 +3003,6 @@
       <line num="31" type="stmt" count="1"/>
       <metrics loc="34" ncloc="31" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="135" loc="7671" ncloc="7531" classes="98" methods="542" coveredmethods="260" conditionals="0" coveredconditionals="0" statements="1719" coveredstatements="977" elements="2261" coveredelements="1237"/>
+    <metrics files="135" loc="7674" ncloc="7531" classes="98" methods="542" coveredmethods="260" conditionals="0" coveredconditionals="0" statements="1719" coveredstatements="977" elements="2261" coveredelements="1237"/>
   </project>
 </coverage>

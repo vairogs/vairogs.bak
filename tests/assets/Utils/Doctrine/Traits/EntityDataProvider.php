@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets\Utils\Doctrine\Traits;
+namespace Vairogs\Tests\Assets\Utils\Doctrine\Traits;
 
 class EntityDataProvider
 {

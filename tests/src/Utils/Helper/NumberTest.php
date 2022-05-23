@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Number;
 
 class NumberTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\NumberDataProvider::dataProviderIsIntFloat
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\NumberDataProvider::dataProviderIsIntFloat
      */
     public function testIsInt(int|float $number, bool $expected): void
     {
@@ -16,7 +16,7 @@ class NumberTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\NumberDataProvider::dataProviderIsIntFloat
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\NumberDataProvider::dataProviderIsIntFloat
      */
     public function testIsFloat(int|float $number, bool $expected): void
     {
@@ -24,7 +24,7 @@ class NumberTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\NumberDataProvider::dataProviderGreatestCommonDivisor
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\NumberDataProvider::dataProviderGreatestCommonDivisor
      */
     public function testGreatestCommonDivisor(int $x, int $y, int $expected): void
     {
@@ -32,7 +32,7 @@ class NumberTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\NumberDataProvider::dataProviderLeastCommonMultiple
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\NumberDataProvider::dataProviderLeastCommonMultiple
      */
     public function testLeastCommonMultiple(int $x, int $y, int $expected): void
     {

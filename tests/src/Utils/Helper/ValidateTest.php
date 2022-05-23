@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Validate;
 
 class ValidateTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\ValidateDataProvider::dataProviderValidateEmail
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\ValidateDataProvider::dataProviderValidateEmail
      */
     public function testValidateEmail(string $email, bool $expected): void
     {
@@ -16,7 +16,7 @@ class ValidateTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\ValidateDataProvider::dataProviderValidateIP
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\ValidateDataProvider::dataProviderValidateIP
      */
     public function testValidateIP(string $ip, bool $deny, bool $expected): void
     {
@@ -24,7 +24,7 @@ class ValidateTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\ValidateDataProvider::dataProviderValidateCIDR
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\ValidateDataProvider::dataProviderValidateCIDR
      */
     public function testValidateCIDR(string $cidr, bool $expected): void
     {

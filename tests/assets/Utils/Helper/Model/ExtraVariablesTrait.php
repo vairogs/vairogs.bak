@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets\Utils\Helper\Model;
+namespace Vairogs\Tests\Assets\Utils\Helper\Model;
 
 trait ExtraVariablesTrait
 {

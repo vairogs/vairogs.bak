@@ -3,13 +3,13 @@
 namespace Vairogs\Tests\Utils\Doctrine\Traits;
 
 use DateTimeInterface;
-use Vairogs\Assets\Utils\Doctrine\Traits\Entity;
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\VairogsTestCase;
 
 class EntityTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Doctrine\Traits\EntityDataProvider::dataProviderEntity
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Doctrine\Traits\EntityDataProvider::dataProviderEntity
      * @noinspection PhpUnhandledExceptionInspection
      * @noinspection UnnecessaryAssertionInspection
      */

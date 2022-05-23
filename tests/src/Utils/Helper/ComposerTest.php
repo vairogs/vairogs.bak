@@ -2,7 +2,7 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Composer;
 
 class ComposerTest extends VairogsTestCase
@@ -15,7 +15,7 @@ class ComposerTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\ComposerDataProvider::dataProviderIsInstalled
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\ComposerDataProvider::dataProviderIsInstalled
      */
     public function testIsInstalled(string $package, bool $installed, bool $incDevReq): void
     {

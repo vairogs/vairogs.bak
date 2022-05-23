@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets\Utils\Handler;
+namespace Vairogs\Tests\Assets\Utils\Handler;
 
 use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Helper\Util;

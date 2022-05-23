@@ -4,11 +4,11 @@ namespace Vairogs\Tests;
 
 use Exception;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Common\Adapter\File;
 use Vairogs\Common\Adapter\Orm;
 use Vairogs\Common\Adapter\PhpRedis;
 use Vairogs\Common\Adapter\Predis;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Composer;
 
 class RemovedFunctionsTest extends VairogsTestCase

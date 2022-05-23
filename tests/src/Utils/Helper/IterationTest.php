@@ -5,14 +5,14 @@ namespace Vairogs\Tests\Utils\Helper;
 use Exception;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Helper\Php;
 
 class IterationTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IterationDataProvider::dataProviderIsEmpty
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IterationDataProvider::dataProviderIsEmpty
      */
     public function testIsEmpty(mixed $value, bool $expected): void
     {
@@ -20,7 +20,7 @@ class IterationTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IterationDataProvider::dataProviderMakeMultiDimensional
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IterationDataProvider::dataProviderMakeMultiDimensional
      */
     public function testMakeMultiDimensional(array $input, array $expected): void
     {
@@ -28,7 +28,7 @@ class IterationTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IterationDataProvider::dataProviderUniqueMap
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IterationDataProvider::dataProviderUniqueMap
      */
     public function testUniqueMap(array $input, array $expected): void
     {
@@ -37,7 +37,7 @@ class IterationTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IterationDataProvider::dataProviderUnique
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IterationDataProvider::dataProviderUnique
      */
     public function testUnique(array $input, array $expected, bool $keep): void
     {
@@ -57,7 +57,7 @@ class IterationTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IterationDataProvider::dataProviderArrayIntersectKeyRecursive
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IterationDataProvider::dataProviderArrayIntersectKeyRecursive
      */
     public function testArrayIntersectKeyRecursive(array $input, array $second, array $expected): void
     {
@@ -65,7 +65,7 @@ class IterationTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\IterationDataProvider::dataProviderArrayFlipRecursive
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IterationDataProvider::dataProviderArrayFlipRecursive
      */
     public function testArrayFlipRecursive(array $input, array $expected): void
     {

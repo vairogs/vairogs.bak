@@ -5,11 +5,11 @@ namespace Vairogs\Tests\Utils\Helper;
 use Exception;
 use InvalidArgumentException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
-use Vairogs\Assets\Utils\Doctrine\Traits\Entity;
-use Vairogs\Assets\Utils\Helper\Model\Entity1;
-use Vairogs\Assets\Utils\Helper\Model\Entity7;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Extra\Constants\Definition;
+use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity1;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity7;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Closure;
 use function sprintf;
 

@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Utils\Helper;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Util;
 
 class UtilTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
      */
     public function testIsPrime(int $number, bool $expected): void
     {
@@ -16,7 +16,7 @@ class UtilTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
      * @noinspection PhpUndefinedFunctionInspection
      */
     public function testIsPrimeNoGMP(int $number, bool $expected): void
@@ -27,7 +27,7 @@ class UtilTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
      */
     public function testIsPrimeBelow1000(int $number, bool $expected, ?bool $expectedBelow): void
     {
@@ -35,7 +35,7 @@ class UtilTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderMakeOneDimension
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderMakeOneDimension
      */
     public function testMakeOneDimension(array $input, bool $onlyLast, int $depth, int $maxDepth, array $expected): void
     {
@@ -43,7 +43,7 @@ class UtilTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\UtilDataProvider::dataProviderDistanceBetweenPoints
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderDistanceBetweenPoints
      */
     public function testDistanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km, float $expected): void
     {

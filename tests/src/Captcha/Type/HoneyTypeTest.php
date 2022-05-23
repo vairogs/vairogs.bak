@@ -3,8 +3,8 @@
 namespace Vairogs\Tests\Captcha\Type;
 
 use Symfony\Component\Form\Test\TypeTestCase;
-use Vairogs\Assets\Captcha\TestFormModel;
-use Vairogs\Assets\Captcha\TestFormType;
+use Vairogs\Tests\Assets\Captcha\TestFormModel;
+use Vairogs\Tests\Assets\Captcha\TestFormType;
 
 class HoneyTypeTest extends TypeTestCase
 {

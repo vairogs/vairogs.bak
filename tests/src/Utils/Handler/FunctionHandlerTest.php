@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Utils\Handler;
 
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Handler\FunctionHandler;
 
 class FunctionHandlerTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Handler\FunctionHandlerDataProvider::dataProvider
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Handler\FunctionHandlerDataProvider::dataProvider
      */
     public function test(string $function, ?object $object, mixed $expected, ...$arguments): void
     {

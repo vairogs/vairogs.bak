@@ -2,8 +2,8 @@
 
 namespace Vairogs\Tests\Extra\Constants\Enum;
 
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
+use Vairogs\Tests\Assets\VairogsTestCase;
 
 class EnumTest extends VairogsTestCase
 {

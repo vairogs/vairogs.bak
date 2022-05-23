@@ -5,11 +5,11 @@ namespace Vairogs\Tests\Utils\Helper;
 use ReflectionException;
 use ReflectionMethod;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
-use Vairogs\Assets\Utils\Doctrine\Traits\Entity;
-use Vairogs\Assets\Utils\Helper\Model\Entity1;
-use Vairogs\Assets\VairogsTestCase;
 use Vairogs\Cache\Cache;
 use Vairogs\Core\Vairogs;
+use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\Utils\Helper\Model\Entity1;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Helper\Text;
@@ -17,7 +17,7 @@ use Vairogs\Utils\Helper\Text;
 class PhpTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\PhpDataProvider::dataProviderBoolval
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\PhpDataProvider::dataProviderBoolval
      */
     public function testBoolval(mixed $value, bool $expected): void
     {
@@ -25,7 +25,7 @@ class PhpTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\PhpDataProvider::dataProviderGetterSetter
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\PhpDataProvider::dataProviderGetterSetter
      */
     public function testGetterSetter(string $variable, string $expGetter, string $expSetter): void
     {

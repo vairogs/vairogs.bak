@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Assets\Repository;
+namespace Vairogs\Tests\Assets\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Vairogs\Entity\TestClass;

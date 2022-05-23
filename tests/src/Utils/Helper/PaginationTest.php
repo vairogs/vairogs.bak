@@ -3,13 +3,13 @@
 namespace Vairogs\Tests\Utils\Helper;
 
 use InvalidArgumentException;
-use Vairogs\Assets\VairogsTestCase;
+use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Pagination;
 
 class PaginationTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\PaginationDataProvider::dataProvider
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\PaginationDataProvider::dataProvider
      */
     public function testPagination(int $visible, int $total, int $current, int $ommit, array $expected): void
     {
@@ -17,7 +17,7 @@ class PaginationTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Assets\Utils\Helper\PaginationDataProvider::dataProviderException
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\PaginationDataProvider::dataProviderException
      */
     public function testPaginationException(int $visible, int $total, int $current, int $ommit, array $expected): void
     {
