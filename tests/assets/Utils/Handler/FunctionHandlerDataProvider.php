@@ -11,7 +11,7 @@ class FunctionHandlerDataProvider
     {
         return [
             ['is_string', null, true, 'vairogs', ],
-            ['getIfNotEmpty', new Iteration(), null, [], 'vairogs', ],
+            ['getIfSet', new Iteration(), null, [], 'vairogs', ],
             ['isPrime', new Util(), true, 3, ],
         ];
     }

@@ -2,9 +2,9 @@
 
 namespace Vairogs\Utils\Locator;
 
-use Vairogs\Utils\Helper\Text;
 use function explode;
 use function implode;
+use function preg_replace;
 use function strtolower;
 
 class Name
@@ -23,7 +23,7 @@ class Name
 
     public function normalize(): string
     {
-        return (new Text())->replacePattern(pattern: '/^\\\*/', text: (string) $this);
+        return preg_replace(pattern: '/^\\\*/', replacement: '', subject: (string) $this);
     }
 
     public function key(): string

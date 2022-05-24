@@ -37,7 +37,7 @@ final class File
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function fileExistsCurrentDir(string $filename): bool
+    public function fileExistsCwd(string $filename): bool
     {
         return is_file(filename: getcwd() . DIRECTORY_SEPARATOR . $filename);
     }

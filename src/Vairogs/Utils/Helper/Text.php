@@ -37,14 +37,14 @@ final class Text
     #[Attribute\TwigFilter]
     public function oneSpace(string $text): string
     {
-        return $this->replacePattern(pattern: '#\s+#S', replacement: ' ', text: $text);
+        return preg_replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function stripSpace(string $text): string
     {
-        return $this->replacePattern(pattern: '#\s+#', text: $text);
+        return preg_replace(pattern: '#\s+#', replacement: '', subject: $text);
     }
 
     #[Attribute\TwigFunction]
@@ -120,14 +120,7 @@ final class Text
     #[Attribute\TwigFilter]
     public function keepNumeric(string $text): string
     {
-        return $this->replacePattern(pattern: '#\D#', text: $text);
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function replacePattern(string $pattern, string $replacement = '', string $text = ''): string
-    {
-        return preg_replace(pattern: $pattern, replacement: $replacement, subject: $text);
+        return preg_replace(pattern: '#\D#', replacement: '', subject: $text);
     }
 
     #[Attribute\TwigFunction]
@@ -152,14 +145,13 @@ final class Text
     #[Attribute\TwigFilter]
     public function htmlEntityDecode(string $text): array|string|null
     {
-        return $this->replacePattern(pattern: '#\R+#', text: html_entity_decode(string: $text));
+        return preg_replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
     }
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
     public function sanitize(string $text): string
     {
-        /* @noinspection PhpDeprecationInspection */
-        return preg_replace(pattern: ['~[\r\n]+~', '#\s+#S'], replacement: ' ', subject: filter_var(value: $text, filter: FILTER_SANITIZE_STRING));
+        return str_replace(search: ["'", '"'], replace: ['&#39;', '&#34;'], subject: preg_replace(pattern: '/\x00|<[^>]*>?/', replacement: '', subject: $text));
     }
 }

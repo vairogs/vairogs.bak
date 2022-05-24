@@ -180,7 +180,7 @@ final class Iteration
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function getIfNotEmpty(array $input, mixed $key): mixed
+    public function getIfSet(array $input, mixed $key): mixed
     {
         return $input[$key] ?? null;
     }

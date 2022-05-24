@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653313396">
-  <project timestamp="1653313396">
+<coverage generated="1653384995">
+  <project timestamp="1653384995">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2301,7 +2301,7 @@
       <line num="30" type="stmt" count="1"/>
       <line num="31" type="stmt" count="1"/>
       <line num="35" type="stmt" count="1"/>
-      <line num="38" type="method" name="fileExistsCurrentDir" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="38" type="method" name="fileExistsCwd" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="42" type="stmt" count="1"/>
       <line num="45" type="method" name="humanFileSize" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="49" type="stmt" count="3"/>
@@ -2506,7 +2506,7 @@
       <line num="171" type="stmt" count="5"/>
       <line num="174" type="method" name="filterKeyEndsWith" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="178" type="stmt" count="1"/>
-      <line num="181" type="method" name="getIfNotEmpty" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="181" type="method" name="getIfSet" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="185" type="stmt" count="1"/>
       <metrics loc="188" ncloc="185" classes="1" methods="13" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="46" elements="59" coveredelements="59"/>
     </file>
@@ -2772,7 +2772,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Text.php">
       <class name="Vairogs\Utils\Helper\Text" namespace="global">
-        <metrics complexity="26" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="46" coveredelements="46"/>
+        <metrics complexity="25" methods="14" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="44" coveredelements="44"/>
       </class>
       <line num="29" type="method" name="cleanText" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="33" type="stmt" count="1"/>
@@ -2808,19 +2808,17 @@
       <line num="116" type="stmt" count="4"/>
       <line num="119" type="method" name="keepNumeric" visibility="public" complexity="1" crap="1" count="8"/>
       <line num="123" type="stmt" count="8"/>
-      <line num="126" type="method" name="replacePattern" visibility="public" complexity="1" crap="1" count="12"/>
-      <line num="130" type="stmt" count="12"/>
-      <line num="133" type="method" name="getLastPart" visibility="public" complexity="2" crap="2" count="3"/>
-      <line num="137" type="stmt" count="3"/>
-      <line num="140" type="method" name="getNormalizedValue" visibility="public" complexity="3" crap="3" count="5"/>
-      <line num="144" type="stmt" count="5"/>
-      <line num="145" type="stmt" count="3"/>
+      <line num="126" type="method" name="getLastPart" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="130" type="stmt" count="3"/>
+      <line num="133" type="method" name="getNormalizedValue" visibility="public" complexity="3" crap="3" count="5"/>
+      <line num="137" type="stmt" count="5"/>
+      <line num="138" type="stmt" count="3"/>
+      <line num="141" type="stmt" count="2"/>
+      <line num="144" type="method" name="htmlEntityDecode" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="148" type="stmt" count="2"/>
-      <line num="151" type="method" name="htmlEntityDecode" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="151" type="method" name="sanitize" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="155" type="stmt" count="2"/>
-      <line num="158" type="method" name="sanitize" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="163" type="stmt" count="2"/>
-      <metrics loc="166" ncloc="165" classes="1" methods="15" coveredmethods="15" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="46" coveredelements="46"/>
+      <metrics loc="158" ncloc="158" classes="1" methods="14" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="30" elements="44" coveredelements="44"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Uri.php">
       <class name="Vairogs\Utils\Helper\Uri" namespace="global">
@@ -3004,6 +3002,6 @@
       <line num="31" type="stmt" count="1"/>
       <metrics loc="34" ncloc="31" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="135" loc="7682" ncloc="7537" classes="98" methods="543" coveredmethods="261" conditionals="0" coveredconditionals="0" statements="1719" coveredstatements="978" elements="2262" coveredelements="1239"/>
+    <metrics files="135" loc="7674" ncloc="7530" classes="98" methods="542" coveredmethods="260" conditionals="0" coveredconditionals="0" statements="1718" coveredstatements="977" elements="2260" coveredelements="1237"/>
   </project>
 </coverage>

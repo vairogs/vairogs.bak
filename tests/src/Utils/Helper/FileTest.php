@@ -29,6 +29,6 @@ class FileTest extends VairogsTestCase
 
     public function testFileExistsCurrentDir(): void
     {
-        $this->assertTrue(condition: (new File())->fileExistsCurrentDir(filename: 'README.md'));
+        $this->assertTrue(condition: (new File())->fileExistsCwd(filename: 'README.md'));
     }
 }
