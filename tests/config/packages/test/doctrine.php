@@ -10,7 +10,7 @@ return static function (DoctrineConfig $config): void {
         ->connection(name: $default = Definition::DEFAULT);
 
     $dbal
-        ->url(value: '%env(resolve:DATABASE_URL)%')
+        ->url(value: '%env(resolve:TEST_DATABASE_URL)%')
         ->serverVersion(value: 14)
         ->charset(value: $charset = 'utf8');
 

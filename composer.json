@@ -97,11 +97,11 @@
         "roave/security-advisories": "dev-latest",
         "sebastian/diff": "5.0.x-dev as 4.0.4",
         "snc/redis-bundle": "dev-master",
-        "symfony/browser-kit": "6.1.x-dev",
-        "symfony/framework-bundle": "6.1.x-dev",
-        "symfony/phpunit-bridge": "6.1.x-dev",
-        "symfony/proxy-manager-bridge": "6.1.x-dev",
-        "symfony/runtime": "6.1.x-dev",
+        "symfony/browser-kit": "*",
+        "symfony/framework-bundle": "*",
+        "symfony/phpunit-bridge": "*",
+        "symfony/proxy-manager-bridge": "*",
+        "symfony/runtime": "*",
         "vimeo/psalm": "5.x-dev as 4.x-dev"
     },
     "replace": {
@@ -143,7 +143,7 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "config": {
         "sort-packages": true,
         "allow-plugins": {
