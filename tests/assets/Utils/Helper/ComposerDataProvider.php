@@ -8,8 +8,8 @@ class ComposerDataProvider
     {
         return [
             ['json', true, false, ],
-            ['ext-xdebug', true, true, ],
-            ['ext-oci8', false, true, ],
+            ['xdebug', true, true, ],
+            ['oci8', false, true, ],
             ['phpunit/phpunit', true, true, ],
             ['phpunit/phpunit', false, false, ],
         ];

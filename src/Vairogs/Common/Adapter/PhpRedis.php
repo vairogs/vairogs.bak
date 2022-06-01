@@ -5,5 +5,5 @@ namespace Vairogs\Common\Adapter;
 final class PhpRedis extends AbstractRedisAdapter
 {
     protected string $class = self::class;
-    protected array $packages = ['ext-redis'];
+    protected array $packages = ['redis'];
 }

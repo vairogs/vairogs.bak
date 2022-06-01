@@ -7,6 +7,7 @@ use JetBrains\PhpStorm\Pure;
 use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Extra\Constants\Enum\StartsEnds;
 use Vairogs\Twig\Attribute;
+use function array_diff;
 use function array_filter;
 use function array_flip;
 use function array_intersect_key;
@@ -144,13 +145,7 @@ final class Iteration
     #[Attribute\TwigFilter]
     public function removeFromArray(array &$input, mixed $value): void
     {
-        if (in_array(needle: $value, haystack: $input, strict: true)) {
-            foreach ($input as $key => $item) {
-                if ($item === $value) {
-                    unset($input[$key]);
-                }
-            }
-        }
+        $input = array_diff($input, [$value]);
     }
 
     /** @throws InvalidArgumentException */

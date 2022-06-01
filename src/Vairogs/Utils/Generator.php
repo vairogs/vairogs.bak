@@ -2,7 +2,6 @@
 
 namespace Vairogs\Utils;
 
-use LogicException;
 use Vairogs\Extra\Constants\Symbol;
 use function array_rand;
 use function count;
@@ -20,13 +19,8 @@ final class Generator
     private string $latvianUpper = Symbol::LV_UPPERCASE;
     private string $latvianLower = Symbol::LV_LOWERCASE;
 
-    /** @throws LogicException */
     public function generate(int $length = 32): string
     {
-        if ([] === $this->sets) {
-            throw new LogicException(message: 'At least one set must be used!');
-        }
-
         $all = $unique = '';
 
         foreach ($this->sets as $set) {

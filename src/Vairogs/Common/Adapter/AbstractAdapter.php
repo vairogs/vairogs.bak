@@ -14,7 +14,7 @@ abstract class AbstractAdapter implements Adapter
 
     protected function checkRequirements(): void
     {
-        if (!(new Composer())->isInstalled(packages: $this->packages, incDevReq: false)) {
+        if (!(new Composer())->isInstalled(packages: $this->packages)) {
             throw new InvalidConfigurationException(message: sprintf('In order to use %s, package(s)/extension(s) "%s" must be installed', $this->class, implode(separator: ',', array: $this->packages)));
         }
     }

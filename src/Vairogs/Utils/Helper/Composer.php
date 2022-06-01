@@ -8,8 +8,6 @@ use function class_exists;
 use function getenv;
 use function interface_exists;
 use function phpversion;
-use function str_replace;
-use function str_starts_with;
 use function trait_exists;
 
 final class Composer
@@ -19,10 +17,10 @@ final class Composer
      */
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function isInstalled(array $packages, bool $incDevReq = true): bool
+    public function isInstalled(array $packages, bool $incDevReq = false): bool
     {
         foreach ($packages as $package) {
-            if ($this->isExtensionInstalled(extension: $package)) {
+            if (false !== phpversion(extension: $package)) {
                 continue;
             }
 
@@ -32,17 +30,6 @@ final class Composer
         }
 
         return true;
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function isExtensionInstalled(string $extension): bool
-    {
-        if (str_starts_with(haystack: $extension, needle: $prefix = 'ext-')) {
-            $extension = str_replace(search: $prefix, replace: '', subject: $extension);
-        }
-
-        return false !== phpversion(extension: $extension);
     }
 
     #[Attribute\TwigFunction]

@@ -46,12 +46,7 @@ final class Uri
                 default => sprintf('%s[%s]', $parent, $key)
             };
 
-            if (!$value instanceof CURLFile && (is_array(value: $value) || is_object(value: $value))) {
-                /** @noinspection SlowArrayOperationsInLoopInspection */
-                $result = array_merge($result, $this->buildHttpQueryArray(input: $value, parent: $newKey));
-            } else {
-                $result[$newKey] = $value;
-            }
+            $this->setResult(result: $result, key: $newKey, value: $value);
         }
 
         return $result;
@@ -167,5 +162,17 @@ final class Uri
     public function routeExists(RouterInterface $router, string $route): bool
     {
         return null !== $router->getRouteCollection()->get(name: $route);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    private function setResult(array &$result, string $key, mixed $value): void
+    {
+        if (!$value instanceof CURLFile && (is_array(value: $value) || is_object(value: $value))) {
+            $result = array_merge($result, $this->buildHttpQueryArray(input: $value, parent: $key));
+        } else {
+            $result[$key] = $value;
+        }
     }
 }
