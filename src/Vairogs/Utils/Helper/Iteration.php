@@ -179,4 +179,17 @@ final class Iteration
     {
         return $input[$key] ?? null;
     }
+
+    #[Attribute\TwigFunction]
+    #[Attribute\TwigFilter]
+    public function getFirstMatchAsString(array $keys, array $haystack): ?string
+    {
+        foreach ($keys as $key) {
+            if (isset($haystack[$key])) {
+                return (string) $haystack[$key];
+            }
+        }
+
+        return null;
+    }
 }

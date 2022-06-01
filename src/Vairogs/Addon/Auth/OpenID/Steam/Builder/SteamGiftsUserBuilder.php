@@ -63,6 +63,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
             return null;
         }
 
+        $matches = [];
         preg_match_all(pattern: '#https?://\S+#', subject: file_get_contents(filename: $path), matches: $matches);
         $expl = explode(separator: '/', string: $matches[0][0] ?? '');
         $username = null;

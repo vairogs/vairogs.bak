@@ -18,15 +18,13 @@ final class IPAddress
     #[Attribute\TwigFilter]
     public function getRemoteIp(Request $request, bool $trust = false): string
     {
+        $headers = [Constants\Http::REMOTE_ADDR, ];
+
         if ($trust) {
-            foreach ([Constants\Http::HTTP_CLIENT_IP, Constants\Http::HTTP_X_REAL_IP, Constants\Http::HTTP_X_FORWARDED_FOR, ] as $parameter) {
-                if ($request->server->has(key: $parameter)) {
-                    return $request->server->get(key: $parameter);
-                }
-            }
+            $headers = [Constants\Http::HTTP_CLIENT_IP, Constants\Http::HTTP_X_REAL_IP, Constants\Http::HTTP_X_FORWARDED_FOR, Constants\Http::REMOTE_ADDR, ];
         }
 
-        return $request->server->get(key: Constants\Http::REMOTE_ADDR);
+        return (new Iteration())->getFirstMatchAsString(keys: $headers, haystack: $request->server->all());
     }
 
     #[Attribute\TwigFunction]

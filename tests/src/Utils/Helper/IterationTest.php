@@ -5,6 +5,7 @@ namespace Vairogs\Tests\Source\Utils\Helper;
 use Exception;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Request;
+use Vairogs\Extra\Constants\Definition;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Helper\Php;
@@ -79,5 +80,12 @@ class IterationTest extends VairogsTestCase
         } catch (Exception $exception) {
             $this->assertEquals(expected: InvalidArgumentException::class, actual: $exception::class);
         }
+    }
+
+    public function testGetFirstAsString(): void
+    {
+        $request = Request::create(uri: Definition::IDENT);
+        $request->initialize();
+        $this->assertEquals(expected: null, actual: (new Iteration())->getFirstMatchAsString(keys: ['AAA'], haystack: $request->server->all()));
     }
 }
