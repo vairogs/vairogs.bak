@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests;
+namespace Vairogs\Tests\Source;
 
 use Exception;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -16,6 +16,7 @@ class RemovedFunctionsTest extends VairogsTestCase
     /**
      * @noinspection PhpUndefinedConstantInspection
      * @noinspection PhpUndefinedFunctionInspection
+     * @noinspection PhpParamsInspection
      */
     public function testMissingRequirements(): void
     {

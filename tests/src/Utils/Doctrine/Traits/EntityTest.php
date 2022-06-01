@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Utils\Doctrine\Traits;
+namespace Vairogs\Tests\Source\Utils\Doctrine\Traits;
 
 use DateTimeInterface;
 use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Utils\Locator;
+namespace Vairogs\Tests\Source\Utils\Locator;
 
 use PhpParser\Node\Stmt\Class_;
 use Vairogs\Tests\Assets\Controller\TestController;

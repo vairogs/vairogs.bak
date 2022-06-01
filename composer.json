@@ -139,7 +139,7 @@
         "psr-4": {
             "Vairogs\\Tests\\Assets\\": "tests/assets",
             "Vairogs\\Tests\\Entity\\": "tests/entity",
-            "Vairogs\\Tests\\": "tests/src"
+            "Vairogs\\Tests\\Source\\": "tests/src"
         }
     },
     "minimum-stability": "dev",

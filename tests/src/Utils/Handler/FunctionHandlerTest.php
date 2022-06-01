@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Utils\Handler;
+namespace Vairogs\Tests\Source\Utils\Handler;
 
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Handler\FunctionHandler;

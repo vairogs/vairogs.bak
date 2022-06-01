@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Core\Registry;
+namespace Vairogs\Tests\Source\Core\Registry;
 
 use InvalidArgumentException;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;

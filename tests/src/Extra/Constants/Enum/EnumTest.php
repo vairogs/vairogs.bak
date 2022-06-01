@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Extra\Constants\Enum;
+namespace Vairogs\Tests\Source\Extra\Constants\Enum;
 
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
 use Vairogs\Tests\Assets\VairogsTestCase;

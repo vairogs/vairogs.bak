@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Common\Adapter;
+namespace Vairogs\Tests\Source\Common\Adapter;
 
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
@@ -12,6 +12,7 @@ use function sprintf;
 
 class AdapterTest extends VairogsTestCase
 {
+    /** @noinspection PhpParamsInspection */
     public function testRedisAdapters(): void
     {
         $predis = new Predis(client: $this->container->get(id: 'snc_redis.predis'));
@@ -24,7 +25,9 @@ class AdapterTest extends VairogsTestCase
         $this->assertInstanceOf(expected: RedisAdapter::class, actual: $phpredis->getAdapter());
     }
 
-    /** @noinspection PhpUnhandledExceptionInspection */
+    /** @noinspection PhpUnhandledExceptionInspection
+     * @noinspection PhpParamsInspection
+     */
     public function testOrmAdapter(): void
     {
         $orm = new Orm(entityManager: $em = $this->container->get(id: 'doctrine.orm.default_entity_manager'), namespace: __FUNCTION__);

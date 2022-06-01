@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Utils\Helper;
+namespace Vairogs\Tests\Source\Utils\Helper;
 
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Json;

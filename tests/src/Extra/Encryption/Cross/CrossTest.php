@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Extra\Encryption\Cross;
+namespace Vairogs\Tests\Source\Extra\Encryption\Cross;
 
 use Vairogs\Extra\Encryption\Cross\Cross;
 use Vairogs\Tests\Assets\VairogsTestCase;

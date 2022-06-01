@@ -21,13 +21,11 @@ class TestKernel extends Kernel
         return dirname(path: __DIR__);
     }
 
-    /** @noinspection ProjectDirParameter */
     public function getCacheDir(): string
     {
         return $this->getProjectDir() . '/var/cache';
     }
 
-    /** @noinspection ProjectDirParameter */
     protected function getConfigDir(): string
     {
         return $this->getProjectDir() . '/config';

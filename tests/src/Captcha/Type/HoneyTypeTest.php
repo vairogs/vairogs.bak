@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Captcha\Type;
+namespace Vairogs\Tests\Source\Captcha\Type;
 
 use Symfony\Component\Form\Test\TypeTestCase;
 use Vairogs\Tests\Assets\Captcha\TestFormModel;

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Extra\Encryption\XXTEA;
+namespace Vairogs\Tests\Source\Extra\Encryption\XXTEA;
 
 use Vairogs\Extra\Encryption\XXTEA\XXTEA;
 use Vairogs\Tests\Assets\VairogsTestCase;

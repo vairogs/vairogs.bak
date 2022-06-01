@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Utils\Helper;
+namespace Vairogs\Tests\Source\Utils\Helper;
 
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;

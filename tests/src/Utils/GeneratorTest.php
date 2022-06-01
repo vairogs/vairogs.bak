@@ -1,8 +1,7 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Utils;
+namespace Vairogs\Tests\Source\Utils;
 
-use LogicException;
 use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Generator;
@@ -44,7 +43,6 @@ class GeneratorTest extends VairogsTestCase
 
         $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::DIGITS));
         $this->assertEmpty(actual: $reset->reset()->getSets());
-        $this->expectException(exception: LogicException::class);
-        $reset->generate();
+        $this->assertEquals(expected: '', actual: $reset->generate());
     }
 }
