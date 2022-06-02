@@ -15,8 +15,8 @@ class Director
 
     public function build(Builder $builder): mixed
     {
-        if (($expected = $builder->getType()) !== ($actual = gettype(value: $this->buffer))) {
-            throw new InvalidArgumentException(message: sprintf('Director __constructor parameter must be %s, %s given', $expected, $actual));
+        if (($type = $builder->getType()) !== ($actual = gettype(value: $this->buffer))) {
+            throw new InvalidArgumentException(message: sprintf('Director __constructor parameter must be %s, %s given', $type, $actual));
         }
 
         $builder->start(buffer: $this->buffer);

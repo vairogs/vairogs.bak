@@ -5,7 +5,8 @@ namespace Vairogs\Utils\Helper;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants\Enum\StartsEnds;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function array_diff;
 use function array_filter;
 use function array_flip;
@@ -22,13 +23,13 @@ use const ARRAY_FILTER_USE_KEY;
 
 final class Iteration
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function isEmpty(mixed $variable, bool $result = true): bool
     {
         if (is_array(value: $variable) && [] !== $variable) {
-            foreach ($variable as $value) {
-                $result = $this->isEmpty(variable: $value, result: $result);
+            foreach ($variable as $item) {
+                $result = $this->isEmpty(variable: $item, result: $result);
             }
 
             return $result;
@@ -37,8 +38,8 @@ final class Iteration
         return empty($variable);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function makeMultiDimensional(array $array): array
     {
         if ($this->isMultiDimensional(keys: $array)) {
@@ -55,15 +56,15 @@ final class Iteration
         return $result;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function uniqueMap(array &$array): void
     {
         $array = array_map(callback: 'unserialize', array: array_unique(array: array_map(callback: 'serialize', array: $array)));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[Pure]
     public function unique(array $input, bool $keepKeys = false): array
     {
@@ -78,8 +79,8 @@ final class Iteration
         return array_keys(array: array_flip(array: $input));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[Pure]
     public function isMultiDimensional(array $keys = []): bool
     {
@@ -92,8 +93,8 @@ final class Iteration
         return false;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function isAssociative(mixed $array): bool
     {
         if (!is_array(value: $array) || [] === $array) {
@@ -103,8 +104,8 @@ final class Iteration
         return !array_is_list($array);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
         $result = array_intersect_key($first, $second);
@@ -119,8 +120,8 @@ final class Iteration
     }
 
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function arrayFlipRecursive(array $input = []): array
     {
         $result = [[]];
@@ -136,47 +137,47 @@ final class Iteration
         return array_replace(...$result);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function removeFromArray(array &$input, mixed $value): void
     {
         $input = array_diff($input, [$value]);
     }
 
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function arrayValuesFiltered(array $input, string $with, StartsEnds $enum = StartsEnds::STARTS): array
+    #[TwigFunction]
+    #[TwigFilter]
+    public function arrayValuesFiltered(array $input, string $with, StartsEnds $startsEnds = StartsEnds::STARTS): array
     {
-        return match ($enum) {
+        return match ($startsEnds) {
             StartsEnds::STARTS => array_values(array: $this->filterKeyStartsWith(input: $input, startsWith: $with)),
             StartsEnds::ENDS => array_values(array: $this->filterKeyEndsWith(input: $input, endsWith: $with))
         };
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function filterKeyStartsWith(array $input, string $startsWith): array
     {
         return array_filter(array: $input, callback: static fn ($key) => str_starts_with(haystack: (string) $key, needle: $startsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function filterKeyEndsWith(array $input, string $endsWith): array
     {
         return array_filter(array: $input, callback: static fn ($key) => str_ends_with(haystack: $key, needle: $endsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getIfSet(array $input, mixed $key): mixed
     {
         return $input[$key] ?? null;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getFirstMatchAsString(array $keys, array $haystack): ?string
     {
         foreach ($keys as $key) {

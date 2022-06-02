@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 use DateTime;
 use DateTimeInterface;
-use Vairogs\Extra\Constants;
+use Vairogs\Extra\Constants\Date;
 
 class DateDataProvider
 {
@@ -70,21 +70,21 @@ class DateDataProvider
 
     public function dataProviderFormatDate(): array
     {
-        $date = new DateTime();
+        $dateTime = new DateTime();
 
         return [
-            [$date->format(format: DateTimeInterface::ATOM),  DateTimeInterface::ATOM, $date->format(format: Constants\Date::FORMAT)],
-            [$date->format(format: DateTimeInterface::RFC3339_EXTENDED), DateTimeInterface::RFC3339_EXTENDED, $date->format(format: Constants\Date::FORMAT)],
+            [$dateTime->format(format: DateTimeInterface::ATOM),  DateTimeInterface::ATOM, $dateTime->format(format: Date::FORMAT)],
+            [$dateTime->format(format: DateTimeInterface::RFC3339_EXTENDED), DateTimeInterface::RFC3339_EXTENDED, $dateTime->format(format: Date::FORMAT)],
         ];
     }
 
     public function dataProviderFormatDateWrong(): array
     {
-        $date = new DateTime();
+        $dateTime = new DateTime();
 
         return [
-            [$date->format(format: DateTimeInterface::ATOM), DateTimeInterface::RFC1036],
-            [$date->format(format: DateTimeInterface::RFC3339_EXTENDED), DateTimeInterface::ATOM],
+            [$dateTime->format(format: DateTimeInterface::ATOM), DateTimeInterface::RFC1036],
+            [$dateTime->format(format: DateTimeInterface::RFC3339_EXTENDED), DateTimeInterface::ATOM],
         ];
     }
 
@@ -92,26 +92,26 @@ class DateDataProvider
     {
         return [
             [1649403032, DateTimeInterface::ATOM, (new DateTime())->setTimestamp(timestamp: 1649403032)->format(format: DateTimeInterface::ATOM)],
-            [1649403032, null, (new DateTime())->setTimestamp(timestamp: 1649403032)->format(format: Constants\Date::FORMAT)],
+            [1649403032, null, (new DateTime())->setTimestamp(timestamp: 1649403032)->format(format: Date::FORMAT)],
         ];
     }
 
     public function dataProviderGetDateNullable(): array
     {
-        $date = new DateTime();
+        $dateTime = new DateTime();
 
         return [
-            [$date->format(format: DateTimeInterface::ATOM), DateTimeInterface::ATOM, $date->format(format: Constants\Date::FORMAT)],
+            [$dateTime->format(format: DateTimeInterface::ATOM), DateTimeInterface::ATOM, $dateTime->format(format: Date::FORMAT)],
             [null, null, null],
         ];
     }
 
     public function dataProviderGetDate(): array
     {
-        $date = new DateTime();
+        $dateTime = new DateTime();
 
         return [
-            [$date->format(format: DateTimeInterface::ATOM), DateTimeInterface::ATOM, $date->format(format: DateTimeInterface::ATOM)],
+            [$dateTime->format(format: DateTimeInterface::ATOM), DateTimeInterface::ATOM, $dateTime->format(format: DateTimeInterface::ATOM)],
         ];
     }
 

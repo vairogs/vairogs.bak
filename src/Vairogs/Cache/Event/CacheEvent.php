@@ -53,8 +53,8 @@ class CacheEvent
         $controller = $this->getController(kernelEvent: $kernelEvent);
 
         try {
-            $method = (new ReflectionClass(objectOrClass: reset(array: $controller)))->getMethod(name: end(array: $controller));
-            foreach ($method->getAttributes(name: $class) as $attribute) {
+            $reflectionMethod = (new ReflectionClass(objectOrClass: reset(array: $controller)))->getMethod(name: end(array: $controller));
+            foreach ($reflectionMethod->getAttributes(name: $class) as $attribute) {
                 if ($class === $attribute->getName()) {
                     return $attribute->newInstance();
                 }

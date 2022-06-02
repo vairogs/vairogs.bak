@@ -4,7 +4,8 @@ namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants\Symbol;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function array_key_exists;
 use function array_reverse;
 use function html_entity_decode;
@@ -26,29 +27,29 @@ use function substr;
 
 final class Text
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function cleanText(string $text): string
     {
         return $this->htmlEntityDecode(text: $this->oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: Symbol::UTF8, from_encoding: Symbol::UTF8))));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function oneSpace(string $text): string
     {
-        return preg_replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
+        return (string) preg_replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function stripSpace(string $text): string
     {
-        return preg_replace(pattern: '#\s+#', replacement: '', subject: $text);
+        return (string) preg_replace(pattern: '#\s+#', replacement: '', subject: $text);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function truncateSafe(string $text, int $length, string $append = '...'): string
     {
         $result = mb_substr(string: $text, start: 0, length: $length);
@@ -65,8 +66,8 @@ final class Text
         return $result;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function limitChars(string $text, int $length = 100, string $append = '...'): string
     {
         if ($length >= mb_strlen(string: $text)) {
@@ -76,8 +77,8 @@ final class Text
         return rtrim(string: mb_substr(string: $text, start: 0, length: $length)) . $append;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function limitWords(string $text, int $limit = 100, string $append = '...'): string
     {
         preg_match(pattern: '/^\s*+(?:\S++\s*+){1,' . $limit . '}/u', subject: $text, matches: $matches);
@@ -88,16 +89,16 @@ final class Text
         return rtrim(string: $matches[0]) . $append;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[Pure]
     public function contains(string $haystack, string $needle): bool
     {
         return false !== strpbrk(string: $haystack, characters: $needle);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function containsAny(string $haystack, array $needles = []): bool
     {
         foreach ($needles as $needle) {
@@ -109,29 +110,29 @@ final class Text
         return false;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function reverseUTF8(string $text): string
     {
         return implode(separator: '', array: array_reverse(array: mb_str_split(string: $text, encoding: Symbol::UTF8)));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function keepNumeric(string $text): string
     {
-        return preg_replace(pattern: '#\D#', replacement: '', subject: $text);
+        return (string) preg_replace(pattern: '#\D#', replacement: '', subject: $text);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getLastPart(string $text, string $delimiter): string
     {
         return false === ($idx = strrpos(haystack: $text, needle: $delimiter)) ? $text : substr(string: $text, offset: $idx + 1);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getNormalizedValue(string $value, string $delimiter = '.'): string|int|float
     {
         if (is_numeric(value: $value)) {
@@ -141,15 +142,15 @@ final class Text
         return $value;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function htmlEntityDecode(string $text): array|string|null
     {
         return preg_replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function sanitize(string $text): string
     {
         return str_replace(search: ["'", '"'], replace: ['&#39;', '&#34;'], subject: (string) preg_replace(pattern: '/\x00|<[^>]*>?/', replacement: '', subject: $text));

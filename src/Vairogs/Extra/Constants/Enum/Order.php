@@ -2,7 +2,7 @@
 
 namespace Vairogs\Extra\Constants\Enum;
 
-enum Criteria
+enum Order
 {
     case ASC;
     case DESC;

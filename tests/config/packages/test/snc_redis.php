@@ -3,8 +3,8 @@
 use Symfony\Config\SncRedisConfig;
 use Vairogs\Core\Vairogs;
 
-return static function (SncRedisConfig $snc): void {
-    $snc
+return static function (SncRedisConfig $sncRedisConfig): void {
+    $sncRedisConfig
         ->client(alias: $key = 'predis')
         ->type(value: 'predis')
         ->alias(value: $key)
@@ -17,7 +17,7 @@ return static function (SncRedisConfig $snc): void {
         ->throwErrors(value: true)
         ->prefix(value: sprintf(Vairogs::VAIROGS . '_%%env(ENVIRONMENT)%%_%s_', $key));
 
-    $snc
+    $sncRedisConfig
         ->client(alias: $key = 'phpredis')
         ->type(value: 'phpredis')
         ->alias(value: $key)

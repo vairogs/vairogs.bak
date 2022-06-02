@@ -19,7 +19,7 @@ final class CacheManager
     /** @throws CacheException */
     public function __construct(private readonly int $defaultLifetime = Definition::DEFAULT_LIFETIME, private readonly bool $useFile = true, ...$adapters)
     {
-        $this->adapter = $this->getAdapter(...$adapters);
+        $this->adapter = $this->getAdapter(adapters: $adapters);
     }
 
     public function get(string $key): mixed
@@ -66,7 +66,7 @@ final class CacheManager
     }
 
     /** @throws CacheException */
-    private function getAdapter(...$adapters): ArrayAdapter|ChainAdapter
+    private function getAdapter(array $adapters): ArrayAdapter|ChainAdapter
     {
         if ([] === $adapters && $this->useFile) {
             $adapters[] = new File();

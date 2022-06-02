@@ -56,7 +56,7 @@ class OpenIDProvider implements HasRegistry
     }
 
     /** @throws JsonException */
-    public function fetchUser(): ?OpenIDUser
+    public function fetchUser(): OpenIDUser
     {
         if ($user = $this->validate()) {
             $builder = new $this->options['user_builder']();

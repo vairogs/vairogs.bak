@@ -1,10 +1,12 @@
 <?php declare(strict_types = 1);
 
+use PhpCsFixer\Config;
+
 if (!file_exists(filename: __DIR__ . '/src')) {
     exit;
 }
 
-return (new PhpCsFixer\Config())
+return (new Config())
     ->setRules(rules: [
         '@PHP80Migration:risky' => true,
         '@PHP81Migration' => true,

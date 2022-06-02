@@ -8,7 +8,7 @@ use League\OAuth2\Client\Token\AccessToken;
 
 class ParsedToken extends AccessToken
 {
-    protected ?IdToken $idToken;
+    protected ?IdToken $idToken = null;
     protected string $idTokenHint;
 
     public function __construct(array $options = [])

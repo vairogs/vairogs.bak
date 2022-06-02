@@ -17,14 +17,14 @@ abstract class AbstractAuthChildDependency implements Dependency
 {
     final public const AUTH = Vairogs::VAIROGS . '.' . Component::AUTH;
 
-    public function loadComponentConfiguration(string $base, ContainerBuilder $containerBuilder): void
+    public function loadComponentConfiguration(string $base, ContainerBuilder $container): void
     {
         $enabledKey = sprintf('%s.%s', $base, Status::ENABLED);
 
-        if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
+        if ($container->hasParameter(name: $enabledKey) && true === $container->getParameter(name: $enabledKey)) {
             $clientsKey = $base . '.clients';
 
-            foreach ($containerBuilder->getParameter(name: $clientsKey) as $key => $clientConfig) {
+            foreach ($container->getParameter(name: $clientsKey) as $key => $clientConfig) {
                 $tree = new TreeBuilder(name: $key);
                 $node = $tree->getRootNode();
                 $this->buildClientConfiguration(arrayNodeDefinition: $node);
@@ -32,15 +32,15 @@ abstract class AbstractAuthChildDependency implements Dependency
                 $clientServiceKey = $clientsKey . '.' . $key;
 
                 foreach ((new Util())->makeOneDimension(array: $config, base: $clientServiceKey) as $tkey => $value) {
-                    $containerBuilder->setParameter(name: $tkey, value: $value);
+                    $container->setParameter(name: $tkey, value: $value);
                 }
 
-                $this->configureClient(containerBuilder: $containerBuilder, clientServiceKey: $clientServiceKey, base: $clientsKey, key: $key);
+                $this->configureClient(container: $container, clientServiceKey: $clientServiceKey, base: $clientsKey, key: $key);
             }
         }
     }
 
     abstract public function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void;
 
-    abstract public function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void;
+    abstract public function configureClient(ContainerBuilder $container, string $clientServiceKey, string $base, string $key): void;
 }

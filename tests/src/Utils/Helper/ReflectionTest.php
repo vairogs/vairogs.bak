@@ -17,9 +17,9 @@ class ReflectionTest extends VairogsTestCase
     /** @throws ReflectionException */
     public function testAttributeExists(): void
     {
-        $method = new ReflectionMethod(objectOrMethod: (new Reflection()), method: 'attributeExists');
-        $this->assertTrue(condition: (new Reflection())->attributeExists(method: $method, filterClass: TwigFilter::class));
-        $this->assertFalse(condition: (new Reflection())->attributeExists(method: $method, filterClass: Cache::class));
+        $reflectionMethod = new ReflectionMethod(objectOrMethod: (new Reflection()), method: 'attributeExists');
+        $this->assertTrue(condition: (new Reflection())->attributeExists(reflectionMethod: $reflectionMethod, filterClass: TwigFilter::class));
+        $this->assertFalse(condition: (new Reflection())->attributeExists(reflectionMethod: $reflectionMethod, filterClass: Cache::class));
     }
 
     public function testGetFilteredMethods(): void

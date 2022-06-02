@@ -38,13 +38,13 @@ class AuthDependency implements Dependency
             ->end();
     }
 
-    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
+    public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
         $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Status::ENABLED);
 
-        if ($containerBuilder->hasParameter(name: $enabledKey) && true === $containerBuilder->getParameter(name: $enabledKey)) {
-            $this->configureComponent(class: AuthOpenIDDependency::class, container: $containerBuilder, configuration: $configuration);
-            $this->configureComponent(class: AuthOpenIDConnectDependency::class, container: $containerBuilder, configuration: $configuration);
+        if ($container->hasParameter(name: $enabledKey) && true === $container->getParameter(name: $enabledKey)) {
+            $this->configureComponent(class: AuthOpenIDDependency::class, container: $container, configuration: $configuration);
+            $this->configureComponent(class: AuthOpenIDConnectDependency::class, container: $container, configuration: $configuration);
         }
     }
 }

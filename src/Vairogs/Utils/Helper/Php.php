@@ -11,7 +11,8 @@ use ReflectionObject;
 use RuntimeException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Vairogs\Extra\Constants\Status;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function array_diff;
 use function array_unshift;
 use function array_values;
@@ -30,8 +31,8 @@ use const FILTER_VALIDATE_BOOL;
 
 final class Php
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[Pure]
     public function boolval(mixed $value): bool
     {
@@ -52,8 +53,8 @@ final class Php
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getClassConstantsValues(string $class): array
     {
         return array_values(array: $this->getClassConstants(class: $class));
@@ -63,8 +64,8 @@ final class Php
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getClassConstants(string $class): array
     {
         try {
@@ -74,8 +75,8 @@ final class Php
         }
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getParameter(array|object $variable, mixed $key): mixed
     {
         if (is_array(value: $variable)) {
@@ -85,8 +86,8 @@ final class Php
         return (new Closure())->hijackGet(object: $variable, property: $key);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getClassMethods(string $class, ?string $parent = null): array
     {
         $methods = get_class_methods(object_or_class: $class);
@@ -97,15 +98,15 @@ final class Php
         return $methods;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function classImplements(string $class, string $interface): bool
     {
         return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getArray(array|object $input): array
     {
         if (is_object(value: $input)) {
@@ -115,35 +116,35 @@ final class Php
         return $input;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getArrayFromObject(object $object): array
     {
         $input = [];
 
-        foreach ((new ReflectionObject(object: $object))->getProperties() as $property) {
-            $input[$name = $property->getName()] = (new Closure())->hijackGet(object: $object, property: $name);
+        foreach ((new ReflectionObject(object: $object))->getProperties() as $reflectionProperty) {
+            $input[$name = $reflectionProperty->getName()] = (new Closure())->hijackGet(object: $object, property: $name);
         }
 
         return $input;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getter(string $variable): string
     {
         return sprintf('get%s', ucfirst(string: $variable));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function setter(string $variable): string
     {
         return sprintf('set%s', ucfirst(string: $variable));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function call(mixed $value, string $function, ...$arguments): mixed
     {
         array_unshift($arguments, $value);
@@ -151,8 +152,8 @@ final class Php
         return (new Closure())->hijackReturn($function, ...$arguments);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function callObject(mixed $value, object $object, string $function, ...$arguments): mixed
     {
         array_unshift($arguments, $value);

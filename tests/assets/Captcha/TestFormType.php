@@ -9,9 +9,9 @@ use Vairogs\Captcha\Form\Type\HoneyType;
 
 class TestFormType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function buildForm(FormBuilderInterface $formBuilder, array $options): void
     {
-        $builder
+        $formBuilder
             ->add(child: 'honey', type: HoneyType::class)
             ->add(child: 'name', type: TextType::class);
     }

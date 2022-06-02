@@ -25,12 +25,12 @@ final class Orm extends AbstractAdapter
     {
         $table = sprintf('%s_items', $this->namespace);
         $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
-        $dbalAdapter = new DoctrineDbalAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: $defaultLifetime, options: ['db_table' => $table]);
+        $doctrineDbalAdapter = new DoctrineDbalAdapter(connOrDsn: $this->entityManager->getConnection(), namespace: '', defaultLifetime: $defaultLifetime, options: ['db_table' => $table]);
 
         if (!$schemaManager->tablesExist(names: [$table])) {
-            $dbalAdapter->createTable();
+            $doctrineDbalAdapter->createTable();
         }
 
-        return $dbalAdapter;
+        return $doctrineDbalAdapter;
     }
 }

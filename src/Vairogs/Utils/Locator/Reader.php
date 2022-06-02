@@ -5,10 +5,11 @@ namespace Vairogs\Utils\Locator;
 use PhpParser\Lexer;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Trait_;
-use PhpParser\Parser;
+use PhpParser\Parser\Php7;
 use function array_values;
 use function in_array;
 
@@ -22,7 +23,7 @@ class Reader
             $this->types = [Class_::class, Interface_::class, Trait_::class];
         }
 
-        $this->findDefinitions(stmts: (new Parser\Php7(lexer: new Lexer(options: ['usedAttributes' => []])))->parse(code: $snippet) ?? [], namespace: new Name(name: $namespace));
+        $this->findDefinitions(stmts: (new Php7(lexer: new Lexer(options: ['usedAttributes' => []])))->parse(code: $snippet) ?? [], namespace: new Name(name: $namespace));
     }
 
     public function getDefinitionNames(): array
@@ -37,7 +38,7 @@ class Reader
         }
     }
 
-    private function makeDefinition(Stmt|Stmt\ClassLike $stmt, Name $namespace): void
+    private function makeDefinition(Stmt|ClassLike $stmt, Name $namespace): void
     {
         if ($stmt instanceof Namespace_) {
             $this->findDefinitions($stmt->stmts, new Name(name: (string) $stmt->name));

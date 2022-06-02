@@ -23,7 +23,7 @@ class CacheDependency implements Dependency
         ->end();
     }
 
-    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
+    public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
         // Part of interface, not needed in this component
     }

@@ -2,7 +2,8 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use Vairogs\Utils\Handler\FunctionHandler;
 use function acos;
 use function array_fill;
@@ -19,8 +20,8 @@ use const PHP_INT_MAX;
 
 final class Util
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function isPrime(int $number): bool
     {
         $function = (new FunctionHandler())->setFunction(functionName: 'isPrimeFunction', instance: new self());
@@ -29,8 +30,8 @@ final class Util
         return (new FunctionHandler())->setFunction(functionName: 'isPrimeGmp', instance: new self())->setNext(handler: $below)->handle($number);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function isPrimeFunction(int $number): bool
     {
         preg_match(pattern: '#^1?$|^(11+?)\1+$#', subject: implode(separator: '1', array: array_fill(start_index: 0, count: $number, value: null)), matches: $matches);
@@ -38,8 +39,8 @@ final class Util
         return isset($matches[1]);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function isPrimeBelow1000(int $number): ?bool
     {
         if (1000 <= $number) {
@@ -55,8 +56,8 @@ final class Util
         return 1 !== $number;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX, array $result = []): array
     {
         if ($depth <= $maxDepth) {
@@ -91,8 +92,8 @@ final class Util
         return null;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function distanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km = true, int $precision = 4): float
     {
         if ($latitude1 === $latitude2 && $longitude1 === $longitude2) {

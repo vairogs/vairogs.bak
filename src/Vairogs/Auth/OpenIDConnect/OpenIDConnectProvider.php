@@ -6,6 +6,7 @@ use DateTime;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
 use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Token\RegisteredClaims;
 use League\OAuth2\Client\Grant\AbstractGrant;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -63,12 +64,12 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     {
         $accessToken = $this->getAccessTokenFunction(grant: $grant, options: $options);
 
-        if (null === $accessToken || null === $token = $accessToken->getIdToken()) {
+        if (!$accessToken instanceof ParsedToken || null === $idToken = $accessToken->getIdToken()) {
             throw new OpenIDConnectException(message: 'Expected an id_token but did not receive one from the authorization server');
         }
 
         $this->setValidators();
-        $this->validatorChain->assert(token: $token);
+        $this->validatorChain->assert(token: $idToken);
 
         $this->saveSession(accessToken: $accessToken);
 
@@ -82,7 +83,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     }
 
     /** @throws IdentityProviderException */
-    public function getAccessTokenFunction($grant, array $options = []): ?ParsedToken
+    public function getAccessTokenFunction(?AbstractGrant $grant, array $options = []): ?ParsedToken
     {
         $grant = $this->verifyGrant(grant: $grant);
 
@@ -96,7 +97,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
 
     public function getPublicKey(): Key
     {
-        return Key\InMemory::plainText(contents: $this->publicKey);
+        return InMemory::plainText(contents: $this->publicKey);
     }
 
     /** @throws IdentityProviderException */
@@ -144,7 +145,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         }
 
         $this->setPublicKey(publicKey: 'file://' . $this->publicKey);
-        $this->uriCollection = (new UriCollection())->build(uris: $uris, provider: $this);
+        $this->uriCollection = (new UriCollection())->build(uris: $uris, openIDConnectProvider: $this);
     }
 
     protected function getTokenRequest(array $params, string $url): RequestInterface

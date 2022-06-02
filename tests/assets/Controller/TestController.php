@@ -31,16 +31,16 @@ class TestController extends AbstractController
 
         $expected = self::getSubscribedServices();
 
-        foreach ($container->getServiceIds() as $id) {
-            if ('service_container' === $id) {
+        foreach ($container->getServiceIds() as $serviceId) {
+            if ('service_container' === $serviceId) {
                 continue;
             }
-            if (!isset($expected[$id])) {
-                throw new UnexpectedValueException(message: sprintf('Service "%s" is not expected, as declared by "%s::getSubscribedServices()".', $id, AbstractController::class));
+            if (!isset($expected[$serviceId])) {
+                throw new UnexpectedValueException(message: sprintf('Service "%s" is not expected, as declared by "%s::getSubscribedServices()".', $serviceId, AbstractController::class));
             }
-            $type = substr(string: $expected[$id], offset: 1);
-            if (!$container->get(id: $id) instanceof $type) {
-                throw new UnexpectedValueException(message: sprintf('Service "%s" is expected to be an instance of "%s", as declared by "%s::getSubscribedServices()".', $id, $type, AbstractController::class));
+            $type = substr(string: $expected[$serviceId], offset: 1);
+            if (!$container->get(id: $serviceId) instanceof $type) {
+                throw new UnexpectedValueException(message: sprintf('Service "%s" is expected to be an instance of "%s", as declared by "%s::getSubscribedServices()".', $serviceId, $type, AbstractController::class));
             }
         }
 

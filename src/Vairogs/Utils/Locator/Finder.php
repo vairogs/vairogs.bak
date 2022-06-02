@@ -16,8 +16,8 @@ class Finder
 
     public function locate(): self
     {
-        foreach ($this->finder as $fileInfo) {
-            $fileInfo = new SplFileInfo(decorated: $fileInfo, types: $this->types, namespace: $this->namespace);
+        foreach ($this->finder as $file) {
+            $fileInfo = new SplFileInfo(decorated: $file, types: $this->types, namespace: $this->namespace);
 
             foreach ($fileInfo->getReader()->getDefinitionNames() as $name) {
                 $this->classMap[$name] = $fileInfo;

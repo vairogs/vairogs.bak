@@ -14,7 +14,7 @@ use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 trait OpenIDConnectProviderVariables
 {
     protected ?Signer $signer = null;
-    protected ?string $baseUriPost;
+    protected ?string $baseUriPost = null;
     protected RequestStack $requestStack;
     protected UriCollection $uriCollection;
     protected ValidatorChain $validatorChain;

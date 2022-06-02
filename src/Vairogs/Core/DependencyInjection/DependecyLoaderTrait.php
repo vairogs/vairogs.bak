@@ -19,7 +19,7 @@ trait DependecyLoaderTrait
     protected function configureComponent(string $class, ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
         if ($this->checkImplementation(class: $class)) {
-            (new $class())->loadComponent(containerBuilder: $container, configuration: $configuration);
+            (new $class())->loadComponent(container: $container, configuration: $configuration);
         }
     }
 

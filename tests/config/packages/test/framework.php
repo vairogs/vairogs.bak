@@ -2,8 +2,8 @@
 
 use Symfony\Config\FrameworkConfig;
 
-return static function (FrameworkConfig $config): void {
-    $config
+return static function (FrameworkConfig $frameworkConfig): void {
+    $frameworkConfig
         ->test(value: true)
         ->httpMethodOverride(value: true);
 };

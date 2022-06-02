@@ -3,11 +3,13 @@
 namespace Vairogs\Utils\Helper;
 
 use DateTime;
+use DateTimeInterface;
 use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function array_merge;
 use function floor;
 use function gmdate;
@@ -28,8 +30,8 @@ final class Date
         'second' => Constants\Date::SEC,
     ];
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function validateDate(string $date): bool
     {
         $date = (new Text())->keepNumeric(text: $date);
@@ -49,8 +51,8 @@ final class Date
         return 0 < $day && $daysInMonth[$month - 1] >= $day;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function excelDate(int $timestamp, string $format = Constants\Date::FORMAT): string
     {
         $base = 25569;
@@ -68,8 +70,8 @@ final class Date
         return (string) $timestamp;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function validateDateBasic(mixed $date, string $format = Constants\Date::FORMAT): bool
     {
         $object = DateTime::createFromFormat(format: '!' . $format, datetime: $date);
@@ -77,8 +79,8 @@ final class Date
         return $object && $date === $object->format(format: $format);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[Pure]
     public function format(int|float $timestamp): string
     {
@@ -104,8 +106,8 @@ final class Date
         return trim(string: $str);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[Pure]
     public function formatToArray(int|float $timestamp): array
     {
@@ -131,8 +133,8 @@ final class Date
         return $result;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function formatDate(string $string, string $format = Constants\Date::FORMAT): string|bool
     {
         if (($date = DateTime::createFromFormat(format: '!' . $format, datetime: $string)) instanceof DateTime) {
@@ -142,9 +144,9 @@ final class Date
         return false;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function getDateNullable(?string $dateString = null, ?string $format = null): ?DateTime
+    #[TwigFunction]
+    #[TwigFilter]
+    public function getDateNullable(?string $dateString = null, ?string $format = null): ?DateTimeInterface
     {
         if (null === $dateString || null === $format || !$date = DateTime::createFromFormat(format: '!' . $format, datetime: $dateString)) {
             return null;
@@ -154,8 +156,8 @@ final class Date
     }
 
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getDate(?string $dateString = null, ?string $format = null): DateTime
     {
         if (null === $dateString || !$date = DateTime::createFromFormat(format: '!' . $format, datetime: $dateString)) {
@@ -166,15 +168,15 @@ final class Date
     }
 
     /** @throws Exception */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string
     {
         return (new DateTime())->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Constants\Date::FORMAT);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getDateWithoutFormat(string $date, array $guesses = []): DateTime|string
     {
         $formats = array_merge((new Php())->getClassConstantsValues(class: DateTime::class), self::EXTRA_FORMATS, $guesses);

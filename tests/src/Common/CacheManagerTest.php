@@ -16,15 +16,15 @@ class CacheManagerTest extends VairogsTestCase
     {
         $random = (new Identification())->getRandomString(chars: Symbol::EXTENDED);
 
-        $manager = (new CacheManager());
-        $this->assertEquals(expected: null, actual: $manager->get(key: __FUNCTION__));
-        $this->assertEquals(expected: null, actual: $manager->get(key: $random));
-        $manager->set(key: __FUNCTION__, value: __CLASS__, expiresAfter: 5);
-        $manager->set(key: $random, value: __CLASS__, expiresAfter: 5);
-        $this->assertEquals(expected: __CLASS__, actual: $manager->get(key: __FUNCTION__));
-        $manager->delete(key: __FUNCTION__);
-        $manager->delete(key: $random);
-        $this->assertEquals(expected: null, actual: $manager->get(key: __FUNCTION__));
+        $cacheManager = (new CacheManager());
+        $this->assertEquals(expected: null, actual: $cacheManager->get(key: __FUNCTION__));
+        $this->assertEquals(expected: null, actual: $cacheManager->get(key: $random));
+        $cacheManager->set(key: __FUNCTION__, value: __CLASS__, expiresAfter: 5);
+        $cacheManager->set(key: $random, value: __CLASS__, expiresAfter: 5);
+        $this->assertEquals(expected: __CLASS__, actual: $cacheManager->get(key: __FUNCTION__));
+        $cacheManager->delete(key: __FUNCTION__);
+        $cacheManager->delete(key: $random);
+        $this->assertEquals(expected: null, actual: $cacheManager->get(key: __FUNCTION__));
 
         $this->assertEquals(expected: null, actual: (new CacheManager(useFile: false))->get(key: __FUNCTION__));
         $this->assertEquals(expected: null, actual: (new CacheManager(15, true, new CacheManager()))->get(key: __FUNCTION__));

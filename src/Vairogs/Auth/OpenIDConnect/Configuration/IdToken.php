@@ -9,9 +9,9 @@ use Lcobucci\JWT\UnencryptedToken;
 
 class IdToken implements UnencryptedToken
 {
-    protected ?string $accessTokenString;
+    protected ?string $accessTokenString = null;
 
-    public function __construct(private readonly UnencryptedToken $token)
+    public function __construct(private readonly UnencryptedToken $unencryptedToken)
     {
     }
 
@@ -34,62 +34,62 @@ class IdToken implements UnencryptedToken
 
     public function claims(): DataSet
     {
-        return $this->token->claims();
+        return $this->unencryptedToken->claims();
     }
 
     public function hasBeenIssuedBefore(DateTimeInterface $now): bool
     {
-        return $this->token->hasBeenIssuedBefore(now: $now);
+        return $this->unencryptedToken->hasBeenIssuedBefore(now: $now);
     }
 
     public function hasBeenIssuedBy(string ...$issuers): bool
     {
-        return $this->token->hasBeenIssuedBy(...$issuers);
+        return $this->unencryptedToken->hasBeenIssuedBy(...$issuers);
     }
 
     public function headers(): DataSet
     {
-        return $this->token->headers();
+        return $this->unencryptedToken->headers();
     }
 
     public function isExpired(DateTimeInterface $now): bool
     {
-        return $this->token->isExpired(now: $now);
+        return $this->unencryptedToken->isExpired(now: $now);
     }
 
     public function isIdentifiedBy(string $id): bool
     {
-        return $this->token->isIdentifiedBy(id: $id);
+        return $this->unencryptedToken->isIdentifiedBy(id: $id);
     }
 
     public function isMinimumTimeBefore(DateTimeInterface $now): bool
     {
-        return $this->token->isMinimumTimeBefore(now: $now);
+        return $this->unencryptedToken->isMinimumTimeBefore(now: $now);
     }
 
     public function isPermittedFor(string $audience): bool
     {
-        return $this->token->isPermittedFor(audience: $audience);
+        return $this->unencryptedToken->isPermittedFor(audience: $audience);
     }
 
     public function isRelatedTo(string $subject): bool
     {
-        return $this->token->isRelatedTo(subject: $subject);
+        return $this->unencryptedToken->isRelatedTo(subject: $subject);
     }
 
     public function payload(): string
     {
-        return $this->token->payload();
+        return $this->unencryptedToken->payload();
     }
 
     public function signature(): Signature
     {
-        return $this->token->signature();
+        return $this->unencryptedToken->signature();
     }
 
     public function toString(): string
     {
-        return $this->token->toString();
+        return $this->unencryptedToken->toString();
     }
 
     public function getClaim(string $claim): mixed

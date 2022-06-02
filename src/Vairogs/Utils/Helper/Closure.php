@@ -7,14 +7,15 @@ use InvalidArgumentException;
 use ReflectionException;
 use ReflectionProperty;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function sprintf;
 
 final class Closure
 {
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackSet(object $object, string $property, mixed $value): object
     {
         try {
@@ -33,8 +34,8 @@ final class Closure
     }
 
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackSetStatic(object $object, string $property, mixed $value): object
     {
         try {
@@ -53,8 +54,8 @@ final class Closure
     }
 
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackSetNonStatic(object $object, string $property, mixed $value): object
     {
         try {
@@ -72,23 +73,23 @@ final class Closure
         return $object;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function return(callable $function, object $clone, ...$arguments): mixed
     {
         return $this->bind(function: $function, clone: $clone)(...$arguments);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function void(callable $function, object $clone, ...$arguments): void
     {
         $this->bind(function: $function, clone: $clone)(...$arguments);
     }
 
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackGetStatic(object $object, string $property, ...$arguments): mixed
     {
         try {
@@ -103,8 +104,8 @@ final class Closure
     }
 
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackGetNonStatic(object $object, string $property, ...$arguments): mixed
     {
         try {
@@ -122,17 +123,17 @@ final class Closure
      * @throws InvalidArgumentException
      * @throws InvalidPropertyPathException
      */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackGet(object $object, string $property, bool $throwOnUnInitialized = false, ...$arguments)
     {
         try {
-            $objectProperty = (new ReflectionProperty(class: $object, property: $property));
+            $reflectionProperty = (new ReflectionProperty(class: $object, property: $property));
         } catch (ReflectionException) {
             throw new InvalidArgumentException(message: sprintf('Unable to get property "%s" of object %s', $property, $object::class));
         }
 
-        if (!$objectProperty->isInitialized(object: $object)) {
+        if (!$reflectionProperty->isInitialized(object: $object)) {
             if ($throwOnUnInitialized) {
                 throw new InvalidPropertyPathException(message: sprintf('%s::%s must not be accessed before initialization', $object::class, $property));
             }
@@ -149,29 +150,29 @@ final class Closure
         return $this->hijackGetStatic($object, $property, ...$arguments);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackVoid(string $function, ...$arguments): void
     {
         $function(...$arguments);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackVoidObject(object $object, string $function, ...$arguments): void
     {
         $this->void(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackReturn(string $function, ...$arguments): mixed
     {
         return $function(...$arguments);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function hijackReturnObject(object $object, string $function, ...$arguments): mixed
     {
         return $this->return(fn () => $object->{$function}(...$arguments), $object, ...$arguments);

@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Source\Utils\Helper;
 
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
-use Vairogs\Extra\Constants\Enum\Criteria;
+use Vairogs\Extra\Constants\Enum\Order;
 use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Sort;
@@ -52,7 +52,7 @@ class SortTest extends VairogsTestCase
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderSort
      */
-    public function testSort(array|object $data, string $parameter, Criteria $order, array $expected): void
+    public function testSort(array|object $data, string $parameter, Order $order, array $expected): void
     {
         $this->assertEquals(expected: $expected, actual: (new Sort())->sort(data: $data, parameter: $parameter, order: $order));
     }
@@ -60,7 +60,7 @@ class SortTest extends VairogsTestCase
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderSortException
      */
-    public function testSortException(iterable|Collection $data, string $parameter, Criteria $order): void
+    public function testSortException(iterable|Collection $data, string $parameter, Order $order): void
     {
         $this->expectException(exception: InvalidArgumentException::class);
         (new Sort())->sort(data: $data, parameter: $parameter, order: $order);

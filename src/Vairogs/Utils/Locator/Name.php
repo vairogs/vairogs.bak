@@ -24,7 +24,7 @@ class Name implements Stringable
 
     public function normalize(): string
     {
-        return preg_replace(pattern: '/^\\\*/', replacement: '', subject: (string) $this);
+        return (string) preg_replace(pattern: '/^\\\*/', replacement: '', subject: (string) $this);
     }
 
     public function key(): string

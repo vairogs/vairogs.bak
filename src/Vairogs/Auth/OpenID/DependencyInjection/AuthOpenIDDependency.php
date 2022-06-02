@@ -35,16 +35,16 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
         $optionsNode->end();
     }
 
-    public function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
+    public function configureClient(ContainerBuilder $container, string $clientServiceKey, string $base, string $key): void
     {
-        $clientDefinition = $containerBuilder->register(id: $clientServiceKey, class: OpenIDProvider::class);
+        $clientDefinition = $container->register(id: $clientServiceKey, class: OpenIDProvider::class);
         $clientDefinition
             ->setArguments(arguments: [
                 new Reference(id: Service::REQUEST_STACK),
                 new Reference(id: Service::ROUTER),
                 $key,
-                $containerBuilder->getParameter(name: Definition::KERNEL_CACHE_DIR),
-                $containerBuilder->getParameter(name: $clientServiceKey),
+                $container->getParameter(name: Definition::KERNEL_CACHE_DIR),
+                $container->getParameter(name: $clientServiceKey),
             ])
             ->addTag(name: $base);
     }
@@ -67,8 +67,8 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
         ->end();
     }
 
-    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
+    public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . Component::AUTH_OPENID, containerBuilder: $containerBuilder);
+        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . Component::AUTH_OPENID, container: $container);
     }
 }

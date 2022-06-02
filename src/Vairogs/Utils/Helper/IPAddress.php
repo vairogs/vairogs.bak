@@ -5,8 +5,9 @@ namespace Vairogs\Utils\Helper;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyInfo\Type;
-use Vairogs\Extra\Constants;
-use Vairogs\Twig\Attribute;
+use Vairogs\Extra\Constants\Http;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function count;
 use function explode;
 use function is_numeric;
@@ -14,32 +15,32 @@ use function long2ip;
 
 final class IPAddress
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getRemoteIp(Request $request, bool $trust = false): string
     {
-        $headers = [Constants\Http::REMOTE_ADDR, ];
+        $headers = [Http::REMOTE_ADDR, ];
 
         if ($trust) {
-            $headers = [Constants\Http::HTTP_CLIENT_IP, Constants\Http::HTTP_X_REAL_IP, Constants\Http::HTTP_X_FORWARDED_FOR, Constants\Http::REMOTE_ADDR, ];
+            $headers = [Http::HTTP_CLIENT_IP, Http::HTTP_X_REAL_IP, Http::HTTP_X_FORWARDED_FOR, Http::REMOTE_ADDR, ];
         }
 
-        return (new Iteration())->getFirstMatchAsString(keys: $headers, haystack: $request->server->all());
+        return (string) (new Iteration())->getFirstMatchAsString(keys: $headers, haystack: $request->server->all());
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getRemoteIpCF(Request $request, bool $trust = false): string
     {
-        if ($request->server->has(key: Constants\Http::HTTP_CF_CONNECTING_IP)) {
-            return $request->server->get(key: Constants\Http::HTTP_CF_CONNECTING_IP);
+        if ($request->server->has(key: Http::HTTP_CF_CONNECTING_IP)) {
+            return $request->server->get(key: Http::HTTP_CF_CONNECTING_IP);
         }
 
         return $this->getRemoteIp(request: $request, trust: $trust);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[ArrayShape([
         Type::BUILTIN_TYPE_STRING,
         Type::BUILTIN_TYPE_STRING,
@@ -71,8 +72,8 @@ final class IPAddress
         return [long2ip(ip: $low), long2ip(ip: $high)];
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function isCIDR(string $cidr): bool
     {
         $parts = explode(separator: '/', string: $cidr);

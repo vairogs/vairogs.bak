@@ -2,10 +2,12 @@
 
 namespace Vairogs\Utils\Helper;
 
+use Closure;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Extra\Constants\Enum\Criteria;
-use Vairogs\Twig\Attribute;
+use Vairogs\Extra\Constants\Enum\Order;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function array_key_exists;
 use function array_slice;
 use function count;
@@ -19,8 +21,8 @@ use function usort;
 /** @noinspection TypoSafeNamingInspection */
 final class Sort
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function swap(mixed &$foo, mixed &$bar): void
     {
         if ($foo === $bar) {
@@ -32,8 +34,8 @@ final class Sort
         $bar = $tmp;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function bubbleSort(array &$array): void
     {
         $count = count(value: $array);
@@ -46,8 +48,8 @@ final class Sort
         }
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function swapArray(array &$array, mixed $foo, mixed $bar): void
     {
         if ($array[$foo] === $array[$bar]) {
@@ -59,8 +61,8 @@ final class Sort
         $array[$bar] = $tmp;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function mergeSort(array $array): array
     {
         if (1 >= count(value: $array)) {
@@ -78,9 +80,9 @@ final class Sort
     }
 
     /** @throws InvalidArgumentException */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function sort(array|object $data, string $parameter, Criteria $order = Criteria::ASC): array
+    #[TwigFunction]
+    #[TwigFilter]
+    public function sort(array|object $data, string $parameter, Order $order = Order::ASC): object|array
     {
         if (count(value: $data) < 2) {
             return $data;
@@ -96,8 +98,8 @@ final class Sort
         return $data;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[Pure]
     public function isSortable(mixed $item, int|string $field): bool
     {
@@ -112,16 +114,16 @@ final class Sort
         return false;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function usort(string $parameter, Criteria $order): callable
+    #[TwigFunction]
+    #[TwigFilter]
+    public function usort(string $parameter, Order $order): Closure
     {
         return static function (array|object $first, array|object $second) use ($parameter, $order): int {
             if (($firstSort = (new Php())->getParameter(variable: $first, key: $parameter)) === ($secondSort = (new Php())->getParameter(variable: $second, key: $parameter))) {
                 return 0;
             }
 
-            $flip = (Criteria::DESC === $order) ? -1 : 1;
+            $flip = (Order::DESC === $order) ? -1 : 1;
 
             if ($firstSort > $secondSort) {
                 return $flip;

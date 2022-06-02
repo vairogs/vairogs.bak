@@ -45,6 +45,7 @@ class UriTest extends VairogsTestCase
     public function testRouteExists(string $route, bool $expected): void
     {
         $this->assertInstanceOf(expected: RouterInterface::class, actual: $router = $this->container->get(id: Service::ROUTER, invalidBehavior: ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        /* @var RouterInterface $router */
         $this->assertEquals(expected: $expected, actual: (new Uri())->routeExists(router: $router, route: $route));
     }
 
@@ -60,7 +61,7 @@ class UriTest extends VairogsTestCase
     {
         $headers = Request::create(uri: Definition::IDENT)->headers;
         $headers->set(key: 'test', values: null);
-        $this->assertIsArray(actual: $headers = (new Uri())->parseHeaders(rawHeaders: (new Uri())->getRawHeaders(headers: $headers)));
+        $this->assertIsArray(actual: $headers = (new Uri())->parseHeaders(rawHeaders: (new Uri())->getRawHeaders(headerBag: $headers)));
         $this->assertArrayHasKey(key: 'user-agent', array: $headers);
         $this->assertEquals(expected: 'Symfony', actual: $headers['user-agent']);
     }

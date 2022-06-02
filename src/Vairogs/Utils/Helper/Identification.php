@@ -4,7 +4,8 @@ namespace Vairogs\Utils\Helper;
 
 use Throwable;
 use Vairogs\Extra\Constants\Symbol;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function base64_encode;
 use function bin2hex;
 use function ceil;
@@ -21,8 +22,8 @@ use function substr;
 
 final class Identification
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function validatePersonCode(string $personCode): bool
     {
         $personCode = (new Text())->keepNumeric(text: $personCode);
@@ -38,8 +39,8 @@ final class Identification
         return true;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function validateNewPersonCode(string $personCode): bool
     {
         if (11 !== strlen(string: $personCode)) {
@@ -63,8 +64,8 @@ final class Identification
         return (1 - $remainder) === (int) $personCode[10];
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function validateOldPersonCode(string $personCode): bool
     {
         if (11 !== strlen(string: $personCode)) {
@@ -82,8 +83,8 @@ final class Identification
         return (int) ($checksum - floor(num: $checksum / 11) * 11) === (int) $personCode[10];
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getUniqueId(int $length = 32): string
     {
         try {
@@ -93,16 +94,16 @@ final class Identification
         }
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getRandomString(int $length = 32, string $chars = Symbol::BASIC): string
     {
         /* @noinspection NonSecureStrShuffleUsageInspection */
         return substr(string: str_shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getHash(string $text, int $bits = 256): string
     {
         $hash = substr(string: hash(algo: 'sha' . $bits, data: $text, binary: true), offset: 0, length: (int) round(num: $bits / 16));

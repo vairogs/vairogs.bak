@@ -28,7 +28,7 @@ final class TwigExtension extends AbstractExtension
     public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
     public const HELPER_DIR = '/../vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/';
 
-    public function __construct(private readonly CacheManager $manager)
+    public function __construct(private readonly CacheManager $cacheManager)
     {
     }
 
@@ -49,14 +49,14 @@ final class TwigExtension extends AbstractExtension
         }
 
         $methods = $this->parseMethods(filter: $filter, twig: $twig);
-        $this->manager->set(key: $this->getKey(type: $type), value: $methods);
+        $this->cacheManager->set(key: $this->getKey(type: $type), value: $methods);
 
         return $methods;
     }
 
     private function getMethodCache(string $type): array
     {
-        if ([] !== $methods = ($this->manager->get(key: $this->getKey(type: $type)) ?? [])) {
+        if ([] !== $methods = ($this->cacheManager->get(key: $this->getKey(type: $type)) ?? [])) {
             return $methods;
         }
 

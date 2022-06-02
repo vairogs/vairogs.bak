@@ -11,12 +11,12 @@ use Vairogs\Core\Registry\Registry;
 use Vairogs\Utils\Helper\Composer;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
-return static function (VairogsConfig $config, ContainerConfigurator $containerConfigurator): void {
-    $config
+return static function (VairogsConfig $vairogsConfig, ContainerConfigurator $containerConfigurator): void {
+    $vairogsConfig
         ->cache()
         ->enabled(value: true);
 
-    $auth = $config
+    $auth = $vairogsConfig
         ->auth()
         ->enabled(value: true);
 

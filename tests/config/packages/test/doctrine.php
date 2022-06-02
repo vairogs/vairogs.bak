@@ -4,8 +4,8 @@ use Doctrine\DBAL\Types\Types;
 use Symfony\Config\DoctrineConfig;
 use Vairogs\Extra\Constants\Definition;
 
-return static function (DoctrineConfig $config): void {
-    $dbal = $config
+return static function (DoctrineConfig $doctrineConfig): void {
+    $dbal = $doctrineConfig
         ->dbal()
         ->connection(name: $default = Definition::DEFAULT);
 
@@ -21,7 +21,7 @@ return static function (DoctrineConfig $config): void {
         ->mappingType(name: 'set', value: Types::STRING)
         ->mappingType(name: 'varbinary', value: Types::STRING);
 
-    $em = $config
+    $em = $doctrineConfig
         ->orm()
         ->defaultEntityManager(value: $default)
         ->autoGenerateProxyClasses(value: false)

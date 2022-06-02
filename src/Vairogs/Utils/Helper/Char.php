@@ -3,7 +3,8 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function array_values;
 use function count;
 use function filter_var;
@@ -27,15 +28,15 @@ final class Char
     final public const LCFIRST = 'lcfirst';
     final public const UCFIRST = 'ucfirst';
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function fromCamelCase(string $string, string $separator = '_'): string
     {
         return strtolower(string: (string) preg_replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function toSnakeCase(string $string, bool $skipCamel = false): string
     {
         $string = preg_replace(pattern: [
@@ -46,8 +47,8 @@ final class Char
         return strtolower(string: str_replace(search: '-', replace: '_', subject: (string) $string));
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function toCamelCase(string $string, string $function = self::LCFIRST): string
     {
         $subject = ucwords(string: strtolower(string: str_replace(search: '_', replace: ' ', subject: $string)));
@@ -57,19 +58,19 @@ final class Char
             self::UCFIRST => ucfirst(string: $subject)
         };
 
-        return preg_replace(pattern: '#\s+#', replacement: '', subject: $subject);
+        return (string) preg_replace(pattern: '#\s+#', replacement: '', subject: $subject);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     #[Pure]
     public function sanitizeFloat(string $string): float
     {
         return (float) filter_var(value: $string, filter: FILTER_SANITIZE_NUMBER_FLOAT, options: FILTER_FLAG_ALLOW_FRACTION);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function long2str(array $array, bool $wide = false): string
     {
         $length = count(value: $array);
@@ -91,8 +92,8 @@ final class Char
     /**
      * @return int[]
      */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function str2long(string $string, bool $wide = false): array
     {
         $array = array_values(unpack(format: 'V*', string: $string . str_repeat(string: "\0", times: (4 - ($length = strlen(string: $string)) % 4) & 3)));
@@ -105,8 +106,8 @@ final class Char
         return $array;
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function char2byte(string $char): int
     {
         $pack = unpack(format: 'c', string: $char);
@@ -114,8 +115,8 @@ final class Char
         return (int) array_pop(array: $pack);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function byte2char(int $byte): string
     {
         return pack('c', $byte);

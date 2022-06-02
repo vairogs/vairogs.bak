@@ -49,10 +49,10 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
         $optionsNode->end();
     }
 
-    public function configureClient(ContainerBuilder $containerBuilder, string $clientServiceKey, string $base, string $key): void
+    public function configureClient(ContainerBuilder $container, string $clientServiceKey, string $base, string $key): void
     {
-        $clientDefinition = $containerBuilder->register(id: $clientServiceKey, class: $containerBuilder->getParameter(name: $clientServiceKey . '.user_provider'));
-        $options = $containerBuilder->getParameter(name: $clientServiceKey);
+        $clientDefinition = $container->register(id: $clientServiceKey, class: $container->getParameter(name: $clientServiceKey . '.user_provider'));
+        $options = $container->getParameter(name: $clientServiceKey);
         unset($options['user_provider']);
         $clientDefinition->setArguments(arguments: [
             $key,
@@ -79,8 +79,8 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
         ->end();
     }
 
-    public function loadComponent(ContainerBuilder $containerBuilder, ConfigurationInterface $configuration): void
+    public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . Component::AUTH_OPENIDCONNECT, containerBuilder: $containerBuilder);
+        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . Component::AUTH_OPENIDCONNECT, container: $container);
     }
 }

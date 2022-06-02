@@ -94,6 +94,7 @@
         "predis/predis": ">=1.1.0",
         "psalm/plugin-symfony": "dev-master",
         "psr/container": "*",
+        "rector/rector": "dev-main",
         "roave/security-advisories": "dev-latest",
         "sebastian/diff": "5.0.x-dev as 4.0.4",
         "snc/redis-bundle": "dev-master",

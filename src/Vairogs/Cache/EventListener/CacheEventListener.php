@@ -30,7 +30,7 @@ class CacheEventListener implements EventSubscriberInterface
 
     protected readonly CacheEvent $event;
 
-    public function __construct(protected bool $enabled, Security $security, private readonly CacheManager $manager)
+    public function __construct(protected bool $enabled, Security $security, private readonly CacheManager $cacheManager)
     {
         if ($this->enabled) {
             $this->event = new CacheEvent(security: $security);
@@ -69,9 +69,9 @@ class CacheEventListener implements EventSubscriberInterface
                 $key = $attribute->getKey(prefix: $route);
 
                 if (!$this->needsInvalidation(request: $controllerEvent->getRequest())) {
-                    $response = $this->manager->get(key: $key);
+                    $response = $this->cacheManager->get(key: $key);
                 } else {
-                    $this->manager->delete(key: $key);
+                    $this->cacheManager->delete(key: $key);
                 }
             }
 
@@ -90,7 +90,7 @@ class CacheEventListener implements EventSubscriberInterface
         if (($attribute = $this->event->getAtribute(kernelEvent: $requestEvent, class: Cache::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
             /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Cache::class));
-            $this->manager->delete(key: $attribute->getKey(prefix: $requestEvent->getRequest()->get(key: self::ROUTE)));
+            $this->cacheManager->delete(key: $attribute->getKey(prefix: $requestEvent->getRequest()->get(key: self::ROUTE)));
         }
     }
 
@@ -106,8 +106,8 @@ class CacheEventListener implements EventSubscriberInterface
             $key = $attribute->getKey(prefix: $responseEvent->getRequest()->get(key: self::ROUTE));
             $skip = Header::SKIP === $responseEvent->getRequest()->headers->get(key: Header::CACHE_VAR);
 
-            if (!$skip && null === $this->manager->get(key: $key)) {
-                $this->manager->set(key: $key, value: $responseEvent->getResponse(), expiresAfter: $attribute->getExpires());
+            if (!$skip && null === $this->cacheManager->get(key: $key)) {
+                $this->cacheManager->set(key: $key, value: $responseEvent->getResponse(), expiresAfter: $attribute->getExpires());
             }
         }
     }

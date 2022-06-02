@@ -93,9 +93,9 @@ class SitemapCommand extends Command
     private function validate(Sitemap $sitemap, OutputInterface $output): bool
     {
         if (0 !== ($violations = $this->validator->validate(value: $sitemap))->count()) {
-            foreach ($violations as $error) {
+            foreach ($violations as $violation) {
                 /* @var ConstraintViolation $error */
-                $output->writeln(messages: $error->getMessage());
+                $output->writeln(messages: $violation->getMessage());
             }
 
             return false;

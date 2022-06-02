@@ -3,7 +3,8 @@
 namespace Vairogs\Utils\Helper;
 
 use UnexpectedValueException;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 use function array_map;
 use function floor;
 use function getcwd;
@@ -21,8 +22,8 @@ use const GLOB_NOSORT;
 final class File
 {
     /** @noinspection MkdirRaceConditionInspection */
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function mkdir(string $dir): bool
     {
         if (!is_dir(filename: $dir)) {
@@ -35,15 +36,15 @@ final class File
         return is_dir(filename: $dir);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function fileExistsCwd(string $filename): bool
     {
         return is_file(filename: getcwd() . DIRECTORY_SEPARATOR . $filename);
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function humanFileSize(int $bytes, int $decimals = 2): string
     {
         $units = ['B', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];

@@ -5,15 +5,16 @@ namespace Vairogs\Utils\Helper;
 use Exception;
 use ReflectionClass;
 use ReflectionMethod;
-use Vairogs\Twig\Attribute;
+use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Twig\Attribute\TwigFunction;
 
 final class Reflection
 {
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function attributeExists(ReflectionMethod $method, string $filterClass): bool
+    #[TwigFunction]
+    #[TwigFilter]
+    public function attributeExists(ReflectionMethod $reflectionMethod, string $filterClass): bool
     {
-        return [] !== $method->getAttributes(name: $filterClass);
+        return [] !== $reflectionMethod->getAttributes(name: $filterClass);
     }
 
     public function getFilteredMethods(string $class, string $filterClass): array
@@ -27,7 +28,7 @@ final class Reflection
         $filtered = [];
 
         foreach ($methods as $method) {
-            if ($this->attributeExists(method: $method, filterClass: $filterClass)) {
+            if ($this->attributeExists(reflectionMethod: $method, filterClass: $filterClass)) {
                 $filtered[(new Char())->fromCamelCase(string: $name = $method->getName())] = $this->filter(class: $class, name: $name, isStatic: $method->isStatic());
             }
         }
@@ -44,8 +45,8 @@ final class Reflection
         return [new $class(), $name, ];
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getNamespace(string $class): string
     {
         try {
@@ -55,8 +56,8 @@ final class Reflection
         }
     }
 
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
+    #[TwigFunction]
+    #[TwigFilter]
     public function getShortName(string $class): string
     {
         try {
