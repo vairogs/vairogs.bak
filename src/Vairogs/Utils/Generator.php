@@ -12,31 +12,19 @@ final class Generator
 {
     private array $sets = [];
 
-    private string $lowerCase = Symbol::EN_LOWERCASE;
-    private string $upperCase = Symbol::EN_UPPERCASE;
     private string $digits = Symbol::DIGITS;
-    private string $symbols = Symbol::SYMBOLS;
-    private string $latvianUpper = Symbol::LV_UPPERCASE;
     private string $latvianLower = Symbol::LV_LOWERCASE;
+    private string $latvianUpper = Symbol::LV_UPPERCASE;
+    private string $lowerCase = Symbol::EN_LOWERCASE;
+    private string $symbols = Symbol::SYMBOLS;
+    private string $upperCase = Symbol::EN_UPPERCASE;
 
     public function generate(int $length = 32): string
     {
-        $all = $unique = '';
+        [$all, $unique, ] = $this->fillSets();
 
-        foreach ($this->sets as $set) {
-            if ([] !== $split = str_split(string: $set)) {
-                $unique .= $set[array_rand(array: $split)];
-                $all .= $set;
-            }
-        }
-
-        if ([] !== $all = str_split(string: $all)) {
-            $setsCount = count(value: $this->sets);
-
-            for ($i = 0; $i < $length - $setsCount; $i++) {
-                /* @noinspection NonSecureArrayRandUsageInspection */
-                $unique .= $all[array_rand(array: $all)];
-            }
+        if ([] !== $parts = str_split(string: $all)) {
+            $unique = $this->fillUnique(unique: $unique, parts: $parts, length: $length);
         }
 
         /* @noinspection NonSecureStrShuffleUsageInspection */
@@ -137,5 +125,31 @@ final class Generator
     public function getSets(): array
     {
         return $this->sets;
+    }
+
+    private function fillSets(): array
+    {
+        $all = $unique = '';
+
+        foreach ($this->sets as $set) {
+            if ([] !== $parts = str_split(string: $set)) {
+                $unique .= $set[array_rand(array: $parts)];
+                $all .= $set;
+            }
+        }
+
+        return [$all, $unique, ];
+    }
+
+    private function fillUnique(string $unique, array $parts, int $length): string
+    {
+        $setsCount = count(value: $this->sets);
+
+        for ($i = 0; $i < $length - $setsCount; $i++) {
+            /* @noinspection NonSecureArrayRandUsageInspection */
+            $unique .= $parts[array_rand(array: $parts)];
+        }
+
+        return $unique;
     }
 }
