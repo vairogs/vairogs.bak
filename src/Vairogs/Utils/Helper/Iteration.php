@@ -4,7 +4,6 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Extra\Constants\Enum\StartsEnds;
 use Vairogs\Twig\Attribute;
 use function array_diff;
@@ -15,10 +14,8 @@ use function array_keys;
 use function array_map;
 use function array_unique;
 use function array_values;
-use function get_debug_type;
-use function in_array;
+use function gettype;
 use function is_array;
-use function is_object;
 use function str_ends_with;
 use function str_starts_with;
 use const ARRAY_FILTER_USE_KEY;
@@ -126,19 +123,17 @@ final class Iteration
     #[Attribute\TwigFilter]
     public function arrayFlipRecursive(array $input = []): array
     {
-        $result = [];
+        $result = [[]];
 
         foreach ($input as $key => $element) {
-            if (is_array(value: $element) || is_object(value: $element)) {
-                $result[$key] = $element;
-            } elseif (in_array(needle: get_debug_type(value: $element), haystack: [Type::BUILTIN_TYPE_INT, Type::BUILTIN_TYPE_STRING], strict: true)) {
-                $result[$element] = $key;
-            } else {
-                throw new InvalidArgumentException(message: 'Value should be array, object, string or integer');
-            }
+            $result[] = match (gettype(value: $element)) {
+                'array', 'object' => [$key => $element, ],
+                'integer', 'string' => [$element => $key, ],
+                default => throw new InvalidArgumentException(message: 'Value should be array, object, string or integer')
+            };
         }
 
-        return $result;
+        return array_replace(...$result);
     }
 
     #[Attribute\TwigFunction]
