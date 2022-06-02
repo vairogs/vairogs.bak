@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use ReflectionClass;
 use ReflectionClassConstant;
-use ReflectionMethod;
 use ReflectionObject;
 use RuntimeException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
@@ -100,19 +99,6 @@ final class Php
 
     #[Attribute\TwigFunction]
     #[Attribute\TwigFilter]
-    public function getShortName(string $class): string
-    {
-        try {
-            return (new ReflectionClass(objectOrClass: $class))->getShortName();
-        } catch (Exception) {
-            // exception === can't get short name
-        }
-
-        return $class;
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
     public function classImplements(string $class, string $interface): bool
     {
         return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
@@ -140,13 +126,6 @@ final class Php
         }
 
         return $input;
-    }
-
-    #[Attribute\TwigFunction]
-    #[Attribute\TwigFilter]
-    public function filterExists(ReflectionMethod $method, string $filterClass): bool
-    {
-        return [] !== $method->getAttributes(name: $filterClass);
     }
 
     #[Attribute\TwigFunction]

@@ -2,15 +2,11 @@
 
 namespace Vairogs\Tests\Source\Utils\Helper;
 
-use ReflectionException;
-use ReflectionMethod;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
-use Vairogs\Cache\Cache;
 use Vairogs\Core\Vairogs;
 use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
 use Vairogs\Tests\Assets\Utils\Helper\Model\Entity1;
 use Vairogs\Tests\Assets\VairogsTestCase;
-use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Utils\Helper\Php;
 use Vairogs\Utils\Helper\Text;
 
@@ -33,14 +29,6 @@ class PhpTest extends VairogsTestCase
         $this->assertEquals(expected: $expSetter, actual: (new Php())->setter(variable: $variable));
     }
 
-    /** @throws ReflectionException */
-    public function testFilterExists(): void
-    {
-        $method = new ReflectionMethod(objectOrMethod: (new Php()), method: 'filterExists');
-        $this->assertTrue(condition: (new Php())->filterExists(method: $method, filterClass: TwigFilter::class));
-        $this->assertFalse(condition: (new Php())->filterExists(method: $method, filterClass: Cache::class));
-    }
-
     public function testGetParameter(): void
     {
         $this->assertEquals(expected: 'value', actual: (new Php())->getParameter(variable: new Entity1(), key: 'value'));
@@ -55,12 +43,6 @@ class PhpTest extends VairogsTestCase
     {
         $this->expectException(AccessException::class);
         (new Php())->getClassConstants(class: 'Test');
-    }
-
-    public function testShortName(): void
-    {
-        $this->assertEquals(expected: 'Vairogs', actual: (new Php())->getShortName(class: Vairogs::class));
-        $this->assertEquals(expected: 'Test', actual: (new Php())->getShortName(class: 'Test'));
     }
 
     public function testCall(): void
