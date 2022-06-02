@@ -8,7 +8,7 @@ use Lcobucci\JWT\Validation\Constraint;
 
 final class IssuedBy extends AbstractConstraint
 {
-    private Constraint $constraint;
+    private readonly Constraint $constraint;
 
     #[Pure]
     public function __construct(string ...$issuers)

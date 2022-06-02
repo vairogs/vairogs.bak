@@ -158,7 +158,7 @@ final class Iteration
     #[Attribute\TwigFilter]
     public function filterKeyStartsWith(array $input, string $startsWith): array
     {
-        return array_filter(array: $input, callback: static fn ($key) => str_starts_with(haystack: $key, needle: $startsWith), mode: ARRAY_FILTER_USE_KEY);
+        return array_filter(array: $input, callback: static fn ($key) => str_starts_with(haystack: (string) $key, needle: $startsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
     #[Attribute\TwigFunction]

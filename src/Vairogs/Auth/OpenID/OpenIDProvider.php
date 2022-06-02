@@ -95,7 +95,7 @@ class OpenIDProvider implements HasRegistry
             OpenID::NS => 'http://specs.openid.net/auth/2.0',
         ];
 
-        foreach (explode(separator: ',', string: $get['openid_signed']) as $item) {
+        foreach (explode(separator: ',', string: (string) $get['openid_signed']) as $item) {
             $params['openid.' . $item] = stripslashes(string: $get['openid_' . str_replace(search: '.', replace: '_', subject: $item)]);
         }
 
@@ -112,7 +112,7 @@ class OpenIDProvider implements HasRegistry
         preg_match(pattern: $this->options['preg_check'], subject: urldecode($get['openid_claimed_id']), matches: $matches);
         $openID = (is_array(value: $matches) && isset($matches[1])) ? $matches[1] : null;
 
-        return 1 === preg_match(pattern: "#is_valid\s*:\s*true#i", subject: file_get_contents(filename: $this->options['openid_url'] . '/' . $this->options['api_key'], use_include_path: false, context: $context)) ? $openID : null;
+        return 1 === preg_match(pattern: "#is_valid\s*:\s*true#i", subject: (string) file_get_contents(filename: $this->options['openid_url'] . '/' . $this->options['api_key'], use_include_path: false, context: $context)) ? $openID : null;
     }
 
     public function redirect(): RedirectResponse
@@ -140,7 +140,7 @@ class OpenIDProvider implements HasRegistry
     /** @throws JsonException */
     private function getData(string $openID): mixed
     {
-        return (new Json())->decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: $this->profileUrl)), flags: Json::ASSOCIATIVE);
+        return (new Json())->decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: (string) $this->profileUrl)), flags: Json::ASSOCIATIVE);
     }
 
     #[ArrayShape([

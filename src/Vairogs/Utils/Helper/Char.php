@@ -31,7 +31,7 @@ final class Char
     #[Attribute\TwigFilter]
     public function fromCamelCase(string $string, string $separator = '_'): string
     {
-        return strtolower(string: preg_replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
+        return strtolower(string: (string) preg_replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
     }
 
     #[Attribute\TwigFunction]
@@ -43,7 +43,7 @@ final class Char
             '#([a-z\d])([A-Z])#',
         ], replacement: '\1_\2', subject: $skipCamel ? $string : $this->toCamelCase(string: $string));
 
-        return strtolower(string: str_replace(search: '-', replace: '_', subject: $string));
+        return strtolower(string: str_replace(search: '-', replace: '_', subject: (string) $string));
     }
 
     #[Attribute\TwigFunction]

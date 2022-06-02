@@ -6,7 +6,7 @@ use Symfony\Component\Finder\Finder as SymfonyFinder;
 
 class Finder
 {
-    private SymfonyFinder $finder;
+    private readonly SymfonyFinder $finder;
     private array $classMap = [];
 
     public function __construct(array $directories, private readonly array $types = [], private readonly string $namespace = '')

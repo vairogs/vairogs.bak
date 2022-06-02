@@ -9,7 +9,7 @@ use Lcobucci\JWT\Validation\Constraint;
 
 final class SignedWith extends AbstractConstraint
 {
-    private Constraint $constraint;
+    private readonly Constraint $constraint;
 
     #[Pure]
     public function __construct(Signer $signer, Signer\Key $key)

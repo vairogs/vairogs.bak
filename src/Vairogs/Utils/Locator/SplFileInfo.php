@@ -10,7 +10,7 @@ use function method_exists;
  */
 class SplFileInfo
 {
-    private Reader $reader;
+    private readonly Reader $reader;
 
     public function __construct(private readonly FinderSplFileInfo $decorated, private readonly array $types = [], string $namespace = '')
     {

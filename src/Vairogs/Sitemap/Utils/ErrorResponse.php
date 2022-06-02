@@ -9,7 +9,7 @@ use Vairogs\Extra\Constants\ContentType;
 
 class ErrorResponse
 {
-    private Response $response;
+    private readonly Response $response;
 
     public function __construct(private readonly ConstraintViolationListInterface $violations)
     {

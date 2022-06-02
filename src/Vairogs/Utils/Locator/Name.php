@@ -9,7 +9,7 @@ use function strtolower;
 
 class Name
 {
-    private array $parts;
+    private readonly array $parts;
 
     public function __construct(string $name)
     {

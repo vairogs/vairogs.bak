@@ -14,7 +14,7 @@ use function method_exists;
 
 final class CacheManager
 {
-    private ArrayAdapter|ChainAdapter $adapter;
+    private readonly ArrayAdapter|ChainAdapter $adapter;
 
     /** @throws CacheException */
     public function __construct(private readonly int $defaultLifetime = Definition::DEFAULT_LIFETIME, private readonly bool $useFile = true, ...$adapters)

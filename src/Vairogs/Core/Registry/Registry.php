@@ -12,7 +12,7 @@ class Registry
     /**
      * @var HasRegistry[]
      */
-    private array $clients;
+    private readonly array $clients;
 
     public function __construct(Traversable $clients)
     {

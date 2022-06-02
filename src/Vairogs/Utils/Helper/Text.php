@@ -101,7 +101,7 @@ final class Text
     public function containsAny(string $haystack, array $needles = []): bool
     {
         foreach ($needles as $needle) {
-            if (str_contains(haystack: $haystack, needle: $needle)) {
+            if (str_contains(haystack: $haystack, needle: (string) $needle)) {
                 return true;
             }
         }
@@ -152,6 +152,6 @@ final class Text
     #[Attribute\TwigFilter]
     public function sanitize(string $text): string
     {
-        return str_replace(search: ["'", '"'], replace: ['&#39;', '&#34;'], subject: preg_replace(pattern: '/\x00|<[^>]*>?/', replacement: '', subject: $text));
+        return str_replace(search: ["'", '"'], replace: ['&#39;', '&#34;'], subject: (string) preg_replace(pattern: '/\x00|<[^>]*>?/', replacement: '', subject: $text));
     }
 }
