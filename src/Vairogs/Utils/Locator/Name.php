@@ -2,12 +2,13 @@
 
 namespace Vairogs\Utils\Locator;
 
+use Stringable;
 use function explode;
 use function implode;
 use function preg_replace;
 use function strtolower;
 
-class Name
+class Name implements Stringable
 {
     private readonly array $parts;
 
