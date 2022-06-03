@@ -145,7 +145,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         }
 
         $this->setPublicKey(publicKey: 'file://' . $this->publicKey);
-        $this->uriCollection = (new UriCollection())->build(uris: $uris, openIDConnectProvider: $this);
+        $this->uriCollection = (new UriCollection())->build(uris: $uris, oidcProvider: $this);
     }
 
     protected function getTokenRequest(array $params, string $url): RequestInterface

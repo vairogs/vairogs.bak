@@ -94,7 +94,7 @@ class SitemapCommand extends Command
     {
         if (0 !== ($violations = $this->validator->validate(value: $sitemap))->count()) {
             foreach ($violations as $violation) {
-                /* @var ConstraintViolation $error */
+                /* @var ConstraintViolation $violation */
                 $output->writeln(messages: $violation->getMessage());
             }
 

@@ -10,9 +10,9 @@ use function sprintf;
 
 class HoneyType extends HiddenType
 {
-    public function configureOptions(OptionsResolver $optionsResolver): void
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $optionsResolver->setDefaults(defaults: [
+        $resolver->setDefaults(defaults: [
             'attr' => ['value' => ''],
             'required' => false,
             'translation_domain' => sprintf('%s_%s', Vairogs::VAIROGS, Component::CAPTCHA),
