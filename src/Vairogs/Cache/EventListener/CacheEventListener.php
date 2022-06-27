@@ -15,6 +15,7 @@ use Vairogs\Cache\Cache;
 use Vairogs\Cache\Event\CacheEvent;
 use Vairogs\Common\CacheManager;
 use Vairogs\Core\Cache\Header;
+
 use function class_exists;
 use function in_array;
 use function is_string;

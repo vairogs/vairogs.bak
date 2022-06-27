@@ -3,6 +3,7 @@
 namespace Vairogs\Sitemap\Model;
 
 use JetBrains\PhpStorm\Pure;
+
 use function method_exists;
 
 class Sitemap

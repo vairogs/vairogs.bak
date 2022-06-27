@@ -7,6 +7,7 @@ use Vairogs\Tests\Assets\Controller\TestController;
 use Vairogs\Tests\Assets\TestKernel;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Locator\Finder;
+
 use function getcwd;
 
 class FinderTest extends VairogsTestCase

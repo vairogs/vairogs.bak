@@ -5,6 +5,7 @@ namespace Vairogs\Utils\Helper;
 use UnexpectedValueException;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function array_map;
 use function floor;
 use function getcwd;
@@ -16,6 +17,7 @@ use function rmdir;
 use function sprintf;
 use function strlen;
 use function unlink;
+
 use const DIRECTORY_SEPARATOR;
 use const GLOB_NOSORT;
 

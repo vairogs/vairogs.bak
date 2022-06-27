@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Vairogs\Utils\Helper\Char;
+
 use function in_array;
 use function is_array;
 use function is_numeric;

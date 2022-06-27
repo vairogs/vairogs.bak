@@ -8,6 +8,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
 use Vairogs\Utils\Helper\File;
+
 use function dirname;
 use function end;
 use function exec;
@@ -16,6 +17,7 @@ use function file_get_contents;
 use function is_file;
 use function preg_match_all;
 use function trim;
+
 use const DIRECTORY_SEPARATOR;
 
 class SteamGiftsUserBuilder implements OpenIDUserBuilder

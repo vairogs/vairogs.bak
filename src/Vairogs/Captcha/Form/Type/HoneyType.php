@@ -6,6 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Core\Vairogs;
+
 use function sprintf;
 
 class HoneyType extends HiddenType

@@ -7,6 +7,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\Model\Steam;
 use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
+
 use function rtrim;
 use function str_starts_with;
 

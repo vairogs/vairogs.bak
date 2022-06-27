@@ -10,6 +10,7 @@ use Symfony\Component\Cache\Exception\CacheException;
 use Vairogs\Common\Adapter\Adapter;
 use Vairogs\Common\Adapter\File;
 use Vairogs\Extra\Constants\Definition;
+
 use function method_exists;
 
 final class CacheManager

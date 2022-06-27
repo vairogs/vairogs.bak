@@ -4,6 +4,7 @@ namespace Vairogs\Utils\Helper\Pagination;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+
 use function ceil;
 use function floor;
 use function range;

@@ -4,6 +4,7 @@ namespace Vairogs\Utils\Helper;
 
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function ctype_digit;
 use function is_numeric;
 

@@ -4,6 +4,7 @@ namespace Vairogs\Sitemap\Model;
 
 use DateTimeInterface;
 use JetBrains\PhpStorm\Pure;
+
 use function get_object_vars;
 use function number_format;
 

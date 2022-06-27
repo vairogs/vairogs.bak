@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Locator;
 
 use Stringable;
+
 use function explode;
 use function implode;
 use function preg_replace;

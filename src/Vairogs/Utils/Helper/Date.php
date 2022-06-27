@@ -10,6 +10,7 @@ use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function array_merge;
 use function floor;
 use function gmdate;

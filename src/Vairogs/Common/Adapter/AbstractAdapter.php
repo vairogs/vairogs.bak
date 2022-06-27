@@ -4,6 +4,7 @@ namespace Vairogs\Common\Adapter;
 
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Vairogs\Utils\Helper\Composer;
+
 use function implode;
 use function sprintf;
 

@@ -11,6 +11,7 @@ use Vairogs\Core\DependencyInjection\Dependency;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Helper\Util;
+
 use function sprintf;
 
 abstract class AbstractAuthChildDependency implements Dependency

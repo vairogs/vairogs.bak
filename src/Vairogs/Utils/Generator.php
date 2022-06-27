@@ -3,6 +3,7 @@
 namespace Vairogs\Utils;
 
 use Vairogs\Extra\Constants\Symbol;
+
 use function array_rand;
 use function count;
 use function str_shuffle;

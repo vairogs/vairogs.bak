@@ -6,6 +6,7 @@ use Throwable;
 use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function base64_encode;
 use function bin2hex;
 use function ceil;

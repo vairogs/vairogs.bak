@@ -5,6 +5,7 @@ namespace Vairogs\Utils\Helper;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function array_values;
 use function count;
 use function filter_var;
@@ -20,6 +21,7 @@ use function substr;
 use function ucfirst;
 use function ucwords;
 use function unpack;
+
 use const FILTER_FLAG_ALLOW_FRACTION;
 use const FILTER_SANITIZE_NUMBER_FLOAT;
 

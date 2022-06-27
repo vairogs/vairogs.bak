@@ -5,6 +5,7 @@ namespace Vairogs\Utils\Helper;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
 use Vairogs\Utils\Handler\FunctionHandler;
+
 use function acos;
 use function array_fill;
 use function cos;
@@ -16,6 +17,7 @@ use function preg_match;
 use function rad2deg;
 use function round;
 use function sin;
+
 use const PHP_INT_MAX;
 
 final class Util

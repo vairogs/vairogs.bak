@@ -9,6 +9,7 @@ use ReflectionClass;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\Security\Core\Security;
 use Vairogs\Cache\Strategy;
+
 use function end;
 use function explode;
 use function is_array;

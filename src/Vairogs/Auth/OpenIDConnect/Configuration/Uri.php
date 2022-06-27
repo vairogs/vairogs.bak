@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
+
 use function array_merge;
 use function http_build_query;
 use function implode;

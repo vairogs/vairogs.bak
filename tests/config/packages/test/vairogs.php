@@ -9,6 +9,7 @@ use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
 use Vairogs\Core\Registry\Registry;
 use Vairogs\Utils\Helper\Composer;
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
 return static function (VairogsConfig $vairogsConfig, ContainerConfigurator $containerConfigurator): void {

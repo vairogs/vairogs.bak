@@ -11,6 +11,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Vairogs\Extra\Constants;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function array_combine;
 use function array_keys;
 use function array_map;
@@ -29,6 +30,7 @@ use function sprintf;
 use function str_replace;
 use function str_starts_with;
 use function urldecode;
+
 use const FILTER_SANITIZE_URL;
 use const FILTER_VALIDATE_URL;
 

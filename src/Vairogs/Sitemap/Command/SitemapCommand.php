@@ -17,6 +17,7 @@ use Vairogs\Sitemap\Builder\Director;
 use Vairogs\Sitemap\Builder\FileBuilder;
 use Vairogs\Sitemap\Model\Sitemap;
 use Vairogs\Sitemap\Provider;
+
 use function fclose;
 use function fopen;
 use function getcwd;

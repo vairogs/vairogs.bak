@@ -9,6 +9,7 @@ use ReflectionProperty;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function sprintf;
 
 final class Closure

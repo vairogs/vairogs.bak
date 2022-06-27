@@ -6,6 +6,7 @@ use Exception;
 use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function is_array;
 use function is_object;
 use function mb_strlen;

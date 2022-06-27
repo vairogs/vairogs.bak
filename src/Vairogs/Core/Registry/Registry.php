@@ -4,6 +4,7 @@ namespace Vairogs\Core\Registry;
 
 use InvalidArgumentException;
 use Traversable;
+
 use function iterator_to_array;
 use function sprintf;
 

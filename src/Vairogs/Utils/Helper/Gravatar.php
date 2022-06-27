@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use RuntimeException;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function hash;
 use function http_build_query;
 use function strtolower;

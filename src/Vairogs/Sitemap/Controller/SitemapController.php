@@ -16,6 +16,7 @@ use Vairogs\Sitemap\Builder\Director;
 use Vairogs\Sitemap\Builder\XmlBuilder;
 use Vairogs\Sitemap\Provider;
 use Vairogs\Sitemap\Utils\ErrorResponse;
+
 use function file_get_contents;
 use function getcwd;
 use function is_file;

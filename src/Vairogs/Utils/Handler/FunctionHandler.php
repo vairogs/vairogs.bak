@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Handler;
 
 use Vairogs\Utils\Helper\Closure;
+
 use function is_object;
 
 class FunctionHandler extends AbstractHandler

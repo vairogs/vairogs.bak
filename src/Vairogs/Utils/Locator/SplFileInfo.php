@@ -3,6 +3,7 @@
 namespace Vairogs\Utils\Locator;
 
 use Symfony\Component\Finder\SplFileInfo as FinderSplFileInfo;
+
 use function method_exists;
 
 /**

@@ -10,6 +10,7 @@ use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Trait_;
 use PhpParser\Parser\Php7;
+
 use function array_values;
 use function in_array;
 

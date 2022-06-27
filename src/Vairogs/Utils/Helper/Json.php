@@ -5,9 +5,11 @@ namespace Vairogs\Utils\Helper;
 use JsonException;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function defined;
 use function json_decode;
 use function json_encode;
+
 use const JSON_BIGINT_AS_STRING;
 use const JSON_PRESERVE_ZERO_FRACTION;
 use const JSON_PRETTY_PRINT;

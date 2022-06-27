@@ -3,6 +3,7 @@
 namespace Vairogs\Sitemap\Builder;
 
 use Symfony\Component\PropertyInfo\Type;
+
 use function fwrite;
 
 class FileBuilder extends AbstractBuilder

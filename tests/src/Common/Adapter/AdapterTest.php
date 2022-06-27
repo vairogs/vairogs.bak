@@ -8,6 +8,7 @@ use Vairogs\Common\Adapter\Orm;
 use Vairogs\Common\Adapter\PhpRedis;
 use Vairogs\Common\Adapter\Predis;
 use Vairogs\Tests\Assets\VairogsTestCase;
+
 use function sprintf;
 
 class AdapterTest extends VairogsTestCase

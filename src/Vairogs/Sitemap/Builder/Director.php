@@ -3,6 +3,7 @@
 namespace Vairogs\Sitemap\Builder;
 
 use InvalidArgumentException;
+
 use function gettype;
 use function sprintf;
 

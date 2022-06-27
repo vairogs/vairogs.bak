@@ -6,6 +6,7 @@ use Vairogs\Sitemap\Model\RichUrl;
 use Vairogs\Sitemap\Model\Sitemap;
 use Vairogs\Sitemap\Model\Url;
 use Vairogs\Utils\Helper\Php;
+
 use function array_keys;
 use function method_exists;
 use function sprintf;

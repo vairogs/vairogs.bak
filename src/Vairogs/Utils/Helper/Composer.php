@@ -5,6 +5,7 @@ namespace Vairogs\Utils\Helper;
 use Composer\InstalledVersions;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function class_exists;
 use function getenv;
 use function interface_exists;

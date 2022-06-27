@@ -3,6 +3,7 @@
 namespace Vairogs\Extra\Encryption\Cross;
 
 use Vairogs\Utils\Helper\Char;
+
 use function strlen;
 
 final class Cross

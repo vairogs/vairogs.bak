@@ -4,6 +4,7 @@ namespace Vairogs\Tests\Source\Utils\Helper;
 
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Text;
+
 use function htmlentities;
 
 class TextTest extends VairogsTestCase

@@ -11,6 +11,7 @@ use Vairogs\Tests\Assets\Utils\Helper\Model\Entity1;
 use Vairogs\Tests\Assets\Utils\Helper\Model\Entity7;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Closure;
+
 use function sprintf;
 
 class ClosureTest extends VairogsTestCase

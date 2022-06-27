@@ -4,6 +4,7 @@ namespace Vairogs\Extra\Encryption\XXTEA;
 
 use Vairogs\Utils\Helper\Char;
 use Vairogs\Utils\Helper\Number;
+
 use function count;
 use function floor;
 

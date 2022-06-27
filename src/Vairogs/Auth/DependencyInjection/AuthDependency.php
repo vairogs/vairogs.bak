@@ -12,6 +12,7 @@ use Vairogs\Core\DependencyInjection\DependecyLoaderTrait;
 use Vairogs\Core\DependencyInjection\Dependency;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
+
 use function sprintf;
 
 class AuthDependency implements Dependency

@@ -6,6 +6,7 @@ use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+
 use function array_key_exists;
 use function array_reverse;
 use function html_entity_decode;

@@ -7,7 +7,9 @@ use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Definition;
+
 use function sys_get_temp_dir;
+
 use const DIRECTORY_SEPARATOR;
 
 final class File extends AbstractAdapter

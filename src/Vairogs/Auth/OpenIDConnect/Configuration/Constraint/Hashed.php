@@ -5,6 +5,7 @@ namespace Vairogs\Auth\OpenIDConnect\Configuration\Constraint;
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Validation\ConstraintViolation;
 use Vairogs\Utils\Helper\Identification;
+
 use function sprintf;
 
 final class Hashed extends AbstractConstraint

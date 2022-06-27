@@ -7,6 +7,7 @@ use Lcobucci\JWT\UnencryptedToken;
 use Lcobucci\JWT\Validation\Constraint;
 use Lcobucci\JWT\Validation\ConstraintViolation;
 use Vairogs\Auth\OpenIDConnect\Configuration\IdToken;
+
 use function sprintf;
 
 abstract class AbstractConstraint implements Constraint
