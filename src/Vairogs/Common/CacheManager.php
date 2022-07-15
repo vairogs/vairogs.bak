@@ -7,11 +7,12 @@ use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
+use Symfony\Component\Cache\PruneableInterface;
 use Vairogs\Common\Adapter\Adapter;
 use Vairogs\Common\Adapter\File;
 use Vairogs\Extra\Constants\Definition;
 
-use function method_exists;
+use function time;
 
 final class CacheManager
 {
@@ -23,15 +24,22 @@ final class CacheManager
         $this->adapter = $this->getAdapter(adapters: $adapters);
     }
 
-    public function get(string $key): mixed
+    public function get(string $key, ?int $expiredTime = null): mixed
     {
         $this->prune();
+        $expiredTime ??= time();
 
         try {
             $cache = $this->adapter->getItem(key: $key);
 
             if ($cache->isHit()) {
-                return $cache->get();
+                $item = $cache->get();
+
+                if ($expiredTime >= $item['expires']) {
+                    $this->delete(key: $key);
+                } else {
+                    return $item['value'];
+                }
             }
         } catch (InvalidArgumentException) {
             // cache not found
@@ -46,8 +54,8 @@ final class CacheManager
 
         try {
             $cache = $this->adapter->getItem(key: $key);
-            $cache->set(value: $value);
-            $cache->expiresAfter(time: $expiresAfter ?? $this->defaultLifetime);
+            $cache->set(value: ['value' => $value, 'expires' => time() + ($expiresAfter ??= $this->defaultLifetime)]);
+            $cache->expiresAfter(time: $expiresAfter);
 
             $this->adapter->save(item: $cache);
         } catch (InvalidArgumentException) {
@@ -82,7 +90,7 @@ final class CacheManager
 
     private function prune(): void
     {
-        if (method_exists(object_or_class: $this->adapter, method: 'prune')) {
+        if ($this->adapter instanceof PruneableInterface) {
             $this->adapter->prune();
         }
     }

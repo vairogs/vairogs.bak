@@ -20,7 +20,7 @@ final class Closure
     public function hijackSet(object $object, string $property, mixed $value): object
     {
         try {
-            (new ReflectionProperty(class: $object, property: $property));
+            new ReflectionProperty(class: $object, property: $property);
         } catch (ReflectionException) {
             throw new InvalidArgumentException(message: sprintf('Unable to set property "%s" of object %s', $property, $object::class));
         }

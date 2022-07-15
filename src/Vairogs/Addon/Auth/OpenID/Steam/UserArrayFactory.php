@@ -14,7 +14,7 @@ class UserArrayFactory
             'large' => (string) ($bag['avatarfull'] ?? ''),
             'medium' => (string) ($bag['avatarmedium'] ?? ''),
             'small' => (string) ($bag['avatar'] ?? ''),
-            'hash' => (string) ($bag['avatarhash']),
+            'hash' => (string) ($bag['avatarhash'] ?? ''),
         ];
 
         return $user

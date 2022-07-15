@@ -23,7 +23,7 @@ class RemovedFunctionsTest extends VairogsTestCase
         runkit7_method_copy(Composer::class, 'isInstalledOriginal', Composer::class, 'isInstalled');
         runkit7_method_copy(Composer::class, 'isInstalled', Composer::class, 'isInstalledOriginal');
 
-        runkit7_method_redefine(Composer::class, 'isInstalled', 'array $packages, bool $incDevReq = true', 'return false;', (RUNKIT_ACC_PUBLIC | RUNKIT_ACC_STATIC));
+        runkit7_method_redefine(Composer::class, 'isInstalled', 'array $packages, bool $incDevReq = true', 'return false;', RUNKIT_ACC_PUBLIC | RUNKIT_ACC_STATIC);
 
         try {
             new PhpRedis(client: $this->container->get(id: 'snc_redis.phpredis'));
