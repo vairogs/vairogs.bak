@@ -17,13 +17,10 @@ class UtilTest extends VairogsTestCase
 
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
-     * @noinspection PhpUndefinedFunctionInspection
      */
     public function testIsPrimeNoGMP(int $number, bool $expected): void
     {
-        @runkit7_function_remove(function_name: 'gmp_prob_prime');
-
-        $this->assertEquals(expected: $expected, actual: (new Util())->isPrime(number: $number));
+        $this->assertEquals(expected: $expected, actual: (new Util())->isPrime(number: $number, override: true));
     }
 
     /**

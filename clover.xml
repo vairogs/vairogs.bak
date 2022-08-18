@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657920426">
-  <project timestamp="1657920426">
+<coverage generated="1660854875">
+  <project timestamp="1660854875">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2893,7 +2893,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Util.php">
       <class name="Vairogs\Utils\Helper\Util" namespace="global">
-        <metrics complexity="17" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="38" coveredelements="38"/>
+        <metrics complexity="18" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="38" coveredelements="38"/>
       </class>
       <line num="25" type="method" name="isPrime" visibility="public" complexity="1" crap="1" count="25"/>
       <line num="29" type="stmt" count="25"/>
@@ -2919,7 +2919,7 @@
       <line num="73" type="stmt" count="1"/>
       <line num="77" type="stmt" count="5"/>
       <line num="81" type="stmt" count="5"/>
-      <line num="84" type="method" name="isPrimeGmp" visibility="public" complexity="2" crap="2" count="25"/>
+      <line num="84" type="method" name="isPrimeGmp" visibility="public" complexity="3" crap="3" count="25"/>
       <line num="86" type="stmt" count="25"/>
       <line num="87" type="stmt" count="13"/>
       <line num="88" type="stmt" count="6"/>

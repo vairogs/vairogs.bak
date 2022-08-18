@@ -24,12 +24,12 @@ final class Util
 {
     #[TwigFunction]
     #[TwigFilter]
-    public function isPrime(int $number): bool
+    public function isPrime(int $number, bool $override = false): bool
     {
         $function = (new FunctionHandler())->setFunction(functionName: 'isPrimeFunction', instance: new self());
         $below = (new FunctionHandler())->setFunction(functionName: 'isPrimeBelow1000', instance: new self())->setNext(handler: $function);
 
-        return (new FunctionHandler())->setFunction(functionName: 'isPrimeGmp', instance: new self())->setNext(handler: $below)->handle($number);
+        return (new FunctionHandler())->setFunction(functionName: 'isPrimeGmp', instance: new self())->setNext(handler: $below)->handle($number, $override);
     }
 
     #[TwigFunction]
@@ -81,9 +81,9 @@ final class Util
         return $result;
     }
 
-    public function isPrimeGmp(int $number): ?bool
+    public function isPrimeGmp(int $number, bool $override = false): ?bool
     {
-        if (function_exists(function: 'gmp_prob_prime')) {
+        if (!$override && function_exists(function: 'gmp_prob_prime')) {
             return match (gmp_prob_prime(num: (string) $number)) {
                 0 => false,
                 2 => true,
