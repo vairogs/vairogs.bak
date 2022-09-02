@@ -92,9 +92,7 @@
         "friendsofphp/php-cs-fixer": "dev-master",
         "phpunit/phpunit": "dev-main",
         "predis/predis": ">=1.1.0",
-        "psalm/plugin-symfony": "dev-master",
         "psr/container": "*",
-        "rector/rector": "dev-main",
         "roave/security-advisories": "dev-latest",
         "sebastian/diff": "dev-main as 4.0.4",
         "snc/redis-bundle": "dev-master",
@@ -102,8 +100,7 @@
         "symfony/framework-bundle": "*",
         "symfony/phpunit-bridge": "*",
         "symfony/proxy-manager-bridge": "*",
-        "symfony/runtime": "*",
-        "vimeo/psalm": "5.x-dev as 4.x-dev"
+        "symfony/runtime": "*"
     },
     "replace": {
         "vairogs/addon": "self.version",
