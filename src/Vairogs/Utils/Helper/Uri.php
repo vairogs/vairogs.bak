@@ -36,7 +36,9 @@ use const FILTER_VALIDATE_URL;
 
 final class Uri
 {
-    /** @throws ReflectionException */
+    /**
+     * @throws ReflectionException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function buildHttpQueryArray(array|object $input, ?string $parent = null): array
@@ -55,7 +57,9 @@ final class Uri
         return $result;
     }
 
-    /** @throws ReflectionException */
+    /**
+     * @throws ReflectionException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function buildArrayFromObject(object $object): array
@@ -65,7 +69,9 @@ final class Uri
         return $result;
     }
 
-    /** @throws ReflectionException */
+    /**
+     * @throws ReflectionException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function buildHttpQueryString(object $object): string

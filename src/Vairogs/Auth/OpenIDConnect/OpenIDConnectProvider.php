@@ -60,7 +60,9 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         }
     }
 
-    /** @throws IdentityProviderException */
+    /**
+     * @throws IdentityProviderException
+     */
     public function getAccessToken($grant, array $options = []): AccessTokenInterface|BaseAccessToken
     {
         $accessToken = $this->getAccessTokenFunction(grant: $grant, options: $options);
@@ -77,13 +79,17 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $accessToken;
     }
 
-    /** @throws IdentityProviderException */
+    /**
+     * @throws IdentityProviderException
+     */
     public function getRefreshToken($token, array $options = []): array
     {
         return $this->getTokenResponse(request: $this->getTokenRequest(params: array_merge(['token' => $token, 'grant_type' => 'refresh_token'], $options), url: $this->getRefreshTokenUrl()));
     }
 
-    /** @throws IdentityProviderException */
+    /**
+     * @throws IdentityProviderException
+     */
     public function getAccessTokenFunction(?AbstractGrant $grant, array $options = []): ?ParsedToken
     {
         $grant = $this->verifyGrant(grant: $grant);
@@ -101,13 +107,17 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return InMemory::plainText(contents: $this->publicKey);
     }
 
-    /** @throws IdentityProviderException */
+    /**
+     * @throws IdentityProviderException
+     */
     public function getValidateToken($token, array $options = []): array
     {
         return $this->getTokenResponse(request: $this->getTokenRequest(params: array_merge(['token' => $token], $options), url: $this->getValidateTokenUrl()));
     }
 
-    /** @throws IdentityProviderException */
+    /**
+     * @throws IdentityProviderException
+     */
     public function getTokenResponse(RequestInterface $request): array
     {
         $response = $this->getResponse(request: $request);
@@ -123,7 +133,9 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $parsed;
     }
 
-    /** @throws IdentityProviderException */
+    /**
+     * @throws IdentityProviderException
+     */
     public function getRevokeToken($token, array $options = []): array
     {
         return $this->getTokenResponse(request: $this->getTokenRequest(params: array_merge(['token' => $token], $options), url: $this->getRevokeTokenUrl()));
@@ -170,7 +182,9 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
             ]);
     }
 
-    /** @throws UnexpectedValueException */
+    /**
+     * @throws UnexpectedValueException
+     */
     protected function parseJson($content): array
     {
         if ('' === $content) {

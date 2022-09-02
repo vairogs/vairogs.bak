@@ -20,7 +20,9 @@ use function usort;
 /** @noinspection TypoSafeNamingInspection */
 final class Order
 {
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function sort(array|object $data, string $parameter, Enum $order = Enum::ASC): object|array

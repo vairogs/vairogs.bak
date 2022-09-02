@@ -22,7 +22,9 @@ class CacheEvent
     {
     }
 
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     public function getAttributes(KernelEvent $kernelEvent, string $class): array
     {
         $params = '_route_params';

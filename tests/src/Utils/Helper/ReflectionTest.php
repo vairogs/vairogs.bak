@@ -14,7 +14,9 @@ use Vairogs\Utils\Helper\Text;
 
 class ReflectionTest extends VairogsTestCase
 {
-    /** @throws ReflectionException */
+    /**
+     * @throws ReflectionException
+     */
     public function testAttributeExists(): void
     {
         $reflectionMethod = new ReflectionMethod(objectOrMethod: (new Reflection()), method: 'attributeExists');

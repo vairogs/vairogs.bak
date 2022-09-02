@@ -14,7 +14,9 @@ use function sprintf;
 
 trait TwigTrait
 {
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     public function makeArray(array $input, string $key, string $class): array
     {
         $this->checkClass(class: $class);
@@ -34,7 +36,9 @@ trait TwigTrait
         return $output;
     }
 
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     public function checkClass(string $class): void
     {
         if (!in_array(needle: $class, haystack: [

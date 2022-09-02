@@ -12,9 +12,12 @@ use Vairogs\Twig\Attribute\TwigFunction;
 
 use function sprintf;
 
+/** @noinspection TypoSafeNamingInspection */
 final class Closure
 {
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function hijackSet(object $object, string $property, mixed $value): object
@@ -34,7 +37,9 @@ final class Closure
         return $this->hijackSetStatic(object: $object, property: $property, value: $value);
     }
 
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function hijackSetStatic(object $object, string $property, mixed $value): object
@@ -54,7 +59,9 @@ final class Closure
         throw new InvalidArgumentException(message: sprintf('Property "%s" is not static', $property));
     }
 
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function hijackSetNonStatic(object $object, string $property, mixed $value): object
@@ -88,7 +95,9 @@ final class Closure
         $this->bind(function: $function, clone: $clone)(...$arguments);
     }
 
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function hijackGetStatic(object $object, string $property, ...$arguments): mixed
@@ -104,7 +113,9 @@ final class Closure
         throw new InvalidArgumentException(message: sprintf('Property "%s" is not static', $property));
     }
 
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function hijackGetNonStatic(object $object, string $property, ...$arguments): mixed

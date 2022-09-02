@@ -35,7 +35,9 @@ final class Http
         return (new Iteration())->arrayValuesFiltered(input: (new Php())->getClassConstants(class: Request::class), with: 'METHOD_');
     }
 
-    /** @throws ReflectionException */
+    /**
+     * @throws ReflectionException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function getRequestIdentity(Request $request, string $ipUrl = Definition::IDENT): array

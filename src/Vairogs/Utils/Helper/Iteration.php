@@ -121,7 +121,9 @@ final class Iteration
         return $result;
     }
 
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function arrayFlipRecursive(array $input = []): array
@@ -146,7 +148,9 @@ final class Iteration
         $input = array_diff($input, [$value]);
     }
 
-    /** @throws InvalidArgumentException */
+    /**
+     * @throws InvalidArgumentException
+     */
     #[TwigFunction]
     #[TwigFilter]
     public function arrayValuesFiltered(array $input, string $with, StartsEnds $startsEnds = StartsEnds::STARTS): array
