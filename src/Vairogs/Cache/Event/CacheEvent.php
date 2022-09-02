@@ -6,8 +6,8 @@ use Exception;
 use InvalidArgumentException;
 use JsonSerializable;
 use ReflectionClass;
+use Symfony\Bundle\SecurityBundle\Security\Security;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
-use Symfony\Component\Security\Core\Security;
 use Vairogs\Cache\Strategy;
 
 use function end;

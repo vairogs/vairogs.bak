@@ -53,7 +53,7 @@
         "symfony/http-foundation": "^5.4|^6.0",
         "symfony/http-kernel": "^5.4|^6.0",
         "symfony/property-info": "^5.4|^6.0",
-        "symfony/security-core": "^5.4|^6.0",
+        "symfony/security-bundle": "^5.4|^6.0",
         "vairogs/common": "self.version",
         "vairogs/core": "self.version",
         "vairogs/extra-constants": "self.version",

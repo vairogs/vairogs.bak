@@ -35,7 +35,7 @@ class Steam implements OpenIDUser, User, Stringable
     #[ORM\Column(type: Types::STRING)]
     protected string $url;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::JSON)]
     protected array $avatar;
 
     #[ORM\Column(type: Types::INTEGER)]
