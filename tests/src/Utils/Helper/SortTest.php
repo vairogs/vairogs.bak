@@ -2,10 +2,6 @@
 
 namespace Vairogs\Tests\Source\Utils\Helper;
 
-use Doctrine\Common\Collections\Collection;
-use InvalidArgumentException;
-use Vairogs\Extra\Constants\Enum\Order;
-use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Sort;
 
@@ -47,32 +43,5 @@ class SortTest extends VairogsTestCase
     public function testMergeSort(array $unsorted, array $sorted): void
     {
         $this->assertEquals(expected: $sorted, actual: (new Sort())->mergeSort(array: $unsorted));
-    }
-
-    /**
-     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderSort
-     */
-    public function testSort(array|object $data, string $parameter, Order $order, array $expected): void
-    {
-        $this->assertEquals(expected: $expected, actual: (new Sort())->sort(data: $data, parameter: $parameter, order: $order));
-    }
-
-    /**
-     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\SortDataProvider::dataProviderSortException
-     */
-    public function testSortException(iterable|Collection $data, string $parameter, Order $order): void
-    {
-        $this->expectException(exception: InvalidArgumentException::class);
-        (new Sort())->sort(data: $data, parameter: $parameter, order: $order);
-    }
-
-    public function testIsSortable(): void
-    {
-        $entity = (new Entity())
-            ->setId(id: 1);
-
-        $this->assertFalse(condition: (new Sort())->isSortable(item: 1, field: 'value'));
-        $this->assertFalse(condition: (new Sort())->isSortable(item: $entity, field: 'test'));
-        $this->assertTrue(condition: (new Sort())->isSortable(item: $entity, field: 'id'));
     }
 }
