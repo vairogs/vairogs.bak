@@ -107,7 +107,7 @@ final class CacheManager
 
             $pool[] = match (true) {
                 $adapter instanceof Adapter => $adapter->getAdapter(defaultLifetime: $this->defaultLifetime),
-                default => $adapter
+                default => $adapter,
             };
         }
 

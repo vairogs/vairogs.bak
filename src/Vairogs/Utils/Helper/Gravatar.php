@@ -41,12 +41,12 @@ final class Gravatar
 
         $host = match ($isSecure) {
             true => self::HTTPS_HOST,
-            false => self::HTTP_HOST
+            false => self::HTTP_HOST,
         };
 
         $default = match (true) {
             (new Uri())->isAbsolute(path: $default) => urldecode(string: $default),
-            default => $this->getIcons()['ICON_' . strtoupper($default)] ?? self::ICON_IDENTICON
+            default => $this->getIcons()['ICON_' . strtoupper($default)] ?? self::ICON_IDENTICON,
         };
 
         return $host . '/avatar/' . hash(algo: 'md5', data: strtolower(string: trim(string: $email))) . '/?' . http_build_query(data: ['s' => $size, 'd' => $default]);

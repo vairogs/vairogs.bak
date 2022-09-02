@@ -8,6 +8,8 @@ if (!file_exists(filename: __DIR__ . '/src')) {
 
 return (new Config())
     ->setRules(rules: [
+        '@PER' => true,
+        '@PER:risky' => true,
         '@PHP80Migration:risky' => true,
         '@PHP81Migration' => true,
         '@PSR12' => true,
@@ -34,13 +36,11 @@ return (new Config())
         'native_constant_invocation' => false,
         'native_function_invocation' => false,
         'native_function_type_declaration_casing' => true,
-        'no_alias_functions' => ['sets' => ['@all']],
+        'no_alias_functions' => ['sets' => ['@all', ], ],
         'no_blank_lines_after_class_opening' => true,
         'no_superfluous_elseif' => true,
         'no_superfluous_phpdoc_tags' => ['allow_mixed' => true, 'remove_inheritdoc' => true, ],
-        'no_trailing_comma_in_list_call' => false,
-        'no_trailing_comma_in_singleline_array' => false,
-        'no_trailing_comma_in_singleline_function_call' => false,
+        'no_trailing_comma_in_singleline' => ['elements' => [], ],
         'no_unneeded_curly_braces' => true,
         'no_unset_on_property' => true,
         'no_useless_else' => true,
@@ -54,7 +54,7 @@ return (new Config())
         'single_line_throw' => true,
         'strict_comparison' => true,
         'strict_param' => true,
-        'trailing_comma_in_multiline' => ['elements' => ['arrays', 'arguments', 'parameters', ], ],
+        'trailing_comma_in_multiline' => ['elements' => ['arrays', 'arguments', 'parameters', 'match', ], ],
         'types_spaces' => ['space' => 'none', ],
         'yoda_style' => true,
     ], )

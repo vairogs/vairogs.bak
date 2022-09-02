@@ -43,7 +43,7 @@ final class SortLatvian
         return match (true) {
             is_array(value: $first) && is_array(value: $second) => $this->compareLatvianArray(first: $first, second: $second),
             is_object(value: $first) && is_object(value: $second) => $this->compareLatvianObject(first: $first, second: $second),
-            default => 0
+            default => 0,
         };
     }
 

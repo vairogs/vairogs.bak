@@ -132,7 +132,7 @@ final class Iteration
             $result[] = match (gettype(value: $element)) {
                 'array', 'object' => [$key => $element, ],
                 'integer', 'string' => [$element => $key, ],
-                default => throw new InvalidArgumentException(message: 'Value should be array, object, string or integer')
+                default => throw new InvalidArgumentException(message: 'Value should be array, object, string or integer'),
             };
         }
 
@@ -153,7 +153,7 @@ final class Iteration
     {
         return match ($startsEnds) {
             StartsEnds::STARTS => array_values(array: $this->filterKeyStartsWith(input: $input, startsWith: $with)),
-            StartsEnds::ENDS => array_values(array: $this->filterKeyEndsWith(input: $input, endsWith: $with))
+            StartsEnds::ENDS => array_values(array: $this->filterKeyEndsWith(input: $input, endsWith: $with)),
         };
     }
 

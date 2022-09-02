@@ -46,7 +46,7 @@ final class Uri
         foreach ((new Php())->getArray(input: $input) as $key => $value) {
             $newKey = match ($parent) {
                 null => $key,
-                default => sprintf('%s[%s]', $parent, $key)
+                default => sprintf('%s[%s]', $parent, $key),
             };
 
             $result = $this->setResult(result: $result, key: $newKey, value: $value);

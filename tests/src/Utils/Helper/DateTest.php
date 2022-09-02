@@ -76,6 +76,7 @@ class DateTest extends VairogsTestCase
 
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\DateDataProvider::dataProviderCreateFromUnixTimestamp
+     *
      * @noinspection PhpUnhandledExceptionInspection
      */
     public function testCreateFromUnixTimestamp(int $timestamp, ?string $format, string $expected): void

@@ -87,7 +87,7 @@ final class Util
             return match (gmp_prob_prime(num: (string) $number)) {
                 0 => false,
                 2 => true,
-                default => null
+                default => null,
             };
         }
 

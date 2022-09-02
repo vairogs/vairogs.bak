@@ -9,6 +9,7 @@ class JsonTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\JsonDataProvider::dataProviderJson
+     *
      * @noinspection PhpUnhandledExceptionInspection
      */
     public function testJson(mixed $data, int $flags): void

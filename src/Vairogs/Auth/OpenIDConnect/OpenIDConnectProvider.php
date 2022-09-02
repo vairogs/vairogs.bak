@@ -133,7 +133,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     {
         $this->redirectUri = match ($options['redirect']['type']) {
             Redirect::ROUTE->value => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL),
-            Redirect::URI->value => $options['redirect']['uri']
+            Redirect::URI->value => $options['redirect']['uri'],
         };
 
         $uris = $options['uris'] ?? [];

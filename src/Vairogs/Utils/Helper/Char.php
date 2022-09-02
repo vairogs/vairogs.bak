@@ -57,7 +57,7 @@ final class Char
 
         $subject = match ($function) {
             self::LCFIRST => lcfirst(string: $subject),
-            self::UCFIRST => ucfirst(string: $subject)
+            self::UCFIRST => ucfirst(string: $subject),
         };
 
         return (string) preg_replace(pattern: '#\s+#', replacement: '', subject: $subject);

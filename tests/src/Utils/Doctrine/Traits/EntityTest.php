@@ -10,6 +10,7 @@ class EntityTest extends VairogsTestCase
 {
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Doctrine\Traits\EntityDataProvider::dataProviderEntity
+     *
      * @noinspection PhpUnhandledExceptionInspection
      * @noinspection UnnecessaryAssertionInspection
      */
