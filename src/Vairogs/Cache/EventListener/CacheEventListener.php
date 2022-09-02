@@ -12,8 +12,8 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Cache\Cache;
+use Vairogs\Cache\CacheManager;
 use Vairogs\Cache\Event\CacheEvent;
-use Vairogs\Common\CacheManager;
 use Vairogs\Core\Cache\Header;
 
 use function class_exists;

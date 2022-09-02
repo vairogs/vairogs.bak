@@ -1,15 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Source\Common;
+namespace Vairogs\Tests\Source\Cache;
 
 use Exception;
 use Predis\Client;
 use Redis;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
-use Vairogs\Common\Adapter\PhpRedis;
-use Vairogs\Common\Adapter\Predis;
-use Vairogs\Common\CacheManager;
+use Vairogs\Cache\Adapter\PhpRedis;
+use Vairogs\Cache\Adapter\Predis;
+use Vairogs\Cache\CacheManager;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Tests\Assets\VairogsTestCase;

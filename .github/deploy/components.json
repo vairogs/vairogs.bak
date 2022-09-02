@@ -36,10 +36,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/captcha.git"
     },
     {
-        "path": "src/Vairogs/Common",
-        "repo": "https://GH_TOKEN@github.com/vairogs/common.git"
-    },
-    {
         "path": "src/Vairogs/Core",
         "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
     },

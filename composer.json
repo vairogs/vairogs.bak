@@ -112,7 +112,6 @@
         "vairogs/auth-openidconnect": "self.version",
         "vairogs/cache": "self.version",
         "vairogs/captcha": "self.version",
-        "vairogs/common": "self.version",
         "vairogs/core": "self.version",
         "vairogs/extra": "self.version",
         "vairogs/extra-constants": "self.version",

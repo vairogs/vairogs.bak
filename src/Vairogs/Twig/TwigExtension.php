@@ -5,7 +5,7 @@ namespace Vairogs\Twig;
 use PhpParser\Node\Stmt\Class_;
 use Twig;
 use Twig\Extension\AbstractExtension;
-use Vairogs\Common\CacheManager;
+use Vairogs\Cache\CacheManager;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Twig\Attribute\TwigFilter;

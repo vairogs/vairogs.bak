@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Common;
+namespace Vairogs\Cache;
 
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
@@ -8,8 +8,8 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
 use Symfony\Component\Cache\PruneableInterface;
-use Vairogs\Common\Adapter\Adapter;
-use Vairogs\Common\Adapter\File;
+use Vairogs\Cache\Adapter\Adapter;
+use Vairogs\Cache\Adapter\File;
 use Vairogs\Extra\Constants\Definition;
 
 use function time;

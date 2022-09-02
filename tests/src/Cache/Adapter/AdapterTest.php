@@ -1,19 +1,18 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Source\Common\Adapter;
+namespace Vairogs\Tests\Source\Cache\Adapter;
 
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
-use Vairogs\Common\Adapter\Orm;
-use Vairogs\Common\Adapter\PhpRedis;
-use Vairogs\Common\Adapter\Predis;
+use Vairogs\Cache\Adapter\Orm;
+use Vairogs\Cache\Adapter\PhpRedis;
+use Vairogs\Cache\Adapter\Predis;
 use Vairogs\Tests\Assets\VairogsTestCase;
 
 use function sprintf;
 
 class AdapterTest extends VairogsTestCase
 {
-    /** @noinspection PhpParamsInspection */
     public function testRedisAdapters(): void
     {
         $predis = new Predis(client: $this->container->get(id: 'snc_redis.predis'));
@@ -26,8 +25,8 @@ class AdapterTest extends VairogsTestCase
         $this->assertInstanceOf(expected: RedisAdapter::class, actual: $phpredis->getAdapter());
     }
 
-    /** @noinspection PhpUnhandledExceptionInspection
-     * @noinspection PhpParamsInspection
+    /**
+     * @noinspection PhpUnhandledExceptionInspection
      */
     public function testOrmAdapter(): void
     {

@@ -7,6 +7,6 @@ vendor/bin/php-cs-fixer fix tests/entity
 vendor/bin/php-cs-fixer fix tests/src
 
 rm -rf tests/var/cache/*
-rm -rf src/Vairogs/Common/var/*
+rm -rf src/Vairogs/Cache/var/*
 
 vendor/bin/phpunit

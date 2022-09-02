@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Common\Adapter;
+namespace Vairogs\Cache\Adapter;
 
 use Predis\ClientInterface;
 use Psr\Cache\CacheItemPoolInterface;

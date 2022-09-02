@@ -4,10 +4,10 @@ namespace Vairogs\Tests\Source;
 
 use Exception;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Vairogs\Common\Adapter\File;
-use Vairogs\Common\Adapter\Orm;
-use Vairogs\Common\Adapter\PhpRedis;
-use Vairogs\Common\Adapter\Predis;
+use Vairogs\Cache\Adapter\File;
+use Vairogs\Cache\Adapter\Orm;
+use Vairogs\Cache\Adapter\PhpRedis;
+use Vairogs\Cache\Adapter\Predis;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Composer;
 
@@ -16,7 +16,6 @@ class RemovedFunctionsTest extends VairogsTestCase
     /**
      * @noinspection PhpUndefinedConstantInspection
      * @noinspection PhpUndefinedFunctionInspection
-     * @noinspection PhpParamsInspection
      */
     public function testMissingRequirements(): void
     {
