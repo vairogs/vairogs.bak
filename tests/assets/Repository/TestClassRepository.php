@@ -3,7 +3,7 @@
 namespace Vairogs\Tests\Assets\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Vairogs\Entity\TestClass;
+use Vairogs\Tests\Entity\TestClass;
 
 /**
  * @method TestClass|null find($id, $lockMode = null, $lockVersion = null)

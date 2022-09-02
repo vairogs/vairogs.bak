@@ -15,7 +15,9 @@ class VairogsExtension extends Extension
 {
     use DependecyLoaderTrait;
 
-    /**  @throws Exception */
+    /**
+     * @throws Exception
+     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();

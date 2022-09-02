@@ -3,6 +3,7 @@
 namespace Vairogs\Tests\Source\Utils\Helper;
 
 use DateTime;
+use Exception;
 use InvalidArgumentException;
 use Vairogs\Extra\Constants;
 use Vairogs\Tests\Assets\VairogsTestCase;
@@ -77,7 +78,7 @@ class DateTest extends VairogsTestCase
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\DateDataProvider::dataProviderCreateFromUnixTimestamp
      *
-     * @noinspection PhpUnhandledExceptionInspection
+     * @throws Exception
      */
     public function testCreateFromUnixTimestamp(int $timestamp, ?string $format, string $expected): void
     {

@@ -17,6 +17,7 @@ class Registry
 
     public function __construct(Traversable $clients)
     {
+        /* @noinspection PhpRedundantOptionalArgumentInspection */
         $this->clients = iterator_to_array(iterator: $clients, preserve_keys: true);
     }
 
