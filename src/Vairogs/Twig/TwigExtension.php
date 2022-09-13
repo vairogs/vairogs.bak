@@ -16,7 +16,7 @@ use Vairogs\Utils\Locator\Finder;
 
 use function array_keys;
 use function array_merge;
-use function getcwd;
+use function dirname;
 use function hash;
 use function sprintf;
 use function str_starts_with;
@@ -27,7 +27,7 @@ final class TwigExtension extends AbstractExtension
     use TwigTrait;
 
     public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
-    public const HELPER_DIR = '/../vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/';
+    public const HELPER_DIR = '/Utils/Helper/';
 
     public function __construct(private readonly CacheManager $cacheManager)
     {
@@ -67,7 +67,7 @@ final class TwigExtension extends AbstractExtension
     private function parseMethods(string $filter, string $twig): array
     {
         $methods = [[]];
-        $foundClasses = (new Finder(directories: [getcwd() . self::HELPER_DIR], types: [Class_::class], namespace: self::HELPER_NAMESPACE))->locate()->getClassMap();
+        $foundClasses = (new Finder(directories: [dirname(path: __DIR__) . self::HELPER_DIR], types: [Class_::class], namespace: self::HELPER_NAMESPACE))->locate()->getClassMap();
 
         foreach (array_keys(array: $foundClasses) as $class) {
             $methods[] = $this->makeArray(input: (new Reflection())->getFilteredMethods(class: $class, filterClass: $filter), key: $this->getPrefix(base: $class), class: $twig);

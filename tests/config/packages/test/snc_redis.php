@@ -9,7 +9,7 @@ return static function (SncRedisConfig $sncRedisConfig): void {
         ->type(value: 'predis')
         ->alias(value: $key)
         ->dsns(value: [
-            sprintf('%%env(REDIS_URL)%%/%s', '%env(' . 'REDIS_DB_' . strtoupper(string: $key) . ')%'),
+            sprintf('%%env(REDIS_URL)%%/%s', '%env(REDIS_DB_' . strtoupper(string: $key) . ')%'),
         ])
         ->logging(value: false)
         ->options()
@@ -22,7 +22,7 @@ return static function (SncRedisConfig $sncRedisConfig): void {
         ->type(value: 'phpredis')
         ->alias(value: $key)
         ->dsns(value: [
-            sprintf('%%env(REDIS_URL)%%/%s', '%env(' . 'REDIS_DB_' . strtoupper(string: $key) . ')%'),
+            sprintf('%%env(REDIS_URL)%%/%s', '%env(REDIS_DB_' . strtoupper(string: $key) . ')%'),
         ])
         ->logging(value: false)
         ->options()

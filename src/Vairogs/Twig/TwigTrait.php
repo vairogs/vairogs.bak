@@ -2,25 +2,16 @@
 
 namespace Vairogs\Twig;
 
-use InvalidArgumentException;
-use Twig\TwigFilter;
-use Twig\TwigFunction;
 use Vairogs\Utils\Helper\Char;
 
-use function in_array;
 use function is_array;
 use function is_numeric;
 use function sprintf;
 
 trait TwigTrait
 {
-    /**
-     * @throws InvalidArgumentException
-     */
     public function makeArray(array $input, string $key, string $class): array
     {
-        $this->checkClass(class: $class);
-
         $output = [];
         foreach ($this->parseFunctions(input: $input, key: $key) as $call => $function) {
             if (is_array(value: $function)) {
@@ -34,19 +25,6 @@ trait TwigTrait
         }
 
         return $output;
-    }
-
-    /**
-     * @throws InvalidArgumentException
-     */
-    public function checkClass(string $class): void
-    {
-        if (!in_array(needle: $class, haystack: [
-            TwigFilter::class,
-            TwigFunction::class,
-        ], strict: true)) {
-            throw new InvalidArgumentException(message: sprintf('Invalid type "%s":. Allowed types are %s and %s', $class, TwigFilter::class, TwigFunction::class));
-        }
     }
 
     private function parseFunctions(array $input, string $key): array
