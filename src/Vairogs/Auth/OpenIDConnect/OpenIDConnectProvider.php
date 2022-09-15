@@ -5,8 +5,10 @@ namespace Vairogs\Auth\OpenIDConnect;
 use DateTime;
 use Exception;
 use JetBrains\PhpStorm\ArrayShape;
+use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Signer\Key\InMemory;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token\RegisteredClaims;
 use League\OAuth2\Client\Grant\AbstractGrant;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -15,6 +17,7 @@ use League\OAuth2\Client\Token\AccessTokenInterface;
 use Psr\Http\Message\RequestInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use UnexpectedValueException;
@@ -27,10 +30,11 @@ use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\IssuedBy;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\LesserOrEqual;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\SignedWith;
 use Vairogs\Auth\OpenIDConnect\Configuration\ParsedToken;
+use Vairogs\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Auth\OpenIDConnect\Configuration\UriCollection;
+use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
-use Vairogs\Auth\OpenIDConnect\Utils\Traits\OpenIDConnectProviderVariables;
 use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Utils\Helper\Char;
@@ -46,7 +50,17 @@ use function sprintf;
 
 abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegistry
 {
-    use OpenIDConnectProviderVariables;
+    protected ?Signer $signer = null;
+    protected ?string $baseUriPost = null;
+    protected RequestStack $requestStack;
+    protected UriCollection $uriCollection;
+    protected ValidatorChain $validatorChain;
+    protected bool $useSession = false;
+    protected bool $verify = true;
+    protected int $statusCode;
+    protected string $baseUri;
+    protected string $idTokenIssuer;
+    protected string $publicKey;
 
     /** @noinspection TraitsPropertiesConflictsInspection */
     public function __construct(protected string $name, protected readonly RouterInterface $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
@@ -58,6 +72,90 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
             $this->state = (new Identification())->getUniqueId();
             $this->configure(options: $options);
         }
+    }
+
+    public function getClientId(): string
+    {
+        return $this->clientId;
+    }
+
+    public function getRedirectUri(): string
+    {
+        return $this->redirectUri;
+    }
+
+    public function getUseSession(): bool
+    {
+        return $this->useSession;
+    }
+
+    public function getSession(): ?SessionInterface
+    {
+        return $this->requestStack->getCurrentRequest()?->getSession();
+    }
+
+    public function getBaseUri(): string
+    {
+        return $this->baseUri;
+    }
+
+    public function setBaseUri(string $baseUri): static
+    {
+        $this->baseUri = $baseUri;
+
+        return $this;
+    }
+
+    public function getBaseUriPost(): ?string
+    {
+        return $this->baseUriPost;
+    }
+
+    public function getUriCollection(): UriCollection
+    {
+        return $this->uriCollection;
+    }
+
+    public function setPublicKey(string $publicKey): static
+    {
+        $this->publicKey = $publicKey;
+
+        return $this;
+    }
+
+    public function getRouter(): RouterInterface
+    {
+        return $this->router;
+    }
+
+    public function getSigner(): Signer
+    {
+        return $this->signer ?? new Sha256();
+    }
+
+    public function getVerify(): bool
+    {
+        return $this->verify;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getValidatorChain(): ValidatorChain
+    {
+        return $this->validatorChain;
+    }
+
+    public function getUri(string $name): ?Uri
+    {
+        return $this->uriCollection->getUri(name: $name);
+    }
+
+    public function getStatusCode(): int
+    {
+        return $this->statusCode;
     }
 
     /**
@@ -139,6 +237,11 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     public function getRevokeToken($token, array $options = []): array
     {
         return $this->getTokenResponse(request: $this->getTokenRequest(params: array_merge(['token' => $token], $options), url: $this->getRevokeTokenUrl()));
+    }
+
+    protected function getIdTokenIssuer(): string
+    {
+        return $this->idTokenIssuer;
     }
 
     protected function configure(array $options = []): void
