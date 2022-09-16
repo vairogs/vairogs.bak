@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1663359835">
-  <project timestamp="1663359835">
+<coverage generated="1663360699">
+  <project timestamp="1663360699">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2383,9 +2383,9 @@
       <line num="94" type="stmt" count="1"/>
       <line num="98" type="method" name="getRandomString" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="103" type="stmt" count="2"/>
-      <line num="106" type="method" name="getHash" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="110" type="stmt" count="1"/>
-      <line num="112" type="stmt" count="1"/>
+      <line num="106" type="method" name="getHash" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="110" type="stmt" count="3"/>
+      <line num="112" type="stmt" count="3"/>
       <metrics loc="115" ncloc="114" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="38" coveredelements="38"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Intl.php">

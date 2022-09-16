@@ -35,9 +35,15 @@ class IdentificationTest extends VairogsTestCase
         }
     }
 
-    public function testHash(): void
+    /**
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\IdentificationDataProvider::dataProviderHash
+     */
+    public function testHash(string $first, bool $equals, string $second): void
     {
-        $this->assertEquals(expected: (new Identification())->getHash(text: 'vairogs'), actual: (new Identification())->getHash(text: 'vairogs'));
-        $this->assertNotEquals(expected: (new Identification())->getHash(text: 'vairogs'), actual: (new Identification())->getHash(text: 'vairogs2'));
+        if ($equals) {
+            $this->assertEquals(expected: (new Identification())->getHash(text: $first), actual: (new Identification())->getHash(text: $second));
+        } else {
+            $this->assertNotEquals(expected: (new Identification())->getHash(text: $first), actual: (new Identification())->getHash(text: $second));
+        }
     }
 }

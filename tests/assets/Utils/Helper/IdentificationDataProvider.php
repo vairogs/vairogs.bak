@@ -14,4 +14,13 @@ class IdentificationDataProvider
             ['320312-34357', false, ],
         ];
     }
+
+    public function dataProviderHash(): array
+    {
+        return [
+            ['vairogs', true, 'vairogs', ],
+            ['', true, '', ],
+            ['vairogs', false, 'vairogs2', ],
+        ];
+    }
 }
