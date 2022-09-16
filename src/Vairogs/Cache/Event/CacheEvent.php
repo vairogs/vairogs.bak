@@ -13,6 +13,7 @@ use Vairogs\Cache\Strategy;
 use function end;
 use function explode;
 use function is_array;
+use function method_exists;
 use function reset;
 use function sprintf;
 
@@ -84,10 +85,10 @@ class CacheEvent
     {
         $user = $this->security->getUser();
 
-        if ($user instanceof JsonSerializable) {
-            return $user->jsonSerialize();
-        }
-
-        return [];
+        return match (true) {
+            null !== $user && method_exists(object_or_class: $user, method: 'toArray') => $user->toArray(),
+            $user instanceof JsonSerializable => $user->jsonSerialize(),
+            default => [],
+        };
     }
 }

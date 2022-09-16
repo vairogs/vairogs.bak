@@ -7,6 +7,7 @@ use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\ChainAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
+use Symfony\Component\Cache\Exception\InvalidArgumentException as SymfonyInvalidArgumentException;
 use Symfony\Component\Cache\PruneableInterface;
 use Vairogs\Cache\Adapter\Adapter;
 use Vairogs\Cache\Adapter\File;
@@ -20,6 +21,7 @@ final class CacheManager
 
     /**
      * @throws CacheException
+     * @throws SymfonyInvalidArgumentException
      */
     public function __construct(private readonly int $defaultLifetime = Definition::DEFAULT_LIFETIME, private readonly bool $useFile = true, ...$adapters)
     {
@@ -38,10 +40,10 @@ final class CacheManager
                 $item = $cache->get();
 
                 if ($expiredTime >= $item['expires']) {
-                    $this->delete(key: $key);
-                } else {
-                    return $item['value'];
+                    return $this->delete(key: $key);
                 }
+
+                return $item['value'];
             }
         } catch (InvalidArgumentException) {
             // cache not found
@@ -65,7 +67,7 @@ final class CacheManager
         }
     }
 
-    public function delete(string $key): void
+    public function delete(string $key): mixed
     {
         $this->prune();
 
@@ -74,10 +76,13 @@ final class CacheManager
         } catch (InvalidArgumentException) {
             // key not found
         }
+
+        return null;
     }
 
     /**
      * @throws CacheException
+     * @throws SymfonyInvalidArgumentException
      */
     private function getAdapter(array $adapters): ArrayAdapter|ChainAdapter
     {

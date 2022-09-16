@@ -11,7 +11,6 @@ use Vairogs\Extra\Constants\Definition;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
 use Vairogs\Utils\Helper\Reflection;
-use Vairogs\Utils\Helper\Text;
 use Vairogs\Utils\Locator\Finder;
 
 use function array_keys;
@@ -83,8 +82,6 @@ final class TwigExtension extends AbstractExtension
 
         if (self::HELPER_NAMESPACE === $nameSpace) {
             $base = sprintf('helper_%s', $short);
-        } elseif ('Extension' === $short) {
-            $base = (new Text())->getLastPart(text: $nameSpace, delimiter: '\\');
         }
 
         $key = '';

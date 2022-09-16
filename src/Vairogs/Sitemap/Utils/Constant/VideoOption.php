@@ -3,6 +3,7 @@
 namespace Vairogs\Sitemap\Utils\Constant;
 
 use RuntimeException;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Utils\Helper\Iteration;
 use Vairogs\Utils\Helper\Php;
 
@@ -13,8 +14,8 @@ final class VideoOption
     final public const PLATFORM_TV = 'tv';
     final public const PLATFORM_MOBILE = 'mobile';
     final public const PLATFORM_WEB = 'web';
-    final public const OPTION_YES = 'yes';
-    final public const OPTION_NO = 'no';
+    final public const OPTION_YES = Status::YES;
+    final public const OPTION_NO = Status::NO;
 
     /**
      * @throws RuntimeException
