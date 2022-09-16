@@ -3,7 +3,6 @@
 namespace Vairogs\Auth\OpenIDConnect\Configuration\Constraint;
 
 use Lcobucci\JWT\Token;
-use Lcobucci\JWT\UnencryptedToken;
 use Lcobucci\JWT\Validation\Constraint;
 use Lcobucci\JWT\Validation\ConstraintViolation;
 use Vairogs\Auth\OpenIDConnect\Configuration\IdToken;
@@ -17,14 +16,10 @@ abstract class AbstractConstraint implements Constraint
 
     public function assert(Token $token): void
     {
-        if (!$token instanceof UnencryptedToken) {
-            throw new ConstraintViolation(message: 'You should pass a plain token');
-        }
+    }
 
-        if (!$token instanceof IdToken) {
-            throw new ConstraintViolation(message: sprintf('Token must be instance of %s', IdToken::class));
-        }
-
+    public function validate(IdToken $token): void
+    {
         if (null !== $this->claim && $this->required && !$token->claims()->has(name: $this->claim)) {
             throw new ConstraintViolation(message: sprintf('%s claim is required', $this->claim));
         }

@@ -3,8 +3,8 @@
 namespace Vairogs\Auth\OpenIDConnect\Configuration\Constraint;
 
 use JetBrains\PhpStorm\Pure;
-use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Validation\Constraint;
+use Vairogs\Auth\OpenIDConnect\Configuration\IdToken;
 
 final class IssuedBy extends AbstractConstraint
 {
@@ -16,9 +16,9 @@ final class IssuedBy extends AbstractConstraint
         $this->constraint = new Constraint\IssuedBy(...$issuers);
     }
 
-    public function assert(Token $token): void
+    public function validate(IdToken $token): void
     {
-        parent::assert(token: $token);
+        parent::validate(token: $token);
 
         $this->constraint->assert(token: $token);
     }

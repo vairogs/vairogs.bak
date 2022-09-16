@@ -2,6 +2,7 @@
 
 namespace Vairogs\Tests\Source\Utils\Helper;
 
+use Vairogs\Extra\Constants\Enum\CamelCase;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Char;
 
@@ -34,7 +35,7 @@ class CharTest extends VairogsTestCase
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\CharDataProvider::dataProviderToCamelCase
      */
-    public function testToCamelCase(string $input, string $function, string $expected): void
+    public function testToCamelCase(string $input, CamelCase $function, string $expected): void
     {
         $this->assertEquals(expected: $expected, actual: (new Char())->toCamelCase(string: $input, function: $function));
     }

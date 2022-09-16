@@ -8,6 +8,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\ArrayLoader;
 use Vairogs\Cache\CacheManager;
+use Vairogs\Tests\Assets\Twig\TwigTestExtension;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Twig\TwigExtension;
 
@@ -26,18 +27,28 @@ class TwigExtensionTest extends VairogsTestCase
             $this->expectExceptionMessage(message: $message);
         }
 
-        $result = $this->getEnvironment(templates: [$template], )->load(name: 0)->render(context: []);
+        $twig = new Environment(loader: new ArrayLoader(templates: [$template]), options: ['debug' => true, 'cache' => false, 'autoescape' => false]);
+        $twig->addExtension(extension: new TwigExtension(cacheManager: new CacheManager()));
+
+        $result = $twig->load(name: 0)->render(context: []);
 
         if (false === $throws) {
             $this->assertEquals(expected: $message, actual: $result);
         }
     }
 
-    protected function getEnvironment($options = [], $templates = []): Environment
+    /**
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     *
+     * @dataProvider \Vairogs\Tests\Assets\Twig\TwigExtensionDataProvider::dataProviderTwigTraitTemplates
+     */
+    public function testTwigTrait(string $template, string $value): void
     {
-        $twig = new Environment(loader: new ArrayLoader(templates: $templates), options: array_merge(['debug' => true, 'cache' => false, 'autoescape' => false], $options));
-        $twig->addExtension(extension: new TwigExtension(cacheManager: new CacheManager()));
+        $twig = new Environment(loader: new ArrayLoader(templates: [$template]), options: ['debug' => true, 'cache' => false, 'autoescape' => false]);
+        $twig->addExtension(extension: new TwigTestExtension());
 
-        return $twig;
+        $this->assertEquals(expected: $value, actual: $twig->load(0)->render(context: []));
     }
 }

@@ -11,4 +11,12 @@ class TwigExtensionDataProvider
             ["{{ 'tests_tests'|vairogs_helper_text_limit_chars(4) }}", false, 'test...', ],
         ];
     }
+
+    public function dataProviderTwigTraitTemplates(): array
+    {
+        return [
+            ['{{ _test() }}', 'test', ],
+            ["{{ _test('value') }}", 'value', ],
+        ];
+    }
 }

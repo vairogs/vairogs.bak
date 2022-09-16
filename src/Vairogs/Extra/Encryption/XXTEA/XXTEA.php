@@ -2,7 +2,7 @@
 
 namespace Vairogs\Extra\Encryption\XXTEA;
 
-use Vairogs\Utils\Helper\Char;
+use Vairogs\Utils\Helper\Convert;
 use Vairogs\Utils\Helper\Number;
 
 use function count;
@@ -18,8 +18,8 @@ final class XXTEA
             return '';
         }
 
-        $vector = (new Char())->str2long(string: $string, wide: true);
-        $fixedKey = $this->fixKey(key: (new Char())->str2long(string: $key));
+        $vector = (new Convert())->str2long(string: $string, wide: true);
+        $fixedKey = $this->fixKey(key: (new Convert())->str2long(string: $key));
         $length = count(value: $vector) - 1;
         $last = $vector[$length];
         $start = floor(num: 6 + 52 / ($length + 1));
@@ -38,7 +38,7 @@ final class XXTEA
             $last = $vector[$length] = (new Number())->floatToInt32(number: $vector[$length] + $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $right, key: $fixedKey));
         }
 
-        return (new Char())->long2str(array: $vector);
+        return (new Convert())->long2str(array: $vector);
     }
 
     public function decrypt(string $string, string $key): string
@@ -47,8 +47,8 @@ final class XXTEA
             return '';
         }
 
-        $vector = (new Char())->str2long(string: $string);
-        $fixedKey = $this->fixKey(key: (new Char())->str2long(string: $key));
+        $vector = (new Convert())->str2long(string: $string);
+        $fixedKey = $this->fixKey(key: (new Convert())->str2long(string: $key));
         $length = count(value: $vector) - 1;
         $first = $vector[0];
         $sum = (new Number())->floatToInt32(number: floor(num: 6 + 52 / ($length + 1)) * self::DELTA);
@@ -66,7 +66,7 @@ final class XXTEA
             $sum = (new Number())->floatToInt32(number: $sum - self::DELTA);
         }
 
-        return (new Char())->long2str(array: $vector, wide: true);
+        return (new Convert())->long2str(array: $vector, wide: true);
     }
 
     private function mx(int $sum, int $first, int $last, int $pointer, int $right, array $key): int

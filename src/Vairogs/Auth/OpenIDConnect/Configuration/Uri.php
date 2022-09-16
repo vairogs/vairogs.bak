@@ -4,7 +4,6 @@ namespace Vairogs\Auth\OpenIDConnect\Configuration;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 
@@ -27,8 +26,8 @@ class Uri
 
     public function __construct(array $options, array $extra = [], protected string $method = Request::METHOD_POST)
     {
-        $this->base = rtrim(string: $extra['base_uri'], characters: '/') . '/';
-        $this->basePost = null !== ($extra['base_uri_post'] ?? null) ? rtrim(string: $extra['base_uri_post'], characters: '/') . '/' : null;
+        $this->base = rtrim(string: (string) $extra['base_uri'], characters: '/') . '/';
+        $this->basePost = null !== ($extra['base_uri_post'] ?? null) ? rtrim(string: (string) $extra['base_uri_post'], characters: '/') . '/' : null;
         unset($extra['base_uri'], $extra['base_uri_post']);
         $this->params = $options['params'];
 
@@ -54,7 +53,7 @@ class Uri
     /**
      * @throws OpenIDConnectException
      */
-    public function redirect(): Response
+    public function redirect(): RedirectResponse
     {
         return new RedirectResponse(url: $this->getUrl());
     }

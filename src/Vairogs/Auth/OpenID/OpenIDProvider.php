@@ -99,7 +99,7 @@ class OpenIDProvider implements HasRegistry
         ];
 
         foreach (explode(separator: ',', string: (string) $get['openid_signed']) as $item) {
-            $params['openid.' . $item] = stripslashes(string: $get['openid_' . str_replace(search: '.', replace: '_', subject: $item)]);
+            $params['openid.' . $item] = stripslashes(string: (string) $get['openid_' . str_replace(search: '.', replace: '_', subject: $item)]);
         }
 
         $params[OpenID::MODE] = 'check_authentication';
@@ -112,7 +112,7 @@ class OpenIDProvider implements HasRegistry
                 'timeout' => $timeout,
             ],
         ]);
-        preg_match(pattern: $this->options['preg_check'], subject: urldecode($get['openid_claimed_id']), matches: $matches);
+        preg_match(pattern: $this->options['preg_check'], subject: urldecode((string) $get['openid_claimed_id']), matches: $matches);
         $openID = (is_array(value: $matches) && isset($matches[1])) ? $matches[1] : null;
 
         return 1 === preg_match(pattern: "#is_valid\s*:\s*true#i", subject: (string) file_get_contents(filename: $this->options['openid_url'] . '/' . $this->options['api_key'], context: $context)) ? $openID : null;

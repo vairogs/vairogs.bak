@@ -4,6 +4,7 @@ namespace Vairogs\Auth\OpenIDConnect;
 
 use DateTime;
 use Exception;
+use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key;
@@ -44,7 +45,7 @@ use Vairogs\Utils\Helper\Util;
 
 use function array_merge;
 use function base64_encode;
-use function is_string;
+use function is_array;
 use function property_exists;
 use function sprintf;
 
@@ -52,7 +53,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
 {
     protected ?Signer $signer = null;
     protected ?string $baseUriPost = null;
-    protected RequestStack $requestStack;
     protected UriCollection $uriCollection;
     protected ValidatorChain $validatorChain;
     protected bool $useSession = false;
@@ -62,10 +62,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     protected string $idTokenIssuer;
     protected string $publicKey;
 
-    /** @noinspection TraitsPropertiesConflictsInspection */
-    public function __construct(protected string $name, protected readonly RouterInterface $router, RequestStack $requestStack, array $options = [], array $collaborators = [])
+    public function __construct(protected string $name, protected readonly RouterInterface $router, protected RequestStack $requestStack, array $options = [], array $collaborators = [])
     {
-        $this->requestStack = $requestStack;
         parent::__construct(options: $options, collaborators: $collaborators);
 
         if ([] !== $options) {
@@ -170,7 +168,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         }
 
         $this->setValidators();
-        $this->validatorChain->assert(token: $idToken);
+        $this->validatorChain->validate(token: $idToken);
 
         $this->saveSession(accessToken: $accessToken);
 
@@ -222,7 +220,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $this->statusCode = $response->getStatusCode();
         $parsed = $this->parseResponse(response: $response);
 
-        if (is_string($parsed)) {
+        if (!is_array($parsed)) {
             return [];
         }
 
@@ -249,6 +247,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $this->redirectUri = match ($options['redirect']['type']) {
             Redirect::ROUTE->value => $this->router->generate(name: $options['redirect']['route'], parameters: $options['redirect']['params'] ?? [], referenceType: UrlGeneratorInterface::ABSOLUTE_URL),
             Redirect::URI->value => $options['redirect']['uri'],
+            default => throw new InvalidArgumentException(message: sprintf('Type must be % or %s', Redirect::ROUTE->value, Redirect::URI->value)),
         };
 
         $uris = $options['uris'] ?? [];

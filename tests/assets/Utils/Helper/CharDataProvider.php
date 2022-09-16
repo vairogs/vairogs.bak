@@ -2,7 +2,7 @@
 
 namespace Vairogs\Tests\Assets\Utils\Helper;
 
-use Vairogs\Utils\Helper\Char;
+use Vairogs\Extra\Constants\Enum\CamelCase;
 
 class CharDataProvider
 {
@@ -35,9 +35,9 @@ class CharDataProvider
     public function dataProviderToCamelCase(): array
     {
         return [
-            ['vairogs_helper', Char::LCFIRST, 'vairogsHelper', ],
-            ['vairogshelper', Char::UCFIRST, 'Vairogshelper', ],
-            ['hello_world', Char::UCFIRST, 'HelloWorld', ],
+            ['vairogs_helper', CamelCase::LCFIRST, 'vairogsHelper', ],
+            ['vairogshelper', CamelCase::UCFIRST, 'Vairogshelper', ],
+            ['hello_world', CamelCase::UCFIRST, 'HelloWorld', ],
         ];
     }
 }

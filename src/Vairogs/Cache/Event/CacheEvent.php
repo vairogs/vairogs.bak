@@ -72,7 +72,7 @@ class CacheEvent
 
     public function getController(KernelEvent $kernelEvent): array
     {
-        $controller = $kernelEvent->getRequest()?->get(key: '_controller');
+        $controller = $kernelEvent->getRequest()->get(key: '_controller');
 
         if ((null !== $controller) && is_array(value: $instance = explode(separator: '::', string: (string) $controller, limit: 2)) && isset($instance[1])) {
             return $instance;

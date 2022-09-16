@@ -12,7 +12,7 @@ class IntlTest extends VairogsTestCase
      */
     public function testCyrillicToLatin(string $string, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: (new Intl())->cyrillicToLatin(text: $string));
+        $this->assertEquals(expected: $expected, actual: (new Intl())->cyrillic2latin(text: $string));
     }
 
     /**
@@ -20,7 +20,7 @@ class IntlTest extends VairogsTestCase
      */
     public function testLatinToCyrillic(string $string, string $expected): void
     {
-        $this->assertEquals(expected: $expected, actual: (new Intl())->latinToCyrillic(text: $string));
+        $this->assertEquals(expected: $expected, actual: (new Intl())->latin2cyrillic(text: $string));
     }
 
     /**

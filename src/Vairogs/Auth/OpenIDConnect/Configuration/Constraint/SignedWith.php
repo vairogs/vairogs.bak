@@ -5,8 +5,8 @@ namespace Vairogs\Auth\OpenIDConnect\Configuration\Constraint;
 use JetBrains\PhpStorm\Pure;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Validation\Constraint;
+use Vairogs\Auth\OpenIDConnect\Configuration\IdToken;
 
 final class SignedWith extends AbstractConstraint
 {
@@ -18,9 +18,9 @@ final class SignedWith extends AbstractConstraint
         $this->constraint = new Constraint\SignedWith($signer, $key);
     }
 
-    public function assert(Token $token): void
+    public function validate(IdToken $token): void
     {
-        parent::assert(token: $token);
+        parent::validate(token: $token);
 
         $this->constraint->assert(token: $token);
     }

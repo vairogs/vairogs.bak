@@ -3,8 +3,8 @@
 namespace Vairogs\Auth\OpenIDConnect\Configuration\Constraint;
 
 use DateTimeInterface;
-use Lcobucci\JWT\Token;
 use Lcobucci\JWT\Validation\ConstraintViolation;
+use Vairogs\Auth\OpenIDConnect\Configuration\IdToken;
 use Vairogs\Auth\OpenIDConnect\Exception\InvalidConstraintException;
 
 use function sprintf;
@@ -15,9 +15,9 @@ final class Equal extends AbstractConstraint
     {
     }
 
-    public function assert(Token $token): void
+    public function validate(IdToken $token): void
     {
-        parent::assert(token: $token);
+        parent::validate(token: $token);
         $this->assertClaimSet();
 
         $value = $token->claims()->get(name: $this->claim);

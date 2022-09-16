@@ -24,6 +24,10 @@ class ValidatorChain implements Constraint
 
     public function assert(Token $token): void
     {
+    }
+
+    public function validate(IdToken $token): void
+    {
         foreach ($this->assertions as $claim => $assertion) {
             $this->assertConstraint(constraint: $assertion, claim: $claim, token: $token);
         }
@@ -40,14 +44,18 @@ class ValidatorChain implements Constraint
         return $this;
     }
 
-    private function assertConstraint(Constraint $constraint, string $claim, Token $token): void
+    private function assertConstraint(Constraint $constraint, string $claim, IdToken $token): void
     {
         if ($constraint instanceof AbstractConstraint) {
             $claim = $constraint->getClaim() ?? (new Text())->getLastPart(text: $constraint::class, delimiter: '\\');
         }
 
         try {
-            $constraint->assert(token: $token);
+            if ($constraint instanceof AbstractConstraint) {
+                $constraint->validate(token: $token);
+            } else {
+                $constraint->assert(token: $token);
+            }
         } catch (InvalidConstraintException $e) {
             $this->messages[$claim] = $e->getMessage();
         } catch (Exception $e) {

@@ -9,6 +9,7 @@ use Vairogs\Extra\Constants\Http;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
 
+use function array_map;
 use function count;
 use function explode;
 use function is_numeric;
@@ -52,14 +53,9 @@ final class IPAddress
             return ['0', '0'];
         }
 
-        [$base, $bits] = explode(separator: '/', string: $cidr);
-        /* @var string $base */
-        /* @var int $bits */
-        [$part1, $part2, $part3, $part4] = explode(separator: '.', string: $base);
-        /** @var int $part1 */
-        /** @var int $part2 */
-        /** @var int $part3 */
-        /** @var int $part4 */
+        [$base, $bits,] = explode(separator: '/', string: $cidr);
+        $bits = (int) $bits;
+        [$part1, $part2, $part3, $part4,] = array_map('intval', explode(separator: '.', string: $base));
         $sum = ($part1 << 24) + ($part2 << 16) + ($part3 << 8) + $part4;
         $mask = (0 === $bits) ? 0 : (~0 << (32 - $bits));
 
