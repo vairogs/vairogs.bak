@@ -30,10 +30,7 @@ class Uri
         $this->base = rtrim(string: $extra['base_uri'], characters: '/') . '/';
         $this->basePost = null !== ($extra['base_uri_post'] ?? null) ? rtrim(string: $extra['base_uri_post'], characters: '/') . '/' : null;
         unset($extra['base_uri'], $extra['base_uri_post']);
-
-        if ([] !== $params = $options['params']) {
-            $this->params = $params;
-        }
+        $this->params = $options['params'];
 
         if (Request::METHOD_GET === $this->method) {
             $this->setGetParams(options: $options, additional: $extra);

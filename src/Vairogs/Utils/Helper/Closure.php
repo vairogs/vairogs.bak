@@ -81,20 +81,6 @@ final class Closure
         return $object;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
-    public function return(callable $function, object $clone, ...$arguments): mixed
-    {
-        return $this->bind(function: $function, clone: $clone)(...$arguments);
-    }
-
-    #[TwigFunction]
-    #[TwigFilter]
-    public function void(callable $function, object $clone, ...$arguments): void
-    {
-        $this->bind(function: $function, clone: $clone)(...$arguments);
-    }
-
     /**
      * @throws InvalidArgumentException
      */
@@ -188,6 +174,16 @@ final class Closure
     public function hijackReturnObject(object $object, string $function, ...$arguments): mixed
     {
         return $this->return(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
+    }
+
+    private function return(callable $function, object $clone, ...$arguments): mixed
+    {
+        return $this->bind(function: $function, clone: $clone)(...$arguments);
+    }
+
+    private function void(callable $function, object $clone, ...$arguments): void
+    {
+        $this->bind(function: $function, clone: $clone)(...$arguments);
     }
 
     private function bind(callable $function, object $clone): \Closure|false|null

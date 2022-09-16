@@ -45,10 +45,6 @@ final class Composer
     #[TwigFilter]
     public function getenv(string $name, bool $localOnly = true): mixed
     {
-        if ($env = getenv(name: $name, local_only: $localOnly)) {
-            return $env;
-        }
-
-        return $_ENV[$name] ?? $name;
+        return getenv(name: $name, local_only: $localOnly) ?: ($_ENV[$name] ?? $name);
     }
 }
