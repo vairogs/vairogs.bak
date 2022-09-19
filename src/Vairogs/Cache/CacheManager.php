@@ -63,7 +63,7 @@ final class CacheManager
 
             $this->adapter->save(item: $cache);
         } catch (InvalidArgumentException) {
-            // do not save if exception thrown
+            // continue if exception thrown
         }
     }
 

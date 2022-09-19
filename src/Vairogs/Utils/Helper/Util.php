@@ -29,7 +29,7 @@ final class Util
         $function = (new FunctionHandler())->setFunction(functionName: 'isPrimeFunction', instance: new self());
         $below = (new FunctionHandler())->setFunction(functionName: 'isPrimeBelow1000', instance: new self())->setNext(handler: $function);
 
-        return (new FunctionHandler())->setFunction(functionName: 'isPrimeGmp', instance: new self())->setNext(handler: $below)->handle($number, $override);
+        return (bool) (new FunctionHandler())->setFunction(functionName: 'isPrimeGmp', instance: new self())->setNext(handler: $below)->handle($number, $override);
     }
 
     #[TwigFunction]

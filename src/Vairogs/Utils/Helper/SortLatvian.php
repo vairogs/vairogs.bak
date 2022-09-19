@@ -16,13 +16,13 @@ use function usort;
 
 final class SortLatvian
 {
-    private static int|string $field = '';
+    private static string $field = '';
 
     #[TwigFunction]
     #[TwigFilter]
     public function sortLatvian(array &$names, string|int $field, array $callback = [self::class, 'compareLatvian']): bool
     {
-        self::$field = $field;
+        self::$field = (string) $field;
         $result = usort(array: $names, callback: $callback);
         self::$field = '';
 

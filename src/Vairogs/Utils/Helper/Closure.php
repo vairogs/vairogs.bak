@@ -86,7 +86,7 @@ final class Closure
      */
     #[TwigFunction]
     #[TwigFilter]
-    public function hijackGetStatic(object $object, string $property, ...$arguments): mixed
+    public function hijackGetStatic(object $object, string $property, mixed ...$arguments): mixed
     {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
@@ -104,7 +104,7 @@ final class Closure
      */
     #[TwigFunction]
     #[TwigFilter]
-    public function hijackGetNonStatic(object $object, string $property, ...$arguments): mixed
+    public function hijackGetNonStatic(object $object, string $property, mixed ...$arguments): mixed
     {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
@@ -123,7 +123,7 @@ final class Closure
      */
     #[TwigFunction]
     #[TwigFilter]
-    public function hijackGet(object $object, string $property, bool $throwOnUnInitialized = false, ...$arguments)
+    public function hijackGet(object $object, string $property, bool $throwOnUnInitialized = false, mixed ...$arguments)
     {
         try {
             $reflectionProperty = (new ReflectionProperty(class: $object, property: $property));
@@ -157,7 +157,7 @@ final class Closure
 
     #[TwigFunction]
     #[TwigFilter]
-    public function hijackVoidObject(object $object, string $function, ...$arguments): void
+    public function hijackVoidObject(object $object, string $function, mixed ...$arguments): void
     {
         $this->void(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
     }
@@ -171,17 +171,17 @@ final class Closure
 
     #[TwigFunction]
     #[TwigFilter]
-    public function hijackReturnObject(object $object, string $function, ...$arguments): mixed
+    public function hijackReturnObject(object $object, string $function, mixed ...$arguments): mixed
     {
         return $this->return(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
     }
 
-    private function return(callable $function, object $clone, ...$arguments): mixed
+    private function return(callable $function, object $clone, mixed ...$arguments): mixed
     {
         return $this->bind(function: $function, clone: $clone)(...$arguments);
     }
 
-    private function void(callable $function, object $clone, ...$arguments): void
+    private function void(callable $function, object $clone, mixed ...$arguments): void
     {
         $this->bind(function: $function, clone: $clone)(...$arguments);
     }

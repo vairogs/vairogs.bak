@@ -5,7 +5,7 @@ namespace Vairogs\Tests\Source\Utils\Helper;
 use Exception;
 use InvalidArgumentException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
-use Vairogs\Extra\Constants\Definition;
+use Vairogs\Extra\Constants\Status;
 use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
 use Vairogs\Tests\Assets\Utils\Helper\Model\Entity1;
 use Vairogs\Tests\Assets\Utils\Helper\Model\Entity7;
@@ -25,8 +25,8 @@ class ClosureTest extends VairogsTestCase
     public function testHijackCallObject(): void
     {
         $entity = new Entity();
-        (new Closure())->hijackVoidObject($entity, 'setStatus', Definition::ENABLED);
-        $this->assertEquals(expected: Definition::ENABLED, actual: (new Closure())->hijackReturnObject(object: $entity, function: 'getStatus'));
+        (new Closure())->hijackVoidObject($entity, 'setStatus', Status::ENABLED_N);
+        $this->assertEquals(expected: Status::ENABLED_N, actual: (new Closure())->hijackReturnObject(object: $entity, function: 'getStatus'));
     }
 
     public function testHijackGet(): void

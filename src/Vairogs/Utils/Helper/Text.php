@@ -146,7 +146,7 @@ final class Text
 
     #[TwigFunction]
     #[TwigFilter]
-    public function htmlEntityDecode(string $text): array|string|null
+    public function htmlEntityDecode(string $text): string
     {
         return preg_replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
     }

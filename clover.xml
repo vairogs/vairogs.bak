@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1663360699">
-  <project timestamp="1663360699">
+<coverage generated="1663586056">
+  <project timestamp="1663586056">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1240,7 +1240,7 @@
       <class name="Vairogs\Extra\Constants\Definition" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="16" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Constants/Enum/CamelCase.php">
       <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1283,7 +1283,7 @@
       <class name="Vairogs\Extra\Constants\Status" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="20" ncloc="20" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="22" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Constants/Symbol.php">
       <class name="Vairogs\Extra\Constants\Symbol" namespace="global">
@@ -1927,14 +1927,14 @@
       <class name="Vairogs\Utils\Doctrine\Traits\Status" namespace="global">
         <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
       </class>
-      <line num="14" type="method" name="getStatus" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="16" type="stmt" count="3"/>
-      <line num="19" type="method" name="setStatus" visibility="public" complexity="2" crap="2" count="3"/>
-      <line num="21" type="stmt" count="3"/>
-      <line num="22" type="stmt" count="1"/>
-      <line num="25" type="stmt" count="3"/>
-      <line num="27" type="stmt" count="3"/>
-      <metrics loc="30" ncloc="30" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+      <line num="15" type="method" name="getStatus" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="17" type="stmt" count="3"/>
+      <line num="20" type="method" name="setStatus" visibility="public" complexity="2" crap="2" count="3"/>
+      <line num="22" type="stmt" count="3"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="26" type="stmt" count="3"/>
+      <line num="28" type="stmt" count="3"/>
+      <metrics loc="31" ncloc="31" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Generator.php">
       <class name="Vairogs\Utils\Generator" namespace="global">
@@ -2220,31 +2220,6 @@
       <line num="193" type="stmt" count="4"/>
       <line num="197" type="stmt" count="4"/>
       <metrics loc="200" ncloc="193" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="56" elements="66" coveredelements="66"/>
-    </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Error.php">
-      <class name="Vairogs\Utils\Helper\Error" namespace="global">
-        <metrics complexity="3" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="19" coveredelements="19"/>
-      </class>
-      <line num="17" type="method" name="getExceptionTraceAsString" visibility="public" complexity="3" crap="3" count="1"/>
-      <line num="19" type="stmt" count="1"/>
-      <line num="20" type="stmt" count="1"/>
-      <line num="22" type="stmt" count="1"/>
-      <line num="23" type="stmt" count="1"/>
-      <line num="24" type="stmt" count="1"/>
-      <line num="25" type="stmt" count="1"/>
-      <line num="26" type="stmt" count="1"/>
-      <line num="27" type="stmt" count="1"/>
-      <line num="28" type="stmt" count="1"/>
-      <line num="29" type="stmt" count="1"/>
-      <line num="33" type="stmt" count="1"/>
-      <line num="36" type="stmt" count="1"/>
-      <line num="37" type="stmt" count="1"/>
-      <line num="38" type="stmt" count="1"/>
-      <line num="39" type="stmt" count="1"/>
-      <line num="40" type="stmt" count="1"/>
-      <line num="41" type="stmt" count="1"/>
-      <line num="45" type="stmt" count="1"/>
-      <metrics loc="48" ncloc="48" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="18" elements="19" coveredelements="19"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/File.php">
       <class name="Vairogs\Utils\Helper\File" namespace="global">
@@ -2533,7 +2508,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Pagination/Behaviour.php">
       <class name="Vairogs\Utils\Helper\Pagination\Behaviour" namespace="global">
-        <metrics complexity="21" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="47" elements="57" coveredelements="57"/>
+        <metrics complexity="21" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="45" elements="55" coveredelements="55"/>
       </class>
       <line num="17" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
       <line num="19" type="stmt" count="9"/>
@@ -2584,14 +2559,12 @@
       <line num="116" type="stmt" count="1"/>
       <line num="119" type="stmt" count="1"/>
       <line num="120" type="stmt" count="1"/>
-      <line num="121" type="stmt" count="1"/>
-      <line num="122" type="stmt" count="1"/>
+      <line num="123" type="stmt" count="1"/>
+      <line num="124" type="stmt" count="1"/>
       <line num="125" type="stmt" count="1"/>
       <line num="126" type="stmt" count="1"/>
       <line num="127" type="stmt" count="1"/>
-      <line num="128" type="stmt" count="1"/>
-      <line num="129" type="stmt" count="1"/>
-      <metrics loc="133" ncloc="133" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="47" elements="57" coveredelements="57"/>
+      <metrics loc="131" ncloc="131" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="45" elements="55" coveredelements="55"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Php.php">
       <class name="Vairogs\Utils\Helper\Php" namespace="global">
@@ -2990,6 +2963,6 @@
       <line num="32" type="stmt" count="2"/>
       <metrics loc="35" ncloc="32" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="134" loc="7832" ncloc="7613" classes="97" methods="545" coveredmethods="275" conditionals="0" coveredconditionals="0" statements="1711" coveredstatements="1031" elements="2256" coveredelements="1306"/>
+    <metrics files="133" loc="7783" ncloc="7564" classes="96" methods="544" coveredmethods="274" conditionals="0" coveredconditionals="0" statements="1691" coveredstatements="1011" elements="2235" coveredelements="1285"/>
   </project>
 </coverage>

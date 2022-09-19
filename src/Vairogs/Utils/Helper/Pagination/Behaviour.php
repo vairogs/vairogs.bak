@@ -117,16 +117,14 @@ final class Behaviour
         }
 
         $omitLeftFrom = floor(num: $visibleLeft / 2) + 1;
-        $omitLeftTo = $current - ($visibleLeft - $omitLeftFrom) - 1;
         $omitRightFrom = ceil(num: $visibleRight / 2) + $current;
-        $omitRightTo = $total - ($visibleRight - ($omitRightFrom - $current));
 
         return [
             ...range(start: 1, end: $omitLeftFrom - 1),
             ...[$omitted],
-            ...range(start: $omitLeftTo + 1, end: $omitRightFrom - 1),
+            ...range(start: $current - ($visibleLeft - $omitLeftFrom), end: $omitRightFrom - 1),
             ...[$omitted],
-            ...range(start: $omitRightTo + 1, end: $total),
+            ...range(start: $total - ($visibleRight - ($omitRightFrom - $current)) + 1, end: $total),
         ];
     }
 }

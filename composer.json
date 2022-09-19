@@ -90,7 +90,6 @@
         "doctrine/doctrine-bundle": "2.7.x-dev",
         "doctrine/orm": "2.14.x-dev",
         "friendsofphp/php-cs-fixer": "dev-master",
-        "phpstan/phpstan": "1.8.x-dev",
         "phpunit/phpunit": "dev-main",
         "predis/predis": ">=1.1.0",
         "psr/container": "*",
