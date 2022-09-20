@@ -2,7 +2,7 @@
 
 namespace Vairogs\Tests\Source\Utils\Helper;
 
-use DateTime;
+use DateTimeInterface;
 use Exception;
 use InvalidArgumentException;
 use Vairogs\Extra\Constants;
@@ -24,7 +24,7 @@ class DateTest extends VairogsTestCase
      */
     public function testGetDateWithoutFormat(string $date): void
     {
-        $this->assertInstanceOf(expected: DateTime::class, actual: (new Date())->getDateWithoutFormat(date: $date));
+        $this->assertInstanceOf(expected: DateTimeInterface::class, actual: (new Date())->getDateWithoutFormat(date: $date));
     }
 
     /**
@@ -32,7 +32,7 @@ class DateTest extends VairogsTestCase
      */
     public function testGetDateWithoutFormatWrong(string $date): void
     {
-        $this->assertNotInstanceOf(expected: DateTime::class, actual: (new Date())->getDateWithoutFormat(date: $date));
+        $this->assertNotInstanceOf(expected: DateTimeInterface::class, actual: (new Date())->getDateWithoutFormat(date: $date));
     }
 
     /**

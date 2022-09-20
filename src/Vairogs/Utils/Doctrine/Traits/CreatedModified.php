@@ -2,7 +2,7 @@
 
 namespace Vairogs\Utils\Doctrine\Traits;
 
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -36,10 +36,10 @@ trait CreatedModified
     #[ORM\PreUpdate]
     public function updatedTimestamps(): static
     {
-        $this->setModificationDate(modificationDate: new DateTime());
+        $this->setModificationDate(modificationDate: new DateTimeImmutable());
 
         if (null === $this->creationDate) {
-            $this->setCreationDate(creationDate: new DateTime());
+            $this->setCreationDate(creationDate: new DateTimeImmutable());
         }
 
         return $this;

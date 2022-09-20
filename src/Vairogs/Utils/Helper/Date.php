@@ -2,7 +2,7 @@
 
 namespace Vairogs\Utils\Helper;
 
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 use InvalidArgumentException;
@@ -75,7 +75,7 @@ final class Date
     #[TwigFilter]
     public function validateDateBasic(mixed $date, string $format = Constants\Date::FORMAT): bool
     {
-        $object = DateTime::createFromFormat(format: '!' . $format, datetime: $date);
+        $object = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $date);
 
         return $object && $date === $object->format(format: $format);
     }
@@ -138,7 +138,7 @@ final class Date
     #[TwigFilter]
     public function formatDate(string $string, string $format = Constants\Date::FORMAT): string|bool
     {
-        if (($date = DateTime::createFromFormat(format: '!' . $format, datetime: $string)) instanceof DateTime) {
+        if (($date = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $string)) instanceof DateTimeImmutable) {
             return $date->format(format: Constants\Date::FORMAT);
         }
 
@@ -149,7 +149,7 @@ final class Date
     #[TwigFilter]
     public function getDateNullable(?string $dateString = null, ?string $format = null): ?DateTimeInterface
     {
-        if (null === $dateString || null === $format || !$date = DateTime::createFromFormat(format: '!' . $format, datetime: $dateString)) {
+        if (null === $dateString || null === $format || !$date = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $dateString)) {
             return null;
         }
 
@@ -161,9 +161,9 @@ final class Date
      */
     #[TwigFunction]
     #[TwigFilter]
-    public function getDate(?string $dateString = null, ?string $format = null): DateTime
+    public function getDate(?string $dateString = null, ?string $format = null): DateTimeInterface
     {
-        if (null === $dateString || !$date = DateTime::createFromFormat(format: '!' . $format, datetime: $dateString)) {
+        if (null === $dateString || !$date = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $dateString)) {
             throw new InvalidArgumentException(message: 'Invalid date string');
         }
 
@@ -177,19 +177,19 @@ final class Date
     #[TwigFilter]
     public function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string
     {
-        return (new DateTime())->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Constants\Date::FORMAT);
+        return (new DateTimeImmutable())->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Constants\Date::FORMAT);
     }
 
     #[TwigFunction]
     #[TwigFilter]
-    public function getDateWithoutFormat(string $date, array $guesses = []): DateTime|string
+    public function getDateWithoutFormat(string $date, array $guesses = []): DateTimeInterface|string
     {
-        $formats = array_merge((new Php())->getClassConstantsValues(class: DateTime::class), self::EXTRA_FORMATS, $guesses);
+        $formats = array_merge((new Php())->getClassConstantsValues(class: DateTimeImmutable::class), self::EXTRA_FORMATS, $guesses);
 
         foreach ($formats as $format) {
-            $datetime = DateTime::createFromFormat(format: '!' . $format, datetime: $date);
+            $datetime = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $date);
 
-            if ($datetime instanceof DateTime) {
+            if ($datetime instanceof DateTimeInterface) {
                 return $datetime;
             }
         }

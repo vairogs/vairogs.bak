@@ -2,7 +2,7 @@
 
 namespace Vairogs\Tests\Assets\Utils\Helper;
 
-use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Vairogs\Extra\Constants\Date;
 
@@ -20,10 +20,10 @@ class DateDataProvider
     public function dataProviderGetDateWithoutFormat(): array
     {
         return [
-            [(new DateTime())->format(format: DateTimeInterface::ATOM), ],
-            [(new DateTime())->format(format: DateTimeInterface::RFC1123), ],
-            [(new DateTime())->format(format: DateTimeInterface::RFC3339_EXTENDED), ],
-            [(new DateTime())->format(format: DateTimeInterface::W3C), ],
+            [(new DateTimeImmutable())->format(format: DateTimeInterface::ATOM), ],
+            [(new DateTimeImmutable())->format(format: DateTimeInterface::RFC1123), ],
+            [(new DateTimeImmutable())->format(format: DateTimeInterface::RFC3339_EXTENDED), ],
+            [(new DateTimeImmutable())->format(format: DateTimeInterface::W3C), ],
         ];
     }
 
@@ -70,7 +70,7 @@ class DateDataProvider
 
     public function dataProviderFormatDate(): array
     {
-        $dateTime = new DateTime();
+        $dateTime = new DateTimeImmutable();
 
         return [
             [$dateTime->format(format: DateTimeInterface::ATOM),  DateTimeInterface::ATOM, $dateTime->format(format: Date::FORMAT)],
@@ -80,7 +80,7 @@ class DateDataProvider
 
     public function dataProviderFormatDateWrong(): array
     {
-        $dateTime = new DateTime();
+        $dateTime = new DateTimeImmutable();
 
         return [
             [$dateTime->format(format: DateTimeInterface::ATOM), DateTimeInterface::RFC1036],
@@ -91,14 +91,14 @@ class DateDataProvider
     public function dataProviderCreateFromUnixTimestamp(): array
     {
         return [
-            [1649403032, DateTimeInterface::ATOM, (new DateTime())->setTimestamp(timestamp: 1649403032)->format(format: DateTimeInterface::ATOM)],
-            [1649403032, null, (new DateTime())->setTimestamp(timestamp: 1649403032)->format(format: Date::FORMAT)],
+            [1649403032, DateTimeInterface::ATOM, (new DateTimeImmutable())->setTimestamp(timestamp: 1649403032)->format(format: DateTimeInterface::ATOM)],
+            [1649403032, null, (new DateTimeImmutable())->setTimestamp(timestamp: 1649403032)->format(format: Date::FORMAT)],
         ];
     }
 
     public function dataProviderGetDateNullable(): array
     {
-        $dateTime = new DateTime();
+        $dateTime = new DateTimeImmutable();
 
         return [
             [$dateTime->format(format: DateTimeInterface::ATOM), DateTimeInterface::ATOM, $dateTime->format(format: Date::FORMAT)],
@@ -108,7 +108,7 @@ class DateDataProvider
 
     public function dataProviderGetDate(): array
     {
-        $dateTime = new DateTime();
+        $dateTime = new DateTimeImmutable();
 
         return [
             [$dateTime->format(format: DateTimeInterface::ATOM), DateTimeInterface::ATOM, $dateTime->format(format: DateTimeInterface::ATOM)],

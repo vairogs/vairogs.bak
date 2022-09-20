@@ -2,7 +2,7 @@
 
 namespace Vairogs\Auth\OpenIDConnect;
 
-use DateTime;
+use DateTimeImmutable;
 use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
@@ -276,10 +276,10 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
                 (new Equal(expected: [$this->clientId]))->setClaim(claim: RegisteredClaims::AUDIENCE),
                 (new Exists())->setClaim(claim: RegisteredClaims::ISSUED_AT)->setRequired(required: true),
                 (new Exists())->setClaim(claim: RegisteredClaims::SUBJECT)->setRequired(required: true),
-                (new GreaterOrEqual(expected: (new DateTime())->getTimestamp()))->setClaim(claim: RegisteredClaims::EXPIRATION_TIME)->setRequired(required: true),
+                (new GreaterOrEqual(expected: (new DateTimeImmutable())->getTimestamp()))->setClaim(claim: RegisteredClaims::EXPIRATION_TIME)->setRequired(required: true),
                 (new Hashed())->setClaim(claim: 'at_hash')->setRequired(required: true),
                 (new IssuedBy(issuers: $this->getIdTokenIssuer()))->setRequired(required: true),
-                (new LesserOrEqual(expected: (new DateTime())->getTimestamp()))->setClaim(claim: RegisteredClaims::NOT_BEFORE),
+                (new LesserOrEqual(expected: (new DateTimeImmutable())->getTimestamp()))->setClaim(claim: RegisteredClaims::NOT_BEFORE),
                 (new SignedWith(signer: $this->getSigner(), key: $this->getPublicKey()))->setRequired(required: true),
             ]);
     }
