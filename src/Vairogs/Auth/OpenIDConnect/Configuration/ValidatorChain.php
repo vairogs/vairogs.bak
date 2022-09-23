@@ -24,6 +24,9 @@ class ValidatorChain implements JWTConstraint
 
     public function assert(Token $token): void
     {
+        /*
+         * override and do not trigger parent function, use validate() instead
+         */
     }
 
     public function validate(IdToken $token): void

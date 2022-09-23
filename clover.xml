@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1663935937">
-  <project timestamp="1663935937">
+<coverage generated="1663942558">
+  <project timestamp="1663942558">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -11,32 +11,32 @@
       <class name="Vairogs\Addon\Auth\OpenID\Steam\Builder\SteamGiftsUserBuilder" namespace="global">
         <metrics complexity="9" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="25" coveredelements="0"/>
       </class>
-      <line num="28" type="method" name="getUser" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="30" type="stmt" count="0"/>
+      <line num="30" type="method" name="getUser" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="32" type="stmt" count="0"/>
-      <line num="35" type="method" name="setUserClass" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="37" type="stmt" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="37" type="method" name="setUserClass" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="39" type="stmt" count="0"/>
-      <line num="42" type="method" name="getUserClass" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="44" type="stmt" count="0"/>
-      <line num="47" type="method" name="getSteamGiftsUser" visibility="private" complexity="1" crap="2" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="50" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="44" type="method" name="getUserClass" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="46" type="stmt" count="0"/>
+      <line num="49" type="method" name="getSteamGiftsUser" visibility="private" complexity="1" crap="2" count="0"/>
+      <line num="51" type="stmt" count="0"/>
       <line num="52" type="stmt" count="0"/>
-      <line num="55" type="method" name="getUsername" visibility="private" complexity="5" crap="30" count="0"/>
-      <line num="57" type="stmt" count="0"/>
-      <line num="60" type="stmt" count="0"/>
-      <line num="61" type="stmt" count="0"/>
-      <line num="64" type="stmt" count="0"/>
-      <line num="65" type="stmt" count="0"/>
-      <line num="68" type="stmt" count="0"/>
-      <line num="69" type="stmt" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="57" type="method" name="getUsername" visibility="private" complexity="5" crap="30" count="0"/>
+      <line num="59" type="stmt" count="0"/>
+      <line num="62" type="stmt" count="0"/>
+      <line num="63" type="stmt" count="0"/>
+      <line num="66" type="stmt" count="0"/>
+      <line num="67" type="stmt" count="0"/>
       <line num="70" type="stmt" count="0"/>
       <line num="71" type="stmt" count="0"/>
+      <line num="72" type="stmt" count="0"/>
       <line num="73" type="stmt" count="0"/>
-      <line num="74" type="stmt" count="0"/>
-      <line num="77" type="stmt" count="0"/>
-      <metrics loc="80" ncloc="79" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="25" coveredelements="0"/>
+      <line num="75" type="stmt" count="0"/>
+      <line num="76" type="stmt" count="0"/>
+      <line num="79" type="stmt" count="0"/>
+      <metrics loc="82" ncloc="81" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="0" elements="25" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Steam/Builder/SteamUserBuilder.php">
       <class name="Vairogs\Addon\Auth\OpenID\Steam\Builder\SteamUserBuilder" namespace="global">
@@ -62,13 +62,7 @@
       <metrics loc="59" ncloc="59" classes="1" methods="6" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="0" elements="17" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Steam/Contracts/User.php">
-      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Steam/Contracts/UserGetters.php">
-      <metrics loc="41" ncloc="41" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
-    </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Steam/Contracts/UserSetters.php">
-      <metrics loc="43" ncloc="43" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="79" ncloc="79" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Steam/Model/Steam.php">
       <class name="Vairogs\Addon\Auth\OpenID\Steam\Model\Steam" namespace="global">
@@ -212,7 +206,7 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Auth/DependencyInjection/AbstractAuthChildDependency.php">
       <class name="Vairogs\Auth\DependencyInjection\AbstractAuthChildDependency" namespace="global">
-        <metrics complexity="5" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="13" coveredelements="13"/>
+        <metrics complexity="5" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="11" coveredelements="11"/>
       </class>
       <line num="21" type="method" name="loadComponentConfiguration" visibility="public" complexity="5" crap="5" count="1"/>
       <line num="23" type="stmt" count="1"/>
@@ -222,12 +216,10 @@
       <line num="29" type="stmt" count="1"/>
       <line num="30" type="stmt" count="1"/>
       <line num="31" type="stmt" count="1"/>
-      <line num="32" type="stmt" count="1"/>
       <line num="33" type="stmt" count="1"/>
-      <line num="35" type="stmt" count="1"/>
-      <line num="36" type="stmt" count="1"/>
-      <line num="39" type="stmt" count="1"/>
-      <metrics loc="48" ncloc="48" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="12" elements="13" coveredelements="13"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <metrics loc="46" ncloc="46" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="11" coveredelements="11"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Auth/DependencyInjection/AuthDependency.php">
       <class name="Vairogs\Auth\DependencyInjection\AuthDependency" namespace="global">
@@ -300,66 +292,66 @@
       <class name="Vairogs\Auth\OpenID\OpenIDProvider" namespace="global">
         <metrics complexity="23" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="0" elements="60" coveredelements="0"/>
       </class>
-      <line num="43" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="45" type="stmt" count="0"/>
+      <line num="44" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="46" type="stmt" count="0"/>
-      <line num="49" type="method" name="getOptions" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="51" type="stmt" count="0"/>
-      <line num="54" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="56" type="stmt" count="0"/>
-      <line num="62" type="method" name="fetchUser" visibility="public" complexity="6" crap="42" count="0"/>
-      <line num="64" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="50" type="method" name="getOptions" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="52" type="stmt" count="0"/>
+      <line num="55" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="57" type="stmt" count="0"/>
+      <line num="63" type="method" name="fetchUser" visibility="public" complexity="6" crap="42" count="0"/>
       <line num="65" type="stmt" count="0"/>
-      <line num="67" type="stmt" count="0"/>
-      <line num="69" type="stmt" count="0"/>
+      <line num="66" type="stmt" count="0"/>
+      <line num="68" type="stmt" count="0"/>
       <line num="70" type="stmt" count="0"/>
-      <line num="72" type="stmt" count="0"/>
+      <line num="71" type="stmt" count="0"/>
       <line num="73" type="stmt" count="0"/>
       <line num="74" type="stmt" count="0"/>
-      <line num="78" type="stmt" count="0"/>
+      <line num="75" type="stmt" count="0"/>
       <line num="79" type="stmt" count="0"/>
       <line num="80" type="stmt" count="0"/>
-      <line num="84" type="stmt" count="0"/>
+      <line num="81" type="stmt" count="0"/>
       <line num="85" type="stmt" count="0"/>
-      <line num="88" type="stmt" count="0"/>
-      <line num="91" type="method" name="validate" visibility="public" complexity="5" crap="30" count="0"/>
-      <line num="93" type="stmt" count="0"/>
+      <line num="86" type="stmt" count="0"/>
+      <line num="89" type="stmt" count="0"/>
+      <line num="92" type="method" name="validate" visibility="public" complexity="5" crap="30" count="0"/>
       <line num="94" type="stmt" count="0"/>
       <line num="95" type="stmt" count="0"/>
       <line num="96" type="stmt" count="0"/>
       <line num="97" type="stmt" count="0"/>
-      <line num="101" type="stmt" count="0"/>
+      <line num="98" type="stmt" count="0"/>
       <line num="102" type="stmt" count="0"/>
-      <line num="105" type="stmt" count="0"/>
+      <line num="103" type="stmt" count="0"/>
       <line num="106" type="stmt" count="0"/>
       <line num="107" type="stmt" count="0"/>
-      <line num="109" type="stmt" count="0"/>
+      <line num="108" type="stmt" count="0"/>
       <line num="110" type="stmt" count="0"/>
-      <line num="115" type="stmt" count="0"/>
+      <line num="111" type="stmt" count="0"/>
       <line num="116" type="stmt" count="0"/>
-      <line num="118" type="stmt" count="0"/>
-      <line num="121" type="method" name="redirect" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="123" type="stmt" count="0"/>
-      <line num="125" type="stmt" count="0"/>
-      <line num="128" type="method" name="urlPath" visibility="public" complexity="4" crap="20" count="0"/>
-      <line num="130" type="stmt" count="0"/>
-      <line num="132" type="stmt" count="0"/>
+      <line num="117" type="stmt" count="0"/>
+      <line num="119" type="stmt" count="0"/>
+      <line num="122" type="method" name="redirect" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="124" type="stmt" count="0"/>
+      <line num="126" type="stmt" count="0"/>
+      <line num="129" type="method" name="urlPath" visibility="public" complexity="4" crap="20" count="0"/>
+      <line num="131" type="stmt" count="0"/>
       <line num="133" type="stmt" count="0"/>
       <line num="134" type="stmt" count="0"/>
-      <line num="137" type="stmt" count="0"/>
-      <line num="140" type="stmt" count="0"/>
-      <line num="146" type="method" name="getData" visibility="private" complexity="1" crap="2" count="0"/>
-      <line num="148" type="stmt" count="0"/>
-      <line num="151" type="method" name="getParams" visibility="private" complexity="3" crap="12" count="0"/>
-      <line num="163" type="stmt" count="0"/>
+      <line num="135" type="stmt" count="0"/>
+      <line num="138" type="stmt" count="0"/>
+      <line num="141" type="stmt" count="0"/>
+      <line num="147" type="method" name="getData" visibility="private" complexity="1" crap="2" count="0"/>
+      <line num="149" type="stmt" count="0"/>
+      <line num="152" type="method" name="getParams" visibility="private" complexity="3" crap="12" count="0"/>
       <line num="164" type="stmt" count="0"/>
       <line num="165" type="stmt" count="0"/>
-      <line num="168" type="stmt" count="0"/>
-      <line num="177" type="stmt" count="0"/>
+      <line num="166" type="stmt" count="0"/>
+      <line num="169" type="stmt" count="0"/>
       <line num="178" type="stmt" count="0"/>
       <line num="179" type="stmt" count="0"/>
-      <line num="182" type="stmt" count="0"/>
-      <metrics loc="185" ncloc="178" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="0" elements="60" coveredelements="0"/>
+      <line num="180" type="stmt" count="0"/>
+      <line num="183" type="stmt" count="0"/>
+      <metrics loc="186" ncloc="179" classes="1" methods="9" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="51" coveredstatements="0" elements="60" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Auth/OpenIDConnect/Configuration/AbstractProvider.php">
       <class name="Vairogs\Auth\OpenIDConnect\Configuration\AbstractProvider" namespace="global">
@@ -399,21 +391,21 @@
       <class name="Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Constraint" namespace="global">
         <metrics complexity="10" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="14" coveredelements="0"/>
       </class>
-      <line num="21" type="method" name="validate" visibility="public" complexity="4" crap="20" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <line num="24" type="stmt" count="0"/>
-      <line num="28" type="method" name="setClaim" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="30" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="35" type="method" name="setRequired" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="0"/>
-      <line num="42" type="method" name="getClaim" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="44" type="stmt" count="0"/>
-      <line num="47" type="method" name="assertClaimSet" visibility="protected" complexity="2" crap="6" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="50" type="stmt" count="0"/>
-      <metrics loc="54" ncloc="54" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="14" coveredelements="0"/>
+      <line num="24" type="method" name="validate" visibility="public" complexity="4" crap="20" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="31" type="method" name="setClaim" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="33" type="stmt" count="0"/>
+      <line num="35" type="stmt" count="0"/>
+      <line num="38" type="method" name="setRequired" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="40" type="stmt" count="0"/>
+      <line num="42" type="stmt" count="0"/>
+      <line num="45" type="method" name="getClaim" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="50" type="method" name="assertClaimSet" visibility="protected" complexity="2" crap="6" count="0"/>
+      <line num="52" type="stmt" count="0"/>
+      <line num="53" type="stmt" count="0"/>
+      <metrics loc="57" ncloc="54" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="14" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Auth/OpenIDConnect/Configuration/Constraint/Equal.php">
       <class name="Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Equal" namespace="global">
@@ -659,28 +651,28 @@
       <class name="Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain" namespace="global">
         <metrics complexity="10" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="21" coveredelements="0"/>
       </class>
-      <line num="29" type="method" name="validate" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
+      <line num="32" type="method" name="validate" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="34" type="stmt" count="0"/>
       <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="40" type="method" name="setAssertions" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="42" type="stmt" count="0"/>
-      <line num="44" type="stmt" count="0"/>
-      <line num="47" type="method" name="assertConstraint" visibility="private" complexity="5" crap="30" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="50" type="stmt" count="0"/>
+      <line num="38" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="43" type="method" name="setAssertions" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="45" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="50" type="method" name="assertConstraint" visibility="private" complexity="5" crap="30" count="0"/>
+      <line num="52" type="stmt" count="0"/>
       <line num="53" type="stmt" count="0"/>
-      <line num="54" type="stmt" count="0"/>
-      <line num="55" type="stmt" count="0"/>
       <line num="56" type="stmt" count="0"/>
       <line num="57" type="stmt" count="0"/>
+      <line num="58" type="stmt" count="0"/>
       <line num="59" type="stmt" count="0"/>
       <line num="60" type="stmt" count="0"/>
-      <line num="61" type="stmt" count="0"/>
       <line num="62" type="stmt" count="0"/>
       <line num="63" type="stmt" count="0"/>
-      <metrics loc="67" ncloc="64" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="21" coveredelements="0"/>
+      <line num="64" type="stmt" count="0"/>
+      <line num="65" type="stmt" count="0"/>
+      <line num="66" type="stmt" count="0"/>
+      <metrics loc="70" ncloc="64" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="0" elements="21" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Auth/OpenIDConnect/DependencyInjection/AuthOpenIDConnectDependency.php">
       <class name="Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency" namespace="global">
@@ -746,103 +738,106 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Auth/OpenIDConnect/OpenIDConnectProvider.php">
       <class name="Vairogs\Auth\OpenIDConnect\OpenIDConnectProvider" namespace="global">
-        <metrics complexity="30" methods="22" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="73" coveredstatements="22" elements="95" coveredelements="27"/>
+        <metrics complexity="31" methods="23" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="75" coveredstatements="22" elements="98" coveredelements="27"/>
       </class>
-      <line num="63" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="1"/>
-      <line num="65" type="stmt" count="1"/>
+      <line num="62" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="64" type="stmt" count="1"/>
+      <line num="66" type="stmt" count="1"/>
       <line num="67" type="stmt" count="1"/>
       <line num="68" type="stmt" count="1"/>
-      <line num="69" type="stmt" count="1"/>
       <line num="71" type="stmt" count="1"/>
       <line num="72" type="stmt" count="1"/>
-      <line num="75" type="method" name="getClientId" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="77" type="stmt" count="1"/>
-      <line num="80" type="method" name="getRedirectUri" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="82" type="stmt" count="1"/>
-      <line num="85" type="method" name="setPublicKey" visibility="public" complexity="1" crap="1" count="1"/>
-      <line num="87" type="stmt" count="1"/>
+      <line num="75" type="method" name="setSigner" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="79" type="stmt" count="0"/>
+      <line num="82" type="method" name="getClientId" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="84" type="stmt" count="1"/>
+      <line num="87" type="method" name="getRedirectUri" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="89" type="stmt" count="1"/>
-      <line num="92" type="method" name="getName" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="92" type="method" name="setPublicKey" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="94" type="stmt" count="1"/>
-      <line num="97" type="method" name="getUri" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="99" type="stmt" count="0"/>
-      <line num="102" type="method" name="getStatusCode" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="104" type="stmt" count="0"/>
-      <line num="110" type="method" name="getAccessToken" visibility="public" complexity="3" crap="12" count="0"/>
-      <line num="112" type="stmt" count="0"/>
-      <line num="114" type="stmt" count="0"/>
-      <line num="115" type="stmt" count="0"/>
-      <line num="118" type="stmt" count="0"/>
+      <line num="96" type="stmt" count="1"/>
+      <line num="99" type="method" name="getName" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="101" type="stmt" count="1"/>
+      <line num="104" type="method" name="getUriCollection" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="106" type="stmt" count="0"/>
+      <line num="109" type="method" name="getStatusCode" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="111" type="stmt" count="0"/>
+      <line num="117" type="method" name="getAccessToken" visibility="public" complexity="3" crap="12" count="0"/>
       <line num="119" type="stmt" count="0"/>
       <line num="121" type="stmt" count="0"/>
-      <line num="123" type="stmt" count="0"/>
-      <line num="129" type="method" name="getRefreshToken" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="131" type="stmt" count="0"/>
-      <line num="137" type="method" name="getAccessTokenFunction" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="139" type="stmt" count="0"/>
-      <line num="141" type="stmt" count="0"/>
-      <line num="142" type="stmt" count="0"/>
-      <line num="143" type="stmt" count="0"/>
-      <line num="144" type="stmt" count="0"/>
+      <line num="122" type="stmt" count="0"/>
+      <line num="125" type="stmt" count="0"/>
+      <line num="126" type="stmt" count="0"/>
+      <line num="128" type="stmt" count="0"/>
+      <line num="130" type="stmt" count="0"/>
+      <line num="136" type="method" name="getRefreshToken" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="138" type="stmt" count="0"/>
+      <line num="144" type="method" name="getAccessTokenFunction" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="146" type="stmt" count="0"/>
-      <line num="149" type="method" name="getPublicKey" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="148" type="stmt" count="0"/>
+      <line num="149" type="stmt" count="0"/>
+      <line num="150" type="stmt" count="0"/>
       <line num="151" type="stmt" count="0"/>
-      <line num="157" type="method" name="getValidateToken" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="159" type="stmt" count="0"/>
-      <line num="165" type="method" name="getTokenResponse" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="167" type="stmt" count="0"/>
-      <line num="168" type="stmt" count="0"/>
-      <line num="169" type="stmt" count="0"/>
-      <line num="171" type="stmt" count="0"/>
-      <line num="172" type="stmt" count="0"/>
+      <line num="153" type="stmt" count="0"/>
+      <line num="156" type="method" name="getPublicKey" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="158" type="stmt" count="0"/>
+      <line num="164" type="method" name="getValidateToken" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="166" type="stmt" count="0"/>
+      <line num="172" type="method" name="getTokenResponse" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="174" type="stmt" count="0"/>
       <line num="175" type="stmt" count="0"/>
-      <line num="177" type="stmt" count="0"/>
-      <line num="183" type="method" name="getRevokeToken" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="185" type="stmt" count="0"/>
-      <line num="188" type="method" name="getIdTokenIssuer" visibility="protected" complexity="1" crap="2" count="0"/>
-      <line num="190" type="stmt" count="0"/>
-      <line num="193" type="method" name="configure" visibility="protected" complexity="3" crap="3.01" count="1"/>
-      <line num="195" type="stmt" count="1"/>
-      <line num="196" type="stmt" count="1"/>
-      <line num="197" type="stmt" count="1"/>
-      <line num="198" type="stmt" count="0"/>
-      <line num="201" type="stmt" count="1"/>
+      <line num="176" type="stmt" count="0"/>
+      <line num="178" type="stmt" count="0"/>
+      <line num="179" type="stmt" count="0"/>
+      <line num="182" type="stmt" count="0"/>
+      <line num="184" type="stmt" count="0"/>
+      <line num="190" type="method" name="getRevokeToken" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="192" type="stmt" count="0"/>
+      <line num="195" type="method" name="getIdTokenIssuer" visibility="protected" complexity="1" crap="2" count="0"/>
+      <line num="197" type="stmt" count="0"/>
+      <line num="200" type="method" name="configure" visibility="protected" complexity="3" crap="3.01" count="1"/>
       <line num="202" type="stmt" count="1"/>
+      <line num="203" type="stmt" count="1"/>
       <line num="204" type="stmt" count="1"/>
-      <line num="205" type="stmt" count="1"/>
-      <line num="206" type="stmt" count="1"/>
-      <line num="210" type="stmt" count="1"/>
+      <line num="205" type="stmt" count="0"/>
+      <line num="208" type="stmt" count="1"/>
+      <line num="209" type="stmt" count="1"/>
       <line num="211" type="stmt" count="1"/>
-      <line num="214" type="method" name="getTokenRequest" visibility="protected" complexity="1" crap="2" count="0"/>
-      <line num="216" type="stmt" count="0"/>
-      <line num="219" type="method" name="setValidators" visibility="protected" complexity="1" crap="2" count="0"/>
-      <line num="221" type="stmt" count="0"/>
-      <line num="222" type="stmt" count="0"/>
+      <line num="212" type="stmt" count="1"/>
+      <line num="213" type="stmt" count="1"/>
+      <line num="217" type="stmt" count="1"/>
+      <line num="218" type="stmt" count="1"/>
+      <line num="221" type="method" name="getTokenRequest" visibility="protected" complexity="1" crap="2" count="0"/>
       <line num="223" type="stmt" count="0"/>
-      <line num="224" type="stmt" count="0"/>
-      <line num="225" type="stmt" count="0"/>
-      <line num="226" type="stmt" count="0"/>
-      <line num="227" type="stmt" count="0"/>
+      <line num="226" type="method" name="setValidators" visibility="protected" complexity="1" crap="2" count="0"/>
       <line num="228" type="stmt" count="0"/>
       <line num="229" type="stmt" count="0"/>
       <line num="230" type="stmt" count="0"/>
       <line num="231" type="stmt" count="0"/>
-      <line num="235" type="method" name="getAccessTokenOptions" visibility="protected" complexity="1" crap="2" count="0"/>
-      <line num="241" type="stmt" count="0"/>
-      <line num="242" type="stmt" count="0"/>
-      <line num="244" type="stmt" count="0"/>
-      <line num="247" type="method" name="getBaseTokenOptions" visibility="protected" complexity="1" crap="2" count="0"/>
-      <line num="254" type="stmt" count="0"/>
-      <line num="255" type="stmt" count="0"/>
-      <line num="259" type="method" name="saveSession" visibility="protected" complexity="3" crap="12" count="0"/>
+      <line num="232" type="stmt" count="0"/>
+      <line num="233" type="stmt" count="0"/>
+      <line num="234" type="stmt" count="0"/>
+      <line num="235" type="stmt" count="0"/>
+      <line num="236" type="stmt" count="0"/>
+      <line num="237" type="stmt" count="0"/>
+      <line num="238" type="stmt" count="0"/>
+      <line num="242" type="method" name="getAccessTokenOptions" visibility="protected" complexity="1" crap="2" count="0"/>
+      <line num="248" type="stmt" count="0"/>
+      <line num="249" type="stmt" count="0"/>
+      <line num="251" type="stmt" count="0"/>
+      <line num="254" type="method" name="getBaseTokenOptions" visibility="protected" complexity="1" crap="2" count="0"/>
       <line num="261" type="stmt" count="0"/>
       <line num="262" type="stmt" count="0"/>
-      <line num="263" type="stmt" count="0"/>
-      <line num="264" type="stmt" count="0"/>
-      <line num="265" type="stmt" count="0"/>
-      <line num="269" type="method" name="getAccessTokenRequest" visibility="protected" complexity="1" crap="2" count="0"/>
+      <line num="266" type="method" name="saveSession" visibility="protected" complexity="3" crap="12" count="0"/>
+      <line num="268" type="stmt" count="0"/>
+      <line num="269" type="stmt" count="0"/>
+      <line num="270" type="stmt" count="0"/>
       <line num="271" type="stmt" count="0"/>
-      <metrics loc="274" ncloc="256" classes="1" methods="22" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="73" coveredstatements="22" elements="95" coveredelements="27"/>
+      <line num="272" type="stmt" count="0"/>
+      <line num="276" type="method" name="getAccessTokenRequest" visibility="protected" complexity="1" crap="2" count="0"/>
+      <line num="278" type="stmt" count="0"/>
+      <metrics loc="281" ncloc="263" classes="1" methods="23" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="75" coveredstatements="22" elements="98" coveredelements="27"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Auth/OpenIDConnect/Utils/Constants/Enum/Redirect.php">
       <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1209,13 +1204,13 @@
       <class name="Vairogs\Extra\Constants\Date" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="13" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Constants/Definition.php">
       <class name="Vairogs\Extra\Constants\Definition" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="14" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="15" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Constants/Enum/CamelCase.php">
       <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1248,6 +1243,12 @@
       </class>
       <metrics loc="93" ncloc="93" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
+    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Constants/Month.php">
+      <class name="Vairogs\Extra\Constants\Month" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="21" ncloc="21" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Constants/Service.php">
       <class name="Vairogs\Extra\Constants\Service" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1258,7 +1259,7 @@
       <class name="Vairogs\Extra\Constants\Status" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </class>
-      <metrics loc="22" ncloc="22" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="20" ncloc="20" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Constants/Symbol.php">
       <class name="Vairogs\Extra\Constants\Symbol" namespace="global">
@@ -1268,33 +1269,32 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Encryption/Cross/Cross.php">
       <class name="Vairogs\Extra\Encryption\Cross\Cross" namespace="global">
-        <metrics complexity="8" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="24" coveredelements="24"/>
+        <metrics complexity="9" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="23" coveredelements="23"/>
       </class>
-      <line num="11" type="method" name="encrypt" visibility="public" complexity="4" crap="4" count="3"/>
-      <line num="13" type="stmt" count="3"/>
-      <line num="14" type="stmt" count="1"/>
-      <line num="17" type="stmt" count="2"/>
-      <line num="18" type="stmt" count="2"/>
+      <line num="13" type="method" name="encrypt" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="15" type="stmt" count="3"/>
+      <line num="16" type="stmt" count="1"/>
       <line num="19" type="stmt" count="2"/>
       <line num="21" type="stmt" count="2"/>
       <line num="22" type="stmt" count="2"/>
-      <line num="25" type="stmt" count="2"/>
+      <line num="23" type="stmt" count="2"/>
       <line num="26" type="stmt" count="2"/>
-      <line num="27" type="stmt" count="2"/>
-      <line num="30" type="stmt" count="2"/>
-      <line num="33" type="method" name="decrypt" visibility="public" complexity="4" crap="4" count="3"/>
-      <line num="35" type="stmt" count="3"/>
-      <line num="36" type="stmt" count="1"/>
+      <line num="29" type="method" name="decrypt" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="31" type="stmt" count="3"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="37" type="stmt" count="2"/>
+      <line num="38" type="stmt" count="2"/>
       <line num="39" type="stmt" count="2"/>
-      <line num="40" type="stmt" count="2"/>
-      <line num="41" type="stmt" count="2"/>
-      <line num="43" type="stmt" count="2"/>
-      <line num="44" type="stmt" count="2"/>
-      <line num="47" type="stmt" count="2"/>
-      <line num="48" type="stmt" count="2"/>
-      <line num="49" type="stmt" count="2"/>
+      <line num="42" type="stmt" count="2"/>
+      <line num="45" type="method" name="base" visibility="private" complexity="3" crap="3" count="2"/>
       <line num="52" type="stmt" count="2"/>
-      <metrics loc="55" ncloc="55" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="22" elements="24" coveredelements="24"/>
+      <line num="53" type="stmt" count="2"/>
+      <line num="54" type="stmt" count="2"/>
+      <line num="56" type="stmt" count="2"/>
+      <line num="57" type="stmt" count="2"/>
+      <line num="61" type="stmt" count="2"/>
+      <metrics loc="67" ncloc="67" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="20" elements="23" coveredelements="23"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Extra/Encryption/XXTEA/XXTEA.php">
       <class name="Vairogs\Extra\Encryption\XXTEA\XXTEA" namespace="global">
@@ -2126,75 +2126,71 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/Date.php">
       <class name="Vairogs\Utils\Helper\Date" namespace="global">
-        <metrics complexity="34" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="56" elements="66" coveredelements="66"/>
+        <metrics complexity="32" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="52" coveredstatements="52" elements="62" coveredelements="62"/>
       </class>
-      <line num="34" type="method" name="validateDate" visibility="public" complexity="5" crap="5" count="4"/>
-      <line num="38" type="stmt" count="4"/>
-      <line num="39" type="stmt" count="4"/>
+      <line num="36" type="method" name="validateDate" visibility="public" complexity="5" crap="5" count="4"/>
       <line num="40" type="stmt" count="4"/>
+      <line num="41" type="stmt" count="4"/>
       <line num="42" type="stmt" count="4"/>
-      <line num="43" type="stmt" count="2"/>
-      <line num="46" type="stmt" count="2"/>
+      <line num="44" type="stmt" count="4"/>
+      <line num="45" type="stmt" count="2"/>
       <line num="48" type="stmt" count="2"/>
-      <line num="49" type="stmt" count="1"/>
-      <line num="52" type="stmt" count="2"/>
-      <line num="55" type="method" name="excelDate" visibility="public" complexity="3" crap="3" count="3"/>
-      <line num="59" type="stmt" count="3"/>
+      <line num="50" type="stmt" count="2"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="54" type="stmt" count="2"/>
+      <line num="57" type="method" name="excelDate" visibility="public" complexity="3" crap="3" count="3"/>
       <line num="61" type="stmt" count="3"/>
-      <line num="63" type="stmt" count="2"/>
-      <line num="64" type="stmt" count="2"/>
+      <line num="63" type="stmt" count="3"/>
+      <line num="65" type="stmt" count="2"/>
       <line num="66" type="stmt" count="2"/>
-      <line num="67" type="stmt" count="2"/>
-      <line num="71" type="stmt" count="1"/>
-      <line num="74" type="method" name="validateDateBasic" visibility="public" complexity="2" crap="2" count="2"/>
-      <line num="78" type="stmt" count="2"/>
+      <line num="68" type="stmt" count="2"/>
+      <line num="69" type="stmt" count="2"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="76" type="method" name="validateDateBasic" visibility="public" complexity="2" crap="2" count="2"/>
       <line num="80" type="stmt" count="2"/>
-      <line num="83" type="method" name="format" visibility="public" complexity="6" crap="6" count="5"/>
-      <line num="88" type="stmt" count="5"/>
-      <line num="89" type="stmt" count="5"/>
+      <line num="82" type="stmt" count="2"/>
+      <line num="85" type="method" name="format" visibility="public" complexity="5" crap="5" count="5"/>
+      <line num="90" type="stmt" count="5"/>
       <line num="91" type="stmt" count="5"/>
-      <line num="92" type="stmt" count="5"/>
-      <line num="93" type="stmt" count="4"/>
-      <line num="95" type="stmt" count="4"/>
-      <line num="96" type="stmt" count="4"/>
-      <line num="99" type="stmt" count="4"/>
-      <line num="103" type="stmt" count="5"/>
-      <line num="104" type="stmt" count="1"/>
-      <line num="107" type="stmt" count="5"/>
-      <line num="110" type="method" name="formatToArray" visibility="public" complexity="5" crap="5" count="5"/>
-      <line num="115" type="stmt" count="5"/>
+      <line num="93" type="stmt" count="5"/>
+      <line num="94" type="stmt" count="5"/>
+      <line num="95" type="stmt" count="5"/>
+      <line num="97" type="stmt" count="5"/>
+      <line num="98" type="stmt" count="5"/>
+      <line num="101" type="stmt" count="5"/>
+      <line num="105" type="stmt" count="5"/>
+      <line num="108" type="method" name="formatToArray" visibility="public" complexity="4" crap="4" count="5"/>
+      <line num="113" type="stmt" count="5"/>
+      <line num="114" type="stmt" count="5"/>
       <line num="116" type="stmt" count="5"/>
+      <line num="117" type="stmt" count="5"/>
       <line num="118" type="stmt" count="5"/>
-      <line num="119" type="stmt" count="5"/>
-      <line num="120" type="stmt" count="4"/>
-      <line num="122" type="stmt" count="4"/>
-      <line num="123" type="stmt" count="4"/>
-      <line num="126" type="stmt" count="4"/>
-      <line num="130" type="stmt" count="5"/>
-      <line num="131" type="stmt" count="1"/>
-      <line num="134" type="stmt" count="5"/>
-      <line num="137" type="method" name="formatDate" visibility="public" complexity="2" crap="2" count="4"/>
-      <line num="141" type="stmt" count="4"/>
-      <line num="142" type="stmt" count="2"/>
-      <line num="145" type="stmt" count="2"/>
-      <line num="148" type="method" name="getDateNullable" visibility="public" complexity="4" crap="4" count="2"/>
-      <line num="152" type="stmt" count="2"/>
-      <line num="153" type="stmt" count="1"/>
-      <line num="156" type="stmt" count="1"/>
-      <line num="162" type="method" name="getDate" visibility="public" complexity="3" crap="3" count="3"/>
-      <line num="166" type="stmt" count="3"/>
-      <line num="167" type="stmt" count="2"/>
-      <line num="170" type="stmt" count="1"/>
-      <line num="176" type="method" name="createFromUnixTimestamp" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="180" type="stmt" count="2"/>
-      <line num="183" type="method" name="getDateWithoutFormat" visibility="public" complexity="3" crap="3" count="8"/>
-      <line num="187" type="stmt" count="8"/>
-      <line num="189" type="stmt" count="8"/>
-      <line num="190" type="stmt" count="8"/>
-      <line num="192" type="stmt" count="8"/>
-      <line num="193" type="stmt" count="4"/>
-      <line num="197" type="stmt" count="4"/>
-      <metrics loc="200" ncloc="193" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="56" coveredstatements="56" elements="66" coveredelements="66"/>
+      <line num="120" type="stmt" count="5"/>
+      <line num="121" type="stmt" count="5"/>
+      <line num="124" type="stmt" count="5"/>
+      <line num="128" type="stmt" count="5"/>
+      <line num="131" type="method" name="formatDate" visibility="public" complexity="2" crap="2" count="4"/>
+      <line num="135" type="stmt" count="4"/>
+      <line num="136" type="stmt" count="2"/>
+      <line num="139" type="stmt" count="2"/>
+      <line num="142" type="method" name="getDateNullable" visibility="public" complexity="4" crap="4" count="2"/>
+      <line num="146" type="stmt" count="2"/>
+      <line num="147" type="stmt" count="1"/>
+      <line num="150" type="stmt" count="1"/>
+      <line num="156" type="method" name="getDate" visibility="public" complexity="3" crap="3" count="3"/>
+      <line num="160" type="stmt" count="3"/>
+      <line num="161" type="stmt" count="2"/>
+      <line num="164" type="stmt" count="1"/>
+      <line num="170" type="method" name="createFromUnixTimestamp" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="174" type="stmt" count="2"/>
+      <line num="177" type="method" name="getDateWithoutFormat" visibility="public" complexity="3" crap="3" count="8"/>
+      <line num="181" type="stmt" count="8"/>
+      <line num="183" type="stmt" count="8"/>
+      <line num="184" type="stmt" count="8"/>
+      <line num="186" type="stmt" count="8"/>
+      <line num="187" type="stmt" count="4"/>
+      <line num="191" type="stmt" count="4"/>
+      <metrics loc="194" ncloc="187" classes="1" methods="10" coveredmethods="10" conditionals="0" coveredconditionals="0" statements="52" coveredstatements="52" elements="62" coveredelements="62"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Helper/File.php">
       <class name="Vairogs\Utils\Helper\File" namespace="global">
@@ -2938,6 +2934,6 @@
       <line num="32" type="stmt" count="2"/>
       <metrics loc="35" ncloc="32" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="132" loc="7729" ncloc="7510" classes="96" methods="534" coveredmethods="270" conditionals="0" coveredconditionals="0" statements="1682" coveredstatements="1009" elements="2216" coveredelements="1279"/>
+    <metrics files="131" loc="7755" ncloc="7530" classes="96" methods="536" coveredmethods="271" conditionals="0" coveredconditionals="0" statements="1676" coveredstatements="1001" elements="2212" coveredelements="1272"/>
   </project>
 </coverage>

@@ -25,8 +25,8 @@ class ClosureTest extends VairogsTestCase
     public function testHijackCallObject(): void
     {
         $entity = new Entity();
-        (new Closure())->hijackVoidObject($entity, 'setStatus', Status::ENABLED_N);
-        $this->assertEquals(expected: Status::ENABLED_N, actual: (new Closure())->hijackReturnObject(object: $entity, function: 'getStatus'));
+        (new Closure())->hijackVoidObject($entity, 'setStatus', Status::ONE);
+        $this->assertEquals(expected: Status::ONE, actual: (new Closure())->hijackReturnObject(object: $entity, function: 'getStatus'));
     }
 
     public function testHijackGet(): void

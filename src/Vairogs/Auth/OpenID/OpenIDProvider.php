@@ -31,6 +31,7 @@ use function str_replace;
 use function stream_context_create;
 use function stripslashes;
 use function strlen;
+use function sys_get_temp_dir;
 use function urldecode;
 
 class OpenIDProvider implements HasRegistry
@@ -76,7 +77,7 @@ class OpenIDProvider implements HasRegistry
                 }
 
                 $data = $this->getData(openID: $user);
-                $data['cache_dir'] = $this->cacheDir;
+                $data['cache_dir'] = $this->cacheDir ?? sys_get_temp_dir();
                 $user = $builder->getUser(response: $data);
             }
         }

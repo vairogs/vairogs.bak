@@ -8,6 +8,7 @@ use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Vairogs\Extra\Constants;
+use Vairogs\Extra\Constants\Month as M;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
 
@@ -29,6 +30,7 @@ final class Date
         'hour' => Constants\Date::HOUR,
         'minute' => Constants\Date::MIN,
         'second' => Constants\Date::SEC,
+        'micro' => Constants\Date::MS,
     ];
 
     #[TwigFunction]
@@ -43,10 +45,10 @@ final class Date
             return false;
         }
 
-        $daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        $daysInMonth = [M::JAN, M::FEB, M::MAR, M::APR, M::MAY, M::JUN, M::JUL, M::AUG, M::SEP, M::OCT, M::NOV, M::DEC];
 
         if (0 === (int) substr(string: $date, offset: 4, length: 2) % 4) {
-            $daysInMonth[1] = 29;
+            $daysInMonth[1] = M::FEB_LONG;
         }
 
         return 0 < $day && $daysInMonth[$month - 1] >= $day;
@@ -100,10 +102,6 @@ final class Date
             }
         }
 
-        if ($timestamp > 0) {
-            $str .= $timestamp . ' ms';
-        }
-
         return trim(string: $str);
     }
 
@@ -125,10 +123,6 @@ final class Date
 
                 $timestamp -= ($time * $value);
             }
-        }
-
-        if ($timestamp > 0) {
-            $result['micro'] = (int) $timestamp;
         }
 
         return $result;

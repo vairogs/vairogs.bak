@@ -7,6 +7,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamGifts;
 use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
 use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
+use Vairogs\Extra\Constants\Definition;
 use Vairogs\Utils\Helper\File;
 
 use function dirname;
@@ -16,6 +17,7 @@ use function explode;
 use function file_get_contents;
 use function is_file;
 use function preg_match_all;
+use function sys_get_temp_dir;
 use function trim;
 
 use const DIRECTORY_SEPARATOR;
@@ -27,7 +29,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
 
     public function getUser(array $response): OpenIDUser
     {
-        $this->cacheDir = (string) $response['cache_dir'];
+        $this->cacheDir = (string) ($response['cache_dir'] ?? sys_get_temp_dir());
 
         return $this->getSteamGiftsUser(data: $response);
     }
@@ -58,7 +60,7 @@ class SteamGiftsUserBuilder implements OpenIDUserBuilder
 
         /* @noinspection NotOptimalIfConditionsInspection */
         if ((new File())->mkdir(dir: dirname(path: $path)) && !is_file(filename: $path)) {
-            exec(command: 'wget --no-verbose --spider --output-file=' . $path . " -e robots=off -U='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36' https://www.steamgifts.com/go/user/" . $user);
+            exec(command: 'wget --no-verbose --spider --output-file=' . $path . " -e robots=off -U='" . Definition::UA . "' https://www.steamgifts.com/go/user/" . $user);
         }
 
         if (!is_file(filename: $path)) {

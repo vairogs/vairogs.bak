@@ -45,6 +45,7 @@
     "require": {
         "php": ">=8.1.0",
         "jetbrains/phpstorm-attributes": "*",
+        "symfony/property-info": "^5.4|^6.1",
         "vairogs/utils": "self.version"
     },
     "autoload": {

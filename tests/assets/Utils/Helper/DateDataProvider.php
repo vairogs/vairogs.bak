@@ -50,7 +50,7 @@ class DateDataProvider
     {
         return [
             [45, '45 seconds', ],
-            [0.045, '45 ms', ],
+            [0.045, '45 micros', ],
             [3000, '50 minutes', ],
             [7200, '2 hours', ],
             [5400, '1 hour 30 minutes', ],

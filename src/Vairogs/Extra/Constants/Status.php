@@ -5,9 +5,7 @@ namespace Vairogs\Extra\Constants;
 final class Status
 {
     final public const DISABLED = 'disabled';
-    final public const DISABLED_N = self::ZERO;
     final public const ENABLED = 'enabled';
-    final public const ENABLED_N = self::ONE;
     final public const ERROR = 'error';
     final public const N = 'n';
     final public const NO = 'no';

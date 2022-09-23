@@ -9,8 +9,8 @@ use Vairogs\Extra\Constants\Status as Constant;
 
 trait Status
 {
-    #[ORM\Column(type: Types::INTEGER, nullable: false, options: [Definition::DEFAULT => Constant::DISABLED_N])]
-    private int $status = Constant::DISABLED_N;
+    #[ORM\Column(type: Types::INTEGER, nullable: false, options: [Definition::DEFAULT => Constant::ZERO])]
+    private int $status = Constant::ZERO;
 
     public function getStatus(): int
     {
@@ -19,8 +19,8 @@ trait Status
 
     public function setStatus(int $status): self
     {
-        if (Constant::ENABLED_N !== $status) {
-            $status = Constant::DISABLED_N;
+        if (Constant::ONE !== $status) {
+            $status = Constant::ZERO;
         }
 
         $this->status = $status;

@@ -24,11 +24,13 @@ class TestKernel extends Kernel
 
     public function getCacheDir(): string
     {
+        /* @noinspection ProjectDirParameter */
         return $this->getProjectDir() . '/var/cache';
     }
 
     protected function getConfigDir(): string
     {
+        /* @noinspection ProjectDirParameter */
         return $this->getProjectDir() . '/config';
     }
 

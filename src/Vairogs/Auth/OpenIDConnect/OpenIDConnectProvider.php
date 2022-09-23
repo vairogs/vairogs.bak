@@ -29,7 +29,6 @@ use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\IssuedBy;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\LesserOrEqual;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\SignedWith;
 use Vairogs\Auth\OpenIDConnect\Configuration\ParsedToken;
-use Vairogs\Auth\OpenIDConnect\Configuration\Uri;
 use Vairogs\Auth\OpenIDConnect\Configuration\UriCollection;
 use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
@@ -53,7 +52,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     public bool $verify = true;
     public string $baseUri;
     public ?SessionInterface $session = null;
-    protected ?Signer $signer = null;
+    protected Signer $signer;
     protected UriCollection $uriCollection;
     protected ValidatorChain $validatorChain;
     protected int $statusCode;
@@ -68,8 +67,16 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         if ([] !== $options) {
             $this->configure(options: $options);
         }
+
         $this->signer ??= new Sha256();
         $this->session = $this->requestStack->getCurrentRequest()?->getSession();
+    }
+
+    public function setSigner(Signer $signer): static
+    {
+        $this->signer = $signer;
+
+        return $this;
     }
 
     public function getClientId(): string
@@ -94,9 +101,9 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $this->name;
     }
 
-    public function getUri(string $name): ?Uri
+    public function getUriCollection(): UriCollection
     {
-        return $this->uriCollection->getUri(name: $name);
+        return $this->uriCollection;
     }
 
     public function getStatusCode(): int
