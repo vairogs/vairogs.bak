@@ -4,8 +4,8 @@ namespace Vairogs\Auth\OpenIDConnect\Configuration;
 
 use Exception;
 use Lcobucci\JWT\Token;
-use Lcobucci\JWT\Validation\Constraint;
-use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\AbstractConstraint;
+use Lcobucci\JWT\Validation\Constraint as JWTConstraint;
+use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Constraint;
 use Vairogs\Auth\OpenIDConnect\Exception\InvalidConstraintException;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 use Vairogs\Utils\Helper\Text;
@@ -13,7 +13,7 @@ use Vairogs\Utils\Helper\Text;
 use function http_build_query;
 use function sprintf;
 
-class ValidatorChain implements Constraint
+class ValidatorChain implements JWTConstraint
 {
     /**
      * @var Constraint[]
@@ -44,14 +44,14 @@ class ValidatorChain implements Constraint
         return $this;
     }
 
-    private function assertConstraint(Constraint $constraint, string $claim, IdToken $token): void
+    private function assertConstraint(JWTConstraint $constraint, string $claim, IdToken $token): void
     {
-        if ($constraint instanceof AbstractConstraint) {
+        if ($constraint instanceof Constraint) {
             $claim = $constraint->getClaim() ?? (new Text())->getLastPart(text: $constraint::class, delimiter: '\\');
         }
 
         try {
-            if ($constraint instanceof AbstractConstraint) {
+            if ($constraint instanceof Constraint) {
                 $constraint->validate(token: $token);
             } else {
                 $constraint->assert(token: $token);

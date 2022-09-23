@@ -8,7 +8,7 @@ use Vairogs\Utils\Helper\Identification;
 
 use function sprintf;
 
-final class Hashed extends AbstractConstraint
+final class Hashed extends Constraint
 {
     public function validate(IdToken $token): void
     {

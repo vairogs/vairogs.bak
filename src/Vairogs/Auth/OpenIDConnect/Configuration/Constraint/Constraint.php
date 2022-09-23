@@ -3,13 +3,13 @@
 namespace Vairogs\Auth\OpenIDConnect\Configuration\Constraint;
 
 use Lcobucci\JWT\Token;
-use Lcobucci\JWT\Validation\Constraint;
+use Lcobucci\JWT\Validation\Constraint as JWTConstraint;
 use Lcobucci\JWT\Validation\ConstraintViolation;
 use Vairogs\Auth\OpenIDConnect\Configuration\IdToken;
 
 use function sprintf;
 
-abstract class AbstractConstraint implements Constraint
+class Constraint implements JWTConstraint
 {
     protected ?string $claim = null;
     protected bool $required = false;

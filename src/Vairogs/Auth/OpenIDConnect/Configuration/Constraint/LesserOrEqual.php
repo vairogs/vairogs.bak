@@ -9,7 +9,7 @@ use Vairogs\Auth\OpenIDConnect\Exception\InvalidConstraintException;
 
 use function sprintf;
 
-class LesserOrEqual extends AbstractConstraint
+class LesserOrEqual extends Constraint
 {
     public function __construct(private readonly int $expected)
     {

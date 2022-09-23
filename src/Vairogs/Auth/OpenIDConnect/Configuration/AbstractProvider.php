@@ -2,11 +2,17 @@
 
 namespace Vairogs\Auth\OpenIDConnect\Configuration;
 
+use Exception;
+use League\OAuth2\Client\Grant\AbstractGrant;
 use League\OAuth2\Client\Provider\AbstractProvider as BaseProvider;
 use League\OAuth2\Client\Provider\GenericResourceOwner;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
 use Psr\Http\Message\ResponseInterface;
+use UnexpectedValueException;
+use Vairogs\Utils\Helper\Json;
+
+use function sprintf;
 
 abstract class AbstractProvider extends BaseProvider
 {
@@ -73,5 +79,30 @@ abstract class AbstractProvider extends BaseProvider
             'proxy',
             'verify',
         ];
+    }
+
+    /**
+     * @throws UnexpectedValueException
+     */
+    protected function parseJson($content): array
+    {
+        if ('' === $content) {
+            return [];
+        }
+
+        try {
+            return (new Json())->decode(json: $content, flags: Json::ASSOCIATIVE);
+        } catch (Exception $exception) {
+            throw new UnexpectedValueException(message: sprintf('Failed to parse JSON response: %s', $exception->getMessage()), previous: $exception);
+        }
+    }
+
+    protected function createAccessToken(array $response, ?AbstractGrant $grant = null): ?ParsedToken
+    {
+        if ($this->check(response: $response)) {
+            return new ParsedToken(options: $response);
+        }
+
+        return null;
     }
 }

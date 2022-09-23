@@ -3,7 +3,6 @@
 namespace Vairogs\Auth\OpenIDConnect;
 
 use DateTimeImmutable;
-use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use Lcobucci\JWT\Signer;
@@ -21,10 +20,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
-use UnexpectedValueException;
 use Vairogs\Auth\OpenIDConnect\Configuration\AbstractProvider;
+use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Constraint;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Equal;
-use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Exists;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\GreaterOrEqual;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Hashed;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\IssuedBy;
@@ -40,7 +38,6 @@ use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Utils\Helper\Char;
 use Vairogs\Utils\Helper\Identification;
-use Vairogs\Utils\Helper\Json;
 use Vairogs\Utils\Helper\Util;
 
 use function array_merge;
@@ -51,14 +48,15 @@ use function sprintf;
 
 abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegistry
 {
+    public ?string $baseUriPost = null;
+    public bool $useSession = false;
+    public bool $verify = true;
+    public string $baseUri;
+    public ?SessionInterface $session = null;
     protected ?Signer $signer = null;
-    protected ?string $baseUriPost = null;
     protected UriCollection $uriCollection;
     protected ValidatorChain $validatorChain;
-    protected bool $useSession = false;
-    protected bool $verify = true;
     protected int $statusCode;
-    protected string $baseUri;
     protected string $idTokenIssuer;
     protected string $publicKey;
 
@@ -66,10 +64,12 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     {
         parent::__construct(options: $options, collaborators: $collaborators);
 
+        $this->state = (new Identification())->getUniqueId();
         if ([] !== $options) {
-            $this->state = (new Identification())->getUniqueId();
             $this->configure(options: $options);
         }
+        $this->signer ??= new Sha256();
+        $this->session = $this->requestStack->getCurrentRequest()?->getSession();
     }
 
     public function getClientId(): string
@@ -82,38 +82,6 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $this->redirectUri;
     }
 
-    public function getUseSession(): bool
-    {
-        return $this->useSession;
-    }
-
-    public function getSession(): ?SessionInterface
-    {
-        return $this->requestStack->getCurrentRequest()?->getSession();
-    }
-
-    public function getBaseUri(): string
-    {
-        return $this->baseUri;
-    }
-
-    public function setBaseUri(string $baseUri): static
-    {
-        $this->baseUri = $baseUri;
-
-        return $this;
-    }
-
-    public function getBaseUriPost(): ?string
-    {
-        return $this->baseUriPost;
-    }
-
-    public function getUriCollection(): UriCollection
-    {
-        return $this->uriCollection;
-    }
-
     public function setPublicKey(string $publicKey): static
     {
         $this->publicKey = $publicKey;
@@ -121,29 +89,9 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $this;
     }
 
-    public function getRouter(): RouterInterface
-    {
-        return $this->router;
-    }
-
-    public function getSigner(): Signer
-    {
-        return $this->signer ?? new Sha256();
-    }
-
-    public function getVerify(): bool
-    {
-        return $this->verify;
-    }
-
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getValidatorChain(): ValidatorChain
-    {
-        return $this->validatorChain;
     }
 
     public function getUri(string $name): ?Uri
@@ -274,30 +222,14 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
             ->setAssertions(assertions: [
                 (new Equal(expected: $this->clientId))->setClaim(claim: 'azp'),
                 (new Equal(expected: [$this->clientId]))->setClaim(claim: RegisteredClaims::AUDIENCE),
-                (new Exists())->setClaim(claim: RegisteredClaims::ISSUED_AT)->setRequired(required: true),
-                (new Exists())->setClaim(claim: RegisteredClaims::SUBJECT)->setRequired(required: true),
+                (new Constraint())->setClaim(claim: RegisteredClaims::ISSUED_AT)->setRequired(required: true),
+                (new Constraint())->setClaim(claim: RegisteredClaims::SUBJECT)->setRequired(required: true),
                 (new GreaterOrEqual(expected: (new DateTimeImmutable())->getTimestamp()))->setClaim(claim: RegisteredClaims::EXPIRATION_TIME)->setRequired(required: true),
                 (new Hashed())->setClaim(claim: 'at_hash')->setRequired(required: true),
                 (new IssuedBy(issuers: $this->getIdTokenIssuer()))->setRequired(required: true),
                 (new LesserOrEqual(expected: (new DateTimeImmutable())->getTimestamp()))->setClaim(claim: RegisteredClaims::NOT_BEFORE),
-                (new SignedWith(signer: $this->getSigner(), key: $this->getPublicKey()))->setRequired(required: true),
+                (new SignedWith(signer: $this->signer, key: $this->getPublicKey()))->setRequired(required: true),
             ]);
-    }
-
-    /**
-     * @throws UnexpectedValueException
-     */
-    protected function parseJson($content): array
-    {
-        if ('' === $content) {
-            return [];
-        }
-
-        try {
-            return (new Json())->decode(json: $content, flags: Json::ASSOCIATIVE);
-        } catch (Exception $exception) {
-            throw new UnexpectedValueException(message: sprintf('Failed to parse JSON response: %s', $exception->getMessage()), previous: $exception);
-        }
     }
 
     #[ArrayShape([
@@ -337,14 +269,5 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     protected function getAccessTokenRequest(array $params): RequestInterface
     {
         return $this->getRequest(method: Request::METHOD_POST, url: $this->getAccessTokenUrl(params: $params), options: $this->getAccessTokenOptions(params: $params));
-    }
-
-    protected function createAccessToken(array $response, ?AbstractGrant $grant = null): ?ParsedToken
-    {
-        if ($this->check(response: $response)) {
-            return new ParsedToken(options: $response);
-        }
-
-        return null;
     }
 }
