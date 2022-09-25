@@ -24,9 +24,9 @@ class UtilTest extends VairogsTestCase
     }
 
     /**
-     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrime
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderIsPrimeBelow1000
      */
-    public function testIsPrimeBelow1000(int $number, bool $expected, ?bool $expectedBelow): void
+    public function testIsPrimeBelow1000(int $number, ?bool $expectedBelow): void
     {
         $this->assertEquals(expected: $expectedBelow, actual: (new Util())->isPrimeBelow1000(number: $number));
     }

@@ -9,18 +9,36 @@ class UtilDataProvider
     public function dataProviderIsPrime(): array
     {
         return [
-            [2,    true,   true, ],
-            [3,    true,   true, ],
-            [5,    true,   true, ],
-            [43,   true,   true, ],
-            [367,  true,   true, ],
-            [3019, true,   null, ],
-            [1,    false, false, ],
-            [4,    false, false, ],
-            [10,   false, false, ],
-            [32,   false, false, ],
-            [360,  false, false, ],
-            [3182, false,  null, ],
+            [2,    true,  ],
+            [3,    true,  ],
+            [5,    true,  ],
+            [43,   true,  ],
+            [367,  true,  ],
+            [3019, true,  ],
+            [1,    false, ],
+            [4,    false, ],
+            [10,   false, ],
+            [32,   false, ],
+            [360,  false, ],
+            [3182, false, ],
+        ];
+    }
+
+    public function dataProviderIsPrimeBelow1000(): array
+    {
+        return [
+            [2,    true,  ],
+            [3,    true,  ],
+            [5,    true,  ],
+            [43,   true,  ],
+            [367,  true,  ],
+            [3019, null,  ],
+            [1,    false, ],
+            [4,    false, ],
+            [10,   false, ],
+            [32,   false, ],
+            [360,  false, ],
+            [3182, null,  ],
         ];
     }
 
