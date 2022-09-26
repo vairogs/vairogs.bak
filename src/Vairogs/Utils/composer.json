@@ -55,7 +55,7 @@
         }
     ],
     "require": {
-        "php": ">=8.1.0",
+        "php": ">=8.2.0",
         "ext-curl": "*",
         "ext-pdo": "*",
         "ext-json": "*",
@@ -67,13 +67,13 @@
         "jetbrains/phpstorm-attributes": "*",
         "nikic/php-parser": "*",
         "psr/cache": "*",
-        "symfony/cache": "^5.4|^6.1",
-        "symfony/finder": "^5.4|^6.1",
-        "symfony/http-foundation": "^5.4|^6.1",
-        "symfony/intl": "^5.4|^6.1",
-        "symfony/property-access": "^5.4|^6.1",
-        "symfony/property-info": "^5.4|^6.1",
-        "symfony/routing": "^5.4|^6.1",
+        "symfony/cache": "^6.1|^6.2",
+        "symfony/finder": "^6.1|^6.2",
+        "symfony/http-foundation": "^6.1|^6.2",
+        "symfony/intl": "^6.1|^6.2",
+        "symfony/property-access": "^6.1|^6.2",
+        "symfony/property-info": "^6.1|^6.2",
+        "symfony/routing": "^6.1|^6.2",
         "vairogs/core": "self.version",
         "vairogs/extra-constants": "self.version",
         "vairogs/twig": "self.version",
@@ -94,7 +94,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "4.x-dev"
         },
         "thanks": {
             "name": "vairogs/vairogs",

@@ -39,7 +39,7 @@
         }
     ],
     "require": {
-        "php": ">=8.1.0",
+        "php": ">=8.2.0",
         "doctrine/dbal": "*",
         "doctrine/orm": "*",
         "jetbrains/phpstorm-attributes": "*",
@@ -59,7 +59,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "4.x-dev"
         },
         "thanks": {
             "name": "vairogs/vairogs",

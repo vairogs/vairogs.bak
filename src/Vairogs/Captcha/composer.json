@@ -37,10 +37,10 @@
         }
     ],
     "require": {
-        "php": ">=8.1.0",
-        "symfony/form": "^5.4|^6.1",
-        "symfony/options-resolver": "^5.4|^6.1",
-        "symfony/validator": "^5.4|^6.1",
+        "php": ">=8.2.0",
+        "symfony/form": "^6.1|^6.2",
+        "symfony/options-resolver": "^6.1|^6.2",
+        "symfony/validator": "^6.1|^6.2",
         "vairogs/core": "self.version"
     },
     "autoload": {
@@ -55,7 +55,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "4.x-dev"
         },
         "thanks": {
             "name": "vairogs/vairogs",
