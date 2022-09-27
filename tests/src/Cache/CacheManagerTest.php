@@ -54,7 +54,7 @@ class CacheManagerTest extends VairogsTestCase
          */
         $phpredis = $this->container->get(id: 'snc_redis.phpredis');
 
-        $manager = new CacheManager(Definition::DEFAULT_LIFETIME, false, new Predis(client: $predis), new PhpRedis(client: $phpredis));
+        $manager = new CacheManager(Definition::DEFAULT_LIFETIME, false, new Predis(client: $predis, incDevReq: true), new PhpRedis(client: $phpredis, incDevReq: true));
         $random = (new Identification())->getRandomString();
         $manager->set(key: $random, value: __FUNCTION__, expiresAfter: 10);
         $this->assertEquals(expected: __FUNCTION__, actual: $manager->get(key: $random));

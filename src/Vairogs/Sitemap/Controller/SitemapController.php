@@ -33,7 +33,7 @@ class SitemapController extends AbstractController
         }
 
         if (null === $provider || false === $this->getParameter(sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::SITEMAP, Status::ENABLED))) {
-            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and provide a Provider');
+            throw new NotFoundHttpException(message: 'To use vairogs/sitemap, you must enable it and pass a Provider');
         }
 
         $model = $provider->populate(host: $request->getSchemeAndHttpHost());

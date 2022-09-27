@@ -11,9 +11,9 @@ use Vairogs\Extra\Constants\Definition;
 
 abstract class AbstractRedisAdapter extends AbstractAdapter
 {
-    public function __construct(protected readonly Redis|ClientInterface $client, protected readonly string $namespace = Vairogs::VAIROGS)
+    public function __construct(protected readonly Redis|ClientInterface $client, protected readonly string $namespace = Vairogs::VAIROGS, bool $incDevReq = false)
     {
-        $this->checkRequirements();
+        $this->checkRequirements(incDevReq: $incDevReq);
     }
 
     public function getAdapter(int $defaultLifetime = Definition::DEFAULT_LIFETIME): CacheItemPoolInterface
