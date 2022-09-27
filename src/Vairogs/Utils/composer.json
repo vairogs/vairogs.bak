@@ -60,6 +60,7 @@
         "ext-pdo": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "ext-random": "*",
         "composer-runtime-api": ">=2.0.0",
         "doctrine/collections": "*",
         "doctrine/dbal": "*",

@@ -2,11 +2,11 @@
 
 namespace Vairogs\Utils;
 
+use Random\Engine\Secure;
+use Random\Randomizer;
 use Vairogs\Extra\Constants\Symbol;
 
-use function array_rand;
 use function count;
-use function str_shuffle;
 use function str_split;
 
 final class Generator
@@ -20,6 +20,11 @@ final class Generator
     private string $symbols = Symbol::SYMBOLS;
     private string $upperCase = Symbol::EN_UPPERCASE;
 
+    public function __construct(private ?Randomizer $randomizer = null)
+    {
+        $this->randomizer ??= new Randomizer(new Secure());
+    }
+
     public function generate(int $length = 32): string
     {
         [$all, $unique, ] = $this->fillSets();
@@ -28,8 +33,7 @@ final class Generator
             $unique = $this->fillUnique(unique: $unique, parts: $parts, length: $length);
         }
 
-        /* @noinspection NonSecureStrShuffleUsageInspection */
-        return str_shuffle(string: $unique);
+        return $this->randomizer->shuffleBytes(bytes: $unique);
     }
 
     public function useLower(): self
@@ -134,7 +138,7 @@ final class Generator
 
         foreach ($this->sets as $set) {
             if ([] !== $parts = str_split(string: $set)) {
-                $unique .= $set[array_rand(array: $parts)];
+                $unique .= $set[$this->randomizer->pickArrayKeys(array: $parts, num: 1)[0]];
                 $all .= $set;
             }
         }
@@ -147,8 +151,7 @@ final class Generator
         $setsCount = count(value: $this->sets);
 
         for ($i = 0; $i < $length - $setsCount; $i++) {
-            /* @noinspection NonSecureArrayRandUsageInspection */
-            $unique .= $parts[array_rand(array: $parts)];
+            $unique .= $parts[$this->randomizer->pickArrayKeys(array: $parts, num: 1)[0]];
         }
 
         return $unique;

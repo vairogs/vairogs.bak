@@ -12,6 +12,7 @@ return (new Config())
         '@PER:risky' => true,
         '@PHP80Migration:risky' => true,
         '@PHP81Migration' => true,
+        '@PHP82Migration' => true,
         '@PSR12' => true,
         '@PSR12:risky' => true,
         '@Symfony' => true,
