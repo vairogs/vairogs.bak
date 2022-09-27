@@ -9,11 +9,11 @@ use function method_exists;
 /**
  * @method getContents()
  */
-class SplFileInfo
+readonly class SplFileInfo
 {
-    private readonly Reader $reader;
+    private Reader $reader;
 
-    public function __construct(private readonly FinderSplFileInfo $decorated, private readonly array $types = [], string $namespace = '')
+    public function __construct(private FinderSplFileInfo $decorated, private array $types = [], string $namespace = '')
     {
         $this->reader = new Reader(snippet: (string) $this->getContents(), namespace: $namespace, types: $this->types);
     }

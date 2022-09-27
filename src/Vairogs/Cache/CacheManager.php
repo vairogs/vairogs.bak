@@ -15,15 +15,15 @@ use Vairogs\Extra\Constants\Definition;
 
 use function time;
 
-final class CacheManager
+final readonly class CacheManager
 {
-    private readonly ArrayAdapter|ChainAdapter $adapter;
+    private ArrayAdapter|ChainAdapter $adapter;
 
     /**
      * @throws CacheException
      * @throws SymfonyInvalidArgumentException
      */
-    public function __construct(private readonly int $defaultLifetime = Definition::DEFAULT_LIFETIME, private readonly bool $useFile = true, ...$adapters)
+    public function __construct(private int $defaultLifetime = Definition::DEFAULT_LIFETIME, private bool $useFile = true, ...$adapters)
     {
         $this->adapter = $this->getAdapter(adapters: $adapters);
     }
@@ -67,7 +67,7 @@ final class CacheManager
         }
     }
 
-    public function delete(string $key): mixed
+    public function delete(string $key): null
     {
         $this->prune();
 

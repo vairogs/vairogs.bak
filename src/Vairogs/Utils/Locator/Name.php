@@ -9,9 +9,9 @@ use function implode;
 use function preg_replace;
 use function strtolower;
 
-class Name implements Stringable
+readonly class Name implements Stringable
 {
-    private readonly array $parts;
+    private array $parts;
 
     public function __construct(string $name)
     {
@@ -25,6 +25,7 @@ class Name implements Stringable
 
     public function normalize(): string
     {
+        /* @noinspection PhpPregReplaceWithEmptyReplacementInspection */
         return (string) preg_replace(pattern: '/^\\\*/', replacement: '', subject: (string) $this);
     }
 

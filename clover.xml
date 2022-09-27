@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1664236400">
-  <project timestamp="1664236400">
+<coverage generated="1664238481">
+  <project timestamp="1664238481">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2894,10 +2894,10 @@
       <line num="21" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="23" type="stmt" count="2"/>
       <line num="26" type="method" name="normalize" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="28" type="stmt" count="2"/>
-      <line num="31" type="method" name="key" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="33" type="stmt" count="2"/>
-      <metrics loc="36" ncloc="36" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="32" type="method" name="key" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <metrics loc="37" ncloc="36" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Utils/Locator/Reader.php">
       <class name="Vairogs\Utils\Locator\Reader" namespace="global">
@@ -2934,6 +2934,6 @@
       <line num="32" type="stmt" count="2"/>
       <metrics loc="35" ncloc="32" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="131" loc="7755" ncloc="7530" classes="96" methods="536" coveredmethods="271" conditionals="0" coveredconditionals="0" statements="1676" coveredstatements="1001" elements="2212" coveredelements="1272"/>
+    <metrics files="131" loc="7756" ncloc="7530" classes="96" methods="536" coveredmethods="271" conditionals="0" coveredconditionals="0" statements="1676" coveredstatements="1001" elements="2212" coveredelements="1272"/>
   </project>
 </coverage>
