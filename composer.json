@@ -51,7 +51,6 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pdo": "*",
-        "ext-redis": ">=5.3",
         "ext-zend-opcache": "*",
         "composer-runtime-api": ">=2.0.0",
         "doctrine/collections": "*",
@@ -61,7 +60,6 @@
         "lcobucci/jwt": "*",
         "league/oauth2-client": "*",
         "nikic/php-parser": "*",
-        "predis/predis": "<2.0.0",
         "psr/cache": "*",
         "psr/http-message": "*",
         "symfony/cache": "^5.4|^6.1",
@@ -85,8 +83,13 @@
         "twig/twig": "*"
     },
     "require-dev": {
-        "ext-redis": ">=5.3",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
         "ext-phpiredis": "*",
+        "ext-redis": ">=5.3",
+        "ext-zend-opcache": "*",
         "doctrine/dbal": "3.5.x-dev",
         "doctrine/doctrine-bundle": "2.7.x-dev",
         "doctrine/orm": "2.14.x-dev",
@@ -130,7 +133,9 @@
     },
     "suggest": {
         "ext-gmp": "to use gmp prime check function",
-        "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+        "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol",
+        "ext-redis": "If you want to use redis",
+        "predis/predis": "If you want to use predis."
     },
     "autoload": {
         "psr-4": {

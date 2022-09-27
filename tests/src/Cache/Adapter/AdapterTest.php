@@ -15,8 +15,8 @@ class AdapterTest extends VairogsTestCase
 {
     public function testRedisAdapters(): void
     {
-        $predis = new Predis(client: $this->container->get(id: 'snc_redis.predis'));
-        $phpredis = new PhpRedis(client: $this->container->get(id: 'snc_redis.phpredis'));
+        $predis = new Predis(client: $this->container->get(id: 'snc_redis.predis'), incDevReq: true);
+        $phpredis = new PhpRedis(client: $this->container->get(id: 'snc_redis.phpredis'), incDevReq: true);
 
         $this->assertInstanceOf(expected: Predis::class, actual: $predis);
         $this->assertInstanceOf(expected: PhpRedis::class, actual: $phpredis);
