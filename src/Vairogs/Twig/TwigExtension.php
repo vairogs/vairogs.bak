@@ -42,6 +42,11 @@ final class TwigExtension extends AbstractExtension
         return $this->getMethods(filter: TwigFunction::class, twig: Twig\TwigFunction::class, type: __FUNCTION__);
     }
 
+    public function getKey(string $type): string
+    {
+        return hash(algo: Definition::HASH_ALGORITHM, data: $this->getPrefix(base: $type));
+    }
+
     private function getMethods(string $filter, string $twig, string $type): array
     {
         if ([] !== $methods = $this->getMethodCache(type: $type)) {
@@ -94,10 +99,5 @@ final class TwigExtension extends AbstractExtension
         }
 
         return strtolower(string: $base);
-    }
-
-    private function getKey(string $type): string
-    {
-        return hash(algo: Definition::HASH_ALGORITHM, data: $this->getPrefix(base: $type));
     }
 }

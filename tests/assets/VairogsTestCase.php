@@ -24,15 +24,14 @@ abstract class VairogsTestCase extends KernelTestCase
     final protected const LOCKFILE = 'vairogs-test-initialization-lock-file';
     protected ContainerInterface $container;
     protected string $directory;
-    protected string $tmp;
     private static bool $initialized = false;
 
     protected function setUp(): void
     {
-        $this->tmp = sys_get_temp_dir() . DIRECTORY_SEPARATOR;
+        $tmp = sys_get_temp_dir();
 
         if (!self::$initialized) {
-            touch(filename: $tmpFile = $this->tmp . self::LOCKFILE);
+            touch(filename: $tmpFile = $tmp . DIRECTORY_SEPARATOR . self::LOCKFILE);
             $lockFile = fopen(filename: $tmpFile, mode: 'rb');
 
             if (!flock(stream: $lockFile, operation: LOCK_EX | LOCK_NB)) {
@@ -42,7 +41,7 @@ abstract class VairogsTestCase extends KernelTestCase
             self::$initialized = true;
         }
 
-        if (is_dir(filename: $this->directory = $this->tmp . Vairogs::VAIROGS)) {
+        if (is_dir(filename: $this->directory = $tmp . DIRECTORY_SEPARATOR . Vairogs::VAIROGS . '-test')) {
             (new File())->rmdir(directory: $this->directory);
         }
 
@@ -51,9 +50,7 @@ abstract class VairogsTestCase extends KernelTestCase
 
     protected function tearDown(): void
     {
-        @unlink(filename: $this->tmp . self::LOCKFILE);
+        unlink(filename: sys_get_temp_dir() . DIRECTORY_SEPARATOR . self::LOCKFILE);
         self::$initialized = false;
-
-        parent::tearDown();
     }
 }
