@@ -6,6 +6,7 @@ use Throwable;
 use Vairogs\Extra\Constants\Symbol;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
+use Vairogs\Utils\AbstractHelper;
 
 use function base64_encode;
 use function bin2hex;
@@ -17,11 +18,10 @@ use function round;
 use function rtrim;
 use function str_repeat;
 use function str_replace;
-use function str_shuffle;
 use function strlen;
 use function substr;
 
-final class Identification
+final class Identification extends AbstractHelper
 {
     #[TwigFunction]
     #[TwigFilter]
@@ -99,8 +99,7 @@ final class Identification
     #[TwigFilter]
     public function getRandomString(int $length = 32, string $chars = Symbol::BASIC): string
     {
-        /* @noinspection NonSecureStrShuffleUsageInspection */
-        return substr(string: str_shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
+        return substr(string: $this->randomizer->shuffleBytes(bytes: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
     }
 
     #[TwigFunction]

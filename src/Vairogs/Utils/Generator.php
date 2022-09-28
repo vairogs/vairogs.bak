@@ -2,14 +2,12 @@
 
 namespace Vairogs\Utils;
 
-use Random\Engine\Secure;
-use Random\Randomizer;
 use Vairogs\Extra\Constants\Symbol;
 
 use function count;
 use function str_split;
 
-final class Generator
+final class Generator extends AbstractHelper
 {
     private array $sets = [];
 
@@ -19,11 +17,6 @@ final class Generator
     private string $lowerCase = Symbol::EN_LOWERCASE;
     private string $symbols = Symbol::SYMBOLS;
     private string $upperCase = Symbol::EN_UPPERCASE;
-
-    public function __construct(private ?Randomizer $randomizer = null)
-    {
-        $this->randomizer ??= new Randomizer(new Secure());
-    }
 
     public function generate(int $length = 32): string
     {
