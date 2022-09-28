@@ -27,8 +27,12 @@ class TwigExtensionTest extends VairogsTestCase
             $this->expectExceptionMessage(message: $message);
         }
 
+        $manager = new CacheManager();
+        $extension = new TwigExtension(cacheManager: $manager);
+        $manager->delete(key: $extension->getKey(type: 'getFilters'));
+
         $twig = new Environment(loader: new ArrayLoader(templates: [$template]), options: ['debug' => true, 'cache' => false, 'autoescape' => false]);
-        $twig->addExtension(extension: new TwigExtension(cacheManager: new CacheManager()));
+        $twig->addExtension(extension: $extension);
 
         $result = $twig->load(name: 0)->render(context: []);
 
