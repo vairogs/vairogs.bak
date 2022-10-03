@@ -4,7 +4,7 @@ namespace Vairogs\Core\Cache;
 
 final class Header
 {
-    final public const CACHE_VAR = 'Vairogs-Cache';
-    final public const INVALIDATE = 'invalidate';
-    final public const SKIP = 'skip';
+    public const CACHE_VAR = 'Vairogs-Cache';
+    public const INVALIDATE = 'invalidate';
+    public const SKIP = 'skip';
 }

@@ -21,12 +21,12 @@ use function trim;
 
 final class Date
 {
-    final public const EXTRA_FORMATS = [
+    public const EXTRA_FORMATS = [
         Constants\Date::FORMAT,
         Constants\Date::FORMAT_TS,
     ];
 
-    final public const TIME = [
+    public const TIME = [
         'hour' => Constants\Date::HOUR,
         'minute' => Constants\Date::MIN,
         'second' => Constants\Date::SEC,

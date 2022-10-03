@@ -19,10 +19,10 @@ use const JSON_UNESCAPED_UNICODE;
 
 final class Json
 {
-    final public const FORCE_ARRAY = 0b0001;
-    final public const PRETTY = 0b0010;
-    final public const ASSOCIATIVE = 1;
-    final public const OBJECT = 0;
+    public const FORCE_ARRAY = 0b0001;
+    public const PRETTY = 0b0010;
+    public const ASSOCIATIVE = 1;
+    public const OBJECT = 0;
 
     /**
      * @throws JsonException

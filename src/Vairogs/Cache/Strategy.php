@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class Strategy
 {
-    final public const ALL = 'ALL';
-    final public const GET = Request::METHOD_GET;
-    final public const MIXED = 'MIXED';
-    final public const POST = Request::METHOD_POST;
-    final public const USER = 'USER';
+    public const ALL = 'ALL';
+    public const GET = Request::METHOD_GET;
+    public const MIXED = 'MIXED';
+    public const POST = Request::METHOD_POST;
+    public const USER = 'USER';
 }

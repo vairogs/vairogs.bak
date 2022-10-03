@@ -11,7 +11,7 @@ use function strtoupper;
 
 final class Intl
 {
-    final public const MAP_CYRILLIC = [
+    public const MAP_CYRILLIC = [
         'е', 'ё', 'ж', 'х', 'ц', 'ч', 'ш', 'щ', 'ю', 'я',
         'Е', 'Ё', 'Ж', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ю', 'Я',
         'а', 'б', 'в', 'г', 'д', 'з', 'и', 'й', 'к', 'л',
@@ -20,7 +20,7 @@ final class Intl
         'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т',
         'У', 'Ф', 'Ъ', 'Ы', 'Ь', 'Э',
     ];
-    final public const MAP_LATIN = [
+    public const MAP_LATIN = [
         'ye', 'ye', 'zh', 'kh', 'ts', 'ch', 'sh', 'shch', 'yu', 'ya',
         'Ye', 'Ye', 'Zh', 'Kh', 'Ts', 'Ch', 'Sh', 'Shch', 'Yu', 'Ya',
         'a', 'b', 'v', 'g', 'd', 'z', 'i', 'y', 'k', 'l',

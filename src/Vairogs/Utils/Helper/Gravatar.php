@@ -16,16 +16,16 @@ use function urldecode;
 
 final class Gravatar
 {
-    final public const ICON_404 = '404';
-    final public const ICON_MM = 'mm';
-    final public const ICON_IDENTICON = 'identicon';
-    final public const ICON_MONSTERID = 'monsterid';
-    final public const ICON_WAVATAR = 'wavatar';
-    final public const ICON_RETRO = 'retro';
-    final public const ICON_BLANK = 'blank';
-    final public const DEFAULT_EMAIL = 'vairogs@vairogs.com';
-    final public const HTTP_HOST = 'http://www.gravatar.com';
-    final public const HTTPS_HOST = 'https://secure.gravatar.com';
+    public const ICON_404 = '404';
+    public const ICON_MM = 'mm';
+    public const ICON_IDENTICON = 'identicon';
+    public const ICON_MONSTERID = 'monsterid';
+    public const ICON_WAVATAR = 'wavatar';
+    public const ICON_RETRO = 'retro';
+    public const ICON_BLANK = 'blank';
+    public const DEFAULT_EMAIL = 'vairogs@vairogs.com';
+    public const HTTP_HOST = 'http://www.gravatar.com';
+    public const HTTPS_HOST = 'https://secure.gravatar.com';
 
     /**
      * @throws RuntimeException
