@@ -2,11 +2,11 @@
 
 namespace Vairogs\Tests\Assets\Captcha;
 
-use Vairogs\Captcha\Form\Model\HoneyTrait;
+use Vairogs\Captcha\Form\Model\Honey;
 
 class TestFormModel
 {
-    use HoneyTrait;
+    use Honey;
 
     private string $name;
 

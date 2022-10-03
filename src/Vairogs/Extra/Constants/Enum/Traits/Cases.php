@@ -5,7 +5,7 @@ namespace Vairogs\Extra\Constants\Enum\Traits;
 use function array_map;
 use function property_exists;
 
-trait CasesTrait
+trait Cases
 {
     public static function getCases(): array
     {

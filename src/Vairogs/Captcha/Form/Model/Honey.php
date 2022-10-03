@@ -4,7 +4,7 @@ namespace Vairogs\Captcha\Form\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-trait HoneyTrait
+trait Honey
 {
     #[Assert\IsNull(message: 'The CSRF token is invalid. Please try to resubmit the form')]
     private mixed $honey = null;

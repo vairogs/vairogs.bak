@@ -5,11 +5,11 @@ namespace Vairogs\Tests\Assets\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use Vairogs\Twig\TwigTrait;
+use Vairogs\Twig\Twig;
 
 class TwigTestExtension extends AbstractExtension
 {
-    use TwigTrait;
+    use Twig;
 
     public function test(?string $value = null): string
     {

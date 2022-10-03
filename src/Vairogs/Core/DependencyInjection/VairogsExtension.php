@@ -13,7 +13,7 @@ use Vairogs\Utils\Helper\Util;
 
 class VairogsExtension extends Extension
 {
-    use DependecyLoaderTrait;
+    use DependecyLoader;
 
     /**
      * @throws Exception

@@ -7,7 +7,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Utils\Helper\Php;
 
-trait DependecyLoaderTrait
+trait DependecyLoader
 {
     protected function appendComponent(string $class, ArrayNodeDefinition $arrayNodeDefinition): void
     {
