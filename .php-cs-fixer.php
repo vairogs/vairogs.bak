@@ -13,8 +13,6 @@ return (new Config())
         '@PHP80Migration:risky' => true,
         '@PHP81Migration' => true,
         '@PHP82Migration' => true,
-        '@PSR12' => true,
-        '@PSR12:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'binary_operator_spaces' => true,
