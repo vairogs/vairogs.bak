@@ -2,11 +2,11 @@
 
 namespace Vairogs\Tests\Source\Extra\Constants\Enum;
 
-use Vairogs\Extra\Constants\Enum\Traits\CasesTrait;
+use Vairogs\Extra\Constants\Enum\Traits\Cases;
 
 enum TestEnum
 {
-    use CasesTrait;
+    use Cases;
 
     case ONE;
     case TWO;

@@ -3,8 +3,9 @@
 namespace Vairogs\Twig;
 
 use PhpParser\Node\Stmt\Class_;
-use Twig;
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter as TwigTwigFilter;
+use Twig\TwigFunction as TwigTwigFunction;
 use Vairogs\Cache\CacheManager;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Definition;
@@ -23,23 +24,23 @@ use function strtolower;
 
 final class TwigExtension extends AbstractExtension
 {
-    use TwigTrait;
+    use Twig;
 
     public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
     public const HELPER_DIR = '/Utils/Helper/';
 
-    public function __construct(private readonly CacheManager $cacheManager)
+    public function __construct(private CacheManager $cacheManager)
     {
     }
 
     public function getFilters(): array
     {
-        return $this->getMethods(filter: TwigFilter::class, twig: Twig\TwigFilter::class, type: __FUNCTION__);
+        return $this->getMethods(filter: TwigFilter::class, twig: TwigTwigFilter::class, type: __FUNCTION__);
     }
 
     public function getFunctions(): array
     {
-        return $this->getMethods(filter: TwigFunction::class, twig: Twig\TwigFunction::class, type: __FUNCTION__);
+        return $this->getMethods(filter: TwigFunction::class, twig: TwigTwigFunction::class, type: __FUNCTION__);
     }
 
     public function getKey(string $type): string

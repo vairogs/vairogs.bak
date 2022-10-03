@@ -2,11 +2,11 @@
 
 namespace Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum;
 
-use Vairogs\Extra\Constants\Enum\Traits\CasesTrait;
+use Vairogs\Extra\Constants\Enum\Traits\Cases;
 
 enum Redirect: string
 {
-    use CasesTrait;
+    use Cases;
 
     case ROUTE = 'route';
     case URI = 'uri';

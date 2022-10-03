@@ -8,7 +8,7 @@ use function is_array;
 use function is_numeric;
 use function sprintf;
 
-trait TwigTrait
+trait Twig
 {
     public function makeArray(array $input, string $key, string $class): array
     {

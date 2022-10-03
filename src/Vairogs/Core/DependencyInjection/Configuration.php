@@ -11,7 +11,7 @@ use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
 
 class Configuration implements ConfigurationInterface
 {
-    use DependecyLoaderTrait;
+    use DependecyLoader;
 
     public function getConfigTreeBuilder(): TreeBuilder
     {
