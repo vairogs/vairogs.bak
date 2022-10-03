@@ -51,7 +51,7 @@ final class Uri
                 default => sprintf('%s[%s]', $parent, $key),
             };
 
-            $result = $this->setResult(result: $result, key: $newKey, value: $value);
+            $result = $this->getResult(result: $result, key: $newKey, value: $value);
         }
 
         return $result;
@@ -176,7 +176,7 @@ final class Uri
     /**
      * @throws ReflectionException
      */
-    private function setResult(array $result, string $key, mixed $value): array
+    private function getResult(array $result, string $key, mixed $value): array
     {
         if (!$value instanceof CURLFile && (is_array(value: $value) || is_object(value: $value))) {
             return array_merge($result, $this->buildHttpQueryArray(input: $value, parent: $key));

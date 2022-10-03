@@ -27,7 +27,7 @@ class CacheManagerTest extends VairogsTestCase
     {
         $random = (new Identification())->getRandomString(chars: Symbol::EXTENDED);
 
-        $cacheManager = new CacheManager();
+        $cacheManager = new CacheManager(useFile: false);
         $this->assertNull(actual: $cacheManager->get(key: __FUNCTION__));
         $this->assertNull(actual: $cacheManager->get(key: $random));
         $cacheManager->set(key: __FUNCTION__, value: __FUNCTION__, expiresAfter: self::LIFETIME);
