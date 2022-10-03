@@ -2,11 +2,13 @@
 
 namespace Vairogs\Tests\Source\Twig;
 
+use Redis;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\ArrayLoader;
+use Vairogs\Cache\Adapter\PhpRedis;
 use Vairogs\Cache\CacheManager;
 use Vairogs\Tests\Assets\Twig\TwigTestExtension;
 use Vairogs\Tests\Assets\VairogsTestCase;
@@ -27,7 +29,12 @@ class TwigExtensionTest extends VairogsTestCase
             $this->expectExceptionMessage(message: $message);
         }
 
-        $manager = new CacheManager();
+        /**
+         * @var Redis $phpredis
+         */
+        $phpredis = $this->container->get(id: 'snc_redis.phpredis');
+
+        $manager = new CacheManager(60, false, new PhpRedis(client: $phpredis));
         $extension = new TwigExtension(cacheManager: $manager);
         $manager->delete(key: $extension->getKey(type: 'getFilters'));
 

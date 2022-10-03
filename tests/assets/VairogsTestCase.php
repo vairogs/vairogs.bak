@@ -41,8 +41,12 @@ abstract class VairogsTestCase extends KernelTestCase
             self::$initialized = true;
         }
 
-        if (is_dir(filename: $this->directory = $tmp . DIRECTORY_SEPARATOR . Vairogs::VAIROGS . '-test')) {
-            (new File())->rmdir(directory: $this->directory);
+        $this->directory = $tmp . DIRECTORY_SEPARATOR . Vairogs::VAIROGS . '-test';
+
+        foreach ([$this->directory, $tmp . DIRECTORY_SEPARATOR . Vairogs::VAIROGS] as $dir) {
+            if (is_dir(filename: $dir)) {
+                (new File())->rmdir(directory: $dir);
+            }
         }
 
         $this->container = static::getContainer();
