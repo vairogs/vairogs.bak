@@ -12,7 +12,7 @@ use function sprintf;
 
 final class Behaviour
 {
-    final public const MIN_VISIBLE = 5;
+    public const MIN_VISIBLE = 5;
 
     public function __construct(private readonly int $visible)
     {
