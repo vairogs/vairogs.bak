@@ -26,10 +26,10 @@ final class Util
     #[TwigFilter]
     public function isPrime(int $number, bool $override = false): bool
     {
-        $function = (new FunctionHandler())->setFunction(functionName: 'isPrimeFunction', instance: new self());
-        $below = (new FunctionHandler())->setFunction(functionName: 'isPrimeBelow1000', instance: new self())->setNext(handler: $function);
+        $function = (new FunctionHandler(function: 'isPrimeFunction', instance: new self()));
+        $below = (new FunctionHandler(function: 'isPrimeBelow1000', instance: new self()))->next(handler: $function);
 
-        return (bool) (new FunctionHandler())->setFunction(functionName: 'isPrimeGmp', instance: new self())->setNext(handler: $below)->handle($number, $override);
+        return (bool) (new FunctionHandler(function: 'isPrimeGmp', instance: new self()))->next(handler: $below)->handle($number, $override);
     }
 
     #[TwigFunction]

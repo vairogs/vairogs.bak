@@ -8,15 +8,8 @@ use function is_object;
 
 class FunctionHandler extends AbstractHandler
 {
-    private ?object $instance;
-    private string $function;
-
-    public function setFunction(string $functionName, ?object $instance = null): static
+    public function __construct(private readonly string $function, private readonly ?object $instance = null)
     {
-        $this->instance = $instance;
-        $this->function = $functionName;
-
-        return $this;
     }
 
     public function handle(...$arguments): mixed

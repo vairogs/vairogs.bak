@@ -12,6 +12,6 @@ class FunctionHandlerTest extends VairogsTestCase
      */
     public function test(string $function, ?object $object, mixed $expected, ...$arguments): void
     {
-        $this->assertEquals(expected: $expected, actual: (new FunctionHandler())->setFunction(functionName: $function, instance: $object)->handle(...$arguments));
+        $this->assertEquals(expected: $expected, actual: (new FunctionHandler(function: $function, instance: $object))->handle(...$arguments));
     }
 }
