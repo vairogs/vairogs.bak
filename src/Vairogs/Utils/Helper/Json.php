@@ -31,7 +31,7 @@ final class Json
     #[TwigFilter]
     public function encode(mixed $value, int $flags = self::OBJECT): string
     {
-        $flags = (JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | ((self::OBJECT !== ($flags & self::PRETTY)) ? JSON_PRETTY_PRINT : self::OBJECT) | (defined(constant_name: 'JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : self::OBJECT));
+        $flags = (JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | (self::OBJECT !== ($flags & self::PRETTY) ? JSON_PRETTY_PRINT : self::OBJECT) | (defined(constant_name: 'JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : self::OBJECT));
 
         return json_encode(value: $value, flags: $flags | JSON_THROW_ON_ERROR);
     }
