@@ -47,11 +47,11 @@ use function sprintf;
 
 abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegistry
 {
-    public ?string $baseUriPost = null;
-    public bool $useSession = false;
-    public bool $verify = true;
-    public string $baseUri;
-    public ?SessionInterface $session = null;
+    protected ?string $baseUriPost = null;
+    protected bool $useSession = false;
+    protected bool $verify = true;
+    protected string $baseUri;
+    protected ?SessionInterface $session = null;
     protected Signer $signer;
     protected UriCollection $uriCollection;
     protected ValidatorChain $validatorChain;
@@ -70,6 +70,31 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
 
         $this->signer ??= new Sha256();
         $this->session = $this->requestStack->getCurrentRequest()?->getSession();
+    }
+
+    public function getBaseUriPost(): ?string
+    {
+        return $this->baseUriPost;
+    }
+
+    public function getUseSession(): bool
+    {
+        return $this->useSession;
+    }
+
+    public function getVerify(): bool
+    {
+        return $this->verify;
+    }
+
+    public function getBaseUri(): string
+    {
+        return $this->baseUri;
+    }
+
+    public function getSession(): ?SessionInterface
+    {
+        return $this->session;
     }
 
     public function setSigner(Signer $signer): static
