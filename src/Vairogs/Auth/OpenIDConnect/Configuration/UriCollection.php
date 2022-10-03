@@ -33,13 +33,13 @@ class UriCollection
                 'client_id' => $oidcProvider->getClientId(),
                 'redirect_uri' => $oidcProvider->getRedirectUri(),
                 'state' => $oidcProvider->getState(),
-                'base_uri' => $oidcProvider->baseUri,
-                'base_uri_post' => $oidcProvider->baseUriPost ?? $oidcProvider->baseUri,
+                'base_uri' => $oidcProvider->getBaseUri(),
+                'base_uri_post' => $oidcProvider->getBaseUriPost() ?? $oidcProvider->getBaseUri(),
             ];
 
             $this->uris[$name] = (new Uri(options: $uri, extra: $params, method: $uri['method'] ?? Request::METHOD_POST))
-                ->setUseSession(useSession: $oidcProvider->useSession)
-                ->setSession(session: $oidcProvider->session);
+                ->setUseSession(useSession: $oidcProvider->getUseSession())
+                ->setSession(session: $oidcProvider->getSession());
         }
 
         return $this;
