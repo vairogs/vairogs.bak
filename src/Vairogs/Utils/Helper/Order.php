@@ -66,7 +66,7 @@ final class Order
                 return 0;
             }
 
-            $flip = (Enum::DESC === $order) ? -1 : 1;
+            $flip = Enum::DESC === $order ? -1 : 1;
 
             if ($firstSort > $secondSort) {
                 return $flip;

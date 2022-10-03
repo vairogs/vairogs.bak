@@ -89,7 +89,7 @@ final class Behaviour
     {
         $rest = $this->visible - ($total - $current);
         $omitPagesFrom = (int) ceil(num: $rest / 2);
-        $omitPagesTo = ($current - ($rest - $omitPagesFrom));
+        $omitPagesTo = $current - ($rest - $omitPagesFrom);
 
         if ($this->hasSingleOmittedNearLast(current: $current)) {
             $rest = $this->visible - $current;

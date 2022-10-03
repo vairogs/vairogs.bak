@@ -44,7 +44,7 @@ class Reader
         if ($stmt instanceof Namespace_) {
             $this->findDefinitions($stmt->stmts, new Name(name: (string) $stmt->name));
         } elseif (in_array(needle: $stmt::class, haystack: $this->types, strict: true)) {
-            $defName = new Name(name: "$namespace\\$stmt->name");
+            $defName = new Name(name: "{$namespace}\\{$stmt->name}");
             $this->names[$defName->key()] = $defName->normalize();
         }
     }
