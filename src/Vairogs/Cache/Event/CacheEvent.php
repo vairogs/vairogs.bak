@@ -6,7 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use JsonSerializable;
 use ReflectionClass;
-use Symfony\Bundle\SecurityBundle\Security\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Vairogs\Cache\Strategy;
 
@@ -17,9 +17,9 @@ use function method_exists;
 use function reset;
 use function sprintf;
 
-class CacheEvent
+final readonly class CacheEvent
 {
-    public function __construct(private readonly Security $security)
+    public function __construct(private Security $security)
     {
     }
 

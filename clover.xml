@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1664835885">
-  <project timestamp="1664835885">
+<coverage generated="1664836966">
+  <project timestamp="1664836966">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -950,8 +950,8 @@
       <line num="34" type="stmt" count="3"/>
       <line num="37" type="stmt" count="3"/>
       <line num="39" type="stmt" count="3"/>
-      <line num="40" type="stmt" count="3"/>
-      <line num="42" type="stmt" count="3"/>
+      <line num="40" type="stmt" count="2"/>
+      <line num="42" type="stmt" count="2"/>
       <line num="43" type="stmt" count="1"/>
       <line num="46" type="stmt" count="3"/>
       <line num="48" type="stmt" count="1"/>
@@ -1835,13 +1835,13 @@
       <line num="48" type="stmt" count="2"/>
       <line num="51" type="method" name="getMethods" visibility="private" complexity="2" crap="2" count="2"/>
       <line num="53" type="stmt" count="2"/>
-      <line num="54" type="stmt" count="2"/>
+      <line num="54" type="stmt" count="1"/>
       <line num="57" type="stmt" count="2"/>
       <line num="58" type="stmt" count="2"/>
       <line num="60" type="stmt" count="2"/>
       <line num="63" type="method" name="getMethodCache" visibility="private" complexity="2" crap="2" count="2"/>
       <line num="65" type="stmt" count="2"/>
-      <line num="66" type="stmt" count="2"/>
+      <line num="66" type="stmt" count="1"/>
       <line num="69" type="stmt" count="2"/>
       <line num="72" type="method" name="parseMethods" visibility="private" complexity="2" crap="2" count="2"/>
       <line num="74" type="stmt" count="2"/>
