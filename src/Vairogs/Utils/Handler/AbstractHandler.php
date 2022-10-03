@@ -4,17 +4,17 @@ namespace Vairogs\Utils\Handler;
 
 abstract class AbstractHandler implements Handler
 {
-    private ?Handler $nextHandler = null;
+    private ?Handler $handler = null;
 
-    public function setNext(Handler $handler): Handler
+    public function next(Handler $handler): Handler
     {
-        $this->nextHandler = $handler;
+        $this->handler = $handler;
 
         return $this;
     }
 
     public function handle(...$arguments): mixed
     {
-        return $this->nextHandler?->handle(...$arguments);
+        return $this->handler?->handle(...$arguments);
     }
 }
