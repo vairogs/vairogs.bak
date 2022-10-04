@@ -6,32 +6,20 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 use InvalidArgumentException;
-use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Extra\Constants;
 use Vairogs\Extra\Constants\Month as M;
 use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_merge;
-use function floor;
-use function get_debug_type;
 use function gmdate;
-use function round;
 use function substr;
-use function trim;
 
 final class Date
 {
     public const EXTRA_FORMATS = [
         Constants\Date::FORMAT,
         Constants\Date::FORMAT_TS,
-    ];
-
-    public const TIME = [
-        'hour' => Constants\Date::HOUR,
-        'minute' => Constants\Date::MIN,
-        'second' => Constants\Date::SEC,
-        'micro' => Constants\Date::MS,
     ];
 
     #[TwigFunction]
@@ -81,33 +69,6 @@ final class Date
         $object = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $date);
 
         return $object && $date === $object->format(format: $format);
-    }
-
-    #[TwigFunction]
-    #[TwigFilter]
-    public function format(int|float $timestamp, bool $asArray = false): array|string
-    {
-        $timestamp = round(num: $timestamp * 1000);
-        $result = $asArray ? [] : '';
-
-        foreach (self::TIME as $unit => $value) {
-            if ($timestamp >= $value) {
-                $time = (int) floor(num: $timestamp / $value);
-                if ($time > 0) {
-                    match (get_debug_type(value: $result)) {
-                        Type::BUILTIN_TYPE_STRING => $result .= $time . ' ' . $unit . (1 === $time ? '' : 's') . ' ',
-                        Type::BUILTIN_TYPE_ARRAY => $result[$unit] = $time,
-                    };
-                }
-
-                $timestamp -= $time * $value;
-            }
-        }
-
-        return match (get_debug_type(value: $result)) {
-            Type::BUILTIN_TYPE_STRING => trim(string: $result),
-            Type::BUILTIN_TYPE_ARRAY => $result,
-        };
     }
 
     #[TwigFunction]
