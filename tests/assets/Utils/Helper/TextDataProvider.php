@@ -72,4 +72,13 @@ class TextDataProvider
             ['I walk the <b>dog</b> now', 'I walk the dog now', ],
         ];
     }
+
+    public function dataProviderLongestSubstrLength(): array
+    {
+        return [
+            ['abcabcabc', 3, ],
+            ['abcdabcdeabcdabcdef', 6, ],
+            ['dvdf', 3, ],
+        ];
+    }
 }
