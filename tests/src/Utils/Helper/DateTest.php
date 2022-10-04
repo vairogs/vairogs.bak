@@ -46,17 +46,9 @@ class DateTest extends VairogsTestCase
     /**
      * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\DateDataProvider::dataProviderFormat
      */
-    public function testFormat(int|float $timestamp, string $expected): void
+    public function testFormat(int|float $timestamp, string|array $expected, bool $asArray): void
     {
-        $this->assertEquals(expected: $expected, actual: (new Date())->format(timestamp: $timestamp));
-    }
-
-    /**
-     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\DateDataProvider::dataProviderFormatToArray
-     */
-    public function testFormatToArray(int|float $timestamp, array $expected): void
-    {
-        $this->assertEquals(expected: $expected, actual: (new Date())->formatToArray(timestamp: $timestamp));
+        $this->assertEquals(expected: $expected, actual: (new Date())->format(timestamp: $timestamp, asArray: $asArray));
     }
 
     /**

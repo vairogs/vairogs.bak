@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 use InvalidArgumentException;
-use JetBrains\PhpStorm\Pure;
+use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Extra\Constants;
 use Vairogs\Extra\Constants\Month as M;
 use Vairogs\Twig\Attribute\TwigFilter;
@@ -14,6 +14,7 @@ use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_merge;
 use function floor;
+use function get_debug_type;
 use function gmdate;
 use function round;
 use function substr;
@@ -84,48 +85,29 @@ final class Date
 
     #[TwigFunction]
     #[TwigFilter]
-    #[Pure]
-    public function format(int|float $timestamp): string
+    public function format(int|float $timestamp, bool $asArray = false): array|string
     {
-        $str = '';
         $timestamp = round(num: $timestamp * 1000);
+        $result = $asArray ? [] : '';
 
         foreach (self::TIME as $unit => $value) {
             if ($timestamp >= $value) {
-                $time = floor(num: $timestamp / $value);
-
+                $time = (int) floor(num: $timestamp / $value);
                 if ($time > 0) {
-                    $str .= $time . ' ' . $unit . (1.0 === $time ? '' : 's') . ' ';
+                    match (get_debug_type(value: $result)) {
+                        Type::BUILTIN_TYPE_STRING => $result .= $time . ' ' . $unit . (1 === $time ? '' : 's') . ' ',
+                        Type::BUILTIN_TYPE_ARRAY => $result[$unit] = $time,
+                    };
                 }
 
                 $timestamp -= $time * $value;
             }
         }
 
-        return trim(string: $str);
-    }
-
-    #[TwigFunction]
-    #[TwigFilter]
-    #[Pure]
-    public function formatToArray(int|float $timestamp): array
-    {
-        $timestamp = round(num: $timestamp * 1000);
-        $result = [];
-
-        foreach (self::TIME as $unit => $value) {
-            if ($timestamp >= $value) {
-                $time = (int) floor(num: $timestamp / $value);
-
-                if ($time > 0) {
-                    $result[$unit] = $time;
-                }
-
-                $timestamp -= ($time * $value);
-            }
-        }
-
-        return $result;
+        return match (get_debug_type(value: $result)) {
+            Type::BUILTIN_TYPE_STRING => trim(string: $result),
+            Type::BUILTIN_TYPE_ARRAY => $result,
+        };
     }
 
     #[TwigFunction]
