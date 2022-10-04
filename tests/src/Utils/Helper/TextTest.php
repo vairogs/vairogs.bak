@@ -83,4 +83,12 @@ class TextTest extends VairogsTestCase
     {
         $this->assertEquals(expected: $expected, actual: (new Text())->sanitize(text: $input));
     }
+
+    /**
+     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\TextDataProvider::dataProviderlongestSubstrLength
+     */
+    public function testLongestSubstrLength(string $string, int $expected): void
+    {
+        $this->assertEquals(expected: $expected, actual: (new Text())->longestSubstrLength(string: $string));
+    }
 }
