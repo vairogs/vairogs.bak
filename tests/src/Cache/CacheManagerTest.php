@@ -4,10 +4,8 @@ namespace Vairogs\Tests\Source\Cache;
 
 use Exception;
 use Predis\Client;
-use Redis;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
-use Vairogs\Cache\Adapter\PhpRedis;
 use Vairogs\Cache\Adapter\Predis;
 use Vairogs\Cache\CacheManager;
 use Vairogs\Extra\Constants\Definition;
@@ -49,12 +47,7 @@ class CacheManagerTest extends VairogsTestCase
          */
         $predis = $this->container->get(id: 'snc_redis.predis');
 
-        /**
-         * @var Redis $phpredis
-         */
-        $phpredis = $this->container->get(id: 'snc_redis.phpredis');
-
-        $manager = new CacheManager(Definition::DEFAULT_LIFETIME, false, new Predis(client: $predis, incDevReq: true), new PhpRedis(client: $phpredis));
+        $manager = new CacheManager(Definition::DEFAULT_LIFETIME, false, new Predis(client: $predis, incDevReq: true));
         $random = (new Identification())->getRandomString();
         $manager->set(key: $random, value: __FUNCTION__, expiresAfter: 10);
         $this->assertEquals(expected: __FUNCTION__, actual: $manager->get(key: $random));

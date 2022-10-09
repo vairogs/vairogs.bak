@@ -5,7 +5,6 @@ namespace Vairogs\Tests\Source\Cache\Adapter;
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Vairogs\Cache\Adapter\Orm;
-use Vairogs\Cache\Adapter\PhpRedis;
 use Vairogs\Cache\Adapter\Predis;
 use Vairogs\Tests\Assets\VairogsTestCase;
 
@@ -16,13 +15,9 @@ class AdapterTest extends VairogsTestCase
     public function testRedisAdapters(): void
     {
         $predis = new Predis(client: $this->container->get(id: 'snc_redis.predis'), incDevReq: true);
-        $phpredis = new PhpRedis(client: $this->container->get(id: 'snc_redis.phpredis'));
 
         $this->assertInstanceOf(expected: Predis::class, actual: $predis);
-        $this->assertInstanceOf(expected: PhpRedis::class, actual: $phpredis);
-
         $this->assertInstanceOf(expected: RedisAdapter::class, actual: $predis->getAdapter());
-        $this->assertInstanceOf(expected: RedisAdapter::class, actual: $phpredis->getAdapter());
     }
 
     /**

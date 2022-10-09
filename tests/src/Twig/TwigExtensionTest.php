@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Source\Twig;
 
-use Redis;
+use Predis\Client;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\ArrayLoader;
-use Vairogs\Cache\Adapter\PhpRedis;
+use Vairogs\Cache\Adapter\Predis;
 use Vairogs\Cache\CacheManager;
 use Vairogs\Tests\Assets\Twig\TwigTestExtension;
 use Vairogs\Tests\Assets\VairogsTestCase;
@@ -30,11 +30,11 @@ class TwigExtensionTest extends VairogsTestCase
         }
 
         /**
-         * @var Redis $phpredis
+         * @var Client $predis
          */
-        $phpredis = $this->container->get(id: 'snc_redis.phpredis');
+        $predis = $this->container->get(id: 'snc_redis.predis');
 
-        $manager = new CacheManager(60, false, new PhpRedis(client: $phpredis));
+        $manager = new CacheManager(60, false, new Predis(client: $predis, incDevReq: true));
         $extension = new TwigExtension(cacheManager: $manager);
         $manager->delete(key: $extension->getKey(type: 'getFilters'));
 
