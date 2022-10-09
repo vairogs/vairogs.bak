@@ -35,7 +35,13 @@ final class Json
     {
         $flags = (JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | (self::OBJECT !== ($flags & self::PRETTY) ? JSON_PRETTY_PRINT : self::OBJECT) | (defined(constant_name: 'JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : self::OBJECT));
 
-        return json_encode(value: $value, flags: $flags | JSON_THROW_ON_ERROR);
+        $json = json_encode(value: $value, flags: $flags | JSON_THROW_ON_ERROR);
+
+        if (function_exists(function: 'json_validate')) {
+            json_validate(json: $json);
+        }
+
+        return $json;
     }
 
     /**
@@ -46,9 +52,9 @@ final class Json
     public function decode(string $json, int $flags = self::OBJECT): mixed
     {
         if (function_exists(function: 'json_validate')) {
-            json_validate(json: $json, flags: $flags);
+            json_validate(json: $json);
         }
 
-        return json_decode(json: $json, associative: (bool) ($flags & self::FORCE_ARRAY), depth: JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING, flags: JSON_THROW_ON_ERROR);
+        return json_decode(json: $json, associative: (bool) ($flags & self::FORCE_ARRAY), depth: JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING, flags: $flags | JSON_THROW_ON_ERROR);
     }
 }
