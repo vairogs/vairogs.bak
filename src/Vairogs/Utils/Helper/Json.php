@@ -7,8 +7,10 @@ use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
 
 use function defined;
+use function function_exists;
 use function json_decode;
 use function json_encode;
+use function json_validate;
 
 use const JSON_BIGINT_AS_STRING;
 use const JSON_PRESERVE_ZERO_FRACTION;
@@ -43,6 +45,10 @@ final class Json
     #[TwigFilter]
     public function decode(string $json, int $flags = self::OBJECT): mixed
     {
+        if (function_exists(function: 'json_validate')) {
+            json_validate(json: $json, flags: $flags);
+        }
+
         return json_decode(json: $json, associative: (bool) ($flags & self::FORCE_ARRAY), depth: JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING, flags: JSON_THROW_ON_ERROR);
     }
 }
