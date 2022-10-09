@@ -16,17 +16,4 @@ return static function (SncRedisConfig $sncRedisConfig): void {
         ->connectionPersistent(value: true)
         ->throwErrors(value: true)
         ->prefix(value: sprintf(Vairogs::VAIROGS . '_%%env(ENVIRONMENT)%%_%s_', $key));
-
-    $sncRedisConfig
-        ->client(alias: $key = 'phpredis')
-        ->type(value: 'phpredis')
-        ->alias(value: $key)
-        ->dsns(value: [
-            sprintf('%%env(REDIS_URL)%%/%s', '%env(REDIS_DB_' . strtoupper(string: $key) . ')%'),
-        ])
-        ->logging(value: false)
-        ->options()
-        ->connectionPersistent(value: true)
-        ->throwErrors(value: true)
-        ->prefix(value: sprintf(Vairogs::VAIROGS . '_%%env(ENVIRONMENT)%%_%s_', $key));
 };
