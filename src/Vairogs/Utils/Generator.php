@@ -11,6 +11,7 @@ use function str_split;
 
 final class Generator
 {
+    /** @var array<string, string> */
     private array $sets = [];
 
     private string $digits = Symbol::DIGITS;
@@ -123,11 +124,17 @@ final class Generator
         return $this;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getSets(): array
     {
         return $this->sets;
     }
 
+    /**
+     * @return array<int, string>
+     */
     private function fillSets(): array
     {
         $all = $unique = '';
@@ -142,6 +149,9 @@ final class Generator
         return [$all, $unique, ];
     }
 
+    /**
+     * @param array<int, string> $parts
+     */
     private function fillUnique(string $unique, array $parts, int $length): string
     {
         $setsCount = count(value: $this->sets);

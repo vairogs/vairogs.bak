@@ -42,6 +42,9 @@ final class Cross
         return $string[0] . $result;
     }
 
+    /**
+     * @return array<int, mixed>
+     */
     #[ArrayShape([
         Type::BUILTIN_TYPE_INT,
         Type::BUILTIN_TYPE_ARRAY,

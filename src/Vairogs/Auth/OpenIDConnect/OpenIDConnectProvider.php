@@ -57,6 +57,8 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
     protected ValidatorChain $validatorChain;
     protected int $statusCode;
     protected string $idTokenIssuer;
+
+    /** @var non-empty-string */
     protected string $publicKey;
 
     public function __construct(protected string $name, protected readonly RouterInterface $router, protected RequestStack $requestStack, array $options = [], array $collaborators = [])
@@ -114,6 +116,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         return $this->redirectUri;
     }
 
+    /** @param non-empty-string $publicKey */
     public function setPublicKey(string $publicKey): static
     {
         $this->publicKey = $publicKey;

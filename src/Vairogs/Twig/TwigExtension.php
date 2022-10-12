@@ -29,7 +29,7 @@ final class TwigExtension extends AbstractExtension
     public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
     public const HELPER_DIR = '/Utils/Helper/';
 
-    public function __construct(private CacheManager $cacheManager)
+    public function __construct(private readonly CacheManager $cacheManager)
     {
     }
 
