@@ -8,6 +8,7 @@ use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Twig\Attribute\TwigFunction;
 
 use function floor;
+use function get_debug_type;
 use function round;
 use function trim;
 
@@ -26,14 +27,15 @@ final class Time
     {
         $timestamp = round(num: $timestamp * 1000);
         $result = $asArray ? [] : '';
+        $type = get_debug_type(value: $result);
 
         foreach (self::TIME as $unit => $value) {
             if ($timestamp >= $value) {
                 $time = (int) floor(num: $timestamp / $value);
                 if ($time > 0) {
-                    match (get_debug_type(value: $result)) {
-                        Type::BUILTIN_TYPE_STRING => $result .= $time . ' ' . $unit . (1 === $time ? '' : 's') . ' ',
+                    match ($type) {
                         Type::BUILTIN_TYPE_ARRAY => $result[$unit] = $time,
+                        default => $result .= $time . ' ' . $unit . (1 === $time ? '' : 's') . ' ',
                     };
                 }
 
@@ -41,9 +43,9 @@ final class Time
             }
         }
 
-        return match (get_debug_type(value: $result)) {
-            Type::BUILTIN_TYPE_STRING => trim(string: $result),
+        return match ($type) {
             Type::BUILTIN_TYPE_ARRAY => $result,
+            default => trim(string: $result),
         };
     }
 }

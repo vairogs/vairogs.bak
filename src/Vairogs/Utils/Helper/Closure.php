@@ -186,7 +186,7 @@ final class Closure
         $this->bind(function: $function, clone: $clone)(...$arguments);
     }
 
-    private function bind(callable $function, object $clone): \Closure|false|null
+    private function bind(callable $function, object $clone): ?\Closure
     {
         return \Closure::bind(closure: $function, newThis: $clone, newScope: $clone::class);
     }

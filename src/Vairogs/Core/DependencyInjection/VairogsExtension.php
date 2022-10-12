@@ -28,6 +28,9 @@ class VairogsExtension extends Extension
         $this->configureComponent(class: SitemapDependency::class, container: $container, configuration: $configuration);
     }
 
+    /**
+     * @param array<int, mixed> $configs
+     */
     public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
         foreach ((new Util())->makeOneDimension(array: [$this->getAlias() => $this->processConfiguration(configuration: $configuration, configs: $configs)]) as $key => $value) {

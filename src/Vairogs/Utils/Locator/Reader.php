@@ -3,9 +3,7 @@
 namespace Vairogs\Utils\Locator;
 
 use PhpParser\Lexer;
-use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Class_;
-use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Trait_;
@@ -35,17 +33,15 @@ class Reader
     private function findDefinitions(array $stmts, Name $namespace): void
     {
         foreach ($stmts as $stmt) {
-            $this->makeDefinition(stmt: $stmt, namespace: $namespace);
-        }
-    }
+            if ($stmt instanceof Namespace_) {
+                $this->findDefinitions($stmt->stmts, new Name(name: (string) $stmt->name));
+                continue;
+            }
 
-    private function makeDefinition(Stmt|ClassLike $stmt, Name $namespace): void
-    {
-        if ($stmt instanceof Namespace_) {
-            $this->findDefinitions($stmt->stmts, new Name(name: (string) $stmt->name));
-        } elseif (in_array(needle: $stmt::class, haystack: $this->types, strict: true)) {
-            $defName = new Name(name: "{$namespace}\\{$stmt->name}");
-            $this->names[$defName->key()] = $defName->normalize();
+            if (in_array(needle: $stmt::class, haystack: $this->types, strict: true)) {
+                $defName = new Name(name: "$namespace\\$stmt->name");
+                $this->names[$defName->key()] = $defName->normalize();
+            }
         }
     }
 }

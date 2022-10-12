@@ -69,11 +69,19 @@ final class XXTEA
         return (new Convert())->long2str(array: $vector, wide: true);
     }
 
+    /**
+     * @param array<int, int> $key
+     */
     private function mx(int $sum, int $first, int $last, int $pointer, int $right, array $key): int
     {
         return ((($last >> 5 & 0x07FFFFFF) ^ $first << 2) + (($first >> 3 & 0x1FFFFFFF) ^ $last << 4)) ^ (($sum ^ $first) + ($key[$pointer & 3 ^ $right] ^ $last));
     }
 
+    /**
+     * @param array<int, int> $key
+     *
+     * @return array<int, int>
+     */
     private function fixKey(array $key): array
     {
         if (count(value: $key) < 4) {

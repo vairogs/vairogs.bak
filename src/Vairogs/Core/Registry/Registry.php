@@ -3,19 +3,19 @@
 namespace Vairogs\Core\Registry;
 
 use InvalidArgumentException;
-use Traversable;
+use IteratorAggregate;
 
 use function iterator_to_array;
 use function sprintf;
 
-class Registry
+readonly class Registry
 {
     /**
      * @var HasRegistry[]
      */
-    private readonly array $clients;
+    private array $clients;
 
-    public function __construct(Traversable $clients)
+    public function __construct(IteratorAggregate $clients)
     {
         /* @noinspection PhpRedundantOptionalArgumentInspection */
         $this->clients = iterator_to_array(iterator: $clients, preserve_keys: true);
@@ -32,7 +32,10 @@ class Registry
         throw new InvalidArgumentException(message: sprintf('Client "%s" does not exist', $name));
     }
 
-    public function getClients(): iterable
+    /**
+     * @return array<int, HasRegistry>
+     */
+    public function getClients(): array
     {
         return $this->clients;
     }

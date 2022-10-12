@@ -7,11 +7,11 @@ use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Vairogs\Extra\Constants\ContentType;
 
-class ErrorResponse
+readonly class ErrorResponse
 {
-    private readonly Response $response;
+    private Response $response;
 
-    public function __construct(private readonly ConstraintViolationListInterface $violations)
+    public function __construct(private ConstraintViolationListInterface $violations)
     {
         $this->response = new Response();
         $this->response->headers->set(key: 'Content-Type', values: ContentType::XML);

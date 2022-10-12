@@ -108,6 +108,6 @@ final class Identification extends AbstractHelper
     {
         $hash = substr(string: hash(algo: 'sha' . $bits, data: $text, binary: true), offset: 0, length: (int) round(num: $bits / 16));
 
-        return strtr(string: rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
+        return strtr(rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');
     }
 }
