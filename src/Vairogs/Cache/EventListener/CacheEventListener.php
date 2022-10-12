@@ -3,7 +3,7 @@
 namespace Vairogs\Cache\EventListener;
 
 use JetBrains\PhpStorm\ArrayShape;
-use Symfony\Bundle\SecurityBundle\Security\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
