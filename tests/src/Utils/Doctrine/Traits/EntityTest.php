@@ -14,15 +14,16 @@ class EntityTest extends VairogsTestCase
      * @noinspection PhpUnhandledExceptionInspection
      * @noinspection UnnecessaryAssertionInspection
      */
-    public function test(int $id, int $status): void
+    public function test(int $id, int $status, int $actualStatus): void
     {
         $entity = (new Entity())
             ->setId(id: $id)
             ->setStatus(status: $status)
-            ->updatedTimestamps();
+            ->updatedTimestamps()
+            ->updateStatus();
 
         $this->assertEquals(expected: $id, actual: $entity->getId());
-        $this->assertEquals(expected: $status, actual: $entity->getStatus());
+        $this->assertEquals(expected: $actualStatus, actual: $entity->getStatus());
         $this->assertInstanceOf(expected: DateTimeInterface::class, actual: $entity->getCreationDate());
         $this->assertInstanceOf(expected: DateTimeInterface::class, actual: $entity->getModificationDate());
         $this->assertEquals(expected: $entity->getCreationDate()->format(format: DateTimeInterface::ATOM), actual: $entity->getModificationDate()->format(format: DateTimeInterface::ATOM));
