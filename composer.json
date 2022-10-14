@@ -88,7 +88,7 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pdo": "*",
-        "ext-random": "*",
+        "ext-phpiredis": "*",
         "ext-redis": ">=5.3",
         "ext-zend-opcache": "*",
         "doctrine/dbal": "3.5.x-dev",
