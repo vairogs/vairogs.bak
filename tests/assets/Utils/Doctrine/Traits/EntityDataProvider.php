@@ -7,8 +7,8 @@ class EntityDataProvider
     public function dataProviderEntity(): array
     {
         return [
-            [1, 1, ],
-            [22, 0, ],
+            [1, 1, 1, ],
+            [22, 3, 0, ],
         ];
     }
 }
