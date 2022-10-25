@@ -12,7 +12,6 @@ use Vairogs\Twig\Attribute\TwigFunction;
 
 use function sprintf;
 
-/** @noinspection TypoSafeNamingInspection */
 final class Closure
 {
     /**

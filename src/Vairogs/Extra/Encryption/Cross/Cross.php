@@ -16,7 +16,7 @@ final class Cross
             return '';
         }
 
-        [$length, $byte, $result,] = $this->base($string, false);
+        [$length, $byte, $result,] = $this->base(string: $string, decrypt: false);
 
         for ($i = 1; $i < $length; $i++) {
             $byte[$i] = ($byte[$i] ^ $byte[$i - 1]) + (new Convert())->char2byte(char: $key[$i % strlen(string: $key)]);
@@ -32,7 +32,7 @@ final class Cross
             return '';
         }
 
-        [$length, $byte, $result,] = $this->base($string, true);
+        [$length, $byte, $result,] = $this->base(string: $string, decrypt: true);
 
         for ($i = $length - 1; $i > 0; $i--) {
             $byte[$i] = ($byte[$i] - (new Convert())->char2byte(char: $key[$i % strlen(string: $key)])) ^ $byte[$i - 1];
@@ -42,9 +42,6 @@ final class Cross
         return $string[0] . $result;
     }
 
-    /**
-     * @return array<int, mixed>
-     */
     #[ArrayShape([
         Type::BUILTIN_TYPE_INT,
         Type::BUILTIN_TYPE_ARRAY,
