@@ -29,7 +29,7 @@ class VairogsExtension extends Extension
     }
 
     /**
-     * @param array<int, mixed> $configs
+     * @param array<int, array> $configs
      */
     public function process(array $configs, ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
