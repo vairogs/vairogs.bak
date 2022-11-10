@@ -2,8 +2,8 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Utils\Handler\FunctionHandler;
 
 use function acos;
@@ -12,13 +12,10 @@ use function cos;
 use function deg2rad;
 use function function_exists;
 use function implode;
-use function ltrim;
 use function preg_match;
 use function rad2deg;
 use function round;
 use function sin;
-
-use const PHP_INT_MAX;
 
 final class Util
 {
@@ -56,29 +53,6 @@ final class Util
         }
 
         return 1 !== $number;
-    }
-
-    #[TwigFunction]
-    #[TwigFilter]
-    public function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX, array $result = []): array
-    {
-        if ($depth <= $maxDepth) {
-            foreach ($array as $key => $value) {
-                $key = ltrim(string: $base . '.' . $key, characters: '.');
-
-                if ((new Iteration())->isAssociative(array: $value)) {
-                    $result = $this->makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth, result: $result);
-
-                    if ($onlyLast) {
-                        continue;
-                    }
-                }
-
-                $result[$key] = $value;
-            }
-        }
-
-        return $result;
     }
 
     public function isPrimeGmp(int $number, bool $override = false): ?bool

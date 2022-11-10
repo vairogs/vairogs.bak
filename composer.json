@@ -119,6 +119,7 @@
         "vairogs/cache": "self.version",
         "vairogs/captcha": "self.version",
         "vairogs/core": "self.version",
+        "vairogs/doctrine-utils": "self.version",
         "vairogs/extra": "self.version",
         "vairogs/extra-constants": "self.version",
         "vairogs/extra-encryption": "self.version",

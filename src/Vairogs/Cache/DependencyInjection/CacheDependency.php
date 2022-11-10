@@ -10,6 +10,8 @@ use Vairogs\Core\DependencyInjection\Dependency;
 
 class CacheDependency implements Dependency
 {
+    public const CACHE = 'cache';
+
     /**
      * @noinspection NullPointerExceptionInspection
      */
@@ -17,7 +19,7 @@ class CacheDependency implements Dependency
     {
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(name: Component::CACHE)
+            ->arrayNode(name: self::CACHE)
                 ->canBeEnabled()
             ->end()
         ->end();

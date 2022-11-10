@@ -7,8 +7,8 @@ use InvalidArgumentException;
 use ReflectionException;
 use ReflectionProperty;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 
 use function sprintf;
 

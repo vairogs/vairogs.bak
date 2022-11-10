@@ -5,7 +5,7 @@ namespace Vairogs\Tests\Source\Utils\Helper;
 use Doctrine\Common\Collections\Collection;
 use InvalidArgumentException;
 use Vairogs\Extra\Constants\Enum\Order as Enum;
-use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\Doctrine\Traits\Entity;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Order;
 

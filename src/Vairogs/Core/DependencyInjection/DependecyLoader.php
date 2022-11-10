@@ -5,7 +5,7 @@ namespace Vairogs\Core\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Vairogs\Utils\Helper\Php;
+use Vairogs\Core\Functions;
 
 trait DependecyLoader
 {
@@ -25,6 +25,6 @@ trait DependecyLoader
 
     protected function checkImplementation(string $class): bool
     {
-        return (new Php())->classImplements(class: $class, interface: Dependency::class);
+        return (new Functions())->classImplements(class: $class, interface: Dependency::class);
     }
 }

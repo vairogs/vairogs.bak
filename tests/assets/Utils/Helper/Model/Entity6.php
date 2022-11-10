@@ -2,7 +2,7 @@
 
 namespace Vairogs\Tests\Assets\Utils\Helper\Model;
 
-use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\Doctrine\Traits\Entity;
 
 class Entity6 extends Entity
 {

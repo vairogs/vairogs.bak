@@ -7,7 +7,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
-use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Core\DependencyInjection\DependecyLoader;
 use Vairogs\Core\DependencyInjection\Dependency;
 use Vairogs\Core\Vairogs;
@@ -19,11 +18,13 @@ class AuthDependency implements Dependency
 {
     use DependecyLoader;
 
+    public const AUTH = 'auth';
+
     public function getConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         $authNode = $arrayNodeDefinition
             ->children()
-                ->arrayNode(name: Component::AUTH)
+                ->arrayNode(name: self::AUTH)
                 ->canBeEnabled();
 
         $this->appendComponent(class: AuthOpenIDDependency::class, arrayNodeDefinition: $authNode);
@@ -31,7 +32,7 @@ class AuthDependency implements Dependency
 
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(name: Component::AUTH)
+            ->arrayNode(name: self::AUTH)
             ->children();
 
         $arrayNodeDefinition
@@ -41,7 +42,7 @@ class AuthDependency implements Dependency
 
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, Component::AUTH, Status::ENABLED);
+        $enabledKey = sprintf('%s.%s.%s', Vairogs::VAIROGS, self::AUTH, Status::ENABLED);
 
         if ($container->hasParameter(name: $enabledKey) && true === $container->getParameter(name: $enabledKey)) {
             $this->configureComponent(class: AuthOpenIDDependency::class, container: $container, configuration: $configuration);

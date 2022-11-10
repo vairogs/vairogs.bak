@@ -5,8 +5,8 @@ namespace Vairogs\Utils\Helper;
 use Exception;
 use ReflectionClass;
 use ReflectionMethod;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 
 final class Reflection
 {

@@ -2,7 +2,7 @@
 
 namespace Vairogs\Tests\Assets\Utils\Helper\Model;
 
-use Vairogs\Twig\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFilter;
 
 class TestAttribute
 {

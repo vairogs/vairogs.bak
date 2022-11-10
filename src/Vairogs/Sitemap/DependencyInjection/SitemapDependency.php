@@ -10,6 +10,8 @@ use Vairogs\Core\DependencyInjection\Dependency;
 
 class SitemapDependency implements Dependency
 {
+    public const SITEMAP = 'sitemap';
+
     /**
      * @noinspection NullPointerExceptionInspection
      */
@@ -17,7 +19,7 @@ class SitemapDependency implements Dependency
     {
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(name: Component::SITEMAP)
+            ->arrayNode(name: self::SITEMAP)
                 ->canBeEnabled()
                 ->addDefaultsIfNotSet()
                 ->children()

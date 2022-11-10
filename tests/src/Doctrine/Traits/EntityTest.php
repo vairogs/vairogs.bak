@@ -1,15 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Source\Utils\Doctrine\Traits;
+namespace Vairogs\Tests\Source\Doctrine\Traits;
 
 use DateTimeInterface;
-use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\Doctrine\Traits\Entity;
 use Vairogs\Tests\Assets\VairogsTestCase;
 
 class EntityTest extends VairogsTestCase
 {
     /**
-     * @dataProvider \Vairogs\Tests\Assets\Utils\Doctrine\Traits\EntityDataProvider::dataProviderEntity
+     * @dataProvider \Vairogs\Tests\Assets\Doctrine\Traits\EntityDataProvider::dataProviderEntity
      *
      * @noinspection PhpUnhandledExceptionInspection
      * @noinspection UnnecessaryAssertionInspection

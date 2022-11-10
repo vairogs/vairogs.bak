@@ -1,10 +1,11 @@
 <?php declare(strict_types = 1);
 
 use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
 
-if (!file_exists(filename: __DIR__ . '/src')) {
-    exit;
-}
+$finder = Finder::create()
+    ->in(dirs: [__DIR__, ])
+    ->exclude(dirs: ['vendor', 'var', 'tests/var', '.github', '.circleci', ]);
 
 return (new Config())
     ->setRules(rules: [
@@ -58,4 +59,5 @@ return (new Config())
         'yoda_style' => true,
     ], )
     ->setRiskyAllowed(isRiskyAllowed: true, )
-    ->setCacheFile(cacheFile: '.php-cs-fixer.cache', );
+    ->setCacheFile(cacheFile: '.php-cs-fixer.cache', )
+    ->setFinder(finder: $finder);

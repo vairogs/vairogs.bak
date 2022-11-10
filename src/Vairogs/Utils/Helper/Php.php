@@ -10,18 +10,15 @@ use ReflectionClassConstant;
 use ReflectionObject;
 use RuntimeException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Extra\Constants\Status;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_diff;
 use function array_unshift;
 use function array_values;
-use function class_exists;
-use function class_implements;
 use function filter_var;
 use function get_class_methods;
-use function interface_exists;
 use function is_array;
 use function is_bool;
 use function is_object;
@@ -98,13 +95,6 @@ final class Php
         }
 
         return $methods;
-    }
-
-    #[TwigFunction]
-    #[TwigFilter]
-    public function classImplements(string $class, string $interface): bool
-    {
-        return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
     }
 
     #[TwigFunction]

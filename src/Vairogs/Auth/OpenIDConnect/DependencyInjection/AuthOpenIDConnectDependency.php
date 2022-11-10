@@ -10,12 +10,13 @@ use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Auth\DependencyInjection\AbstractAuthChildDependency;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
-use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Service;
 
 class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
 {
+    public const AUTH_OPENIDCONNECT = 'openidconnect';
+
     public function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         $arrayNodeDefinition->addDefaultsIfNotSet();
@@ -69,7 +70,7 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
         /* @noinspection PhpPossiblePolymorphicInvocationInspection */
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(name: Component::AUTH_OPENIDCONNECT)
+            ->arrayNode(name: self::AUTH_OPENIDCONNECT)
                 ->canBeEnabled()
                 ->addDefaultsIfNotSet()
                 ->children()
@@ -81,6 +82,6 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
 
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . Component::AUTH_OPENIDCONNECT, container: $container);
+        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . self::AUTH_OPENIDCONNECT, container: $container);
     }
 }

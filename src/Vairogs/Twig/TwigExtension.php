@@ -7,10 +7,10 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter as TwigTwigFilter;
 use Twig\TwigFunction as TwigTwigFunction;
 use Vairogs\Cache\CacheManager;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Definition;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 use Vairogs\Utils\Helper\Reflection;
 use Vairogs\Utils\Locator\Finder;
 
@@ -28,6 +28,8 @@ final class TwigExtension extends AbstractExtension
 
     public const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
     public const HELPER_DIR = '/Utils/Helper/';
+    private const CORE_NAMESPACE = 'Vairogs\Core';
+    private const CORE_DIR = '/Core/';
 
     public function __construct(private readonly CacheManager $cacheManager)
     {
@@ -73,6 +75,9 @@ final class TwigExtension extends AbstractExtension
     {
         $methods = [[]];
         $foundClasses = (new Finder(directories: [dirname(path: __DIR__) . self::HELPER_DIR], types: [Class_::class], namespace: self::HELPER_NAMESPACE))->locate()->getClassMap();
+        $foundFunctionsClasses = (new Finder(directories: [dirname(path: __DIR__) . self::CORE_DIR], types: [Class_::class], namespace: self::CORE_DIR))->locate()->getClassMap();
+
+        $foundClasses += $foundFunctionsClasses;
 
         foreach (array_keys(array: $foundClasses) as $class) {
             $methods[] = $this->makeArray(input: (new Reflection())->getFilteredMethods(class: $class, filterClass: $filter), key: $this->getPrefix(base: $class), class: $twig);
@@ -88,6 +93,10 @@ final class TwigExtension extends AbstractExtension
 
         if (self::HELPER_NAMESPACE === $nameSpace) {
             $base = sprintf('helper_%s', $short);
+        }
+
+        if (self::CORE_NAMESPACE === $nameSpace) {
+            $base = sprintf('core_%s', $short);
         }
 
         $key = '';

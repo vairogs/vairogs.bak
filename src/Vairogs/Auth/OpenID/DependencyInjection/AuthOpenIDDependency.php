@@ -9,12 +9,13 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Auth\DependencyInjection\AbstractAuthChildDependency;
 use Vairogs\Auth\OpenID\OpenIDProvider;
-use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Service;
 
 class AuthOpenIDDependency extends AbstractAuthChildDependency
 {
+    public const AUTH_OPENID = 'openid';
+
     public function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
         $arrayNodeDefinition->addDefaultsIfNotSet();
@@ -57,7 +58,7 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
         /* @noinspection PhpPossiblePolymorphicInvocationInspection */
         $arrayNodeDefinition
             ->children()
-            ->arrayNode(name: Component::AUTH_OPENID)
+            ->arrayNode(name: self::AUTH_OPENID)
                 ->canBeEnabled()
                 ->addDefaultsIfNotSet()
                 ->children()
@@ -69,6 +70,6 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
 
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . Component::AUTH_OPENID, container: $container);
+        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . self::AUTH_OPENID, container: $container);
     }
 }

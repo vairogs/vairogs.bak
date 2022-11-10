@@ -6,11 +6,11 @@ use InvalidArgumentException;
 use ReflectionException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Extra\Constants;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Status;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_merge;
 use function file_get_contents;

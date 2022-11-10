@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils\Doctrine\Traits;
+namespace Vairogs\DoctrineUtils\Traits;
 
 trait Entity
 {

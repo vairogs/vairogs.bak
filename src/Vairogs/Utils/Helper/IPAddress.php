@@ -5,9 +5,9 @@ namespace Vairogs\Utils\Helper;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyInfo\Type;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Extra\Constants\Http;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_map;
 use function count;

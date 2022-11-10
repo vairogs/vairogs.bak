@@ -5,10 +5,10 @@ namespace Vairogs\Tests\Source\Utils\Helper;
 use ReflectionException;
 use ReflectionMethod;
 use Vairogs\Cache\Cache;
+use Vairogs\Core\Attribute\TwigFilter;
 use Vairogs\Core\Vairogs;
 use Vairogs\Tests\Assets\Utils\Helper\Model\TestAttribute;
 use Vairogs\Tests\Assets\VairogsTestCase;
-use Vairogs\Twig\Attribute\TwigFilter;
 use Vairogs\Utils\Helper\Reflection;
 use Vairogs\Utils\Helper\Text;
 

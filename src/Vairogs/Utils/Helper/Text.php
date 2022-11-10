@@ -3,9 +3,9 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Extra\Constants\Symbol;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_key_exists;
 use function array_reverse;

@@ -1,20 +1,19 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Utils\Doctrine\Traits;
+namespace Vairogs\DoctrineUtils\Traits;
 
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
-use Vairogs\Extra\Constants\Definition;
 
 trait CreatedModified
 {
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: [Definition::DEFAULT => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $creationDate = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: [Definition::DEFAULT => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeInterface $modificationDate = null;
 
     public function getModificationDate(): DateTimeInterface

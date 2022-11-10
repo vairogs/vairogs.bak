@@ -4,8 +4,8 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use RuntimeException;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 
 use function hash;
 use function http_build_query;

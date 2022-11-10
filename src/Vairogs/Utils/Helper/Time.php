@@ -3,9 +3,9 @@
 namespace Vairogs\Utils\Helper;
 
 use Symfony\Component\PropertyInfo\Type;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Extra\Constants;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 
 use function floor;
 use function get_debug_type;

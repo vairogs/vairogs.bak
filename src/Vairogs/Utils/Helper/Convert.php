@@ -2,8 +2,8 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 
 use function array_pop;
 use function array_values;

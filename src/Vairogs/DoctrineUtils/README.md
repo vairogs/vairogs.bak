@@ -8,7 +8,7 @@ Installation
 The recommended way to install is via Composer:
 
 ```
-composer require vairogs/core
+composer require vairogs/doctrine-utils
 ```
 
-This package requires at least PHP 8.1.0. If used with Symfony project, minimum required Symfony version is 6.1
+This package requires at least PHP 8.2.0. If used with Symfony project, minimum required Symfony version is 6.2

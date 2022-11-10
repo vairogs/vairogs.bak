@@ -6,7 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 use Vairogs\Extra\Constants\Status;
-use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\Doctrine\Traits\Entity;
 use Vairogs\Tests\Assets\Utils\Helper\Model\Entity1;
 use Vairogs\Tests\Assets\Utils\Helper\Model\Entity7;
 use Vairogs\Tests\Assets\VairogsTestCase;

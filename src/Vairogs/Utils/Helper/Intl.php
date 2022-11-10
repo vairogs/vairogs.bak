@@ -3,8 +3,8 @@
 namespace Vairogs\Utils\Helper;
 
 use Symfony\Component\Intl\Countries;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 
 use function str_replace;
 use function strtoupper;

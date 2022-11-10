@@ -6,10 +6,10 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 use InvalidArgumentException;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Extra\Constants;
 use Vairogs\Extra\Constants\Month as M;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_merge;
 use function gmdate;

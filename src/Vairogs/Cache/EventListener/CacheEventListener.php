@@ -14,7 +14,7 @@ use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Cache\Cache;
 use Vairogs\Cache\CacheManager;
 use Vairogs\Cache\Event\CacheEvent;
-use Vairogs\Core\Cache\Header;
+use Vairogs\Cache\Header;
 
 use function class_exists;
 use function in_array;

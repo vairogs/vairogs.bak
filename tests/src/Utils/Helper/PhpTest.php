@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Source\Utils\Helper;
 
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Vairogs\Core\Vairogs;
-use Vairogs\Tests\Assets\Utils\Doctrine\Traits\Entity;
+use Vairogs\Tests\Assets\Doctrine\Traits\Entity;
 use Vairogs\Tests\Assets\Utils\Helper\Model\Entity1;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Php;

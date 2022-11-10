@@ -33,11 +33,11 @@ use Vairogs\Auth\OpenIDConnect\Configuration\UriCollection;
 use Vairogs\Auth\OpenIDConnect\Configuration\ValidatorChain;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
+use Vairogs\Core\Functions;
 use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Utils\Helper\Char;
 use Vairogs\Utils\Helper\Identification;
-use Vairogs\Utils\Helper\Util;
 
 use function array_merge;
 use function base64_encode;
@@ -236,7 +236,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $uris = $options['uris'] ?? [];
         unset($options['redirect'], $options['uris']);
 
-        foreach ((new Util())->makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
+        foreach ((new Functions())->makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
             if (property_exists(object_or_class: $this, property: $var = (new Char())->toCamelCase(string: $key))) {
                 $this->{$var} = $value;
             }

@@ -5,9 +5,9 @@ namespace Vairogs\Utils\Helper;
 use Closure;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Extra\Constants\Enum\Order as Enum;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_key_exists;
 use function count;

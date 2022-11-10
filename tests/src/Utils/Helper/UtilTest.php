@@ -2,6 +2,7 @@
 
 namespace Vairogs\Tests\Source\Utils\Helper;
 
+use Vairogs\Core\Functions;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Util;
 
@@ -36,7 +37,7 @@ class UtilTest extends VairogsTestCase
      */
     public function testMakeOneDimension(array $input, bool $onlyLast, int $depth, int $maxDepth, array $expected): void
     {
-        $this->assertEquals($expected, (new Util())->makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
+        $this->assertEquals($expected, (new Functions())->makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
     }
 
     /**

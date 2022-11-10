@@ -4,9 +4,9 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
+use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\TwigFunction;
 use Vairogs\Extra\Constants\Enum\StartsEnds;
-use Vairogs\Twig\Attribute\TwigFilter;
-use Vairogs\Twig\Attribute\TwigFunction;
 
 use function array_diff;
 use function array_filter;
@@ -93,17 +93,6 @@ final class Iteration
         }
 
         return false;
-    }
-
-    #[TwigFunction]
-    #[TwigFilter]
-    public function isAssociative(mixed $array): bool
-    {
-        if (!is_array(value: $array) || [] === $array) {
-            return false;
-        }
-
-        return !array_is_list($array);
     }
 
     #[TwigFunction]

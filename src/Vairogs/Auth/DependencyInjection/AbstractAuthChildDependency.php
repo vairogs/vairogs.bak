@@ -6,17 +6,16 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Core\DependencyInjection\Dependency;
+use Vairogs\Core\Functions;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
-use Vairogs\Utils\Helper\Util;
 
 use function sprintf;
 
 abstract class AbstractAuthChildDependency implements Dependency
 {
-    final public const AUTH = Vairogs::VAIROGS . '.' . Component::AUTH;
+    final public const AUTH = Vairogs::VAIROGS . '.' . AuthDependency::AUTH;
 
     public function loadComponentConfiguration(string $base, ContainerBuilder $container): void
     {
@@ -30,7 +29,7 @@ abstract class AbstractAuthChildDependency implements Dependency
                 $this->buildClientConfiguration(arrayNodeDefinition: $tree->getRootNode());
                 $config = (new Processor())->process(configTree: $tree->buildTree(), configs: [$clientConfig]);
 
-                foreach ((new Util())->makeOneDimension(array: $config, base: $clientKey = $clients . '.' . $key) as $tkey => $value) {
+                foreach ((new Functions())->makeOneDimension(array: $config, base: $clientKey = $clients . '.' . $key) as $tkey => $value) {
                     $container->setParameter(name: $tkey, value: $value);
                 }
 

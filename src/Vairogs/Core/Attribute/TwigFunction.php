@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Twig\Attribute;
+namespace Vairogs\Core\Attribute;
 
 use Attribute;
 
