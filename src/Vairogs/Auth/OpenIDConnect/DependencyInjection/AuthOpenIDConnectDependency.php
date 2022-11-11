@@ -7,15 +7,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\PropertyInfo\Type;
-use Vairogs\Auth\DependencyInjection\AbstractAuthChildDependency;
+use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
+use Vairogs\Core\DependencyInjection\Dependency;
+use Vairogs\Core\DependencyInjection\Traits\ClientDependency;
+use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Service;
 
-class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
+class AuthOpenIDConnectDependency implements Dependency
 {
+    use ClientDependency;
+
     public const AUTH_OPENIDCONNECT = 'openidconnect';
+    private const USER_PROVIDER = 'user_provider';
 
     public function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
     {
@@ -32,7 +38,7 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
             ->scalarNode(name: 'id_token_issuer')->isRequired()->defaultValue(value: null)->end()
             ->scalarNode(name: 'public_key')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode(name: 'use_session')->defaultValue(value: false)->end()
-            ->scalarNode(name: 'user_provider')->defaultValue(value: DefaultProvider::class)->end()
+            ->scalarNode(name: self::USER_PROVIDER)->defaultValue(value: DefaultProvider::class)->end()
             ->scalarNode(name: 'verify')->defaultValue(value: true)->end()
             ->arrayNode(name: 'redirect')
                 ->addDefaultsIfNotSet()
@@ -52,9 +58,9 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
 
     public function configureClient(ContainerBuilder $container, string $clientServiceKey, string $base, string $key): void
     {
-        $clientDefinition = $container->register(id: $clientServiceKey, class: $container->getParameter(name: $clientServiceKey . '.user_provider'));
+        $clientDefinition = $container->register(id: $clientServiceKey, class: $container->getParameter(name: $clientServiceKey . '.'.self::USER_PROVIDER));
         $options = $container->getParameter(name: $clientServiceKey);
-        unset($options['user_provider']);
+        unset($options[self::USER_PROVIDER]);
         $clientDefinition->setArguments(arguments: [
             $key,
             new Reference(id: Service::ROUTER),
@@ -82,6 +88,6 @@ class AuthOpenIDConnectDependency extends AbstractAuthChildDependency
 
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . self::AUTH_OPENIDCONNECT, container: $container);
+        $this->loadComponentConfiguration(base: Vairogs::VAIROGS . '.' . AuthDependency::AUTH . '.' . self::AUTH_OPENIDCONNECT, container: $container);
     }
 }

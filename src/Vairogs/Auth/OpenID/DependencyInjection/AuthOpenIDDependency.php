@@ -7,13 +7,18 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\PropertyInfo\Type;
-use Vairogs\Auth\DependencyInjection\AbstractAuthChildDependency;
+use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Auth\OpenID\OpenIDProvider;
+use Vairogs\Core\DependencyInjection\Dependency;
+use Vairogs\Core\DependencyInjection\Traits\ClientDependency;
+use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Service;
 
-class AuthOpenIDDependency extends AbstractAuthChildDependency
+class AuthOpenIDDependency implements Dependency
 {
+    use ClientDependency;
+
     public const AUTH_OPENID = 'openid';
 
     public function buildClientConfiguration(ArrayNodeDefinition $arrayNodeDefinition): void
@@ -70,6 +75,6 @@ class AuthOpenIDDependency extends AbstractAuthChildDependency
 
     public function loadComponent(ContainerBuilder $container, ConfigurationInterface $configuration): void
     {
-        $this->loadComponentConfiguration(base: AbstractAuthChildDependency::AUTH . '.' . self::AUTH_OPENID, container: $container);
+        $this->loadComponentConfiguration(base: Vairogs::VAIROGS . '.' . AuthDependency::AUTH . '.' . self::AUTH_OPENID, container: $container);
     }
 }
