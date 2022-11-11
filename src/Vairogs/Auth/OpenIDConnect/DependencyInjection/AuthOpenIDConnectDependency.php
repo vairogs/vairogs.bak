@@ -58,7 +58,7 @@ class AuthOpenIDConnectDependency implements Dependency
 
     public function configureClient(ContainerBuilder $container, string $clientServiceKey, string $base, string $key): void
     {
-        $clientDefinition = $container->register(id: $clientServiceKey, class: $container->getParameter(name: $clientServiceKey . '.'.self::USER_PROVIDER));
+        $clientDefinition = $container->register(id: $clientServiceKey, class: $container->getParameter(name: $clientServiceKey . '.' . self::USER_PROVIDER));
         $options = $container->getParameter(name: $clientServiceKey);
         unset($options[self::USER_PROVIDER]);
         $clientDefinition->setArguments(arguments: [

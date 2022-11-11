@@ -1,10 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Core\DependencyInjection;
+namespace Vairogs\Core\DependencyInjection\Traits;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Vairogs\Core\DependencyInjection\Dependency;
 use Vairogs\Core\Functions;
 
 trait DependecyLoader

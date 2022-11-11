@@ -7,8 +7,8 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
-use Vairogs\Core\DependencyInjection\DependecyLoader;
 use Vairogs\Core\DependencyInjection\Dependency;
+use Vairogs\Core\DependencyInjection\Traits\DependecyLoader;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
 

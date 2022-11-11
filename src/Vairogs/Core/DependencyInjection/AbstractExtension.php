@@ -10,7 +10,7 @@ use Vairogs\Core\Functions;
 
 abstract class AbstractExtension extends Extension
 {
-    use DependecyLoader;
+    use Traits\DependecyLoader;
 
     /**
      * @throws Exception
