@@ -4,8 +4,8 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use RuntimeException;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 
 use function hash;
 use function http_build_query;
@@ -31,8 +31,8 @@ final class Gravatar
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getGravatarUrl(string $email, bool $isSecure = false, int $size = 32, string $default = self::ICON_IDENTICON): string
     {
         if (!(new Validate())->validateEmail(email: $email)) {

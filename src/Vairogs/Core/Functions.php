@@ -2,8 +2,8 @@
 
 namespace Vairogs\Core;
 
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 
 use function class_exists;
 use function class_implements;
@@ -15,8 +15,8 @@ use const PHP_INT_MAX;
 
 final class Functions
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isAssociative(mixed $array): bool
     {
         if (!is_array(value: $array) || [] === $array) {
@@ -26,8 +26,8 @@ final class Functions
         return !array_is_list($array);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function makeOneDimension(array $array, string $base = '', string $separator = '.', bool $onlyLast = false, int $depth = 0, int $maxDepth = PHP_INT_MAX, array $result = []): array
     {
         if ($depth <= $maxDepth) {
@@ -49,8 +49,8 @@ final class Functions
         return $result;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function classImplements(string $class, string $interface): bool
     {
         return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);

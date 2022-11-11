@@ -4,8 +4,8 @@ namespace Vairogs\Utils\Helper;
 
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants\Enum\StartsEnds;
 
 use function array_diff;
@@ -25,8 +25,8 @@ use const ARRAY_FILTER_USE_KEY;
 
 final class Iteration
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isEmpty(mixed $variable, bool $result = true): bool
     {
         if (is_array(value: $variable) && [] !== $variable) {
@@ -40,8 +40,8 @@ final class Iteration
         return empty($variable);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function makeMultiDimensional(array $array): array
     {
         if ($this->isMultiDimensional(keys: $array)) {
@@ -58,15 +58,15 @@ final class Iteration
         return $result;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function uniqueMap(array &$array): void
     {
         $array = array_map(callback: 'unserialize', array: array_unique(array: array_map(callback: 'serialize', array: $array)));
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     #[Pure]
     public function unique(array $input, bool $keepKeys = false): array
     {
@@ -81,8 +81,8 @@ final class Iteration
         return array_keys(array: array_flip(array: $input));
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     #[Pure]
     public function isMultiDimensional(array $keys = []): bool
     {
@@ -95,8 +95,8 @@ final class Iteration
         return false;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function arrayIntersectKeyRecursive(array $first = [], array $second = []): array
     {
         $result = array_intersect_key($first, $second);
@@ -113,8 +113,8 @@ final class Iteration
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function arrayFlipRecursive(array $input = []): array
     {
         $result = [[]];
@@ -130,8 +130,8 @@ final class Iteration
         return array_replace(...$result);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function removeFromArray(array &$input, mixed $value): void
     {
         $input = array_diff($input, [$value]);
@@ -140,8 +140,8 @@ final class Iteration
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function arrayValuesFiltered(array $input, string $with, StartsEnds $startsEnds = StartsEnds::STARTS): array
     {
         return match ($startsEnds) {
@@ -150,29 +150,29 @@ final class Iteration
         };
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function filterKeyStartsWith(array $input, string $startsWith): array
     {
         return array_filter(array: $input, callback: static fn ($key) => str_starts_with(haystack: (string) $key, needle: $startsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function filterKeyEndsWith(array $input, string $endsWith): array
     {
         return array_filter(array: $input, callback: static fn ($key) => str_ends_with(haystack: $key, needle: $endsWith), mode: ARRAY_FILTER_USE_KEY);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getIfSet(array $input, mixed $key): mixed
     {
         return $input[$key] ?? null;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getFirstMatchAsString(array $keys, array $haystack): ?string
     {
         foreach ($keys as $key) {

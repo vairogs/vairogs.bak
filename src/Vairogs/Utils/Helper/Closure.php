@@ -7,8 +7,8 @@ use InvalidArgumentException;
 use ReflectionException;
 use ReflectionProperty;
 use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 
 use function sprintf;
 
@@ -17,8 +17,8 @@ final class Closure
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackSet(object $object, string $property, mixed $value): object
     {
         try {
@@ -39,8 +39,8 @@ final class Closure
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackSetStatic(object $object, string $property, mixed $value): object
     {
         try {
@@ -61,8 +61,8 @@ final class Closure
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackSetNonStatic(object $object, string $property, mixed $value): object
     {
         try {
@@ -83,8 +83,8 @@ final class Closure
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackGetStatic(object $object, string $property, mixed ...$arguments): mixed
     {
         try {
@@ -101,8 +101,8 @@ final class Closure
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackGetNonStatic(object $object, string $property, mixed ...$arguments): mixed
     {
         try {
@@ -120,8 +120,8 @@ final class Closure
      * @throws InvalidArgumentException
      * @throws InvalidPropertyPathException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackGet(object $object, string $property, bool $throwOnUnInitialized = false, mixed ...$arguments)
     {
         try {
@@ -147,29 +147,29 @@ final class Closure
         return $this->hijackGetStatic($object, $property, ...$arguments);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackVoid(string $function, ...$arguments): void
     {
         $function(...$arguments);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackVoidObject(object $object, string $function, mixed ...$arguments): void
     {
         $this->void(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackReturn(string $function, ...$arguments): mixed
     {
         return $function(...$arguments);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function hijackReturnObject(object $object, string $function, mixed ...$arguments): mixed
     {
         return $this->return(fn () => $object->{$function}(...$arguments), $object, ...$arguments);

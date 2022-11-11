@@ -5,6 +5,6 @@ namespace Vairogs\Core\Attribute;
 use Attribute;
 
 #[Attribute]
-final class TwigFilter
+final class CoreFilter
 {
 }

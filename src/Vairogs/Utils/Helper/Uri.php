@@ -8,8 +8,8 @@ use ReflectionException;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants;
 
 use function array_combine;
@@ -39,8 +39,8 @@ final class Uri
     /**
      * @throws ReflectionException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function buildHttpQueryArray(array|object $input, ?string $parent = null): array
     {
         $result = [];
@@ -60,8 +60,8 @@ final class Uri
     /**
      * @throws ReflectionException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function buildArrayFromObject(object $object): array
     {
         parse_str(string: $this->buildHttpQueryString($object), result: $result);
@@ -72,15 +72,15 @@ final class Uri
     /**
      * @throws ReflectionException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function buildHttpQueryString(object $object): string
     {
         return http_build_query(data: $this->buildHttpQueryArray(input: $object));
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function urlEncode(string $url): string
     {
         $urlParsed = parse_url(url: $url);
@@ -100,8 +100,8 @@ final class Uri
         return $urlParsed['scheme'] . '://' . $urlParsed['host'] . $port . ($urlParsed['path'] ?? '') . $query;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function arrayFromQueryString(string $query): array
     {
         parse_str(string: (string) preg_replace_callback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(string: urldecode(string: $match[0])), subject: $query), result: $values);
@@ -109,8 +109,8 @@ final class Uri
         return array_combine(keys: array_map(callback: 'hex2bin', array: array_keys(array: $values)), values: $values);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function parseHeaders(string $rawHeaders = ''): array
     {
         $headers = [];
@@ -130,8 +130,8 @@ final class Uri
         return $headers;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getRawHeaders(HeaderBag $headerBag): string
     {
         $string = '';
@@ -143,8 +143,8 @@ final class Uri
         return $string;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     #[Pure]
     public function isUrl(string $url): bool
     {
@@ -152,22 +152,22 @@ final class Uri
         return false !== filter_var(value: filter_var(value: $url, filter: FILTER_SANITIZE_URL), filter: FILTER_VALIDATE_URL);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getSchema(Request $request): string
     {
         return (new Http())->isHttps(request: $request) ? Constants\Http::SCHEMA_HTTPS : Constants\Http::SCHEMA_HTTP;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isAbsolute(string $path): bool
     {
         return str_starts_with(haystack: $path, needle: '//') || preg_match(pattern: '#^[a-z-]{3,}://#i', subject: $path);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function routeExists(RouterInterface $router, string $route): bool
     {
         return null !== $router->getRouteCollection()->get(name: $route);

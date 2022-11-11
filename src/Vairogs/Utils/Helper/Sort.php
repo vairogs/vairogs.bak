@@ -2,8 +2,8 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 
 use function array_slice;
 use function count;
@@ -11,8 +11,8 @@ use function round;
 
 final class Sort
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function swap(mixed &$foo, mixed &$bar): void
     {
         if ($foo === $bar) {
@@ -24,8 +24,8 @@ final class Sort
         $bar = $tmp;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function bubbleSort(array &$array): void
     {
         $count = count(value: $array);
@@ -38,8 +38,8 @@ final class Sort
         }
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function swapArray(array &$array, mixed $foo, mixed $bar): void
     {
         if ($array[$foo] === $array[$bar]) {
@@ -51,8 +51,8 @@ final class Sort
         $array[$bar] = $tmp;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function mergeSort(array $array): array
     {
         if (1 >= count(value: $array)) {

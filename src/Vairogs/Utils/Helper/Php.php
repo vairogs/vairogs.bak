@@ -10,8 +10,8 @@ use ReflectionClassConstant;
 use ReflectionObject;
 use RuntimeException;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants\Status;
 
 use function array_diff;
@@ -30,8 +30,8 @@ use const FILTER_VALIDATE_BOOL;
 
 final class Php
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     #[Pure]
     public function boolval(mixed $value): bool
     {
@@ -52,8 +52,8 @@ final class Php
      * @throws RuntimeException
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getClassConstantsValues(string $class): array
     {
         return array_values(array: $this->getClassConstants(class: $class));
@@ -63,8 +63,8 @@ final class Php
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getClassConstants(string $class): array
     {
         try {
@@ -74,8 +74,8 @@ final class Php
         }
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getParameter(array|object $variable, mixed $key): mixed
     {
         if (is_array(value: $variable)) {
@@ -85,8 +85,8 @@ final class Php
         return (new Closure())->hijackGet(object: $variable, property: $key);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getClassMethods(string $class, ?string $parent = null): array
     {
         $methods = get_class_methods(object_or_class: $class);
@@ -97,8 +97,8 @@ final class Php
         return $methods;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getArray(array|object $input): array
     {
         if (is_object(value: $input)) {
@@ -108,8 +108,8 @@ final class Php
         return $input;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getArrayFromObject(object $object): array
     {
         $input = [];
@@ -121,22 +121,22 @@ final class Php
         return $input;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getter(string $variable): string
     {
         return sprintf('get%s', ucfirst(string: $variable));
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function setter(string $variable): string
     {
         return sprintf('set%s', ucfirst(string: $variable));
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function call(mixed $value, string $function, ...$arguments): mixed
     {
         array_unshift($arguments, $value);
@@ -144,8 +144,8 @@ final class Php
         return (new Closure())->hijackReturn($function, ...$arguments);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function callObject(mixed $value, object $object, string $function, ...$arguments): mixed
     {
         array_unshift($arguments, $value);

@@ -5,8 +5,8 @@ namespace Vairogs\Utils\Helper;
 use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyInfo\Type;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants\Http;
 
 use function array_map;
@@ -17,8 +17,8 @@ use function long2ip;
 
 final class IPAddress
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getRemoteIp(Request $request, bool $trust = false): string
     {
         $headers = [Http::REMOTE_ADDR, ];
@@ -30,8 +30,8 @@ final class IPAddress
         return (string) (new Iteration())->getFirstMatchAsString(keys: $headers, haystack: $request->server->all());
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getRemoteIpCF(Request $request, bool $trust = false): string
     {
         if ($request->server->has(key: Http::HTTP_CF_CONNECTING_IP)) {
@@ -41,8 +41,8 @@ final class IPAddress
         return $this->getRemoteIp(request: $request, trust: $trust);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     #[ArrayShape([
         Type::BUILTIN_TYPE_STRING,
         Type::BUILTIN_TYPE_STRING,
@@ -69,8 +69,8 @@ final class IPAddress
         return [long2ip(ip: $low), long2ip(ip: $high)];
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isCIDR(string $cidr): bool
     {
         $parts = explode(separator: '/', string: $cidr);

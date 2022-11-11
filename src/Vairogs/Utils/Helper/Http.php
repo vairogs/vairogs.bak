@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use ReflectionException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Status;
@@ -17,8 +17,8 @@ use function file_get_contents;
 
 final class Http
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isHttps(Request $request): bool
     {
         return $this->checkHttps(request: $request) || $this->checkServerPort(request: $request) || $this->checkHttpXForwardedSsl(request: $request) || $this->checkHttpXForwardedProto(request: $request);
@@ -28,8 +28,8 @@ final class Http
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getRequestMethods(): array
     {
         return (new Iteration())->arrayValuesFiltered(input: (new Php())->getClassConstants(class: Request::class), with: 'METHOD_');
@@ -38,8 +38,8 @@ final class Http
     /**
      * @throws ReflectionException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getRequestIdentity(Request $request, string $ipUrl = Definition::IDENT): array
     {
         $additionalData = [
@@ -50,8 +50,8 @@ final class Http
         return array_merge((new Uri())->buildArrayFromObject(object: $request), $additionalData);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isIE(Request $request): bool
     {
         return (new Text())->containsAny(haystack: $request->server->get(key: 'HTTP_USER_AGENT'), needles: ['MSIE', 'Edge', 'Trident/7']);

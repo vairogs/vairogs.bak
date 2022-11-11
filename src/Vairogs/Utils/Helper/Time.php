@@ -3,8 +3,8 @@
 namespace Vairogs\Utils\Helper;
 
 use Symfony\Component\PropertyInfo\Type;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants;
 
 use function floor;
@@ -21,8 +21,8 @@ final class Time
         'micro' => Constants\Time::MS,
     ];
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function format(int|float $timestamp, bool $asArray = false): array|string
     {
         $timestamp = round(num: $timestamp * 1000);

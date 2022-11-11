@@ -3,8 +3,8 @@
 namespace Vairogs\Utils\Helper;
 
 use JsonException;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 
 use function defined;
 use function function_exists;
@@ -29,8 +29,8 @@ final class Json
     /**
      * @throws JsonException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function encode(mixed $value, int $flags = self::OBJECT): string
     {
         $flags = (JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | (self::OBJECT !== ($flags & self::PRETTY) ? JSON_PRETTY_PRINT : self::OBJECT) | (defined(constant_name: 'JSON_PRESERVE_ZERO_FRACTION') ? JSON_PRESERVE_ZERO_FRACTION : self::OBJECT));
@@ -47,8 +47,8 @@ final class Json
     /**
      * @throws JsonException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function decode(string $json, int $flags = self::OBJECT): mixed
     {
         if (function_exists(function: 'json_validate')) {

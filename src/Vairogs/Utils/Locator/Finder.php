@@ -9,9 +9,11 @@ class Finder
     private readonly SymfonyFinder $finder;
     private array $classMap = [];
 
-    public function __construct(array $directories, private readonly array $types = [], private readonly string $namespace = '')
+    public function __construct(array $directories, private readonly array $types = [], private readonly string $namespace = '', array $notPath = ['vendor', 'var', 'tests'])
     {
-        $this->finder = (new SymfonyFinder())->in(dirs: $directories);
+        $this->finder = (new SymfonyFinder())
+            ->in(dirs: $directories)
+            ->notPath(patterns: $notPath);
     }
 
     public function locate(): self

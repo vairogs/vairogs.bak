@@ -2,8 +2,8 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Utils\Handler\FunctionHandler;
 
 use function acos;
@@ -19,8 +19,8 @@ use function sin;
 
 final class Util
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isPrime(int $number, bool $override = false): bool
     {
         $function = (new FunctionHandler(function: 'isPrimeFunction', instance: new self()));
@@ -29,8 +29,8 @@ final class Util
         return (bool) (new FunctionHandler(function: 'isPrimeGmp', instance: new self()))->next(handler: $below)->handle($number, $override);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isPrimeFunction(int $number): bool
     {
         preg_match(pattern: '#^1?$|^(11+?)\1+$#', subject: implode(separator: '1', array: array_fill(start_index: 0, count: $number, value: null)), matches: $matches);
@@ -38,8 +38,8 @@ final class Util
         return isset($matches[1]);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isPrimeBelow1000(int $number): ?bool
     {
         if (1000 <= $number) {
@@ -68,8 +68,8 @@ final class Util
         return null;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function distanceBetweenPoints(float $latitude1, float $longitude1, float $latitude2, float $longitude2, bool $km = true, int $precision = 4): float
     {
         if ($latitude1 === $latitude2 && $longitude1 === $longitude2) {

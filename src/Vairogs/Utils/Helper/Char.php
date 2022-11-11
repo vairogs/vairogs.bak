@@ -3,8 +3,8 @@
 namespace Vairogs\Utils\Helper;
 
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants\Enum\CamelCase;
 
 use function filter_var;
@@ -18,15 +18,15 @@ use const FILTER_SANITIZE_NUMBER_FLOAT;
 
 final class Char
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function fromCamelCase(string $string, string $separator = '_'): string
     {
         return strtolower(string: (string) preg_replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function toSnakeCase(string $string, bool $skipCamel = false): string
     {
         $string = preg_replace(pattern: [
@@ -37,15 +37,15 @@ final class Char
         return strtolower(string: str_replace(search: '-', replace: '_', subject: (string) $string));
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function toCamelCase(string $string, CamelCase $function = CamelCase::LCFIRST): string
     {
         return (string) preg_replace(pattern: '#\s+#', replacement: '', subject: ($function->value)(string: ucwords(string: strtolower(string: str_replace(search: '_', replace: ' ', subject: $string)))));
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     #[Pure]
     public function sanitizeFloat(string $string): float
     {

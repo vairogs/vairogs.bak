@@ -5,13 +5,13 @@ namespace Vairogs\Utils\Helper;
 use Exception;
 use ReflectionClass;
 use ReflectionMethod;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 
 final class Reflection
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function attributeExists(ReflectionMethod $reflectionMethod, string $filterClass): bool
     {
         return [] !== $reflectionMethod->getAttributes(name: $filterClass);
@@ -45,8 +45,8 @@ final class Reflection
         return [new $class(), $name, ];
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getNamespace(string $class): string
     {
         try {
@@ -56,8 +56,8 @@ final class Reflection
         }
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getShortName(string $class): string
     {
         try {

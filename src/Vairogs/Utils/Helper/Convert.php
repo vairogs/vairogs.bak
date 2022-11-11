@@ -2,8 +2,8 @@
 
 namespace Vairogs\Utils\Helper;
 
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 
 use function array_pop;
 use function array_values;
@@ -17,8 +17,8 @@ use function unpack;
 
 final class Convert
 {
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function long2str(array $array, bool $wide = false): string
     {
         $length = count(value: $array);
@@ -40,8 +40,8 @@ final class Convert
     /**
      * @return int[]
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function str2long(string $string, bool $wide = false): array
     {
         $array = array_values(unpack(format: 'V*', string: $string . str_repeat(string: "\0", times: (4 - ($length = strlen(string: $string)) % 4) & 3)));
@@ -54,8 +54,8 @@ final class Convert
         return $array;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function char2byte(string $char): int
     {
         $pack = unpack(format: 'c', string: $char);
@@ -63,8 +63,8 @@ final class Convert
         return (int) array_pop(array: $pack);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function byte2char(int $byte): string
     {
         return pack('c', $byte);

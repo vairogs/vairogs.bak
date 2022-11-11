@@ -3,8 +3,8 @@
 namespace Vairogs\Utils\Helper;
 
 use Exception;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants\Symbol;
 
 use function is_array;
@@ -18,8 +18,8 @@ final class SortLatvian
 {
     private static string $field = '';
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function sortLatvian(array &$names, string|int $field, array $callback = [self::class, 'compareLatvian']): bool
     {
         self::$field = (string) $field;

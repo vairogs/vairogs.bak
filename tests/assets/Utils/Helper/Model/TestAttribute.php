@@ -2,13 +2,13 @@
 
 namespace Vairogs\Tests\Assets\Utils\Helper\Model;
 
-use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\CoreFilter;
 
 class TestAttribute
 {
     public static int $a;
 
-    #[TwigFilter]
+    #[CoreFilter]
     public static function test(): void
     {
         self::$a = 1;

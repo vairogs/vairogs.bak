@@ -5,7 +5,7 @@ namespace Vairogs\Tests\Source\Utils\Helper;
 use ReflectionException;
 use ReflectionMethod;
 use Vairogs\Cache\Cache;
-use Vairogs\Core\Attribute\TwigFilter;
+use Vairogs\Core\Attribute\CoreFilter;
 use Vairogs\Core\Vairogs;
 use Vairogs\Tests\Assets\Utils\Helper\Model\TestAttribute;
 use Vairogs\Tests\Assets\VairogsTestCase;
@@ -20,15 +20,15 @@ class ReflectionTest extends VairogsTestCase
     public function testAttributeExists(): void
     {
         $reflectionMethod = new ReflectionMethod(objectOrMethod: (new Reflection()), method: 'attributeExists');
-        $this->assertTrue(condition: (new Reflection())->attributeExists(reflectionMethod: $reflectionMethod, filterClass: TwigFilter::class));
+        $this->assertTrue(condition: (new Reflection())->attributeExists(reflectionMethod: $reflectionMethod, filterClass: CoreFilter::class));
         $this->assertFalse(condition: (new Reflection())->attributeExists(reflectionMethod: $reflectionMethod, filterClass: Cache::class));
     }
 
     public function testGetFilteredMethods(): void
     {
-        $this->assertArrayHasKey(key: 'sanitize', array: (new Reflection())->getFilteredMethods(class: Text::class, filterClass: TwigFilter::class));
-        $this->assertEquals(expected: [], actual: (new Reflection())->getFilteredMethods(class: 'Test', filterClass: TwigFilter::class));
-        $this->assertArrayHasKey(key: 'test', array: (new Reflection())->getFilteredMethods(class: TestAttribute::class, filterClass: TwigFilter::class));
+        $this->assertArrayHasKey(key: 'sanitize', array: (new Reflection())->getFilteredMethods(class: Text::class, filterClass: CoreFilter::class));
+        $this->assertEquals(expected: [], actual: (new Reflection())->getFilteredMethods(class: 'Test', filterClass: CoreFilter::class));
+        $this->assertArrayHasKey(key: 'test', array: (new Reflection())->getFilteredMethods(class: TestAttribute::class, filterClass: CoreFilter::class));
     }
 
     /**

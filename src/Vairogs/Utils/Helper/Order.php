@@ -5,8 +5,8 @@ namespace Vairogs\Utils\Helper;
 use Closure;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants\Enum\Order as Enum;
 
 use function array_key_exists;
@@ -23,8 +23,8 @@ final class Order
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function sort(array|object $data, string $parameter, Enum $order = Enum::ASC): object|array
     {
         if (count(value: $data) < 2) {
@@ -41,8 +41,8 @@ final class Order
         return $data;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     #[Pure]
     public function isSortable(mixed $item, int|string $field): bool
     {
@@ -57,8 +57,8 @@ final class Order
         return false;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function usort(string $parameter, Enum $order): Closure
     {
         return static function (array|object $first, array|object $second) use ($parameter, $order): int {

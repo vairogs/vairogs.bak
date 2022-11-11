@@ -9,6 +9,6 @@ abstract class AbstractHelper
 {
     public function __construct(protected ?Randomizer $randomizer = null)
     {
-        $this->randomizer ??= new Randomizer(new Xoshiro256StarStar());
+        $this->randomizer ??= new Randomizer(engine: new Xoshiro256StarStar());
     }
 }

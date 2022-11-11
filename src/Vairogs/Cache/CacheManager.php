@@ -39,7 +39,7 @@ final readonly class CacheManager
             if ($cache->isHit()) {
                 $item = $cache->get();
 
-                if ($expiredTime >= $item['expires']) {
+                if ($expiredTime >= $item['expires'] ?? 0) {
                     return $this->delete(key: $key);
                 }
 

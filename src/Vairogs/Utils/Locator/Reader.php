@@ -34,7 +34,7 @@ class Reader
     {
         foreach ($stmts as $stmt) {
             if ($stmt instanceof Namespace_) {
-                $this->findDefinitions($stmt->stmts, new Name(name: (string) $stmt->name));
+                $this->findDefinitions(stmts: $stmt->stmts, namespace: new Name(name: (string) $stmt->name));
                 continue;
             }
 

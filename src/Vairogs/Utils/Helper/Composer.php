@@ -3,8 +3,8 @@
 namespace Vairogs\Utils\Helper;
 
 use Composer\InstalledVersions;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 
 use function class_exists;
 use function getenv;
@@ -17,8 +17,8 @@ final class Composer
     /**
      * @psalm-param array<string> $packages
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function isInstalled(array $packages, bool $incDevReq = false): bool
     {
         foreach ($packages as $package) {
@@ -34,15 +34,15 @@ final class Composer
         return true;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function exists(string $class): bool
     {
         return class_exists(class: $class) || interface_exists(interface: $class) || trait_exists(trait: $class);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getenv(string $name, bool $localOnly = true): mixed
     {
         return getenv($name, local_only: $localOnly) ?: ($_ENV[$name] ?? $name);

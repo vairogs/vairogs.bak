@@ -6,8 +6,8 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 use InvalidArgumentException;
-use Vairogs\Core\Attribute\TwigFilter;
-use Vairogs\Core\Attribute\TwigFunction;
+use Vairogs\Core\Attribute\CoreFilter;
+use Vairogs\Core\Attribute\CoreFunction;
 use Vairogs\Extra\Constants;
 use Vairogs\Extra\Constants\Month as M;
 
@@ -22,8 +22,8 @@ final class Date
         Constants\Date::FORMAT_TS,
     ];
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function validateDate(string $date): bool
     {
         $date = (new Text())->keepNumeric(text: $date);
@@ -43,8 +43,8 @@ final class Date
         return 0 < $day && $daysInMonth[$month - 1] >= $day;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function excelDate(int $timestamp, string $format = Constants\Date::FORMAT): string
     {
         $base = 25569;
@@ -62,8 +62,8 @@ final class Date
         return (string) $timestamp;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function validateDateBasic(mixed $date, string $format = Constants\Date::FORMAT): bool
     {
         $object = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $date);
@@ -71,8 +71,8 @@ final class Date
         return $object && $date === $object->format(format: $format);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function formatDate(string $string, string $format = Constants\Date::FORMAT): string|bool
     {
         if (($date = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $string)) instanceof DateTimeImmutable) {
@@ -82,8 +82,8 @@ final class Date
         return false;
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getDateNullable(?string $dateString = null, ?string $format = null): ?DateTimeInterface
     {
         if (null === $dateString || null === $format || !$date = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $dateString)) {
@@ -96,8 +96,8 @@ final class Date
     /**
      * @throws InvalidArgumentException
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getDate(?string $dateString = null, ?string $format = null): DateTimeInterface
     {
         if (null === $dateString || !$date = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $dateString)) {
@@ -110,15 +110,15 @@ final class Date
     /**
      * @throws Exception
      */
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string
     {
         return (new DateTimeImmutable())->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Constants\Date::FORMAT);
     }
 
-    #[TwigFunction]
-    #[TwigFilter]
+    #[CoreFunction]
+    #[CoreFilter]
     public function getDateWithoutFormat(string $date, array $guesses = []): DateTimeInterface|string
     {
         $formats = array_merge((new Php())->getClassConstantsValues(class: DateTimeImmutable::class), self::EXTRA_FORMATS, $guesses);

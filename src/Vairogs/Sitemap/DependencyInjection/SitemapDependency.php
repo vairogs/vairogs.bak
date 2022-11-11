@@ -5,7 +5,6 @@ namespace Vairogs\Sitemap\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Vairogs\Core\DependencyInjection\Component;
 use Vairogs\Core\DependencyInjection\Dependency;
 
 class SitemapDependency implements Dependency
