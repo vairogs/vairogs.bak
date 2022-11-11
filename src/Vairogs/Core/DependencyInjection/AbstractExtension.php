@@ -17,7 +17,7 @@ abstract class AbstractExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $configuration = new Configuration();
+        $configuration = $this->init();
         $this->process(configs: $configs, container: $container, configuration: $configuration);
         $this->configure(container: $container, configuration: $configuration);
     }
@@ -32,5 +32,7 @@ abstract class AbstractExtension extends Extension
         }
     }
 
-    abstract protected function configure(ContainerBuilder $container, Configuration $configuration): void;
+    abstract protected function init(): ConfigurationInterface;
+
+    abstract protected function configure(ContainerBuilder $container, ConfigurationInterface $configuration): void;
 }

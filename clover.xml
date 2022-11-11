@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1668183155">
-  <project timestamp="1668183155">
+<coverage generated="1668205731">
+  <project timestamp="1668205731">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1146,7 +1146,7 @@
       <line num="28" type="method" name="process" visibility="public" complexity="2" crap="2" count="1"/>
       <line num="30" type="stmt" count="1"/>
       <line num="31" type="stmt" count="1"/>
-      <metrics loc="37" ncloc="31" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+      <metrics loc="39" ncloc="33" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/DependencyInjection/Configuration.php">
       <class name="Vairogs\Core\DependencyInjection\Configuration" namespace="global">
@@ -1180,13 +1180,15 @@
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/DependencyInjection/VairogsExtension.php">
       <class name="Vairogs\Core\DependencyInjection\VairogsExtension" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
       </class>
-      <line num="12" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
-      <line num="14" type="stmt" count="1"/>
+      <line num="13" type="method" name="configure" visibility="protected" complexity="1" crap="1" count="1"/>
       <line num="15" type="stmt" count="1"/>
       <line num="16" type="stmt" count="1"/>
-      <metrics loc="19" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
+      <line num="17" type="stmt" count="1"/>
+      <line num="20" type="method" name="init" visibility="protected" complexity="1" crap="1" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <metrics loc="25" ncloc="25" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Functions.php">
       <class name="Vairogs\Core\Functions" namespace="global">
@@ -2967,6 +2969,6 @@
       <line num="32" type="stmt" count="3"/>
       <metrics loc="35" ncloc="32" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="136" loc="7865" ncloc="7618" classes="100" methods="544" coveredmethods="278" conditionals="0" coveredconditionals="0" statements="1673" coveredstatements="1009" elements="2217" coveredelements="1287"/>
+    <metrics files="136" loc="7873" ncloc="7626" classes="100" methods="545" coveredmethods="279" conditionals="0" coveredconditionals="0" statements="1674" coveredstatements="1010" elements="2219" coveredelements="1289"/>
   </project>
 </coverage>
