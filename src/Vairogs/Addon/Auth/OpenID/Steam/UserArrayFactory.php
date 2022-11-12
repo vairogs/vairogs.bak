@@ -2,7 +2,7 @@
 
 namespace Vairogs\Addon\Auth\OpenID\Steam;
 
-use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
+use Vairogs\Addon\Auth\OpenID\Steam\Model\User;
 
 class UserArrayFactory
 {

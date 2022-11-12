@@ -2,6 +2,7 @@
 
 namespace Vairogs\Tests\Source\Cache\Adapter;
 
+use Exception;
 use Symfony\Component\Cache\Adapter\DoctrineDbalAdapter;
 use Symfony\Component\Cache\Adapter\RedisTagAwareAdapter;
 use Vairogs\Cache\Adapter\Orm;
@@ -12,6 +13,12 @@ use function sprintf;
 
 class AdapterTest extends VairogsTestCase
 {
+    /**
+     * @throws Exception
+     *
+     * @noinspection MissingService
+     * @noinspection PhpParamsInspection
+     */
     public function testRedisAdapters(): void
     {
         $predis = new Predis(client: $this->container->get(id: 'snc_redis.predis'), incDevReq: true);

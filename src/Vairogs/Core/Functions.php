@@ -23,7 +23,7 @@ final class Functions
             return false;
         }
 
-        return !array_is_list($array);
+        return !array_is_list(array: $array);
     }
 
     #[CoreFunction]

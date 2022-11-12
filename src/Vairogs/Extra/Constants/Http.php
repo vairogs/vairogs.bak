@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php /** @noinspection HttpUrlsUsage */ declare(strict_types = 1);
 
 namespace Vairogs\Extra\Constants;
 

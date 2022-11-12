@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Addon\Auth\OpenID\Steam\Contracts;
+namespace Vairogs\Addon\Auth\OpenID\Steam\Model;
 
-use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
+use Vairogs\Auth\OpenID\Model\OpenIDUser;
 
 interface User extends OpenIDUser
 {

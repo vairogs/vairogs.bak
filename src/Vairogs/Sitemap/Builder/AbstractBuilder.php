@@ -42,6 +42,7 @@ abstract class AbstractBuilder implements Builder
         $this->write(buffer: $buffer, text: '</urlset>' . "\n" . '<!-- created with sitemap library for Symfony vairogs/sitemap -->');
     }
 
+    /** @noinspection HttpUrlsUsage */
     public function start(&$buffer): void
     {
         $this->write(

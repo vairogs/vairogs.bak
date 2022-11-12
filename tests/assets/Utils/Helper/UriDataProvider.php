@@ -16,6 +16,7 @@ class UriDataProvider
         ];
     }
 
+    /** @noinspection HttpUrlsUsage */
     public function dataProviderGetSchema(): array
     {
         return [

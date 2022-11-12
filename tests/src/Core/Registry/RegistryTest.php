@@ -2,12 +2,18 @@
 
 namespace Vairogs\Tests\Source\Core\Registry;
 
+use Exception;
 use InvalidArgumentException;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Tests\Assets\VairogsTestCase;
 
 class RegistryTest extends VairogsTestCase
 {
+    /**
+     * @throws Exception
+     *
+     * @noinspection MissingService
+     */
     public function testRegistry(): void
     {
         $registry = static::getContainer()->get(id: 'vairogs.auth.openidconnect.registry');

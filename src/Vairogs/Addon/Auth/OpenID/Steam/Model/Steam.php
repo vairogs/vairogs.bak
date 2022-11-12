@@ -6,8 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use JetBrains\PhpStorm\Pure;
 use Stringable;
-use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
-use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
+use Vairogs\Auth\OpenID\Model\OpenIDUser;
 
 #[ORM\MappedSuperclass]
 class Steam implements OpenIDUser, User, Stringable

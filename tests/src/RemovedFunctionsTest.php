@@ -15,6 +15,8 @@ class RemovedFunctionsTest extends VairogsTestCase
     /**
      * @noinspection PhpUndefinedConstantInspection
      * @noinspection PhpUndefinedFunctionInspection
+     * @noinspection MissingService
+     * @noinspection PhpParamsInspection
      */
     public function testMissingRequirements(): void
     {

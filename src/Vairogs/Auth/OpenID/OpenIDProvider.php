@@ -13,8 +13,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use UnexpectedValueException;
 use Vairogs\Addon\Auth\OpenID\Constants\OpenID;
-use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
-use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
+use Vairogs\Auth\OpenID\Builder\OpenIDUserBuilder;
+use Vairogs\Auth\OpenID\Model\OpenIDUser;
 use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Extra\Constants\ContentType;
 use Vairogs\Utils\Helper\Json;
@@ -89,6 +89,7 @@ class OpenIDProvider implements HasRegistry
         return $user;
     }
 
+    /** @noinspection HttpUrlsUsage */
     public function validate(int $timeout = 30): ?string
     {
         $get = $this->requestStack->getCurrentRequest()->query->all();
@@ -149,6 +150,7 @@ class OpenIDProvider implements HasRegistry
         return (new Json())->decode(json: file_get_contents(filename: str_replace(search: '#openid#', replace: $openID, subject: (string) $this->profileUrl)), flags: Json::ASSOCIATIVE);
     }
 
+    /** @noinspection HttpUrlsUsage */
     #[ArrayShape([
         OpenID::NS => Type::BUILTIN_TYPE_STRING,
         OpenID::MODE => Type::BUILTIN_TYPE_STRING,

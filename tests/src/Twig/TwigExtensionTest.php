@@ -2,7 +2,9 @@
 
 namespace Vairogs\Tests\Source\Twig;
 
+use Exception;
 use Predis\Client;
+use Symfony\Component\Cache\Exception\CacheException;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -17,11 +19,15 @@ use Vairogs\Twig\TwigExtension;
 class TwigExtensionTest extends VairogsTestCase
 {
     /**
+     * @dataProvider \Vairogs\Tests\Assets\Twig\TwigExtensionDataProvider::dataProviderTwigTemplates
+     *
+     * @throws CacheException
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws Exception
      *
-     * @dataProvider \Vairogs\Tests\Assets\Twig\TwigExtensionDataProvider::dataProviderTwigTemplates
+     * @noinspection MissingService
      */
     public function testTwigExtension(string $template, bool $throws, ?string $message = null): void
     {

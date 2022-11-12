@@ -3,6 +3,8 @@
 namespace Vairogs\Auth\OpenIDConnect\Configuration;
 
 use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Signer\Blake2b;
+use Lcobucci\JWT\Signer\Key\InMemory;
 use League\OAuth2\Client\Token\AccessToken;
 
 class ParsedToken extends AccessToken
@@ -14,8 +16,11 @@ class ParsedToken extends AccessToken
     {
         parent::__construct(options: $options);
 
-        $parser = Configuration::forUnsecuredSigner()
-            ->parser();
+        // TODO: check if new implementation doesn't brake old logic: $parser = Configuration::forUnsecuredSigner()->parser();
+        $parser = Configuration::forSymmetricSigner(
+            signer: new Blake2b(),
+            key: InMemory::plainText(contents: ' '),
+        )->parser();
 
         if ('' !== $this->values['id_token']) {
             $parse = $parser->parse(jwt: $this->values['id_token']);

@@ -2,11 +2,11 @@
 
 namespace Vairogs\Addon\Auth\OpenID\Steam\Builder;
 
-use Vairogs\Addon\Auth\OpenID\Steam\Contracts\User;
 use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamGifts;
+use Vairogs\Addon\Auth\OpenID\Steam\Model\User;
 use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
-use Vairogs\Auth\OpenID\Contracts\OpenIDUser;
-use Vairogs\Auth\OpenID\Contracts\OpenIDUserBuilder;
+use Vairogs\Auth\OpenID\Builder\OpenIDUserBuilder;
+use Vairogs\Auth\OpenID\Model\OpenIDUser;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Utils\Helper\File;
 

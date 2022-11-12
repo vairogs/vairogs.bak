@@ -20,6 +20,8 @@ class CacheManagerTest extends VairogsTestCase
     /**
      * @throws CacheException
      * @throws Exception
+     *
+     * @noinspection MissingService
      */
     public function testCacheManager(): void
     {

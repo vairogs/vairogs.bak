@@ -1,6 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Auth\OpenID\Contracts;
+namespace Vairogs\Auth\OpenID\Builder;
+
+use Vairogs\Auth\OpenID\Model\OpenIDUser;
 
 interface OpenIDUserBuilder
 {

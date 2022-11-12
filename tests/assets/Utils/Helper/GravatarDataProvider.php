@@ -6,6 +6,7 @@ use Vairogs\Utils\Helper\Gravatar;
 
 class GravatarDataProvider
 {
+    /** @noinspection HttpUrlsUsage */
     public function dataProviderGetGravatarUrl(): array
     {
         return [
