@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class PhpDataProvider
 {
-    public function dataProviderBoolval(): array
+    public static function dataProviderBoolval(): array
     {
         return [
             [true, true, ],
@@ -16,7 +16,7 @@ class PhpDataProvider
         ];
     }
 
-    public function dataProviderGetterSetter(): array
+    public static function dataProviderGetterSetter(): array
     {
         return [
             ['aaa', 'getAaa', 'setAaa', ],

@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class IpAddressDataProvider
 {
-    public function dataProviderGetCIDRRange(): array
+    public static function dataProviderGetCIDRRange(): array
     {
         return [
             ['10.0.0.0/24', false, ['10.0.0.0', '10.0.0.255', ], ],
@@ -13,7 +13,7 @@ class IpAddressDataProvider
         ];
     }
 
-    public function dataProviderGetRemoteIpCF(): array
+    public static function dataProviderGetRemoteIpCF(): array
     {
         return [
             ['86.204.153.254', '192.244.147.46', true, '192.244.147.46', ],

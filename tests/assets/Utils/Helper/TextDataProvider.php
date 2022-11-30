@@ -6,14 +6,14 @@ use Vairogs\Core\Vairogs;
 
 class TextDataProvider
 {
-    public function dataProviderOneStripSpace(): array
+    public static function dataProviderOneStripSpace(): array
     {
         return [
             ['hello  world vairogs', 'hello world vairogs', 'helloworldvairogs', ],
         ];
     }
 
-    public function dataProviderLimit(): array
+    public static function dataProviderLimit(): array
     {
         return [
             ['sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur', 32, 4, '...', 'sapien nec sagittis aliquam male...', 'sapien nec sagittis aliquam...', 'sapien nec sagittis aliquam...', ],
@@ -21,7 +21,7 @@ class TextDataProvider
         ];
     }
 
-    public function dataProviderGetLastPart(): array
+    public static function dataProviderGetLastPart(): array
     {
         return [
             ['hello-vairogs', '-', 'vairogs', ],
@@ -30,7 +30,7 @@ class TextDataProvider
         ];
     }
 
-    public function dataProviderGetNormalizedValue(): array
+    public static function dataProviderGetNormalizedValue(): array
     {
         return [
             ['0.05', '.', 0.05, ],
@@ -41,14 +41,14 @@ class TextDataProvider
         ];
     }
 
-    public function dataProviderHtmlEntityDecode(): array
+    public static function dataProviderHtmlEntityDecode(): array
     {
         return [
             ["I'll \"walk\" the <b>dog</b> now", ],
         ];
     }
 
-    public function dataProvideReverseUTF8(): array
+    public static function dataProvideReverseUTF8(): array
     {
         return [
             ['vairogs', 'sgoriav', ],
@@ -57,7 +57,7 @@ class TextDataProvider
         ];
     }
 
-    public function dataProviderContainsAny(): array
+    public static function dataProviderContainsAny(): array
     {
         return [
             ['vairogs-hello-world', ['one', 'two', ], false, ],
@@ -65,7 +65,7 @@ class TextDataProvider
         ];
     }
 
-    public function dataProviderSanitize(): array
+    public static function dataProviderSanitize(): array
     {
         return [
             ['<p>Pārtraukumi pakalpojumu darbībā</p>', 'Pārtraukumi pakalpojumu darbībā', ],
@@ -73,7 +73,7 @@ class TextDataProvider
         ];
     }
 
-    public function dataProviderLongestSubstrLength(): array
+    public static function dataProviderLongestSubstrLength(): array
     {
         return [
             ['abcabcabc', 3, ],

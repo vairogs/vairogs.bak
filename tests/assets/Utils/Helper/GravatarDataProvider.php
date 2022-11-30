@@ -7,7 +7,7 @@ use Vairogs\Utils\Helper\Gravatar;
 class GravatarDataProvider
 {
     /** @noinspection HttpUrlsUsage */
-    public function dataProviderGetGravatarUrl(): array
+    public static function dataProviderGetGravatarUrl(): array
     {
         return [
             [Gravatar::DEFAULT_EMAIL, false, 32, Gravatar::ICON_IDENTICON, 'http://www.gravatar.com/avatar/817bf5e10e1afad8a2609f0034d01620/?s=32&d=identicon', ],

@@ -2,13 +2,13 @@
 
 namespace Vairogs\Auth\DependencyInjection;
 
+use Simple\To\Implement\DependencyInjection\Dependency;
+use Simple\To\Implement\DependencyInjection\Traits\DependecyLoader;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
-use Vairogs\Core\DependencyInjection\Dependency;
-use Vairogs\Core\DependencyInjection\Traits\DependecyLoader;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Status;
 

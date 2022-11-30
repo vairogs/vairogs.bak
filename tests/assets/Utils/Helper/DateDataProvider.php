@@ -8,7 +8,7 @@ use Vairogs\Extra\Constants\Date;
 
 class DateDataProvider
 {
-    public function dataProviderValidateDate(): array
+    public static function dataProviderValidateDate(): array
     {
         return [
             ['08.04.2022', true, ],
@@ -17,7 +17,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderGetDateWithoutFormat(): array
+    public static function dataProviderGetDateWithoutFormat(): array
     {
         return [
             [(new DateTimeImmutable())->format(format: DateTimeInterface::ATOM), ],
@@ -27,7 +27,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderGetDateWithoutFormatWrong(): array
+    public static function dataProviderGetDateWithoutFormatWrong(): array
     {
         return [
             ['02-02-98', ],
@@ -37,7 +37,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderExcelDate(): array
+    public static function dataProviderExcelDate(): array
     {
         return [
             [25559, '25559', ],
@@ -46,7 +46,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderFormatDate(): array
+    public static function dataProviderFormatDate(): array
     {
         $dateTime = new DateTimeImmutable();
 
@@ -56,7 +56,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderFormatDateWrong(): array
+    public static function dataProviderFormatDateWrong(): array
     {
         $dateTime = new DateTimeImmutable();
 
@@ -66,7 +66,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderCreateFromUnixTimestamp(): array
+    public static function dataProviderCreateFromUnixTimestamp(): array
     {
         return [
             [1649403032, DateTimeInterface::ATOM, (new DateTimeImmutable())->setTimestamp(timestamp: 1649403032)->format(format: DateTimeInterface::ATOM)],
@@ -74,7 +74,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderGetDateNullable(): array
+    public static function dataProviderGetDateNullable(): array
     {
         $dateTime = new DateTimeImmutable();
 
@@ -84,7 +84,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderGetDate(): array
+    public static function dataProviderGetDate(): array
     {
         $dateTime = new DateTimeImmutable();
 
@@ -93,7 +93,7 @@ class DateDataProvider
         ];
     }
 
-    public function dataProviderGetDateWrong(): array
+    public static function dataProviderGetDateWrong(): array
     {
         return [
             [null, null],

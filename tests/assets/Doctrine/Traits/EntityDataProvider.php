@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Doctrine\Traits;
 
 class EntityDataProvider
 {
-    public function dataProviderEntity(): array
+    public static function dataProviderEntity(): array
     {
         return [
             [1, 1, 1, ],

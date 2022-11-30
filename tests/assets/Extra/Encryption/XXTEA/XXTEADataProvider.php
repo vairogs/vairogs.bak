@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Extra\Encryption\XXTEA;
 
 class XXTEADataProvider
 {
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         return [
             ['Vairogs! 盾牌！ Štít', 'testVAIROGS789', ],

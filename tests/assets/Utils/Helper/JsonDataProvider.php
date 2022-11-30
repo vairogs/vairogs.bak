@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class JsonDataProvider
 {
-    public function dataProviderJson(): array
+    public static function dataProviderJson(): array
     {
         return [
             ['vairogs', 0, ],

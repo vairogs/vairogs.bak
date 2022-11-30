@@ -8,7 +8,7 @@ class ReflectionDataProvider
 {
     private const HELPER_NAMESPACE = 'Vairogs\Utils\Helper';
 
-    public function dataProviderGetNamespace(): array
+    public static function dataProviderGetNamespace(): array
     {
         return [
             [Text::class, self::HELPER_NAMESPACE, ],

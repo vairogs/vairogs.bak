@@ -63,6 +63,7 @@
         "nikic/php-parser": "*",
         "psr/cache": "*",
         "psr/http-message": "*",
+        "simpletoimplement/dependency-injection": "*",
         "symfony/cache": "^6.2|^6.3",
         "symfony/config": "^6.2|^6.3",
         "symfony/console": "^6.2|^6.3",

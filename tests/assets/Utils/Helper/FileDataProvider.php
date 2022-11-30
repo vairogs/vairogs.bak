@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class FileDataProvider
 {
-    public function dataProviderHumanFileSize(): array
+    public static function dataProviderHumanFileSize(): array
     {
         return [
             [8, 2, '8.00B', ],

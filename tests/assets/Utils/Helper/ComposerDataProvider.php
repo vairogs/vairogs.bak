@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class ComposerDataProvider
 {
-    public function dataProviderIsInstalled(): array
+    public static function dataProviderIsInstalled(): array
     {
         return [
             ['json', true, false, ],

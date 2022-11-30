@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Twig;
 
 class TwigExtensionDataProvider
 {
-    public function dataProviderTwigTemplates(): array
+    public static function dataProviderTwigTemplates(): array
     {
         return [
             ["{{ 'tests_tests'|vairogs_utils_helper_text_limit_char(4) }}", true, 'Unknown "vairogs_utils_helper_text_limit_char" filter', ],
@@ -12,7 +12,7 @@ class TwigExtensionDataProvider
         ];
     }
 
-    public function dataProviderTwigTraitTemplates(): array
+    public static function dataProviderTwigTraitTemplates(): array
     {
         return [
             ['{{ _test() }}', 'test', ],

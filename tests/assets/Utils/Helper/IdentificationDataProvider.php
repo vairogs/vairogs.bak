@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class IdentificationDataProvider
 {
-    public function dataProviderValidatePersonCode(): array
+    public static function dataProviderValidatePersonCode(): array
     {
         return [
             ['150193-10933', true, ],
@@ -15,7 +15,7 @@ class IdentificationDataProvider
         ];
     }
 
-    public function dataProviderHash(): array
+    public static function dataProviderHash(): array
     {
         return [
             ['vairogs', true, 'vairogs', ],

@@ -6,7 +6,7 @@ use Vairogs\Extra\Constants\Enum\CamelCase;
 
 class CharDataProvider
 {
-    public function dataProviderSanitizeFloat(): array
+    public static function dataProviderSanitizeFloat(): array
     {
         return [
             ['0.56', 0.56, ],
@@ -16,7 +16,7 @@ class CharDataProvider
         ];
     }
 
-    public function dataProviderToSnakeCase(): array
+    public static function dataProviderToSnakeCase(): array
     {
         return [
             ['VairogsHelper', false, 'vairogshelper', ],
@@ -24,7 +24,7 @@ class CharDataProvider
         ];
     }
 
-    public function dataProviderFromCamelCase(): array
+    public static function dataProviderFromCamelCase(): array
     {
         return [
             ['VairogsHelper', '_', 'vairogs_helper', ],
@@ -32,7 +32,7 @@ class CharDataProvider
         ];
     }
 
-    public function dataProviderToCamelCase(): array
+    public static function dataProviderToCamelCase(): array
     {
         return [
             ['vairogs_helper', CamelCase::LCFIRST, 'vairogsHelper', ],

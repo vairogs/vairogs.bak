@@ -6,7 +6,7 @@ use const PHP_INT_MAX;
 
 class UtilDataProvider
 {
-    public function dataProviderIsPrime(): array
+    public static function dataProviderIsPrime(): array
     {
         return [
             [2,    true,  ],
@@ -24,7 +24,7 @@ class UtilDataProvider
         ];
     }
 
-    public function dataProviderIsPrimeBelow1000(): array
+    public static function dataProviderIsPrimeBelow1000(): array
     {
         return [
             [2,    true,  ],
@@ -42,7 +42,7 @@ class UtilDataProvider
         ];
     }
 
-    public function dataProviderMakeOneDimension(): array
+    public static function dataProviderMakeOneDimension(): array
     {
         $array = [
             'vairogs' => [
@@ -79,7 +79,7 @@ class UtilDataProvider
         ];
     }
 
-    public function dataProviderDistanceBetweenPoints(): array
+    public static function dataProviderDistanceBetweenPoints(): array
     {
         return [
             [56.95633943847958, 24.197759089350726, 56.95457297448779, 24.200456656517165, true, 0.2556, ],

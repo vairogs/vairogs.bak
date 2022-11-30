@@ -6,7 +6,7 @@ use Vairogs\Utils\Helper\Iteration;
 
 class IterationDataProvider
 {
-    public function dataProviderIsEmpty(): array
+    public static function dataProviderIsEmpty(): array
     {
         return [
             [0, true, ],
@@ -17,7 +17,7 @@ class IterationDataProvider
         ];
     }
 
-    public function dataProviderMakeMultiDimensional(): array
+    public static function dataProviderMakeMultiDimensional(): array
     {
         return [
             [[], [], ],
@@ -26,7 +26,7 @@ class IterationDataProvider
         ];
     }
 
-    public function dataProviderUniqueMap(): array
+    public static function dataProviderUniqueMap(): array
     {
         return [
             [['vairogs', 'test', 'vairogs', ], ['vairogs', 'test', ], ],
@@ -35,7 +35,7 @@ class IterationDataProvider
         ];
     }
 
-    public function dataProviderUnique(): array
+    public static function dataProviderUnique(): array
     {
         return [
             [['vairogs', 'test', 'vairogs', ], ['vairogs', 'test', ], true, ],
@@ -44,7 +44,7 @@ class IterationDataProvider
         ];
     }
 
-    public function dataProviderArrayIntersectKeyRecursive(): array
+    public static function dataProviderArrayIntersectKeyRecursive(): array
     {
         return [
             [[1 => 'test', 2 => 'data', ], ['test', 'test2', ], [1 => 'test', ], ],
@@ -52,7 +52,7 @@ class IterationDataProvider
         ];
     }
 
-    public function dataProviderArrayFlipRecursive(): array
+    public static function dataProviderArrayFlipRecursive(): array
     {
         return [
             [[1 => 'a', 2 => 'b', 'c' => 3, ], ['a' => 1, 'b' => 2, 3 => 'c', ], ],

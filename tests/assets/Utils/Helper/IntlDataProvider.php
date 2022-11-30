@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class IntlDataProvider
 {
-    public function dataProviderCyrillicToLatin(): array
+    public static function dataProviderCyrillicToLatin(): array
     {
         return [
             ['юнит-тест', 'yunit-tyest', ],
@@ -12,7 +12,7 @@ class IntlDataProvider
         ];
     }
 
-    public function dataProviderLatinToCyrillic(): array
+    public static function dataProviderLatinToCyrillic(): array
     {
         return [
             ['yunit-tyest', 'юнит-тест', ],
@@ -20,7 +20,7 @@ class IntlDataProvider
         ];
     }
 
-    public function dataProviderGetCountryName(): array
+    public static function dataProviderGetCountryName(): array
     {
         return [
             ['LV', 'en', 'Latvia', ],

@@ -2,6 +2,8 @@
 
 namespace Vairogs\Auth\OpenIDConnect\DependencyInjection;
 
+use Simple\To\Implement\DependencyInjection\Dependency;
+use Simple\To\Implement\DependencyInjection\Traits\ClientDependency;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -10,8 +12,6 @@ use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
-use Vairogs\Core\DependencyInjection\Dependency;
-use Vairogs\Core\DependencyInjection\Traits\ClientDependency;
 use Vairogs\Core\Vairogs;
 use Vairogs\Extra\Constants\Definition;
 use Vairogs\Extra\Constants\Service;

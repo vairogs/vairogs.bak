@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class NumberDataProvider
 {
-    public function dataProviderGreatestCommonDivisor(): array
+    public static function dataProviderGreatestCommonDivisor(): array
     {
         return [
             [30, 24, 6, ],
@@ -12,7 +12,7 @@ class NumberDataProvider
         ];
     }
 
-    public function dataProviderLeastCommonMultiple(): array
+    public static function dataProviderLeastCommonMultiple(): array
     {
         return [
             [12, 15, 60, ],
@@ -20,7 +20,7 @@ class NumberDataProvider
         ];
     }
 
-    public function dataProviderIsIntFloat(): array
+    public static function dataProviderIsIntFloat(): array
     {
         return [
             [1, true, ],

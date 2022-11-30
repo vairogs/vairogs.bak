@@ -4,7 +4,7 @@ namespace Vairogs\Tests\Assets\Utils\Helper;
 
 class PaginationDataProvider
 {
-    public function dataProvider(): array
+    public static function dataProvider(): array
     {
         return [
             [7, 30, 1, -1, [1, 2, 3, -1, 28, 29, 30, ], ],
@@ -14,7 +14,7 @@ class PaginationDataProvider
         ];
     }
 
-    public function dataProviderException(): array
+    public static function dataProviderException(): array
     {
         return [
             [4, 30, 1, -1, [1, 2, 3, -1, 28, 29, 30, ], ],
