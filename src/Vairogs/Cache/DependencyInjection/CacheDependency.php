@@ -2,7 +2,7 @@
 
 namespace Vairogs\Cache\DependencyInjection;
 
-use Simple\To\Implement\DependencyInjection\Dependency;
+use SimpleToImplement\DependencyInjection\Dependency;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

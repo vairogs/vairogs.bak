@@ -2,7 +2,7 @@
 
 namespace Vairogs\Core;
 
-use Simple\To\Implement\DependencyInjection\Functions as Base;
+use SimpleToImplement\DependencyInjection\Functions as Base;
 
 use const PHP_INT_MAX;
 

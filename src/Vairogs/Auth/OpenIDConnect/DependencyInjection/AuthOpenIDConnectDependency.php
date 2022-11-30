@@ -2,8 +2,8 @@
 
 namespace Vairogs\Auth\OpenIDConnect\DependencyInjection;
 
-use Simple\To\Implement\DependencyInjection\Dependency;
-use Simple\To\Implement\DependencyInjection\Traits\ClientDependency;
+use SimpleToImplement\DependencyInjection\Dependency;
+use SimpleToImplement\DependencyInjection\Traits\ClientDependency;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

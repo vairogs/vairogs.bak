@@ -2,8 +2,8 @@
 
 namespace Vairogs\Auth\DependencyInjection;
 
-use Simple\To\Implement\DependencyInjection\Dependency;
-use Simple\To\Implement\DependencyInjection\Traits\DependecyLoader;
+use SimpleToImplement\DependencyInjection\Dependency;
+use SimpleToImplement\DependencyInjection\Traits\DependecyLoader;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
