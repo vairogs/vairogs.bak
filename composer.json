@@ -119,6 +119,7 @@
         "vairogs/auth-openidconnect": "self.version",
         "vairogs/cache": "self.version",
         "vairogs/captcha": "self.version",
+        "vairogs/config": "self.version",
         "vairogs/core": "self.version",
         "vairogs/doctrine-utils": "self.version",
         "vairogs/extra": "self.version",

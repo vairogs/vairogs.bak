@@ -40,6 +40,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
     },
     {
+        "path": "src/Vairogs/config",
+        "repo": "https://GH_TOKEN@github.com/vairogs/config.git"
+    },
+    {
         "path": "src/Vairogs/DoctrineUtils",
         "repo": "https://GH_TOKEN@github.com/vairogs/doctrine-utils.git"
     },
