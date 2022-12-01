@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669839000">
-  <project timestamp="1669839000">
+<coverage generated="1669855677">
+  <project timestamp="1669855677">
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Addon/Auth/OpenID/Constants/OpenID.php">
       <class name="Vairogs\Addon\Auth\OpenID\Constants\OpenID" namespace="global">
         <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -1148,14 +1148,6 @@
       <line num="21" type="method" name="init" visibility="protected" complexity="1" crap="1" count="1"/>
       <line num="23" type="stmt" count="1"/>
       <metrics loc="26" ncloc="26" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
-    </file>
-    <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Functions.php">
-      <class name="Vairogs\Core\Functions" namespace="global">
-        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
-      </class>
-      <line num="11" type="method" name="makeOneDimension" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="13" type="stmt" count="4"/>
-      <metrics loc="16" ncloc="16" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="/var/www/html/vendor/vairogs/vairogs/src/Vairogs/Core/Registry/HasRegistry.php">
       <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
@@ -2913,6 +2905,6 @@
       <line num="32" type="stmt" count="3"/>
       <metrics loc="35" ncloc="32" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
     </file>
-    <metrics files="132" loc="7722" ncloc="7475" classes="97" methods="542" coveredmethods="273" conditionals="0" coveredconditionals="0" statements="1642" coveredstatements="976" elements="2184" coveredelements="1249"/>
+    <metrics files="131" loc="7706" ncloc="7459" classes="96" methods="541" coveredmethods="272" conditionals="0" coveredconditionals="0" statements="1641" coveredstatements="975" elements="2182" coveredelements="1247"/>
   </project>
 </coverage>

@@ -8,7 +8,7 @@ use IteratorAggregate;
 use function iterator_to_array;
 use function sprintf;
 
-readonly class Registry
+class Registry
 {
     /**
      * @var HasRegistry[]

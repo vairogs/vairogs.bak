@@ -2,8 +2,6 @@
 
 namespace Vairogs\Tests\Assets\Utils\Helper;
 
-use const PHP_INT_MAX;
-
 class UtilDataProvider
 {
     public static function dataProviderIsPrime(): array
@@ -39,43 +37,6 @@ class UtilDataProvider
             [32,   false, ],
             [360,  false, ],
             [3182, null,  ],
-        ];
-    }
-
-    public static function dataProviderMakeOneDimension(): array
-    {
-        $array = [
-            'vairogs' => [
-                'cache' => [
-                    'enabled' => true,
-                ],
-            ],
-        ];
-
-        return [
-            [
-                $array, false, 0, PHP_INT_MAX,
-                [
-                    'vairogs.cache.enabled' => true,
-                    'vairogs.cache' => [
-                        'enabled' => true,
-                    ],
-                    'vairogs' => [
-                        'cache' => [
-                            'enabled' => true,
-                        ],
-                    ],
-                ],
-            ],
-            [
-                $array, true, 1, PHP_INT_MAX,
-                [
-                    'vairogs.cache.enabled' => true,
-                ],
-            ],
-            [
-                $array, false, 0, 0, $array,
-            ],
         ];
     }
 

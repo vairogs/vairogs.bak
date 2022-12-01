@@ -2,7 +2,6 @@
 
 namespace Vairogs\Tests\Source\Utils\Helper;
 
-use Vairogs\Core\Functions;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Helper\Util;
 
@@ -30,14 +29,6 @@ class UtilTest extends VairogsTestCase
     public function testIsPrimeBelow1000(int $number, ?bool $expectedBelow): void
     {
         $this->assertEquals(expected: $expectedBelow, actual: (new Util())->isPrimeBelow1000(number: $number));
-    }
-
-    /**
-     * @dataProvider \Vairogs\Tests\Assets\Utils\Helper\UtilDataProvider::dataProviderMakeOneDimension
-     */
-    public function testMakeOneDimension(array $input, bool $onlyLast, int $depth, int $maxDepth, array $expected): void
-    {
-        $this->assertEquals($expected, (new Functions())->makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
     }
 
     /**
