@@ -44,16 +44,8 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "*"
     },
-    "autoload": {
-        "psr-4": {
-            "Vairog\\Config\\": ""
-        }
-    },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "config": {
-        "sort-packages": true
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "4.x-dev"
