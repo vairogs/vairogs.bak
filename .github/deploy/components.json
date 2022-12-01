@@ -40,7 +40,7 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
     },
     {
-        "path": "src/Vairogs/config",
+        "path": "src/Vairogs/Config",
         "repo": "https://GH_TOKEN@github.com/vairogs/config.git"
     },
     {
