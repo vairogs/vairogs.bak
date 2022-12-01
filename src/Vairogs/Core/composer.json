@@ -38,7 +38,7 @@
     ],
     "require": {
         "php": ">=8.2.0",
-        "simpletoimplement/dependency-injection": "*",
+        "spaghetti/dependency-injection": "*",
         "symfony/config": "^6.2|^6.3",
         "symfony/dependency-injection": "^6.2|^6.3",
         "symfony/http-kernel": "^6.2|^6.3"

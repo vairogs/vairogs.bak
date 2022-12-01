@@ -2,7 +2,7 @@
 
 namespace Vairogs\Core\DependencyInjection;
 
-use SimpleToImplement\DependencyInjection\AbstractExtension;
+use Spaghetti\DependencyInjection\AbstractExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Auth\DependencyInjection\AuthDependency;

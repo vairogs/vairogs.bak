@@ -2,7 +2,7 @@
 
 namespace Vairogs\Core\DependencyInjection;
 
-use SimpleToImplement\DependencyInjection\Traits;
+use Spaghetti\DependencyInjection\Traits;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Vairogs\Auth\DependencyInjection\AuthDependency;

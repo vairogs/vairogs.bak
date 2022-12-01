@@ -40,10 +40,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
     },
     {
-        "path": "src/Vairogs/Config",
-        "repo": "https://GH_TOKEN@github.com/vairogs/config.git"
-    },
-    {
         "path": "src/Vairogs/DoctrineUtils",
         "repo": "https://GH_TOKEN@github.com/vairogs/doctrine-utils.git"
     },
@@ -66,22 +62,6 @@
     {
         "path": "src/Vairogs/Extra/Encryption/XXTEA",
         "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption-xxtea.git"
-    },
-    {
-        "path": "src/Vairogs/GraphQL",
-        "repo": "https://GH_TOKEN@github.com/vairogs/graphql.git"
-    },
-    {
-        "path": "src/Vairogs/GraphQL/Client",
-        "repo": "https://GH_TOKEN@github.com/vairogs/graphql-client.git"
-    },
-    {
-        "path": "src/Vairogs/GraphQL/Server",
-        "repo": "https://GH_TOKEN@github.com/vairogs/graphql-server.git"
-    },
-    {
-        "path": "src/Vairogs/Position",
-        "repo": "https://GH_TOKEN@github.com/vairogs/position.git"
     },
     {
         "path": "src/Vairogs/Sitemap",
