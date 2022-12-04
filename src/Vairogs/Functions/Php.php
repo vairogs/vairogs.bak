@@ -15,8 +15,11 @@ use Vairogs\Functions\Constants\Status;
 use function array_diff;
 use function array_unshift;
 use function array_values;
+use function class_exists;
+use function class_implements;
 use function filter_var;
 use function get_class_methods;
+use function interface_exists;
 use function is_array;
 use function is_bool;
 use function is_object;
@@ -125,5 +128,10 @@ final class Php
         array_unshift($arguments, $value);
 
         return (new Closure())->hijackReturnObject($object, $function, ...$arguments);
+    }
+
+    public function classImplements(string $class, string $interface): bool
+    {
+        return class_exists(class: $class) && interface_exists(interface: $interface) && isset(class_implements(object_or_class: $class)[$interface]);
     }
 }
