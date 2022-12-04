@@ -5,7 +5,7 @@ namespace Vairogs\Tests\Assets;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Vairogs\Core\Vairogs;
-use Vairogs\Utils\Helper\File;
+use Vairogs\Functions\File;
 
 use function flock;
 use function fopen;

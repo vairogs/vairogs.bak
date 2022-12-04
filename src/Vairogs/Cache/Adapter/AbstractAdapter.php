@@ -3,7 +3,7 @@
 namespace Vairogs\Cache\Adapter;
 
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Vairogs\Utils\Helper\Composer;
+use Vairogs\Functions\Composer;
 
 use function implode;
 use function sprintf;

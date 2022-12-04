@@ -2,7 +2,7 @@
 
 namespace Vairogs\Twig;
 
-use Vairogs\Utils\Helper\Char;
+use Vairogs\Functions\Char;
 
 use function is_array;
 use function is_numeric;

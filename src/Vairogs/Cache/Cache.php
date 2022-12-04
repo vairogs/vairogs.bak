@@ -3,8 +3,8 @@
 namespace Vairogs\Cache;
 
 use Attribute;
-use Vairogs\Extra\Constants\Definition;
-use Vairogs\Utils\Helper\Iteration;
+use Vairogs\Functions\Constants\Definition;
+use Vairogs\Functions\Iteration;
 
 use function hash;
 use function hash_algos;

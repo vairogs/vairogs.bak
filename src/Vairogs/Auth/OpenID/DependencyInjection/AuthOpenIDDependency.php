@@ -12,8 +12,7 @@ use Symfony\Component\PropertyInfo\Type;
 use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Auth\OpenID\OpenIDProvider;
 use Vairogs\Core\Vairogs;
-use Vairogs\Extra\Constants\Definition;
-use Vairogs\Extra\Constants\Service;
+use Vairogs\Functions\Constants\Definition;
 
 class AuthOpenIDDependency implements Dependency
 {
@@ -46,8 +45,8 @@ class AuthOpenIDDependency implements Dependency
         $clientDefinition = $container->register(id: $clientServiceKey, class: OpenIDProvider::class);
         $clientDefinition
             ->setArguments(arguments: [
-                new Reference(id: Service::REQUEST_STACK),
-                new Reference(id: Service::ROUTER),
+                new Reference(id: 'request_stack'),
+                new Reference(id: 'router'),
                 $key,
                 $container->getParameter(name: Definition::KERNEL_CACHE_DIR),
                 $container->getParameter(name: $clientServiceKey),

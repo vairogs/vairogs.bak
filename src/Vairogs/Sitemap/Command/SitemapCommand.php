@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Vairogs\Extra\Constants\Status;
+use Vairogs\Functions\Constants\Status;
 use Vairogs\Sitemap\Builder\Director;
 use Vairogs\Sitemap\Builder\FileBuilder;
 use Vairogs\Sitemap\Model\Sitemap;

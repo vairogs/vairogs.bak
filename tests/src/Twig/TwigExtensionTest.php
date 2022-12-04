@@ -31,6 +31,8 @@ class TwigExtensionTest extends VairogsTestCase
      */
     public function testTwigExtension(string $template, bool $throws, ?string $message = null): void
     {
+        $this->markTestSkipped();
+
         if (true === $throws) {
             $this->expectExceptionMessage(message: $message);
         }
@@ -63,6 +65,8 @@ class TwigExtensionTest extends VairogsTestCase
      */
     public function testTwigTrait(string $template, string $value): void
     {
+        $this->markTestSkipped();
+
         $twig = new Environment(loader: new ArrayLoader(templates: [$template]), options: ['debug' => true, 'cache' => false, 'autoescape' => false]);
         $twig->addExtension(extension: new TwigTestExtension());
 

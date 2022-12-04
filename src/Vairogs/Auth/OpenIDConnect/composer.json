@@ -50,8 +50,7 @@
         "symfony/property-info": "^6.2|^6.3",
         "symfony/routing": "^6.2|^6.3",
         "vairogs/core": "self.version",
-        "vairogs/extra-constants": "self.version",
-        "vairogs/utils": "self.version"
+        "vairogs/functions": "self.version"
     },
     "autoload": {
         "psr-4": {

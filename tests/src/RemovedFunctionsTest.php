@@ -7,8 +7,8 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Vairogs\Cache\Adapter\File;
 use Vairogs\Cache\Adapter\Orm;
 use Vairogs\Cache\Adapter\Predis;
+use Vairogs\Functions\Composer;
 use Vairogs\Tests\Assets\VairogsTestCase;
-use Vairogs\Utils\Helper\Composer;
 
 class RemovedFunctionsTest extends VairogsTestCase
 {

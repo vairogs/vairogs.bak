@@ -2,7 +2,7 @@
 
 use Doctrine\DBAL\Types\Types;
 use Symfony\Config\DoctrineConfig;
-use Vairogs\Extra\Constants\Definition;
+use Vairogs\Functions\Constants\Definition;
 
 return static function (DoctrineConfig $doctrineConfig): void {
     $dbal = $doctrineConfig
@@ -11,7 +11,7 @@ return static function (DoctrineConfig $doctrineConfig): void {
 
     $dbal
         ->url(value: '%env(resolve:TEST_DATABASE_URL)%')
-        ->serverVersion(value: 14)
+        ->serverVersion(value: 15)
         ->charset(value: $charset = 'utf8');
 
     $dbal

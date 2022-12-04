@@ -1,0 +1,74 @@
+{
+    "name": "vairogs/functions",
+    "description": "⛨ Vairogs ⛨: Functions",
+    "type": "library",
+    "keywords": [
+        "functions",
+        "php",
+        "symfony",
+        "vairogs"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dāvis Zālītis (k0d3r1s)",
+            "email": "k0d3r1s@vairogs.com",
+            "homepage": "https://me.k0d3r1s.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "support@vairogs.com",
+        "issues": "https://github.com/vairogs/vairogs/issues",
+        "wiki": "https://github.com/vairogs/vairogs/wiki"
+    },
+    "funding": [
+        {
+            "type": "ko-fi",
+            "url": "https://ko-fi.com/k0d3r1s"
+        },
+        {
+            "type": "paypal",
+            "url": "https://www.paypal.com/paypalme/k0d3r1s"
+        },
+        {
+            "type": "issuehunt",
+            "url": "https://issuehunt.io/r/vairogs/vairogs"
+        }
+    ],
+    "require": {
+        "php": ">=8.1.0",
+        "ext-curl": "*",
+        "composer-runtime-api": ">=2.0.0",
+        "doctrine/common": "*",
+        "jetbrains/phpstorm-attributes": "*",
+        "symfony/http-foundation": ">=6.1",
+        "symfony/intl": ">=6.1",
+        "symfony/property-access": ">=6.1",
+        "symfony/property-info": ">=6.1",
+        "symfony/routing": ">=6.1"
+    },
+    "suggest": {
+        "ext-random": "*",
+        "ext-gmp": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.x-dev"
+        },
+        "thanks": {
+            "name": "vairogs/vairogs",
+            "url": "https://github.com/vairogs/vairogs"
+        }
+    }
+}

@@ -3,7 +3,7 @@
 namespace Vairogs\Cache\Adapter;
 
 use Psr\Cache\CacheItemPoolInterface;
-use Vairogs\Extra\Constants\Definition;
+use Vairogs\Functions\Constants\Definition;
 
 interface Adapter
 {

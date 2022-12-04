@@ -10,7 +10,7 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
 use Psr\Http\Message\ResponseInterface;
 use UnexpectedValueException;
-use Vairogs\Utils\Helper\Json;
+use Vairogs\Functions\Json;
 
 use function sprintf;
 

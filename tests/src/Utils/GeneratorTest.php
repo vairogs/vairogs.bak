@@ -2,10 +2,10 @@
 
 namespace Vairogs\Tests\Source\Utils;
 
-use Vairogs\Extra\Constants\Symbol;
+use Vairogs\Functions\Constants\Symbol;
+use Vairogs\Functions\Text;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Utils\Generator;
-use Vairogs\Utils\Helper\Text;
 
 use function function_exists;
 

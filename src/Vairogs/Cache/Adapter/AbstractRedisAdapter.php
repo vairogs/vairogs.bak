@@ -7,7 +7,7 @@ use Psr\Cache\CacheItemPoolInterface;
 use Redis;
 use Symfony\Component\Cache\Adapter\RedisTagAwareAdapter;
 use Vairogs\Core\Vairogs;
-use Vairogs\Extra\Constants\Definition;
+use Vairogs\Functions\Constants\Definition;
 
 abstract class AbstractRedisAdapter extends AbstractAdapter
 {

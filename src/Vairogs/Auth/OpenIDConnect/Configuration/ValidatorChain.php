@@ -8,7 +8,7 @@ use Lcobucci\JWT\Validation\Constraint as JWTConstraint;
 use Vairogs\Auth\OpenIDConnect\Configuration\Constraint\Constraint;
 use Vairogs\Auth\OpenIDConnect\Exception\InvalidConstraintException;
 use Vairogs\Auth\OpenIDConnect\Exception\OpenIDConnectException;
-use Vairogs\Utils\Helper\Text;
+use Vairogs\Functions\Text;
 
 use function http_build_query;
 use function sprintf;

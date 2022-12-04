@@ -8,7 +8,7 @@ use Vairogs\Addon\Auth\OpenID\Steam\Model\SteamGifts;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
 use Vairogs\Core\Registry\Registry;
-use Vairogs\Utils\Helper\Composer;
+use Vairogs\Functions\Composer;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 

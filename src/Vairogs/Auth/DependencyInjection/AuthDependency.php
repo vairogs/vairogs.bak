@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Vairogs\Auth\OpenID\DependencyInjection\AuthOpenIDDependency;
 use Vairogs\Auth\OpenIDConnect\DependencyInjection\AuthOpenIDConnectDependency;
 use Vairogs\Core\Vairogs;
-use Vairogs\Extra\Constants\Status;
+use Vairogs\Functions\Constants\Status;
 
 use function sprintf;
 

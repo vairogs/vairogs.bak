@@ -6,7 +6,7 @@ use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
 use Vairogs\Core\Vairogs;
-use Vairogs\Extra\Constants\Definition;
+use Vairogs\Functions\Constants\Definition;
 
 use function sys_get_temp_dir;
 

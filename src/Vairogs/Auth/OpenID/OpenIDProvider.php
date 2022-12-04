@@ -16,9 +16,9 @@ use Vairogs\Addon\Auth\OpenID\Constants\OpenID;
 use Vairogs\Auth\OpenID\Builder\OpenIDUserBuilder;
 use Vairogs\Auth\OpenID\Model\OpenIDUser;
 use Vairogs\Core\Registry\HasRegistry;
-use Vairogs\Extra\Constants\ContentType;
-use Vairogs\Utils\Helper\Json;
-use Vairogs\Utils\Helper\Uri;
+use Vairogs\Functions\Constants\ContentType;
+use Vairogs\Functions\Json;
+use Vairogs\Functions\Uri;
 
 use function array_keys;
 use function explode;

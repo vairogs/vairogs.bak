@@ -2,12 +2,13 @@
 
 namespace Vairogs\Utils;
 
-use Vairogs\Extra\Constants\Symbol;
+use Vairogs\Functions\Abstraction;
+use Vairogs\Functions\Constants\Symbol;
 
 use function count;
 use function str_split;
 
-final class Generator extends AbstractHelper
+final class Generator extends Abstraction
 {
     /** @var array<string, string> */
     private array $sets = [];
@@ -27,7 +28,7 @@ final class Generator extends AbstractHelper
             $unique = $this->fillUnique(unique: $unique, parts: $parts, length: $length);
         }
 
-        return $this->randomizer->shuffleBytes(bytes: $unique);
+        return $this->shuffle(string: $unique);
     }
 
     public function useLower(): self
@@ -138,7 +139,7 @@ final class Generator extends AbstractHelper
 
         foreach ($this->sets as $set) {
             if ([] !== $parts = str_split(string: $set)) {
-                $unique .= $set[$this->randomizer->pickArrayKeys(array: $parts, num: 1)[0]];
+                $unique .= $set[$this->pick(array: $parts)];
                 $all .= $set;
             }
         }
@@ -154,7 +155,7 @@ final class Generator extends AbstractHelper
         $setsCount = count(value: $this->sets);
 
         for ($i = 0; $i < $length - $setsCount; $i++) {
-            $unique .= $parts[$this->randomizer->pickArrayKeys(array: $parts, num: 1)[0]];
+            $unique .= $parts[$this->pick(array: $parts)];
         }
 
         return $unique;

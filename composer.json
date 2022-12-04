@@ -10,8 +10,7 @@
         "captcha",
         "common",
         "core",
-        "extra",
-        "position",
+        "functions",
         "sitemap",
         "twig",
         "utils",
@@ -87,9 +86,11 @@
     },
     "require-dev": {
         "ext-curl": "*",
+        "ext-gmp": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pdo": "*",
+        "ext-phpiredis": "*",
         "ext-random": "*",
         "ext-redis": ">=5.3",
         "ext-zend-opcache": "*",
@@ -122,25 +123,10 @@
         "vairogs/cache": "self.version",
         "vairogs/captcha": "self.version",
         "vairogs/core": "self.version",
-        "vairogs/doctrine-utils": "self.version",
-        "vairogs/extra": "self.version",
-        "vairogs/extra-constants": "self.version",
-        "vairogs/extra-encryption": "self.version",
-        "vairogs/extra-encryption-cross": "self.version",
-        "vairogs/extra-encryption-xxtea": "self.version",
-        "vairogs/graphql": "self.version",
-        "vairogs/graphql-client": "self.version",
-        "vairogs/graphql-server": "self.version",
+        "vairogs/functions": "self.version",
         "vairogs/sitemap": "self.version",
         "vairogs/twig": "self.version",
-        "vairogs/utils": "self.version",
-        "vairogs/utils-locator": "self.version"
-    },
-    "suggest": {
-        "ext-gmp": "to use gmp prime check function",
-        "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol",
-        "ext-redis": "If you want to use redis",
-        "predis/predis": "If you want to use predis."
+        "vairogs/utils": "self.version"
     },
     "autoload": {
         "psr-4": {

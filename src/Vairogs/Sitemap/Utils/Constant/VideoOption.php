@@ -3,9 +3,9 @@
 namespace Vairogs\Sitemap\Utils\Constant;
 
 use RuntimeException;
-use Vairogs\Extra\Constants\Status;
-use Vairogs\Utils\Helper\Iteration;
-use Vairogs\Utils\Helper\Php;
+use Vairogs\Functions\Constants\Status;
+use Vairogs\Functions\Iteration;
+use Vairogs\Functions\Php;
 
 final class VideoOption
 {

@@ -51,8 +51,7 @@
         "symfony/routing": "^6.2|^6.3",
         "vairogs/addon-auth-openid": "self.version",
         "vairogs/core": "self.version",
-        "vairogs/extra-constants": "self.version",
-        "vairogs/utils": "self.version"
+        "vairogs/functions": "self.version"
     },
     "replace": {
         "vairogs/auth-openid": "self.version",

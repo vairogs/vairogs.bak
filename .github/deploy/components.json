@@ -40,28 +40,8 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/core.git"
     },
     {
-        "path": "src/Vairogs/DoctrineUtils",
-        "repo": "https://GH_TOKEN@github.com/vairogs/doctrine-utils.git"
-    },
-    {
-        "path": "src/Vairogs/Extra",
-        "repo": "https://GH_TOKEN@github.com/vairogs/extra.git"
-    },
-    {
-        "path": "src/Vairogs/Extra/Constants",
-        "repo": "https://GH_TOKEN@github.com/vairogs/extra-constants.git"
-    },
-    {
-        "path": "src/Vairogs/Extra/Encryption",
-        "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption.git"
-    },
-    {
-        "path": "src/Vairogs/Extra/Encryption/Cross",
-        "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption-cross.git"
-    },
-    {
-        "path": "src/Vairogs/Extra/Encryption/XXTEA",
-        "repo": "https://GH_TOKEN@github.com/vairogs/extra-encryption-xxtea.git"
+        "path": "src/Vairogs/Functions",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions.git"
     },
     {
         "path": "src/Vairogs/Sitemap",
@@ -74,9 +54,5 @@
     {
         "path": "src/Vairogs/Utils",
         "repo": "https://GH_TOKEN@github.com/vairogs/utils.git"
-    },
-    {
-        "path": "src/Vairogs/Utils/Locator",
-        "repo": "https://GH_TOKEN@github.com/vairogs/utils-locator.git"
     }
 ]

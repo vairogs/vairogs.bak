@@ -11,7 +11,7 @@ use Symfony\Component\Cache\Exception\InvalidArgumentException as SymfonyInvalid
 use Symfony\Component\Cache\PruneableInterface;
 use Vairogs\Cache\Adapter\Adapter;
 use Vairogs\Cache\Adapter\File;
-use Vairogs\Extra\Constants\Definition;
+use Vairogs\Functions\Constants\Definition;
 
 use function time;
 

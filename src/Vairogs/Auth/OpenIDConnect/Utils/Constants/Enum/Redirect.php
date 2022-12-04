@@ -2,7 +2,7 @@
 
 namespace Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum;
 
-use Vairogs\Extra\Constants\Enum\Traits\Cases;
+use Vairogs\Functions\Traits\Cases;
 
 enum Redirect: string
 {

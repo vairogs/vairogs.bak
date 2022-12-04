@@ -5,7 +5,7 @@ namespace Vairogs\Sitemap\Utils;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Vairogs\Extra\Constants\ContentType;
+use Vairogs\Functions\Constants\ContentType;
 
 readonly class ErrorResponse
 {

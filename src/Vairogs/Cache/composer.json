@@ -56,8 +56,7 @@
         "symfony/property-info": "^6.2|^6.3",
         "symfony/security-bundle": "^6.2|^6.3",
         "vairogs/core": "self.version",
-        "vairogs/extra-constants": "self.version",
-        "vairogs/utils": "self.version"
+        "vairogs/functions": "self.version"
     },
     "suggest": {
         "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol",

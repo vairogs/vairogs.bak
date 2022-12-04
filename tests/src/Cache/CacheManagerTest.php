@@ -8,10 +8,10 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Exception\CacheException;
 use Vairogs\Cache\Adapter\Predis;
 use Vairogs\Cache\CacheManager;
-use Vairogs\Extra\Constants\Definition;
-use Vairogs\Extra\Constants\Symbol;
+use Vairogs\Functions\Constants\Definition;
+use Vairogs\Functions\Constants\Symbol;
+use Vairogs\Functions\Identification;
 use Vairogs\Tests\Assets\VairogsTestCase;
-use Vairogs\Utils\Helper\Identification;
 
 class CacheManagerTest extends VairogsTestCase
 {

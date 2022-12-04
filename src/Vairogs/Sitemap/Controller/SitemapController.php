@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Vairogs\Core\Vairogs;
-use Vairogs\Extra\Constants\Status;
+use Vairogs\Functions\Constants\Status;
 use Vairogs\Sitemap\Builder\Director;
 use Vairogs\Sitemap\Builder\XmlBuilder;
 use Vairogs\Sitemap\DependencyInjection\SitemapDependency;

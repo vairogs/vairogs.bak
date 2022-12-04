@@ -9,8 +9,8 @@ use Twig\TwigFunction;
 use Vairogs\Cache\CacheManager;
 use Vairogs\Core\Attribute\CoreFilter;
 use Vairogs\Core\Attribute\CoreFunction;
-use Vairogs\Extra\Constants\Definition;
-use Vairogs\Utils\Helper\Reflection;
+use Vairogs\Functions\Constants\Definition;
+use Vairogs\Functions\Reflection;
 use Vairogs\Utils\Locator\Finder;
 
 use function array_keys;

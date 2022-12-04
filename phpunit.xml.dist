@@ -34,7 +34,6 @@
         </include>
         <exclude>
             <directory>./tests/</directory>
-            <directory>./src/Vairogs/Config/</directory>
         </exclude>
         <report>
             <html outputDirectory=".github/coverage"/>

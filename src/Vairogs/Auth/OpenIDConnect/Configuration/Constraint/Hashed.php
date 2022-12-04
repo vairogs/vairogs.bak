@@ -4,7 +4,7 @@ namespace Vairogs\Auth\OpenIDConnect\Configuration\Constraint;
 
 use Lcobucci\JWT\Validation\ConstraintViolation;
 use Vairogs\Auth\OpenIDConnect\Configuration\IdToken;
-use Vairogs\Utils\Helper\Identification;
+use Vairogs\Functions\Identification;
 
 use function sprintf;
 

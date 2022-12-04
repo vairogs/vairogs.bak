@@ -13,8 +13,7 @@ use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Auth\OpenIDConnect\Configuration\DefaultProvider;
 use Vairogs\Auth\OpenIDConnect\Utils\Constants\Enum\Redirect;
 use Vairogs\Core\Vairogs;
-use Vairogs\Extra\Constants\Definition;
-use Vairogs\Extra\Constants\Service;
+use Vairogs\Functions\Constants\Definition;
 
 class AuthOpenIDConnectDependency implements Dependency
 {
@@ -63,8 +62,8 @@ class AuthOpenIDConnectDependency implements Dependency
         unset($options[self::USER_PROVIDER]);
         $clientDefinition->setArguments(arguments: [
             $key,
-            new Reference(id: Service::ROUTER),
-            new Reference(id: Service::REQUEST_STACK),
+            new Reference(id: 'router'),
+            new Reference(id: 'request_stack'),
             $options,
             [],
         ])

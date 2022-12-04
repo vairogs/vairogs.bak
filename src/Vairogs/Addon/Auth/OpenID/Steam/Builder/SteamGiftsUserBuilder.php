@@ -7,8 +7,8 @@ use Vairogs\Addon\Auth\OpenID\Steam\Model\User;
 use Vairogs\Addon\Auth\OpenID\Steam\UserArrayFactory;
 use Vairogs\Auth\OpenID\Builder\OpenIDUserBuilder;
 use Vairogs\Auth\OpenID\Model\OpenIDUser;
-use Vairogs\Extra\Constants\Definition;
-use Vairogs\Utils\Helper\File;
+use Vairogs\Functions\Constants\Definition;
+use Vairogs\Functions\File;
 
 use function dirname;
 use function end;
