@@ -9,6 +9,7 @@ use Vairogs\Auth\DependencyInjection\AuthDependency;
 use Vairogs\Cache\DependencyInjection\CacheDependency;
 use Vairogs\Core\Vairogs;
 use Vairogs\Sitemap\DependencyInjection\SitemapDependency;
+use Vairogs\Twig\DependencyInjection\TwigDependency;
 
 class Configuration implements ConfigurationInterface
 {
@@ -22,6 +23,7 @@ class Configuration implements ConfigurationInterface
         $this->appendComponent(class: AuthDependency::class, arrayNodeDefinition: $rootNode);
         $this->appendComponent(class: CacheDependency::class, arrayNodeDefinition: $rootNode);
         $this->appendComponent(class: SitemapDependency::class, arrayNodeDefinition: $rootNode);
+        $this->appendComponent(class: TwigDependency::class, arrayNodeDefinition: $rootNode);
 
         return $treeBuilder;
     }

@@ -43,6 +43,8 @@
         "nikic/php-parser": "*",
         "psr/cache": "*",
         "symfony/cache": "^6.2|^6.3",
+        "symfony/config": "^6.2|^6.3",
+        "symfony/property-info": "^6.2|^6.3",
         "twig/twig": "*",
         "vairogs/core": "self.version",
         "vairogs/functions": "self.version",

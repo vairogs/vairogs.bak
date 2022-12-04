@@ -13,7 +13,7 @@ final class Reflection
         return [] !== $reflectionMethod->getAttributes(name: $filterClass);
     }
 
-    public function getFilteredMethods(string $class, string $filterClass): array
+    public function getFilteredMethods(string $class, ?string $filterClass = null): array
     {
         try {
             $methods = (new ReflectionClass(objectOrClass: $class))->getMethods(filter: ReflectionMethod::IS_PUBLIC);
@@ -24,7 +24,7 @@ final class Reflection
         $filtered = [];
 
         foreach ($methods as $method) {
-            if ($this->attributeExists(reflectionMethod: $method, filterClass: $filterClass)) {
+            if ((null !== $filterClass && $this->attributeExists(reflectionMethod: $method, filterClass: $filterClass)) || null === $filterClass) {
                 $filtered[(new Char())->fromCamelCase(string: $name = $method->getName())] = $this->filter(class: $class, name: $name, isStatic: $method->isStatic());
             }
         }

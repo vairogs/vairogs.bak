@@ -12,6 +12,8 @@ use Twig\Error\SyntaxError;
 use Twig\Loader\ArrayLoader;
 use Vairogs\Cache\Adapter\Predis;
 use Vairogs\Cache\CacheManager;
+use Vairogs\Functions\Text;
+use Vairogs\Tests\Assets\Twig\TestFunctions;
 use Vairogs\Tests\Assets\Twig\TwigTestExtension;
 use Vairogs\Tests\Assets\VairogsTestCase;
 use Vairogs\Twig\TwigExtension;
@@ -31,8 +33,6 @@ class TwigExtensionTest extends VairogsTestCase
      */
     public function testTwigExtension(string $template, bool $throws, ?string $message = null): void
     {
-        $this->markTestSkipped();
-
         if (true === $throws) {
             $this->expectExceptionMessage(message: $message);
         }
@@ -43,7 +43,7 @@ class TwigExtensionTest extends VairogsTestCase
         $predis = $this->container->get(id: 'snc_redis.predis');
 
         $manager = new CacheManager(60, false, new Predis(client: $predis, incDevReq: true));
-        $extension = new TwigExtension(cacheManager: $manager);
+        $extension = new TwigExtension(cacheManager: $manager, enabled: true, classes: [Text::class, TestFunctions::class, 'Test', ]);
         $manager->delete(key: $extension->getKey(type: 'getFilters'));
 
         $twig = new Environment(loader: new ArrayLoader(templates: [$template]), options: ['debug' => true, 'cache' => false, 'autoescape' => false]);
@@ -65,8 +65,6 @@ class TwigExtensionTest extends VairogsTestCase
      */
     public function testTwigTrait(string $template, string $value): void
     {
-        $this->markTestSkipped();
-
         $twig = new Environment(loader: new ArrayLoader(templates: [$template]), options: ['debug' => true, 'cache' => false, 'autoescape' => false]);
         $twig->addExtension(extension: new TwigTestExtension());
 

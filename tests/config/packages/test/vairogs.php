@@ -29,6 +29,13 @@ return static function (VairogsConfig $vairogsConfig, ContainerConfigurator $con
         ->openid()
         ->enabled(value: true);
 
+    $vairogsConfig
+        ->twig()
+        ->enabled(true)
+        ->classes([
+            'Vairogs\Functions\Text',
+        ]);
+
     $services = $containerConfigurator->services();
 
     $services->defaults()

@@ -46,4 +46,12 @@ class GeneratorTest extends VairogsTestCase
         $this->assertEmpty(actual: $reset->reset()->getSets());
         $this->assertEquals(expected: '', actual: $reset->generate());
     }
+
+    public function testGeneratorNotMinimum(): void
+    {
+        $result = (new Generator(80400))
+            ->useDigits()
+            ->generate();
+        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::DIGITS));
+    }
 }

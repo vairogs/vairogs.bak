@@ -10,16 +10,16 @@ use function str_shuffle;
 
 abstract class Abstraction
 {
-    protected bool $is82;
+    protected bool $isSupported;
 
-    public function __construct()
+    public function __construct(int $minimum = 80200)
     {
-        $this->is82 = (new Composer())->checkPhpVersion(phpVersionId: 80200) && (new Composer())->isInstalled(packages: ['random']);
+        $this->isSupported = (new Composer())->checkPhpVersion(phpVersionId: $minimum) && (new Composer())->isInstalled(packages: ['random']);
     }
 
     protected function shuffle(string $string): string
     {
-        if ($this->is82) {
+        if ($this->isSupported) {
             return (new Randomizer(engine: new Xoshiro256StarStar()))->shuffleBytes(bytes: $string);
         }
 
@@ -28,7 +28,7 @@ abstract class Abstraction
 
     protected function pick(array $array): int|string|array
     {
-        if ($this->is82) {
+        if ($this->isSupported) {
             return (new Randomizer(engine: new Xoshiro256StarStar()))->pickArrayKeys(array: $array, num: 1)[0];
         }
 
