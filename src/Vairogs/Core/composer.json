@@ -38,7 +38,7 @@
     ],
     "require": {
         "php": ">=8.2.0",
-        "spaghetti/dependency-injection": "*",
+        "spaghetti/dependency-injection": ">=1.1",
         "symfony/config": "^6.2|^6.3",
         "symfony/dependency-injection": "^6.2|^6.3",
         "symfony/http-kernel": "^6.2|^6.3"
