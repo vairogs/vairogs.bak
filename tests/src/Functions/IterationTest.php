@@ -88,4 +88,12 @@ class IterationTest extends VairogsTestCase
         $request->initialize();
         $this->assertEquals(expected: null, actual: (new Iteration())->getFirstMatchAsString(keys: ['AAA'], haystack: $request->server->all()));
     }
+
+    /**
+     * @dataProvider \Vairogs\Tests\Assets\Functions\IterationDataProvider::dataProviderMakeOneDimension
+     */
+    public function testMakeOneDimension(array $input, bool $onlyLast, int $depth, int $maxDepth, array $expected): void
+    {
+        $this->assertEquals($expected, (new Iteration())->makeOneDimension(array: $input, onlyLast: $onlyLast, depth: $depth, maxDepth: $maxDepth));
+    }
 }

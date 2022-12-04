@@ -15,7 +15,6 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken as BaseAccessToken;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 use Psr\Http\Message\RequestInterface;
-use Spaghetti\ArrayFunctions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -38,6 +37,7 @@ use Vairogs\Core\Registry\HasRegistry;
 use Vairogs\Functions\Char;
 use Vairogs\Functions\Constants\ContentType;
 use Vairogs\Functions\Identification;
+use Vairogs\Functions\Iteration;
 
 use function array_merge;
 use function base64_encode;
@@ -236,7 +236,7 @@ abstract class OpenIDConnectProvider extends AbstractProvider implements HasRegi
         $uris = $options['uris'] ?? [];
         unset($options['redirect'], $options['uris']);
 
-        foreach ((new ArrayFunctions())->makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
+        foreach ((new Iteration())->makeOneDimension(array: $options, maxDepth: 0) as $key => $value) {
             if (property_exists(object_or_class: $this, property: $var = (new Char())->toCamelCaseLCFisrt(string: $key))) {
                 $this->{$var} = $value;
             }

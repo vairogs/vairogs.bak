@@ -2,6 +2,8 @@
 
 namespace Vairogs\Tests\Source\Functions;
 
+use DateTime;
+use DateTimeInterface;
 use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Vairogs\Core\Vairogs;
 use Vairogs\Functions\Php;
@@ -53,5 +55,10 @@ class PhpTest extends VairogsTestCase
     public function testCallObject(): void
     {
         $this->assertEquals(expected: 'sgoriav', actual: (new Php())->callObject(value: Vairogs::VAIROGS, object: new Text(), function: 'reverseUTF8'));
+    }
+
+    public function testClassImplements(): void
+    {
+        $this->assertEquals(expected: true, actual: (new Php())->classImplements(class: DateTime::class, interface: DateTimeInterface::class));
     }
 }

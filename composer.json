@@ -63,7 +63,6 @@
         "psr/cache": "*",
         "psr/http-message": "*",
         "spaghetti/dependency-injection": "*",
-        "spaghetti/spaghetti": "*",
         "symfony/cache": "^6.2|^6.3",
         "symfony/config": "^6.2|^6.3",
         "symfony/console": "^6.2|^6.3",

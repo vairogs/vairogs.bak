@@ -59,4 +59,41 @@ class IterationDataProvider
             [['1' => new Iteration(), 2 => 'test', ], [1 => new Iteration(), 'test' => 2, ], ],
         ];
     }
+
+    public static function dataProviderMakeOneDimension(): array
+    {
+        $array = [
+            'vairogs' => [
+                'cache' => [
+                    'enabled' => true,
+                ],
+            ],
+        ];
+
+        return [
+            [
+                $array, false, 0, PHP_INT_MAX,
+                [
+                    'vairogs.cache.enabled' => true,
+                    'vairogs.cache' => [
+                        'enabled' => true,
+                    ],
+                    'vairogs' => [
+                        'cache' => [
+                            'enabled' => true,
+                        ],
+                    ],
+                ],
+            ],
+            [
+                $array, true, 1, PHP_INT_MAX,
+                [
+                    'vairogs.cache.enabled' => true,
+                ],
+            ],
+            [
+                $array, false, 0, 0, $array,
+            ],
+        ];
+    }
 }
