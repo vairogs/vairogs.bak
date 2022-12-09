@@ -3,7 +3,6 @@
 namespace Vairogs\Functions;
 
 use Closure;
-use Doctrine\Common\Collections\Criteria;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 
@@ -21,7 +20,7 @@ final class Order
     /**
      * @throws InvalidArgumentException
      */
-    public function sort(array|object $data, string $parameter, string $order = Criteria::ASC): object|array
+    public function sort(array|object $data, string $parameter, string $order = 'ASC'): object|array
     {
         if (count(value: $data) < 2) {
             return $data;
@@ -58,7 +57,7 @@ final class Order
                 return 0;
             }
 
-            $flip = Criteria::DESC === $order ? -1 : 1;
+            $flip = 'DESC' === $order ? -1 : 1;
 
             if ($firstSort > $secondSort) {
                 return $flip;

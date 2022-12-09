@@ -1,0 +1,18 @@
+version: 2
+
+jobs:
+    build:
+        environment:
+            CC_TEST_REPORTER_ID: 9253c5e12c6d9d5a7e84cfa345188cf8e861c0a01231ebbf594e14cd1d769b40
+        docker:
+            - image: k0d3r1s/php-fpm:unstable-testing
+        resource_class: small
+        working_directory: ~/repo
+        steps:
+            - checkout
+            - run: composer install -n --prefer-dist
+            - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            - run: chmod +x ./cc-test-reporter
+            - run: ./cc-test-reporter before-build
+            - run: vendor/bin/phpunit --coverage-clover clover.xml
+            - run: ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?

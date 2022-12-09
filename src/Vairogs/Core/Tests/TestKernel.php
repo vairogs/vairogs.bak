@@ -14,9 +14,6 @@ use function getcwd;
 use function hash;
 use function sys_get_temp_dir;
 
-/**
- * @interal
- */
 class TestKernel extends Kernel
 {
     use MicroKernelTrait;

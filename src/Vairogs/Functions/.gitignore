@@ -1,4 +1,10 @@
+.github/coverage/*
+.php-cs-fixer.cache
+.phpunit.cache/
+.phpunit.result.cache
+/vendor
 composer.lock
 composer.phar
-/vendor
 phpunit.xml
+var/
+clover.xml

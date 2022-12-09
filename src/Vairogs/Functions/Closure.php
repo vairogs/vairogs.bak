@@ -6,7 +6,6 @@ use Exception;
 use InvalidArgumentException;
 use ReflectionException;
 use ReflectionProperty;
-use Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException;
 
 use function sprintf;
 
@@ -106,7 +105,6 @@ final class Closure
 
     /**
      * @throws InvalidArgumentException
-     * @throws InvalidPropertyPathException
      */
     public function hijackGet(object $object, string $property, bool $throwOnUnInitialized = false, mixed ...$arguments)
     {
@@ -118,7 +116,7 @@ final class Closure
 
         if (!$reflectionProperty->isInitialized(object: $object)) {
             if ($throwOnUnInitialized) {
-                throw new InvalidPropertyPathException(message: sprintf('%s::%s must not be accessed before initialization', $object::class, $property));
+                throw new InvalidArgumentException(message: sprintf('%s::%s must not be accessed before initialization', $object::class, $property));
             }
 
             return null;

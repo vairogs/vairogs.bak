@@ -19,9 +19,6 @@ use const LOCK_EX;
 use const LOCK_NB;
 use const LOCK_SH;
 
-/**
- * @interal
- */
 abstract class VairogsTestCase extends KernelTestCase
 {
     final protected const LOCKFILE = 'vairogs-test-initialization-lock-file';

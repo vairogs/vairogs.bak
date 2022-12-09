@@ -2,6 +2,7 @@
 
 namespace Vairogs\Functions;
 
+use BadFunctionCallException;
 use Exception;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
@@ -9,7 +10,6 @@ use ReflectionClass;
 use ReflectionClassConstant;
 use ReflectionObject;
 use RuntimeException;
-use Symfony\Component\PropertyAccess\Exception\AccessException;
 use Vairogs\Functions\Constants\Status;
 
 use function array_diff;
@@ -63,7 +63,7 @@ final class Php
         try {
             return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
         } catch (Exception $e) {
-            throw new AccessException(message: $e->getMessage(), code: $e->getCode(), previous: $e);
+            throw new BadFunctionCallException(message: $e->getMessage(), code: $e->getCode(), previous: $e);
         }
     }
 
