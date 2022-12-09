@@ -5,7 +5,7 @@ namespace Vairogs\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use Vairogs\Cache\CacheManager;
+use Vairogs\Core\Contracts\CacheManagerInterface;
 use Vairogs\Functions\Constants\Definition;
 use Vairogs\Functions\Reflection;
 
@@ -21,7 +21,7 @@ class TwigExtension extends AbstractExtension
     private array $foundClasses = [];
 
     public function __construct(
-        private readonly CacheManager $cacheManager,
+        private readonly CacheManagerInterface $cacheManager,
         private readonly bool $enabled = false,
         private readonly array $classes = [],
     ) {

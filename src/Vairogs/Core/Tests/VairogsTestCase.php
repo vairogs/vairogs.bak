@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Tests\Assets;
+namespace Vairogs\Core\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -19,6 +19,9 @@ use const LOCK_EX;
 use const LOCK_NB;
 use const LOCK_SH;
 
+/**
+ * @interal
+ */
 abstract class VairogsTestCase extends KernelTestCase
 {
     final protected const LOCKFILE = 'vairogs-test-initialization-lock-file';
