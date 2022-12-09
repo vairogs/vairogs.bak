@@ -1,8 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Functions\Tests\Constants\Enum;
+namespace Vairogs\Functions\Tests;
 
 use Vairogs\Core\Tests\VairogsTestCase;
+use Vairogs\Functions\Tests\Assets\Constants\Enum\TestEnum;
+use Vairogs\Functions\Tests\Assets\Constants\Enum\TestEnumValues;
 
 class EnumTraitTest extends VairogsTestCase
 {

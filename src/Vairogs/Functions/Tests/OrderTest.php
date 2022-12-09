@@ -5,7 +5,7 @@ namespace Vairogs\Functions\Tests;
 use InvalidArgumentException;
 use Vairogs\Core\Tests\VairogsTestCase;
 use Vairogs\Functions\Order;
-use Vairogs\Functions\Tests\Entity\Entity;
+use Vairogs\Functions\Tests\Assets\Model\Entity;
 
 class OrderTest extends VairogsTestCase
 {

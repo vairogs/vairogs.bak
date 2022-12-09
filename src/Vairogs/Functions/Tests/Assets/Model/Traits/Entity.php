@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Functions\Tests\Traits;
+namespace Vairogs\Functions\Tests\Assets\Model\Traits;
 
 use DateTimeImmutable;
 use DateTimeInterface;

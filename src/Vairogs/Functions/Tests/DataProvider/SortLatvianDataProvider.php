@@ -2,12 +2,12 @@
 
 namespace Vairogs\Functions\Tests\DataProvider;
 
-use Vairogs\Functions\Tests\Model\Entity1;
-use Vairogs\Functions\Tests\Model\Entity2;
-use Vairogs\Functions\Tests\Model\Entity3;
-use Vairogs\Functions\Tests\Model\Entity4;
-use Vairogs\Functions\Tests\Model\Entity5;
-use Vairogs\Functions\Tests\Model\Entity6;
+use Vairogs\Functions\Tests\Assets\Model\Entity1;
+use Vairogs\Functions\Tests\Assets\Model\Entity2;
+use Vairogs\Functions\Tests\Assets\Model\Entity3;
+use Vairogs\Functions\Tests\Assets\Model\Entity4;
+use Vairogs\Functions\Tests\Assets\Model\Entity5;
+use Vairogs\Functions\Tests\Assets\Model\Entity6;
 
 class SortLatvianDataProvider
 {

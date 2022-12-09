@@ -3,5 +3,5 @@
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {
-    $routingConfigurator->import(resource: '../../../Controller/', type: 'attribute');
+    $routingConfigurator->import(resource: '../../../Assets/Controller/', type: 'attribute');
 };

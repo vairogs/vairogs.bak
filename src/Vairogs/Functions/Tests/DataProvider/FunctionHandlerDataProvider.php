@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Functions\Tests\DataProvider\Handler;
+namespace Vairogs\Functions\Tests\DataProvider;
 
 use Vairogs\Functions\Iteration;
 use Vairogs\Functions\Util;

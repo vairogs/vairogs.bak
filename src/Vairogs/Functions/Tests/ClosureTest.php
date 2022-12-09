@@ -7,9 +7,9 @@ use InvalidArgumentException;
 use Vairogs\Core\Tests\VairogsTestCase;
 use Vairogs\Functions\Closure;
 use Vairogs\Functions\Constants\Status;
-use Vairogs\Functions\Tests\Entity\Entity;
-use Vairogs\Functions\Tests\Model\Entity1;
-use Vairogs\Functions\Tests\Model\Entity7;
+use Vairogs\Functions\Tests\Assets\Model\Entity;
+use Vairogs\Functions\Tests\Assets\Model\Entity1;
+use Vairogs\Functions\Tests\Assets\Model\Entity7;
 
 use function sprintf;
 

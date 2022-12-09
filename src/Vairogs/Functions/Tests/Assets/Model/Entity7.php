@@ -1,13 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Functions\Tests\Model;
-
-use Vairogs\Functions\Tests\Entity\Entity;
-use Vairogs\Functions\Tests\Traits\ExtraVariables;
+namespace Vairogs\Functions\Tests\Assets\Model;
 
 class Entity7 extends Entity
 {
-    use ExtraVariables;
+    use Traits\ExtraVariables;
 
     protected static string $value = 'value';
 

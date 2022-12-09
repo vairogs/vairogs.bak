@@ -7,8 +7,8 @@ use DateTime;
 use DateTimeInterface;
 use Vairogs\Core\Tests\VairogsTestCase;
 use Vairogs\Functions\Php;
-use Vairogs\Functions\Tests\Entity\Entity;
-use Vairogs\Functions\Tests\Model\Entity1;
+use Vairogs\Functions\Tests\Assets\Model\Entity;
+use Vairogs\Functions\Tests\Assets\Model\Entity1;
 use Vairogs\Functions\Text;
 
 class PhpTest extends VairogsTestCase

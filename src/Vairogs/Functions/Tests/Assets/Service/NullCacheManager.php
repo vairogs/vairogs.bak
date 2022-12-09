@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Functions\Tests\Service;
+namespace Vairogs\Functions\Tests\Assets\Service;
 
 use Vairogs\Core\Contracts\CacheManagerInterface;
 

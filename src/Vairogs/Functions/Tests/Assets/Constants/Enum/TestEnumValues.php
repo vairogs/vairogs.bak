@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Functions\Tests\Constants\Enum;
+namespace Vairogs\Functions\Tests\Assets\Constants\Enum;
 
 use Vairogs\Functions\Traits\Cases;
 

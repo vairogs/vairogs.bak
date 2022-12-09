@@ -14,8 +14,8 @@ use Twig\Error\SyntaxError;
 use Twig\Loader\ArrayLoader;
 use Vairogs\Core\Tests\VairogsTestCase;
 use Vairogs\Functions\Reflection;
-use Vairogs\Functions\Tests\Service\NullCacheManager;
-use Vairogs\Functions\Tests\Twig\TestFunctions;
+use Vairogs\Functions\Tests\Assets\Service\NullCacheManager;
+use Vairogs\Functions\Tests\Assets\Twig\TestFunctions;
 use Vairogs\Functions\Text;
 use Vairogs\Twig\TwigExtension;
 
