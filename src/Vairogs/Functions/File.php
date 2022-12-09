@@ -50,7 +50,7 @@ final class File
 
     public function rmdir(string $directory): bool
     {
-        array_map(fn (string $file) => is_dir(filename: $file) ? $this->rmdir(directory: $file) : unlink(filename: $file), glob(pattern: $directory . '/*', flags: GLOB_NOSORT));
+        array_map(callback: fn (string $file) => is_dir(filename: $file) ? $this->rmdir(directory: $file) : unlink(filename: $file), array: glob(pattern: $directory . '/*', flags: GLOB_NOSORT));
 
         return !is_dir(filename: $directory) || rmdir(directory: $directory);
     }
