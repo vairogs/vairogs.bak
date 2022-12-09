@@ -2,22 +2,13 @@
 
 namespace Vairogs\Functions\Tests;
 
-use Exception;
 use ReflectionException;
 use ReflectionMethod;
-use Symfony\Component\Cache\Exception\CacheException;
 use Symfony\Component\Routing\Route;
-use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
-use Twig\Loader\ArrayLoader;
 use Vairogs\Core\Tests\VairogsTestCase;
 use Vairogs\Functions\Reflection;
-use Vairogs\Functions\Tests\Assets\Service\NullCacheManager;
 use Vairogs\Functions\Tests\Assets\Twig\TestFunctions;
 use Vairogs\Functions\Text;
-use Vairogs\Twig\TwigExtension;
 
 class ReflectionTest extends VairogsTestCase
 {
@@ -44,32 +35,10 @@ class ReflectionTest extends VairogsTestCase
         $this->assertEquals(expected: 'Test', actual: (new Reflection())->getShortName(class: 'Test'));
     }
 
-    /**
-     * @dataProvider \Vairogs\Functions\Tests\DataProvider\ReflectionDataProvider::dataProviderTwigTemplates
-     *
-     * @throws CacheException
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
-     * @throws Exception
-     */
-    public function testTwigExtension(string $template, bool $throws, ?string $message = null): void
+    public function testGetFilteredMethods(): void
     {
-        if (true === $throws) {
-            $this->expectExceptionMessage(message: $message);
-        }
-
-        $manager = new NullCacheManager();
-        $extension = new TwigExtension(cacheManager: $manager, enabled: true, classes: [Text::class, TestFunctions::class, 'Test', ]);
-        $manager->delete(key: $extension->getKey(type: 'getFilters'));
-
-        $twig = new Environment(loader: new ArrayLoader(templates: [$template]), options: ['debug' => true, 'cache' => false, 'autoescape' => false]);
-        $twig->addExtension(extension: $extension);
-
-        $result = $twig->load(name: 0)->render(context: []);
-
-        if (false === $throws) {
-            $this->assertEquals(expected: $message, actual: $result);
-        }
+        $this->assertCount(expectedCount: 0, haystack: (new Reflection())->getFilteredMethods(class: 'Nothing'));
+        $this->assertCount(expectedCount: 1, haystack: (new Reflection())->getFilteredMethods(class: TestFunctions::class));
+        $this->assertCount(expectedCount: 15, haystack: (new Reflection())->getFilteredMethods(class: Text::class));
     }
 }

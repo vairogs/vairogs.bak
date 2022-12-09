@@ -17,7 +17,7 @@ abstract class Abstraction
         $this->isSupported = (new Composer())->checkPhpVersion(phpVersionId: $minimum) && (new Composer())->isInstalled(packages: ['random']);
     }
 
-    protected function shuffle(string $string): string
+    public function shuffle(string $string): string
     {
         if ($this->isSupported) {
             return (new Randomizer(engine: new Xoshiro256StarStar()))->shuffleBytes(bytes: $string);
@@ -26,7 +26,7 @@ abstract class Abstraction
         return str_shuffle(string: $string);
     }
 
-    protected function pick(array $array): int|string|array
+    public function pick(array $array): int|string|array
     {
         if ($this->isSupported) {
             return (new Randomizer(engine: new Xoshiro256StarStar()))->pickArrayKeys(array: $array, num: 1)[0];

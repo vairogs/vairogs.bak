@@ -3,9 +3,7 @@
 namespace Vairogs\Functions\Tests;
 
 use Vairogs\Core\Tests\VairogsTestCase;
-use Vairogs\Functions\Constants\Symbol;
 use Vairogs\Functions\Text;
-use Vairogs\Utils\Generator;
 
 use function htmlentities;
 
@@ -92,18 +90,5 @@ class TextTest extends VairogsTestCase
     public function testLongestSubstrLength(string $string, int $expected): void
     {
         $this->assertEquals(expected: $expected, actual: (new Text())->longestSubstrLength(string: $string));
-    }
-
-    public function testGeneratorNotMinimum(): void
-    {
-        $result = (new Generator(80400))
-            ->useDigits()
-            ->generate();
-        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::DIGITS));
-
-        $result = (new Generator(80200))
-            ->useDigits()
-            ->generate();
-        $this->assertTrue(condition: (new Text())->contains(haystack: $result, needle: Symbol::DIGITS));
     }
 }

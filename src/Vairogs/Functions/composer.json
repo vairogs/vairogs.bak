@@ -56,10 +56,7 @@
         "symfony/framework-bundle": "*",
         "symfony/phpunit-bridge": "*",
         "symfony/routing": "*",
-        "twig/twig": "^3",
-        "vairogs/core": "self.version",
-        "vairogs/twig": "self.version",
-        "vairogs/utils": "self.version"
+        "vairogs/core": "self.version"
     },
     "suggest": {
         "ext-random": "*",
@@ -68,6 +65,11 @@
     "autoload": {
         "psr-4": {
             "Vairogs\\Functions\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vairogs\\Functions\\Tests\\": "Tests/"
         }
     },
     "minimum-stability": "dev",
