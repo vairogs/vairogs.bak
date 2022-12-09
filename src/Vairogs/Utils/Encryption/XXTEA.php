@@ -3,7 +3,6 @@
 namespace Vairogs\Utils\Encryption;
 
 use Vairogs\Functions\Convert;
-use Vairogs\Functions\Number;
 
 use function count;
 use function floor;
@@ -26,16 +25,16 @@ final class XXTEA
         $sum = 0;
 
         while (0 < $start--) {
-            $sum = (new Number())->floatToInt32(number: $sum + self::DELTA);
+            $sum = (new Convert())->floatToInt32(number: $sum + self::DELTA);
             $right = $sum >> 2 & 3;
 
             for ($pointer = 0; $pointer < $length; $pointer++) {
                 $first = $vector[$pointer + 1];
-                $last = $vector[$pointer] = (new Number())->floatToInt32(number: $vector[$pointer] + $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $right, key: $fixedKey));
+                $last = $vector[$pointer] = (new Convert())->floatToInt32(number: $vector[$pointer] + $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $right, key: $fixedKey));
             }
 
             $first = $vector[0];
-            $last = $vector[$length] = (new Number())->floatToInt32(number: $vector[$length] + $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $right, key: $fixedKey));
+            $last = $vector[$length] = (new Convert())->floatToInt32(number: $vector[$length] + $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $right, key: $fixedKey));
         }
 
         return (new Convert())->long2str(array: $vector);
@@ -51,19 +50,19 @@ final class XXTEA
         $fixedKey = $this->fixKey(key: (new Convert())->str2long(string: $key));
         $length = count(value: $vector) - 1;
         $first = $vector[0];
-        $sum = (new Number())->floatToInt32(number: floor(num: 6 + 52 / ($length + 1)) * self::DELTA);
+        $sum = (new Convert())->floatToInt32(number: floor(num: 6 + 52 / ($length + 1)) * self::DELTA);
 
         while (0 !== $sum) {
             $shiftRight = $sum >> 2 & 3;
 
             for ($pointer = $length; $pointer > 0; $pointer--) {
                 $last = $vector[$pointer - 1];
-                $first = $vector[$pointer] = (new Number())->floatToInt32(number: $vector[$pointer] - $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $shiftRight, key: $fixedKey));
+                $first = $vector[$pointer] = (new Convert())->floatToInt32(number: $vector[$pointer] - $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $shiftRight, key: $fixedKey));
             }
 
             $last = $vector[$length];
-            $first = $vector[0] = (new Number())->floatToInt32(number: $vector[0] - $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $shiftRight, key: $fixedKey));
-            $sum = (new Number())->floatToInt32(number: $sum - self::DELTA);
+            $first = $vector[0] = (new Convert())->floatToInt32(number: $vector[0] - $this->mx(sum: $sum, first: $first, last: $last, pointer: $pointer, right: $shiftRight, key: $fixedKey));
+            $sum = (new Convert())->floatToInt32(number: $sum - self::DELTA);
         }
 
         return (new Convert())->long2str(array: $vector, wide: true);

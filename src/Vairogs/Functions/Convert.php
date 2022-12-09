@@ -58,4 +58,9 @@ final class Convert
     {
         return pack('c', $byte);
     }
+
+    public function floatToInt32(float $number): int
+    {
+        return $number & 0xFFFFFFFF;
+    }
 }

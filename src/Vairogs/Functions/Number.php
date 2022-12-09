@@ -6,11 +6,6 @@ use function is_numeric;
 
 final class Number
 {
-    public function floatToInt32(float $number): int
-    {
-        return $number & 0xFFFFFFFF;
-    }
-
     public function isInt(mixed $value): bool
     {
         return is_numeric(value: $value) && ctype_digit(text: (string) $value);
