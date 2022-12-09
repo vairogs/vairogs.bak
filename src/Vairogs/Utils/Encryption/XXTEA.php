@@ -2,8 +2,6 @@
 
 namespace Vairogs\Utils\Encryption;
 
-use Vairogs\Functions\Convert;
-
 use function count;
 use function floor;
 

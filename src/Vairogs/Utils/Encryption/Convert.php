@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Functions;
+namespace Vairogs\Utils\Encryption;
 
 use function array_pop;
 use function array_values;
