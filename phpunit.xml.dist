@@ -8,13 +8,11 @@
         failOnWarning="true"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
-    >
+>
     <php>
         <env name="APP_ENV" value="test" />
         <env name="ENVIRONMENT" value="test" />
-        <env name="KERNEL_CLASS" value="Vairogs\Tests\Assets\TestKernel" />
-        <env name="REDIS_DB_PHPREDIS" value="13" />
-        <env name="REDIS_DB_PREDIS" value="13" />
+        <env name="KERNEL_CLASS" value="Vairogs\Core\Tests\TestKernel" />
         <env name="SHELL_VERBOSITY" value="-1" />
         <env name="SYMFONY_PHPUNIT_VERSION" value="10" />
         <ini name="error_reporting" value="-1"/>
@@ -23,17 +21,20 @@
     </php>
 
     <testsuites>
-        <testsuite name="Vairogs Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="Vairogs Test Suite: Functions">
+            <directory>./src/Vairogs/Functions/Tests</directory>
         </testsuite>
     </testsuites>
 
     <coverage>
         <include>
-            <directory suffix=".php">./src/Vairogs/</directory>
+            <directory suffix=".php">.</directory>
         </include>
         <exclude>
-            <directory>./tests/</directory>
+            <directory>./src/Vairogs/Functions/Tests</directory>
+            <directory>./src/Vairogs/Functions/vendor</directory>
+            <directory>./vendor</directory>
+            <directory>./Tests</directory>
         </exclude>
         <report>
             <html outputDirectory=".github/coverage"/>
