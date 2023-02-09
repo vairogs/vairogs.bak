@@ -61,7 +61,7 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        if (null !== ($attribute = $this->event->getAtribute(kernelEvent: $controllerEvent, class: Cache::class))) {
+        if (null !== ($attribute = $this->event->getAttribute(kernelEvent: $controllerEvent, class: Cache::class))) {
             /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $controllerEvent, class: Cache::class));
             $response = null;
@@ -88,7 +88,7 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        if (($attribute = $this->event->getAtribute(kernelEvent: $requestEvent, class: Cache::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
+        if (($attribute = $this->event->getAttribute(kernelEvent: $requestEvent, class: Cache::class)) && $this->needsInvalidation(request: $requestEvent->getRequest())) {
             /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $requestEvent, class: Cache::class));
             $this->cacheManager->delete(key: $attribute->getKey(prefix: $requestEvent->getRequest()->get(key: self::ROUTE)));
@@ -101,7 +101,7 @@ class CacheEventListener implements EventSubscriberInterface
             return;
         }
 
-        if ($attribute = $this->event->getAtribute(kernelEvent: $responseEvent, class: Cache::class)) {
+        if ($attribute = $this->event->getAttribute(kernelEvent: $responseEvent, class: Cache::class)) {
             /* @var Cache $attribute */
             $attribute->setData(data: $this->event->getAttributes(kernelEvent: $responseEvent, class: Cache::class));
             $key = $attribute->getKey(prefix: $responseEvent->getRequest()->get(key: self::ROUTE));

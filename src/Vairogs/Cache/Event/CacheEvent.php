@@ -30,7 +30,7 @@ final readonly class CacheEvent
     {
         $params = '_route_params';
 
-        if (null !== ($attribute = $this->getAtribute(kernelEvent: $kernelEvent, class: $class))) {
+        if (null !== ($attribute = $this->getAttribute(kernelEvent: $kernelEvent, class: $class))) {
             $request = $kernelEvent->getRequest();
 
             $user = $this->getUser();
@@ -52,7 +52,7 @@ final readonly class CacheEvent
         return [];
     }
 
-    public function getAtribute(KernelEvent $kernelEvent, string $class): ?object
+    public function getAttribute(KernelEvent $kernelEvent, string $class): ?object
     {
         $controller = $this->getController(kernelEvent: $kernelEvent);
 
