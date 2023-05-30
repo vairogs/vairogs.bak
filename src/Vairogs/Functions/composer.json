@@ -55,7 +55,6 @@
         "spaghetti/php-cs-fixer-config": ">=1.1",
         "symfony/framework-bundle": "*",
         "symfony/phpunit-bridge": "*",
-        "symfony/routing": "*",
         "vairogs/core": "self.version"
     },
     "suggest": {

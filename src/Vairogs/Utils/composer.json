@@ -43,8 +43,8 @@
         "php": ">=8.2.0",
         "jetbrains/phpstorm-attributes": "*",
         "nikic/php-parser": "*",
-        "symfony/finder": "^6.2|^6.3",
-        "symfony/property-info": "^6.2|^6.3",
+        "symfony/finder": ">=6.2",
+        "symfony/property-info": ">=6.2",
         "vairogs/functions": "self.version"
     },
     "autoload": {
